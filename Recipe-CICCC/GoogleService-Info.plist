@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>39063762000-u54e1o124ocm3vpes107n5k9qg1m9fkp.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.39063762000-u54e1o124ocm3vpes107n5k9qg1m9fkp</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCMIF4Wxjhk61exPDsmldRS4KQfRZ2p0hg</string>
+	<key>GCM_SENDER_ID</key>
+	<string>39063762000</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>ca.acworkshop.Recipe-CICCC</string>
+	<key>PROJECT_ID</key>
+	<string>receipt-ciccc</string>
+	<key>STORAGE_BUCKET</key>
+	<string>receipt-ciccc.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:39063762000:ios:34db64a16d98036c518d55</string>
+	<key>DATABASE_URL</key>
+	<string>https://receipt-ciccc.firebaseio.com</string>
+</dict>
+</plist>
