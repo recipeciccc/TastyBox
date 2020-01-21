@@ -10,8 +10,12 @@ import UIKit
 
 class TestViewController: UIViewController {
     
+    // test hi!
+    
     var numImg = CGFloat(2.0) // depends on how many pictures user want to use, it is gonna change.
 
+    
+    
 
     
     override func viewDidLoad() {
