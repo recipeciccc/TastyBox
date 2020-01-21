@@ -89,19 +89,8 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Facebook"/>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PzF-S5-Rcy">
-                                <rect key="frame" x="161" y="65" width="92" height="30"/>
-                                <state key="normal" title="To Main Page"/>
-                                <connections>
-                                    <segue destination="LFY-oK-eGn" kind="show" id="UA4-fb-HC5"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="PzF-S5-Rcy" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="21" id="P82-DS-edf"/>
-                            <constraint firstItem="PzF-S5-Rcy" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="gsT-hA-kwc"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
