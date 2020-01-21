@@ -10,7 +10,7 @@ import UIKit
 
 private let reuseIdentifier = "Cell"
 
-class RecipeViewController: UIViewController, UICollectionViewDataSource,UICollectionViewDelegate {
+class RecipeViewController: UIViewController {
     
     @IBOutlet weak var TitleImage: UIImageView!
     @IBOutlet weak var TitleLabel: UILabel!
@@ -22,24 +22,33 @@ class RecipeViewController: UIViewController, UICollectionViewDataSource,UIColle
     var T_Name = ""
     var CollectionImage = [UIImage]()
     var CollectionLabel = [String]()
-    var inset: CGFloat = 8.0
+    var EdgeOfCollectionView: CGFloat = 0
     
     var searching = false
     var searchNames = [String]()
-    lazy  var SearchBar:UISearchBar = UISearchBar(frame: CGRect(x: 0, y: 0, width: 500, height: 20))
+    lazy  var SearchBar: UISearchBar = UISearchBar(frame: CGRect(x: 0, y: 0, width: 600, height: 20))
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        SearchBar.delegate = self
+        SearchBar.placeholder = "Search Recipe "
+        let RightNavBarButton = UIBarButtonItem(customView:SearchBar)
+        self.navigationItem.rightBarButtonItem = RightNavBarButton
+        
         TitleImage.image = T_image
         TitleLabel.text = T_Name
-    
-        
         self.view.sendSubviewToBack(TitleImage)
         
         collectionRef.delegate = self
         collectionRef.dataSource = self
-//      roundCorners(view: UIView, cornerRadius: Double)
+        
+        let width = (collectionRef.frame.size.width - 4) / 2
+        let layout = collectionRef.collectionViewLayout as! UICollectionViewFlowLayout
+        layout.itemSize = CGSize(width: width, height: width)
+        
+        //      roundCorners(view: UIView, cornerRadius: Double)
         
         switch category{
         case 0: setupCollection_1(); break
@@ -50,18 +59,7 @@ class RecipeViewController: UIViewController, UICollectionViewDataSource,UIColle
         case 5: setupCollection_6(); break
         default: print("no category"); break
         }
-        
-        SearchBar.delegate = self
-        SearchBar.placeholder = "Search recipe "
-        
-        let RightNavBarButton = UIBarButtonItem(customView:SearchBar)
-        self.navigationItem.rightBarButtonItem = RightNavBarButton
-        
-        let width = (collectionRef.frame.size.width - 5) / 2
-        let layout = collectionRef.collectionViewLayout as! UICollectionViewFlowLayout
-        layout.itemSize = CGSize(width: width, height: width)
-        
-        
+         
     }
     
     private func setupCollection_1() {
@@ -108,10 +106,46 @@ class RecipeViewController: UIViewController, UICollectionViewDataSource,UIColle
     
    
     
+    
+    
+}
+
+
+extension RecipeViewController: UISearchBarDelegate{
+        
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        searchNames = CollectionLabel.filter({ $0.lowercased().contains(searchText.lowercased())})
+        searching = true
+        searchBar.showsCancelButton = true
+        collectionRef.reloadData()
+    }
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchBar.showsCancelButton = true
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searching = false
+        searchBar.text = ""
+        searchBar.showsCancelButton = false
+        searchBar.endEditing(true)
+        collectionRef.reloadData()
+    }
+
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searching = false
+        searchBar.endEditing(true)
+    }
+    
+}
+
+
+extension RecipeViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+    
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
-    
+        
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         if searching{
@@ -138,45 +172,13 @@ class RecipeViewController: UIViewController, UICollectionViewDataSource,UIColle
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: inset, left: inset, bottom: inset, right: inset)
+        return UIEdgeInsets(top: EdgeOfCollectionView, left: EdgeOfCollectionView, bottom: EdgeOfCollectionView, right: EdgeOfCollectionView)
     }
     
-    //    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-    //        let width = (collectionView.frame.size.width - 10) / 3
-    //        //let height = collectionView.frame.size.height
-    //        return CGSize(width: width, height: width)
-    //    }
     
     func roundCorners(view: UIView, cornerRadius: Double) {
            view.layer.cornerRadius = CGFloat(cornerRadius)
            view.clipsToBounds = true
-    }
-}
-
-extension RecipeViewController: UISearchBarDelegate{
-        
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        searchNames = CollectionLabel.filter({ $0.lowercased().contains(searchText.lowercased())})
-        searching = true
-        searchBar.showsCancelButton = true
-        collectionRef.reloadData()
-    }
-    
-    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        searchBar.showsCancelButton = true
-    }
-    
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        searching = false
-        searchBar.text = ""
-        searchBar.showsCancelButton = false
-        searchBar.endEditing(true)
-        collectionRef.reloadData()
-    }
-
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        searching = false
-        searchBar.endEditing(true)
     }
     
 }

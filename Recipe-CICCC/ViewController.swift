@@ -10,6 +10,13 @@ import UIKit
 
 class ViewController: UIViewController {
 
+//    @IBAction func Turn2MainPage(_ sender: Any) {
+//        let NextStoryboard = UIStoryboard(name: "Main.storyboard", bundle: nil)
+//        if let vc = NextStoryboard.instantiateViewController(withIdentifier: "Discovery") as?{
+//            
+//
+//        }
+//    }
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
