@@ -29,6 +29,7 @@
 		408C31A223C98C1E00E74E4A /* cell for Refgenerator in Resources */ = {isa = PBXBuildFile; fileRef = 408C319A23C98C1E00E74E4A /* cell for Refgenerator */; };
 		40A8051F23A07FF40094E52A /* EmailRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A8051E23A07FF40094E52A /* EmailRegisterViewController.swift */; };
 		40A8052123A08C130094E52A /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A8052023A08C130094E52A /* ResetPasswordViewController.swift */; };
+		40BF229323D6AD920009FC69 /* LoginMainpageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40BF229223D6AD920009FC69 /* LoginMainpageViewController.swift */; };
 		484DADF5A56D21C65AE0925A /* Pods_Recipe_CICCCTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E32D65DEEA3D2064428CF46F /* Pods_Recipe_CICCCTests.framework */; };
 		B85B44E4B7712DCAEA7533E2 /* Pods_Recipe_CICCC_Recipe_CICCCUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0AA45E6A7912FC6432A5B9C /* Pods_Recipe_CICCC_Recipe_CICCCUITests.framework */; };
 		D842848E4079AD1F8EF4DF88 /* Pods_Recipe_CICCC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D89B921DC6BD386DA580F255 /* Pods_Recipe_CICCC.framework */; };
@@ -84,6 +85,7 @@
 		408C319A23C98C1E00E74E4A /* cell for Refgenerator */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "cell for Refgenerator"; sourceTree = "<group>"; };
 		40A8051E23A07FF40094E52A /* EmailRegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailRegisterViewController.swift; sourceTree = "<group>"; };
 		40A8052023A08C130094E52A /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
+		40BF229223D6AD920009FC69 /* LoginMainpageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginMainpageViewController.swift; sourceTree = "<group>"; };
 		939DE07C470F123E9499D33E /* Pods-Recipe-CICCC.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Recipe-CICCC.debug.xcconfig"; path = "Target Support Files/Pods-Recipe-CICCC/Pods-Recipe-CICCC.debug.xcconfig"; sourceTree = "<group>"; };
 		A4B3B0DAE263BCAF397031CE /* Pods-Recipe-CICCCTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Recipe-CICCCTests.debug.xcconfig"; path = "Target Support Files/Pods-Recipe-CICCCTests/Pods-Recipe-CICCCTests.debug.xcconfig"; sourceTree = "<group>"; };
 		B0AA45E6A7912FC6432A5B9C /* Pods_Recipe_CICCC_Recipe_CICCCUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Recipe_CICCC_Recipe_CICCCUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -191,6 +193,7 @@
 			children = (
 				40A8051E23A07FF40094E52A /* EmailRegisterViewController.swift */,
 				40A8052023A08C130094E52A /* ResetPasswordViewController.swift */,
+				40BF229223D6AD920009FC69 /* LoginMainpageViewController.swift */,
 			);
 			path = LoginPart;
 			sourceTree = "<group>";
@@ -506,6 +509,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				40A8051F23A07FF40094E52A /* EmailRegisterViewController.swift in Sources */,
+				40BF229323D6AD920009FC69 /* LoginMainpageViewController.swift in Sources */,
 				40127AD223A06E3C00260AF0 /* ViewController.swift in Sources */,
 				40A8052123A08C130094E52A /* ResetPasswordViewController.swift in Sources */,
 				40127ACE23A06E3C00260AF0 /* AppDelegate.swift in Sources */,
