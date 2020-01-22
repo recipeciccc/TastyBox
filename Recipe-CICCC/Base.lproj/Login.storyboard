@@ -102,16 +102,6 @@
             </objects>
             <point key="canvasLocation" x="137.68115942028987" y="101.78571428571428"/>
         </scene>
-        <!--Main-->
-        <scene sceneID="j0p-SI-awU">
-            <objects>
-                <viewControllerPlaceholder storyboardName="Main" id="LFY-oK-eGn" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="JVN-Kh-UAu"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="xCh-5g-vyf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="645" y="-136"/>
-        </scene>
         <!--Email Register View Controller-->
         <scene sceneID="P3y-aF-G0T">
             <objects>
