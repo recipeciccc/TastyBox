@@ -91,3 +91,7 @@ fastlane/test_output
 
 iOSInjectionProject/
 *.xcuserstate
+
+.DS_Store
+xcschememanagement.plist
+UserInterfaceState.xcuserstate
