@@ -102,9 +102,9 @@ class DiscoveryViewController: UIViewController {
     @objc func showProfile(){
         print("show Profile")
         
-        let Storyboard: UIStoryboard = UIStoryboard(name: "shihomi", bundle: nil)
-        let vc = Storyboard.instantiateViewController(withIdentifier: "profilePage") as! TableViewController
-        self.navigationController?.pushViewController(vc, animated: true)
+//        let Storyboard: UIStoryboard = UIStoryboard(name: "shihomi", bundle: nil)
+//        let vc = Storyboard.instantiateViewController(withIdentifier: "profilePage") as! TableViewController
+//        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     @objc func showSearch(){
