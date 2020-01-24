@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import CHIPageControl
 
 
 class recipeMainTableViewCell: UITableViewCell {
@@ -15,8 +14,7 @@ class recipeMainTableViewCell: UITableViewCell {
     @IBOutlet weak var heightForLabel: NSLayoutConstraint!
     
     @IBOutlet weak var scrollView: UIScrollView!
-    //@IBOutlet weak var pageControl: UIPageControl!
-    @IBOutlet weak var pageControl: CHIBasePageControl!
+
     
     
     var numImg = CGFloat(2.0) 
@@ -31,7 +29,7 @@ class recipeMainTableViewCell: UITableViewCell {
         scrollView.contentSize = CGSize(width: UIScreen.main.bounds.width * numImg, height: scrollView.bounds.height)
         scrollView.isPagingEnabled = true
 
-        pageControl.tintColor = .orange
+      
         
 //        scrollView.delegate = self as! UIScrollViewDelegate
 //        pageControl.addTarget(self, action: #selector(didChangePage), for: .valueChanged)
@@ -39,13 +37,6 @@ class recipeMainTableViewCell: UITableViewCell {
 //        pageControl.autoresizingMask = [.flexibleTopMargin, .flexibleWidth]
        }
 
-        
-    @objc func didChangePage(sender: CHIBasePageControl){
-          var offset = scrollView.contentOffset
-          offset.x = CGFloat(sender.currentPage) * scrollView.bounds.size.width;
-          scrollView.setContentOffset(offset, animated: true)
-        }
-    
    
        
 
