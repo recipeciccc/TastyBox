@@ -95,3 +95,6 @@ iOSInjectionProject/
 .DS_Store
 xcschememanagement.plist
 UserInterfaceState.xcuserstate
+Pods/Pods.xcodeproj/xcuserdata/ac.xcuserdatad/xcschemes/xcschememanagement.plist
+Recipe-CICCC.xcodeproj/xcuserdata/ac.xcuserdatad/xcschemes/xcschememanagement.plist
+Recipe-CICCC.xcworkspace/xcuserdata/ac.xcuserdatad/UserInterfaceState.xcuserstate
