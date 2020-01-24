@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class LoginViewController: UIViewController {
 
 //    @IBAction func Turn2MainPage(_ sender: Any) {
 //        let NextStoryboard = UIStoryboard(name: "Main.storyboard", bundle: nil)
