@@ -31,8 +31,11 @@ class LoginMainpageViewController: UIViewController {
                 (user, error) in
                 if error == nil {
                     // means no error, login successfully
-                    let vc = self.storyboard?.instantiateViewController(withIdentifier: "Discovery")
-                    self.present(vc!, animated: true, completion: nil)
+                    let Storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                    let vc = Storyboard.instantiateViewController(withIdentifier: "Discovery")
+                    self.navigationController?.pushViewController(vc, animated: true)
+                   // self.present(vc, animated: true, completion: nil)
+                    
                 } else {
                     // mention there's some error
                     let alertController = UIAlertController(title: "error", message: error?.localizedDescription, preferredStyle: .alert)
