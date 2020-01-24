@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="9pc-xg-uKA">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="9pc-xg-uKA">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -11,13 +11,13 @@
         <!--Your Profile-->
         <scene sceneID="4fc-ik-FQx">
             <objects>
-                <tableViewController storyboardIdentifier="User profile" id="MFD-Bk-wha" customClass="userPageTableViewController" customModule="RecipeTest" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="User profile" id="MFD-Bk-wha" customClass="userPageTableViewController" customModule="Recipe_CICCC" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="z8C-ZK-bjh">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Main User Page" rowHeight="135" id="J3l-G9-8c5" customClass="mainUserProfileTableViewCell" customModule="RecipeTest" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Main User Page" rowHeight="135" id="J3l-G9-8c5" customClass="mainUserProfileTableViewCell" customModule="Recipe_CICCC" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="414" height="135"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="J3l-G9-8c5" id="sYF-SY-kFh">
@@ -53,7 +53,7 @@
                                     <outlet property="userNameLabel" destination="Pit-9U-SHQ" id="IrR-FN-d59"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="show the num" id="Dt9-6Z-VmQ" customClass="NumberTableViewCell" customModule="RecipeTest" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="show the num" id="Dt9-6Z-VmQ" customClass="NumberTableViewCell" customModule="Recipe_CICCC" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="163" width="414" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Dt9-6Z-VmQ" id="RoW-uu-8bc">
@@ -94,7 +94,7 @@
                                     <outlet property="numOfRecipeUserSavedButton" destination="pFt-N9-939" id="dIR-i8-3Cf"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="recipeItemForUser" rowHeight="560" id="mXa-et-RMB" customClass="userRecipeItemTableViewCell" customModule="RecipeTest" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="recipeItemForUser" rowHeight="560" id="mXa-et-RMB" customClass="userRecipeItemTableViewCell" customModule="Recipe_CICCC" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="206.5" width="414" height="560"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mXa-et-RMB" id="PQo-5P-GAF">
@@ -111,14 +111,14 @@
                                                 <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                             </collectionViewFlowLayout>
                                             <cells>
-                                                <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="recipeItemForUser" id="Nmx-e2-5Ub" customClass="userRecipeItemCollectionViewCell" customModule="RecipeTest" customModuleProvider="target">
+                                                <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="recipeItemForUser" id="Nmx-e2-5Ub" customClass="userRecipeItemCollectionViewCell" customModule="Recipe_CICCC" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="QFn-nr-b6F">
                                                         <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <subviews>
-                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="2018_Sweet-Sallty-Snack-Mix_5817_600x600" translatesAutoresizingMaskIntoConstraints="NO" id="7Pc-Gf-KKY">
+                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="2018_Sweet-Sallty-Snack-Mix_5817_600x600" translatesAutoresizingMaskIntoConstraints="NO" id="7Pc-Gf-KKY">
                                                                 <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="150" id="TQB-Y1-J78"/>
@@ -126,10 +126,14 @@
                                                                 </constraints>
                                                             </imageView>
                                                         </subviews>
+                                                        <constraints>
+                                                            <constraint firstItem="7Pc-Gf-KKY" firstAttribute="centerY" secondItem="QFn-nr-b6F" secondAttribute="centerY" id="pQg-6a-tAq"/>
+                                                            <constraint firstItem="7Pc-Gf-KKY" firstAttribute="centerX" secondItem="QFn-nr-b6F" secondAttribute="centerX" id="zJ2-7d-l6e"/>
+                                                        </constraints>
                                                     </collectionViewCellContentView>
                                                     <size key="customSize" width="150" height="150"/>
                                                     <connections>
-                                                        <outlet property="imageView" destination="7Pc-Gf-KKY" id="jVr-I6-KgW"/>
+                                                        <outlet property="imageView" destination="7Pc-Gf-KKY" id="ZSG-Yg-zGO"/>
                                                     </connections>
                                                 </collectionViewCell>
                                             </cells>
@@ -143,7 +147,7 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="collectionView" destination="mfL-q6-wyG" id="shS-cV-wbB"/>
+                                    <outlet property="collectionView" destination="mfL-q6-wyG" id="aqW-WZ-s1C"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -175,7 +179,7 @@
         <!--Refrigerator-->
         <scene sceneID="5gz-1b-VV3">
             <objects>
-                <tableViewController id="EP1-3A-DHh" customClass="RefrigeratorTableViewController" customModule="RecipeTest" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="EP1-3A-DHh" customClass="RefrigeratorTableViewController" customModule="Recipe_CICCC" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="5ZC-mn-Di6">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -186,7 +190,7 @@
                             <textInputTraits key="textInputTraits"/>
                         </searchBar>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="search stores" id="Czs-wk-a2C" customClass="searchStoresTableViewCell" customModule="RecipeTest" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="search stores" id="Czs-wk-a2C" customClass="searchStoresTableViewCell" customModule="Recipe_CICCC" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="72" width="414" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Czs-wk-a2C" id="vKT-6F-K3X">
@@ -204,7 +208,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ingredient" id="jay-AD-liC" customClass="IngredientsTableViewCell" customModule="RecipeTest" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ingredient" id="jay-AD-liC" customClass="IngredientsTableViewCell" customModule="Recipe_CICCC" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="115.5" width="414" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="jay-AD-liC" id="xBk-F2-cxD">
@@ -249,7 +253,7 @@
         <!--Stores Map View Controller-->
         <scene sceneID="zCY-rp-i9R">
             <objects>
-                <viewController id="sCs-lS-ReV" customClass="StoresMapViewController" customModule="RecipeTest" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="sCs-lS-ReV" customClass="StoresMapViewController" customModule="Recipe_CICCC" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="u6J-f7-nIP">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -264,7 +268,7 @@
         <!--Shopping List-->
         <scene sceneID="PGG-q8-REE">
             <objects>
-                <tableViewController id="bbT-g1-BBM" customClass="ShoppingListTableViewController" customModule="RecipeTest" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="bbT-g1-BBM" customClass="ShoppingListTableViewController" customModule="Recipe_CICCC" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="bWQ-9j-U7G">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

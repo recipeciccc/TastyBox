@@ -7,13 +7,11 @@
 //
 
 import UIKit
-import CHIPageControl
 
 
 class recipeItemTableViewController: UITableViewController {
     
-//    @IBOutlet weak var RecipeImageScrollView: UIScrollView!
-//    @IBOutlet weak var pageControl: CHIPageControlJalapeno!
+
     
     var item = RecipeItem()
     var indexPath = IndexPath()
@@ -56,24 +54,6 @@ class recipeItemTableViewController: UITableViewController {
         super.viewDidAppear(animated)
         let cell: recipeMainTableViewCell = (tableView.dequeueReusableCell(withIdentifier:"recipeMainCell") as? recipeMainTableViewCell)!
         
-        var direction = Direction.right
-        cell.pageControl.numberOfPages = Int(self.numImg)
-
-//        cell.pageControl.progress = 0
-        
-        
-        let currentProgress = Int(cell.pageControl.progress)
-        let numberOfPages = cell.pageControl.numberOfPages
-        
-        // this metod isn't called.
-        cell.pageControl.addTarget(cell.scrollView, action: #selector(didChangePage), for: .valueChanged)
-
-        
-        
-            let newProgress = direction.newProgress(withCurrentProgress: currentProgress)
-            //self.pageControl.set(progress: newProgress, animated: true)
-            cell.pageControl.set(progress: newProgress, animated: true)
-        print(cell.pageControl.progress)
     }
 
     // MARK: - Table view data source
@@ -259,26 +239,8 @@ class recipeItemTableViewController: UITableViewController {
         
         return view
     }
-    
-    @objc func didChangePage(sender: CHIBasePageControl, cell: recipeMainTableViewCell){
-//        var offset = cell.scrollView.contentOffset
-//        offset.x = CGFloat(sender.currentPage) * cell.scrollView.bounds.size.width;
-//        cell.scrollView.setContentOffset(offset, animated: true)
-        print("hi")
-        var scrollViewWidth: CGFloat = cell.scrollView.frame.size.width
-        var contentWidth: Double = Double(cell.scrollView.contentOffset.x / scrollViewWidth)
-        var page : Double = round(contentWidth)
-        cell.pageControl.progress = page;
-        print("new progress \(cell.pageControl.progress)")
-        
-    }
-    
-//   func didChangePage(sender: UIPageControl){
-//      var offset = RecipeImageScrollView.contentOffset
-//      offset.x = CGFloat(sender.currentPage) * RecipeImageScrollView.bounds.size.width;
-//      RecipeImageScrollView.setContentOffset(offset, animated: true)
-//    }
 
+    
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -332,33 +294,5 @@ extension recipeItemTableViewController {
         print("")
     }
     
-//    override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-//        print()
-//        
-//        self.currentPage = self.currentPage+1
-//        
-//        let cell = scrollView.superview?.superview?.superview as! recipeMainTableViewCell
-//        
-//        cell.pageControl.numberOfPages = Int(self.numImg)
-//        cell.pageControl.progress = Double(self.currentPage)
-//
-//        let currentProgress = Int(cell.pageControl.progress)
-//        
-//        
-//        var  direction = Direction.right
-//        if self.currentPage % 2 == 0 {
-//            direction = Direction.right
-//        } else {
-//            direction = Direction.left
-//        }
-//
-//        // page controll
-//
-//        cell.pageControl.addTarget(cell.scrollView, action: #selector(didChangePage), for: .valueChanged)
-//        let newProgress = direction.newProgress(withCurrentProgress: currentProgress)
-//            //self.pageControl.set(progress: newProgress, animated: true)
-//        cell.pageControl.set(progress: newProgress, animated: true)
-//        
-//    }
     
 }
