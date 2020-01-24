@@ -29,10 +29,13 @@ pod 'Firebase/Auth'
 #pods for Google sign in
 pod 'GoogleSignIn'
 
-#pods for Facebook sign in
+#pods for Facebook
+pod 'Bolts'
+pod 'FBSDKCoreKit'
+pod 'FBSDKLoginKit'
 
-#pod 'CHIPageControl', '~> 0.1.3'
-#pod 'CHIPageControl/Jalapeno'
+#pod CHIPageControl, ~> 0.1.3
+#pod CHIPageControl/Jalapeno
 pod 'GoogleMaps'
 pod 'GooglePlaces'
 pod 'SideMenu'
