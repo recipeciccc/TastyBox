@@ -88,6 +88,9 @@
                                 <rect key="frame" x="252" y="413" width="67" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Facebook"/>
+                                <connections>
+                                    <action selector="facebookLogin:" destination="BYZ-38-t0r" eventType="touchDown" id="vbr-sd-kPq"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

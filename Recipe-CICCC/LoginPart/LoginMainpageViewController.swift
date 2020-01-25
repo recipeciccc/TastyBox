@@ -61,7 +61,7 @@ class LoginMainpageViewController: UIViewController {
 //        }
 //    }
     
-    @IBAction func facebookLogin(sender: UIButton) {
+    @IBAction func facebookLogin(_ sender: UIButton) {
         let fbLoginManager = LoginManager()
         fbLoginManager.logIn(permissions: ["public_profile", "email"], from: self) {(
             Result, Error) in
@@ -91,7 +91,7 @@ class LoginMainpageViewController: UIViewController {
                 }
                 
                 // show the main View
-                if let viewController = self.storyboard?.instantiateViewController(withIdentifier: "MainView") {
+                if let viewController = self.storyboard?.instantiateViewController(withIdentifier: "LoginMain") {
                     UIApplication.shared.keyWindow?.rootViewController = viewController
                     self.dismiss(animated: true, completion: nil)
                 }
