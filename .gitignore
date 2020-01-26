@@ -49,6 +49,10 @@ playground.xcworkspace
 # .swiftpm
 
 .build/
+.DS_Store
+Pods/Pods.xcodeproj/xcuserdata/kitajimashihomi.xcuserdatad/xcschemes/xcschememanagement.plist
+Recipe-CICCC.xcodeproj/xcuserdata/kitajimashihomi.xcuserdatad/xcschemes/xcschememanagement.plist
+
 
 # CocoaPods
 #
@@ -98,3 +102,4 @@ UserInterfaceState.xcuserstate
 Pods/Pods.xcodeproj/xcuserdata/ac.xcuserdatad/xcschemes/xcschememanagement.plist
 Recipe-CICCC.xcodeproj/xcuserdata/ac.xcuserdatad/xcschemes/xcschememanagement.plist
 Recipe-CICCC.xcworkspace/xcuserdata/ac.xcuserdatad/UserInterfaceState.xcuserstate
+.DS_Store
