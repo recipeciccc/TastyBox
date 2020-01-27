@@ -13,11 +13,14 @@ import FBSDKCoreKit
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
+    let apiKey = ""
+    
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
         FirebaseApp.configure()
+        
         return true
     }
 

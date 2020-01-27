@@ -63,42 +63,42 @@ class RecipeViewController: UIViewController {
     }
     
     private func setupCollection_1() {
-        let images = [#imageLiteral(resourceName: "appetizer"),#imageLiteral(resourceName: "appetizer"),#imageLiteral(resourceName: "appetizer"),#imageLiteral(resourceName: "appetizer"),#imageLiteral(resourceName: "appetizer"),#imageLiteral(resourceName: "appetizer")]
+        let images = [#imageLiteral(resourceName: "guacamole-foto-heroe-1024x723"),#imageLiteral(resourceName: "13PAIRING-articleLarge"),#imageLiteral(resourceName: "Lemon-Garlic-Butter-Salmon-with-Zucchini-Noodles-recipes"),#imageLiteral(resourceName: "13PAIRING-articleLarge"),#imageLiteral(resourceName: "best-salad-7"),#imageLiteral(resourceName: "candied-yams-5")]
         let labels = ["Recipe1: ______\nCreator: ______","Recipe11: ______\nCreator: ______","Recipe2: ______\nCreator: ______","Recipe22: ______\nCreator: ______","Recipe3: ______\nCreator: ______","Recipe33: ______\nCreator: ______",]
         CollectionImage = images
         CollectionLabel = labels
     }
     
     private func setupCollection_2(){
-        let images = [#imageLiteral(resourceName: "soup"),#imageLiteral(resourceName: "soup"),#imageLiteral(resourceName: "soup"),#imageLiteral(resourceName: "soup"),#imageLiteral(resourceName: "soup"),#imageLiteral(resourceName: "soup")]
+        let images = [#imageLiteral(resourceName: "Lemon-Garlic-Butter-Salmon-with-Zucchini-Noodles-recipes"),#imageLiteral(resourceName: "Lemon-Garlic-Butter-Salmon-with-Zucchini-Noodles-recipes"),#imageLiteral(resourceName: "Lemon-Garlic-Butter-Salmon-with-Zucchini-Noodles-recipes"),#imageLiteral(resourceName: "Lemon-Garlic-Butter-Salmon-with-Zucchini-Noodles-recipes"),#imageLiteral(resourceName: "Lemon-Garlic-Butter-Salmon-with-Zucchini-Noodles-recipes"),#imageLiteral(resourceName: "Lemon-Garlic-Butter-Salmon-with-Zucchini-Noodles-recipes")]
         let labels = ["Recipe: abc___\nCreator: ______","Recipe: bcf___\nCreator: ______","Recipe: ______\nCreator: ______","Recipe: ______\nCreator: ______","Recipe: ______\nCreator: ______","Recipe: ______\nCreator: ______",]
         CollectionImage = images
         CollectionLabel = labels
     }
     
     private func setupCollection_3(){
-        let images = [#imageLiteral(resourceName: "salad"),#imageLiteral(resourceName: "salad"),#imageLiteral(resourceName: "salad"),#imageLiteral(resourceName: "salad"),#imageLiteral(resourceName: "salad"),#imageLiteral(resourceName: "salad")]
+        let images = [#imageLiteral(resourceName: "crepes-recipe-0419-9085-lw-076-0746463d_horiz"),#imageLiteral(resourceName: "crepes-recipe-0419-9085-lw-076-0746463d_horiz"),#imageLiteral(resourceName: "crepes-recipe-0419-9085-lw-076-0746463d_horiz"),#imageLiteral(resourceName: "crepes-recipe-0419-9085-lw-076-0746463d_horiz"),#imageLiteral(resourceName: "crepes-recipe-0419-9085-lw-076-0746463d_horiz"),#imageLiteral(resourceName: "crepes-recipe-0419-9085-lw-076-0746463d_horiz")]
         let labels = ["Recipe: ______\nCreator: ______","Recipe: ______\nCreator: ______","Recipe: ______\nCreator: ______","Recipe: ______\nCreator: ______","Recipe: ______\nCreator: ______","Recipe: ______\nCreator: ______"]
         CollectionImage = images
         CollectionLabel = labels
     }
     
     private func setupCollection_4(){
-        let images = [#imageLiteral(resourceName: "cake"),#imageLiteral(resourceName: "cake"),#imageLiteral(resourceName: "cake"),#imageLiteral(resourceName: "cake"),#imageLiteral(resourceName: "cake"),#imageLiteral(resourceName: "cake")]
+        let images = [#imageLiteral(resourceName: "77d08f50-3ccc-4432-a86d-4dcfdd3d7cd4"),#imageLiteral(resourceName: "77d08f50-3ccc-4432-a86d-4dcfdd3d7cd4"),#imageLiteral(resourceName: "77d08f50-3ccc-4432-a86d-4dcfdd3d7cd4"),#imageLiteral(resourceName: "77d08f50-3ccc-4432-a86d-4dcfdd3d7cd4"),#imageLiteral(resourceName: "77d08f50-3ccc-4432-a86d-4dcfdd3d7cd4"),#imageLiteral(resourceName: "77d08f50-3ccc-4432-a86d-4dcfdd3d7cd4")]
         let labels = ["Recipe: ______\nCreator: ______","Recipe: ______\nCreator: ______","Recipe: ______\nCreator: ______","Recipe: ______\nCreator: ______","Recipe: ______\nCreator: ______","Recipe: ______\nCreator: ______"]
         CollectionImage = images
         CollectionLabel = labels
     }
     
     private func setupCollection_5(){
-        let images = [#imageLiteral(resourceName: "Pizza"),#imageLiteral(resourceName: "Pizza"),#imageLiteral(resourceName: "Pizza"),#imageLiteral(resourceName: "Pizza"),#imageLiteral(resourceName: "Pizza"),#imageLiteral(resourceName: "Pizza")]
+        let images = [#imageLiteral(resourceName: "guacamole-foto-heroe-1024x723"),#imageLiteral(resourceName: "guacamole-foto-heroe-1024x723"),#imageLiteral(resourceName: "guacamole-foto-heroe-1024x723"),#imageLiteral(resourceName: "guacamole-foto-heroe-1024x723"),#imageLiteral(resourceName: "guacamole-foto-heroe-1024x723"),#imageLiteral(resourceName: "guacamole-foto-heroe-1024x723")]
         let labels = ["Recipe: ______\nCreator: ______","Recipe: ______\nCreator: ______","Recipe: ______\nCreator: ______","Recipe: ______\nCreator: ______","Recipe: ______\nCreator: ______","Recipe: ______\nCreator: ______"]
         CollectionImage = images
         CollectionLabel = labels
     }
     
     private func setupCollection_6(){
-        let images = [#imageLiteral(resourceName: "soup"),#imageLiteral(resourceName: "soup"),#imageLiteral(resourceName: "soup"),#imageLiteral(resourceName: "soup"),#imageLiteral(resourceName: "soup"),]
+        let images = [#imageLiteral(resourceName: "huevos-rancheros"),#imageLiteral(resourceName: "huevos-rancheros"),#imageLiteral(resourceName: "huevos-rancheros"),#imageLiteral(resourceName: "huevos-rancheros"),#imageLiteral(resourceName: "huevos-rancheros"),#imageLiteral(resourceName: "huevos-rancheros")]
         let labels = ["Recipe: ______\nCreator: ______","Recipe: ______\nCreator: ______","Recipe: ______\nCreator: ______","Recipe: ______\nCreator: ______","Recipe: ______\nCreator: ______","Recipe: ______\nCreator: ______"]
         CollectionImage = images
         CollectionLabel = labels
