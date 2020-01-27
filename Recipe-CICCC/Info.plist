@@ -60,5 +60,9 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+
+    <key>CFBundleURLTypes</key> <array> <dict> <key>CFBundleURLSchemes</key> <array> <string>fb1010141679341760</string> </array> </dict> </array> <key>FacebookAppID</key> <string>1010141679341760</string> <key>FacebookDisplayName</key> <string>Recipe-CICCC</string>
+    
+    
 </dict>
 </plist>
