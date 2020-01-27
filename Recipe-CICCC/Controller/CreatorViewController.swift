@@ -18,16 +18,16 @@ struct RecipeData{
 
 class CreatorViewController: UIViewController {
     
-    @IBOutlet weak var MainPhotoTableView: UITableView!
+    @IBOutlet weak var MainTableView: UITableView!
     @IBAction func UploadPhotoAction(_ sender: Any) {
         imagePicker.sourceType = .photoLibrary
         imagePicker.allowsEditing = true
         present(imagePicker, animated: true, completion: nil)
     }
     @IBAction func AddIngredients(_ sender: Any) {
-        //ingredientList["New item"] = "Amount"
-        ingredientList.updateValue("Amount", forKey: "New item")
-        MainPhotoTableView.insertRows(at: [IndexPath(row: 0, section: 4)], with: .top)
+        ingredientList.append("")
+        amountList.append("")
+        MainTableView.insertRows(at: [IndexPath(row: ingredientList.count-1, section: 4)], with: .top)
     }
     @IBAction func SaveData(_ sender: Any) {
         RecipeData.title.append(recipeTitle)
@@ -42,16 +42,35 @@ class CreatorViewController: UIViewController {
     var recipeTitle = String()
     var recipeTime = String()
     var recipeServings = String()
-    var ingredientList: [String: String] = [:]
+    var ingredientList = [String]()
+    var amountList = [String]()
+    var keyboardShow : Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         imagePicker.delegate = self
+        NotificationCenter.default.addObserver( self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+    
+        amountList.append("")
+        ingredientList.append("")
+    }
+    
+    @objc func keyboardWillShow(note:NSNotification){
+        
+        if let newFrame = (note.userInfo?[ UIResponder.keyboardFrameEndUserInfoKey ] as? NSValue)?.cgRectValue {
+            
+            if !keyboardShow {
+                keyboardShow = true
+                MainTableView.contentInset = UIEdgeInsets( top: 0, left: 0, bottom: newFrame.height, right: 0 )
+            }else{
+                MainTableView.contentInset = UIEdgeInsets( top: 0, left: 0, bottom: 0, right: 0 )
+            }
+        }
     }
 }
 
 
-
+//image picker
 extension CreatorViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
@@ -62,25 +81,25 @@ extension CreatorViewController: UIImagePickerControllerDelegate, UINavigationCo
                    mainPhoto = originalPhoto
                }
         dismiss(animated: true, completion: nil)
-        MainPhotoTableView?.reloadData()
+        MainTableView?.reloadData()
     }
     
     
 }
 
+//tableview
 extension CreatorViewController: UITableViewDelegate,UITableViewDataSource{
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 5
+        return 7
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
-            case 0, 1, 2, 3 :
+            case 0, 1, 2, 3, 5:
                 return 1
             case 4:
-                print(ingredientList.keys.count)
-                return ingredientList.keys.count
+                return ingredientList.count
             default:
                 return 0
         }
@@ -90,7 +109,7 @@ extension CreatorViewController: UITableViewDelegate,UITableViewDataSource{
         switch indexPath.section {
             case 0:
                 return 380
-            case 1,2,3,4:
+            case 1,2,3,4,5:
                 return 40
             default:
                 return UITableView.automaticDimension
@@ -116,11 +135,17 @@ extension CreatorViewController: UITableViewDelegate,UITableViewDataSource{
                 return cell
             
             case 4:
-                let cell = tableView.dequeueReusableCell(withIdentifier: "Editingredients") as! EditIngredientsCell
-                ingredientList[cell.ingredientTextField.text ?? ""] = cell.AmountTextField.text ?? ""
-                print(ingredientList.keys.count)
+                let cell = tableView.dequeueReusableCell(withIdentifier: "editingredients") as! EditIngredientsCell
+                ingredientList[indexPath.row] = cell.ingredientTextField.text!
+                amountList[indexPath.row] = cell.AmountTextField.text!
                 return cell
-                
+            case 5:
+                let cell = tableView.dequeueReusableCell(withIdentifier:"instructions") as! InstructionTitleCell
+                return cell
+            case 6:
+                let cell = tableView.dequeueReusableCell(withIdentifier: "preparation") as! PreparationCell
+                return cell
+            
             default:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "ingredients") as! IngredientsCell
                 return cell
@@ -128,19 +153,22 @@ extension CreatorViewController: UITableViewDelegate,UITableViewDataSource{
         }
     }
     
-    
-}
-
-extension CreatorViewController: UITextFieldDelegate{
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        MainPhotoTableView?.reloadData()
-        textField.resignFirstResponder()
-        return true
+    func tableView(_ tableView: UITableView, didSelectRowAt : IndexPath) {
+        tableView.cellForRow(at: didSelectRowAt)?.selectionStyle = .none
     }
     
 }
 
-
+extension CreatorViewController: UITextFieldDelegate{
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        MainTableView?.reloadData()
+        textField.resignFirstResponder()
+        keyboardShow = false
+        return true
+    }
+    
+}
 
 
 
@@ -176,4 +204,13 @@ class EditIngredientsCell: UITableViewCell{
     @IBOutlet weak var ingredientTextField: UITextField!
     @IBOutlet weak var AmountTextField: UITextField!
    
+}
+
+class InstructionTitleCell: UITableViewCell{
+    
+}
+class PreparationCell: UITableViewCell{
+    @IBOutlet weak var stepNumber: UILabel!
+    @IBOutlet weak var textView: UITextView!
+    @IBOutlet weak var stepsImageView: UIImageView!
 }
