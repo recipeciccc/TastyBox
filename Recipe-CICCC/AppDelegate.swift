@@ -9,11 +9,12 @@
 import UIKit
 import Firebase
 import FBSDKCoreKit
+import GoogleMaps
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
-    let apiKey = ""
+    let apiKey = "AIzaSyA8iI9CDqKxnyvCAuWoBbSyZYdRqf_WQLk"
     
     var window: UIWindow?
 
@@ -21,6 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         FirebaseApp.configure()
         
+        GMSServices.provideAPIKey(apiKey)
         return true
     }
 
