@@ -167,35 +167,6 @@
             </objects>
             <point key="canvasLocation" x="1042.0289855072465" y="136.60714285714286"/>
         </scene>
-        <!--Shopping List-->
-        <scene sceneID="PGG-q8-REE">
-            <objects>
-                <tableViewController id="bbT-g1-BBM" customClass="ShoppingListTableViewController" customModule="Recipe_CICCC" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="bWQ-9j-U7G">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="eVW-PX-hFJ">
-                                <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="eVW-PX-hFJ" id="tcK-Wc-OQK">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="bbT-g1-BBM" id="M4a-Ir-hbZ"/>
-                            <outlet property="delegate" destination="bbT-g1-BBM" id="iNQ-Sv-Te9"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="Shopping List" id="zhy-Yn-tPq"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="MAm-4c-cVh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3722" y="806"/>
-        </scene>
         <!--Navigation Controller-->
         <scene sceneID="71W-7A-7d3">
             <objects>
@@ -213,24 +184,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zr5-yJ-WI8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="131.8840579710145" y="136.60714285714286"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="uzc-ZR-NTN">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="yyT-hX-lXx" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ABo-zu-POc">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="bbT-g1-BBM" kind="relationship" relationship="rootViewController" id="TI2-9I-OS0"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="yjn-CF-s8E" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2713" y="806"/>
         </scene>
         <!--Refrigerator-->
         <scene sceneID="tpw-dc-wLG">

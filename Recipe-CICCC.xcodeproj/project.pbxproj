@@ -73,6 +73,7 @@
 		6F3FF54423DAADF5005162C7 /* RecipeItemList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4069256023D834C900059C8E /* RecipeItemList.swift */; };
 		6F3FF54523DAB0F0005162C7 /* RefrigeratorList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4069256D23D834E000059C8E /* RefrigeratorList.swift */; };
 		6F3FF54723DAB62D005162C7 /* StoresMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F3FF54623DAB62D005162C7 /* StoresMapViewController.swift */; };
+		6F3FF55D23E1068B005162C7 /* ShoppingList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F3FF55C23E1068B005162C7 /* ShoppingList.storyboard */; };
 		B85B44E4B7712DCAEA7533E2 /* Pods_Recipe_CICCC_Recipe_CICCCUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0AA45E6A7912FC6432A5B9C /* Pods_Recipe_CICCC_Recipe_CICCCUITests.framework */; };
 		D842848E4079AD1F8EF4DF88 /* Pods_Recipe_CICCC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D89B921DC6BD386DA580F255 /* Pods_Recipe_CICCC.framework */; };
 /* End PBXBuildFile section */
@@ -171,6 +172,7 @@
 		6F3FF53E23DAABAD005162C7 /* Refrigerator.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Refrigerator.storyboard; sourceTree = "<group>"; };
 		6F3FF54023DAAC7C005162C7 /* RefrigeratorTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RefrigeratorTableViewController.swift; path = "Recipe-CICCC/ViewController/RefrigeratorTableViewController.swift"; sourceTree = SOURCE_ROOT; };
 		6F3FF54623DAB62D005162C7 /* StoresMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StoresMapViewController.swift; path = "Recipe-CICCC/ViewController/StoresMapViewController.swift"; sourceTree = SOURCE_ROOT; };
+		6F3FF55C23E1068B005162C7 /* ShoppingList.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ShoppingList.storyboard; sourceTree = "<group>"; };
 		939DE07C470F123E9499D33E /* Pods-Recipe-CICCC.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Recipe-CICCC.debug.xcconfig"; path = "Target Support Files/Pods-Recipe-CICCC/Pods-Recipe-CICCC.debug.xcconfig"; sourceTree = "<group>"; };
 		A4B3B0DAE263BCAF397031CE /* Pods-Recipe-CICCCTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Recipe-CICCCTests.debug.xcconfig"; path = "Target Support Files/Pods-Recipe-CICCCTests/Pods-Recipe-CICCCTests.debug.xcconfig"; sourceTree = "<group>"; };
 		B0AA45E6A7912FC6432A5B9C /* Pods_Recipe_CICCC_Recipe_CICCCUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Recipe_CICCC_Recipe_CICCCUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -389,6 +391,7 @@
 			children = (
 				4058445523D16E5900C86B44 /* Main.storyboard */,
 				408C319523C98C1C00E74E4A /* userPage.storyboard */,
+				6F3FF55C23E1068B005162C7 /* ShoppingList.storyboard */,
 				6F3FF53E23DAABAD005162C7 /* Refrigerator.storyboard */,
 				40127AD323A06E3C00260AF0 /* Login.storyboard */,
 				408C319123C986FF00E74E4A /* shihomi.storyboard */,
@@ -533,6 +536,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6F3FF53F23DAABAD005162C7 /* Refrigerator.storyboard in Resources */,
+				6F3FF55D23E1068B005162C7 /* ShoppingList.storyboard in Resources */,
 				6F0FBAFD23DA3E49009C1775 /* savedRecipe.storyboard in Resources */,
 				40127ADA23A06E4600260AF0 /* LaunchScreen.storyboard in Resources */,
 				408C319223C986FF00E74E4A /* shihomi.storyboard in Resources */,
