@@ -312,9 +312,6 @@
                                             </subviews>
                                             <color key="backgroundColor" red="0.99607843139999996" green="0.98823529409999999" blue="0.79215686269999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="NR2-Lz-PWk" kind="show" id="1Vu-S4-nWU"/>
-                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="ktZ-v8-uvj">
                                         <rect key="frame" x="0.0" y="203" width="150" height="43.5"/>
@@ -418,16 +415,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h81-2T-d6W" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1502.8985507246377" y="814.95535714285711"/>
-        </scene>
-        <!--Storyboard Reference-->
-        <scene sceneID="jja-lA-9CV">
-            <objects>
-                <viewControllerPlaceholder id="NR2-Lz-PWk" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="GbS-7W-GVZ"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="OxQ-rt-DqT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1826" y="625"/>
         </scene>
         <!--Refrigerator-->
         <scene sceneID="KAd-qy-edF">
