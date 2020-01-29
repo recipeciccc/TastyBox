@@ -85,12 +85,15 @@
         <scene sceneID="zCY-rp-i9R">
             <objects>
                 <viewController id="sCs-lS-ReV" customClass="StoresMapViewController" customModule="Recipe_CICCC" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="u6J-f7-nIP">
+                    <view key="view" contentMode="scaleToFill" id="u6J-f7-nIP" customClass="GMSMapView">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="830-0t-fQw"/>
                     </view>
+                    <connections>
+                        <outlet property="mapView" destination="u6J-f7-nIP" id="EBq-Ci-YRI"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QAK-Fx-27U" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

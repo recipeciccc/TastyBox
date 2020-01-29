@@ -6,6 +6,7 @@
 
 ## User settings
 xcuserdata/
+Recipe-CICCC.xcodeproj/xcshareddata/
 
 ## compatibility with Xcode 8 and earlier (ignoring not required starting Xcode 9)
 *.xcscmblueprint
@@ -49,9 +50,11 @@ playground.xcworkspace
 # .swiftpm
 
 .build/
+
 Pods/Pods.xcodeproj/xcuserdata/kitajimashihomi.xcuserdatad/xcschemes/xcschememanagement.plist
 Recipe-CICCC.xcodeproj/xcuserdata/kitajimashihomi.xcuserdatad/xcschemes/xcschememanagement.plist
 Recipe-CICCC.xcworkspace/xcuserdata/kitajimashihomi.xcuserdatad/UserInterfaceState.xcuserstate
+.DS_Store
 
 # CocoaPods
 #
@@ -102,3 +105,4 @@ Pods/Pods.xcodeproj/xcuserdata/ac.xcuserdatad/xcschemes/xcschememanagement.plist
 Recipe-CICCC.xcodeproj/xcuserdata/ac.xcuserdatad/xcschemes/xcschememanagement.plist
 Recipe-CICCC.xcworkspace/xcuserdata/ac.xcuserdatad/UserInterfaceState.xcuserstate
 *.pbxproj
+.env
