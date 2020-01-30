@@ -7,13 +7,21 @@
 //
 
 import UIKit
+import GoogleMaps
 
 class StoresMapViewController: UIViewController {
 
+    @IBOutlet var mapView: GMSMapView!
+    private let locationManager = CLLocationManager()
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        locationManager.delegate = self as! CLLocationManagerDelegate
+        locationManager.requestWhenInUseAuthorization()
+        
     }
     
 
@@ -27,4 +35,27 @@ class StoresMapViewController: UIViewController {
     }
     */
 
+}
+
+
+extension StoresMapViewController: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        guard status == .authorizedWhenInUse else {
+            return
+        }
+        
+        locationManager.startUpdatingLocation()
+        mapView.isMyLocationEnabled = true
+        mapView.settings.myLocationButton = true
+        
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let location = locations.first else {
+            return
+        }
+        mapView.camera = GMSCameraPosition(target: location.coordinate, zoom: 15, bearing: 0, viewingAngle: 0)
+        
+        locationManager.stopUpdatingLocation()
+    }
 }
