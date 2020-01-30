@@ -41,6 +41,7 @@ class DiscoveryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Discovery"
+        self.navigationController?.navigationBar.tintColor = UIColor.orange
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.orange ]
         CreateMenuLabel()
         
@@ -50,7 +51,12 @@ class DiscoveryViewController: UIViewController {
         
         initialContentView()
         EditorContainerView.isHidden = false
+        allNotificationCenter()
+
         
+    }
+    
+    func allNotificationCenter(){
         NotificationCenter.default.addObserver(self, selector: #selector(toggleSideMenu), name: NSNotification.Name("ToggleSideMenu"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(showSearch), name: NSNotification.Name("ShowSearch"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(showProfile), name: NSNotification.Name("ShowProfile"), object: nil)
@@ -59,9 +65,7 @@ class DiscoveryViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(showContact), name: NSNotification.Name("ShowContact"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(showAbout), name: NSNotification.Name("ShowAbout"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(showLogout), name: NSNotification.Name("ShowLogout"), object: nil)
-        
     }
-    
     func initialContentView(){
         self.SubscribedContainerView.isHidden = true
         self.MonthlyContainerView.isHidden = true
