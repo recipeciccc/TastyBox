@@ -33,7 +33,7 @@
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <state key="normal" title="search stores"/>
                                             <connections>
-                                                <segue destination="sCs-lS-ReV" kind="showDetail" id="Esj-RQ-00B"/>
+                                                <segue destination="sCs-lS-ReV" kind="show" id="Esj-RQ-00B"/>
                                             </connections>
                                         </button>
                                     </subviews>
@@ -81,19 +81,17 @@
             </objects>
             <point key="canvasLocation" x="2766.666666666667" y="136.60714285714286"/>
         </scene>
-        <!--Stores Map View Controller-->
+        <!--Map-->
         <scene sceneID="zCY-rp-i9R">
             <objects>
                 <viewController id="sCs-lS-ReV" customClass="StoresMapViewController" customModule="Recipe_CICCC" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="u6J-f7-nIP" customClass="GMSMapView">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                    <view key="view" contentMode="scaleToFill" id="u6J-f7-nIP">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="830-0t-fQw"/>
                     </view>
-                    <connections>
-                        <outlet property="mapView" destination="u6J-f7-nIP" id="EBq-Ci-YRI"/>
-                    </connections>
+                    <navigationItem key="navigationItem" title="Map" id="Zt2-j1-oQs"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QAK-Fx-27U" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
