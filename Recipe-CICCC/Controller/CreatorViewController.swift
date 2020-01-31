@@ -41,7 +41,8 @@ class CreatorViewController: UIViewController {
         preparationText.append("")
         photoList.append(#imageLiteral(resourceName: "imageFile"))
         self.MainTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
-        
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
+               view.addGestureRecognizer(tap)
         //let indexPath = MainTableView.
         //stepNumberString = String(indexPath!.row + 1)
         
@@ -93,7 +94,6 @@ class CreatorViewController: UIViewController {
     @objc func keyboardWillShow(note:NSNotification){
         
         if let newFrame = (note.userInfo?[ UIResponder.keyboardFrameEndUserInfoKey ] as? NSValue)?.cgRectValue {
-            
             if !keyboardShow {
                 keyboardShow = true
                 MainTableView.contentInset = UIEdgeInsets( top: 0, left: 0, bottom: newFrame.height, right: 0 )
@@ -211,19 +211,28 @@ extension CreatorViewController: UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, didSelectRowAt : IndexPath) {
         tableView.cellForRow(at: didSelectRowAt)?.selectionStyle = .none
     }
-    
+    func tableView(_ tableView: UITableView, targetIndexPathForMoveFromRowAt sourceIndexPath: IndexPath, toProposedIndexPath proposedDestinationIndexPath: IndexPath) -> IndexPath {
+        if proposedDestinationIndexPath.section != sourceIndexPath.section{
+            return sourceIndexPath
+        }else{
+            return proposedDestinationIndexPath
+        }
+    }
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        let tempText = preparationText[sourceIndexPath.item]
-        preparationText.remove(at: sourceIndexPath.item)
-        preparationText.insert(tempText, at: destinationIndexPath.item)
+            let tempText = preparationText[sourceIndexPath.item]
+            preparationText.remove(at: sourceIndexPath.item)
+            preparationText.insert(tempText, at: destinationIndexPath.item)
+            
+            let tempPhoto = photoList[sourceIndexPath.item]
+            photoList.remove(at: sourceIndexPath.item)
+            photoList.insert(tempPhoto, at: destinationIndexPath.item)
+            tableView.reloadData()
+    }
+
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         
-        let tempPhoto = photoList[sourceIndexPath.item]
-        photoList.remove(at: sourceIndexPath.item)
-        photoList.insert(tempPhoto, at: destinationIndexPath.item)
-        
-        let stepNumberString = String(sourceIndexPath.item)
-       //stepNumberString = String(destinationIndexPath.item + 1)
-        
+       let edit: Bool = (indexPath.section == 6 ) ? true : false
+        return edit
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
@@ -231,6 +240,7 @@ extension CreatorViewController: UITableViewDelegate,UITableViewDataSource{
            preparationText.remove(at: indexPath.row)
             photoList.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .automatic)
+            tableView.reloadData()
         }
     }
     
@@ -241,12 +251,11 @@ extension CreatorViewController: UITableViewDelegate,UITableViewDataSource{
 extension CreatorViewController: UITextFieldDelegate{
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        MainTableView?.reloadData()
+        //MainTableView?.reloadData()
         textField.resignFirstResponder()
         keyboardShow = false
         return true
     }
-    
 }
 
 
@@ -260,20 +269,12 @@ class CreatorPhotoCell: UITableViewCell{
 
 class TitleCell: UITableViewCell{
     @IBOutlet weak var TitleTextField: UITextField!
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        TitleTextField.resignFirstResponder()
-    }
 }
 
 
 class TimeNSearvingCell: UITableViewCell {
     @IBOutlet weak  var TimeTextFieldCell: UITextField!
     @IBOutlet weak  var ServingsTextFieldCell: UITextField!
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        TimeTextFieldCell.resignFirstResponder()
-        ServingsTextFieldCell.resignFirstResponder()
-    }
 }
 
 class IngredientsCell: UITableViewCell{
