@@ -464,6 +464,7 @@
 		68A658D35C3678E65C7E66759121B0F7 /* GDTCORTransformer.h in Headers */ = {isa = PBXBuildFile; fileRef = 8ADEADCCBD9219D9869E5F063E07AA69 /* GDTCORTransformer.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		68A88D17B55C5786A970E1B2DA571E3D /* FBSDKAppLink.h in Headers */ = {isa = PBXBuildFile; fileRef = 8D03DB3D11857DF2E0B84D2427180963 /* FBSDKAppLink.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		68CEEB5919675586880353B7DD11266D /* FBSDKGraphErrorRecoveryProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 43CB26C7F9162AF6EA0CFEB627879EF4 /* FBSDKGraphErrorRecoveryProcessor.m */; };
+		699BCB9823E47C6A006709B8 /* SideMenu.h in Headers */ = {isa = PBXBuildFile; fileRef = 699BCB9623E47C6A006709B8 /* SideMenu.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		69A4F778725C874EBC89B71A02B77822 /* FBSDKLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 87350F8284743505D76E0E84A1B24B44 /* FBSDKLogger.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		6A4F5D04626776B130AC675FA4EE614E /* FIRInstanceIDCheckinPreferences.h in Headers */ = {isa = PBXBuildFile; fileRef = F8FCC05E52CE5A1306851D7D1A866183 /* FIRInstanceIDCheckinPreferences.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		6A7E9407CF4206A3C6C72DBA7959D23A /* GDTCORRegistrar_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = EBEF4065A8E482C89FC100EEF9186DBE /* GDTCORRegistrar_Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
@@ -1873,6 +1874,9 @@
 		6920958E5D0A7F4113A2D8CAFF16116E /* FBSDKUtility.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FBSDKUtility.h; path = FBSDKCoreKit/FBSDKCoreKit/FBSDKUtility.h; sourceTree = "<group>"; };
 		6942351307BC1F54575D9853307EAE0E /* GoogleDataTransportCCTSupport.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GoogleDataTransportCCTSupport.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		69971263BB48C31515BF4D4F36F3DDA8 /* FBSDKAccessTokenCache.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FBSDKAccessTokenCache.h; path = FBSDKCoreKit/FBSDKCoreKit/Internal/TokenCaching/FBSDKAccessTokenCache.h; sourceTree = "<group>"; };
+		699BCB9423E47C6A006709B8 /* SideMenu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SideMenu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		699BCB9623E47C6A006709B8 /* SideMenu.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SideMenu.h; sourceTree = "<group>"; };
+		699BCB9723E47C6A006709B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		69E87C77E936622572E3BA1701B38404 /* OIDExternalUserAgentIOS.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = OIDExternalUserAgentIOS.h; path = Source/iOS/OIDExternalUserAgentIOS.h; sourceTree = "<group>"; };
 		6AFD823B8D7372DAAB275E0C1AC29356 /* FBSDKTestUsersManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FBSDKTestUsersManager.m; path = FBSDKCoreKit/FBSDKCoreKit/FBSDKTestUsersManager.m; sourceTree = "<group>"; };
 		6B30C6C5CE82CF57B4B893CD06451176 /* OIDTokenUtilities.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = OIDTokenUtilities.m; path = Source/OIDTokenUtilities.m; sourceTree = "<group>"; };
@@ -2523,6 +2527,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				7F9FF16DD70A5A21AA149842600D2797 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		699BCB9123E47C6A006709B8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3403,6 +3414,15 @@
 			path = "../Target Support Files/FBSDKLoginKit";
 			sourceTree = "<group>";
 		};
+		699BCB9523E47C6A006709B8 /* SideMenu */ = {
+			isa = PBXGroup;
+			children = (
+				699BCB9623E47C6A006709B8 /* SideMenu.h */,
+				699BCB9723E47C6A006709B8 /* Info.plist */,
+			);
+			path = SideMenu;
+			sourceTree = "<group>";
+		};
 		6A7B8509278E711BADD8747913374041 /* GTMSessionFetcher */ = {
 			isa = PBXGroup;
 			children = (
@@ -4057,6 +4077,7 @@
 			isa = PBXGroup;
 			children = (
 				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
+				699BCB9523E47C6A006709B8 /* SideMenu */,
 				02980D841E41F97AB149855704A9D6C7 /* Frameworks */,
 				79281353D46EE957CACAB46E7C349083 /* Pods */,
 				D25FC975644A9A8BA9691C79116F8F54 /* Products */,
@@ -4098,6 +4119,7 @@
 				61A542638D5E4714AC9D26D32CE89B09 /* Pods_Recipe_CICCC.framework */,
 				7696F9591760E594F38D14626D641B46 /* Pods_Recipe_CICCC_Recipe_CICCCUITests.framework */,
 				9ECADCD8C4723C7B154B5BF4CFB37E37 /* Pods_Recipe_CICCCTests.framework */,
+				699BCB9423E47C6A006709B8 /* SideMenu.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -4602,6 +4624,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		699BCB8F23E47C6A006709B8 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				699BCB9823E47C6A006709B8 /* SideMenu.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7260447B769C278930ADD88CA0DFA047 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -5054,6 +5084,24 @@
 			productReference = 8CC9178C366942FD6FF6A115604EAD58 /* FirebaseCoreDiagnostics.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		699BCB9323E47C6A006709B8 /* SideMenu */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 699BCB9B23E47C6A006709B8 /* Build configuration list for PBXNativeTarget "SideMenu" */;
+			buildPhases = (
+				699BCB8F23E47C6A006709B8 /* Headers */,
+				699BCB9023E47C6A006709B8 /* Sources */,
+				699BCB9123E47C6A006709B8 /* Frameworks */,
+				699BCB9223E47C6A006709B8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SideMenu;
+			productName = SideMenu;
+			productReference = 699BCB9423E47C6A006709B8 /* SideMenu.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 		6AE4A3D573DED275B034E20506596C62 /* FirebaseAuth */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9CC8F780A590B79C6B67B55D57734E97 /* Build configuration list for PBXNativeTarget "FirebaseAuth" */;
@@ -5217,6 +5265,11 @@
 			attributes = {
 				LastSwiftUpdateCheck = 1100;
 				LastUpgradeCheck = 1100;
+				TargetAttributes = {
+					699BCB9323E47C6A006709B8 = {
+						CreatedOnToolsVersion = 11.3.1;
+					};
+				};
 			};
 			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 10.0";
@@ -5256,6 +5309,7 @@
 				5C625E2C01A63B4F53D783A3E81D5370 /* Pods-Recipe-CICCC */,
 				582B34B793E9C6F109FACED4290DDF5C /* Pods-Recipe-CICCC-Recipe-CICCCUITests */,
 				DED6812DF35A04BBC54BC4AC58FAB5AA /* Pods-Recipe-CICCCTests */,
+				699BCB9323E47C6A006709B8 /* SideMenu */,
 			);
 		};
 /* End PBXProject section */
@@ -5297,6 +5351,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		68C0932CA3EDF9FF746703A88C8A4ADE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		699BCB9223E47C6A006709B8 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -5642,6 +5703,13 @@
 				6468DC8AEFFEBED071BB9CE76D7454DD /* BFWebViewAppLinkResolver.m in Sources */,
 				169EC1051634440401AFD55D6FF058CF /* Bolts-dummy.m in Sources */,
 				DD5C4634A4770435749166E8925A1AEC /* Bolts.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		699BCB9023E47C6A006709B8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6944,6 +7012,65 @@
 			};
 			name = Debug;
 		};
+		699BCB9923E47C6A006709B8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = SideMenu/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = CICCC.SideMenu;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		699BCB9A23E47C6A006709B8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = SideMenu/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = CICCC.SideMenu;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 		6B19FD28EAC2C4404B015DD9C5D9AEB0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 57B4DFEEEEC1E0D2AA92BEDA1ED18F61 /* Firebase.xcconfig */;
@@ -8016,6 +8143,15 @@
 			buildConfigurations = (
 				AA24D7E336E29595DB52DE0CCB6C2F6D /* Debug */,
 				A996DD19D838574A2217F56031D115F2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		699BCB9B23E47C6A006709B8 /* Build configuration list for PBXNativeTarget "SideMenu" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				699BCB9923E47C6A006709B8 /* Debug */,
+				699BCB9A23E47C6A006709B8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
