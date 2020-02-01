@@ -10,17 +10,28 @@ import Foundation
 import Firebase
 import FBSDKLoginKit
 
-class LoginMainpageViewController: UIViewController {
+class LoginMainpageViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
         view.addGestureRecognizer(tap)
-    }
+        
+        emailTextField.delegate = self
+        passwordTextField.delegate = self
+      
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        }
+        
+        
+    
     
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
+    
+    
     
     @IBAction func loginAction(_ sender: Any) {
         
@@ -100,4 +111,45 @@ class LoginMainpageViewController: UIViewController {
             })
         }
     }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+//        emailTextField.resignFirstResponder()
+//        let nextTag = emailTextField.tag + 1
+//        if let}nextTextField = self.view.viewWithTag(nextTag) {
+//            nextTextField.becomeFirstResponder()
+//            return true
+//        }
+//        passwordTextField.resignFirstResponder()
+//        return true
+
+        switch textField.tag {
+        case 1:
+            // they work
+            emailTextField.resignFirstResponder()
+            passwordTextField.becomeFirstResponder()
+            break
+        case 2:
+            // not close the keyboard
+            textField.resignFirstResponder()
+            break
+        default:
+            break
+        }
+        return true
+    }
+
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            if self.view.frame.origin.y == 0 {
+                self.view.frame.origin.y -= 100
+            }
+        }
+    }
+
+    @objc func keyboardWillHide(notification: NSNotification) {
+        if self.view.frame.origin.y != 0 {
+            self.view.frame.origin.y = 0
+        }
+    }
+
 }
