@@ -20,7 +20,13 @@ class LoginMainpageViewController: UIViewController, UITextFieldDelegate {
         
         emailTextField.delegate = self
         passwordTextField.delegate = self
-    }
+      
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        }
+        
+        
+    
     
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
@@ -109,7 +115,7 @@ class LoginMainpageViewController: UIViewController, UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
 //        emailTextField.resignFirstResponder()
 //        let nextTag = emailTextField.tag + 1
-//        if let nextTextField = self.view.viewWithTag(nextTag) {
+//        if let}nextTextField = self.view.viewWithTag(nextTag) {
 //            nextTextField.becomeFirstResponder()
 //            return true
 //        }
@@ -131,5 +137,19 @@ class LoginMainpageViewController: UIViewController, UITextFieldDelegate {
         }
         return true
     }
-    
+
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            if self.view.frame.origin.y == 0 {
+                self.view.frame.origin.y -= 100
+            }
+        }
+    }
+
+    @objc func keyboardWillHide(notification: NSNotification) {
+        if self.view.frame.origin.y != 0 {
+            self.view.frame.origin.y = 0
+        }
+    }
+
 }
