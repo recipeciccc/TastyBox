@@ -9,10 +9,11 @@
 import UIKit
 import CoreLocation
 import GoogleMaps
+import GooglePlaces
 
 class StoresMapViewController: UIViewController{
 
-    //@IBOutlet var mapView: GMSMapView!
+//    @IBOutlet var mapView: GMSMapView!
     var mapView: GMSMapView!
     
     private let locationManager = CLLocationManager()
@@ -20,6 +21,8 @@ class StoresMapViewController: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+//        mapView.delegate = self
+
         
         // Do any additional setup after loading the view.
 //        locationManager.delegate = self as? CLLocationManagerDelegate
