@@ -106,3 +106,4 @@ Recipe-CICCC.xcodeproj/xcuserdata/ac.xcuserdatad/xcschemes/xcschememanagement.pl
 Recipe-CICCC.xcworkspace/xcuserdata/ac.xcuserdatad/UserInterfaceState.xcuserstate
 *.pbxproj
 .env
+apiKey.plist
