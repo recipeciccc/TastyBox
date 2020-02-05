@@ -10,15 +10,21 @@ import UIKit
 
 //Globel variables
 struct RecipeData{
-    static var photo = [UIImage]()
+    
+    static var mainphoto = [UIImage]()
     static var title = [String]()
     static var cookingtime = [String]()
     static var servings = [String]()
+    static var ingredients = [[String]]()
+    static var amounts = [[String]]()
+    static var stepPhotos = [[UIImage]]()
+    static var stepTexts = [[String]]()
 }
 
 // ViewController
 class CreatorViewController: UIViewController {
     
+    var move = false
     var imagePicker = UIImagePickerController()
     var mainPhoto = UIImage()
     var photoList = [UIImage]()
@@ -28,26 +34,30 @@ class CreatorViewController: UIViewController {
     var recipeServings = String()
     var ingredientList = [String]()
     var amountList = [String]()
-    var keyboardShow : Bool = false
     var position = CGPoint()
-    var stepNumberString = String()
+    var tableviewHeight = CGFloat()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableviewHeight = MainTableView.frame.origin.y
         imagePicker.delegate = self
-        NotificationCenter.default.addObserver( self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
         amountList.append("")
         ingredientList.append("")
         preparationText.append("")
         photoList.append(#imageLiteral(resourceName: "imageFile"))
+        MainTableView.isEditing = false
         self.MainTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
-               view.addGestureRecognizer(tap)
-        //let indexPath = MainTableView.
-        //stepNumberString = String(indexPath!.row + 1)
         
+        NotificationCenter.default.addObserver( self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
         
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyBoard))
+        self.view.addGestureRecognizer(tap)
         
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
     @IBOutlet weak var MainTableView: UITableView!
@@ -58,6 +68,12 @@ class CreatorViewController: UIViewController {
         
         position = (sender as AnyObject).convert(CGPoint.zero, to: self.MainTableView)
         present(imagePicker, animated: true, completion: nil)
+    }
+    
+    @IBAction func StepTextViewPosition(_ sender: UIButton) {
+        position = (sender as AnyObject).convert(CGPoint.zero, to: self.MainTableView)
+        sender.isHidden = true
+        print(sender.isHidden)
     }
     
     @IBAction func AddIngredients(_ sender: Any) {
@@ -73,34 +89,51 @@ class CreatorViewController: UIViewController {
     }
     
     @IBAction func SaveData(_ sender: Any) {
+        MainTableView.reloadData()
+        RecipeData.mainphoto.append(mainPhoto)
         RecipeData.title.append(recipeTitle)
         RecipeData.cookingtime.append(recipeTime)
         RecipeData.servings.append(recipeServings)
-        RecipeData.photo.append(mainPhoto)
-        print(RecipeData.title)
+        RecipeData.ingredients.append(ingredientList)
+        RecipeData.amounts.append(amountList)
+        RecipeData.stepPhotos.append(photoList)
+        RecipeData.stepTexts.append(preparationText)
+        
+        print(RecipeData.title,RecipeData.cookingtime,RecipeData.servings, RecipeData.ingredients, RecipeData.amounts,RecipeData.stepTexts)
+        //print(preparationText)
     }
     
     @IBAction func EditMode(_ sender: UIButton) {
+        
         MainTableView.isEditing = !MainTableView.isEditing
         if MainTableView.isEditing{
             sender.setTitle("Done", for: .normal)
         }else{
+            
             sender.setTitle("Edit", for: .normal)
         }
     }
     
-    
-    
-    @objc func keyboardWillShow(note:NSNotification){
+    @objc func keyboardWillShow(_ notification: Notification) {
         
-        if let newFrame = (note.userInfo?[ UIResponder.keyboardFrameEndUserInfoKey ] as? NSValue)?.cgRectValue {
-            if !keyboardShow {
-                keyboardShow = true
-                MainTableView.contentInset = UIEdgeInsets( top: 0, left: 0, bottom: newFrame.height, right: 0 )
-            }else{
-                MainTableView.contentInset = UIEdgeInsets( top: 0, left: 0, bottom: 0, right: 0 )
-            }
-        }
+        UITextView.animate(withDuration: 0.2, animations:{
+            var frame = self.MainTableView.frame
+            frame.origin.y = -243 // keyboardSize.size.height
+            self.MainTableView.frame = frame
+        })
+    }
+    
+    @objc func dismissKeyBoard() {
+        
+//        UITextView.animate(withDuration: 0.3, animations:{
+//            var frame = self.MainTableView.frame
+//            frame.origin.y = 0 // self.tableviewHeight
+//            self.MainTableView.frame = frame})
+        self.view.endEditing(true)
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
     }
 }
 
@@ -128,6 +161,7 @@ extension CreatorViewController: UIImagePickerControllerDelegate, UINavigationCo
                 }else if let originalPhoto = info[UIImagePickerController.InfoKey.originalImage] as? UIImage{
                     photoList[indexPath.row] = originalPhoto
                 }
+                print(photoList)
             }
         }
         dismiss(animated: true, completion: nil)
@@ -159,7 +193,7 @@ extension CreatorViewController: UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.section {
         case 0:
-            return 380
+            return 350
         case 1,2,3,4,5:
             return 40
         case 6:
@@ -188,17 +222,38 @@ extension CreatorViewController: UITableViewDelegate,UITableViewDataSource{
             
         case 4:
             let cell = tableView.dequeueReusableCell(withIdentifier: "editingredients") as! EditIngredientsCell
-            ingredientList[indexPath.row] = cell.ingredientTextField.text!
-            amountList[indexPath.row] = cell.AmountTextField.text!
+            
+            if tableView.isEditing == true {
+                if move == true {
+                    cell.ingredientTextField.text = ingredientList[indexPath.row]
+                    cell.AmountTextField.text = amountList[indexPath.row]
+                    
+                }else{
+                    ingredientList[indexPath.row] = cell.ingredientTextField.text ?? ""
+                    amountList[indexPath.row] = cell.AmountTextField.text ?? ""
+                }
+            }
+            else{
+                ingredientList[indexPath.row] = cell.ingredientTextField.text ?? ""
+                amountList[indexPath.row] = cell.AmountTextField.text ?? ""
+            }
+            
             return cell
         case 5:
             let cell = tableView.dequeueReusableCell(withIdentifier:"instructions") as! InstructionTitleCell
             return cell
         case 6:
             let cell = tableView.dequeueReusableCell(withIdentifier: "preparation") as! PreparationCell
-            stepNumberString = String(indexPath.row + 1)
-            cell.stepNumber.text = stepNumberString + " :"
+            cell.stepNumber.text = String(indexPath.row + 1) + " :"
             cell.stepsImageView.image = photoList[indexPath.row]
+            
+            if tableView.isEditing == true {
+                cell.textView.text = preparationText[indexPath.row]
+                print(preparationText)
+            }
+            if cell.StepButton.isHidden {
+                cell.StepButton.isHidden = false
+            }
             
             return cell
             
@@ -208,9 +263,11 @@ extension CreatorViewController: UITableViewDelegate,UITableViewDataSource{
             
         }
     }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt : IndexPath) {
         tableView.cellForRow(at: didSelectRowAt)?.selectionStyle = .none
     }
+    
     func tableView(_ tableView: UITableView, targetIndexPathForMoveFromRowAt sourceIndexPath: IndexPath, toProposedIndexPath proposedDestinationIndexPath: IndexPath) -> IndexPath {
         if proposedDestinationIndexPath.section != sourceIndexPath.section{
             return sourceIndexPath
@@ -218,43 +275,105 @@ extension CreatorViewController: UITableViewDelegate,UITableViewDataSource{
             return proposedDestinationIndexPath
         }
     }
-    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-            let tempText = preparationText[sourceIndexPath.item]
-            preparationText.remove(at: sourceIndexPath.item)
-            preparationText.insert(tempText, at: destinationIndexPath.item)
-            
-            let tempPhoto = photoList[sourceIndexPath.item]
-            photoList.remove(at: sourceIndexPath.item)
-            photoList.insert(tempPhoto, at: destinationIndexPath.item)
-            tableView.reloadData()
-    }
-
+    
+    
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         
-       let edit: Bool = (indexPath.section == 6 ) ? true : false
+        let edit: Bool = indexPath.section == 6 || indexPath.section == 4 ? true : false
         return edit
     }
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-           preparationText.remove(at: indexPath.row)
-            photoList.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .automatic)
-            tableView.reloadData()
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        move = true
+        if sourceIndexPath.section == 4{
+            let tempIngredient = ingredientList[sourceIndexPath.item]
+            ingredientList.remove(at: sourceIndexPath.item)
+            ingredientList.insert(tempIngredient, at: destinationIndexPath.item)
+            
+            let tempAmount = amountList[sourceIndexPath.item]
+            amountList.remove(at: sourceIndexPath.item)
+            amountList.insert(tempAmount, at: destinationIndexPath.item)
         }
+        
+        
+        if sourceIndexPath.section == 6{
+            let tempPreparation = preparationText[sourceIndexPath.item]
+            preparationText.remove(at: sourceIndexPath.item)
+            preparationText.insert(tempPreparation, at: destinationIndexPath.item)
+            print(preparationText)
+            let tempPhoto = photoList[sourceIndexPath.item]
+            photoList.remove(at: sourceIndexPath.item)
+            photoList.insert(tempPhoto, at: destinationIndexPath.item)
+        }
+        tableView.reloadData()
+        
+    }
+    
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
+        if editingStyle == .delete {
+            
+            if indexPath.section == 4{
+                ingredientList.remove(at: indexPath.item)
+                amountList.remove(at: indexPath.item)
+                tableView.deleteRows(at: [indexPath], with: .automatic)
+                //  tableView.reloadData()
+            }
+            else if indexPath.section == 6{
+                preparationText.remove(at: indexPath.item)
+                photoList.remove(at: indexPath.item)
+                tableView.deleteRows(at: [indexPath], with: .automatic)
+                //  tableView.reloadData()
+            }
+        }
+        
+    }
+    
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return .delete
+    }
+    func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
+        return true
     }
     
 }
 
 
 // TextField
-extension CreatorViewController: UITextFieldDelegate{
+extension CreatorViewController: UITextFieldDelegate, UITextViewDelegate{
+    
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        //MainTableView?.reloadData()
         textField.resignFirstResponder()
-        keyboardShow = false
+        UITextView.animate(withDuration: 0.3, animations:{
+            var frame = self.MainTableView.frame
+            frame.origin.y = 0 // self.tableviewHeight
+            self.MainTableView.frame = frame})
         return true
+    }
+    
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        move = false
+        
+    }
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        MainTableView.reloadData()
+    }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if let indexPath = self.MainTableView.indexPathForRow(at: position) {
+            if indexPath.section == 6 {
+                preparationText[indexPath.row] = textView.text
+                print(indexPath)
+                print(preparationText)
+            }
+        }
+        return true
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        MainTableView.reloadData()
     }
 }
 
@@ -263,7 +382,6 @@ extension CreatorViewController: UITextFieldDelegate{
 //TableView Cells
 class CreatorPhotoCell: UITableViewCell{
     @IBOutlet weak var Mainphoto: UIImageView!
-    
 }
 
 
@@ -284,6 +402,7 @@ class EditIngredientsCell: UITableViewCell{
     @IBOutlet weak var ingredientTextField: UITextField!
     @IBOutlet weak var AmountTextField: UITextField!
     
+    
 }
 
 class InstructionTitleCell: UITableViewCell{
@@ -293,7 +412,6 @@ class PreparationCell: UITableViewCell{
     @IBOutlet weak var stepNumber: UILabel!
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var stepsImageView: UIImageView!
+    @IBOutlet weak var StepButton: UIButton!
     var imagePicker = UIImagePickerController()
 }
-
-
