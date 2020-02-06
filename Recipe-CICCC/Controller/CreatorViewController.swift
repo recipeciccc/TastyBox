@@ -45,7 +45,7 @@ class CreatorViewController: UIViewController {
         amountList.append("")
         ingredientList.append("")
         preparationText.append("")
-        photoList.append(#imageLiteral(resourceName: "imageFile"))
+        photoList.append(#imageLiteral(resourceName: "77d08f50-3ccc-4432-a86d-4dcfdd3d7cd4"))
         MainTableView.isEditing = false
         self.MainTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         
