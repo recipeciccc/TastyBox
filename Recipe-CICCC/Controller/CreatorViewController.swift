@@ -45,10 +45,10 @@ class CreatorViewController: UIViewController {
         amountList.append("")
         ingredientList.append("")
         preparationText.append("")
-        photoList.append(#imageLiteral(resourceName: "download (1)"))
+        photoList.append(#imageLiteral(resourceName: "imageFile"))
         MainTableView.isEditing = false
         self.MainTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
-        
+        self.navigationController!.navigationBar.tintColor = UIColor.orange
         NotificationCenter.default.addObserver( self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
         
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyBoard))
@@ -83,7 +83,7 @@ class CreatorViewController: UIViewController {
     }
     
     @IBAction func AddPreparationStep(_ sender: Any) {
-        photoList.append(#imageLiteral(resourceName: "download (1)"))
+        photoList.append(#imageLiteral(resourceName: "imageFile"))
         preparationText.append("")
         MainTableView.insertRows(at: [IndexPath(row: photoList.count-1, section: 6)], with: .top)
     }
@@ -361,6 +361,14 @@ extension CreatorViewController: UITextFieldDelegate, UITextViewDelegate{
         MainTableView.reloadData()
     }
     
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.text == "Write your recipe preparations." {
+            textView.text = ""
+            textView.textColor = UIColor.black
+        }
+    }
+    
+    
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         if let indexPath = self.MainTableView.indexPathForRow(at: position) {
             if indexPath.section == 6 {
@@ -373,6 +381,10 @@ extension CreatorViewController: UITextFieldDelegate, UITextViewDelegate{
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text == "" {
+            textView.text = "Write your recipe preparations."
+            textView.textColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+        }
         MainTableView.reloadData()
     }
 }
