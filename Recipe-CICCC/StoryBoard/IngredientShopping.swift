@@ -7,3 +7,8 @@
 //
 
 import Foundation
+
+class IngredientShopping: NSObject {
+    var name = ""
+    var amount = ""
+}

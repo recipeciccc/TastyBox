@@ -15,16 +15,15 @@ import GooglePlaces
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
-//    let apiKey = "AIzaSyA8iI9CDqKxnyvCAuWoBbSyZYdRqf_WQLk"
     
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
+        // chnge apikey before register bank account
         if let apiKey = KeyManager().getValue(key: "apiKey") as? String {
             GMSServices.provideAPIKey(apiKey)
             GMSPlacesClient.provideAPIKey(apiKey)
-            print("\n Hello \(apiKey)\n")
         }
         
         ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
