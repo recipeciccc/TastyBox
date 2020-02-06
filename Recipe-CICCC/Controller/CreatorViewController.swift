@@ -8,6 +8,7 @@
 
 import UIKit
 
+//Globel variables
 struct RecipeData{
     
     static var mainphoto = [UIImage]()
@@ -20,10 +21,9 @@ struct RecipeData{
     static var stepTexts = [[String]]()
 }
 
-
+// ViewController
 class CreatorViewController: UIViewController {
     
-
     var move = false
     var imagePicker = UIImagePickerController()
     var mainPhoto = UIImage()
@@ -45,7 +45,7 @@ class CreatorViewController: UIViewController {
         amountList.append("")
         ingredientList.append("")
         preparationText.append("")
-        photoList.append(#imageLiteral(resourceName: "77d08f50-3ccc-4432-a86d-4dcfdd3d7cd4"))
+        photoList.append(#imageLiteral(resourceName: "download (1)"))
         MainTableView.isEditing = false
         self.MainTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         
@@ -60,14 +60,16 @@ class CreatorViewController: UIViewController {
         NotificationCenter.default.removeObserver(self)
     }
     
-
     @IBOutlet weak var MainTableView: UITableView!
+    
     @IBAction func UploadPhotoAction(_ sender: Any) {
         imagePicker.sourceType = .photoLibrary
         imagePicker.allowsEditing = true
+        
+        position = (sender as AnyObject).convert(CGPoint.zero, to: self.MainTableView)
         present(imagePicker, animated: true, completion: nil)
     }
-
+    
     @IBAction func StepTextViewPosition(_ sender: UIButton) {
         position = (sender as AnyObject).convert(CGPoint.zero, to: self.MainTableView)
         sender.isHidden = true
@@ -79,6 +81,13 @@ class CreatorViewController: UIViewController {
         amountList.append("")
         MainTableView.insertRows(at: [IndexPath(row: ingredientList.count-1, section: 4)], with: .top)
     }
+    
+    @IBAction func AddPreparationStep(_ sender: Any) {
+        photoList.append(#imageLiteral(resourceName: "download (1)"))
+        preparationText.append("")
+        MainTableView.insertRows(at: [IndexPath(row: photoList.count-1, section: 6)], with: .top)
+    }
+    
     @IBAction func SaveData(_ sender: Any) {
         MainTableView.reloadData()
         RecipeData.mainphoto.append(mainPhoto)
@@ -129,11 +138,14 @@ class CreatorViewController: UIViewController {
 }
 
 
+
+
 //image picker
 extension CreatorViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-
+        
+        
         if let indexPath = self.MainTableView.indexPathForRow(at: position) {
             let section = indexPath.section
             if section == 0 {
@@ -152,13 +164,11 @@ extension CreatorViewController: UIImagePickerControllerDelegate, UINavigationCo
                 print(photoList)
             }
         }
-
         dismiss(animated: true, completion: nil)
         MainTableView?.reloadData()
     }
-    
-    
 }
+
 
 //tableview
 extension CreatorViewController: UITableViewDelegate,UITableViewDataSource{
@@ -169,12 +179,14 @@ extension CreatorViewController: UITableViewDelegate,UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
-            case 0, 1, 2, 3, 5:
-                return 1
-            case 4:
-                return ingredientList.count
-            default:
-                return 0
+        case 0, 1, 2, 3, 5:
+            return 1
+        case 4:
+            return ingredientList.count
+        case 6:
+            return preparationText.count
+        default:
+            return 0
         }
     }
     
@@ -188,27 +200,25 @@ extension CreatorViewController: UITableViewDelegate,UITableViewDataSource{
             return 100
         default:
             return UITableView.automaticDimension
-
         }
     }
     
-
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-       
+        
         switch indexPath.section{
-            case 0:
-                let cell = tableView.dequeueReusableCell(withIdentifier: "mainPhotoCell") as! CreatorPhotoCell
-                cell.Mainphoto.image = mainPhoto
-                return cell
-            case 1:
-                let cell : TitleCell = tableView.dequeueReusableCell(withIdentifier: "title") as! TitleCell
-                recipeTitle =  cell.TitleTextField.text ?? ""
-                return cell
-            case 2:
-                let cell = tableView.dequeueReusableCell(withIdentifier: "timeNserving") as! TimeNSearvingCell
-                recipeTime = cell.TimeTextFieldCell.text ?? ""
-                recipeServings = cell.ServingsTextFieldCell.text ?? ""
-                return cell
+        case 0:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "mainPhotoCell") as! CreatorPhotoCell
+            cell.Mainphoto.image = mainPhoto
+            return cell
+        case 1:
+            let cell : TitleCell = tableView.dequeueReusableCell(withIdentifier: "title") as! TitleCell
+            recipeTitle =  cell.TitleTextField.text ?? ""
+            return cell
+        case 2:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "timeNserving") as! TimeNSearvingCell
+            recipeTime = cell.TimeTextFieldCell.text ?? ""
+            recipeServings = cell.ServingsTextFieldCell.text ?? ""
+            return cell
             
         case 4:
             let cell = tableView.dequeueReusableCell(withIdentifier: "editingredients") as! EditIngredientsCell
@@ -250,6 +260,7 @@ extension CreatorViewController: UITableViewDelegate,UITableViewDataSource{
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: "ingredients") as! IngredientsCell
             return cell
+            
         }
     }
     
@@ -332,6 +343,7 @@ extension CreatorViewController: UITableViewDelegate,UITableViewDataSource{
 // TextField
 extension CreatorViewController: UITextFieldDelegate, UITextViewDelegate{
     
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         UITextView.animate(withDuration: 0.3, animations:{
@@ -367,7 +379,7 @@ extension CreatorViewController: UITextFieldDelegate, UITextViewDelegate{
 
 
 
-//TableViewCell
+//TableView Cells
 class CreatorPhotoCell: UITableViewCell{
     @IBOutlet weak var Mainphoto: UIImageView!
 }
@@ -381,7 +393,6 @@ class TitleCell: UITableViewCell{
 class TimeNSearvingCell: UITableViewCell {
     @IBOutlet weak  var TimeTextFieldCell: UITextField!
     @IBOutlet weak  var ServingsTextFieldCell: UITextField!
-
 }
 
 class IngredientsCell: UITableViewCell{
@@ -390,6 +401,8 @@ class IngredientsCell: UITableViewCell{
 class EditIngredientsCell: UITableViewCell{
     @IBOutlet weak var ingredientTextField: UITextField!
     @IBOutlet weak var AmountTextField: UITextField!
+    
+    
 }
 
 class InstructionTitleCell: UITableViewCell{
@@ -402,3 +415,4 @@ class PreparationCell: UITableViewCell{
     @IBOutlet weak var StepButton: UIButton!
     var imagePicker = UIImagePickerController()
 }
+
