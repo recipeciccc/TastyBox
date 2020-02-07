@@ -12,8 +12,8 @@ class userRecipeItemTableViewCell: UITableViewCell {
     
     @IBOutlet weak var collectionView: UICollectionView!{
         didSet{
-            collectionView.dataSource = self as! UICollectionViewDataSource
-            collectionView.delegate = self as! UICollectionViewDelegate
+            collectionView.dataSource = self as UICollectionViewDataSource
+            collectionView.delegate = self as UICollectionViewDelegate
         }
     }
     
