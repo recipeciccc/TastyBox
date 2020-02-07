@@ -10,18 +10,17 @@ import UIKit
 
 class FollowingRecipeViewController: UIViewController {
 
+    
     @IBOutlet weak var folowingTableView: UITableView!
     
     
-    var subscribed = [UIImage]()
-    var recipeImage = [[UIImage]]()
-    var recipeTitle = [[String]]()
+    var creatorImageList = [UIImage]()
+    var creatorNameList = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        subscribed = [#imageLiteral(resourceName: "download (1)"),#imageLiteral(resourceName: "download (1)"),#imageLiteral(resourceName: "download (1)")]
-        recipeImage = [[#imageLiteral(resourceName: "2018_Sweet-Sallty-Snack-Mix_5817_600x600"),#imageLiteral(resourceName: "77d08f50-3ccc-4432-a86d-4dcfdd3d7cd4"),#imageLiteral(resourceName: "190411-potato-salad-horizontal-1-1555688422"),#imageLiteral(resourceName: "guacamole-foto-heroe-1024x723"),#imageLiteral(resourceName: "huevos-rancheros"),#imageLiteral(resourceName: "08COOKING-POTATO2-articleLarge-v2")],[#imageLiteral(resourceName: "2018_Sweet-Sallty-Snack-Mix_5817_600x600"),#imageLiteral(resourceName: "77d08f50-3ccc-4432-a86d-4dcfdd3d7cd4"),#imageLiteral(resourceName: "190411-potato-salad-horizontal-1-1555688422"),#imageLiteral(resourceName: "guacamole-foto-heroe-1024x723"),#imageLiteral(resourceName: "huevos-rancheros"),#imageLiteral(resourceName: "08COOKING-POTATO2-articleLarge-v2")],[#imageLiteral(resourceName: "2018_Sweet-Sallty-Snack-Mix_5817_600x600"),#imageLiteral(resourceName: "77d08f50-3ccc-4432-a86d-4dcfdd3d7cd4"),#imageLiteral(resourceName: "190411-potato-salad-horizontal-1-1555688422"),#imageLiteral(resourceName: "guacamole-foto-heroe-1024x723"),#imageLiteral(resourceName: "huevos-rancheros"),#imageLiteral(resourceName: "08COOKING-POTATO2-articleLarge-v2")]]
-        recipeTitle = [["Title","Title","Title","Title","Title","Title"],["Title","Title","Title","Title","Title","Title"],["Title","Title","Title","Title","Title","Title"]]
+        creatorImageList = [#imageLiteral(resourceName: "imageFile"),#imageLiteral(resourceName: "imageFile"),#imageLiteral(resourceName: "imageFile")]
+        creatorNameList = ["Ruby Smith","Sherry Heni","Anne Casper"]
     }
     
 }
@@ -29,11 +28,26 @@ class FollowingRecipeViewController: UIViewController {
 extension FollowingRecipeViewController: UITableViewDataSource,UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return subscribed.count
+        return creatorImageList.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "recipeCell", for: indexPath) as! FollowingRecipeTableViewCell
+        cell.creatorImage.image = creatorImageList[indexPath.row]
+        cell.createrName.text = creatorNameList[indexPath.row]
+      
+        //cell.recipeImage[indexPath.row][]
         return cell
     }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 240
+    }
+//    func tableView(tableView: UITableView,
+//        willDisplayCell cell: UITableViewCell,
+//        forRowAtIndexPath indexPath: NSIndexPath) {
+//
+//        guard let tableViewCell = cell as? FollowingRecipeTableViewCell else { return }
+//
+//      //  FollowingRecipeTableViewCell.setCollectionViewDataSourceDelegate(self, forRow: indexPath.row)
+//    }
     
 }
