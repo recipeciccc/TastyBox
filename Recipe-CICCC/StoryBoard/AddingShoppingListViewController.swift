@@ -9,7 +9,11 @@
 import UIKit
 
 protocol AddingShoppingListViewControllerDelegate: class {
+    
     func editItemViewController(_ controller: AddingShoppingListViewController, didFinishEditting item: IngredientShopping, indexPath: IndexPath)
+    
+    func editItemViewController(_ controller: AddingShoppingListViewController, addItem item: IngredientShopping, indexPath: IndexPath)
+    
 }
 
 class AddingShoppingListViewController: UIViewController {
@@ -20,6 +24,7 @@ class AddingShoppingListViewController: UIViewController {
     @IBOutlet weak var amountTextField: UITextField!
     
     var item = IngredientShopping()
+    var itemIsEmpty:Bool?
     var indexPath = IndexPath()
     var shoppingList = ShoppingList()
     weak var delegate:AddingShoppingListViewControllerDelegate?
@@ -34,13 +39,26 @@ class AddingShoppingListViewController: UIViewController {
         // Do any additional setup after loading the view.
         ingredientNameTextField.text = item.name
         amountTextField.text = item.amount
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
+        ingredientNameTextField.delegate = self
+        amountTextField.delegate = self
     }
     
     @IBAction func done(_ sender: UIBarButtonItem) {
         
-            self.item.name = ingredientNameTextField.text ?? ""
-            self.item.amount = amountTextField.text ?? ""
+        
+        
+        self.item.name = ingredientNameTextField.text ?? ""
+        self.item.amount = amountTextField.text ?? ""
+        
+        if itemIsEmpty == false {
             delegate?.editItemViewController(self, didFinishEditting: self.item, indexPath: indexPath)
+        } else {
+            delegate?.editItemViewController(self, addItem: self.item, indexPath: indexPath)
+        }
         
         navigationController?.popViewController(animated: true)
     }
@@ -55,4 +73,33 @@ class AddingShoppingListViewController: UIViewController {
     }
     */
 
+}
+
+extension AddingShoppingListViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        switch textField.tag {
+        case 0:
+            ingredientNameTextField.resignFirstResponder()
+            amountTextField.becomeFirstResponder()
+        case 1:
+            amountTextField.resignFirstResponder()
+        default:
+            break
+        }
+        return true
+    }
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            if self.view.frame.origin.y == 0 {
+                self.view.frame.origin.y = 0
+            }
+        }
+    }
+    
+    @objc func keyboardWillHide() {
+        if self.view.frame.origin.y != 0 {
+            self.view.frame.origin.y = 0
+        }
+    }
 }

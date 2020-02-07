@@ -128,7 +128,14 @@ class ShoppingListTableViewController: UITableViewController {
                     addVC.item = item
                     addVC.indexPath = indexPath
                     addVC.delegate = self as! AddingShoppingListViewControllerDelegate
+                    addVC.itemIsEmpty = false
                 }
+            }
+        }
+        if segue.identifier == "addShoppingIItem" {
+            if let addVC = segue.destination as? AddingShoppingListViewController {
+                addVC.delegate = self as! AddingShoppingListViewControllerDelegate
+                addVC.itemIsEmpty = true
             }
         }
     }
@@ -141,6 +148,11 @@ extension ShoppingListTableViewController: AddingShoppingListViewControllerDeleg
         shoppingList.list.remove(at: indexPath.row)
         shoppingList.list.insert(item, at: indexPath.row)
         
+        self.tableView.reloadData()
+    }
+    
+    func editItemViewController(_ controller: AddingShoppingListViewController, addItem item: IngredientShopping, indexPath: IndexPath){
+        shoppingList.list.append(item)
         self.tableView.reloadData()
     }
     

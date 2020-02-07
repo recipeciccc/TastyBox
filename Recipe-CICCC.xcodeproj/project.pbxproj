@@ -88,6 +88,7 @@
 		6FB86C3823EB3F7000672851 /* ShoppingList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB86C3723EB3F7000672851 /* ShoppingList.swift */; };
 		6FB86C3A23EC942800672851 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6FB86C3923EC942700672851 /* Main.storyboard */; };
 		6FB86C3C23EC959D00672851 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6FB86C3B23EC959D00672851 /* Assets.xcassets */; };
+		6FB86C4623ED1C3B00672851 /* Map.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6FB86C4523ED1C3A00672851 /* Map.storyboard */; };
 		B85B44E4B7712DCAEA7533E2 /* Pods_Recipe_CICCC_Recipe_CICCCUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0AA45E6A7912FC6432A5B9C /* Pods_Recipe_CICCC_Recipe_CICCCUITests.framework */; };
 		D842848E4079AD1F8EF4DF88 /* Pods_Recipe_CICCC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D89B921DC6BD386DA580F255 /* Pods_Recipe_CICCC.framework */; };
 /* End PBXBuildFile section */
@@ -201,6 +202,7 @@
 		6FB86C3723EB3F7000672851 /* ShoppingList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ShoppingList.swift; path = "Recipe-CICCC/ShoppingList.swift"; sourceTree = SOURCE_ROOT; };
 		6FB86C3923EC942700672851 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		6FB86C3B23EC959D00672851 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		6FB86C4523ED1C3A00672851 /* Map.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Map.storyboard; sourceTree = "<group>"; };
 		939DE07C470F123E9499D33E /* Pods-Recipe-CICCC.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Recipe-CICCC.debug.xcconfig"; path = "Target Support Files/Pods-Recipe-CICCC/Pods-Recipe-CICCC.debug.xcconfig"; sourceTree = "<group>"; };
 		A4B3B0DAE263BCAF397031CE /* Pods-Recipe-CICCCTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Recipe-CICCCTests.debug.xcconfig"; path = "Target Support Files/Pods-Recipe-CICCCTests/Pods-Recipe-CICCCTests.debug.xcconfig"; sourceTree = "<group>"; };
 		B0AA45E6A7912FC6432A5B9C /* Pods_Recipe_CICCC_Recipe_CICCCUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Recipe_CICCC_Recipe_CICCCUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -429,6 +431,7 @@
 				6F3FF55C23E1068B005162C7 /* ShoppingList.storyboard */,
 				6FB86C2C23EA899900672851 /* IngredientShopping.swift */,
 				6F3FF53E23DAABAD005162C7 /* Refrigerator.storyboard */,
+				6FB86C4523ED1C3A00672851 /* Map.storyboard */,
 				40127AD323A06E3C00260AF0 /* Login.storyboard */,
 				408C319123C986FF00E74E4A /* shihomi.storyboard */,
 				6F0FBB0423DA491A009C1775 /* RecipeDetail.storyboard */,
@@ -605,6 +608,7 @@
 				408C319D23C98C1E00E74E4A /* userPage.storyboard in Resources */,
 				6F0FBB0523DA491A009C1775 /* RecipeDetail.storyboard in Resources */,
 				40127AD523A06E3C00260AF0 /* Login.storyboard in Resources */,
+				6FB86C4623ED1C3B00672851 /* Map.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

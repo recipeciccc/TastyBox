@@ -55,6 +55,9 @@
                                             <state key="normal" title="Search Stores">
                                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </state>
+                                            <connections>
+                                                <segue destination="h0v-Pw-8TT" kind="show" id="zn2-Hb-9AI"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                     <constraints>
@@ -128,6 +131,16 @@
             </objects>
             <point key="canvasLocation" x="5542.0289855072469" y="805.58035714285711"/>
         </scene>
+        <!--Map-->
+        <scene sceneID="UAI-Yj-Run">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Map" id="h0v-Pw-8TT" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="w7y-3c-MHO"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WLL-kw-dRP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6127" y="434"/>
+        </scene>
         <!--Add-->
         <scene sceneID="1ob-CF-Gxc">
             <objects>
@@ -156,7 +169,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ol4-0X-WWh">
+                                    <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ol4-0X-WWh">
                                         <rect key="frame" x="0.0" y="129" width="338" height="34"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
