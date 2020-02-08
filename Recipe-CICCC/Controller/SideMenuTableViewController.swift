@@ -12,10 +12,11 @@ class SideMenuTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         self.tableView.separatorColor = UIColor.clear
+         NotificationCenter.default.post(name: NSNotification.Name("ToggleSideMenu"), object: nil)
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print(indexPath.row)
-        NotificationCenter.default.post(name: NSNotification.Name("ToggleSideMenu"), object: nil)
+//        NotificationCenter.default.post(name: NSNotification.Name("ToggleSideMenu"), object: nil)
         
         
         switch indexPath.row {
