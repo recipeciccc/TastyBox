@@ -12,23 +12,14 @@ import GoogleMaps
 import GooglePlaces
 
 class StoresMapViewController: UIViewController{
-
-//    @IBOutlet var mapView: GMSMapView!
     var mapView: GMSMapView!
     
     private let locationManager = CLLocationManager()
-    
+    let apiKey = KeyManager().getValue(key:"apiKey") as? String
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        mapView.delegate = self
 
-        
-        // Do any additional setup after loading the view.
-//        locationManager.delegate = self as? CLLocationManagerDelegate
-//        locationManager.requestWhenInUseAuthorization()
-//        mapView.delegate = self as? GMSMapViewDelegate
-//
         if CLLocationManager.locationServicesEnabled() {
             locationManager.delegate = self
             locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
@@ -61,28 +52,76 @@ class StoresMapViewController: UIViewController{
         } else {
           print("Location services are not enabled")
         }
+        
+        getSupermarketImformation()
     }
     
-    func showCurrentLocation() {
-        mapView.settings.myLocationButton = true
-        let locationObj = locationManager.location as! CLLocation
-        let coord = locationObj.coordinate
-        let lattitude = coord.latitude
-        let longitude = coord.longitude
-        print(" lat in  updating \(lattitude) ")
-        print(" long in  updating \(longitude)")
+    func getSupermarketImformation()  {
+        let session = URLSession.shared
+        
+        let url = URL(string: "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=\(locationManager.location!.coordinate.latitude),\(locationManager.location!.coordinate.longitude)&radius=4500&type=supermarket&key=\(apiKey!)")!
+        let task = session.dataTask(with: url) { data, response, error in
+            
+            if error != nil || data == nil {
+                print("Client error!")
+                return
+            }
+            
+            guard let response = response as? HTTPURLResponse, (200...299).contains(response.statusCode) else {
+                print("Server error!")
+                return
+            }
+            
+            guard let mime = response.mimeType, mime == "application/json" else {
+                print("Wrong MIME type!")
+                return
+            }
+            
+            do {
+                let json = try JSONSerialization.jsonObject(with: data!, options: [])
+                print(json)
+            } catch {
+                print("JSON error: \(error.localizedDescription)")
+            }
+            
+            do {
+                let decoder = JSONDecoder()
+                decoder.keyDecodingStrategy = .convertFromSnakeCase
+                let root = try decoder.decode(Root.self, from: data!)
+                print(root)
+                self.createMarkers(root: root)
+            } catch {
+                print(error)
+            }
+        }
+        
+        
+        
+        task.resume()
+        
+        
+    }
 
-        let center = CLLocationCoordinate2D(latitude: locationObj.coordinate.latitude, longitude: locationObj.coordinate.longitude)
-        let marker = GMSMarker()
-        marker.position = center
-        marker.title = "current location"
-        marker.map = mapView
-        //let camera: GMSCameraPosition = GMSCameraPosition.camera(withLatitude: lattitude, longitude: longitude, zoom: Float(5))
-        //self.mapView.animate(to: camera)
-//        mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
+    private func createMarkers(root: Root) {
+        
+        var markers: [GMSMarker] = []
+        let places:[SearchResult] = root.results
+        
+        for place in places {
+            
+            let marker = GMSMarker()
+            marker.position = CLLocationCoordinate2D(latitude: place.geometry.location.lat , longitude: place.geometry.location.lng)
+            marker.title = "\(place.name)"
+            marker.snippet = "\(place.vicinity)"
+            markers.append(marker)
+            marker.map = mapView
+        }
+        
     }
     
     
+    
+   
     
 
     /*
@@ -95,11 +134,51 @@ class StoresMapViewController: UIViewController{
     }
     */
 
+
 }
 
-
 extension StoresMapViewController: GMSMapViewDelegate {
-    
+     func mapView(_ mapView: GMSMapView, didTapInfoWindowOf marker: GMSMarker) {
+            
+            let word = marker.snippet!.split(separator: ",")
+            var result = ""
+            
+            for value in word {
+                for char in value {
+                    var temp = String(char)
+                    if char == " " {
+                        temp = ",+"
+                    }
+                    result += temp
+                }
+            }
+             
+            
+            print(result)
+            
+            if (UIApplication.shared.canOpenURL(URL(string:"comgooglemaps://")!)) {
+                
+                let urlHasAddressAndName:String? =         "comgooglemaps://?q=\(result),+\(marker.title!)&center=\(marker.position.latitude),\(marker.position.longitude)&zoom=14&views=traffic"
+                
+                let  urlHasAddress:String? =         "comgooglemaps://?q=\(result)&center=\(marker.position.latitude),\(marker.position.longitude)&zoom=14&views=traffic"
+                
+                let url = URL(string: urlHasAddressAndName!) ?? URL(string: urlHasAddress!)
+                
+                UIApplication.shared.openURL(url!)
+                
+                
+    //            let urlString :String? =         "comgooglemaps://?q=\(marker.title!)&center=\(marker.position.latitude),\(marker.position.longitude)&zoom=14&views=traffic"
+    //
+    //            let  urlHasAddress:String? =         "comgooglemaps://?q=\(result)&center=\(marker.position.latitude),\(marker.position.longitude)&zoom=14&views=traffic"
+    //
+    //            let url = URL(string: urlString!) ?? URL(string: urlHasAddress!)
+                              
+    //            UIApplication.shared.openURL(url!)
+                
+             } else {
+               print("Can't use comgooglemaps://");
+             }
+        }
 }
 
 extension StoresMapViewController: CLLocationManagerDelegate {
@@ -111,7 +190,7 @@ extension StoresMapViewController: CLLocationManagerDelegate {
         locationManager.startUpdatingLocation()
         mapView.isMyLocationEnabled = true
         mapView.settings.myLocationButton = true
-        self.showCurrentLocation()
+     
         
     }
     
@@ -121,6 +200,6 @@ extension StoresMapViewController: CLLocationManagerDelegate {
         }
         mapView.camera = GMSCameraPosition(target: location.coordinate, zoom: 15, bearing: 0, viewingAngle: 0)
         locationManager.stopUpdatingLocation()
-        self.showCurrentLocation()
+        
     }
 }
