@@ -137,7 +137,7 @@ class LoginMainpageViewController: UIViewController, UITextFieldDelegate {
     }
 
     @objc func keyboardWillShow(notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+        if ((notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue) != nil {
             if self.view.frame.origin.y == 0 {
                 self.view.frame.origin.y -= 100
             }
@@ -182,13 +182,7 @@ extension LoginMainpageViewController: GIDSignInDelegate {
                 let vc = Storyboard.instantiateViewController(withIdentifier: "Discovery")
                 self.navigationController?.pushViewController(vc, animated: true)
             }
-                
-                
-//                let viewController = self.storyboard?.instantiateViewController(withIdentifier: "Discovery") {
-//                UIApplication.shared.keyWindow?.rootViewController = viewController
-//                self.dismiss(animated: true, completion: nil)
-//                self.navigationController?.pushViewController(viewController, animated: true)
-            
+
         })
      
     }
