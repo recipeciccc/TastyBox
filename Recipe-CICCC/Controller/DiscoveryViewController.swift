@@ -56,11 +56,6 @@ class DiscoveryViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(showProfile), name: NSNotification.Name("ShowProfile"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(AddRecipe), name: NSNotification.Name("AddRecipe"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(showSetting), name: NSNotification.Name("ShowSetting"), object: nil)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(ShowShoppingList), name: NSNotification.Name("ShowShoppingList"), object: nil)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(ShowRefrigerator), name: NSNotification.Name("ShowRefrigerator"), object: nil)
-        
         NotificationCenter.default.addObserver(self, selector: #selector(showContact), name: NSNotification.Name("ShowContact"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(showAbout), name: NSNotification.Name("ShowAbout"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(showLogout), name: NSNotification.Name("ShowLogout"), object: nil)
@@ -121,14 +116,6 @@ class DiscoveryViewController: UIViewController {
     @objc func showSetting(){
         print("show Setting")
         performSegue(withIdentifier: "setting", sender: nil)
-    }
-    @objc func ShowRefrigerator(){
-        print("show Refrigerator")
-        performSegue(withIdentifier: "refrigerator", sender: nil)
-    }
-    @objc func ShowShoppingList(){
-        print("show ShoppingList")
-        performSegue(withIdentifier: "shoppingList", sender: nil)
     }
     @objc func showContact(){
         print("show Contact")
