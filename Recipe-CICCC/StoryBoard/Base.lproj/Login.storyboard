@@ -10,7 +10,7 @@
         <!--Login Mainpage View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="LoginMain" id="BYZ-38-t0r" customClass="LoginMainpageViewController" customModule="Recipe_CICCC" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="LoginMainpageViewController" customModule="Recipe_CICCC" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -31,6 +31,9 @@
                                 <rect key="frame" x="118" y="413" width="50" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Google"/>
+                                <connections>
+                                    <action selector="googleLoginWithSender:" destination="BYZ-38-t0r" eventType="touchDown" id="LUq-t5-gly"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Continue with" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Iz-Wg-71u">
                                 <rect key="frame" x="154" y="359" width="106" height="21"/>
@@ -54,11 +57,11 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BgS-tT-feb">
-                                <rect key="frame" x="239" y="789" width="65" height="30"/>
+                                <rect key="frame" x="239" y="789" width="65" height="29"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Register !"/>
                                 <connections>
-                                    <segue destination="ZrB-fw-QEE" kind="show" id="n3q-Q1-xiV"/>
+                                    <segue destination="XtL-dg-aW0" kind="presentation" id="crt-yz-jkf"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Forget password?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kFd-Rt-aFm">
@@ -73,7 +76,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Reset here！"/>
                                 <connections>
-                                    <segue destination="yaD-wG-Tjn" kind="show" id="8Pf-WT-tQi"/>
+                                    <segue destination="Dob-Vs-Z8o" kind="presentation" id="hkF-ti-x1o"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jzu-d9-6zw">
@@ -106,12 +109,28 @@
             </objects>
             <point key="canvasLocation" x="1047.8260869565217" y="101.78571428571428"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="86v-61-W3S">
+            <objects>
+                <navigationController storyboardIdentifier="Email Register" id="XtL-dg-aW0" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="7Xb-4o-h98">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="ZrB-fw-QEE" kind="relationship" relationship="rootViewController" id="4yG-LI-nWM"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BPH-VY-Fhb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2106" y="292"/>
+        </scene>
         <!--Email Register View Controller-->
         <scene sceneID="P3y-aF-G0T">
             <objects>
-                <viewController storyboardIdentifier="Email Register" id="ZrB-fw-QEE" customClass="EmailRegisterViewController" customModule="Recipe_CICCC" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="ZrB-fw-QEE" customClass="EmailRegisterViewController" customModule="Recipe_CICCC" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Inn-fD-uEh">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="E-mail" textAlignment="natural" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="g0l-Rg-rpq">
@@ -165,14 +184,31 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0ZK-m7-wy8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2202.898550724638" y="411.83035714285711"/>
+            <point key="canvasLocation" x="2871" y="292"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="caM-3U-f73">
+            <objects>
+                <navigationController id="Dob-Vs-Z8o" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="JIj-HR-KfY"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="2LW-1D-0tE">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="yaD-wG-Tjn" kind="relationship" relationship="rootViewController" id="rfh-OU-XwY"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6yR-Fg-RPp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2106" y="-372"/>
         </scene>
         <!--Reset Password View Controller-->
         <scene sceneID="vfX-5P-XEq">
             <objects>
                 <viewController id="yaD-wG-Tjn" customClass="ResetPasswordViewController" customModule="Recipe_CICCC" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="LNO-XS-udC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="E-mail" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RVz-Ta-gWp">
@@ -200,14 +236,22 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="Ntu-qF-lsh"/>
                     </view>
-                    <navigationItem key="navigationItem" id="nhR-h4-nOS"/>
+                    <navigationItem key="navigationItem" id="nhR-h4-nOS">
+                        <barButtonItem key="rightBarButtonItem" title="Cancel" id="pL1-6I-8lU">
+                            <connections>
+                                <action selector="backToLoginMainSegue:" destination="jZp-Ss-qLU" id="1w6-Ee-BMd"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="emailTextField" destination="RVz-Ta-gWp" id="9iU-EW-9q6"/>
+                        <segue destination="jZp-Ss-qLU" kind="unwind" identifier="backToLoginMainSegue" unwindAction="unwindtoLoginMainWithSegue:" id="wZL-e8-MDS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="u1Q-W9-q9I" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="jZp-Ss-qLU" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2789.8550724637685" y="-302.00892857142856"/>
+            <point key="canvasLocation" x="2872" y="-372"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="6AA-D6-P1I">
@@ -239,7 +283,7 @@
         <!--Navigation Controller-->
         <scene sceneID="1wf-yI-4XA">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="SoH-tz-dVu" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="LoginMain" automaticallyAdjustsScrollViewInsets="NO" id="SoH-tz-dVu" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Aui-Xp-0ib">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
