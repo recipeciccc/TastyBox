@@ -936,13 +936,8 @@
                                                     <rect key="frame" x="15" y="15" width="384" height="320"/>
                                                     <color key="backgroundColor" systemColor="systemBrownColor" red="0.63529411759999999" green="0.51764705879999995" blue="0.36862745099999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </button>
-<<<<<<< HEAD
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yym-n8-iQK">
                                                     <rect key="frame" x="19" y="19" width="376" height="342"/>
-=======
-                                                <button opaque="NO" tag="-1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yym-n8-iQK">
-                                                    <rect key="frame" x="19" y="19" width="376" height="312"/>
->>>>>>> testCreation2
                                                     <color key="backgroundColor" red="0.99759250880000006" green="0.98715764279999996" blue="0.79212433100000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <state key="normal">
@@ -971,22 +966,14 @@
                                                     </constraints>
                                                 </imageView>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cake" translatesAutoresizingMaskIntoConstraints="NO" id="Gsu-Ih-1Vp">
-<<<<<<< HEAD
                                                     <rect key="frame" x="25" y="95" width="364" height="260"/>
-=======
-                                                    <rect key="frame" x="24" y="19" width="366" height="312"/>
->>>>>>> testCreation2
                                                     <color key="tintColor" systemColor="systemBrownColor" red="0.63529411759999999" green="0.51764705879999995" blue="0.36862745099999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </imageView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="Yym-n8-iQK" secondAttribute="trailing" constant="19" id="2So-YL-bod"/>
                                                 <constraint firstItem="7xS-nj-aIJ" firstAttribute="leading" secondItem="Jmj-9z-V6w" secondAttribute="leading" constant="15" id="8zd-fc-3cR"/>
-<<<<<<< HEAD
                                                 <constraint firstItem="Gsu-Ih-1Vp" firstAttribute="top" secondItem="iZd-uv-drG" secondAttribute="bottom" constant="5" id="CQr-9E-1ay"/>
-=======
-                                                <constraint firstItem="Gsu-Ih-1Vp" firstAttribute="top" secondItem="Jmj-9z-V6w" secondAttribute="topMargin" constant="8" id="9if-O4-TEz"/>
->>>>>>> testCreation2
                                                 <constraint firstItem="iZd-uv-drG" firstAttribute="centerX" secondItem="Jmj-9z-V6w" secondAttribute="centerX" id="Drv-gz-sAi"/>
                                                 <constraint firstAttribute="trailing" secondItem="7xS-nj-aIJ" secondAttribute="trailing" constant="15" id="Iwz-1T-6vv"/>
                                                 <constraint firstItem="Gsu-Ih-1Vp" firstAttribute="leading" secondItem="Jmj-9z-V6w" secondAttribute="leadingMargin" constant="4" id="Jw5-j0-L8c"/>
@@ -1024,13 +1011,9 @@
                                                     <color key="textColor" systemColor="systemBrownColor" red="0.63529411759999999" green="0.51764705879999995" blue="0.36862745099999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-<<<<<<< HEAD
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nWR-Ye-ptM">
                                                     <rect key="frame" x="71" y="2.5" width="323" height="35"/>
-=======
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Your recipe name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nWR-Ye-ptM">
-                                                    <rect key="frame" x="78" y="2.5" width="316" height="35"/>
->>>>>>> testCreation2
+
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="35" id="LnF-5U-HQW"/>
                                                     </constraints>
@@ -1081,13 +1064,8 @@
                                                     <color key="textColor" systemColor="systemBrownColor" red="0.63529411759999999" green="0.51764705879999995" blue="0.36862745099999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-<<<<<<< HEAD
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="Vu2-wK-Eta">
                                                     <rect key="frame" x="314" y="4.5" width="80" height="35"/>
-=======
-                                                <textField opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="People" textAlignment="natural" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="Vu2-wK-Eta">
-                                                    <rect key="frame" x="334" y="4.5" width="60" height="35"/>
->>>>>>> testCreation2
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="60" id="4gr-G2-Kda"/>
                                                         <constraint firstAttribute="height" constant="35" id="SbK-0C-dF3"/>
@@ -1098,13 +1076,8 @@
                                                         <outlet property="delegate" destination="gID-go-gIn" id="OE1-6K-82w"/>
                                                     </connections>
                                                 </textField>
-<<<<<<< HEAD
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cQY-xb-1eM">
                                                     <rect key="frame" x="127" y="4.5" width="80" height="35"/>
-=======
-                                                <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Minites" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cQY-xb-1eM">
-                                                    <rect key="frame" x="78" y="4.5" width="151" height="35"/>
->>>>>>> testCreation2
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="35" id="zed-Ai-Cey"/>
                                                     </constraints>
@@ -1220,11 +1193,7 @@
                                                 <constraint firstItem="M6b-kB-gZp" firstAttribute="centerY" secondItem="On3-Rp-KXM" secondAttribute="centerY" id="pUV-fa-NhL"/>
                                             </constraints>
                                         </tableViewCellContentView>
-<<<<<<< HEAD
                                         <color key="backgroundColor" red="0.99778848890000005" green="0.98293131590000005" blue="0.81173658370000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-=======
-                                        <color key="backgroundColor" red="0.99736517670000002" green="0.98348218200000004" blue="0.76859062909999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
->>>>>>> testCreation2
                                         <connections>
                                             <outlet property="AmountTextField" destination="pBj-jI-rDu" id="IzJ-fJ-y4O"/>
                                             <outlet property="ingredientTextField" destination="M6b-kB-gZp" id="7xX-Ja-0yM"/>
@@ -1253,8 +1222,6 @@
                                                     <color key="textColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-<<<<<<< HEAD
-=======
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h4I-Yf-kHr">
                                                     <rect key="frame" x="8" y="9.5" width="47" height="24.5"/>
                                                     <constraints>
@@ -1281,27 +1248,19 @@
                                                         <action selector="EditMode:" destination="gID-go-gIn" eventType="touchUpInside" id="X9n-tY-7EY"/>
                                                     </connections>
                                                 </button>
->>>>>>> testCreation2
                                             </subviews>
                                             <color key="backgroundColor" red="0.99736517670000002" green="0.98348218200000004" blue="0.76859062909999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="pD3-ka-1Pa" secondAttribute="trailing" id="55E-A0-IVm"/>
-<<<<<<< HEAD
-=======
                                                 <constraint firstItem="h4I-Yf-kHr" firstAttribute="leading" secondItem="fwe-2G-Ofr" secondAttribute="leading" constant="8" id="7cB-7O-69w"/>
                                                 <constraint firstItem="h4I-Yf-kHr" firstAttribute="centerY" secondItem="fwe-2G-Ofr" secondAttribute="centerY" id="Kb2-SB-uZs"/>
->>>>>>> testCreation2
                                                 <constraint firstItem="pD3-ka-1Pa" firstAttribute="centerY" secondItem="fwe-2G-Ofr" secondAttribute="centerY" id="SiF-FF-UxO"/>
                                                 <constraint firstItem="tuy-Ap-pLg" firstAttribute="centerY" secondItem="fwe-2G-Ofr" secondAttribute="centerY" id="blO-Od-efy"/>
                                                 <constraint firstItem="pD3-ka-1Pa" firstAttribute="leading" secondItem="fwe-2G-Ofr" secondAttribute="leading" id="uLZ-gM-My4"/>
                                                 <constraint firstItem="tuy-Ap-pLg" firstAttribute="centerX" secondItem="fwe-2G-Ofr" secondAttribute="centerX" id="wis-3q-Q5s"/>
                                             </constraints>
                                         </tableViewCellContentView>
-<<<<<<< HEAD
                                         <color key="backgroundColor" red="0.99778836969999996" green="0.97895878550000004" blue="0.81173723939999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-=======
-                                        <color key="backgroundColor" red="0.99736517670000002" green="0.98348218200000004" blue="0.76859062909999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
->>>>>>> testCreation2
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="preparation" rowHeight="120" id="GbY-AT-CoJ" customClass="PreparationCell" customModule="Recipe_CICCC" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="592" width="414" height="120"/>
