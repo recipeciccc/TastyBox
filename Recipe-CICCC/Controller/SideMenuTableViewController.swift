@@ -23,15 +23,15 @@ class SideMenuTableViewController: UITableViewController {
             NotificationCenter.default.post(name: NSNotification.Name("ShowProfile"), object: nil)
         case 1:
             NotificationCenter.default.post(name: NSNotification.Name("ShowSetting"), object: nil)
-        
-        // adding refrigerator and shopping list cells in menu bar.
         case 2:
-            NotificationCenter.default.post(name: NSNotification.Name("ShowRefrigerator"), object: nil)
+            NotificationCenter.default.post(name: NSNotification.Name("ShowContact"), object: nil)
+            
+            // adding refrigerator and shopping list cells in menu bar.
         case 3:
+            NotificationCenter.default.post(name: NSNotification.Name("ShowRefrigerator"), object: nil)
+        case 4:
             NotificationCenter.default.post(name: NSNotification.Name("ShowShoppingList"), object: nil)
             
-        case 4:
-            NotificationCenter.default.post(name: NSNotification.Name("ShowContact"), object: nil)
         case 5:
             NotificationCenter.default.post(name: NSNotification.Name("ShowAbout"), object: nil)
         case 6:
