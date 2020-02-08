@@ -11,7 +11,7 @@ import Firebase
 import FBSDKLoginKit
 import GoogleSignIn
 
-class LoginMainpageViewController: UIViewController {
+class LoginMainpageViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,7 +21,18 @@ class LoginMainpageViewController: UIViewController {
         GIDSignIn.sharedInstance()?.delegate = self
         GIDSignIn.sharedInstance()?.presentingViewController = self
         // Do any additional setup after loading the view.
-    }
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
+        view.addGestureRecognizer(tap)
+        
+        emailTextField.delegate = self
+        passwordTextField.delegate = self
+      
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        }
+        
+        
+    
     
     @IBAction func unwindtoLoginMain(segue: UIStoryboardSegue) {
         dismiss(animated: true, completion: nil)
@@ -29,6 +40,8 @@ class LoginMainpageViewController: UIViewController {
     
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
+    
+    
     
     @IBAction func loginAction(_ sender: Any) {
         
@@ -97,7 +110,46 @@ class LoginMainpageViewController: UIViewController {
             })
         }
     }
-    
+        func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+//        emailTextField.resignFirstResponder()
+//        let nextTag = emailTextField.tag + 1
+//        if let}nextTextField = self.view.viewWithTag(nextTag) {
+//            nextTextField.becomeFirstResponder()
+//            return true
+//        }
+//        passwordTextField.resignFirstResponder()
+//        return true
+
+        switch textField.tag {
+        case 1:
+            // they work
+            emailTextField.resignFirstResponder()
+            passwordTextField.becomeFirstResponder()
+            break
+        case 2:
+            // not close the keyboard
+            textField.resignFirstResponder()
+            break
+        default:
+            break
+        }
+        return true
+    }
+
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            if self.view.frame.origin.y == 0 {
+                self.view.frame.origin.y -= 100
+            }
+        }
+    }
+
+    @objc func keyboardWillHide(notification: NSNotification) {
+        if self.view.frame.origin.y != 0 {
+            self.view.frame.origin.y = 0
+        }
+    }
+  
     @IBAction func googleLogin(sender: UIButton) {
         GIDSignIn.sharedInstance().signIn()
     }
@@ -138,9 +190,7 @@ extension LoginMainpageViewController: GIDSignInDelegate {
 //                self.navigationController?.pushViewController(viewController, animated: true)
             
         })
-        func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
-            
-        }
+     
     }
             
 }

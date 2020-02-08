@@ -10,18 +10,28 @@ import UIKit
 import Firebase
 import FBSDKCoreKit
 import GoogleSignIn
+import GoogleMaps
+import GooglePlaces
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
-    let apiKey = ""
+//    let apiKey = "AIzaSyA8iI9CDqKxnyvCAuWoBbSyZYdRqf_WQLk"
     
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
+        if let apiKey = KeyManager().getValue(key: "apiKey") as? String {
+            GMSServices.provideAPIKey(apiKey)
+            GMSPlacesClient.provideAPIKey(apiKey)
+            print("\n Hello \(apiKey)\n")
+        }
+        
         ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
         FirebaseApp.configure()
         GIDSignIn.sharedInstance()?.clientID = FirebaseApp.app()?.options.clientID
+
         return true
     }
 

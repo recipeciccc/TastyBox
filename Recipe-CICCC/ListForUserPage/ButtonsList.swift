@@ -8,6 +8,7 @@
 
 import Foundation
 
+//class can be deleted!
 class ButtonsList{
     var buttons = [ButtonTableViewCell]()
     
@@ -20,9 +21,9 @@ class ButtonsList{
         row1Item.titleButton = "Refrigerator"
         row2Item.titleButton = "Shopping List"
         
-        row0Item.buttonImage = #imageLiteral(resourceName: "Group 26 (1)")
-        row1Item.buttonImage = #imageLiteral(resourceName: "Group 26 (1)")
-        row2Item.buttonImage = #imageLiteral(resourceName: "Group 26 (1)")
+        row0Item.buttonImage = #imageLiteral(resourceName: "best-salad-7")
+        row1Item.buttonImage = #imageLiteral(resourceName: "08COOKING-POTATO2-articleLarge-v2")
+        row2Item.buttonImage = #imageLiteral(resourceName: "77d08f50-3ccc-4432-a86d-4dcfdd3d7cd4")
         
         
         buttons.append(row0Item)
