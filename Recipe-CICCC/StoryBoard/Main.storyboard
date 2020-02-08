@@ -970,6 +970,7 @@
                                                 <constraint firstAttribute="trailing" secondItem="Yym-n8-iQK" secondAttribute="trailing" constant="19" id="2So-YL-bod"/>
                                                 <constraint firstItem="7xS-nj-aIJ" firstAttribute="leading" secondItem="Jmj-9z-V6w" secondAttribute="leading" constant="15" id="8zd-fc-3cR"/>
                                                 <constraint firstItem="Gsu-Ih-1Vp" firstAttribute="top" secondItem="Jmj-9z-V6w" secondAttribute="topMargin" constant="8" id="9if-O4-TEz"/>
+
                                                 <constraint firstItem="iZd-uv-drG" firstAttribute="centerX" secondItem="Jmj-9z-V6w" secondAttribute="centerX" id="Drv-gz-sAi"/>
                                                 <constraint firstAttribute="trailing" secondItem="7xS-nj-aIJ" secondAttribute="trailing" constant="15" id="Iwz-1T-6vv"/>
                                                 <constraint firstItem="Gsu-Ih-1Vp" firstAttribute="leading" secondItem="Jmj-9z-V6w" secondAttribute="leadingMargin" constant="4" id="Jw5-j0-L8c"/>
@@ -1009,7 +1010,7 @@
                                                 </label>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Your recipe name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nWR-Ye-ptM">
                                                     <rect key="frame" x="78" y="2.5" width="316" height="35"/>
-                                                    <constraints>
+                                  <constraints>
                                                         <constraint firstAttribute="height" constant="35" id="LnF-5U-HQW"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -1059,6 +1060,7 @@
                                                     <color key="textColor" systemColor="systemBrownColor" red="0.63529411759999999" green="0.51764705879999995" blue="0.36862745099999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+
                                                 <textField opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="People" textAlignment="natural" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="Vu2-wK-Eta">
                                                     <rect key="frame" x="334" y="4.5" width="60" height="35"/>
                                                     <constraints>
@@ -1256,7 +1258,7 @@
                                                 <constraint firstItem="tuy-Ap-pLg" firstAttribute="centerX" secondItem="fwe-2G-Ofr" secondAttribute="centerX" id="wis-3q-Q5s"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" red="0.99736517670000002" green="0.98348218200000004" blue="0.76859062909999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <color key="backgroundColor" red="0.99778836969999996" green="0.97895878550000004" blue="0.81173723939999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="preparation" rowHeight="120" id="GbY-AT-CoJ" customClass="PreparationCell" customModule="Recipe_CICCC" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="592" width="414" height="120"/>

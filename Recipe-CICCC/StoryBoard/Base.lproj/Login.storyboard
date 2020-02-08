@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="SoH-tz-dVu">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="SoH-tz-dVu">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -10,7 +10,7 @@
         <!--Login Mainpage View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="LoginMain" id="BYZ-38-t0r" customClass="LoginMainpageViewController" customModule="Recipe_CICCC" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="LoginMainpageViewController" customModule="Recipe_CICCC" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -48,10 +48,16 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zqi-bS-vRw">
                                                 <rect key="frame" x="0.0" y="0.0" width="50" height="30"/>
                                                 <state key="normal" title="Google"/>
+                                                <connections>
+                                                    <action selector="googleLoginWithSender:" destination="BYZ-38-t0r" eventType="touchDown" id="yXv-ol-Qx8"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ekj-hf-6Nz">
                                                 <rect key="frame" x="80" y="0.0" width="67" height="30"/>
                                                 <state key="normal" title="Facebook"/>
+                                                <connections>
+                                                    <action selector="facebookLogin:" destination="BYZ-38-t0r" eventType="touchDown" id="K75-rY-Io0"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -168,10 +174,26 @@
             </objects>
             <point key="canvasLocation" x="1047.8260869565217" y="101.78571428571428"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="86v-61-W3S">
+            <objects>
+                <navigationController storyboardIdentifier="Email Register" id="XtL-dg-aW0" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="7Xb-4o-h98">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="ZrB-fw-QEE" kind="relationship" relationship="rootViewController" id="4yG-LI-nWM"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BPH-VY-Fhb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2106" y="292"/>
+        </scene>
         <!--Email Register View Controller-->
         <scene sceneID="P3y-aF-G0T">
             <objects>
-                <viewController storyboardIdentifier="Email Register" id="ZrB-fw-QEE" customClass="EmailRegisterViewController" customModule="Recipe_CICCC" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="ZrB-fw-QEE" customClass="EmailRegisterViewController" customModule="Recipe_CICCC" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Inn-fD-uEh">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -227,7 +249,24 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0ZK-m7-wy8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2202.898550724638" y="411.83035714285711"/>
+            <point key="canvasLocation" x="2871" y="292"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="caM-3U-f73">
+            <objects>
+                <navigationController id="Dob-Vs-Z8o" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="JIj-HR-KfY"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="2LW-1D-0tE">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="yaD-wG-Tjn" kind="relationship" relationship="rootViewController" id="rfh-OU-XwY"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6yR-Fg-RPp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2106" y="-372"/>
         </scene>
         <!--Reset Password View Controller-->
         <scene sceneID="vfX-5P-XEq">
@@ -265,11 +304,13 @@
                     <navigationItem key="navigationItem" id="nhR-h4-nOS"/>
                     <connections>
                         <outlet property="emailTextField" destination="RVz-Ta-gWp" id="9iU-EW-9q6"/>
+                        <segue destination="jZp-Ss-qLU" kind="unwind" identifier="backToLoginMainSegue" unwindAction="unwindtoLoginMainWithSegue:" id="wZL-e8-MDS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="u1Q-W9-q9I" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="jZp-Ss-qLU" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2789.8550724637685" y="-302.00892857142856"/>
+            <point key="canvasLocation" x="2872" y="-372"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="6AA-D6-P1I">
@@ -301,7 +342,7 @@
         <!--Navigation Controller-->
         <scene sceneID="1wf-yI-4XA">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="SoH-tz-dVu" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="LoginMain" automaticallyAdjustsScrollViewInsets="NO" id="SoH-tz-dVu" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Aui-Xp-0ib">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -317,4 +358,8 @@
             <point key="canvasLocation" x="137.68115942028987" y="101.78571428571428"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="8Pf-WT-tQi"/>
+        <segue reference="n3q-Q1-xiV"/>
+    </inferredMetricsTieBreakers>
 </document>

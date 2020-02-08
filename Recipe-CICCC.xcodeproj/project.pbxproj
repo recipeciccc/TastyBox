@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -55,10 +55,10 @@
 		40A8051F23A07FF40094E52A /* EmailRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A8051E23A07FF40094E52A /* EmailRegisterViewController.swift */; };
 		40A8052123A08C130094E52A /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A8052023A08C130094E52A /* ResetPasswordViewController.swift */; };
 		40BF229323D6AD920009FC69 /* LoginMainpageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40BF229223D6AD920009FC69 /* LoginMainpageViewController.swift */; };
+		40E59BE923EE6A240049F9B6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 40E59BE823EE6A240049F9B6 /* Assets.xcassets */; };
+		40E59BED23EE6BC60049F9B6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40E59BEC23EE6BC60049F9B6 /* Main.storyboard */; };
 		484DADF5A56D21C65AE0925A /* Pods_Recipe_CICCCTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E32D65DEEA3D2064428CF46F /* Pods_Recipe_CICCCTests.framework */; };
 		69124FAA23ECE2C100D116B4 /* followingRecipeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69124FA923ECE2C100D116B4 /* followingRecipeCollectionViewCell.swift */; };
-		69A7E5DA23EBC32800916BC2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 69A7E5D923EBC32800916BC2 /* Main.storyboard */; };
-		69A7E5DC23EBCAE200916BC2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 69A7E5DB23EBCAE200916BC2 /* Assets.xcassets */; };
 		69DB5BBC23ECB2940027A238 /* followingRecipe.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 69DB5BBB23ECB2940027A238 /* followingRecipe.storyboard */; };
 		69DB5BBE23ECBB930027A238 /* FollowingRecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69DB5BBD23ECBB930027A238 /* FollowingRecipeViewController.swift */; };
 		69DB5BC123ECBF240027A238 /* FollowingRecipeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69DB5BC023ECBF240027A238 /* FollowingRecipeTableViewCell.swift */; };
@@ -179,9 +179,9 @@
 		40A8051E23A07FF40094E52A /* EmailRegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailRegisterViewController.swift; sourceTree = "<group>"; };
 		40A8052023A08C130094E52A /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
 		40BF229223D6AD920009FC69 /* LoginMainpageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginMainpageViewController.swift; sourceTree = "<group>"; };
+		40E59BE823EE6A240049F9B6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "Recipe-CICCC/Assets.xcassets"; sourceTree = "<group>"; };
+		40E59BEC23EE6BC60049F9B6 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		69124FA923ECE2C100D116B4 /* followingRecipeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = followingRecipeCollectionViewCell.swift; sourceTree = "<group>"; };
-		69A7E5D923EBC32800916BC2 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = ../../../../Main.storyboard; sourceTree = "<group>"; };
-		69A7E5DB23EBCAE200916BC2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../../../Assets.xcassets; sourceTree = "<group>"; };
 		69DB5BBB23ECB2940027A238 /* followingRecipe.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = followingRecipe.storyboard; sourceTree = "<group>"; };
 		69DB5BBD23ECBB930027A238 /* FollowingRecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowingRecipeViewController.swift; sourceTree = "<group>"; };
 		69DB5BC023ECBF240027A238 /* FollowingRecipeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowingRecipeTableViewCell.swift; sourceTree = "<group>"; };
@@ -253,6 +253,7 @@
 		40127AC123A06E3C00260AF0 = {
 			isa = PBXGroup;
 			children = (
+				40E59BE823EE6A240049F9B6 /* Assets.xcassets */,
 				40127ACC23A06E3C00260AF0 /* Recipe-CICCC */,
 				40127AE323A06E4700260AF0 /* Recipe-CICCCTests */,
 				40127AEE23A06E4700260AF0 /* Recipe-CICCCUITests */,
@@ -448,7 +449,7 @@
 		6F0FBB0623DA4B94009C1775 /* StoryBoard */ = {
 			isa = PBXGroup;
 			children = (
-				6FB86C3923EC942700672851 /* Main.storyboard */,
+				40E59BEC23EE6BC60049F9B6 /* Main.storyboard */,
 				408C319523C98C1C00E74E4A /* userPage.storyboard */,
 				6F3FF55C23E1068B005162C7 /* ShoppingList.storyboard */,
 				6FB86C2C23EA899900672851 /* IngredientShopping.swift */,
@@ -595,7 +596,7 @@
 				};
 			};
 			buildConfigurationList = 40127AC523A06E3C00260AF0 /* Build configuration list for PBXProject "Recipe-CICCC" */;
-			compatibilityVersion = "Xcode 9.3";
+			compatibilityVersion = "Xcode 11.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -619,12 +620,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				40E59BE923EE6A240049F9B6 /* Assets.xcassets in Resources */,
 				6F3FF53F23DAABAD005162C7 /* Refrigerator.storyboard in Resources */,
 				6FB86C0B23E8855800672851 /* apiKey.plist in Resources */,
 				6F3FF55D23E1068B005162C7 /* ShoppingList.storyboard in Resources */,
-				69A7E5DA23EBC32800916BC2 /* Main.storyboard in Resources */,
 				69DB5BBC23ECB2940027A238 /* followingRecipe.storyboard in Resources */,
 				6F0FBAFD23DA3E49009C1775 /* savedRecipe.storyboard in Resources */,
+				40E59BED23EE6BC60049F9B6 /* Main.storyboard in Resources */,
 				40127ADA23A06E4600260AF0 /* LaunchScreen.storyboard in Resources */,
 				408C319223C986FF00E74E4A /* shihomi.storyboard in Resources */,
 				6FB86C3C23EC959D00672851 /* Assets.xcassets in Resources */,
