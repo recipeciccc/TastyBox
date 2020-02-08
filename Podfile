@@ -25,6 +25,8 @@ pod 'Firebase/Analytics'
 #pods for Firebase
 pod 'Firebase/Core'
 pod 'Firebase/Auth'
+pod 'Firebase/Database'
+pod 'Firebase/Storage'
 
 #pods for Google sign in
 pod 'GoogleSignIn'

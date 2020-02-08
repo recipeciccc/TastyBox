@@ -189,11 +189,6 @@ extension LoginMainpageViewController: GIDSignInDelegate {
             
 }
 
-
-//let Storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-//let vc = Storyboard.instantiateViewController(withIdentifier: "Discovery")
-//self.navigationController?.pushViewController(vc, animated: true)
-
 //    @IBAction func otherWayToLogin(_ sender: Any) {
 //        if Auth.auth().currentUser != nil {
 //            do {
