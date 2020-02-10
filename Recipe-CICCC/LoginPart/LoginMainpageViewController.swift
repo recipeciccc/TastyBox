@@ -9,11 +9,17 @@
 import Foundation
 import Firebase
 import FBSDKLoginKit
+import GoogleSignIn
 
 class LoginMainpageViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.title = ""
+        
+        GIDSignIn.sharedInstance()?.delegate = self
+        GIDSignIn.sharedInstance()?.presentingViewController = self
         // Do any additional setup after loading the view.
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
         view.addGestureRecognizer(tap)
@@ -27,6 +33,10 @@ class LoginMainpageViewController: UIViewController, UITextFieldDelegate {
         
         
     
+    
+    @IBAction func unwindtoLoginMain(segue: UIStoryboardSegue) {
+        dismiss(animated: true, completion: nil)
+    }
     
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
@@ -61,20 +71,8 @@ class LoginMainpageViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-//    @IBAction func otherWayToLogin(_ sender: Any) {
-//        if Auth.auth().currentUser != nil {
-//            do {
-//                try Auth.auth().signOut()
-//                let vc = UIStoryboard(name: "Login", bundle: nil).instantiateViewController(withIdentifier: "SignIn")
-//                present(vc, animated: true, completion: nil)
-//
-//            } catch let error as NSError {
-//                print(error.localizedDescription)
-//            }
-//        }
-//    }
-    
-    @IBAction func facebookLogin(sender: UIButton) {
+// Facebook Login
+    @IBAction func facebookLogin(_ sender: UIButton) {
         let fbLoginManager = LoginManager()
         fbLoginManager.logIn(permissions: ["public_profile", "email"], from: self) {(
             Result, Error) in
@@ -103,16 +101,16 @@ class LoginMainpageViewController: UIViewController, UITextFieldDelegate {
                     return
                 }
                 
-                // show the main View
-                if let viewController = self.storyboard?.instantiateViewController(withIdentifier: "MainView") {
-                    UIApplication.shared.keyWindow?.rootViewController = viewController
-                    self.dismiss(animated: true, completion: nil)
+                // present the main View
+                if error == nil {
+                    let Storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                    let vc = Storyboard.instantiateViewController(withIdentifier: "Discovery")
+                    self.navigationController?.pushViewController(vc, animated: true)
                 }
             })
         }
     }
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        func textFieldShouldReturn(_ textField: UITextField) -> Bool {
 //        emailTextField.resignFirstResponder()
 //        let nextTag = emailTextField.tag + 1
 //        if let}nextTextField = self.view.viewWithTag(nextTag) {
@@ -139,7 +137,7 @@ class LoginMainpageViewController: UIViewController, UITextFieldDelegate {
     }
 
     @objc func keyboardWillShow(notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+        if ((notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue) != nil {
             if self.view.frame.origin.y == 0 {
                 self.view.frame.origin.y -= 100
             }
@@ -151,5 +149,61 @@ class LoginMainpageViewController: UIViewController, UITextFieldDelegate {
             self.view.frame.origin.y = 0
         }
     }
-
+  
+    @IBAction func googleLogin(sender: UIButton) {
+        GIDSignIn.sharedInstance().signIn()
+    }
+    
 }
+
+extension LoginMainpageViewController: GIDSignInDelegate {
+    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+        if error != nil {
+            return
+        }
+        guard let authentication = user.authentication else {
+            return
+        }
+        
+        let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken, accessToken: authentication.accessToken)
+        
+        Auth.auth().signIn(with: credential, completion: { (user, error) in
+            if let error = error {
+                print("Login error: \(error.localizedDescription)")
+                let alertController = UIAlertController(title: "Login Error", message: error.localizedDescription, preferredStyle: .alert)
+                let okayAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                alertController.addAction(okayAction)
+                self.present(alertController, animated: true, completion: nil)
+                return
+            }
+            // present the main view
+            if error == nil {
+                let Storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                let vc = Storyboard.instantiateViewController(withIdentifier: "Discovery")
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+
+        })
+     
+    }
+            
+}
+
+
+//let Storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+//let vc = Storyboard.instantiateViewController(withIdentifier: "Discovery")
+//self.navigationController?.pushViewController(vc, animated: true)
+
+//    @IBAction func otherWayToLogin(_ sender: Any) {
+//        if Auth.auth().currentUser != nil {
+//            do {
+//                try Auth.auth().signOut()
+//                let vc = UIStoryboard(name: "Login", bundle: nil).instantiateViewController(withIdentifier: "SignIn")
+//                present(vc, animated: true, completion: nil)
+//
+//            } catch let error as NSError {
+//                print(error.localizedDescription)
+//            }
+//        }
+//    }
+    
