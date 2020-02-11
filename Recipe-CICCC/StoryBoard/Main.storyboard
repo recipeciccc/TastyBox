@@ -179,6 +179,7 @@
                         <segue destination="mAg-kh-N8h" kind="show" identifier="contact" id="ZhV-6w-emw"/>
                         <segue destination="SZ7-A1-OCM" kind="show" identifier="logout" id="gOP-u2-Bf7"/>
                         <segue destination="mN5-z3-hnC" kind="show" identifier="about" id="04A-vC-zqo"/>
+                        <segue destination="LJl-fZ-Rb0" kind="show" id="Ebv-19-PwK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -801,6 +802,16 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qwo-7W-And" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="745" y="-674"/>
+        </scene>
+        <!--Storyboard Reference-->
+        <scene sceneID="gjd-K3-Lmm">
+            <objects>
+                <viewControllerPlaceholder id="LJl-fZ-Rb0" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="3fh-5n-rom"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fJK-29-8mL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1467" y="-654"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="FmT-Mn-92m">
