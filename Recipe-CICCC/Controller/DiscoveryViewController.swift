@@ -101,7 +101,7 @@ class DiscoveryViewController: UIViewController {
     
     @objc func showProfile(){
         print("show Profile")
-        performSegue(withIdentifier: "User profile", sender: nil)
+        performSegue(withIdentifier: "userProfile", sender: nil)
     }
     
     @objc func showSearch(){

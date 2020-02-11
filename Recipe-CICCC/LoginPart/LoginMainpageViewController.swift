@@ -43,6 +43,7 @@ class LoginMainpageViewController: UIViewController, UITextFieldDelegate {
     
     
     
+    @IBOutlet weak var login: UIButton!
     @IBAction func loginAction(_ sender: Any) {
         
         if self.emailTextField.text == "" || self.passwordTextField.text == "" {
@@ -55,6 +56,7 @@ class LoginMainpageViewController: UIViewController, UITextFieldDelegate {
                 (user, error) in
                 if error == nil {
                     // means no error, login successfully
+                    self.login.isEnabled = false
                     let Storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
                     let vc = Storyboard.instantiateViewController(withIdentifier: "Discovery")
                     self.navigationController?.pushViewController(vc, animated: true)
