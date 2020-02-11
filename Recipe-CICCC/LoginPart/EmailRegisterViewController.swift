@@ -16,6 +16,14 @@ class EmailRegisterViewController: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var confirmPasswordTextField: UITextField!
     
+//    @IBAction func pressBackToLoginMainButton(_ sender: UIButton) {
+//        self.performSegue(withIdentifier: "backToLoginMainSegue", sender: nil)
+//    }
+    
+    @IBAction func pressBackToLoginMainSegue(_ sender: UIBarButtonItem) {
+        self.performSegue(withIdentifier: "backToLoginMainSegue", sender: nil)
+    }
+    
     
     @IBAction func createAccountAction(_ sender: Any) {
         if emailTextField.text == nil || passwordTextField.text == nil || confirmPasswordTextField.text == nil {
