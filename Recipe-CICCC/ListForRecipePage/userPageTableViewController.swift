@@ -14,7 +14,7 @@ class userPageTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+    self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.orange ]
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 

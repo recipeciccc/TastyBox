@@ -155,31 +155,16 @@
                             <outlet property="delegate" destination="MFD-Bk-wha" id="V2O-ju-2Zp"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Your Profile" id="8rf-h0-j1c">
-                        <barButtonItem key="leftBarButtonItem" title="Item" id="gaq-N3-mDv">
-                            <connections>
-                                <segue destination="Ps9-B4-GP1" kind="show" id="eQ3-u9-NSh"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Your Profile" id="8rf-h0-j1c"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fpO-Vh-pYg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1042.0289855072465" y="136.60714285714286"/>
-        </scene>
-        <!--Refrigerator-->
-        <scene sceneID="tpw-dc-wLG">
-            <objects>
-                <viewControllerPlaceholder storyboardName="Refrigerator" id="Ps9-B4-GP1" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="b5a-YS-lU5"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="gHW-eK-2g7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1857" y="137"/>
         </scene>
     </scenes>
     <resources>
         <image name="2018_Sweet-Sallty-Snack-Mix_5817_600x600" width="600" height="600"/>
         <image name="download (1)" width="225" height="225"/>
     </resources>
+    <color key="tintColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>

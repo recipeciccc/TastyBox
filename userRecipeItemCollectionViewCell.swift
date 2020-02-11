@@ -11,4 +11,5 @@ import UIKit
 class userRecipeItemCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var imageView: UIImageView!
+    
 }
