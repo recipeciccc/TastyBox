@@ -167,6 +167,7 @@
                     <navigationItem key="navigationItem" id="a6y-fj-CSm"/>
                     <connections>
                         <outlet property="emailTextField" destination="4Qy-9Y-8FR" id="M5w-FY-TtN"/>
+                        <outlet property="login" destination="jzu-d9-6zw" id="hP2-mK-dYH"/>
                         <outlet property="passwordTextField" destination="MG5-cb-mMS" id="4uQ-9i-OTv"/>
                     </connections>
                 </viewController>
@@ -362,4 +363,5 @@
         <segue reference="8Pf-WT-tQi"/>
         <segue reference="n3q-Q1-xiV"/>
     </inferredMetricsTieBreakers>
+    <color key="tintColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>

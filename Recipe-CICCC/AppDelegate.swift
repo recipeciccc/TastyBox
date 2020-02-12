@@ -31,7 +31,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
         FirebaseApp.configure()
         GIDSignIn.sharedInstance()?.clientID = FirebaseApp.app()?.options.clientID
-
+        UINavigationBar.appearance().tintColor = UIColor.orange
+        UINavigationBar.appearance().barTintColor = UIColor.white
+      
+               
         return true
     }
 

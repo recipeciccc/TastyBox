@@ -19,7 +19,7 @@ class FollowingRecipeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        creatorImageList = [#imageLiteral(resourceName: "imageFile"),#imageLiteral(resourceName: "imageFile"),#imageLiteral(resourceName: "imageFile")]
+        creatorImageList = [#imageLiteral(resourceName: "download (1)"),#imageLiteral(resourceName: "download (1)"),#imageLiteral(resourceName: "download (1)")]
         creatorNameList = ["Ruby Smith","Sherry Heni","Anne Casper"]
         recipeImage = [[#imageLiteral(resourceName: "2018_Sweet-Sallty-Snack-Mix_5817_600x600"),#imageLiteral(resourceName: "2018_Sweet-Sallty-Snack-Mix_5817_600x600"),#imageLiteral(resourceName: "2018_Sweet-Sallty-Snack-Mix_5817_600x600"),#imageLiteral(resourceName: "2018_Sweet-Sallty-Snack-Mix_5817_600x600"),#imageLiteral(resourceName: "2018_Sweet-Sallty-Snack-Mix_5817_600x600"),#imageLiteral(resourceName: "2018_Sweet-Sallty-Snack-Mix_5817_600x600")],
                        [#imageLiteral(resourceName: "guacamole-foto-heroe-1024x723"),#imageLiteral(resourceName: "guacamole-foto-heroe-1024x723"),#imageLiteral(resourceName: "guacamole-foto-heroe-1024x723"),#imageLiteral(resourceName: "guacamole-foto-heroe-1024x723"),#imageLiteral(resourceName: "guacamole-foto-heroe-1024x723"),#imageLiteral(resourceName: "guacamole-foto-heroe-1024x723")],
