@@ -45,7 +45,7 @@ class CreatorViewController: UIViewController {
         amountList.append("")
         ingredientList.append("")
         preparationText.append("")
-        photoList.append(#imageLiteral(resourceName: "imageFile"))
+        photoList.append(#imageLiteral(resourceName: "guacamole-foto-heroe-1024x723"))
         MainTableView.isEditing = false
         self.MainTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         self.navigationController!.navigationBar.tintColor = UIColor.orange
@@ -83,7 +83,7 @@ class CreatorViewController: UIViewController {
     }
     
     @IBAction func AddPreparationStep(_ sender: Any) {
-        photoList.append(#imageLiteral(resourceName: "imageFile"))
+        photoList.append(#imageLiteral(resourceName: "guacamole-foto-heroe-1024x723"))
         preparationText.append("")
         MainTableView.insertRows(at: [IndexPath(row: photoList.count-1, section: 6)], with: .top)
     }

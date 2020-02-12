@@ -89,7 +89,7 @@ class DiscoveryViewController: UIViewController {
     @objc func toggleSideMenu() {
         if sideMenuOpen{
             sideMenuOpen = false
-            SideMenuConstraint.constant = -150
+            SideMenuConstraint.constant = -160
         }else{
             sideMenuOpen = true
             SideMenuConstraint.constant = 0
@@ -101,7 +101,7 @@ class DiscoveryViewController: UIViewController {
     
     @objc func showProfile(){
         print("show Profile")
-        performSegue(withIdentifier: "User profile", sender: nil)
+        performSegue(withIdentifier: "userProfile", sender: nil)
     }
     
     @objc func showSearch(){

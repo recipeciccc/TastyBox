@@ -36,8 +36,7 @@ extension userRecipeItemTableViewCell: UICollectionViewDataSource, UICollectionV
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-       let cell = (collectionView.dequeueReusableCell(withReuseIdentifier: "recipeItemForUser", for: indexPath) as? TestCollectionViewCell)!
-       
+       let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "recipeItemForUser", for: indexPath)
        return cell
     }
     
@@ -58,3 +57,5 @@ extension userRecipeItemTableViewCell: UICollectionViewDataSource, UICollectionV
        return CGSize(width: width, height: width)
    }
 }
+
+

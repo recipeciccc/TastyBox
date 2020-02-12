@@ -22,11 +22,11 @@ class MonthlyViewController: UIViewController {
     }
     
     func CreateImageArray() {
-        let image1 = Image(title: "Appetizer", image: #imageLiteral(resourceName: "merlin_141075420_edfc0f4f-ba70-4542-a881-085a9dc162b9-articleLarge"))
+        let image1 = Image(title: "Appetizer", image: #imageLiteral(resourceName: "How-to-Make-the-Best-Juiciest-Turkey-Meatballs_055"))
         let image2 = Image(title: "Main Dish", image: #imageLiteral(resourceName: "merlin_141075420_edfc0f4f-ba70-4542-a881-085a9dc162b9-articleLarge"))
-        let image3 = Image(title: "Salad", image: #imageLiteral(resourceName: "merlin_141075420_edfc0f4f-ba70-4542-a881-085a9dc162b9-articleLarge"))
-        let image4 = Image(title: "Dessert", image: #imageLiteral(resourceName: "merlin_141075420_edfc0f4f-ba70-4542-a881-085a9dc162b9-articleLarge"))
-        let image5 = Image(title: "Beverage", image: #imageLiteral(resourceName: "merlin_141075420_edfc0f4f-ba70-4542-a881-085a9dc162b9-articleLarge"))
+        let image3 = Image(title: "Salad", image: #imageLiteral(resourceName: "best-salad-7"))
+        let image4 = Image(title: "Dessert", image: #imageLiteral(resourceName: "77d08f50-3ccc-4432-a86d-4dcfdd3d7cd4"))
+        let image5 = Image(title: "Beverage", image: #imageLiteral(resourceName: "candied-yams-5"))
         
         imageArray.append(image1)
         imageArray.append(image2)
