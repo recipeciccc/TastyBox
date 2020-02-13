@@ -127,7 +127,10 @@ class DiscoveryViewController: UIViewController {
     }
     @objc func showLogout(){
         print("show Logout")
-        performSegue(withIdentifier: "logout", sender: nil)
+        let loginStoryboard: UIStoryboard = UIStoryboard(name: "Login", bundle: nil)
+        if let vc = loginStoryboard.instantiateViewController(withIdentifier: "LoginMain") as? LoginMainpageViewController {
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
     }
     
     

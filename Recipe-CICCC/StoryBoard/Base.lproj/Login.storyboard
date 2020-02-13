@@ -35,7 +35,7 @@
                                                     <constraint firstAttribute="height" constant="40" id="nQI-WW-5bj"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES" textContentType="password"/>
+                                                <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES" secureTextEntry="YES" textContentType="password"/>
                                             </textField>
                                         </subviews>
                                         <constraints>
@@ -193,7 +193,7 @@
         <!--Email Register View Controller-->
         <scene sceneID="P3y-aF-G0T">
             <objects>
-                <viewController id="ZrB-fw-QEE" customClass="EmailRegisterViewController" customModule="Recipe_CICCC" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EmailRegister" id="ZrB-fw-QEE" customClass="EmailRegisterViewController" customModule="Recipe_CICCC" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Inn-fD-uEh">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -228,6 +228,10 @@
                                 <rect key="frame" x="229" y="714" width="51" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Log In !"/>
+                                <connections>
+                                    <action selector="pressBackToLogin:" destination="ZrB-fw-QEE" eventType="touchDown" id="k2N-9K-jVo"/>
+                                    <segue destination="SoH-tz-dVu" kind="show" id="c5d-fm-ve9"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Already had an account?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oCz-bS-Wga">
                                 <rect key="frame" x="32" y="719" width="189" height="21"/>
@@ -249,7 +253,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0ZK-m7-wy8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2871" y="292"/>
+            <point key="canvasLocation" x="2869.5652173913045" y="291.96428571428572"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="caM-3U-f73">
@@ -344,6 +348,7 @@
             <objects>
                 <navigationController storyboardIdentifier="LoginMain" automaticallyAdjustsScrollViewInsets="NO" id="SoH-tz-dVu" sceneMemberID="viewController">
                     <toolbarItems/>
+                    <navigationItem key="navigationItem" id="mtA-kZ-YU8"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Aui-Xp-0ib">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
