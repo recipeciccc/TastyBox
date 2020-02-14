@@ -1,17 +1,20 @@
 //
-//  explanationTableViewCell.swift
+//  UnderNo4TableViewCell.swift
 //  Recipe-CICCC
 //
-//  Created by 北島　志帆美 on 2020-01-23.
+//  Created by 北島　志帆美 on 2020-02-13.
 //  Copyright © 2020 Argus Chen. All rights reserved.
 //
 
 import UIKit
 
-class explanationTableViewCell: UITableViewCell {
+class UnderNo4TableViewCell: UITableViewCell {
 
-    @IBOutlet weak var timeLabel: UILabel!
-    @IBOutlet weak var servingLabel: UILabel!
+    @IBOutlet weak var rankingLabel: UILabel!
+    @IBOutlet weak var titleLabel: UILabel!
+    
+    @IBOutlet weak var recipeImageView: UIImageView!
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()

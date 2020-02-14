@@ -99,6 +99,8 @@
                                     <constraints>
                                         <constraint firstAttribute="bottom" secondItem="jsE-IJ-CDj" secondAttribute="bottom" constant="15" id="0tR-Pw-pcf"/>
                                         <constraint firstItem="jsE-IJ-CDj" firstAttribute="centerY" secondItem="yEk-O7-aZh" secondAttribute="centerY" id="NnI-kx-i7J"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="jsE-IJ-CDj" secondAttribute="trailing" constant="62" id="k0q-ne-A7t"/>
+                                        <constraint firstItem="jsE-IJ-CDj" firstAttribute="leading" secondItem="yEk-O7-aZh" secondAttribute="leadingMargin" constant="62" id="w9p-MJ-iN1"/>
                                         <constraint firstItem="jsE-IJ-CDj" firstAttribute="top" secondItem="yEk-O7-aZh" secondAttribute="top" constant="15" id="wbS-H7-aPG"/>
                                         <constraint firstItem="jsE-IJ-CDj" firstAttribute="centerX" secondItem="yEk-O7-aZh" secondAttribute="centerX" id="yzd-zn-Kmu"/>
                                     </constraints>
