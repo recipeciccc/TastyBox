@@ -55,10 +55,10 @@
 		40A8051F23A07FF40094E52A /* EmailRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A8051E23A07FF40094E52A /* EmailRegisterViewController.swift */; };
 		40A8052123A08C130094E52A /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A8052023A08C130094E52A /* ResetPasswordViewController.swift */; };
 		40BF229323D6AD920009FC69 /* LoginMainpageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40BF229223D6AD920009FC69 /* LoginMainpageViewController.swift */; };
-		40E59BE923EE6A240049F9B6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 40E59BE823EE6A240049F9B6 /* Assets.xcassets */; };
 		40E59BED23EE6BC60049F9B6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40E59BEC23EE6BC60049F9B6 /* Main.storyboard */; };
 		484DADF5A56D21C65AE0925A /* Pods_Recipe_CICCCTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E32D65DEEA3D2064428CF46F /* Pods_Recipe_CICCCTests.framework */; };
 		69124FAA23ECE2C100D116B4 /* followingRecipeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69124FA923ECE2C100D116B4 /* followingRecipeCollectionViewCell.swift */; };
+		6970F4E223F612C900F94541 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6970F4E123F612C800F94541 /* Assets.xcassets */; };
 		6985A53623F48B5E001257A8 /* IngredientsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6985A53523F48B5E001257A8 /* IngredientsViewController.swift */; };
 		6985A53A23F4924A001257A8 /* IngredientTitleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6985A53923F4924A001257A8 /* IngredientTitleCollectionViewCell.swift */; };
 		6985A53C23F494B0001257A8 /* IngredientImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6985A53B23F494B0001257A8 /* IngredientImageCollectionViewCell.swift */; };
@@ -181,9 +181,9 @@
 		40A8051E23A07FF40094E52A /* EmailRegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailRegisterViewController.swift; sourceTree = "<group>"; };
 		40A8052023A08C130094E52A /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
 		40BF229223D6AD920009FC69 /* LoginMainpageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginMainpageViewController.swift; sourceTree = "<group>"; };
-		40E59BE823EE6A240049F9B6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		40E59BEC23EE6BC60049F9B6 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		69124FA923ECE2C100D116B4 /* followingRecipeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = followingRecipeCollectionViewCell.swift; sourceTree = "<group>"; };
+		6970F4E123F612C800F94541 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../../../Assets.xcassets; sourceTree = "<group>"; };
 		6985A53523F48B5E001257A8 /* IngredientsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientsViewController.swift; sourceTree = "<group>"; };
 		6985A53923F4924A001257A8 /* IngredientTitleCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientTitleCollectionViewCell.swift; sourceTree = "<group>"; };
 		6985A53B23F494B0001257A8 /* IngredientImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientImageCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -279,7 +279,7 @@
 		40127ACC23A06E3C00260AF0 /* Recipe-CICCC */ = {
 			isa = PBXGroup;
 			children = (
-				40E59BE823EE6A240049F9B6 /* Assets.xcassets */,
+				6970F4E123F612C800F94541 /* Assets.xcassets */,
 				6F8BE78B23EEB00E00CEA348 /* CellForShoppingList */,
 				402CAC6923D92A37004A46F1 /* CellForRefgenerator */,
 				4069259323D8355200059C8E /* ViewController */,
@@ -636,7 +636,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				40E59BE923EE6A240049F9B6 /* Assets.xcassets in Resources */,
 				6F8BE77523EEA96300CEA348 /* Map.storyboard in Resources */,
 				6F3FF53F23DAABAD005162C7 /* Refrigerator.storyboard in Resources */,
 				6FB86C0B23E8855800672851 /* apiKey.plist in Resources */,
@@ -650,6 +649,7 @@
 				699679AF23F3A25800719A36 /* ingredientRecipe.storyboard in Resources */,
 				408C319D23C98C1E00E74E4A /* userPage.storyboard in Resources */,
 				6F0FBB0523DA491A009C1775 /* RecipeDetail.storyboard in Resources */,
+				6970F4E223F612C900F94541 /* Assets.xcassets in Resources */,
 				40127AD523A06E3C00260AF0 /* Login.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
