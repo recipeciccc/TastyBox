@@ -59,7 +59,7 @@ extension IngredientsViewController: UICollectionViewDelegateFlowLayout {
         if collectionView == TitleCollectionView{
             return CGSize(width: 65, height: 30)
         }
-        return CGSize(width: collectionView.bounds.width / 2, height: 170)
+        return CGSize(width: (collectionView.bounds.width-20) / 2, height: 170)
     }
     
     

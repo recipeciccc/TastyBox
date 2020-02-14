@@ -22,8 +22,9 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="2bF-Nb-q4u"/>
                                 </constraints>
-                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="fTZ-9I-Hta">
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="fTZ-9I-Hta">
                                     <size key="itemSize" width="66" height="45"/>
+                                    <size key="estimatedItemSize" width="66" height="45"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -64,49 +65,49 @@
                                 </connections>
                             </collectionView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="28Z-CY-jex">
-                                <rect key="frame" x="15" y="52" width="345" height="615"/>
+                                <rect key="frame" x="10" y="52" width="355" height="615"/>
                                 <color key="backgroundColor" red="0.99711173769999994" green="0.99571460489999997" blue="0.74113160369999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="1" minimumInteritemSpacing="1" id="er2-y6-Jx6">
-                                    <size key="itemSize" width="170" height="170"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="1" minimumInteritemSpacing="1" id="er2-y6-Jx6">
+                                    <size key="itemSize" width="158" height="158"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ingredientImageCell" id="YKx-5I-rHD" customClass="IngredientImageCollectionViewCell" customModule="Recipe_CICCC" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="165" height="165"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="175" height="158"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="9j3-UP-VeL">
-                                            <rect key="frame" x="0.0" y="0.0" width="165" height="165"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="175" height="158"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="13PAIRING-articleLarge" translatesAutoresizingMaskIntoConstraints="NO" id="cZQ-GS-aeu" userLabel="ingredientRecipeImage">
+                                                    <rect key="frame" x="0.0" y="0.0" width="175" height="125"/>
+                                                    <color key="backgroundColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="180" id="DMO-eb-qX2"/>
+                                                    </constraints>
+                                                </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="OCr-Ed-8Kr">
-                                                    <rect key="frame" x="0.0" y="146" width="165" height="20.5"/>
+                                                    <rect key="frame" x="0.0" y="125" width="175" height="33"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" systemColor="systemBrownColor" red="0.63529411759999999" green="0.51764705879999995" blue="0.36862745099999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="13PAIRING-articleLarge" translatesAutoresizingMaskIntoConstraints="NO" id="cZQ-GS-aeu" userLabel="ingredientRecipeImage">
-                                                    <rect key="frame" x="0.0" y="2" width="165" height="140"/>
-                                                    <color key="backgroundColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="170" id="dd7-Vn-ZDK"/>
-                                                        <constraint firstAttribute="height" constant="140" id="qNc-oo-kaT"/>
-                                                    </constraints>
-                                                </imageView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="OCr-Ed-8Kr" secondAttribute="trailing" id="4Qk-NH-56J"/>
-                                                <constraint firstItem="OCr-Ed-8Kr" firstAttribute="centerX" secondItem="cZQ-GS-aeu" secondAttribute="centerX" id="BLU-BH-VKy"/>
-                                                <constraint firstItem="OCr-Ed-8Kr" firstAttribute="top" secondItem="cZQ-GS-aeu" secondAttribute="bottom" constant="4" id="Brg-NI-zFl"/>
-                                                <constraint firstItem="OCr-Ed-8Kr" firstAttribute="leading" secondItem="9j3-UP-VeL" secondAttribute="leading" id="Opo-DB-YIy"/>
-                                                <constraint firstItem="OCr-Ed-8Kr" firstAttribute="leading" secondItem="cZQ-GS-aeu" secondAttribute="leading" id="TM3-Jw-3dk"/>
-                                                <constraint firstItem="cZQ-GS-aeu" firstAttribute="top" secondItem="9j3-UP-VeL" secondAttribute="top" constant="2" id="qVV-Qq-6cr"/>
-                                                <constraint firstItem="cZQ-GS-aeu" firstAttribute="centerX" secondItem="9j3-UP-VeL" secondAttribute="centerX" id="uPH-cH-Aeu"/>
+                                                <constraint firstItem="cZQ-GS-aeu" firstAttribute="leading" secondItem="9j3-UP-VeL" secondAttribute="leading" id="BVE-96-2f2"/>
+                                                <constraint firstAttribute="bottom" secondItem="cZQ-GS-aeu" secondAttribute="bottom" constant="33" id="Mg8-ag-cfm"/>
+                                                <constraint firstAttribute="trailing" secondItem="OCr-Ed-8Kr" secondAttribute="trailing" id="N8e-XT-sC0"/>
+                                                <constraint firstAttribute="bottom" secondItem="OCr-Ed-8Kr" secondAttribute="bottom" id="Xvi-ot-gDN"/>
+                                                <constraint firstAttribute="trailing" secondItem="cZQ-GS-aeu" secondAttribute="trailing" id="au3-Hg-goV"/>
+                                                <constraint firstItem="OCr-Ed-8Kr" firstAttribute="top" secondItem="cZQ-GS-aeu" secondAttribute="bottom" id="ckn-4y-H4H"/>
+                                                <constraint firstItem="cZQ-GS-aeu" firstAttribute="top" secondItem="9j3-UP-VeL" secondAttribute="top" id="kPX-NS-ejQ"/>
+                                                <constraint firstItem="OCr-Ed-8Kr" firstAttribute="leading" secondItem="9j3-UP-VeL" secondAttribute="leading" id="yNB-S8-kD8"/>
                                             </constraints>
                                         </collectionViewCellContentView>
-                                        <size key="customSize" width="165" height="165"/>
+                                        <size key="customSize" width="175" height="158"/>
                                         <connections>
                                             <outlet property="ingredientRecipeImage" destination="cZQ-GS-aeu" id="vdt-Ux-QvD"/>
                                             <outlet property="ingredientRecipeName" destination="OCr-Ed-8Kr" id="fF7-Zk-gUl"/>
@@ -123,9 +124,9 @@
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="28Z-CY-jex" secondAttribute="bottom" id="9wy-so-s4G"/>
                             <constraint firstItem="c3v-63-Co7" firstAttribute="top" secondItem="ZhU-Ym-2UX" secondAttribute="top" id="Jdv-54-o0w"/>
-                            <constraint firstItem="ZhU-Ym-2UX" firstAttribute="trailing" secondItem="28Z-CY-jex" secondAttribute="trailing" constant="15" id="cqL-1b-W7i"/>
+                            <constraint firstItem="ZhU-Ym-2UX" firstAttribute="trailing" secondItem="28Z-CY-jex" secondAttribute="trailing" constant="10" id="cqL-1b-W7i"/>
                             <constraint firstItem="ZhU-Ym-2UX" firstAttribute="trailing" secondItem="c3v-63-Co7" secondAttribute="trailing" id="e8H-jJ-4Qr"/>
-                            <constraint firstItem="28Z-CY-jex" firstAttribute="leading" secondItem="ZhU-Ym-2UX" secondAttribute="leading" constant="15" id="emE-Rs-eOG"/>
+                            <constraint firstItem="28Z-CY-jex" firstAttribute="leading" secondItem="ZhU-Ym-2UX" secondAttribute="leading" constant="10" id="emE-Rs-eOG"/>
                             <constraint firstItem="28Z-CY-jex" firstAttribute="top" secondItem="c3v-63-Co7" secondAttribute="bottom" constant="2" id="qsK-QE-XL8"/>
                             <constraint firstItem="c3v-63-Co7" firstAttribute="leading" secondItem="ZhU-Ym-2UX" secondAttribute="leading" constant="20" id="uOQ-oq-fqu"/>
                         </constraints>
