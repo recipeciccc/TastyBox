@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RecipeCollectionPageViewController" customModule="Recipe_CICCC" customModuleProvider="target"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="id" id="c9n-Ut-gPx" customClass="CollectionViewCell" customModule="Recipe_CICCC" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="175" height="176"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Mqe-gF-CSP">
+                <rect key="frame" x="0.0" y="0.0" width="175" height="176"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cake" translatesAutoresizingMaskIntoConstraints="NO" id="I4U-lU-AZc">
+                        <rect key="frame" x="0.0" y="0.0" width="175" height="135.5"/>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Dp-rA-1cv">
+                        <rect key="frame" x="0.0" y="137.5" width="175" height="38.5"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <color key="backgroundColor" red="0.99759250880000006" green="0.98715764279999996" blue="0.79212433100000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="5Dp-rA-1cv" secondAttribute="bottom" id="6TX-sF-YPK"/>
+                    <constraint firstItem="5Dp-rA-1cv" firstAttribute="top" secondItem="I4U-lU-AZc" secondAttribute="bottom" constant="2" id="Ao8-S1-uMU"/>
+                    <constraint firstItem="I4U-lU-AZc" firstAttribute="top" secondItem="Mqe-gF-CSP" secondAttribute="top" id="DuY-9d-qqv"/>
+                    <constraint firstItem="5Dp-rA-1cv" firstAttribute="leading" secondItem="Mqe-gF-CSP" secondAttribute="leading" id="FD5-cq-ZKB"/>
+                    <constraint firstAttribute="trailing" secondItem="I4U-lU-AZc" secondAttribute="trailing" id="h1Q-UJ-d4b"/>
+                    <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="5Dp-rA-1cv" secondAttribute="trailing" id="tHO-fe-jwL"/>
+                    <constraint firstAttribute="bottom" secondItem="I4U-lU-AZc" secondAttribute="bottom" multiplier="1.15" constant="20" symbolic="YES" id="tgb-Rc-7J2"/>
+                    <constraint firstItem="I4U-lU-AZc" firstAttribute="leading" secondItem="Mqe-gF-CSP" secondAttribute="leading" id="v1G-9R-PEy"/>
+                </constraints>
+            </collectionViewCellContentView>
+            <size key="customSize" width="175" height="176"/>
+            <connections>
+                <outlet property="collectionImage" destination="I4U-lU-AZc" id="9m8-Sv-cQk"/>
+                <outlet property="collectionLabel" destination="5Dp-rA-1cv" id="wI1-0T-gjo"/>
+            </connections>
+            <point key="canvasLocation" x="-246" y="1371"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="cake" width="16" height="16"/>
+    </resources>
+</document>
