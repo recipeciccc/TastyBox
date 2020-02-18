@@ -92,7 +92,7 @@
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tLa-kL-8Ef">
                                 <rect key="frame" x="0.0" y="138" width="414" height="724"/>
                                 <connections>
-                                    <segue destination="yu9-PX-3Bs" kind="embed" id="7AQ-uD-2jV"/>
+                                    <segue destination="jg4-s1-OQ3" kind="embed" id="edi-fS-nd0"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ebh-34-Zi3">
@@ -436,7 +436,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qr6-sE-R3K" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1977" y="554"/>
+            <point key="canvasLocation" x="1921" y="520"/>
         </scene>
         <!--ShoppingList-->
         <scene sceneID="BTp-qL-ijD">
@@ -446,7 +446,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RIO-Rs-b3f" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1844" y="606"/>
+            <point key="canvasLocation" x="1843" y="831"/>
         </scene>
         <!--Refrigerator-->
         <scene sceneID="KAd-qy-edF">
@@ -456,7 +456,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kG8-az-28Q" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1860" y="684"/>
+            <point key="canvasLocation" x="1839" y="802"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="W76-rR-iLR">
@@ -617,13 +617,13 @@
             </objects>
             <point key="canvasLocation" x="1047.8260869565217" y="114.50892857142857"/>
         </scene>
-        <!--EditorChoice-->
+        <!--Monthly-->
         <scene sceneID="kRk-wo-m7d">
             <objects>
-                <viewControllerPlaceholder storyboardName="EditorChoice" id="bOG-U9-byp" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="Monthly" id="bOG-U9-byp" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ebk-D1-WKP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="695" y="-375"/>
+            <point key="canvasLocation" x="2928" y="181"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="5bi-Q1-hyS">
@@ -650,7 +650,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qwo-7W-And" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="745" y="-674"/>
+            <point key="canvasLocation" x="2597" y="-632"/>
         </scene>
         <!--followingRecipe-->
         <scene sceneID="gjd-K3-Lmm">
@@ -660,7 +660,15 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fJK-29-8mL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1467" y="-654"/>
+            <point key="canvasLocation" x="2960" y="216"/>
+        </scene>
+        <!--EditorChoice-->
+        <scene sceneID="MAc-LR-SoQ">
+            <objects>
+                <viewControllerPlaceholder storyboardName="EditorChoice" id="jg4-s1-OQ3" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Syn-7A-a1g" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2942" y="115"/>
         </scene>
         <!--ingredientRecipe-->
         <scene sceneID="B5Y-pC-TKc">
@@ -668,34 +676,7 @@
                 <viewControllerPlaceholder storyboardName="ingredientRecipe" id="go2-jv-AyD" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jF5-fa-Upo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1977" y="-652"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="oMe-sF-6sQ">
-            <objects>
-                <viewController id="yu9-PX-3Bs" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Vhl-uo-xM9">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="724"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Editor Choice" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lrt-7k-1bk">
-                                <rect key="frame" x="155.5" y="351.5" width="103" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <constraints>
-                            <constraint firstItem="lrt-7k-1bk" firstAttribute="centerX" secondItem="Vhl-uo-xM9" secondAttribute="centerX" id="EAq-jG-tg2"/>
-                            <constraint firstItem="lrt-7k-1bk" firstAttribute="centerY" secondItem="Vhl-uo-xM9" secondAttribute="centerY" id="FzQ-J7-UEf"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="9Fz-Ls-cei"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="5R0-73-lxw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2878" y="-674"/>
+            <point key="canvasLocation" x="2964" y="147"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="HhR-xW-rT3">
@@ -722,7 +703,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SjK-r4-nyB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3614" y="-674"/>
+            <point key="canvasLocation" x="3301" y="-632"/>
         </scene>
         <!--Creator View Controller-->
         <scene sceneID="Lnz-eH-7xC">
@@ -1194,7 +1175,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gFL-in-ZTE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5183" y="-421"/>
+            <point key="canvasLocation" x="3612" y="9"/>
         </scene>
     </scenes>
     <resources>

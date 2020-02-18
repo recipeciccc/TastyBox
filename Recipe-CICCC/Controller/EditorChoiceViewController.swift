@@ -1,14 +1,17 @@
 //
-//  MonthlyViewController.swift
-//  RecipeProject_v2
+//  EditorChoiceViewController.swift
+//  Recipe-CICCC
 //
-//  Created by fangyilai on 2019-12-05.
-//  Copyright © 2019 fangyilai. All rights reserved.
+//  Created by fangyilai on 2020-02-13.
+//  Copyright © 2020 Argus Chen. All rights reserved.
 //
 
 import UIKit
 
-class MonthlyViewController: UIViewController {    
+class EditorChoiceViewController: UIViewController {
+    
+    
+    
     
     var imageArray = [Image]()
     var arrayMenu = [String]()
@@ -22,11 +25,11 @@ class MonthlyViewController: UIViewController {
     }
     
     func CreateImageArray() {
-        let image1 = Image(title: "Valentine's Day", image: #imageLiteral(resourceName: "brina-blum-surQ2mkZNxw-unsplash"))
-        let image2 = Image(title: "Cozy Spring", image: #imageLiteral(resourceName: "shenggeng-lin-XoN3v3Ge7EE-unsplash"))
-        let image3 = Image(title: "Quick and Simple", image: #imageLiteral(resourceName: "190411-potato-salad-horizontal-1-1555688422"))
-        let image4 = Image(title: "Healthy Diet", image: #imageLiteral(resourceName: "best-salad-7"))
-        let image5 = Image(title: "Home Cooking", image: #imageLiteral(resourceName: "How-to-Make-the-Best-Juiciest-Turkey-Meatballs_055"))
+        let image1 = Image(title: "Appetizer", image: #imageLiteral(resourceName: "elli-o-XoByiBymX20-unsplash"))
+        let image2 = Image(title: "Main Dish", image: #imageLiteral(resourceName: "How-to-Make-the-Best-Juiciest-Turkey-Meatballs_055"))
+        let image3 = Image(title: "Salad", image: #imageLiteral(resourceName: "Image"))
+        let image4 = Image(title: "Dessert", image: #imageLiteral(resourceName: "brina-blum-surQ2mkZNxw-unsplash"))
+        let image5 = Image(title: "Beverage", image: #imageLiteral(resourceName: "shenggeng-lin-XoN3v3Ge7EE-unsplash"))
         
         imageArray.append(image1)
         imageArray.append(image2)
@@ -37,7 +40,7 @@ class MonthlyViewController: UIViewController {
     }
 }
 
-extension MonthlyViewController: UITableViewDataSource, UITableViewDelegate{
+extension EditorChoiceViewController: UITableViewDataSource, UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return imageArray.count
@@ -64,4 +67,5 @@ extension MonthlyViewController: UITableViewDataSource, UITableViewDelegate{
     }
         
 }
+
 
