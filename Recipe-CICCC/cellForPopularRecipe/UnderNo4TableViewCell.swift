@@ -15,6 +15,8 @@ class UnderNo4TableViewCell: UITableViewCell {
     
     @IBOutlet weak var recipeImageView: UIImageView!
     
+    @IBOutlet weak var numLikeLabel: UILabel!
+    @IBOutlet weak var numCommentLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

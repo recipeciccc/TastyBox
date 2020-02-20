@@ -58,11 +58,26 @@ extension PopularRecipeViewController: UITableViewDataSource {
         
         if indexPath.section == 0 {
         let cell = (tableView.dequeueReusableCell(withIdentifier: "medal recipe", for: indexPath) as? Number123TableViewCell)!
+            
+            switch indexPath.row {
+            case 0:
+                cell.badgeImageView.image = #imageLiteral(resourceName: "Group 28")
+            case 1:
+                cell.badgeImageView.image = #imageLiteral(resourceName: "Group 29")
+            case 2:
+                cell.badgeImageView.image = #imageLiteral(resourceName: "Group 30")
+            default:
+                break
+            }
         
         return cell
         }
         
         let cell = (tableView.dequeueReusableCell(withIdentifier: "under no.4", for: indexPath) as? UnderNo4TableViewCell)!
+        
+        cell.rankingLabel.text = "No. \(indexPath.row + 4)"
+        cell.numLikeLabel.text =  "Likes"
+        cell.numCommentLabel.text = "comments"
         
         return cell
     }
