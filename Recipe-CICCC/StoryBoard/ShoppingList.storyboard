@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="bbT-g1-BBM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="jjU-ex-krj">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
@@ -7,16 +7,125 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Shoppinglist View Controller-->
+        <scene sceneID="43e-6V-vYD">
+            <objects>
+                <viewController id="jjU-ex-krj" customClass="ShoppinglistViewController" customModule="Recipe_CICCC" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="bek-1J-1YQ">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="HzK-eu-T6l">
+                                <rect key="frame" x="0.0" y="44" width="414" height="56"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="0gy-dk-r3R">
+                                <rect key="frame" x="0.0" y="100" width="414" height="796"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="searchStores" id="Bcg-W8-Tlt" customClass="searchButtonTableViewCell" customModule="Recipe_CICCC" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="42.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Bcg-W8-Tlt" id="aoG-5a-8b0">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="42.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DV5-0P-hFV">
+                                                    <rect key="frame" x="158.5" y="6" width="97" height="30.5"/>
+                                                    <state key="normal" title="Search Stores"/>
+                                                    <connections>
+                                                        <segue destination="h0v-Pw-8TT" kind="show" id="hI6-pa-j10"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="DV5-0P-hFV" firstAttribute="centerY" secondItem="aoG-5a-8b0" secondAttribute="centerY" id="ReD-NX-cjq"/>
+                                                <constraint firstItem="DV5-0P-hFV" firstAttribute="top" secondItem="aoG-5a-8b0" secondAttribute="topMargin" constant="-5" id="aEp-7I-u5t"/>
+                                                <constraint firstItem="DV5-0P-hFV" firstAttribute="centerX" secondItem="aoG-5a-8b0" secondAttribute="centerX" id="dyq-Dn-URH"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="button" destination="DV5-0P-hFV" id="AmH-RZ-Jq5"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="IngredientsInShoppingList" id="pWI-Gn-FSo" customClass="IngredietntShoppingListTableViewCell" customModule="Recipe_CICCC" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="70.5" width="414" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="pWI-Gn-FSo" id="lhg-FK-Rhx">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="4Uf-Jt-Qer">
+                                                    <rect key="frame" x="20" y="11.5" width="374" height="20.5"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kc0-sf-dxK">
+                                                            <rect key="frame" x="0.0" y="0.0" width="312" height="20.5"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RFa-gZ-r5h">
+                                                            <rect key="frame" x="332" y="0.0" width="42" height="20.5"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstItem="kc0-sf-dxK" firstAttribute="centerY" secondItem="4Uf-Jt-Qer" secondAttribute="centerY" id="0zj-ch-yRa"/>
+                                                        <constraint firstAttribute="trailing" secondItem="RFa-gZ-r5h" secondAttribute="trailing" id="sBp-Dw-dsY"/>
+                                                        <constraint firstItem="RFa-gZ-r5h" firstAttribute="centerY" secondItem="4Uf-Jt-Qer" secondAttribute="centerY" id="tm8-X6-r94"/>
+                                                    </constraints>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="4Uf-Jt-Qer" firstAttribute="leading" secondItem="lhg-FK-Rhx" secondAttribute="leadingMargin" id="MIm-OS-k3g"/>
+                                                <constraint firstItem="4Uf-Jt-Qer" firstAttribute="centerY" secondItem="lhg-FK-Rhx" secondAttribute="centerY" id="faY-Ge-HU7"/>
+                                                <constraint firstItem="4Uf-Jt-Qer" firstAttribute="trailing" secondItem="lhg-FK-Rhx" secondAttribute="trailingMargin" id="laD-Dj-9su"/>
+                                                <constraint firstItem="4Uf-Jt-Qer" firstAttribute="centerX" secondItem="lhg-FK-Rhx" secondAttribute="centerX" id="lsO-q5-PKT"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="amountLabel" destination="RFa-gZ-r5h" id="VGr-UK-f9W"/>
+                                            <outlet property="nameLabel" destination="kc0-sf-dxK" id="tM5-hc-aBt"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="HzK-eu-T6l" firstAttribute="top" secondItem="oqd-JO-GzM" secondAttribute="top" id="36d-et-gzU"/>
+                            <constraint firstAttribute="bottom" secondItem="0gy-dk-r3R" secondAttribute="bottom" id="BDS-kb-hmK"/>
+                            <constraint firstItem="0gy-dk-r3R" firstAttribute="top" secondItem="HzK-eu-T6l" secondAttribute="bottom" id="BoY-F1-MDE"/>
+                            <constraint firstItem="0gy-dk-r3R" firstAttribute="trailing" secondItem="oqd-JO-GzM" secondAttribute="trailing" id="H2J-I3-UUu"/>
+                            <constraint firstItem="0gy-dk-r3R" firstAttribute="top" secondItem="HzK-eu-T6l" secondAttribute="bottom" id="QMa-fm-sQ1"/>
+                            <constraint firstItem="HzK-eu-T6l" firstAttribute="leading" secondItem="oqd-JO-GzM" secondAttribute="leading" id="X6M-QA-nWG"/>
+                            <constraint firstItem="HzK-eu-T6l" firstAttribute="trailing" secondItem="oqd-JO-GzM" secondAttribute="trailing" id="YqN-or-xIR"/>
+                            <constraint firstItem="0gy-dk-r3R" firstAttribute="leading" secondItem="oqd-JO-GzM" secondAttribute="leading" id="njB-Nh-rYQ"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="oqd-JO-GzM"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="0Kj-l8-IIK"/>
+                    <connections>
+                        <outlet property="searchBar" destination="HzK-eu-T6l" id="l7p-EV-gIt"/>
+                        <outlet property="tableView" destination="0gy-dk-r3R" id="HrI-qc-VIA"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GEC-VK-5QC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5453.6231884057979" y="805.58035714285711"/>
+        </scene>
         <!--Shopping List-->
         <scene sceneID="PGG-q8-REE">
             <objects>
-                <tableViewController id="bbT-g1-BBM" customClass="ShoppingListTableViewController" customModule="Recipe_CICCC" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="bbT-g1-BBM" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="bWQ-9j-U7G">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="searchBar" id="NQ9-HY-dLX" customClass="SearchIngredientTableViewCell" customModule="Recipe_CICCC" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="searchBar" id="NQ9-HY-dLX">
                                 <rect key="frame" x="0.0" y="28" width="414" height="56.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="NQ9-HY-dLX" id="AvI-0g-JOM">
@@ -39,7 +148,7 @@
                                     <outlet property="searchBar" destination="DDh-Ro-z9B" id="yRr-M8-dBF"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="searchStores" id="eVW-PX-hFJ" customClass="searchButtonTableViewCell" customModule="Recipe_CICCC" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="eVW-PX-hFJ">
                                 <rect key="frame" x="0.0" y="84.5" width="414" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="eVW-PX-hFJ" id="tcK-Wc-OQK">
@@ -55,9 +164,6 @@
                                             <state key="normal" title="Search Stores">
                                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </state>
-                                            <connections>
-                                                <segue destination="h0v-Pw-8TT" kind="show" id="zn2-Hb-9AI"/>
-                                            </connections>
                                         </button>
                                     </subviews>
                                     <constraints>
@@ -65,11 +171,8 @@
                                         <constraint firstItem="D5s-Ma-yIB" firstAttribute="centerX" secondItem="tcK-Wc-OQK" secondAttribute="centerX" id="dnK-Yw-84e"/>
                                     </constraints>
                                 </tableViewCellContentView>
-                                <connections>
-                                    <outlet property="button" destination="D5s-Ma-yIB" id="Grz-zE-BkX"/>
-                                </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="IngredientsInShoppingList" id="w8r-pM-LsO" customClass="IngredietntShoppingListTableViewCell" customModule="Recipe_CICCC" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="w8r-pM-LsO">
                                 <rect key="frame" x="0.0" y="128" width="414" height="43"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="w8r-pM-LsO" id="58Z-bd-uA2">
@@ -105,8 +208,6 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="amountLabel" destination="laG-8U-y4E" id="6YE-UP-kWd"/>
-                                    <outlet property="nameLabel" destination="HZw-gg-kTq" id="Jic-Gc-jSQ"/>
                                     <segue destination="FtJ-lZ-rSv" kind="show" identifier="editItemShopping" id="S0T-kw-pL3"/>
                                 </connections>
                             </tableViewCell>
@@ -129,7 +230,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MAm-4c-cVh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5542.0289855072469" y="805.58035714285711"/>
+            <point key="canvasLocation" x="6452.1739130434789" y="805.58035714285711"/>
         </scene>
         <!--Map-->
         <scene sceneID="UAI-Yj-Run">
@@ -202,7 +303,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="baR-fx-slA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6672.4637681159429" y="805.58035714285711"/>
+            <point key="canvasLocation" x="7582.6086956521749" y="805.58035714285711"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>

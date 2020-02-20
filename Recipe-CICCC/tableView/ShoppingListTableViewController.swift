@@ -13,6 +13,9 @@ class ShoppingListTableViewController: UITableViewController {
     let shoppingList = ShoppingList()
     var item = IngredientShopping()
     weak var delegate: AddingShoppingListViewControllerDelegate?
+    
+    var filteredTableData = [String]()
+    var resultSearchController = UISearchController()
 
     override func viewDidLoad() {
         super.viewDidLoad()
