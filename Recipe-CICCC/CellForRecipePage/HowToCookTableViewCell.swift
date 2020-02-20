@@ -11,6 +11,7 @@ import UIKit
 class HowToCookTableViewCell: UITableViewCell {
 
     @IBOutlet weak var howToCookLabel: UILabel!
+    @IBOutlet weak var imgView: UIImageView!
     
     var howToCook = ""
     
