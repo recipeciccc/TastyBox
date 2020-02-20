@@ -623,7 +623,7 @@
                 <viewControllerPlaceholder storyboardName="Monthly" id="bOG-U9-byp" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ebk-D1-WKP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2928" y="181"/>
+            <point key="canvasLocation" x="-614" y="-688"/>
         </scene>
         <!--Popular Recipe View Controller-->
         <scene sceneID="5bi-Q1-hyS">
@@ -842,7 +842,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qwo-7W-And" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2597" y="-632"/>
+            <point key="canvasLocation" x="744.92753623188412" y="-674.33035714285711"/>
         </scene>
         <!--followingRecipe-->
         <scene sceneID="gjd-K3-Lmm">
@@ -895,7 +895,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SjK-r4-nyB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3301" y="-632"/>
+            <point key="canvasLocation" x="4033" y="-674"/>
         </scene>
         <!--Creator View Controller-->
         <scene sceneID="Lnz-eH-7xC">

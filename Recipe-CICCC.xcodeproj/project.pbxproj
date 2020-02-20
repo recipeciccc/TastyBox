@@ -61,7 +61,6 @@
 		69202F2E23FB3D33001AB4A9 /* EditorChoice.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 69202F2D23FB3D33001AB4A9 /* EditorChoice.storyboard */; };
 		693C9FF423FB4B2400957EF2 /* RecipeCollectionPageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 693C9FF223FB4B2400957EF2 /* RecipeCollectionPageViewController.xib */; };
 		693C9FF823FB4D2A00957EF2 /* RecipeCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693C9FF723FB4D2A00957EF2 /* RecipeCollectionView.swift */; };
-		6970F4E223F612C900F94541 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6970F4E123F612C800F94541 /* Assets.xcassets */; };
 		6970F4E423F6302A00F94541 /* Monthly.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6970F4E323F6302A00F94541 /* Monthly.storyboard */; };
 		6985A53623F48B5E001257A8 /* IngredientsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6985A53523F48B5E001257A8 /* IngredientsViewController.swift */; };
 		6985A53A23F4924A001257A8 /* IngredientTitleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6985A53923F4924A001257A8 /* IngredientTitleCollectionViewCell.swift */; };
@@ -105,6 +104,7 @@
 		6F8BE81E23F6639A00CEA348 /* UnderNo4TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8BE81C23F6639900CEA348 /* UnderNo4TableViewCell.swift */; };
 		6FB86C0923E8839800672851 /* KeyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB86C0823E8839800672851 /* KeyManager.swift */; };
 		6FB86C0B23E8855800672851 /* apiKey.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6FB86C0A23E8855800672851 /* apiKey.plist */; };
+		6FEC4D9723FE417400AB2785 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6FEC4D9623FE417400AB2785 /* Assets.xcassets */; };
 		B85B44E4B7712DCAEA7533E2 /* Pods_Recipe_CICCC_Recipe_CICCCUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0AA45E6A7912FC6432A5B9C /* Pods_Recipe_CICCC_Recipe_CICCCUITests.framework */; };
 		D842848E4079AD1F8EF4DF88 /* Pods_Recipe_CICCC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D89B921DC6BD386DA580F255 /* Pods_Recipe_CICCC.framework */; };
 /* End PBXBuildFile section */
@@ -194,7 +194,6 @@
 		69202F2D23FB3D33001AB4A9 /* EditorChoice.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = EditorChoice.storyboard; sourceTree = "<group>"; };
 		693C9FF223FB4B2400957EF2 /* RecipeCollectionPageViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecipeCollectionPageViewController.xib; sourceTree = "<group>"; };
 		693C9FF723FB4D2A00957EF2 /* RecipeCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeCollectionView.swift; sourceTree = "<group>"; };
-		6970F4E123F612C800F94541 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../../../Assets.xcassets; sourceTree = "<group>"; };
 		6970F4E323F6302A00F94541 /* Monthly.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Monthly.storyboard; sourceTree = "<group>"; };
 		6985A53523F48B5E001257A8 /* IngredientsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientsViewController.swift; sourceTree = "<group>"; };
 		6985A53923F4924A001257A8 /* IngredientTitleCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientTitleCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -235,6 +234,7 @@
 		6F8BE81C23F6639900CEA348 /* UnderNo4TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderNo4TableViewCell.swift; sourceTree = "<group>"; };
 		6FB86C0823E8839800672851 /* KeyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyManager.swift; sourceTree = "<group>"; };
 		6FB86C0A23E8855800672851 /* apiKey.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = apiKey.plist; sourceTree = "<group>"; };
+		6FEC4D9623FE417400AB2785 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		939DE07C470F123E9499D33E /* Pods-Recipe-CICCC.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Recipe-CICCC.debug.xcconfig"; path = "Target Support Files/Pods-Recipe-CICCC/Pods-Recipe-CICCC.debug.xcconfig"; sourceTree = "<group>"; };
 		A4B3B0DAE263BCAF397031CE /* Pods-Recipe-CICCCTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Recipe-CICCCTests.debug.xcconfig"; path = "Target Support Files/Pods-Recipe-CICCCTests/Pods-Recipe-CICCCTests.debug.xcconfig"; sourceTree = "<group>"; };
 		B0AA45E6A7912FC6432A5B9C /* Pods_Recipe_CICCC_Recipe_CICCCUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Recipe_CICCC_Recipe_CICCCUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -685,6 +685,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6FEC4D9723FE417400AB2785 /* Assets.xcassets in Resources */,
 				6970F4E423F6302A00F94541 /* Monthly.storyboard in Resources */,
 				6F8BE77523EEA96300CEA348 /* Map.storyboard in Resources */,
 				69202F2E23FB3D33001AB4A9 /* EditorChoice.storyboard in Resources */,
@@ -701,7 +702,6 @@
 				693C9FF423FB4B2400957EF2 /* RecipeCollectionPageViewController.xib in Resources */,
 				408C319D23C98C1E00E74E4A /* userPage.storyboard in Resources */,
 				6F0FBB0523DA491A009C1775 /* RecipeDetail.storyboard in Resources */,
-				6970F4E223F612C900F94541 /* Assets.xcassets in Resources */,
 				40127AD523A06E3C00260AF0 /* Login.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
