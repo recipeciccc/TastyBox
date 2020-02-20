@@ -22,11 +22,11 @@ class MonthlyViewController: UIViewController {
     }
     
     func CreateImageArray() {
-        let image1 = Image(title: "Appetizer", image: #imageLiteral(resourceName: "How-to-Make-the-Best-Juiciest-Turkey-Meatballs_055"))
-        let image2 = Image(title: "Main Dish", image: #imageLiteral(resourceName: "merlin_141075420_edfc0f4f-ba70-4542-a881-085a9dc162b9-articleLarge"))
-        let image3 = Image(title: "Salad", image: #imageLiteral(resourceName: "best-salad-7"))
-        let image4 = Image(title: "Dessert", image: #imageLiteral(resourceName: "77d08f50-3ccc-4432-a86d-4dcfdd3d7cd4"))
-        let image5 = Image(title: "Beverage", image: #imageLiteral(resourceName: "candied-yams-5"))
+        let image1 = Image(title: "Valentine's Day", image: #imageLiteral(resourceName: "Easy-strawberry-desserts-–-Greek-Yogurt-recipes-–-Valentines-desserts"))
+        let image2 = Image(title: "Cozy Spring", image: #imageLiteral(resourceName: "Valentines-Day-Cookie-Bars-1-3-680"))
+        let image3 = Image(title: "Quick and Simple", image: #imageLiteral(resourceName: "190411-potato-salad-horizontal-1-1555688422"))
+        let image4 = Image(title: "Healthy Diet", image: #imageLiteral(resourceName: "guacamole-foto-heroe-1024x723"))
+        let image5 = Image(title: "Home Cooking", image: #imageLiteral(resourceName: "images (1)"))
         
         imageArray.append(image1)
         imageArray.append(image2)
