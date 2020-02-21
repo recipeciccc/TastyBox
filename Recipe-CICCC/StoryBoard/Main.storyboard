@@ -98,7 +98,7 @@
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ebh-34-Zi3">
                                 <rect key="frame" x="0.0" y="138" width="414" height="724"/>
                                 <connections>
-                                    <segue destination="8Fr-xQ-R38" kind="embed" id="XDg-Zt-XYg"/>
+                                    <segue destination="9VU-Un-7z1" kind="embed" id="eTc-NM-da3"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FId-yb-en9">
@@ -854,6 +854,14 @@
             </objects>
             <point key="canvasLocation" x="2960" y="216"/>
         </scene>
+        <!--VIP_page-->
+        <scene sceneID="rtR-na-5dT">
+            <objects>
+                <viewControllerPlaceholder storyboardName="VIP_page" id="9VU-Un-7z1" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nsi-cG-GZV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2932" y="252"/>
+        </scene>
         <!--EditorChoice-->
         <scene sceneID="MAc-LR-SoQ">
             <objects>
@@ -869,33 +877,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jF5-fa-Upo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2964" y="147"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="HhR-xW-rT3">
-            <objects>
-                <viewController id="8Fr-xQ-R38" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="K6m-Ow-Ape">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="724"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="VIP Only" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bh9-TI-U4a">
-                                <rect key="frame" x="174" y="351.5" width="66" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <constraints>
-                            <constraint firstItem="bh9-TI-U4a" firstAttribute="centerX" secondItem="K6m-Ow-Ape" secondAttribute="centerX" id="4eD-bW-M8u"/>
-                            <constraint firstItem="bh9-TI-U4a" firstAttribute="centerY" secondItem="K6m-Ow-Ape" secondAttribute="centerY" id="Nfc-hB-fRz"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="rCe-zC-wKq"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="SjK-r4-nyB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4033" y="-674"/>
         </scene>
         <!--Creator View Controller-->
         <scene sceneID="Lnz-eH-7xC">

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="GiG-KZ-gQh">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="aJW-TR-JYh">
+            <objects>
+                <viewController id="GiG-KZ-gQh" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="I1F-1C-yVd">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fea-Ia-KSV" customClass="RecipeCollectionView" customModule="Recipe_CICCC" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.99759250880000006" green="0.98715764279999996" blue="0.79212433100000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <constraints>
+                            <constraint firstItem="fea-Ia-KSV" firstAttribute="trailing" secondItem="Rzy-Ag-A3V" secondAttribute="trailing" id="Sia-7m-7qQ"/>
+                            <constraint firstItem="fea-Ia-KSV" firstAttribute="top" secondItem="Rzy-Ag-A3V" secondAttribute="top" id="Z70-WL-QEB"/>
+                            <constraint firstItem="fea-Ia-KSV" firstAttribute="leading" secondItem="Rzy-Ag-A3V" secondAttribute="leading" id="fdL-Ek-iXI"/>
+                            <constraint firstItem="fea-Ia-KSV" firstAttribute="bottom" secondItem="Rzy-Ag-A3V" secondAttribute="bottom" id="jKm-eS-grd"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Rzy-Ag-A3V"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zpt-7V-3IR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-89.855072463768124" y="-234.375"/>
+        </scene>
+    </scenes>
+</document>
