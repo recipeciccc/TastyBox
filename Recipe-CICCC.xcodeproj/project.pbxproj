@@ -104,7 +104,6 @@
 		6F8BE81E23F6639A00CEA348 /* UnderNo4TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8BE81C23F6639900CEA348 /* UnderNo4TableViewCell.swift */; };
 		6FB86C0923E8839800672851 /* KeyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB86C0823E8839800672851 /* KeyManager.swift */; };
 		6FB86C0B23E8855800672851 /* apiKey.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6FB86C0A23E8855800672851 /* apiKey.plist */; };
-		6FEC4D9723FE417400AB2785 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6FEC4D9623FE417400AB2785 /* Assets.xcassets */; };
 		B85B44E4B7712DCAEA7533E2 /* Pods_Recipe_CICCC_Recipe_CICCCUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0AA45E6A7912FC6432A5B9C /* Pods_Recipe_CICCC_Recipe_CICCCUITests.framework */; };
 		D842848E4079AD1F8EF4DF88 /* Pods_Recipe_CICCC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D89B921DC6BD386DA580F255 /* Pods_Recipe_CICCC.framework */; };
 /* End PBXBuildFile section */
@@ -279,6 +278,7 @@
 				40127ACB23A06E3C00260AF0 /* Products */,
 				7EB1D06E023F549FFE87347F /* Pods */,
 				D720AAFECF96A7DD4C5B0B1D /* Frameworks */,
+				6FEC4DAD23FFCD7000AB2785 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -296,8 +296,6 @@
 			isa = PBXGroup;
 			children = (
 				6F8BE81823F6630900CEA348 /* cellForPopularRecipe */,
-				40E59BE823EE6A240049F9B6 /* Assets.xcassets */,
-				6970F4E123F612C800F94541 /* Assets.xcassets */,
 				6F8BE78B23EEB00E00CEA348 /* CellForShoppingList */,
 				402CAC6923D92A37004A46F1 /* CellForRefgenerator */,
 				4069259323D8355200059C8E /* ViewController */,
@@ -551,6 +549,14 @@
 			path = cellForPopularRecipe;
 			sourceTree = "<group>";
 		};
+		6FEC4DAD23FFCD7000AB2785 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				6FEC4D9623FE417400AB2785 /* Assets.xcassets */,
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
 		7EB1D06E023F549FFE87347F /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -685,7 +691,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6FEC4D9723FE417400AB2785 /* Assets.xcassets in Resources */,
 				6970F4E423F6302A00F94541 /* Monthly.storyboard in Resources */,
 				6F8BE77523EEA96300CEA348 /* Map.storyboard in Resources */,
 				69202F2E23FB3D33001AB4A9 /* EditorChoice.storyboard in Resources */,
