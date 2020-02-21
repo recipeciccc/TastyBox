@@ -25,28 +25,14 @@ class recipeItemTableViewController: UITableViewController {
     
     var currentPage:Int = 0
 
-    enum Direction {
-       case left
-       case right
-    
-       func newProgress(withCurrentProgress current: Int) -> Int {
-           switch self {
-           case .left:
-               return current - 1
-           case .right:
-               return current + 1
-           }
-        
-        }
-    }
-    
+   
        
        override func viewDidLoad() {
            super.viewDidLoad()
         let cell: recipeMainTableViewCell = (tableView.dequeueReusableCell(withIdentifier:"recipeMainCell") as? recipeMainTableViewCell)!
         
            // Do any additional setup after loading the view.
-        cell.scrollView.delegate = self
+        
         
        }
     
@@ -117,25 +103,11 @@ class recipeItemTableViewController: UITableViewController {
             let cell : recipeMainTableViewCell =  (tableView.dequeueReusableCell(withIdentifier:"recipeMainCell") as? recipeMainTableViewCell)!
             
             
-            cell.scrollView.delegate = self
+            
             //let _ = RecipeListCreator.creatorRecipeLists[indexPath.row]
             
-            // 1枚目の画像
-            let firstImageView = UIImageView(image: UIImage(named: "breakfast-450x310"))
-            firstImageView.frame = CGRect(x: 0.0, y: 0.0, width: cell.scrollView.bounds.width, height: cell.scrollView.bounds.height)
-            firstImageView.contentMode = UIView.ContentMode.scaleAspectFit
-            cell.scrollView.addSubview(firstImageView)
-
-                   // 2枚目の画像
-            let secondImageView = UIImageView(image: UIImage(named: "images"))
-            secondImageView.frame = CGRect(x: cell.scrollView.bounds.width * 1.0, y: 0.0, width: cell.scrollView.bounds.width, height: cell.scrollView.bounds.height)
-            secondImageView.contentMode = UIView.ContentMode.scaleAspectFit
-                   
-            cell.scrollView.addSubview(secondImageView)
             
-        
-//            }
-//
+            
             return cell
             
         }
@@ -153,7 +125,7 @@ class recipeItemTableViewController: UITableViewController {
             
 //            cell.explanationLabel.text = "Brussels sprouts are one of the most underrated vegetables. These cruciferous green gems are good for you and, when cooked correctly, so darn delicious. Still not sure? We’ve rounded up a few recipes that prove it!"
             
-            cell.explanationLabel.text = item.recipeExplanation
+            cell.timeLabel.text = item.recipeExplanation
             
             
 //            cell.explanationLabel.sizeToFit()

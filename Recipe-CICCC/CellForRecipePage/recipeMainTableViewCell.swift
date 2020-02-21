@@ -11,11 +11,9 @@ import UIKit
 
 class recipeMainTableViewCell: UITableViewCell {
        
-    @IBOutlet weak var heightForLabel: NSLayoutConstraint!
-    
-    @IBOutlet weak var scrollView: UIScrollView!
+//    @IBOutlet weak var heightForLabel: NSLayoutConstraint!
 
-    
+    @IBOutlet weak var imgView: UIImageView!
     
     var numImg = CGFloat(2.0) 
     
@@ -25,16 +23,7 @@ class recipeMainTableViewCell: UITableViewCell {
        override func awakeFromNib() {
            super.awakeFromNib()
            // Initialization code
-        
-        scrollView.contentSize = CGSize(width: UIScreen.main.bounds.width * numImg, height: scrollView.bounds.height)
-        scrollView.isPagingEnabled = true
-
-      
-        
-//        scrollView.delegate = self as! UIScrollViewDelegate
-//        pageControl.addTarget(self, action: #selector(didChangePage), for: .valueChanged)
-//        
-//        pageControl.autoresizingMask = [.flexibleTopMargin, .flexibleWidth]
+    
        }
 
    

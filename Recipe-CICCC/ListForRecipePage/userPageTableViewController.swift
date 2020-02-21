@@ -100,8 +100,7 @@ class userPageTableViewController: UITableViewController {
 //        case 2:
 //            return 38
         case 2:
-            return 560
-            
+            return self.view.frame.height - ((self.view.frame.origin.y) * -1)
             //return UITableView.automaticDimension
         default:
             return UITableView.automaticDimension
@@ -173,5 +172,8 @@ class userPageTableViewController: UITableViewController {
 //        }
     }
     
-
+    @IBAction func postedButtonTapped(_ sender: Any) {
+        self.view.frame.origin.y = -195.0
+    }
+    
 }

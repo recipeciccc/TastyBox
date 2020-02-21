@@ -31,6 +31,7 @@ class MonthlyViewController: UIViewController {
         let image3 = Image(title: "Quick and Simple", image: #imageLiteral(resourceName: "190411-potato-salad-horizontal-1-1555688422"))
         let image4 = Image(title: "Healthy Diet", image: #imageLiteral(resourceName: "guacamole-foto-heroe-1024x723"))
         let image5 = Image(title: "Home Cooking", image: #imageLiteral(resourceName: "merlin_141075420_edfc0f4f-ba70-4542-a881-085a9dc162b9-articleLarge"))
+
         
         imageArray.append(image1)
         imageArray.append(image2)

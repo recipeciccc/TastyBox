@@ -20,6 +20,14 @@ class NumOfCreatorhasTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        NumOfPostedButton.titleLabel?.numberOfLines = 0
+        NumOfPostedButton.setTitle("\nPosted", for: .normal)
+
+        NumOffollowingButton.titleLabel?.numberOfLines = 0
+        NumOffollowingButton.setTitle("\nFollowing", for: .normal)
+        
+        NumOFFollwedButton.titleLabel?.numberOfLines = 0
+        NumOFFollwedButton.setTitle("\nFollowed", for: .normal)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
