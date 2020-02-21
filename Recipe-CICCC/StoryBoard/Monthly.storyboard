@@ -92,7 +92,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="GAE-gZ-UlS">
-                                <rect key="frame" x="0.0" y="88" width="414" height="808"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RWP-Wa-fJI">
                                         <rect key="frame" x="47" y="0.0" width="320" height="100"/>
@@ -101,7 +101,7 @@
                                         </constraints>
                                     </imageView>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="xxP-CN-iaT">
-                                        <rect key="frame" x="10" y="104" width="394" height="704"/>
+                                        <rect key="frame" x="10" y="104" width="394" height="670"/>
                                         <color key="backgroundColor" red="0.99759250880000006" green="0.98715764279999996" blue="0.79212433100000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="5" minimumInteritemSpacing="4" id="GPi-54-cEq">
                                             <size key="itemSize" width="173" height="176"/>
@@ -167,7 +167,7 @@
                         <color key="backgroundColor" red="0.99778836969999996" green="0.97895878550000004" blue="0.81173723939999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="GAE-gZ-UlS" firstAttribute="centerX" secondItem="MXQ-14-Tek" secondAttribute="centerX" id="3mN-ua-4UO"/>
-                            <constraint firstAttribute="bottomMargin" secondItem="GAE-gZ-UlS" secondAttribute="bottom" constant="-34" id="6sj-1h-yMi"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="GAE-gZ-UlS" secondAttribute="bottom" id="6sj-1h-yMi"/>
                             <constraint firstItem="NgF-DD-NMW" firstAttribute="trailing" secondItem="GAE-gZ-UlS" secondAttribute="trailing" id="70f-xw-QEm"/>
                             <constraint firstItem="GAE-gZ-UlS" firstAttribute="leading" secondItem="UeL-87-spJ" secondAttribute="leading" id="FkH-fO-ZJc"/>
                             <constraint firstItem="GAE-gZ-UlS" firstAttribute="top" secondItem="NgF-DD-NMW" secondAttribute="top" id="KDP-ud-s54"/>
