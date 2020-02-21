@@ -108,6 +108,7 @@
 		6FEC4DA623FF952500AB2785 /* Number123TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FEC4DA523FF952500AB2785 /* Number123TableViewCell.swift */; };
 		6FEC4DA823FF955600AB2785 /* UnderNo4TableViewCell.swift in Resources */ = {isa = PBXBuildFile; fileRef = 6FEC4DA723FF955600AB2785 /* UnderNo4TableViewCell.swift */; };
 		6FEC4DAA23FF95A000AB2785 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6FEC4DA923FF959F00AB2785 /* Assets.xcassets */; };
+		6FEC4DAC23FF984E00AB2785 /* UnderNo4TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FEC4DA723FF955600AB2785 /* UnderNo4TableViewCell.swift */; };
 		B85B44E4B7712DCAEA7533E2 /* Pods_Recipe_CICCC_Recipe_CICCCUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0AA45E6A7912FC6432A5B9C /* Pods_Recipe_CICCC_Recipe_CICCCUITests.framework */; };
 		D842848E4079AD1F8EF4DF88 /* Pods_Recipe_CICCC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D89B921DC6BD386DA580F255 /* Pods_Recipe_CICCC.framework */; };
 /* End PBXBuildFile section */
@@ -889,6 +890,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6FEC4DAC23FF984E00AB2785 /* UnderNo4TableViewCell.swift in Sources */,
 				6FEC4DA623FF952500AB2785 /* Number123TableViewCell.swift in Sources */,
 				6F8BE77B23EEAAAA00CEA348 /* IngredientShopping.swift in Sources */,
 				6F3FF54523DAB0F0005162C7 /* RefrigeratorList.swift in Sources */,
