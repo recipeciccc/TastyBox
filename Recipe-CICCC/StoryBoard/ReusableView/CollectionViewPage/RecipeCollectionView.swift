@@ -13,9 +13,14 @@ class RecipeCollectionView: UIView {
 
     @IBOutlet var R_view: UIView!
     @IBOutlet weak var R_collectionView: UICollectionView!
+    @IBOutlet weak var width: NSLayoutConstraint!
+    @IBOutlet weak var height: NSLayoutConstraint!
     
-        var imageArray = [UIImage]()
-        var recipeName = [String]()
+    var imageArray = [UIImage]()
+    var recipeName = [String]()
+
+    let layout = UICollectionViewFlowLayout()
+
     
         override init(frame: CGRect) {
             super.init(frame: frame)
@@ -28,12 +33,11 @@ class RecipeCollectionView: UIView {
         }
         
         private func commonInit() {
+            
             let bundle = Bundle(for: type(of: self))
             bundle.loadNibNamed("RecipeCollectionView", owner: self, options: nil)
             addSubview(R_view)
             
-            imageArray = [#imageLiteral(resourceName: "huevos-rancheros"),#imageLiteral(resourceName: "2018_Sweet-Sallty-Snack-Mix_5817_600x600"),#imageLiteral(resourceName: "Lemon-Garlic-Butter-Salmon-with-Zucchini-Noodles-recipes"),#imageLiteral(resourceName: "candied-yams-5"),#imageLiteral(resourceName: "best-salad-7"),#imageLiteral(resourceName: "guacamole-foto-heroe-1024x723"),#imageLiteral(resourceName: "huevos-rancheros"),#imageLiteral(resourceName: "How-to-Make-the-Best-Juiciest-Turkey-Meatballs_055"),#imageLiteral(resourceName: "Intrepid-Travel-Taiwan-dumplings-Xiao-Long-Bao_577219075"),#imageLiteral(resourceName: "guacamole-foto-heroe-1024x723")]
-            recipeName = ["Title:\nCreator:","Title:\nCreator:","Title:\nCreator:","Title:\nCreator:","Title:\nCreator:","Title:\nCreator:","Title:\nCreator:","Title:\nCreator:","Title:\nCreator:","Title:\nCreator:"]
             initCollectionView()
         }
         
@@ -42,11 +46,10 @@ class RecipeCollectionView: UIView {
             R_collectionView.register(nib, forCellWithReuseIdentifier: "RecipeCollectionViewCell")
             R_collectionView.dataSource = self
             R_collectionView.delegate = self
+            width.constant = UIScreen.main.bounds.size.width
+            height.constant = UIScreen.main.bounds.size.height*0.8
         }
-    
-    
-        
-    }
+}
 
     extension RecipeCollectionView: UICollectionViewDataSource, UICollectionViewDelegate{
         
@@ -68,22 +71,22 @@ class RecipeCollectionView: UIView {
     extension RecipeCollectionView: UICollectionViewDelegateFlowLayout {
         
         func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-            return UIEdgeInsets(top: 0, left: 10, bottom: 10, right: 10)
+            return UIEdgeInsets(top: 5, left: 10, bottom: 10, right: 10)
         }
         
         func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-            return CGSize(width: (collectionView.frame.size.width-25) / 2, height: (collectionView.frame.size.width-25) / 2)
+            return CGSize(width: (collectionView.frame.size.width-30) / 2, height: (collectionView.frame.size.width-30) / 2)
         }
         
         
         func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
                 
-            return 4
+            return 10
         }
             
         func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
                 
-            return 5
+            return 10
         }
 
 }
