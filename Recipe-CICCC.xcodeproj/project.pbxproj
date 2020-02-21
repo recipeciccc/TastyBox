@@ -472,10 +472,10 @@
 		693C9FEC23FB490B00957EF2 /* CollectionViewPage */ = {
 			isa = PBXGroup;
 			children = (
-				693CA00723FF437600957EF2 /* RecipeCollectionViewCell.swift */,
-				693CA00823FF437600957EF2 /* RecipeCollectionViewCell.xib */,
 				693C9FF723FB4D2A00957EF2 /* RecipeCollectionView.swift */,
+				693CA00723FF437600957EF2 /* RecipeCollectionViewCell.swift */,
 				693C9FF223FB4B2400957EF2 /* RecipeCollectionView.xib */,
+				693CA00823FF437600957EF2 /* RecipeCollectionViewCell.xib */,
 			);
 			path = CollectionViewPage;
 			sourceTree = "<group>";

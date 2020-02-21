@@ -668,7 +668,7 @@
                 <viewControllerPlaceholder storyboardName="VIP_page" id="9VU-Un-7z1" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nsi-cG-GZV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2923" y="44"/>
+            <point key="canvasLocation" x="2932" y="252"/>
         </scene>
         <!--EditorChoice-->
         <scene sceneID="MAc-LR-SoQ">

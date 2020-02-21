@@ -9,7 +9,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RecipeCollectionView" customModule="Recipe_CICCC" customModuleProvider="target">
             <connections>
-                <outlet property="R_collectionView" destination="542-yr-ATQ" id="6oO-uX-uSY"/>
+                <outlet property="R_collectionView" destination="ZT2-L1-vUR" id="Gn5-ld-Grn"/>
                 <outlet property="R_view" destination="r1O-MZ-UQv" id="8qG-RF-wh5"/>
             </connections>
         </placeholder>
@@ -18,22 +18,27 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" id="542-yr-ATQ">
-                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" red="0.99711173769999994" green="0.99571460489999997" blue="0.74113160369999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                    <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="1" minimumInteritemSpacing="1" id="M3n-TV-OPp">
-                        <size key="itemSize" width="158" height="158"/>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="ZT2-L1-vUR">
+                    <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                    <color key="backgroundColor" red="0.99759250880000006" green="0.98715764279999996" blue="0.79212433100000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    <viewLayoutGuide key="safeArea" id="KDz-3M-Do0"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="1" minimumInteritemSpacing="1" id="X0W-VM-fPp">
+                        <size key="itemSize" width="175" height="158"/>
                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                     </collectionViewFlowLayout>
-                    <cells/>
                 </collectionView>
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+            <constraints>
+                <constraint firstItem="ZT2-L1-vUR" firstAttribute="leading" secondItem="Xow-KI-QTM" secondAttribute="leading" id="YJF-b7-9Aq"/>
+                <constraint firstItem="ZT2-L1-vUR" firstAttribute="bottom" secondItem="Xow-KI-QTM" secondAttribute="bottom" id="YOT-q8-F7o"/>
+                <constraint firstItem="Xow-KI-QTM" firstAttribute="trailing" secondItem="ZT2-L1-vUR" secondAttribute="trailing" id="jqZ-80-wrr"/>
+                <constraint firstItem="ZT2-L1-vUR" firstAttribute="top" secondItem="Xow-KI-QTM" secondAttribute="top" id="lg7-Yx-8Gj"/>
+            </constraints>
             <viewLayoutGuide key="safeArea" id="Xow-KI-QTM"/>
-            <point key="canvasLocation" x="-999" y="1173"/>
+            <point key="canvasLocation" x="-1000.0000000000001" y="1172.5446428571429"/>
         </view>
     </objects>
 </document>
