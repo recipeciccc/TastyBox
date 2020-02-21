@@ -68,7 +68,7 @@
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wNH-OO-IJE">
                                 <rect key="frame" x="0.0" y="138" width="414" height="724"/>
                                 <connections>
-                                    <segue destination="A5H-Ie-HkG" kind="embed" id="dBC-E6-mx9"/>
+                                    <segue destination="8mF-s1-pgI" kind="embed" id="zjg-5w-3Zf"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="alY-9v-5Rz">
@@ -630,11 +630,11 @@
             <objects>
                 <viewController id="A5H-Ie-HkG" customClass="PopularRecipeViewController" customModule="Recipe_CICCC" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="9cg-Nb-3xa">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="724"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="xQJ-X1-TRh">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="724"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="medal recipe" rowHeight="450" id="iuv-CN-zpN" customClass="Number123TableViewCell" customModule="Recipe_CICCC" customModuleProvider="target">
@@ -846,7 +846,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qwo-7W-And" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="744.92753623188412" y="-674.33035714285711"/>
+            <point key="canvasLocation" x="1842" y="-663"/>
         </scene>
         <!--RecipeDetail-->
         <scene sceneID="DOQ-N7-vTm">
@@ -866,7 +866,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fJK-29-8mL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2960" y="216"/>
+            <point key="canvasLocation" x="2769" y="52"/>
         </scene>
         <!--VIP_page-->
         <scene sceneID="rtR-na-5dT">
@@ -874,7 +874,15 @@
                 <viewControllerPlaceholder storyboardName="VIP_page" id="9VU-Un-7z1" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nsi-cG-GZV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2932" y="252"/>
+            <point key="canvasLocation" x="2746" y="115"/>
+        </scene>
+        <!--PopularPage-->
+        <scene sceneID="hGa-gS-91U">
+            <objects>
+                <viewControllerPlaceholder storyboardName="PopularPage" id="8mF-s1-pgI" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JRZ-qr-aBr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2762" y="150"/>
         </scene>
         <!--EditorChoice-->
         <scene sceneID="MAc-LR-SoQ">
@@ -882,7 +890,7 @@
                 <viewControllerPlaceholder storyboardName="EditorChoice" id="jg4-s1-OQ3" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Syn-7A-a1g" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2942" y="115"/>
+            <point key="canvasLocation" x="2755" y="81"/>
         </scene>
         <!--ingredientRecipe-->
         <scene sceneID="B5Y-pC-TKc">
@@ -890,7 +898,7 @@
                 <viewControllerPlaceholder storyboardName="ingredientRecipe" id="go2-jv-AyD" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jF5-fa-Upo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2964" y="147"/>
+            <point key="canvasLocation" x="2785" y="212"/>
         </scene>
         <!--Creator View Controller-->
         <scene sceneID="Lnz-eH-7xC">
@@ -945,7 +953,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cake" translatesAutoresizingMaskIntoConstraints="NO" id="5Sn-Ro-uek">
-                                                    <rect key="frame" x="25" y="25" width="364" height="330"/>
+                                                    <rect key="frame" x="19" y="19" width="376" height="342"/>
                                                     <color key="tintColor" systemColor="systemBrownColor" red="0.63529411759999999" green="0.51764705879999995" blue="0.36862745099999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </imageView>
                                             </subviews>
@@ -954,19 +962,19 @@
                                                 <constraint firstItem="Knl-vh-ib8" firstAttribute="top" secondItem="SR8-6F-d4s" secondAttribute="topMargin" constant="20" id="1Ad-iD-HIE"/>
                                                 <constraint firstItem="Zts-ek-Z8b" firstAttribute="top" secondItem="SR8-6F-d4s" secondAttribute="top" constant="15" id="5Pn-R6-dND"/>
                                                 <constraint firstItem="lZj-ya-Smq" firstAttribute="top" secondItem="Knl-vh-ib8" secondAttribute="bottom" constant="3" id="69U-Oy-9c4"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="5Sn-Ro-uek" secondAttribute="bottom" constant="14" id="9Cz-xg-PeX"/>
-                                                <constraint firstItem="5Sn-Ro-uek" firstAttribute="leading" secondItem="SR8-6F-d4s" secondAttribute="leadingMargin" constant="5" id="JZl-eK-J1r"/>
+                                                <constraint firstItem="5Sn-Ro-uek" firstAttribute="leading" secondItem="SR8-6F-d4s" secondAttribute="leading" constant="19" id="GhL-0m-3a4"/>
                                                 <constraint firstItem="Zts-ek-Z8b" firstAttribute="leading" secondItem="SR8-6F-d4s" secondAttribute="leading" constant="15" id="MSe-8b-odL"/>
                                                 <constraint firstAttribute="bottom" secondItem="Yd3-e6-7HW" secondAttribute="bottom" constant="19" id="NKS-9H-NOV"/>
+                                                <constraint firstAttribute="bottom" secondItem="5Sn-Ro-uek" secondAttribute="bottom" constant="19" id="SK9-ES-6sX"/>
+                                                <constraint firstAttribute="trailing" secondItem="5Sn-Ro-uek" secondAttribute="trailing" constant="19" id="SOh-Cv-7Hg"/>
                                                 <constraint firstAttribute="bottom" secondItem="Zts-ek-Z8b" secondAttribute="bottom" constant="15" id="VoD-Vp-obQ"/>
                                                 <constraint firstItem="Yd3-e6-7HW" firstAttribute="top" secondItem="SR8-6F-d4s" secondAttribute="top" constant="19" id="WVd-PP-EW7"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="5Sn-Ro-uek" secondAttribute="trailing" constant="5" id="WiL-Oc-72F"/>
                                                 <constraint firstItem="Knl-vh-ib8" firstAttribute="top" secondItem="SR8-6F-d4s" secondAttribute="topMargin" constant="20" id="aRR-kL-xAt"/>
                                                 <constraint firstItem="Knl-vh-ib8" firstAttribute="centerX" secondItem="SR8-6F-d4s" secondAttribute="centerX" id="b3e-4C-gd7"/>
                                                 <constraint firstAttribute="trailing" secondItem="Zts-ek-Z8b" secondAttribute="trailing" constant="15" id="eW1-B5-Kj0"/>
                                                 <constraint firstItem="lZj-ya-Smq" firstAttribute="centerX" secondItem="SR8-6F-d4s" secondAttribute="centerX" id="jN5-NZ-Dmn"/>
                                                 <constraint firstItem="Yd3-e6-7HW" firstAttribute="leading" secondItem="SR8-6F-d4s" secondAttribute="leading" constant="19" id="orN-Lr-AJU"/>
-                                                <constraint firstItem="5Sn-Ro-uek" firstAttribute="top" secondItem="SR8-6F-d4s" secondAttribute="topMargin" constant="14" id="vLR-ZO-jJ0"/>
+                                                <constraint firstItem="5Sn-Ro-uek" firstAttribute="top" secondItem="SR8-6F-d4s" secondAttribute="top" constant="19" id="sp3-uj-M7V"/>
                                                 <constraint firstAttribute="trailing" secondItem="Yd3-e6-7HW" secondAttribute="trailing" constant="19" id="zbR-hN-rut"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -1054,7 +1062,7 @@
                                                         <outlet property="delegate" destination="CG3-wo-2ij" id="qia-ti-CJH"/>
                                                     </connections>
                                                 </textField>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Timer" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iOk-Ow-ZkM">
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Minites" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iOk-Ow-ZkM">
                                                     <rect key="frame" x="80" y="4.5" width="80" height="35"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="35" id="MfN-mM-Job"/>
@@ -1144,7 +1152,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Add ingredient" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="D07-ky-79i">
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Add an ingredient" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="D07-ky-79i">
                                                     <rect key="frame" x="20" y="5" width="239" height="34"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
@@ -1362,7 +1370,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gFL-in-ZTE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3612" y="9"/>
+            <point key="canvasLocation" x="3357" y="18"/>
         </scene>
     </scenes>
     <resources>
