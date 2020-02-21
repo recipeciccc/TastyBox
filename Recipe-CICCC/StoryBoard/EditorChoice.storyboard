@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="dIx-4t-9bj">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="dIx-4t-9bj">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -144,6 +144,7 @@
                                                 <connections>
                                                     <outlet property="collectionImage" destination="45U-Je-HVx" id="iau-iS-c1L"/>
                                                     <outlet property="collectionLabel" destination="ltZ-qp-eRW" id="VZs-7E-fG2"/>
+                                                    <segue destination="0mO-ES-kGT" kind="show" id="DG0-cU-l9r"/>
                                                 </connections>
                                             </collectionViewCell>
                                         </cells>
@@ -188,6 +189,16 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SGH-H5-OAn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1673.913043478261" y="-216.29464285714286"/>
+        </scene>
+        <!--RecipeDetail-->
+        <scene sceneID="6GU-ih-msw">
+            <objects>
+                <viewControllerPlaceholder storyboardName="RecipeDetail" id="0mO-ES-kGT" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="0uv-xZ-EHc"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="m9I-uM-K17" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2380" y="-295"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="9K6-Ut-RpC">

@@ -38,6 +38,9 @@ extension FollowingRecipeViewController: UITableViewDataSource,UITableViewDelega
         let cell = tableView.dequeueReusableCell(withIdentifier: "recipeCell", for: indexPath) as! FollowingRecipeTableViewCell
         cell.creatorImage.image = creatorImageList[indexPath.row]
         cell.createrName.text = creatorNameList[indexPath.row]
+        
+        cell.createrName.isUserInteractionEnabled = true
+        
         return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -47,6 +50,8 @@ extension FollowingRecipeViewController: UITableViewDataSource,UITableViewDelega
         guard let tableViewCell = cell as? FollowingRecipeTableViewCell else {return}
         tableViewCell.collectionViewDelegate(self, row: indexPath.row)
     }
+    
+    
 }
 
 extension FollowingRecipeViewController : UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
@@ -61,6 +66,7 @@ extension FollowingRecipeViewController : UICollectionViewDelegate,UICollectionV
        
         cell.RecipeImage.image = recipeImage[collectionView.tag][indexPath.row]
         cell.RecipeName.text = recipeTitle[collectionView.tag][indexPath.row]
+        
         return cell
     }
   

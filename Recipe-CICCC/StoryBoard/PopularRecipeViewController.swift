@@ -63,6 +63,7 @@ extension PopularRecipeViewController: UITableViewDataSource {
         if indexPath.section == 0 {
         let cell = (tableView.dequeueReusableCell(withIdentifier: "medal recipe", for: indexPath) as? Number123TableViewCell)!
             
+            
             switch indexPath.row {
             case 0:
                 cell.badgeImageView.image = #imageLiteral(resourceName: "Group 28")
@@ -105,6 +106,9 @@ extension PopularRecipeViewController: UITableViewDataSource {
         return 450.0
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
     
 }
 
