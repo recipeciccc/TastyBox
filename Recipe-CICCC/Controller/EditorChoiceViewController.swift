@@ -11,8 +11,6 @@ import UIKit
 class EditorChoiceViewController: UIViewController {
     
     
-    
-    
     var imageArray = [Image]()
     var arrayMenu = [String]()
     var searchIMageName = [Image]()

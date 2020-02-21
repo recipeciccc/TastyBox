@@ -71,7 +71,6 @@ class TableViewController: UITableViewController {
             
                 let cell = (tableView.dequeueReusableCell(withIdentifier: "creatorsProfie") as? profieTableViewCell)!
                 
-                cell.imgView.image = UIImage(named: "download (1)")
                 cell.imgView.layer.masksToBounds = false
                 cell.imgView.layer.cornerRadius = cell.imgView.bounds.width / 2
                 cell.imgView.clipsToBounds = true
@@ -145,13 +144,16 @@ class TableViewController: UITableViewController {
         }
         else if indexPath.section == 1 { //2 {
             //return 150.0
-            return 50.0
+//            return 50.0
+            return UITableView.automaticDimension
             
         }
 //        } else if indexPath.section == 3 {
 //            return 435 // it needs to be until the end of the screen and if the items inside are more than the border, it should become bigger.
 //        }
-        return tableView.frame.height - 135.0
+       // return tableView.frame.height - 135.0
+        
+        return self.view.frame.height - ((self.view.frame.origin.y) * -1)
     }
     
     
