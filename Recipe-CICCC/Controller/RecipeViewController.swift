@@ -16,6 +16,8 @@ class RecipeViewController: UIViewController {
     @IBOutlet weak var TitleLabel: UILabel!
     @IBOutlet weak var collectionRef: UICollectionView!
     
+    var recipeImages = [UIImage]()
+    var recipeLabels = [String]()
     
     var category:Int = 0
     var T_image = UIImage()
@@ -47,67 +49,16 @@ class RecipeViewController: UIViewController {
         let width = (collectionRef.frame.size.width - 4) / 2
         let layout = collectionRef.collectionViewLayout as! UICollectionViewFlowLayout
         layout.itemSize = CGSize(width: width, height: width)
-        
-        //      roundCorners(view: UIView, cornerRadius: Double)
-        
-        switch category{
-        case 0: setupCollection_1(); break
-        case 1: setupCollection_2(); break
-        case 2: setupCollection_3(); break
-        case 3: setupCollection_4(); break
-        case 4: setupCollection_5(); break
-        case 5: setupCollection_6(); break
-        default: print("no category"); break
-        }
+    
+        setupCollection()
+    
          
     }
     
-    private func setupCollection_1() {
-        let images = [#imageLiteral(resourceName: "huevos-rancheros"),#imageLiteral(resourceName: "2018_Sweet-Sallty-Snack-Mix_5817_600x600"),#imageLiteral(resourceName: "Lemon-Garlic-Butter-Salmon-with-Zucchini-Noodles-recipes"),#imageLiteral(resourceName: "candied-yams-5"),#imageLiteral(resourceName: "best-salad-7"),#imageLiteral(resourceName: "guacamole-foto-heroe-1024x723"),#imageLiteral(resourceName: "huevos-rancheros"),#imageLiteral(resourceName: "How-to-Make-the-Best-Juiciest-Turkey-Meatballs_055"),#imageLiteral(resourceName: "Intrepid-Travel-Taiwan-dumplings-Xiao-Long-Bao_577219075"),#imageLiteral(resourceName: "guacamole-foto-heroe-1024x723")]
-        let labels = ["Recipe1: ______\nCreator: ______","Recipe11: ______\nCreator: ______","Recipe2: ______\nCreator: ______","Recipe22: ______\nCreator: ______","Recipe3: ______\nCreator: ______","Recipe33: ______\nCreator: ______","Recipe33: ______\nCreator: ______","Recipe33: ______\nCreator: ______","Recipe33: ______\nCreator: ______","Recipe33: ______\nCreator: ______",]
-        CollectionImage = images
-        CollectionLabel = labels
+    private func setupCollection() {
+        CollectionImage = recipeImages
+        CollectionLabel = recipeLabels
     }
-    
-    private func setupCollection_2(){
-        let images = [#imageLiteral(resourceName: "huevos-rancheros"),#imageLiteral(resourceName: "2018_Sweet-Sallty-Snack-Mix_5817_600x600"),#imageLiteral(resourceName: "Lemon-Garlic-Butter-Salmon-with-Zucchini-Noodles-recipes"),#imageLiteral(resourceName: "candied-yams-5"),#imageLiteral(resourceName: "best-salad-7"),#imageLiteral(resourceName: "guacamole-foto-heroe-1024x723"),#imageLiteral(resourceName: "huevos-rancheros"),#imageLiteral(resourceName: "How-to-Make-the-Best-Juiciest-Turkey-Meatballs_055"),#imageLiteral(resourceName: "Intrepid-Travel-Taiwan-dumplings-Xiao-Long-Bao_577219075"),#imageLiteral(resourceName: "guacamole-foto-heroe-1024x723")]
-        let labels = ["Recipe: abc___\nCreator: ______","Recipe: bcf___\nCreator: ______","Recipe: ______\nCreator: ______","Recipe: ______\nCreator: ______","Recipe: ______\nCreator: ______","Recipe: ______\nCreator: ______","Recipe33: ______\nCreator: ______","Recipe33: ______\nCreator: ______","Recipe33: ______\nCreator: ______","Recipe33: ______\nCreator: ______",]
-        CollectionImage = images
-        CollectionLabel = labels
-    }
-    
-    private func setupCollection_3(){
-        let images = [#imageLiteral(resourceName: "huevos-rancheros"),#imageLiteral(resourceName: "2018_Sweet-Sallty-Snack-Mix_5817_600x600"),#imageLiteral(resourceName: "Lemon-Garlic-Butter-Salmon-with-Zucchini-Noodles-recipes"),#imageLiteral(resourceName: "candied-yams-5"),#imageLiteral(resourceName: "best-salad-7"),#imageLiteral(resourceName: "guacamole-foto-heroe-1024x723"),#imageLiteral(resourceName: "huevos-rancheros"),#imageLiteral(resourceName: "How-to-Make-the-Best-Juiciest-Turkey-Meatballs_055"),#imageLiteral(resourceName: "Intrepid-Travel-Taiwan-dumplings-Xiao-Long-Bao_577219075"),#imageLiteral(resourceName: "guacamole-foto-heroe-1024x723")]
-        let labels = ["Recipe: ______\nCreator: ______","Recipe: ______\nCreator: ______","Recipe: ______\nCreator: ______","Recipe: ______\nCreator: ______","Recipe: ______\nCreator: ______","Recipe: ______\nCreator: ______","Recipe33: ______\nCreator: ______","Recipe33: ______\nCreator: ______","Recipe33: ______\nCreator: ______","Recipe33: ______\nCreator: ______",]
-        CollectionImage = images
-        CollectionLabel = labels
-    }
-    
-    private func setupCollection_4(){
-        let images = [#imageLiteral(resourceName: "huevos-rancheros"),#imageLiteral(resourceName: "2018_Sweet-Sallty-Snack-Mix_5817_600x600"),#imageLiteral(resourceName: "Lemon-Garlic-Butter-Salmon-with-Zucchini-Noodles-recipes"),#imageLiteral(resourceName: "candied-yams-5"),#imageLiteral(resourceName: "best-salad-7"),#imageLiteral(resourceName: "guacamole-foto-heroe-1024x723"),#imageLiteral(resourceName: "huevos-rancheros"),#imageLiteral(resourceName: "How-to-Make-the-Best-Juiciest-Turkey-Meatballs_055"),#imageLiteral(resourceName: "Intrepid-Travel-Taiwan-dumplings-Xiao-Long-Bao_577219075"),#imageLiteral(resourceName: "guacamole-foto-heroe-1024x723")]
-        let labels = ["Recipe: ______\nCreator: ______","Recipe: ______\nCreator: ______","Recipe: ______\nCreator: ______","Recipe: ______\nCreator: ______","Recipe: ______\nCreator: ______","Recipe: ______\nCreator: ______","Recipe33: ______\nCreator: ______","Recipe33: ______\nCreator: ______","Recipe33: ______\nCreator: ______","Recipe33: ______\nCreator: ______",]
-        CollectionImage = images
-        CollectionLabel = labels
-    }
-    
-    private func setupCollection_5(){
-        let images = [#imageLiteral(resourceName: "huevos-rancheros"),#imageLiteral(resourceName: "2018_Sweet-Sallty-Snack-Mix_5817_600x600"),#imageLiteral(resourceName: "Lemon-Garlic-Butter-Salmon-with-Zucchini-Noodles-recipes"),#imageLiteral(resourceName: "candied-yams-5"),#imageLiteral(resourceName: "best-salad-7"),#imageLiteral(resourceName: "guacamole-foto-heroe-1024x723"),#imageLiteral(resourceName: "huevos-rancheros"),#imageLiteral(resourceName: "How-to-Make-the-Best-Juiciest-Turkey-Meatballs_055"),#imageLiteral(resourceName: "Intrepid-Travel-Taiwan-dumplings-Xiao-Long-Bao_577219075"),#imageLiteral(resourceName: "guacamole-foto-heroe-1024x723")]
-        let labels = ["Recipe: ______\nCreator: ______","Recipe: ______\nCreator: ______","Recipe: ______\nCreator: ______","Recipe: ______\nCreator: ______","Recipe: ______\nCreator: ______","Recipe: ______\nCreator: ______","Recipe33: ______\nCreator: ______","Recipe33: ______\nCreator: ______","Recipe33: ______\nCreator: ______","Recipe33: ______\nCreator: ______",]
-        CollectionImage = images
-        CollectionLabel = labels
-    }
-    
-    private func setupCollection_6(){
-        let images = [#imageLiteral(resourceName: "huevos-rancheros"),#imageLiteral(resourceName: "2018_Sweet-Sallty-Snack-Mix_5817_600x600"),#imageLiteral(resourceName: "Lemon-Garlic-Butter-Salmon-with-Zucchini-Noodles-recipes"),#imageLiteral(resourceName: "candied-yams-5"),#imageLiteral(resourceName: "best-salad-7"),#imageLiteral(resourceName: "guacamole-foto-heroe-1024x723"),#imageLiteral(resourceName: "huevos-rancheros"),#imageLiteral(resourceName: "How-to-Make-the-Best-Juiciest-Turkey-Meatballs_055"),#imageLiteral(resourceName: "Intrepid-Travel-Taiwan-dumplings-Xiao-Long-Bao_577219075"),#imageLiteral(resourceName: "guacamole-foto-heroe-1024x723")]
-        let labels = ["Recipe: ______\nCreator: ______","Recipe: ______\nCreator: ______","Recipe: ______\nCreator: ______","Recipe: ______\nCreator: ______","Recipe: ______\nCreator: ______","Recipe: ______\nCreator: ______"]
-        CollectionImage = images
-        CollectionLabel = labels
-    }
-    
-   
-    
-    
-    
 }
 
 
@@ -171,11 +122,6 @@ extension RecipeViewController: UICollectionViewDataSource, UICollectionViewDele
         return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: EdgeOfCollectionView, left: EdgeOfCollectionView, bottom: EdgeOfCollectionView, right: EdgeOfCollectionView)
-    }
-    
-    
     func roundCorners(view: UIView, cornerRadius: Double) {
            view.layer.cornerRadius = CGFloat(cornerRadius)
            view.clipsToBounds = true
@@ -185,7 +131,21 @@ extension RecipeViewController: UICollectionViewDataSource, UICollectionViewDele
 
 extension RecipeViewController: UICollectionViewDelegateFlowLayout {
 
-func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-    return CGSize(width: (collectionView.bounds.width-20) / 2, height: 170)
-}
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+           return UIEdgeInsets(top: 0, left: 0, bottom: 10, right: 0)
+       }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: (collectionView.frame.size.width-30) / 2, height: (collectionView.frame.size.width-30) / 2)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 10
+    }
+        
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+            
+        return 10
+    }
+    
 }

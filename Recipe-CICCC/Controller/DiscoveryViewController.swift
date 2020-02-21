@@ -35,7 +35,6 @@ class DiscoveryViewController: UIViewController {
     }
     
     var arrayMenu = [String]()
-    
     var sideMenuOpen = false
     
     override func viewDidLoad() {

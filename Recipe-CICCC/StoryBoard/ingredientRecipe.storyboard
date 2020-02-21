@@ -1,13 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Aua-h9-SUW">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Aua-h9-SUW">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--RecipeDetail-->
+        <scene sceneID="ey6-wV-h4L">
+            <objects>
+                <viewControllerPlaceholder storyboardName="RecipeDetail" id="fuN-ZP-66L" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="rU3-B7-VQy"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ydX-xL-Yv8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-3076" y="-815"/>
+        </scene>
         <!--Ingredients View Controller-->
         <scene sceneID="JGT-OA-ma6">
             <objects>
@@ -17,7 +27,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="c3v-63-Co7">
-                                <rect key="frame" x="20" y="0.0" width="355" height="50"/>
+                                <rect key="frame" x="10" y="0.0" width="365" height="50"/>
                                 <color key="backgroundColor" red="0.99711173769999994" green="0.99571460489999997" blue="0.74113160369999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="2bF-Nb-q4u"/>
@@ -82,35 +92,34 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="13PAIRING-articleLarge" translatesAutoresizingMaskIntoConstraints="NO" id="cZQ-GS-aeu" userLabel="ingredientRecipeImage">
-                                                    <rect key="frame" x="0.0" y="0.0" width="175" height="125"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="175" height="139"/>
                                                     <color key="backgroundColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="180" id="DMO-eb-qX2"/>
-                                                    </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="OCr-Ed-8Kr">
-                                                    <rect key="frame" x="0.0" y="125" width="175" height="33"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="OCr-Ed-8Kr">
+                                                    <rect key="frame" x="0.0" y="141" width="175" height="17"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" systemColor="systemBrownColor" red="0.63529411759999999" green="0.51764705879999995" blue="0.36862745099999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
+                                            <color key="backgroundColor" red="0.99759250880000006" green="0.98715764279999996" blue="0.79212433100000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             <constraints>
+                                                <constraint firstItem="OCr-Ed-8Kr" firstAttribute="top" secondItem="cZQ-GS-aeu" secondAttribute="bottom" constant="2" id="3ad-D9-h9j"/>
                                                 <constraint firstItem="cZQ-GS-aeu" firstAttribute="leading" secondItem="9j3-UP-VeL" secondAttribute="leading" id="BVE-96-2f2"/>
-                                                <constraint firstAttribute="bottom" secondItem="cZQ-GS-aeu" secondAttribute="bottom" constant="33" id="Mg8-ag-cfm"/>
                                                 <constraint firstAttribute="trailing" secondItem="OCr-Ed-8Kr" secondAttribute="trailing" id="N8e-XT-sC0"/>
                                                 <constraint firstAttribute="bottom" secondItem="OCr-Ed-8Kr" secondAttribute="bottom" id="Xvi-ot-gDN"/>
                                                 <constraint firstAttribute="trailing" secondItem="cZQ-GS-aeu" secondAttribute="trailing" id="au3-Hg-goV"/>
-                                                <constraint firstItem="OCr-Ed-8Kr" firstAttribute="top" secondItem="cZQ-GS-aeu" secondAttribute="bottom" id="ckn-4y-H4H"/>
                                                 <constraint firstItem="cZQ-GS-aeu" firstAttribute="top" secondItem="9j3-UP-VeL" secondAttribute="top" id="kPX-NS-ejQ"/>
                                                 <constraint firstItem="OCr-Ed-8Kr" firstAttribute="leading" secondItem="9j3-UP-VeL" secondAttribute="leading" id="yNB-S8-kD8"/>
                                             </constraints>
                                         </collectionViewCellContentView>
+                                        <color key="backgroundColor" red="0.99759250880000006" green="0.98715764279999996" blue="0.79212433100000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <size key="customSize" width="175" height="158"/>
                                         <connections>
                                             <outlet property="ingredientRecipeImage" destination="cZQ-GS-aeu" id="vdt-Ux-QvD"/>
                                             <outlet property="ingredientRecipeName" destination="OCr-Ed-8Kr" id="fF7-Zk-gUl"/>
+                                            <segue destination="fuN-ZP-66L" kind="show" id="trb-eY-SD6"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -128,7 +137,7 @@
                             <constraint firstItem="ZhU-Ym-2UX" firstAttribute="trailing" secondItem="c3v-63-Co7" secondAttribute="trailing" id="e8H-jJ-4Qr"/>
                             <constraint firstItem="28Z-CY-jex" firstAttribute="leading" secondItem="ZhU-Ym-2UX" secondAttribute="leading" constant="10" id="emE-Rs-eOG"/>
                             <constraint firstItem="28Z-CY-jex" firstAttribute="top" secondItem="c3v-63-Co7" secondAttribute="bottom" constant="2" id="qsK-QE-XL8"/>
-                            <constraint firstItem="c3v-63-Co7" firstAttribute="leading" secondItem="ZhU-Ym-2UX" secondAttribute="leading" constant="20" id="uOQ-oq-fqu"/>
+                            <constraint firstItem="c3v-63-Co7" firstAttribute="leading" secondItem="ZhU-Ym-2UX" secondAttribute="leading" constant="10" id="uOQ-oq-fqu"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ZhU-Ym-2UX"/>
                     </view>
