@@ -24,6 +24,8 @@ class LoginMainpageViewController: UIViewController, UITextFieldDelegate {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
         view.addGestureRecognizer(tap)
         
+        self.navigationItem.hidesBackButton = true;
+        
         emailTextField.delegate = self
         passwordTextField.delegate = self
       
