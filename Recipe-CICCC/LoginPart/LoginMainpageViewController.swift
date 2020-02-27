@@ -182,8 +182,8 @@ extension LoginMainpageViewController: GIDSignInDelegate {
             }
             // present the main view
             if error == nil {
-                let Storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                let vc = Storyboard.instantiateViewController(withIdentifier: "Discovery")
+                let Storyboard: UIStoryboard = UIStoryboard(name: "Login", bundle: nil)
+                let vc = Storyboard.instantiateViewController(withIdentifier: "FirstTimeProfile")
                 self.navigationController?.pushViewController(vc, animated: true)
             }
 
