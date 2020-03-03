@@ -313,7 +313,6 @@ extension CreatorViewController: UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         
         if editingStyle == .delete {
-            
             if indexPath.section == 4{
                 ingredientList.remove(at: indexPath.item)
                 amountList.remove(at: indexPath.item)
@@ -388,8 +387,6 @@ extension CreatorViewController: UITextFieldDelegate, UITextViewDelegate{
         MainTableView.reloadData()
     }
 }
-
-
 
 //TableView Cells
 class CreatorPhotoCell: UITableViewCell{
