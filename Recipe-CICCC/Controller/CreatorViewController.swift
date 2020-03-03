@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 //Globel variables
 struct RecipeData{
@@ -23,6 +24,9 @@ struct RecipeData{
 
 // ViewController
 class CreatorViewController: UIViewController {
+    
+    var documentReference: DocumentReference? = nil
+    let db = Firestore.firestore()
     
     var move = false
     var imagePicker = UIImagePickerController()
@@ -45,7 +49,7 @@ class CreatorViewController: UIViewController {
         amountList.append("")
         ingredientList.append("")
         preparationText.append("")
-        photoList.append(#imageLiteral(resourceName: "guacamole-foto-heroe-1024x723"))
+        photoList.append(#imageLiteral(resourceName: "imageFile"))
         MainTableView.isEditing = false
         self.MainTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         self.navigationController!.navigationBar.tintColor = UIColor.orange
@@ -83,7 +87,7 @@ class CreatorViewController: UIViewController {
     }
     
     @IBAction func AddPreparationStep(_ sender: Any) {
-        photoList.append(#imageLiteral(resourceName: "guacamole-foto-heroe-1024x723"))
+        photoList.append(#imageLiteral(resourceName: "imageFile"))
         preparationText.append("")
         MainTableView.insertRows(at: [IndexPath(row: photoList.count-1, section: 6)], with: .top)
     }
@@ -101,6 +105,19 @@ class CreatorViewController: UIViewController {
         
         print(RecipeData.title,RecipeData.cookingtime,RecipeData.servings, RecipeData.ingredients, RecipeData.amounts,RecipeData.stepTexts)
         //print(preparationText)
+        
+        documentReference = db.collection("recipe").addDocument(data: [
+            "mainphoto": "Ada",
+            "last": "Lovelace",
+            "born": 1815
+        ]) { err in
+            if let err = err {
+                print("Error adding document: \(err)")
+            } else {
+                print("Document added with ID: \(self.documentReference!.documentID)")
+            }
+        }
+
     }
     
     @IBAction func EditMode(_ sender: UIButton) {
