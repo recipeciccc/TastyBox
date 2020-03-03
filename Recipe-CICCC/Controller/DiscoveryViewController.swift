@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseAuth
 
 class DiscoveryViewController: UIViewController {
     
@@ -126,14 +128,22 @@ class DiscoveryViewController: UIViewController {
     }
     @objc func showLogout(){
         print("show Logout")
-        let loginStoryboard: UIStoryboard = UIStoryboard(name: "Login", bundle: nil)
-        if let vc = loginStoryboard.instantiateViewController(withIdentifier: "LoginMain") as? LoginMainpageViewController {
-            self.navigationController?.pushViewController(vc, animated: true)
+        if Auth.auth().currentUser != nil{
+            do{
+                try Auth.auth().signOut()
+                let vc = UIStoryboard(name: "Login", bundle: nil).instantiateViewController(withIdentifier: "loginPage")
+                navigationController?.pushViewController(vc, animated: true)
+            }catch let error as NSError{
+                print(error.localizedDescription)
+            }
         }
+//        let loginStoryboard: UIStoryboard = UIStoryboard(name: "Login", bundle: nil)
+//        if let vc = loginStoryboard.instantiateViewController(withIdentifier: "LoginMain") as? LoginMainpageViewController {
+//            self.navigationController?.pushViewController(vc, animated: true)
+//    }
     }
-    
-    
 }
+
 
 
 extension DiscoveryViewController: UICollectionViewDelegate, UICollectionViewDataSource{

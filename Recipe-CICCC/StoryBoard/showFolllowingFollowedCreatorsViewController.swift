@@ -15,9 +15,9 @@ class showFolllowingFollowedCreatorsViewController: UIViewController {
    
     @IBAction func swipeLeftAciton(_ sender: UISwipeGestureRecognizer) {
         if UISwipeGestureRecognizer.Direction.left == .left {
-//            let vc: showFollowedViewController = showFollowedViewController()
-//            navigationController?.pushViewController(vc, animated: true)
-            performSegue(withIdentifier: "showFollowing", sender: nil)
+            let vc: showFollowedViewController = showFollowedViewController()
+            navigationController?.pushViewController(vc, animated: true)
+           // performSegue(withIdentifier: "showFollowing", sender: nil)
             
             
         }
@@ -25,8 +25,9 @@ class showFolllowingFollowedCreatorsViewController: UIViewController {
     
     @IBAction func swipeRightAction(_ sender: UISwipeGestureRecognizer) {
         if UISwipeGestureRecognizer.Direction.right == .right {
-            //let vc: showFolllowingFollowedCreatorsViewController = showFolllowingFollowedCreatorsViewController()
-           performSegue(withIdentifier: "showFollowers", sender: nil)
+            let vc: showFolllowingFollowedCreatorsViewController = showFolllowingFollowedCreatorsViewController()
+            navigationController?.popViewController(animated: true)
+          // performSegue(withIdentifier: "showFollowers", sender: nil)
         }
     }
     
