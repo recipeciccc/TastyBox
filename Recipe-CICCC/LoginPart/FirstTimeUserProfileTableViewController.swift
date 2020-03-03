@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import Firebase
 
 class FirstTimeUserProfileTableViewController: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
@@ -28,10 +29,16 @@ class FirstTimeUserProfileTableViewController: UITableViewController, UIPickerVi
     var cuisinePicker = UIPickerView()
     
     
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
         
+        userNameTextField.text = Auth.auth().currentUser?.displayName
+        emailTextField.text = Auth.auth().currentUser?.email
+        
+        var ref: DatabaseReference!
+        ref = Database.database().reference()
         
         familyPicker.delegate = self
         familyPicker.dataSource = self
@@ -49,6 +56,7 @@ class FirstTimeUserProfileTableViewController: UITableViewController, UIPickerVi
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(closeKeyboard))
         view.addGestureRecognizer(tap)
+        
         
     }
     
@@ -101,6 +109,9 @@ class FirstTimeUserProfileTableViewController: UITableViewController, UIPickerVi
                 
             present(alertController, animated: true, completion: nil)
         } else {
+            var ref: DatabaseReference!
+            ref = Database.database().reference()
+            
             let Storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
             let vc = Storyboard.instantiateViewController(withIdentifier: "Discovery")
             self.navigationController?.pushViewController(vc, animated: true)

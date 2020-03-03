@@ -56,21 +56,48 @@ class LoginMainpageViewController: UIViewController, UITextFieldDelegate {
         } else {
             Auth.auth().signIn(withEmail: self.emailTextField.text!, password: self.passwordTextField.text!) {
                 (user, error) in
-                if error == nil {
-                    // means no error, login successfully
-                    self.login.isEnabled = false
-                    let Storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                    let vc = Storyboard.instantiateViewController(withIdentifier: "Discovery")
-                    self.navigationController?.pushViewController(vc, animated: true)
-                   // self.present(vc, animated: true, completion: nil)
-                    
-                } else {
-                    // mention there's some error
-                    let alertController = UIAlertController(title: "error", message: error?.localizedDescription, preferredStyle: .alert)
-                    let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-                    alertController.addAction(defaultAction)
+                
+                if let error = error {
+                    let alertController = UIAlertController(title: "Login Error", message:error.localizedDescription, preferredStyle: .alert)
+                    let okayAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                    alertController.addAction(okayAction)
                     self.present(alertController, animated: true, completion: nil)
+                    return
                 }
+                
+                guard let currentUser = Auth.auth().currentUser, currentUser.isEmailVerified else {
+                    let alertController = UIAlertController(title: "Login Error", message:"You haven't confirmed your email address yet. We sent you a confirmation email when you sign up. Please click the verification link in that email. If you need us to send the confirmation email again, please tap Resend Email.", preferredStyle: .alert)
+                    let okayAction = UIAlertAction(title: "Resend email", style: .default,handler: { (action) in
+                        Auth.auth().currentUser?.sendEmailVerification(completion: nil)
+                    })
+                    let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+                    alertController.addAction(okayAction)
+                    alertController.addAction(cancelAction)
+                    self.present(alertController, animated: true, completion: nil)
+                    return
+                }
+                self.view.endEditing(true)
+                
+                let Storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                let vc = Storyboard.instantiateViewController(withIdentifier: "Discovery")
+                self.navigationController?.pushViewController(vc, animated: true)
+                
+//                if error == nil {
+//                    // means no error, login successfully
+//                    self.login.isEnabled = false
+//                    let Storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+//                    let vc = Storyboard.instantiateViewController(withIdentifier: "Discovery")
+//                    self.navigationController?.pushViewController(vc, animated: true)
+//                   // self.present(vc, animated: true, completion: nil)
+//
+//                } else {
+//                    // mention there's some error
+//                    let alertController = UIAlertController(title: "error", message: error?.localizedDescription, preferredStyle: .alert)
+//                    let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+//                    alertController.addAction(defaultAction)
+//                    self.present(alertController, animated: true, completion: nil)
+//                }
+                //LoginProperties.user = AppUser(authData: user!)
             }
         }
     }
@@ -94,7 +121,7 @@ class LoginMainpageViewController: UIViewController, UITextFieldDelegate {
             let credential = FacebookAuthProvider.credential(withAccessToken: accessToken.tokenString)
             
             // call Firebase API to signin
-            Auth.auth().signIn(with: credential, completion: {(user, error) in
+            Auth.auth().signIn(with: credential, completion: { user, error in
                 if let error = error {
                     print("Login error: \(error.localizedDescription)")
                     let alertController = UIAlertController(title: "Login error", message: error.localizedDescription, preferredStyle: .alert)
@@ -111,6 +138,8 @@ class LoginMainpageViewController: UIViewController, UITextFieldDelegate {
                     let vc = Storyboard.instantiateViewController(withIdentifier: "Discovery")
                     self.navigationController?.pushViewController(vc, animated: true)
                 }
+                
+//                LoginProperties.user = AppUser(authData: user!)
             })
         }
     }
