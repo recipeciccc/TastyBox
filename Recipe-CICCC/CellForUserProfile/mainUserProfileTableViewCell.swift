@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class mainUserProfileTableViewCell: UITableViewCell {
     
@@ -17,7 +18,7 @@ class mainUserProfileTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        userNameLabel.text = "Shihomi Kitajima"
+        userNameLabel.text = Auth.auth().currentUser?.displayName
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

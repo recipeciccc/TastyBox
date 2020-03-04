@@ -46,16 +46,42 @@ class EmailRegisterViewController: UIViewController {
             
         } else {
             Auth.auth().createUser(withEmail: emailTextField.text!, password: passwordTextField.text!) { (user, error) in
-                if error == nil {
-                    print("You have successfully signed up")
-                    let vc = self.storyboard?.instantiateViewController(withIdentifier: "Main Page")
-                    self.present(vc!, animated: true, completion: nil)
-                } else {
-                    let alertController = UIAlertController(title: "Error", message: error?.localizedDescription, preferredStyle: .alert)
-                    let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-                    alertController.addAction(defaultAction)
+                
+                if let error = error {
+                    let alertController = UIAlertController(title: "Registration Error", message: error.localizedDescription, preferredStyle: .alert)
+                    let okayAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                    alertController.addAction(okayAction)
                     self.present(alertController, animated: true, completion: nil)
+                    return
                 }
+//                if error == nil {
+//                    print("You have successfully signed up")
+//                    let vc = self.storyboard?.instantiateViewController(withIdentifier: "Main Page")
+//                    self.present(vc!, animated: true, completion: nil)
+//                } else {
+//                    let alertController = UIAlertController(title: "Registration Error", message: error?.localizedDescription, preferredStyle: .alert)
+//                    let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+//                    alertController.addAction(defaultAction)
+//                    self.present(alertController, animated: true, completion: nil)
+//                }
+                
+                if let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest(){
+                    changeRequest.commitChanges(completion: { (error) in
+                        if let error = error {
+                            print("Failed to change the display name: \(error.localizedDescription)")
+                        }
+                    })
+                }
+                
+                Auth.auth().currentUser?.sendEmailVerification(completion: nil)
+                
+                let alertController = UIAlertController(title: "Email Verification", message: "We've just sent a confirmation email to your email address. Please check yourinbox and click the verification link in that email to complete the sign up.", preferredStyle: .alert)
+                let okayAction = UIAlertAction(title: "OK", style: .cancel, handler: { (action) in
+                self.view.endEditing(true)
+                    
+                })
+                alertController.addAction(okayAction)
+                self.present(alertController, animated: true, completion: nil)
             }
         }
         
