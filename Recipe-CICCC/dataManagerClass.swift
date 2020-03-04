@@ -68,42 +68,42 @@ class dataManagerClass {
             self.delegate?.gotData(recipes: self.recipes)
             
         }
+    }
+    
+    func getImage(imageString: String, imageView: UIImageView) {
         
-        func getImage(imageString: String, imageView: UIImageView) {
-            
-            // Get a reference to the storage service using the default Firebase App
-            let storage = Storage.storage()
-            
-            // Create a storage reference from our storage service
-            let storageRef = storage.reference()
-            
-            
-            // Create a child reference
-            // imagesRef now points to "images"
-            //        let imagesRef = storageRef.child("recipeImages")
-            
-            // Child references can also take paths delimited by '/'
-            // spaceRef now points to "images/space.jpg"
-            // imagesRef still points to "images"
-            let imagesRef = storageRef.child("recipeImages/\(imageString)")
-            
-            // This is equivalent to creating the full reference
-            //        let storagePath = "\(your_firebase_storage_bucket)/images/space.jpg"
-            //        spaceRef = storage.reference(forURL: storagePath)
-            
-            
-            // Download in memory with a maximum allowed size of 1MB (1 * 1024 * 1024 bytes)
-            imagesRef.getData(maxSize: 1 * 1024 * 1024) { data, error in
-                if error != nil {
-                    // Uh-oh, an error occurred!
-                } else {
-                    // Data for "images/island.jpg" is returned
-                    let image = UIImage(data: data!)!
-                    self.delegate?.assignImage(image: image, reference: imageView)
-                }
+        // Get a reference to the storage service using the default Firebase App
+        let storage = Storage.storage()
+        
+        // Create a storage reference from our storage service
+        let storageRef = storage.reference()
+        
+        
+        // Create a child reference
+        // imagesRef now points to "images"
+        //        let imagesRef = storageRef.child("recipeImages")
+        
+        // Child references can also take paths delimited by '/'
+        // spaceRef now points to "images/space.jpg"
+        // imagesRef still points to "images"
+        let imagesRef = storageRef.child("recipeImages/\(imageString)")
+        
+        // This is equivalent to creating the full reference
+        //        let storagePath = "\(your_firebase_storage_bucket)/images/space.jpg"
+        //        spaceRef = storage.reference(forURL: storagePath)
+        
+        
+        // Download in memory with a maximum allowed size of 1MB (1 * 1024 * 1024 bytes)
+        imagesRef.getData(maxSize: 1 * 1024 * 1024) { data, error in
+            if error != nil {
+                // Uh-oh, an error occurred!
+            } else {
+                // Data for "images/island.jpg" is returned
+                let image = UIImage(data: data!)!
+                self.delegate?.assignImage(image: image, reference: imageView)
             }
-            
         }
         
     }
+    
 }
