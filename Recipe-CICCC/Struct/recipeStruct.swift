@@ -15,7 +15,7 @@ struct RecipeDetail {
     var title: String
 //        var explaination: String
     var cookingTime: Int
-//     var image: UIImage
+     var image: String
     var like: Int
     var serving: Int
 //    var ingredient: Ingredient
