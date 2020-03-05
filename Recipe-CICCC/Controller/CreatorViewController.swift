@@ -10,6 +10,7 @@ import UIKit
 import Firebase
 import FirebaseFirestore
 
+
 //Globel variables
 struct RecipeData{
     
@@ -25,7 +26,9 @@ struct RecipeData{
 
 // ViewController
 class CreatorViewController: UIViewController {
+
     let db = Firestore.firestore()
+
     var move = false
     var imagePicker = UIImagePickerController()
     var mainPhoto = UIImage()
@@ -103,6 +106,7 @@ class CreatorViewController: UIViewController {
         
         print(RecipeData.title,RecipeData.cookingtime,RecipeData.servings, RecipeData.ingredients, RecipeData.amounts,RecipeData.stepTexts)
         //print(preparationText)
+
         let cgref = mainPhoto.cgImage
         let cim = mainPhoto.ciImage
         guard let uid = Auth.auth().currentUser?.uid else{return}
@@ -116,37 +120,11 @@ class CreatorViewController: UIViewController {
            
         }else{
             self.uploadImage(mainPhoto,uid,rid) { (url) in
-                
-                let recipeData = ["userID": uid,
-                                  "mainPhoto":url?.absoluteString as Any,
-                                  "title":self.recipeTitle,
-                                  "cookingTime":Int(self.recipeTime) as Any,
-                                  "serving":Int(self.recipeServings) as Any,
-                                  "recipeID":rid,
-                                  //ingredient
-                                  //amounts
-                                  //stepPhoto
-                                  //stepTexts
-                                  //like number
-                                  "time":Timestamp()] as [String : Any]
-                
-                self.db.collection("recipe").document().setData(recipeData, merge: true) { (err) in
-                    if err != nil{
-                         print(err?.localizedDescription as Any)
-                    }else{
-                        print("Successfully set data")
-                        self.navigationController?.popViewController(animated: true)
-                    }
-                }
-
-//                self.db.collection("recipe").addDocument(data: recipeData) { (err) in
-//                   if err != nil{
-//                        print(err?.localizedDescription as Any)
-//                   }else{
-//                       print("Successfully set data")
-//                       self.navigationController?.popViewController(animated: true)
-//                   }
-//               }
+                self.recipeUpload(uid,rid,url!.absoluteString)
+                self.ingredientUpload(rid)
+                self.commentUpload(rid)
+                                                 //stepPhoto
+                                                 //stepTexts
             }
         }
     }
@@ -186,6 +164,69 @@ class CreatorViewController: UIViewController {
 }
 
 extension CreatorViewController{
+    
+    func recipeUpload(_ uid:String,_ rid:String, _ url:String){
+        let recipeData = ["userID": uid,
+                          "image":url as Any,
+                          "title":self.recipeTitle,
+                          "cookingTime":Int(self.recipeTime) as Any,
+                          "serving":Int(self.recipeServings) as Any,
+                          "recipeID":rid,
+                          "like":0,
+                          "time":Timestamp()] as [String : Any]
+        self.db.collection("recipe").document(rid).setData(recipeData, merge: true) { (err) in
+            if err != nil{
+                print(err?.localizedDescription as Any)
+            }else{
+                print("Successfully set data")
+                self.navigationController?.popViewController(animated: true)
+            }
+        }
+    }
+    
+    func ingredientUpload(_ rid:String){
+        for index in 0..<self.ingredientList.count{
+            let ingredientData = ["ingredient": self.ingredientList[index],"amount": self.amountList[index]]
+            let ref = self.db.collection("recipe").document(rid)
+            ref.collection("ingredient").document().setData(ingredientData) { (err) in
+                if err != nil{
+                     print(err?.localizedDescription as Any)
+                }else{
+                    print("Successfully set ingredient data")
+                    self.navigationController?.popViewController(animated: true)
+                }
+            }
+        }
+    }
+    
+    func commentUpload(_ rid: String){
+        let commentData = ["text":"","user":""]
+        let ref = self.db.collection("recipe").document(rid)
+        ref.collection("comment").document().setData(commentData) { (err) in
+            if err != nil{
+                 print(err?.localizedDescription as Any)
+            }else{
+                print("Successfully set ingredient data")
+                self.navigationController?.popViewController(animated: true)
+            }
+        }
+    }
+    
+    
+    func instructionUpload(_ rid:String){
+//        for index in 0..<self.preparationText.count{
+//            let instructionData = ["text": self.preparationText[index],"image": url]]
+//            let ref = self.db.collection("recipe").document(rid)
+//            ref.collection("ingredient").document().setData(ingredientData) { (err) in
+//                if err != nil{
+//                    print(err?.localizedDescription as Any)
+//                }else{
+//                    print("Successfully set ingredient data")
+//                    self.navigationController?.popViewController(animated: true)
+//                }
+//            }
+//        }
+    }
     
     func uploadImage(_ image:UIImage, _ uid:String, _ rid:String, completion: @escaping((_ url: URL?)->())){
         

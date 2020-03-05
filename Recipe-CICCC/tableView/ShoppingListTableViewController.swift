@@ -7,21 +7,31 @@
 //
 
 import UIKit
+import Firebase
 
 class ShoppingListTableViewController: UITableViewController {
     
-    let shoppingList = ShoppingList()
-    var item = IngredientShopping()
+//    let shoppingList = ShoppingList()
+    var shoppingList = [IngredientShopping]()
+    
+//    var item = IngredientShopping()
     weak var delegate: AddingShoppingListViewControllerDelegate?
+
+    var database: DatabaseReference!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        database = Database.database().reference().child("item")
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        
+       
+        
         
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.orange ]
 
@@ -38,7 +48,7 @@ class ShoppingListTableViewController: UITableViewController {
         // #warning Incomplete implementation, return the number of rows
         switch section {
         case 2:
-            return shoppingList.list.count
+            return  shoppingList.count //shoppingList.list.count
         default:
             return 1
         }
@@ -65,10 +75,17 @@ class ShoppingListTableViewController: UITableViewController {
             let cell = (tableView.dequeueReusableCell(withIdentifier: "IngredientsInShoppingList", for: indexPath) as? IngredietntShoppingListTableViewCell)!
 
             // Configure the cell...
+//
+//            cell.nameLabel.text = shoppingList.list[indexPath.row].name
+//
+//            cell.amountLabel.text = shoppingList.list[indexPath.row].amount
             
-            cell.nameLabel.text = shoppingList.list[indexPath.row].name
             
-            cell.amountLabel.text = shoppingList.list[indexPath.row].amount
+            cell.nameLabel.text = shoppingList[indexPath.row].name
+            
+            cell.amountLabel.text = shoppingList[indexPath.row].amount
+            
+            
 
             return cell
         default:
@@ -124,8 +141,8 @@ class ShoppingListTableViewController: UITableViewController {
         if segue.identifier == "editItemShopping" {
             if let addVC = segue.destination as? AddingShoppingListViewController {
                 if let cell = sender as? UITableViewCell, let indexPath = tableView.indexPath(for: cell) {
-                    let item = shoppingList.list[indexPath.row]
-                    addVC.item = item
+                    let item =  shoppingList[indexPath.row]//shoppingList.list[indexPath.row]
+//                    addVC.item = item
                     addVC.indexPath = indexPath
                     addVC.delegate = self as! AddingShoppingListViewControllerDelegate
                     addVC.itemIsEmpty = false
@@ -143,16 +160,69 @@ class ShoppingListTableViewController: UITableViewController {
 }
 
 extension ShoppingListTableViewController: AddingShoppingListViewControllerDelegate {
-    func editItemViewController(_ controller: AddingShoppingListViewController, didFinishEditting item: IngredientShopping, indexPath: IndexPath) {
+    func editItemViewController(_ controller: AddingShoppingListViewController, addItemName name: String, addItemAmount amount: String, indexPath: IndexPath) {
         
-        shoppingList.list.remove(at: indexPath.row)
-        shoppingList.list.insert(item, at: indexPath.row)
+        
+        
+        // 2
+        
+        let groceryItemRef = self.database.child(name.lowercased())
+        
+        var groceryItem = IngredientShopping(name: name, amount: amount, ref: groceryItemRef, isBought: false)
+        
+        // 4
+        groceryItemRef.setValue(groceryItem.toAnyObject())
+        
+        shoppingList.append(groceryItem)
         
         self.tableView.reloadData()
     }
     
+   
+    
+    func editItemViewController(_ controller: AddingShoppingListViewController, didFinishEditting item: IngredientShopping, indexPath: IndexPath) {
+        //
+        //        shoppingList.list.remove(at: indexPath.row)
+        //        shoppingList.list.insert(item, at: indexPath.row)
+        
+//        let name = item.name, amount = item.amount
+//        let shoppingData = ["name": name, "amount": amount]
+//        database.childByAutoId().setValue(shoppingData)
+//
+//        // 2
+//
+//        let groceryItemRef = self.database.child(item.name.lowercased())
+//
+//        var groceryItem = IngredientShopping(name: item.name, amount: item.amount, ref: groceryItemRef, isBought: false)
+//        // 3
+//        let groceryItemRef = self.ref.child(item.name.lowercased())
+//
+//        // 4
+//        groceryItemRef.setValue(groceryItem.toAnyObject())
+//
+        
+        
+        self.tableView.reloadData()
+    }
+
+    
     func editItemViewController(_ controller: AddingShoppingListViewController, addItem item: IngredientShopping, indexPath: IndexPath){
-        shoppingList.list.append(item)
+//        shoppingList.list.append(item)
+        let name = item.name, amount = item.amount
+        let shoppingData = ["name": name, "amount": amount]
+        database.childByAutoId().setValue(shoppingData)
+        
+        // 2
+        
+        let groceryItemRef = self.database.child(item.name.lowercased())
+        
+        var groceryItem = IngredientShopping(name: item.name, amount: item.amount, ref: groceryItemRef, isBought: false)
+        
+        // 4
+        groceryItemRef.setValue(groceryItem.toAnyObject())
+        
+        shoppingList.append(groceryItem)
+        
         self.tableView.reloadData()
     }
     
