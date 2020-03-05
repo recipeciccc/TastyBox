@@ -14,6 +14,7 @@ class SideMenuTableViewController: UITableViewController {
         self.tableView.separatorColor = UIColor.clear
          NotificationCenter.default.post(name: NSNotification.Name("ToggleSideMenu"), object: nil)
     }
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print(indexPath.row)
 //        NotificationCenter.default.post(name: NSNotification.Name("ToggleSideMenu"), object: nil)
@@ -40,4 +41,6 @@ class SideMenuTableViewController: UITableViewController {
         default: break
         }
     }
+    
+    
 }

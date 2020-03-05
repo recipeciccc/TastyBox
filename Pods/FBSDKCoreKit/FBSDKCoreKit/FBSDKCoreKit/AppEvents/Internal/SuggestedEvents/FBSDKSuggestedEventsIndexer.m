@@ -16,6 +16,10 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+#import "TargetConditionals.h"
+
+#if !TARGET_OS_TV
+
 #import "FBSDKSuggestedEventsIndexer.h"
 
 #import <objc/runtime.h>
@@ -216,7 +220,9 @@ static NSMutableSet<NSString *> *_unconfirmedEvents;
       }
       if ([_optInEvents containsObject:event]) {
         [FBSDKAppEvents logEvent:event
-                      parameters:@{@"_is_suggested_event": @"1"}];
+                      parameters:@{@"_is_suggested_event": @"1",
+                                   @"_button_text": text
+                      }];
       } else if ([_unconfirmedEvents containsObject:event]) {
         // Only send back not confirmed events to advertisers
         [self logSuggestedEvent:event withText:text withDenseFeature:result[DENSE_FEATURE_KEY] ?: @""];
@@ -261,3 +267,5 @@ static NSMutableSet<NSString *> *_unconfirmedEvents;
 }
 
 @end
+
+#endif

@@ -20,7 +20,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
 
+
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
+        FirebaseApp.configure()
+        
         
         if let apiKey = KeyManager().getValue(key: "apiKey") as? String {
             GMSServices.provideAPIKey(apiKey)
@@ -28,13 +32,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print("\n Hello \(apiKey)\n")
         }
         
+        
         ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
-        FirebaseApp.configure()
+//        FirebaseApp.configure()
         GIDSignIn.sharedInstance()?.clientID = FirebaseApp.app()?.options.clientID
         UINavigationBar.appearance().tintColor = UIColor.orange
         UINavigationBar.appearance().barTintColor = UIColor.white
-      
-               
+        
+        
+        
         return true
     }
 

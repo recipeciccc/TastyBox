@@ -16,18 +16,22 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+#import "TargetConditionals.h"
+
+#if !TARGET_OS_TV
+
 #import "FBSDKEventBindingManager.h"
 
 #import <objc/runtime.h>
 
 #import <UIKit/UIKit.h>
 
-#import "FBSDKCodelessMacros.h"
 #import "FBSDKCodelessPathComponent.h"
 #import "FBSDKEventBinding.h"
 #import "FBSDKSwizzler.h"
 #import "FBSDKTypeUtility.h"
 #import "FBSDKViewHierarchy.h"
+#import "FBSDKViewHierarchyMacros.h"
 
 #define ReactNativeTargetKey          @"target"
 #define ReactNativeTouchEndEventName  @"touchEnd"
@@ -389,3 +393,5 @@
 }
 
 @end
+
+#endif

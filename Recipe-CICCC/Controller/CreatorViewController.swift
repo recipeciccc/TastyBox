@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 //Globel variables
 struct RecipeData{
@@ -23,6 +24,9 @@ struct RecipeData{
 
 // ViewController
 class CreatorViewController: UIViewController {
+    
+    var documentReference: DocumentReference? = nil
+    let db = Firestore.firestore()
     
     var move = false
     var imagePicker = UIImagePickerController()
@@ -101,6 +105,19 @@ class CreatorViewController: UIViewController {
         
         print(RecipeData.title,RecipeData.cookingtime,RecipeData.servings, RecipeData.ingredients, RecipeData.amounts,RecipeData.stepTexts)
         //print(preparationText)
+        
+        documentReference = db.collection("recipe").addDocument(data: [
+            "mainphoto": "Ada",
+            "last": "Lovelace",
+            "born": 1815
+        ]) { err in
+            if let err = err {
+                print("Error adding document: \(err)")
+            } else {
+                print("Document added with ID: \(self.documentReference!.documentID)")
+            }
+        }
+
     }
     
     @IBAction func EditMode(_ sender: UIButton) {
