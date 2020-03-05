@@ -149,8 +149,6 @@ class CreatorViewController: UIViewController {
 //               }
             }
         }
-        
-        
     }
     
     @IBAction func EditMode(_ sender: UIButton) {
