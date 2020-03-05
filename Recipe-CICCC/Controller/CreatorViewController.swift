@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseFirestore
 
 //Globel variables
 struct RecipeData{
@@ -23,7 +25,7 @@ struct RecipeData{
 
 // ViewController
 class CreatorViewController: UIViewController {
-    
+    let db = Firestore.firestore()
     var move = false
     var imagePicker = UIImagePickerController()
     var mainPhoto = UIImage()
@@ -101,6 +103,54 @@ class CreatorViewController: UIViewController {
         
         print(RecipeData.title,RecipeData.cookingtime,RecipeData.servings, RecipeData.ingredients, RecipeData.amounts,RecipeData.stepTexts)
         //print(preparationText)
+        let cgref = mainPhoto.cgImage
+        let cim = mainPhoto.ciImage
+        guard let uid = Auth.auth().currentUser?.uid else{return}
+        let rid = self.db.collection("recipe").document().documentID
+        
+        if recipeTitle == "" || (cgref == nil && cim == nil){
+           let alertController = UIAlertController(title: "Error:", message: "Please enter recipe title and upload your main photo.", preferredStyle: .alert)
+           let alertAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+           alertController.addAction(alertAction)
+           present(alertController, animated: true, completion: nil)
+           
+        }else{
+            self.uploadImage(mainPhoto,uid,rid) { (url) in
+                
+                let recipeData = ["userID": uid,
+                                  "mainPhoto":url?.absoluteString as Any,
+                                  "title":self.recipeTitle,
+                                  "cookingTime":self.recipeTime,
+                                  "serving":self.recipeServings,
+                                  "recipeID":rid,
+                                  //ingredient
+                                  //amounts
+                                  //stepPhoto
+                                  //stepTexts
+                                  //like number
+                                  "time":Timestamp()] as [String : Any]
+                
+                self.db.collection("recipe").document().setData(recipeData, merge: true) { (err) in
+                    if err != nil{
+                         print(err?.localizedDescription as Any)
+                    }else{
+                        print("Successfully set data")
+                        self.navigationController?.popViewController(animated: true)
+                    }
+                }
+
+//                self.db.collection("recipe").addDocument(data: recipeData) { (err) in
+//                   if err != nil{
+//                        print(err?.localizedDescription as Any)
+//                   }else{
+//                       print("Successfully set data")
+//                       self.navigationController?.popViewController(animated: true)
+//                   }
+//               }
+            }
+        }
+        
+        
     }
     
     @IBAction func EditMode(_ sender: UIButton) {
@@ -134,6 +184,29 @@ class CreatorViewController: UIViewController {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+}
+
+extension CreatorViewController{
+    
+    func uploadImage(_ image:UIImage, _ uid:String, _ rid:String, completion: @escaping((_ url: URL?)->())){
+        
+        let storageRef = Storage.storage().reference().child("user/\(uid)/\(rid)")
+        guard let imgData = image.jpegData(compressionQuality: 0.75) else{return}
+        let metaData = StorageMetadata()
+        metaData.contentType = "image/jpg"
+        storageRef.putData(imgData, metadata: metaData){ (metaData, error) in
+            if error == nil, metaData != nil{
+                print("success")
+                storageRef.downloadURL{ (url, err) in
+                    completion(url)
+                }
+            }else{
+                print("error in save image")
+                completion(nil)
+            }
+            
+        }
     }
 }
 
@@ -387,6 +460,12 @@ extension CreatorViewController: UITextFieldDelegate, UITextViewDelegate{
         MainTableView.reloadData()
     }
 }
+
+
+
+
+
+
 
 //TableView Cells
 class CreatorPhotoCell: UITableViewCell{
