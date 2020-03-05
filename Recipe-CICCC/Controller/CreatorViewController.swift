@@ -123,8 +123,12 @@ class CreatorViewController: UIViewController {
                 self.recipeUpload(uid,rid,url!.absoluteString)
                 self.ingredientUpload(rid)
                 self.commentUpload(rid)
-                                                 //stepPhoto
-                                                 //stepTexts
+            }
+            
+            for index in 0..<photoList.count{
+                self.uploadInstructionImage(photoList[index], uid, rid, index) { (url) in
+                    self.instructionUpload(rid,index,url!.absoluteString)
+                }
             }
         }
     }
@@ -213,24 +217,43 @@ extension CreatorViewController{
     }
     
     
-    func instructionUpload(_ rid:String){
-//        for index in 0..<self.preparationText.count{
-//            let instructionData = ["text": self.preparationText[index],"image": url]]
-//            let ref = self.db.collection("recipe").document(rid)
-//            ref.collection("ingredient").document().setData(ingredientData) { (err) in
-//                if err != nil{
-//                    print(err?.localizedDescription as Any)
-//                }else{
-//                    print("Successfully set ingredient data")
-//                    self.navigationController?.popViewController(animated: true)
-//                }
-//            }
-//        }
+    func instructionUpload(_ rid:String, _ index: Int, _ url:String){
+        
+        let instructionData = ["text": self.preparationText[index],"image": url,"index":index] as [String : Any]
+        let ref = self.db.collection("recipe").document(rid)
+        ref.collection("instruction").document(String(index)).setData(instructionData) { (err) in
+            if err != nil{
+                print(err?.localizedDescription as Any)
+            }else{
+                print("Successfully set instruction data")
+                self.navigationController?.popViewController(animated: true)
+            }
+        }
+        
+    }
+    
+    func uploadInstructionImage(_ image:UIImage, _ uid:String, _ rid:String, _ index: Int, completion: @escaping((_ url: URL?)->())){
+
+           let storageRef = Storage.storage().reference().child("user/\(uid)/RecipePhoto/\(rid)/\(index)")
+           guard let imgData = image.jpegData(compressionQuality: 0.75) else{return}
+           let metaData = StorageMetadata()
+           metaData.contentType = "image/jpg"
+           storageRef.putData(imgData, metadata: metaData){ (metaData, error) in
+               if error == nil, metaData != nil{
+                   print("success")
+                   storageRef.downloadURL{ (url, err) in
+                       completion(url)
+                   }
+               }else{
+                   print("error in save instruction images")
+                   completion(nil)
+               }
+           }
     }
     
     func uploadImage(_ image:UIImage, _ uid:String, _ rid:String, completion: @escaping((_ url: URL?)->())){
         
-        let storageRef = Storage.storage().reference().child("user/\(uid)/\(rid)")
+        let storageRef = Storage.storage().reference().child("user/\(uid)/RecipePhoto/\(rid)/\(rid)")
         guard let imgData = image.jpegData(compressionQuality: 0.75) else{return}
         let metaData = StorageMetadata()
         metaData.contentType = "image/jpg"
