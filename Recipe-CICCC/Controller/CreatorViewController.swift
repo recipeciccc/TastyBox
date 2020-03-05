@@ -120,8 +120,8 @@ class CreatorViewController: UIViewController {
                 let recipeData = ["userID": uid,
                                   "mainPhoto":url?.absoluteString as Any,
                                   "title":self.recipeTitle,
-                                  "cookingTime":self.recipeTime,
-                                  "serving":self.recipeServings,
+                                  "cookingTime":Int(self.recipeTime) as Any,
+                                  "serving":Int(self.recipeServings) as Any,
                                   "recipeID":rid,
                                   //ingredient
                                   //amounts
