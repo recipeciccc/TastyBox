@@ -11,12 +11,11 @@ import UIKit
 
 protocol AddingShoppingListViewControllerDelegate: class {
     
-    func editItemViewController(_ controller: AddingShoppingListViewController, didFinishEditting item: IngredientShopping, indexPath: IndexPath)
+    func editIngredient(controller: AddingShoppingListViewController, name: String, amount: String, isBought: Bool)
+//
+//    func editItemViewController(_ controller: AddingShoppingListViewController, addItemName name: String, addItemAmount amount: String, indexPath: IndexPath)
     
-    func editItemViewController(_ controller: AddingShoppingListViewController, addItem item: IngredientShopping, indexPath: IndexPath)
-    
-    func editItemViewController(_ controller: AddingShoppingListViewController, addItemName name: String, addItemAmount amount: String, indexPath: IndexPath)
-    
+    func addIngredient(controller: AddingShoppingListViewController, name: String, amount: String, isBought: Bool)
 }
 
 class AddingShoppingListViewController: UIViewController {
@@ -60,7 +59,7 @@ class AddingShoppingListViewController: UIViewController {
         if itemIsEmpty == false {
            // delegate?.editItemViewController(self, didFinishEditting: self.item, indexPath: indexPath)
         } else {
-            delegate?.editItemViewController(self, addItemName: ingredientNameTextField.text ?? "", addItemAmount: amountLabel.text ?? "", indexPath: indexPath)
+            delegate?.addIngredient(controller: self, name: ingredientNameTextField.text ?? "", amount: amountTextField.text ?? "", isBought: false)
         }
         
         navigationController?.popViewController(animated: true)

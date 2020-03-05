@@ -10,15 +10,15 @@ import Foundation
 import Firebase
 
 class IngredientShopping: NSObject {
-    let ref: DatabaseReference?
+//    let ref: DatabaseReference?
     let key: String
     var name = ""
     var amount = ""
     var isBought: Bool?
     
     
-    init(name: String, amount: String, ref: DatabaseReference, isBought: Bool, key: String = "") {
-        self.ref = nil
+    init(name: String, amount: String, isBought: Bool, key: String = "") {
+       
         self.key = key
         self.name = name
         self.amount = amount
@@ -35,7 +35,6 @@ class IngredientShopping: NSObject {
                 return nil
         }
         
-        self.ref = snapshot.ref
         self.key = snapshot.key
         self.name = name
         self.amount = amount
