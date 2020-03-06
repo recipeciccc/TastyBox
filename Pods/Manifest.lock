@@ -175,19 +175,11 @@ PODS:
   - BoringSSL-GRPC/Implementation (0.0.3):
     - BoringSSL-GRPC/Interface (= 0.0.3)
   - BoringSSL-GRPC/Interface (0.0.3)
-<<<<<<< HEAD
-  - FBSDKCoreKit (5.11.1):
-    - FBSDKCoreKit/Basics (= 5.11.1)
-    - FBSDKCoreKit/Core (= 5.11.1)
-  - FBSDKCoreKit/Basics (5.11.1)
-  - FBSDKCoreKit/Core (5.11.1):
-=======
   - FBSDKCoreKit (6.0.0):
     - FBSDKCoreKit/Basics (= 6.0.0)
     - FBSDKCoreKit/Core (= 6.0.0)
   - FBSDKCoreKit/Basics (6.0.0)
   - FBSDKCoreKit/Core (6.0.0):
->>>>>>> upstream/master
     - FBSDKCoreKit/Basics
   - FBSDKLoginKit (6.0.0):
     - FBSDKLoginKit/Login (= 6.0.0)
@@ -257,15 +249,8 @@ PODS:
     - "gRPC-C++ (= 0.0.9)"
     - leveldb-library (~> 1.22)
     - nanopb (~> 0.3.901)
-<<<<<<< HEAD
   - FirebaseFirestoreSwift (0.2):
     - FirebaseFirestore (>= 1.6.1, ~> 1.6)
-  - FirebaseInstanceID (4.2.6):
-    - FirebaseCore (~> 6.0)
-    - GoogleUtilities/Environment (~> 6.0)
-    - GoogleUtilities/UserDefaults (~> 6.0)
-  - FirebaseStorage (3.4.3):
-=======
   - FirebaseInstallations (1.1.0):
     - FirebaseCore (~> 6.6)
     - GoogleUtilities/UserDefaults (~> 6.5)
@@ -276,7 +261,6 @@ PODS:
     - GoogleUtilities/Environment (~> 6.5)
     - GoogleUtilities/UserDefaults (~> 6.5)
   - FirebaseStorage (3.5.0):
->>>>>>> upstream/master
     - FirebaseAuthInterop (~> 1.0)
     - FirebaseCore (~> 6.0)
     - GTMSessionFetcher/Core (~> 1.1)
@@ -385,11 +369,8 @@ SPEC REPOS:
     - FirebaseCoreDiagnosticsInterop
     - FirebaseDatabase
     - FirebaseFirestore
-<<<<<<< HEAD
     - FirebaseFirestoreSwift
-=======
     - FirebaseInstallations
->>>>>>> upstream/master
     - FirebaseInstanceID
     - FirebaseStorage
     - GoogleAppMeasurement
@@ -413,37 +394,18 @@ SPEC CHECKSUMS:
   AppAuth: 73574f3013a1e65b9601a3ddc8b3158cce68c09d
   Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
   BoringSSL-GRPC: db8764df3204ccea016e1c8dd15d9a9ad63ff318
-<<<<<<< HEAD
-  FBSDKCoreKit: 5aada61a229054694810f3cee231f986004b3c49
-  FBSDKLoginKit: 0e4572e0279e477103b57978e3ea05fac1dd673d
-  Firebase: bc9cfc7a96c73268656d5aaab453ff1b4b530e0e
-  FirebaseAnalytics: 0e3ecff2c5d86070f7d4325e21f1edabfbd558dc
-  FirebaseAuth: b401a012cc33b04df3b52bb308b04e8766f2693e
-=======
   FBSDKCoreKit: fe738b172590e622c86735b45e20d196848b54df
   FBSDKLoginKit: fa57df1b967fe0e147b25bede6ea4e9cdf4d64be
   Firebase: 2672e5636b42f977177716317e68346ae5e9de25
   FirebaseAnalytics: cf95d3aab897612783020fbd98401d5366f135ee
   FirebaseAuth: 5ce2b03a3d7fe56b7a6e4c5ec7ff1522890b1d6f
->>>>>>> upstream/master
   FirebaseAuthInterop: 0ffa57668be100582bb7643d4fcb7615496c41fc
   FirebaseCore: a1dd9dd6355a8356dd30a8f076839e242285a81c
   FirebaseCoreDiagnostics: 5e78803ab276bc5b50340e3c539c06c3de35c649
   FirebaseCoreDiagnosticsInterop: 296e2c5f5314500a850ad0b83e9e7c10b011a850
   FirebaseDatabase: 0144e0706a4761f1b0e8679572eba8095ddb59be
   FirebaseFirestore: 2ee644acccde18e49b2fb5d434c709b1f1171b13
-<<<<<<< HEAD
   FirebaseFirestoreSwift: 0437bb10d83f8161a9131da1739998254c78fdf5
-  FirebaseInstanceID: d0eafcd8bdbd3447cd694594734078c3e3e77d8b
-  FirebaseStorage: 93fe2f8190a01bfb2b2c4932df7d679744c4ef1d
-  GoogleAppMeasurement: 434cc7be25e71dc04b8d0e3079125127b330e84a
-  GoogleDataTransport: 166f9b9f82cbf60a204e8fe2daa9db3e3ec1fb15
-  GoogleDataTransportCCTSupport: f6ab1962e9dc05ab1fb938b795e5b310209edeec
-  GoogleMaps: 55da829c68aa931f3ae982b9e341cc2f3d89c587
-  GooglePlaces: a62077320f9d64239245af63aa1aa136393ebeb6
-  GoogleSignIn: 7137d297ddc022a7e0aa4619c86d72c909fa7213
-  GoogleUtilities: f895fde57977df4e0233edda0dbeac490e3703b6
-=======
   FirebaseInstallations: 575cd32f2aec0feeb0e44f5d0110a09e5e60b47b
   FirebaseInstanceID: 031d7d0c8e7b5c030bbeb4d2a690550375e83fec
   FirebaseStorage: 6c5263796af3b1be82ed173598aade47535fe125
@@ -454,7 +416,6 @@ SPEC CHECKSUMS:
   GooglePlaces: d5f70c3e9e427964fdeca1301a665d276ccd8754
   GoogleSignIn: 7137d297ddc022a7e0aa4619c86d72c909fa7213
   GoogleUtilities: 06eb53bb579efe7099152735900dd04bf09e7275
->>>>>>> upstream/master
   "gRPC-C++": 9dfe7b44821e7b3e44aacad2af29d2c21f7cde83
   gRPC-Core: c9aef9a261a1247e881b18059b84d597293c9947
   GTMAppAuth: 4deac854479704f348309e7b66189e604cf5e01e
@@ -464,10 +425,6 @@ SPEC CHECKSUMS:
   PromisesObjC: c119f3cd559f50b7ae681fa59dc1acd19173b7e6
   SideMenu: 928a015669c3afc201e1fe3a87f1b0bc8993a664
 
-<<<<<<< HEAD
-PODFILE CHECKSUM: 68146a87326bc1d7c3ebbb3a41c4d899c0f81a88
-=======
-PODFILE CHECKSUM: 9491d89b9359da2f880b1d53eaa70d5975ced10a
->>>>>>> upstream/master
+PODFILE CHECKSUM: ab60dc607874a6acca5936ced16a060948364efc
 
 COCOAPODS: 1.8.4
