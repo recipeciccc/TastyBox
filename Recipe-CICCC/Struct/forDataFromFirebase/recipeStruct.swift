@@ -11,13 +11,15 @@ import UIKit
 import Firebase
 
 struct RecipeDetail {
-    var id: String
+    var recipeID: String
     var title: String
 //        var explaination: String
     var cookingTime: Int
      var image: String
     var like: Int
     var serving: Int
+    var userID:String
+    
 //    var ingredient: Ingredient
 //        var instruciton: Instruction
 //     var comment: Comment
@@ -53,6 +55,4 @@ struct Comment {
     var text: String
 }
 
-struct User {
-    var name: String
-}
+
