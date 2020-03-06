@@ -11,12 +11,11 @@ import UIKit
 
 protocol AddingShoppingListViewControllerDelegate: class {
     
-    func editItemViewController(_ controller: AddingShoppingListViewController, didFinishEditting item: IngredientShopping, indexPath: IndexPath)
+    func editIngredient(controller: AddingShoppingListViewController, name: String, amount: String, isBought: Bool)
+//
+//    func editItemViewController(_ controller: AddingShoppingListViewController, addItemName name: String, addItemAmount amount: String, indexPath: IndexPath)
     
-    func editItemViewController(_ controller: AddingShoppingListViewController, addItem item: IngredientShopping, indexPath: IndexPath)
-    
-    func editItemViewController(_ controller: AddingShoppingListViewController, addItemName name: String, addItemAmount amount: String, indexPath: IndexPath)
-    
+    func addIngredient(controller: AddingShoppingListViewController, name: String, amount: String, isBought: Bool)
 }
 
 class AddingShoppingListViewController: UIViewController {
@@ -28,6 +27,7 @@ class AddingShoppingListViewController: UIViewController {
     
 //    var item = IngredientShopping()
     var itemIsEmpty:Bool?
+    var isBought:Bool?
     var indexPath = IndexPath()
     var shoppingList = ShoppingList()
     weak var delegate:AddingShoppingListViewControllerDelegate?
@@ -40,8 +40,6 @@ class AddingShoppingListViewController: UIViewController {
         
        
         // Do any additional setup after loading the view.
-//        ingredientNameTextField.text = item.name
-//        amountTextField.text = item.amount
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -52,15 +50,14 @@ class AddingShoppingListViewController: UIViewController {
     
     @IBAction func done(_ sender: UIBarButtonItem) {
         
-        
-//
-//        self.item.name = ingredientNameTextField.text ?? ""
-//        self.item.amount = amountTextField.text ?? ""
-//
+
         if itemIsEmpty == false {
-           // delegate?.editItemViewController(self, didFinishEditting: self.item, indexPath: indexPath)
+            
+            delegate?.editIngredient(controller: self, name: ingredientNameTextField.text ?? "", amount: amountTextField.text ?? "", isBought: isBought!)
+            
         } else {
-            delegate?.editItemViewController(self, addItemName: ingredientNameTextField.text ?? "", addItemAmount: amountLabel.text ?? "", indexPath: indexPath)
+            
+            delegate?.addIngredient(controller: self, name: ingredientNameTextField.text ?? "", amount: amountTextField.text ?? "", isBought: false)
         }
         
         navigationController?.popViewController(animated: true)

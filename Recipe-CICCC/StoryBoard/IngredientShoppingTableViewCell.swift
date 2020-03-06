@@ -1,14 +1,18 @@
 //
-//  searchButtonTableViewCell.swift
+//  IngredientShoppingTableViewCell.swift
 //  Recipe-CICCC
 //
-//  Created by 北島　志帆美 on 2020-02-05.
+//  Created by 北島　志帆美 on 2020-03-05.
 //  Copyright © 2020 Argus Chen. All rights reserved.
 //
 
 import UIKit
 
-class searchButtonTableViewCell: UITableViewCell {
+class IngredientShoppingTableViewCell: UITableViewCell {
+
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var amountLabel: UILabel!
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()

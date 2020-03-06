@@ -23,7 +23,7 @@ class PopularRecipeViewController: UIViewController {
 //    var numberComments = [110, 100, 90, 80, 70, 60, 50, 40, 30, 20, 10]
 //    var titles = ["Courgette and durian salad", "Denjang and fontina cheese salad", "Coriander and duck korma", "Cheese and raisin cupcakes","Cavatelli and nutmeg salad", "Goji berry and arugula salad","Celeriac and spinach wontons", "Lamb and rhubarb pie", "Apricot and cheese cheesecake", "Goat and mushroom madras"]
     
-    let dataManager = dataManagerClass()
+    let dataManager = RecipedataManagerClass()
     
     
     override func viewDidLoad() {
