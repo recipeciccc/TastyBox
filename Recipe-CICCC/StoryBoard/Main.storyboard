@@ -1033,7 +1033,7 @@
                                                     <color key="textColor" systemColor="systemBrownColor" red="0.63529411759999999" green="0.51764705879999995" blue="0.36862745099999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Write your recipe preparations." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Oqo-1n-RtK">
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Please press [return] after the last character to finish editing." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Oqo-1n-RtK">
                                                     <rect key="frame" x="20" y="34" width="308" height="60"/>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                     <constraints>

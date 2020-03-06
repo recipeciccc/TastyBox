@@ -119,17 +119,20 @@ class CreatorViewController: UIViewController {
            present(alertController, animated: true, completion: nil)
            
         }else{
-            self.uploadImage(mainPhoto,uid,rid) { (url) in
-                self.recipeUpload(uid,rid,url!.absoluteString)
-                self.ingredientUpload(rid)
-                self.commentUpload(rid)
-            }
             
-            for index in 0..<photoList.count{
-                self.uploadInstructionImage(photoList[index], uid, rid, index) { (url) in
-                    self.instructionUpload(rid,index,url!.absoluteString)
+            //if checkTextView(){
+                self.uploadImage(mainPhoto,uid,rid) { (url) in
+                    self.recipeUpload(uid,rid,url!.absoluteString)
+                    self.ingredientUpload(rid)
+                    self.commentUpload(rid)
                 }
-            }
+                
+                for index in 0..<photoList.count{
+                    self.uploadInstructionImage(photoList[index], uid, rid, index) { (url) in
+                        self.instructionUpload(rid,index,url!.absoluteString)
+                    }
+                }
+            //}
         }
     }
     
@@ -168,6 +171,19 @@ class CreatorViewController: UIViewController {
 }
 
 extension CreatorViewController{
+    
+//    func checkTextView() -> Bool{
+//        for i in 0..<preparationText.count{
+//            if preparationText[i].last != "."{
+//                let alertController = UIAlertController(title: "Error", message: "Please type period(.) after your last word in step \(i+1).", preferredStyle: .alert)
+//                let alertAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+//                alertController.addAction(alertAction)
+//                present(alertController, animated: true, completion: nil)
+//                return false
+//            }
+//        }
+//        return true
+//    }
     
     func recipeUpload(_ uid:String,_ rid:String, _ url:String){
         let recipeData = ["userID": uid,
@@ -383,13 +399,13 @@ extension CreatorViewController: UITableViewDelegate,UITableViewDataSource{
             cell.stepsImageView.image = photoList[indexPath.row]
             
             if tableView.isEditing == true {
-                cell.textView.text = preparationText[indexPath.row]
+                preparationText[indexPath.row] =  cell.textView.text
+               // cell.textView.text = preparationText[indexPath.row]
                 print(preparationText)
             }
             if cell.StepButton.isHidden {
                 cell.StepButton.isHidden = false
             }
-            
             return cell
             
         default:
@@ -495,8 +511,9 @@ extension CreatorViewController: UITextFieldDelegate, UITextViewDelegate{
         MainTableView.reloadData()
     }
     
+//Text view
     func textViewDidBeginEditing(_ textView: UITextView) {
-        if textView.text == "Write your recipe preparations." {
+        if textView.text == "Please press [return] after the last character to finish editing." {
             textView.text = ""
             textView.textColor = UIColor.black
         }
@@ -515,11 +532,12 @@ extension CreatorViewController: UITextFieldDelegate, UITextViewDelegate{
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
+        MainTableView.reloadData()
         if textView.text == "" {
-            textView.text = "Write your recipe preparations."
+            textView.text = "Please press [return] after the last character to finish editing."
             textView.textColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
         }
-        MainTableView.reloadData()
+        
     }
 }
 
