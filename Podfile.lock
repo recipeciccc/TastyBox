@@ -249,6 +249,8 @@ PODS:
     - "gRPC-C++ (= 0.0.9)"
     - leveldb-library (~> 1.22)
     - nanopb (~> 0.3.901)
+  - FirebaseFirestoreSwift (0.2):
+    - FirebaseFirestore (>= 1.6.1, ~> 1.6)
   - FirebaseInstallations (1.1.0):
     - FirebaseCore (~> 6.6)
     - GoogleUtilities/UserDefaults (~> 6.5)
@@ -344,6 +346,7 @@ DEPENDENCIES:
   - Firebase/Database
   - Firebase/Firestore
   - Firebase/Storage
+  - FirebaseFirestoreSwift
   - GoogleMaps
   - GooglePlaces
   - GoogleSignIn
@@ -366,6 +369,7 @@ SPEC REPOS:
     - FirebaseCoreDiagnosticsInterop
     - FirebaseDatabase
     - FirebaseFirestore
+    - FirebaseFirestoreSwift
     - FirebaseInstallations
     - FirebaseInstanceID
     - FirebaseStorage
@@ -401,6 +405,7 @@ SPEC CHECKSUMS:
   FirebaseCoreDiagnosticsInterop: 296e2c5f5314500a850ad0b83e9e7c10b011a850
   FirebaseDatabase: 0144e0706a4761f1b0e8679572eba8095ddb59be
   FirebaseFirestore: 2ee644acccde18e49b2fb5d434c709b1f1171b13
+  FirebaseFirestoreSwift: 0437bb10d83f8161a9131da1739998254c78fdf5
   FirebaseInstallations: 575cd32f2aec0feeb0e44f5d0110a09e5e60b47b
   FirebaseInstanceID: 031d7d0c8e7b5c030bbeb4d2a690550375e83fec
   FirebaseStorage: 6c5263796af3b1be82ed173598aade47535fe125
@@ -420,6 +425,6 @@ SPEC CHECKSUMS:
   PromisesObjC: c119f3cd559f50b7ae681fa59dc1acd19173b7e6
   SideMenu: 928a015669c3afc201e1fe3a87f1b0bc8993a664
 
-PODFILE CHECKSUM: 9491d89b9359da2f880b1d53eaa70d5975ced10a
+PODFILE CHECKSUM: ab60dc607874a6acca5936ced16a060948364efc
 
 COCOAPODS: 1.8.4

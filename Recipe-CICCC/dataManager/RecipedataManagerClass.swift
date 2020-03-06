@@ -51,8 +51,8 @@ class RecipedataManagerClass {
                         
                         print("data count: \(data.count)")
                         
-                        
                         let reipeId = data["recipeID"] as? String
+
                         let title = data["title"] as? String
                         let cookingTime = data["cookingTime"] as? Int
                         let like = data["like"] as? Int

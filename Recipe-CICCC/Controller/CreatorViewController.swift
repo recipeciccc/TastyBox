@@ -8,6 +8,8 @@
 
 import UIKit
 import Firebase
+import FirebaseFirestore
+
 
 //Globel variables
 struct RecipeData{
@@ -24,10 +26,9 @@ struct RecipeData{
 
 // ViewController
 class CreatorViewController: UIViewController {
-    
-    var documentReference: DocumentReference? = nil
+
     let db = Firestore.firestore()
-    
+
     var move = false
     var imagePicker = UIImagePickerController()
     var mainPhoto = UIImage()
@@ -105,19 +106,34 @@ class CreatorViewController: UIViewController {
         
         print(RecipeData.title,RecipeData.cookingtime,RecipeData.servings, RecipeData.ingredients, RecipeData.amounts,RecipeData.stepTexts)
         //print(preparationText)
-        
-        documentReference = db.collection("recipe").addDocument(data: [
-            "mainphoto": "Ada",
-            "last": "Lovelace",
-            "born": 1815
-        ]) { err in
-            if let err = err {
-                print("Error adding document: \(err)")
-            } else {
-                print("Document added with ID: \(self.documentReference!.documentID)")
-            }
-        }
 
+        let cgref = mainPhoto.cgImage
+        let cim = mainPhoto.ciImage
+        guard let uid = Auth.auth().currentUser?.uid else{return}
+        let rid = self.db.collection("recipe").document().documentID
+        
+        if recipeTitle == "" || (cgref == nil && cim == nil){
+           let alertController = UIAlertController(title: "Error:", message: "Please enter recipe title and upload your main photo.", preferredStyle: .alert)
+           let alertAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+           alertController.addAction(alertAction)
+           present(alertController, animated: true, completion: nil)
+           
+        }else{
+            
+            //if checkTextView(){
+                self.uploadImage(mainPhoto,uid,rid) { (url) in
+                    self.recipeUpload(uid,rid,url!.absoluteString)
+                    self.ingredientUpload(rid)
+                    self.commentUpload(rid)
+                }
+                
+                for index in 0..<photoList.count{
+                    self.uploadInstructionImage(photoList[index], uid, rid, index) { (url) in
+                        self.instructionUpload(rid,index,url!.absoluteString)
+                    }
+                }
+            //}
+        }
     }
     
     @IBAction func EditMode(_ sender: UIButton) {
@@ -151,6 +167,124 @@ class CreatorViewController: UIViewController {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+}
+
+extension CreatorViewController{
+    
+//    func checkTextView() -> Bool{
+//        for i in 0..<preparationText.count{
+//            if preparationText[i].last != "."{
+//                let alertController = UIAlertController(title: "Error", message: "Please type period(.) after your last word in step \(i+1).", preferredStyle: .alert)
+//                let alertAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+//                alertController.addAction(alertAction)
+//                present(alertController, animated: true, completion: nil)
+//                return false
+//            }
+//        }
+//        return true
+//    }
+    
+    func recipeUpload(_ uid:String,_ rid:String, _ url:String){
+        let recipeData = ["userID": uid,
+                          "image":url as Any,
+                          "title":self.recipeTitle,
+                          "cookingTime":Int(self.recipeTime) as Any,
+                          "serving":Int(self.recipeServings) as Any,
+                          "recipeID":rid,
+                          "like":0,
+                          "time":Timestamp()] as [String : Any]
+        self.db.collection("recipe").document(rid).setData(recipeData, merge: true) { (err) in
+            if err != nil{
+                print(err?.localizedDescription as Any)
+            }else{
+                print("Successfully set data")
+                self.navigationController?.popViewController(animated: true)
+            }
+        }
+    }
+    
+    func ingredientUpload(_ rid:String){
+        for index in 0..<self.ingredientList.count{
+            let ingredientData = ["ingredient": self.ingredientList[index],"amount": self.amountList[index]]
+            let ref = self.db.collection("recipe").document(rid)
+            ref.collection("ingredient").document().setData(ingredientData) { (err) in
+                if err != nil{
+                     print(err?.localizedDescription as Any)
+                }else{
+                    print("Successfully set ingredient data")
+                    self.navigationController?.popViewController(animated: true)
+                }
+            }
+        }
+    }
+    
+    func commentUpload(_ rid: String){
+        let commentData = ["text":"","user":""]
+        let ref = self.db.collection("recipe").document(rid)
+        ref.collection("comment").document().setData(commentData) { (err) in
+            if err != nil{
+                 print(err?.localizedDescription as Any)
+            }else{
+                print("Successfully set ingredient data")
+                self.navigationController?.popViewController(animated: true)
+            }
+        }
+    }
+    
+    
+    func instructionUpload(_ rid:String, _ index: Int, _ url:String){
+        
+        let instructionData = ["text": self.preparationText[index],"image": url,"index":index] as [String : Any]
+        let ref = self.db.collection("recipe").document(rid)
+        ref.collection("instruction").document(String(index)).setData(instructionData) { (err) in
+            if err != nil{
+                print(err?.localizedDescription as Any)
+            }else{
+                print("Successfully set instruction data")
+                self.navigationController?.popViewController(animated: true)
+            }
+        }
+        
+    }
+    
+    func uploadInstructionImage(_ image:UIImage, _ uid:String, _ rid:String, _ index: Int, completion: @escaping((_ url: URL?)->())){
+
+           let storageRef = Storage.storage().reference().child("user/\(uid)/RecipePhoto/\(rid)/\(index)")
+           guard let imgData = image.jpegData(compressionQuality: 0.75) else{return}
+           let metaData = StorageMetadata()
+           metaData.contentType = "image/jpg"
+           storageRef.putData(imgData, metadata: metaData){ (metaData, error) in
+               if error == nil, metaData != nil{
+                   print("success")
+                   storageRef.downloadURL{ (url, err) in
+                       completion(url)
+                   }
+               }else{
+                   print("error in save instruction images")
+                   completion(nil)
+               }
+           }
+    }
+    
+    func uploadImage(_ image:UIImage, _ uid:String, _ rid:String, completion: @escaping((_ url: URL?)->())){
+        
+        let storageRef = Storage.storage().reference().child("user/\(uid)/RecipePhoto/\(rid)/\(rid)")
+        guard let imgData = image.jpegData(compressionQuality: 0.75) else{return}
+        let metaData = StorageMetadata()
+        metaData.contentType = "image/jpg"
+        storageRef.putData(imgData, metadata: metaData){ (metaData, error) in
+            if error == nil, metaData != nil{
+                print("success")
+                storageRef.downloadURL{ (url, err) in
+                    completion(url)
+                }
+            }else{
+                print("error in save image")
+                completion(nil)
+            }
+            
+        }
     }
 }
 
@@ -265,13 +399,13 @@ extension CreatorViewController: UITableViewDelegate,UITableViewDataSource{
             cell.stepsImageView.image = photoList[indexPath.row]
             
             if tableView.isEditing == true {
-                cell.textView.text = preparationText[indexPath.row]
+                preparationText[indexPath.row] =  cell.textView.text
+               // cell.textView.text = preparationText[indexPath.row]
                 print(preparationText)
             }
             if cell.StepButton.isHidden {
                 cell.StepButton.isHidden = false
             }
-            
             return cell
             
         default:
@@ -330,7 +464,6 @@ extension CreatorViewController: UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         
         if editingStyle == .delete {
-            
             if indexPath.section == 4{
                 ingredientList.remove(at: indexPath.item)
                 amountList.remove(at: indexPath.item)
@@ -378,8 +511,9 @@ extension CreatorViewController: UITextFieldDelegate, UITextViewDelegate{
         MainTableView.reloadData()
     }
     
+//Text view
     func textViewDidBeginEditing(_ textView: UITextView) {
-        if textView.text == "Write your recipe preparations." {
+        if textView.text == "Please press [return] after the last character to finish editing." {
             textView.text = ""
             textView.textColor = UIColor.black
         }
@@ -398,13 +532,18 @@ extension CreatorViewController: UITextFieldDelegate, UITextViewDelegate{
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
+        MainTableView.reloadData()
         if textView.text == "" {
-            textView.text = "Write your recipe preparations."
+            textView.text = "Please press [return] after the last character to finish editing."
             textView.textColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
         }
-        MainTableView.reloadData()
+        
     }
 }
+
+
+
+
 
 
 
