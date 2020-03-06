@@ -52,9 +52,9 @@ class dataManagerClass {
                         print("data count: \(data.count)")
                         
                         
-                        let id = data["id"] as? String
+                        let id = data["recipeID"] as? String
                         let title = data["title"] as? String
-                        let cookingTime = data["Cooking Time"] as? Int
+                        let cookingTime = data["cookingTime"] as? Int
                         let like = data["like"] as? Int
                         let serving = data["serving"] as? Int
                         let image = data["image"] as? String
