@@ -52,14 +52,17 @@ class RecipedataManagerClass {
                         print("data count: \(data.count)")
                         
                         
-                        let id = data["recipeID"] as? String
+                        let reipeId = data["recipeID"] as? String
                         let title = data["title"] as? String
                         let cookingTime = data["cookingTime"] as? Int
                         let like = data["like"] as? Int
                         let serving = data["serving"] as? Int
                         let image = data["image"] as? String
+                        let userID = data["userID"] as? String
                         
-                        let recipe = RecipeDetail(id: id!, title: title!, cookingTime: cookingTime!, image: image!, like: like!, serving: serving!)
+                        
+                        let recipe = RecipeDetail(recipeID: reipeId!, title: title!, cookingTime: cookingTime!, image: image!, like: like!, serving: serving!, userID: userID!)
+                        
                         self.recipes.append(recipe)
                     }
                 }

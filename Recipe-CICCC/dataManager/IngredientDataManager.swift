@@ -17,17 +17,17 @@ class IngredientDataManager {
     
     var ingredients:[IngredientShopping] = []
     
-    func editIngredient(name: String, amount: String, isBought: Bool) {
+    func editIngredient(name: String, amount: String, isBought: Bool, userID: String) {
         
-        db.collection("shoppingList").document().setData(
+        db.collection("user").document(userID).collection("ingredient").document(name).setData(
             [ "name": name,
               "amount": amount,
               "isBought": isBought], merge: true)
-        
     }
     
-    func addIngredient(name: String, amount: String, isBought: Bool) {
-          db.collection("shoppingList").document(name).setData([
+    func addIngredient(name: String, amount: String, isBought: Bool, userID: String) {
+        
+        db.collection("user").document(userID).collection("shoppingList").document().setData([
               "name": name,
               "amount": amount,
               "isBought": isBought
@@ -38,9 +38,10 @@ class IngredientDataManager {
                   print("Document successfully written!")
               }
           }
+       
       }
     
-    func getReipeDetail() {
+    func getShoppingListDetail(userID: String) {
         
         // this cant be executed before put value to cell.textlabel
         //        db.collection("recipe").document("OfcILMhCh3LVMNhE60I7").getDocument(source: .cache) {
@@ -56,41 +57,38 @@ class IngredientDataManager {
         //              }
         //        }
         
-        db.collection("shoppingList").getDocuments {
-            (querysnapshot, error) in
+        db.collection("user").document(userID).collection("shoppingList").addSnapshotListener { querySnapshot, error in
             if error != nil {
-                print("Error getting documents: \(String(describing: error))")
-            } else {
-                
-                //For-loop
-                for documents in querysnapshot!.documents
-                {
-                    self.ingredients.removeAll()
-                    let document = querysnapshot!.documents
+                    print("Error getting documents: \(String(describing: error))")
+                } else {
                     
-                    for (index, element) in document.enumerated() {
-                        print("document count：\(document.count)")
-                        let data = element.data()
+                self.ingredients.removeAll()
+                    //For-loop
+                    for documents in querySnapshot!.documents
+                    {
                         
-                        print("data count: \(data.count)")
                         
-                        let name = data["name"] as? String
-                        let amount = data["amount"] as? String
-                        let isBought = data["isBought"] as? Bool
-                        
-                        let ingredient = IngredientShopping(name: name!, amount: amount!, isBought: isBought!)
-                        
-                        self.ingredients.append(ingredient)
+                            let data = documents.data()
+                            
+                            print("data count: \(data.count)")
+                            
+                            let name = data["name"] as? String
+                            let amount = data["amount"] as? String
+                            let isBought = data["isBought"] as? Bool
+                            
+                            let ingredient = IngredientShopping(name: name!, amount: amount!, isBought: isBought!)
+                            
+                            self.ingredients.append(ingredient)
+    
                     }
                 }
+                
+                self.delegate?.gotData(ingredients: self.ingredients)
+                
             }
-            
-            self.delegate?.gotData(ingredients: self.ingredients)
-            
+
         }
-    }
-    
-    
+        
 }
 
 

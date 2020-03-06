@@ -27,6 +27,7 @@ class AddingShoppingListViewController: UIViewController {
     
 //    var item = IngredientShopping()
     var itemIsEmpty:Bool?
+    var isBought:Bool?
     var indexPath = IndexPath()
     var shoppingList = ShoppingList()
     weak var delegate:AddingShoppingListViewControllerDelegate?
@@ -39,8 +40,6 @@ class AddingShoppingListViewController: UIViewController {
         
        
         // Do any additional setup after loading the view.
-//        ingredientNameTextField.text = item.name
-//        amountTextField.text = item.amount
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -51,14 +50,13 @@ class AddingShoppingListViewController: UIViewController {
     
     @IBAction func done(_ sender: UIBarButtonItem) {
         
-        
-//
-//        self.item.name = ingredientNameTextField.text ?? ""
-//        self.item.amount = amountTextField.text ?? ""
-//
+
         if itemIsEmpty == false {
-           // delegate?.editItemViewController(self, didFinishEditting: self.item, indexPath: indexPath)
+            
+            delegate?.editIngredient(controller: self, name: ingredientNameTextField.text ?? "", amount: amountTextField.text ?? "", isBought: isBought!)
+            
         } else {
+            
             delegate?.addIngredient(controller: self, name: ingredientNameTextField.text ?? "", amount: amountTextField.text ?? "", isBought: false)
         }
         
