@@ -37,7 +37,6 @@ class PopularRecipeViewController: UIViewController {
         
         tableView.delegate = self as UITableViewDelegate
         tableView.dataSource = self as UITableViewDataSource
-        self.tableView.reloadData()
     }
     
     
@@ -76,9 +75,11 @@ extension PopularRecipeViewController: UITableViewDataSource {
         
         
         if indexPath.section == 0 {
-            
-            if recipes.isEmpty { return UITableViewCell() }
-                
+
+            if recipes.isEmpty {
+                return UITableViewCell()
+            }
+
             else {
                 
                 print("recipe:\(recipes) count: \(recipes.count)")
@@ -149,6 +150,7 @@ extension PopularRecipeViewController: UITableViewDataSource {
 extension PopularRecipeViewController: getDataFromFirebaseDelegate {
     func gotData(recipes: [RecipeDetail]) {
         self.recipes = recipes
+        tableView.reloadData()
     }
     
     
