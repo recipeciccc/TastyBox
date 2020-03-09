@@ -30,10 +30,10 @@ class AddingShoppingListViewController: UIViewController {
     var isBought:Bool?
     var indexPath = IndexPath()
     var shoppingList = ShoppingList()
-    weak var delegate:AddingShoppingListViewControllerDelegate?
+    weak var delegate: AddingShoppingListViewControllerDelegate?
     
-    
-    
+    var name: String?
+    var amount: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,6 +46,11 @@ class AddingShoppingListViewController: UIViewController {
         
         ingredientNameTextField.delegate = self
         amountTextField.delegate = self
+        
+        if name != nil, amount != nil {
+            ingredientNameTextField.text = name
+            amountTextField.text = amount
+        }
     }
     
     @IBAction func done(_ sender: UIBarButtonItem) {

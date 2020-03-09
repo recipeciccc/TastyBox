@@ -2189,7 +2189,7 @@ Copyright 2020 Google
    limitations under the License.
 
 
-## FirebaseInstallations
+## FirebaseFirestoreSwift
 
 
                                  Apache License
@@ -2395,7 +2395,7 @@ Copyright 2020 Google
    limitations under the License.
 
 
-## FirebaseInstanceID
+## FirebaseInstallations
 
 
                                  Apache License
