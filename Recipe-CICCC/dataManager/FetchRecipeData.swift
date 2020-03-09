@@ -28,9 +28,10 @@ class FetchRecipeData{
                         let serving = data["serving"] as? Int
                         let image = data["image"] as? String
                         let userID = data["userID"] as? String
+                        let time = data["time"] as? Timestamp
                         let recipe = RecipeDetail(recipeID: reipeId!, title: title!, cookingTime: cookingTime!, image: image!, like: like!, serving: serving!, userID: userID!)
                         recipeList.append(recipe)
-                        
+                        print(time?.dateValue())
                     }
                 }
                 exist = true

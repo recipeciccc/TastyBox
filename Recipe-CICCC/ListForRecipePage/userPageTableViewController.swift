@@ -43,6 +43,7 @@ class userPageTableViewController: UITableViewController {
             for data in recipeList{
                 urlList.append(data.image)
                 ridList.append(data.recipeID)
+                print(data.recipeID)
             }
         }
     }
@@ -84,8 +85,6 @@ class userPageTableViewController: UITableViewController {
         let cell = (tableView.dequeueReusableCell(withIdentifier: "recipeItemForUser", for: indexPath) as? userRecipeItemTableViewCell)!
         if recipeList.count != 0{
             cell.recipeData = recipeList
-            
-            //fetchImage.getImage(uid: uid!, rid: ridList, imageUrl: urlList)
 
             if imageList.count >= recipeList.count {
                 cell.recipeImage = imageList
