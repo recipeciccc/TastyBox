@@ -34,6 +34,8 @@ class ShoppinglistViewController: UIViewController {
         
         dataManager.getShoppingListDetail(userID: uid)
         dataManager.delegate = self
+        
+        searchBar.delegate = self
     }
     
     // MARK: - Navigation
@@ -176,14 +178,29 @@ extension ShoppinglistViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
          guard let uid = Auth.auth().currentUser?.uid else { return }
+         var temp: [IngredientShopping] = []
         
         if searchBar.text != "" {
+            
+            let text = searchBar.text!.lowercased()
+            
+            for ingredient in ingredients {
+                let name = ingredient.name.lowercased()
+                
+                if name.contains(text){
+                    temp.append(ingredient)
+                }
+            }
+            print(temp)
+            
             ingredients.removeAll()
-            dataManager.searchIngredients(text: searchBar.text!, tableView: self.tableView)
+            ingredients = temp
+           
+            tableView.reloadData()
         } else {
             dataManager.getShoppingListDetail(userID: uid)
+            tableView.reloadData()
         }
-        
     }
     
     func searchBarBookmarkButtonClicked(_ searchBar: UISearchBar) {

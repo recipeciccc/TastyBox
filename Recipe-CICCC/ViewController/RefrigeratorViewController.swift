@@ -15,16 +15,16 @@ class RefrigeratorViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     var ingredients: [IngredientRefrigerator] = []
-//    var searchResult:[IngredientRefrigerator] = []
+    //    var searchResult:[IngredientRefrigerator] = []
     
     let db = Firestore.firestore()
     let dataManager = IngredientRefrigeratorDataManager()
     
     
- 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         guard let uid = Auth.auth().currentUser?.uid else { return }
         
@@ -40,13 +40,13 @@ class RefrigeratorViewController: UIViewController {
         dataManager.delegate = self //as getIngredientRefrigeratorDataDelegate
         searchBar.enablesReturnKeyAutomatically = false
         
-       
+        
     }
     
-
+    
     
     // MARK: - Navigation
-
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
@@ -70,7 +70,7 @@ class RefrigeratorViewController: UIViewController {
             }
         }
     }
-
+    
 }
 
 extension RefrigeratorViewController: UITableViewDataSource {
@@ -125,19 +125,19 @@ extension RefrigeratorViewController: getIngredientRefrigeratorDataDelegate {
         tableView.reloadData()
     }
     
-   
+    
 }
 
 extension RefrigeratorViewController: AddingIngredientRefrigeratorViewControllerDelegate {
     func editIngredient(controller: AddingIngredientRefrigeratorViewController, name: String, amount: String) {
-         guard let uid = Auth.auth().currentUser?.uid else { return }
+        guard let uid = Auth.auth().currentUser?.uid else { return }
         dataManager.addIngredient(name: name, amount: amount, userID: uid)
         dataManager.getRefrigeratorDetail(userID: uid)
         tableView.reloadData()
     }
     
     func addIngredient(controller: AddingIngredientRefrigeratorViewController, name: String, amount: String) {
-         guard let uid = Auth.auth().currentUser?.uid else { return }
+        guard let uid = Auth.auth().currentUser?.uid else { return }
         dataManager.editIngredient(name: name, amount: amount, userID: uid)
         print(ingredients)
         dataManager.getRefrigeratorDetail(userID: uid)
@@ -150,13 +150,29 @@ extension RefrigeratorViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
-         guard let uid = Auth.auth().currentUser?.uid else { return }
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        var temp: [IngredientRefrigerator] = []
         
         if searchBar.text != "" {
+            
+            let text = searchBar.text!.lowercased()
+            
+            for ingredient in ingredients {
+                let name = ingredient.name.lowercased()
+                
+                if name.contains(text){
+                    temp.append(ingredient)
+                }
+            }
+            
             ingredients.removeAll()
-            dataManager.searchIngredients(text: searchBar.text!, tableView: self.tableView)
+            ingredients = temp
+            
+            tableView.reloadData()
+            
         } else {
             dataManager.getRefrigeratorDetail(userID: uid)
+            tableView.reloadData()
         }
         
     }
