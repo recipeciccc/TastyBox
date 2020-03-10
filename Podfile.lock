@@ -175,16 +175,16 @@ PODS:
   - BoringSSL-GRPC/Implementation (0.0.3):
     - BoringSSL-GRPC/Interface (= 0.0.3)
   - BoringSSL-GRPC/Interface (0.0.3)
-  - FBSDKCoreKit (6.0.0):
-    - FBSDKCoreKit/Basics (= 6.0.0)
-    - FBSDKCoreKit/Core (= 6.0.0)
-  - FBSDKCoreKit/Basics (6.0.0)
-  - FBSDKCoreKit/Core (6.0.0):
+  - FBSDKCoreKit (6.2.0):
+    - FBSDKCoreKit/Basics (= 6.2.0)
+    - FBSDKCoreKit/Core (= 6.2.0)
+  - FBSDKCoreKit/Basics (6.2.0)
+  - FBSDKCoreKit/Core (6.2.0):
     - FBSDKCoreKit/Basics
-  - FBSDKLoginKit (6.0.0):
-    - FBSDKLoginKit/Login (= 6.0.0)
-  - FBSDKLoginKit/Login (6.0.0):
-    - FBSDKCoreKit (~> 6.0.0)
+  - FBSDKLoginKit (6.2.0):
+    - FBSDKLoginKit/Login (= 6.2.0)
+  - FBSDKLoginKit/Login (6.2.0):
+    - FBSDKCoreKit (~> 6.2.0)
   - Firebase/Analytics (6.18.0):
     - Firebase/Core
   - Firebase/Auth (6.18.0):
@@ -249,8 +249,6 @@ PODS:
     - "gRPC-C++ (= 0.0.9)"
     - leveldb-library (~> 1.22)
     - nanopb (~> 0.3.901)
-  - FirebaseFirestoreSwift (0.2):
-    - FirebaseFirestore (>= 1.6.1, ~> 1.6)
   - FirebaseInstallations (1.1.0):
     - FirebaseCore (~> 6.6)
     - GoogleUtilities/UserDefaults (~> 6.5)
@@ -341,7 +339,6 @@ DEPENDENCIES:
   - Firebase/Database
   - Firebase/Firestore
   - Firebase/Storage
-  - FirebaseFirestoreSwift
   - GoogleMaps
   - GooglePlaces
   - GoogleSignIn
@@ -364,7 +361,6 @@ SPEC REPOS:
     - FirebaseCoreDiagnosticsInterop
     - FirebaseDatabase
     - FirebaseFirestore
-    - FirebaseFirestoreSwift
     - FirebaseInstallations
     - FirebaseStorage
     - GoogleAppMeasurement
@@ -388,8 +384,8 @@ SPEC CHECKSUMS:
   AppAuth: 73574f3013a1e65b9601a3ddc8b3158cce68c09d
   Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
   BoringSSL-GRPC: db8764df3204ccea016e1c8dd15d9a9ad63ff318
-  FBSDKCoreKit: fe738b172590e622c86735b45e20d196848b54df
-  FBSDKLoginKit: fa57df1b967fe0e147b25bede6ea4e9cdf4d64be
+  FBSDKCoreKit: a7bb9f5ac56c1e11d5f8ae0b90a3610f8744b43a
+  FBSDKLoginKit: 5877adb09cc249870c352d92ecc3246cb925c771
   Firebase: 0490eca762a72e4f1582319539153897f1508dee
   FirebaseAnalytics: 058d71e714a1a6804d9e0f25e3bb18e377a51579
   FirebaseAuth: 5ce2b03a3d7fe56b7a6e4c5ec7ff1522890b1d6f
@@ -399,7 +395,6 @@ SPEC CHECKSUMS:
   FirebaseCoreDiagnosticsInterop: 296e2c5f5314500a850ad0b83e9e7c10b011a850
   FirebaseDatabase: 0144e0706a4761f1b0e8679572eba8095ddb59be
   FirebaseFirestore: a23d596ae3a8c13d3b8353b565d2adfb690f9032
-  FirebaseFirestoreSwift: 0437bb10d83f8161a9131da1739998254c78fdf5
   FirebaseInstallations: 575cd32f2aec0feeb0e44f5d0110a09e5e60b47b
   FirebaseStorage: 6c5263796af3b1be82ed173598aade47535fe125
   GoogleAppMeasurement: 39ecba10918b21c83877d392246157f65db351cf
@@ -418,6 +413,6 @@ SPEC CHECKSUMS:
   PromisesObjC: c119f3cd559f50b7ae681fa59dc1acd19173b7e6
   SideMenu: 928a015669c3afc201e1fe3a87f1b0bc8993a664
 
-PODFILE CHECKSUM: ab60dc607874a6acca5936ced16a060948364efc
+PODFILE CHECKSUM: 3dc5d998ce0bfe04bfbb1fa3b97099a1f315aa37
 
 COCOAPODS: 1.8.4

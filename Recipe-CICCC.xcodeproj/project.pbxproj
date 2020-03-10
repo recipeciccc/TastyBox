@@ -73,6 +73,8 @@
 		6985A53A23F4924A001257A8 /* IngredientTitleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6985A53923F4924A001257A8 /* IngredientTitleCollectionViewCell.swift */; };
 		6985A53C23F494B0001257A8 /* IngredientImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6985A53B23F494B0001257A8 /* IngredientImageCollectionViewCell.swift */; };
 		699679AF23F3A25800719A36 /* ingredientRecipe.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 699679AE23F3A25800719A36 /* ingredientRecipe.storyboard */; };
+		6999A49024170ED00013BD5B /* Podfile.lock in Resources */ = {isa = PBXBuildFile; fileRef = 6999A48F24170ED00013BD5B /* Podfile.lock */; };
+		6999A49324170EE40013BD5B /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 6999A49224170EE40013BD5B /* Podfile */; };
 		69DB5BBC23ECB2940027A238 /* followingRecipe.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 69DB5BBB23ECB2940027A238 /* followingRecipe.storyboard */; };
 		69DB5BBE23ECBB930027A238 /* FollowingRecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69DB5BBD23ECBB930027A238 /* FollowingRecipeViewController.swift */; };
 		69DB5BC123ECBF240027A238 /* FollowingRecipeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69DB5BC023ECBF240027A238 /* FollowingRecipeTableViewCell.swift */; };
@@ -153,6 +155,8 @@
 /* Begin PBXFileReference section */
 		02494DD702BE27D7F9C693EC /* Pods-Recipe-CICCCTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Recipe-CICCCTests.release.xcconfig"; path = "Target Support Files/Pods-Recipe-CICCCTests/Pods-Recipe-CICCCTests.release.xcconfig"; sourceTree = "<group>"; };
 		0A68970065BD7EB4CE3E307C /* Pods-Recipe-CICCC.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Recipe-CICCC.release.xcconfig"; path = "Target Support Files/Pods-Recipe-CICCC/Pods-Recipe-CICCC.release.xcconfig"; sourceTree = "<group>"; };
+		1321891214E29317B8224AE6 /* Pods-Recipe-CICCC.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Recipe-CICCC.debug.xcconfig"; path = "Target Support Files/Pods-Recipe-CICCC/Pods-Recipe-CICCC.debug.xcconfig"; sourceTree = "<group>"; };
+		1BBFE56D1C339529EA1BCFF5 /* Pods-Recipe-CICCC.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Recipe-CICCC.release.xcconfig"; path = "Target Support Files/Pods-Recipe-CICCC/Pods-Recipe-CICCC.release.xcconfig"; sourceTree = "<group>"; };
 		1FB68862972AF3D3836E2626 /* Pods-Recipe-CICCC-Recipe-CICCCUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Recipe-CICCC-Recipe-CICCCUITests.release.xcconfig"; path = "Target Support Files/Pods-Recipe-CICCC-Recipe-CICCCUITests/Pods-Recipe-CICCC-Recipe-CICCCUITests.release.xcconfig"; sourceTree = "<group>"; };
 		32D8E6CD05D34DE248C814F4 /* Pods-Recipe-CICCC-Recipe-CICCCUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Recipe-CICCC-Recipe-CICCCUITests.debug.xcconfig"; path = "Target Support Files/Pods-Recipe-CICCC-Recipe-CICCCUITests/Pods-Recipe-CICCC-Recipe-CICCCUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		40127ACA23A06E3C00260AF0 /* Recipe-CICCC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Recipe-CICCC.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -214,6 +218,9 @@
 		40A8052023A08C130094E52A /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
 		40BF229223D6AD920009FC69 /* LoginMainpageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginMainpageViewController.swift; sourceTree = "<group>"; };
 		40E59BEC23EE6BC60049F9B6 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		4CDC13217C2AAA8AA80FAA23 /* Pods-Recipe-CICCC-Recipe-CICCCUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Recipe-CICCC-Recipe-CICCCUITests.release.xcconfig"; path = "Target Support Files/Pods-Recipe-CICCC-Recipe-CICCCUITests/Pods-Recipe-CICCC-Recipe-CICCCUITests.release.xcconfig"; sourceTree = "<group>"; };
+		5B91677B69BE919F3A971473 /* Pods-Recipe-CICCC-Recipe-CICCCUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Recipe-CICCC-Recipe-CICCCUITests.debug.xcconfig"; path = "Target Support Files/Pods-Recipe-CICCC-Recipe-CICCCUITests/Pods-Recipe-CICCC-Recipe-CICCCUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		5BDE5C19CC75C54CF1A672CF /* Pods-Recipe-CICCCTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Recipe-CICCCTests.release.xcconfig"; path = "Target Support Files/Pods-Recipe-CICCCTests/Pods-Recipe-CICCCTests.release.xcconfig"; sourceTree = "<group>"; };
 		69124FA923ECE2C100D116B4 /* followingRecipeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = followingRecipeCollectionViewCell.swift; sourceTree = "<group>"; };
 		691F6AC823FFB0FB005D3231 /* VIPViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VIPViewController.swift; sourceTree = "<group>"; };
 		691F6ACA23FFB1C2005D3231 /* PopularViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularViewController.swift; sourceTree = "<group>"; };
@@ -229,6 +236,8 @@
 		6985A53923F4924A001257A8 /* IngredientTitleCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientTitleCollectionViewCell.swift; sourceTree = "<group>"; };
 		6985A53B23F494B0001257A8 /* IngredientImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		699679AE23F3A25800719A36 /* ingredientRecipe.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ingredientRecipe.storyboard; sourceTree = "<group>"; };
+		6999A48F24170ED00013BD5B /* Podfile.lock */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile.lock; sourceTree = "<group>"; };
+		6999A49224170EE40013BD5B /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
 		69DB5BBB23ECB2940027A238 /* followingRecipe.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = followingRecipe.storyboard; sourceTree = "<group>"; };
 		69DB5BBD23ECBB930027A238 /* FollowingRecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowingRecipeViewController.swift; sourceTree = "<group>"; };
 		69DB5BC023ECBF240027A238 /* FollowingRecipeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowingRecipeTableViewCell.swift; sourceTree = "<group>"; };
@@ -290,6 +299,7 @@
 		939DE07C470F123E9499D33E /* Pods-Recipe-CICCC.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Recipe-CICCC.debug.xcconfig"; path = "Target Support Files/Pods-Recipe-CICCC/Pods-Recipe-CICCC.debug.xcconfig"; sourceTree = "<group>"; };
 		A4B3B0DAE263BCAF397031CE /* Pods-Recipe-CICCCTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Recipe-CICCCTests.debug.xcconfig"; path = "Target Support Files/Pods-Recipe-CICCCTests/Pods-Recipe-CICCCTests.debug.xcconfig"; sourceTree = "<group>"; };
 		B0AA45E6A7912FC6432A5B9C /* Pods_Recipe_CICCC_Recipe_CICCCUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Recipe_CICCC_Recipe_CICCCUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BBDF6B455BD1082F8C59A5B7 /* Pods-Recipe-CICCCTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Recipe-CICCCTests.debug.xcconfig"; path = "Target Support Files/Pods-Recipe-CICCCTests/Pods-Recipe-CICCCTests.debug.xcconfig"; sourceTree = "<group>"; };
 		D89B921DC6BD386DA580F255 /* Pods_Recipe_CICCC.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Recipe_CICCC.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E32D65DEEA3D2064428CF46F /* Pods_Recipe_CICCCTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Recipe_CICCCTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -325,6 +335,9 @@
 		40127AC123A06E3C00260AF0 = {
 			isa = PBXGroup;
 			children = (
+				6999A49224170EE40013BD5B /* Podfile */,
+				6999A49124170ED80013BD5B /* Pods */,
+				6999A48F24170ED00013BD5B /* Podfile.lock */,
 				40127ACC23A06E3C00260AF0 /* Recipe-CICCC */,
 				40127AE323A06E4700260AF0 /* Recipe-CICCCTests */,
 				40127AEE23A06E4700260AF0 /* Recipe-CICCCUITests */,
@@ -559,6 +572,19 @@
 			path = CellForIngredientRecipe;
 			sourceTree = "<group>";
 		};
+		6999A49124170ED80013BD5B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				1321891214E29317B8224AE6 /* Pods-Recipe-CICCC.debug.xcconfig */,
+				1BBFE56D1C339529EA1BCFF5 /* Pods-Recipe-CICCC.release.xcconfig */,
+				5B91677B69BE919F3A971473 /* Pods-Recipe-CICCC-Recipe-CICCCUITests.debug.xcconfig */,
+				4CDC13217C2AAA8AA80FAA23 /* Pods-Recipe-CICCC-Recipe-CICCCUITests.release.xcconfig */,
+				BBDF6B455BD1082F8C59A5B7 /* Pods-Recipe-CICCCTests.debug.xcconfig */,
+				5BDE5C19CC75C54CF1A672CF /* Pods-Recipe-CICCCTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		69DB5BBF23ECBC280027A238 /* CellForFollowingRecipe */ = {
 			isa = PBXGroup;
 			children = (
@@ -616,9 +642,7 @@
 			children = (
 				69325D292416FF1800340F1F /* getUserDataDelegate.swift */,
 				6F82F999240E2E4E007B7D71 /* getDataFromFirebase.swift */,
-				6F4966222410EA4600397B4F /* getUserDataDelegate.swift */,
 				6F9BB7992410C01F00CE7F60 /* getIngredientData.swift */,
-
 			);
 			path = delegates;
 			sourceTree = "<group>";
@@ -801,9 +825,11 @@
 				6FEC4DAF23FFCF3A00AB2785 /* Assets.xcassets in Resources */,
 				6970F4E423F6302A00F94541 /* Monthly.storyboard in Resources */,
 				6F8BE77523EEA96300CEA348 /* Map.storyboard in Resources */,
+				6999A49324170EE40013BD5B /* Podfile in Resources */,
 				69202F2E23FB3D33001AB4A9 /* EditorChoice.storyboard in Resources */,
 				693CA00A23FF437600957EF2 /* RecipeCollectionViewCell.xib in Resources */,
 				6F3FF53F23DAABAD005162C7 /* Refrigerator.storyboard in Resources */,
+				6999A49024170ED00013BD5B /* Podfile.lock in Resources */,
 				693CA00C23FF43CE00957EF2 /* VIP_page.storyboard in Resources */,
 				6FB86C0B23E8855800672851 /* apiKey.plist in Resources */,
 				6F3FF55D23E1068B005162C7 /* ShoppingList.storyboard in Resources */,
