@@ -2492,7 +2492,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 			<key>License</key>
 			<string>Apache</string>
 			<key>Title</key>
-			<string>FirebaseInstallations</string>
+			<string>FirebaseFirestoreSwift</string>
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 		</dict>
@@ -2704,7 +2704,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 			<key>License</key>
 			<string>Apache</string>
 			<key>Title</key>
-			<string>FirebaseInstanceID</string>
+			<string>FirebaseInstallations</string>
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 		</dict>

@@ -19,7 +19,7 @@ class UserdataManagerClass {
     
     func getUserDetail() {
         
-        db.collection("user").getDocuments {
+        db.collection("user").addSnapshotListener {
             (querysnapshot, error) in
             if error != nil {
                 print("Error getting documents: \(String(describing: error))")
