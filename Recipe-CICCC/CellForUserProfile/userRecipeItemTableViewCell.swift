@@ -10,6 +10,9 @@ import UIKit
 
 class userRecipeItemTableViewCell: UITableViewCell {
     
+    var recipeData = [RecipeDetail]()
+    var recipeImage = [UIImage]()
+    
     @IBOutlet weak var collectionView: UICollectionView!{
         didSet{
             collectionView.dataSource = self as UICollectionViewDataSource
@@ -32,11 +35,13 @@ class userRecipeItemTableViewCell: UITableViewCell {
 
 extension userRecipeItemTableViewCell: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 15
+        print(recipeImage.count)
+        return recipeImage.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-       let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "recipeItemForUser", for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "recipeItemForUser", for: indexPath) as! userRecipeItemCollectionViewCell
+        cell.imageView.image = recipeImage[indexPath.row]
        return cell
     }
     
