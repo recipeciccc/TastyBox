@@ -34,7 +34,6 @@
 NSString * const OptInEvents = @"production_events";
 NSString * const UnconfirmedEvents = @"eligible_for_prediction_events";
 
-static NSMutableArray<NSMutableDictionary<NSString *, id> *> *_viewTrees;
 static NSMutableSet<NSString *> *_optInEvents;
 static NSMutableSet<NSString *> *_unconfirmedEvents;
 
@@ -42,7 +41,6 @@ static NSMutableSet<NSString *> *_unconfirmedEvents;
 
 + (void)initialize
 {
-  _viewTrees = [NSMutableArray array];
   _optInEvents = [NSMutableSet set];
   _unconfirmedEvents = [NSMutableSet set];
 }
@@ -145,7 +143,8 @@ static NSMutableSet<NSString *> *_unconfirmedEvents;
 
 + (void)buttonClicked:(UIButton *)button
 {
-  [self predictEvent:button withText:[FBSDKViewHierarchy getText:button]];
+  [self predictEventWithUIResponder:button
+                               text:[FBSDKViewHierarchy getText:button]];
 }
 
 + (void)handleView:(UIView *)view withDelegate:(id)delegate
@@ -158,7 +157,8 @@ static NSMutableSet<NSString *> *_unconfirmedEvents;
       && [delegate respondsToSelector:@selector(tableView:didSelectRowAtIndexPath:)]) {
     void (^block)(id, SEL, id, id) = ^(id target, SEL command, UITableView *tableView, NSIndexPath *indexPath) {
       UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-      [self predictEvent:cell withText:[self getTextFromContentView:[cell contentView]]];
+      [self predictEventWithUIResponder:cell
+                                   text:[self getTextFromContentView:[cell contentView]]];
     };
     [FBSDKSwizzler swizzleSelector:@selector(tableView:didSelectRowAtIndexPath:)
                            onClass:[delegate class]
@@ -168,7 +168,8 @@ static NSMutableSet<NSString *> *_unconfirmedEvents;
              && [delegate respondsToSelector:@selector(collectionView:didSelectItemAtIndexPath:)]) {
     void (^block)(id, SEL, id, id) = ^(id target, SEL command, UICollectionView *collectionView, NSIndexPath *indexPath) {
       UICollectionViewCell *cell = [collectionView cellForItemAtIndexPath:indexPath];
-      [self predictEvent:cell withText:[self getTextFromContentView:[cell contentView]]];
+      [self predictEventWithUIResponder:cell
+                                   text:[self getTextFromContentView:[cell contentView]]];
     };
     [FBSDKSwizzler swizzleSelector:@selector(collectionView:didSelectItemAtIndexPath:)
                            onClass:[delegate class]
@@ -177,7 +178,7 @@ static NSMutableSet<NSString *> *_unconfirmedEvents;
   }
 }
 
-+ (void)predictEvent:(NSObject *)obj withText:(NSString *)text
++ (void)predictEventWithUIResponder:(UIResponder *)uiResponder text:(NSString *)text
 {
   if (text.length > 100 || text.length == 0 || [FBSDKAppEventsUtility isSensitiveUserData: text]) {
     return;
@@ -186,9 +187,13 @@ static NSMutableSet<NSString *> *_unconfirmedEvents;
   NSMutableArray<NSDictionary<NSString *, id> *> *trees = [NSMutableArray array];
 
   fb_dispatch_on_main_thread(^{
+    NSMutableSet<NSObject *> *objAddressSet = [NSMutableSet set];
     NSArray<UIWindow *> *windows = [UIApplication sharedApplication].windows;
     for (UIWindow *window in windows) {
-      NSDictionary<NSString *, id> *tree = [FBSDKViewHierarchy recursiveCaptureTree:window withObject:obj];
+      NSDictionary<NSString *, id> *tree = [FBSDKViewHierarchy recursiveCaptureTreeWithCurrentNode:window
+                                                                                        targetNode:uiResponder
+                                                                                     objAddressSet:objAddressSet
+                                                                                              hash:NO];
       if (tree) {
         if (window.isKeyWindow) {
           [trees insertObject:tree atIndex:0];
@@ -197,7 +202,7 @@ static NSMutableSet<NSString *> *_unconfirmedEvents;
         }
       }
     }
-    NSMutableDictionary<NSString *, id> *treeInfo = [NSMutableDictionary dictionary];
+    NSMutableDictionary<NSString *, id> *viewTree = [NSMutableDictionary dictionary];
 
     NSString *screenName = nil;
     UIViewController *topMostViewController = [FBSDKInternalUtility topMostViewController];
@@ -205,12 +210,8 @@ static NSMutableSet<NSString *> *_unconfirmedEvents;
       screenName = NSStringFromClass([topMostViewController class]);
     }
 
-    treeInfo[VIEW_HIERARCHY_VIEW_KEY] = trees;
-    treeInfo[VIEW_HIERARCHY_SCREEN_NAME_KEY] = screenName ?: @"";
-
-    [_viewTrees addObject:treeInfo];
-
-    NSDictionary<NSString *, id> *viewTree = [_viewTrees lastObject];
+    viewTree[VIEW_HIERARCHY_VIEW_KEY] = trees;
+    viewTree[VIEW_HIERARCHY_SCREEN_NAME_KEY] = screenName ?: @"";
 
     fb_dispatch_on_default_thread(^{
       NSDictionary<NSString *, NSString *> *result = [FBSDKEventInferencer predict:text viewTree:[viewTree mutableCopy] withLog:YES];

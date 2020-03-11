@@ -77,7 +77,7 @@ class LoginMainpageViewController: UIViewController, UITextFieldDelegate {
                     return
                 }
                 self.view.endEditing(true)
-                
+                self.passwordTextField.text = ""
                 let Storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
                 let vc = Storyboard.instantiateViewController(withIdentifier: "Discovery")
                 self.navigationController?.pushViewController(vc, animated: true)

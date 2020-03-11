@@ -38,10 +38,6 @@ static NSString * const FIELD_K                                 = @"k";
 static NSString * const FIELD_V                                 = @"v";
 static NSString * const FIELD_K_DELIMITER                       = @",";
 
-FBSDKAppEventUserDataType FBSDKAppEventRule1                    = @"r1";
-FBSDKAppEventUserDataType FBSDKAppEventRule2                    = @"r2";
-
-static NSArray<FBSDKAppEventUserDataType> *FBSDKMetadataIndexerKeys;
 static NSMutableDictionary<NSString *, NSDictionary<NSString *, NSString *> *> *_rules;
 static NSMutableDictionary<NSString *, NSMutableArray<NSString *> *> *_store;
 static dispatch_queue_t serialQueue;
@@ -50,7 +46,7 @@ static dispatch_queue_t serialQueue;
 
 + (void)initialize
 {
-  FBSDKMetadataIndexerKeys = @[FBSDKAppEventRule1, FBSDKAppEventRule2];
+  _rules = [[NSMutableDictionary alloc] init];
   serialQueue = dispatch_queue_create("com.facebook.appevents.MetadataIndexer", DISPATCH_QUEUE_SERIAL);
 }
 
@@ -78,8 +74,8 @@ static dispatch_queue_t serialQueue;
     [FBSDKMetadataIndexer initStore];
 
     BOOL isEnabled = NO;
-    for (NSString *key in FBSDKMetadataIndexerKeys) {
-      BOOL isRuleEnabled = (nil != [_rules objectForKey:key]);
+    for (NSString *key in _rules) {
+      BOOL isRuleEnabled = (nil != _rules[key]);
       if (isRuleEnabled) {
         isEnabled = YES;
       }
@@ -98,14 +94,14 @@ static dispatch_queue_t serialQueue;
 + (void)initStore
 {
   _store = [[NSMutableDictionary alloc] init];
-  for (NSString *key in FBSDKMetadataIndexerKeys) {
+  for (NSString *key in _rules) {
     NSString *data = [FBSDKUserDataStore getHashedDataForType:key];
     if (data.length > 0) {
       _store[key] = [NSMutableArray arrayWithArray:[data componentsSeparatedByString:FIELD_K_DELIMITER]];
     }
   }
 
-  for (NSString *key in FBSDKMetadataIndexerKeys) {
+  for (NSString *key in _rules) {
     if (!_store[key]) {
       _store[key] = [[NSMutableArray alloc] init];
     }
@@ -114,13 +110,9 @@ static dispatch_queue_t serialQueue;
 
 + (void)constructRules:(NSDictionary<NSString *, id> * _Nullable)rules
 {
-  if (!_rules) {
-    _rules = [[NSMutableDictionary alloc] init];
-  }
-
   for (NSString *key in rules) {
     NSDictionary<NSString *, NSString *> *value = [FBSDKTypeUtility dictionaryValue:rules[key]];
-    if (value && value[FIELD_K].length > 0 && value[FIELD_V].length > 0) {
+    if (value[FIELD_K].length > 0 && value[FIELD_V]) {
       _rules[key] = value;
     }
   }
@@ -137,8 +129,8 @@ static dispatch_queue_t serialQueue;
       NSArray<NSString *> *labels = [self getLabelsOfView:view];
       UIKeyboardType keyboardType = [self getKeyboardType:view];
       dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
-        [self getMetadataWithText:[self normalizedValue:text]
-                      placeholder:[self normalizeField:placeholder]
+        [self getMetadataWithText:text
+                      placeholder:placeholder
                            labels:labels
                   secureTextEntry:secureTextEntry
                         inputType:keyboardType];
@@ -221,8 +213,9 @@ static dispatch_queue_t serialQueue;
             secureTextEntry:(BOOL)secureTextEntry
                   inputType:(UIKeyboardType)inputType
 {
-  if (secureTextEntry ||
-      [placeholder containsString:@"password"] ||
+  text = [self normalizeValue:text];
+  placeholder = [self normalizeField:placeholder];
+  if (secureTextEntry || [placeholder containsString:@"password"] ||
       text.length == 0 ||
       text.length > FBSDKMetadataIndexerMaxTextLength ||
       placeholder.length >= FBSDKMetadataIndexerMaxIndicatorLength) {
@@ -233,9 +226,19 @@ static dispatch_queue_t serialQueue;
     NSDictionary<NSString *, NSString *> *rule = _rules[key];
     BOOL isRuleKMatched = [self checkMetadataHint:placeholder matchRuleK:rule[FIELD_K]]
     || [self checkMetadataLabels:labels matchRuleK:rule[FIELD_K]];
-    BOOL isRuleVMatched = [self checkMetadataText:text matchRuleV:rule[FIELD_V]];
-    if (isRuleKMatched && isRuleVMatched) {
-      [FBSDKMetadataIndexer checkAndAppendData:text forKey:key];
+    if (!isRuleKMatched) {
+      continue;
+    }
+
+    NSString *preProcessedText = text;
+    if ([key isEqualToString:@"r2"]) {
+      preProcessedText = [[text componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"+- ()."]] componentsJoinedByString:@""];
+    }
+    BOOL isRuleVMatched = [rule[FIELD_V] isEqualToString:@""] || [self checkMetadataText:preProcessedText matchRuleV:rule[FIELD_V]];
+    if (isRuleVMatched) {
+      NSString *prunedText = [self pruneValue:preProcessedText forKey:key];
+      [FBSDKMetadataIndexer checkAndAppendData:prunedText forKey:key];
+      continue;
     }
   }
 }
@@ -255,7 +258,7 @@ static dispatch_queue_t serialQueue;
       [_store[key] removeObjectAtIndex:0];
     }
     [_store[key] addObject:hashData];
-    [FBSDKUserDataStore setHashData:[_store[key] componentsJoinedByString:@","]
+    [FBSDKUserDataStore setHashData:[_store[key] componentsJoinedByString:FIELD_K_DELIMITER]
                             forType:key];
   });
 }
@@ -275,7 +278,7 @@ static dispatch_queue_t serialQueue;
                matchRuleK:(NSString *)ruleK
 {
   if (hint.length > 0 && ruleK) {
-    NSArray<NSString *> *items = [ruleK componentsSeparatedByString:@","];
+    NSArray<NSString *> *items = [ruleK componentsSeparatedByString:FIELD_K_DELIMITER];
     for (NSString *item in items) {
       if ([hint containsString:item]) {
         return YES;
@@ -292,12 +295,7 @@ static dispatch_queue_t serialQueue;
     NSRegularExpression *regex = [[NSRegularExpression alloc] initWithPattern:ruleV
                                                                       options:NSRegularExpressionCaseInsensitive
                                                                         error:nil];
-    NSUInteger matches = [regex numberOfMatchesInString:text options:0 range:NSMakeRange(0, text.length)];
-
-    NSString *prunedText = [[text componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"+- ()."]] componentsJoinedByString:@""];
-    NSUInteger prunedMatches = [regex numberOfMatchesInString:prunedText options:0 range:NSMakeRange(0, prunedText.length)];
-
-    return matches > 0 || prunedMatches > 0;
+    return [regex numberOfMatchesInString:text options:0 range:NSMakeRange(0, text.length)] == 1;
   }
   return NO;
 }
@@ -316,12 +314,31 @@ static dispatch_queue_t serialQueue;
                                     withTemplate:@""].lowercaseString;
 }
 
-+ (NSString *)normalizedValue:(NSString *)value
++ (NSString *)normalizeValue:(NSString *)value
 {
   if (!value) {
     return nil;
   }
   return [value stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]].lowercaseString;
+}
+
++ (NSString *)pruneValue:(NSString *)value forKey:(NSString *)key
+{
+  if (value.length == 0) {
+    return @"";
+  }
+  if ([key isEqualToString:@"r3"]) {
+    if ([value hasPrefix:@"m"] || [value hasPrefix:@"b"] || [value hasPrefix:@"ge"]) {
+      value = @"m";
+    } else {
+      value = @"f";
+    }
+  } else if ([key isEqualToString:@"r4"] || [key isEqualToString:@"r5"]) {
+    value = [[value componentsSeparatedByCharactersInSet:[[NSCharacterSet letterCharacterSet] invertedSet]] componentsJoinedByString:@""];
+  } else if ([key isEqualToString:@"r6"]) {
+    value = [value componentsSeparatedByString:@"-"][0];
+  }
+  return value;
 }
 
 @end
