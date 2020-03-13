@@ -45,11 +45,8 @@ class RefrigeratorViewController: UIViewController {
         let addButton = UIBarButtonItem(title: "＋", style: .plain, target: self, action: #selector(addButtunTapped))
         
 //        self.navigationItem.rightBarButtonItems = [addButton, editButtonItem]
-
     }
     
-    
-
     @objc func addButtunTapped() {
         performSegue(withIdentifier: "addIItemRefrigerator", sender: nil)
     }
@@ -62,6 +59,7 @@ class RefrigeratorViewController: UIViewController {
             tableView.isEditing = false
             
         }
+
     }
     
     override func setEditing(_ editing: Bool, animated: Bool) {
@@ -106,7 +104,6 @@ class RefrigeratorViewController: UIViewController {
         return true
     }
 
-    
 }
 
 extension RefrigeratorViewController: UITableViewDataSource {
@@ -163,11 +160,12 @@ extension RefrigeratorViewController: UITableViewDataSource {
         tableView.deselectRow(at: indexPath, animated: true)
         
         if tableView.isEditing == true {
-        
+
         dataManager.deleteData(name: ingredients[indexPath.row].name, indexPath: indexPath)
         ingredients.remove(at: indexPath.row)
         tableView.deleteRows(at: [indexPath], with: .automatic)
         
+
         
         }
     }
