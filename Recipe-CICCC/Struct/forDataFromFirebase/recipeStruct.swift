@@ -13,29 +13,28 @@ import Firebase
 struct RecipeDetail {
     var recipeID: String
     var title: String
-//        var explaination: String
+   
     var cookingTime: Int
-     var image: String
+    var image: String
     var like: Int
     var serving: Int
     var userID:String
+//     var instructions: [Instruction]
+//    var ingredients: [Ingredient]
+//    var comment: [Comment]
     
-//    var ingredient: Ingredient
-//        var instruciton: Instruction
-//     var comment: Comment
-    
-//    init(snapshot:QueryDocumentSnapshot) {
-//        guard
-//            let docId = snapshot.documentID,
-//            let title = snapshot.get("title") as! String,
-//            let cookingTime = snapshot.get("Cooking Time") as! Int,
-//    //                    let image = document.get("image") as! String
-//            let like = snapshot.get("like") as! Int,
-//            let serving = snapshot.get("serving") as! Int
-//        else { return }
-//        
-//        self.id = "ID"
-//    }
+    //    init(snapshot:QueryDocumentSnapshot) {
+    //        guard
+    //            let docId = snapshot.documentID,
+    //            let title = snapshot.get("title") as! String,
+    //            let cookingTime = snapshot.get("Cooking Time") as! Int,
+    //    //                    let image = document.get("image") as! String
+    //            let like = snapshot.get("like") as! Int,
+    //            let serving = snapshot.get("serving") as! Int
+    //        else { return }
+    //
+    //        self.id = "ID"
+    //    }
     
     
 }

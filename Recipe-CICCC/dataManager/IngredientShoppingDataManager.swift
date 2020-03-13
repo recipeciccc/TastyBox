@@ -87,9 +87,6 @@ class IngredientShoppingDataManager {
                 }
         }
         
-        self.ingredients.remove(at: indexPath.row)
-        self.delegate?.gotData(ingredients: self.ingredients)
-        
     }
     
     func searchIngredients(text: String, tableView: UITableView) {

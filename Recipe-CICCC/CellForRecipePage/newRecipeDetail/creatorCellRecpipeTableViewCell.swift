@@ -8,16 +8,24 @@
 
 import UIKit
 
+protocol creatorCellRecpipeTableViewCellDelegate: class {
+    func increaseFollower()
+}
+
+
 class creatorCellRecpipeTableViewCell: UITableViewCell {
 
     let numOfCreatorhasTableViewCell = NumOfCreatorhasTableViewCell()
+    
+    weak var delegate: creatorCellRecpipeTableViewCellDelegate?
 
-    @IBOutlet weak var creatorNameLabel: UILabel!
+//    @IBOutlet weak var creatorNameLabel: UILabel!
+    @IBOutlet weak var labelCreator: UIButton!
     @IBOutlet weak var imgCreator: UIButton!
     
     
     @IBAction func followerAdding(_ sender: Any) {
-        numOfCreatorhasTableViewCell.numOfFollowed += 1
+        self.delegate?.increaseFollower()
     }
     
     
@@ -25,7 +33,6 @@ class creatorCellRecpipeTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        creatorNameLabel.text = ""
     }
     
 
