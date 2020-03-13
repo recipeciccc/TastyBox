@@ -100,7 +100,7 @@ extension ShoppinglistViewController: UITableViewDataSource {
             
             cell.nameLabel.text = ingredients[indexPath.row].name
             cell.amountLabel.text = ingredients[indexPath.row].amount
-            cell.accessoryType = .checkmark
+            cell.accessoryType = .none
             
             return cell
         }
@@ -114,18 +114,24 @@ extension ShoppinglistViewController: UITableViewDataSource {
         else {
             ingredients[indexPath.row].isBought = true
             dataManager.deleteData(name: ingredients[indexPath.row].name, indexPath: indexPath)
+            ingredients.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .automatic)
         }
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         
+         let cell = (tableView.dequeueReusableCell(withIdentifier: "ingredientShopping", for: indexPath) as? IngredientShoppingTableViewCell)!
         
         if editingStyle == .delete {
             dataManager.deleteData(name: ingredients[indexPath.row].name, indexPath: indexPath)
             tableView.deleteRows(at: [indexPath], with: .automatic)
         }
        
+    }
+    
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
@@ -168,6 +174,7 @@ extension ShoppinglistViewController: getIngredientShoppingDataDelegate {
     func gotData(ingredients: [IngredientShopping]) {
         
         self.ingredients = ingredients
+      
         tableView.reloadData()
     
     }
@@ -203,8 +210,16 @@ extension ShoppinglistViewController: UISearchBarDelegate {
         }
     }
     
+    
+    
     func searchBarBookmarkButtonClicked(_ searchBar: UISearchBar) {
         searchBar.endEditing(true)
     }
     
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar)
+    {
+        self.searchBar.endEditing(true)
+    }
 }
+
+

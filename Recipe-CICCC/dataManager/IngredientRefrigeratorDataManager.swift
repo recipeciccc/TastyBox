@@ -84,9 +84,6 @@ class IngredientRefrigeratorDataManager {
                 }
         }
         
-        self.ingredients.remove(at: indexPath.row)
-        self.delegate?.gotData(ingredients: self.ingredients)
-        
     }
     
     func searchIngredients(text: String, tableView: UITableView) {
@@ -126,9 +123,7 @@ class IngredientRefrigeratorDataManager {
                 
             }
         }
-        //the code below here will execute *before* the code in the above closure
-        self.delegate?.gotData(ingredients: self.ingredients)
-        tableView.reloadData()
+        
     }
     
 }
