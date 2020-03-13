@@ -44,7 +44,12 @@ class RecipedataManagerClass {
                     let serving = data["serving"] as? Int
                     let image = data["image"] as? String
                     let userID = data["userID"] as? String
+//                     let instructions = data["instruction"] as? [Instruction]
+//                     let ingredients = data["ingredient"] as? [Ingredient]
+//                     let comments = data["comment"] as? [Comment]
                     
+                    
+//                    let recipe = RecipeDetail(recipeID: reipeId!, title: title!, instructions: instructions!, cookingTime: cookingTime!, image: image!, like: like!, serving: serving!, userID: userID!, ingredients: ingredients!, comment: comments!)
                     
                     let recipe = RecipeDetail(recipeID: reipeId!, title: title!, cookingTime: cookingTime!, image: image!, like: like!, serving: serving!, userID: userID!)
                     

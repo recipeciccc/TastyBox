@@ -7,9 +7,6 @@
    <Group
       location = "group:Recipe-CICCC"
       name = "Recipe-CICCC">
-      <FileRef
-         location = "group:SavedRecipeTableViewController.swift">
-      </FileRef>
       <Group
          location = "group:CellForRecipePage"
          name = "CellForRecipePage">
@@ -35,6 +32,9 @@
       <Group
          location = "group:tableView"
          name = "tableView">
+         <FileRef
+            location = "group:/Users/kitajimashihomi/tutorialClass/Recipe-CICCC-1/Recipe-CICCC/tableView/SavedRecipeTableViewController.swift">
+         </FileRef>
          <FileRef
             location = "group:ViewController.swift">
          </FileRef>
