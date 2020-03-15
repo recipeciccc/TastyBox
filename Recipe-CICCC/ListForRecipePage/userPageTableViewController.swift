@@ -48,6 +48,19 @@ class userPageTableViewController: UITableViewController {
         }
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+           if segue.identifier == "following" {
+               if let nextVC = segue.destination as? showFolllowingFollowedCreatorsViewController {
+                   nextVC.titleVC = "Following"
+               }
+           }
+           if segue.identifier == "follower" {
+                   if let nextVC = segue.destination as? showFolllowingFollowedCreatorsViewController {
+                       nextVC.titleVC = "Follower"
+                   }
+           }
+    }
+    
 //    func getImage(data: RecipeDetail){
 ////        for data in recipeList{
 ////        }
@@ -111,13 +124,7 @@ class userPageTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let buttonTitle = buttons.buttons[indexPath.row].titleButton
-        //
-        //        if buttonTitle == "Shopping List" {
-        //            let segue = self.performSegue(withIdentifier: "to Shopping List", sender:nil)
-        //            let distination =  segue.destination as! ShoppingListTableViewController
-        //
-        //        }
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     @IBAction func postedButtonTapped(_ sender: Any) {
@@ -131,7 +138,7 @@ extension userPageTableViewController: ReloadDataDelegate{
         recipeList = data
         get_url_rid()
         fetchImage.getImage(uid: uid!, rid: ridList, imageUrl: urlList)
-        if imageList.count == 0{
+        if imageList.count == 0 {
             self.tableView.reloadData()
         }
     }
