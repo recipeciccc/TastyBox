@@ -8,16 +8,25 @@
 
 import UIKit
 
+protocol iconItemTableViewCellDelegate: class{
+    func increaseLike()
+}
+
 class iconItemTableViewCell: UITableViewCell {
 
     @IBOutlet weak var numLikeLabel: UILabel!
     
-    var numLike = 0
+    weak var delegate: iconItemTableViewCellDelegate?
+    
+    @IBAction func increaseLike(_ sender: UIButton) {
+        self.delegate?.increaseLike()
+    }
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        numLikeLabel.text = "\(numLike)"
+       
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
