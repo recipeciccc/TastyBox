@@ -409,7 +409,7 @@ extension CreatorViewController: UITableViewDelegate,UITableViewDataSource{
             return cell
             
         default:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "ingredient") as! IngredientsCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "ingredients") as! IngredientsCell
             return cell
             
         }
