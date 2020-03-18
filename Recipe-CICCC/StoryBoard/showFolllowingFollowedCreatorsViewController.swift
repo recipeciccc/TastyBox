@@ -18,13 +18,15 @@ class showFolllowingFollowedCreatorsViewController: UIViewController {
     
     var user: User?
     var titleVC: String?
-   
+    
+    var followers: [String] = []
+    var following: [String] = []
    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        user = User(userID: "jkfl;da", name: "Test")
+//        user = User(userID: "jkfl;da", name: "Test", followersID: <#[String]#>)
         
         searchBar.delegate = self
         scrollView.delegate = self

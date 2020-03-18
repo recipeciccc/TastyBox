@@ -428,10 +428,10 @@
             </objects>
             <point key="canvasLocation" x="1502.8985507246377" y="814.95535714285711"/>
         </scene>
-        <!--userPage-->
+        <!--MyPage-->
         <scene sceneID="7Jy-Rw-1DD">
             <objects>
-                <viewControllerPlaceholder storyboardName="userPage" id="Uzb-vj-7TZ" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="MyPage" id="Uzb-vj-7TZ" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="1Ye-ML-0mg"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qr6-sE-R3K" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

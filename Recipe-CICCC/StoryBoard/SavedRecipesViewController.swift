@@ -41,11 +41,11 @@ extension SavedRecipesViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = (collectionView.dequeueReusableCell(withReuseIdentifier: "savedRecipe", for: indexPath) as? SavedRecipeCollectionViewCell)
+        let cell = (collectionView.dequeueReusableCell(withReuseIdentifier: "savedRecipe", for: indexPath) as? SavedRecipesCollectionViewCell)
         
-        cell.imageView.image = savedRecipes[indexPath.row].image
+//        cell!.imageView.image = savedRecipes[indexPath.row].image
         
-        return cell
+        return cell!
     }
     
     
