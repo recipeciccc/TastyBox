@@ -12,5 +12,10 @@ struct User {
     var userID: String
     var name: String
 //    var image: UIImage
+    var followersID: [String]
+    var followingID: [String]
 }
+
+
+
 

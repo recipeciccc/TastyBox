@@ -8,5 +8,6 @@
 import Foundation
 
 protocol getUserDataDelegate {
-    func gotData(user: User)
+//    func gotUsersData(users: [User])
+    func gotUserData(user: User)
 }

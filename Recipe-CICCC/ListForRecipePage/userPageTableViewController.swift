@@ -14,11 +14,16 @@ class userPageTableViewController: UITableViewController {
     
     let fetchData = FetchRecipeData()
     let fetchImage = FetchRecipeImage()
+    let userDataManager = UserdataManager()
     let uid = Auth.auth().currentUser?.uid
     var recipeList = [RecipeDetail]()
     var imageList = [UIImage]()
     var urlList = [String]()
     var ridList = [String]()
+    var followers:[User] = []
+    var following:[User] = []
+    
+    var user: User?
     
     let buttons = ButtonsList()
     
@@ -29,13 +34,15 @@ class userPageTableViewController: UITableViewController {
         
         fetchData.delegate = self
         fetchImage.delegate = self
+        userDataManager.delegate = self
         
         let db = Firestore.firestore()
         let queryRef = db.collection("recipe").whereField("userID", isEqualTo: uid as Any).order(by: "time", descending: true)
         
         recipeList = fetchData.Data(queryRef: queryRef)
         
-        
+        self.userDataManager.getUserDetail(id: uid)
+       
     }
     
     func get_url_rid(){
@@ -46,6 +53,28 @@ class userPageTableViewController: UITableViewController {
                 print(data.recipeID)
             }
         }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let nextVC = segue.destination as? showFolllowingFollowedCreatorsViewController {
+            
+//            nextVC.followers = user!.followersID
+//            nextVC.following = user!.followingID
+            
+            if segue.identifier == "following" {
+               
+                nextVC.titleVC = "Following"
+                
+            
+            }
+            if segue.identifier == "follower" {
+            
+                nextVC.titleVC = "Follower"
+            
+            }
+        }
+        
+          
     }
     
 //    func getImage(data: RecipeDetail){
@@ -74,6 +103,8 @@ class userPageTableViewController: UITableViewController {
             cell.userImageView.layer.masksToBounds = false
             cell.userImageView.layer.cornerRadius = cell.userImageView.bounds.width / 2
             cell.userImageView.clipsToBounds = true
+            
+            
             return cell
         }
             
@@ -111,13 +142,7 @@ class userPageTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let buttonTitle = buttons.buttons[indexPath.row].titleButton
-        //
-        //        if buttonTitle == "Shopping List" {
-        //            let segue = self.performSegue(withIdentifier: "to Shopping List", sender:nil)
-        //            let distination =  segue.destination as! ShoppingListTableViewController
-        //
-        //        }
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     @IBAction func postedButtonTapped(_ sender: Any) {
@@ -131,7 +156,7 @@ extension userPageTableViewController: ReloadDataDelegate{
         recipeList = data
         get_url_rid()
         fetchImage.getImage(uid: uid!, rid: ridList, imageUrl: urlList)
-        if imageList.count == 0{
+        if imageList.count == 0 {
             self.tableView.reloadData()
         }
     }
@@ -139,4 +164,17 @@ extension userPageTableViewController: ReloadDataDelegate{
         imageList = img
         self.tableView.reloadData()
     }
+}
+
+extension userPageTableViewController : getUserDataDelegate {
+//    func gotUsersData(users: [User]) {
+//        <#code#>
+//    }
+//
+    func gotUserData(user: User) {
+        self.user = user
+        self.user!.name = (Auth.auth().currentUser?.displayName)!
+    }
+    
+    
 }

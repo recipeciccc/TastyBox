@@ -842,7 +842,7 @@
             location = "group:TestViewController.swift">
          </FileRef>
          <FileRef
-            location = "group:TableViewController.swift">
+            location = "group:/Users/kitajimashihomi/tutorialClass/Recipe-CICCC-1/Recipe-CICCC/ViewController/CreatorProfileTableViewController.swift">
          </FileRef>
          <FileRef
             location = "group:SavedRecipeCollectionViewController.swift">
