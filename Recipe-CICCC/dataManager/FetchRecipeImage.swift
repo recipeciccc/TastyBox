@@ -21,22 +21,23 @@ class FetchRecipeImage{
         var imageList = [UIImage]()
         
         for index in 0..<rid.count{
-           
+            
             let imagesRef = storageRef.child("user/\(uid)/RecipePhoto/\(rid[index])/\(rid[index])")
             imagesRef.getData(maxSize: 1 * 1024 * 1024) { data, error in   //
                 if error != nil {
                     print(error?.localizedDescription as Any)
                 } else {
                     if let imgData = data{
+                        
                         image = UIImage(data: imgData)!
                         imageList.append(image)
+                        self.delegate?.reloadImg(img: imageList)
                     }
                 }
                 
                 self.delegate?.reloadImg(img: imageList)
             }
         }
-        
     }
 }
 
