@@ -29,13 +29,14 @@ class FetchRecipeData{
                         let image = data["image"] as? String
                         let userID = data["userID"] as? String
                         let time = data["time"] as? Timestamp
-                        let instructions = data["instruction"] as? [Instruction]
-                        let ingredients = data["ingredient"] as? [Ingredient]
-                        let comments = data["comment"] as? [Comment]
- 
-//                        let recipe = RecipeDetail(recipeID: reipeId!, title: title!, instructions: instructions!, cookingTime: cookingTime!, image: image!, like: like!, serving: serving!, userID: userID!, ingredients: ingredients!, comment: comments!)
                         
+//                        let instructions = data["instruction"] as? [String]
+//                        let ingredients = data["ingredient"] as? [String]
+//                        let comments = data["comment"] as? [String]
+ 
                         let recipe = RecipeDetail(recipeID: reipeId!, title: title!, cookingTime: cookingTime!, image: image!, like: like!, serving: serving!, userID: userID!)
+
+//                      let recipe =  RecipeDetail(recipeID: reipeId!, title: title!, cookingTime: cookingTime!, image: image!, like: like!, serving: serving!, userID: userID!, instructions: instructions!, ingredients: ingredients!, comment: comments!)
                         
                         recipeList.append(recipe)
                         print(time?.dateValue())

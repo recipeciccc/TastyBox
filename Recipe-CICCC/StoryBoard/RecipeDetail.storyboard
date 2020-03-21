@@ -76,7 +76,7 @@
                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="685-dU-znX">
                                                     <rect key="frame" x="120" y="11.5" width="174" height="20.5"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u2H-g1-Q9g">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u2H-g1-Q9g">
                                                             <rect key="frame" x="0.0" y="0.0" width="112" height="20.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
@@ -84,9 +84,6 @@
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Po2-o4-7i8">
                                                             <rect key="frame" x="132" y="0.0" width="42" height="20.5"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="width" constant="42" id="GUU-Wh-hPo"/>
-                                                            </constraints>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -188,6 +185,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="followBtn" destination="gaE-sM-Vua" id="gBa-yU-ZoM"/>
                                             <outlet property="imgCreator" destination="6H6-18-rY5" id="udL-jV-Fy0"/>
                                             <outlet property="labelCreator" destination="Gx5-Hj-ihu" id="5Nr-5i-4Hx"/>
                                         </connections>

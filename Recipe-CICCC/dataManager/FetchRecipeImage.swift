@@ -34,7 +34,6 @@ class FetchRecipeImage{
                         self.delegate?.reloadImg(img: imageList)
                     }
                 }
-                
                 self.delegate?.reloadImg(img: imageList)
             }
         }

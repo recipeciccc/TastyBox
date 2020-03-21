@@ -10,8 +10,10 @@ import UIKit
 
 class RecipeDetailViewController: UIViewController {
 
+
     @IBOutlet weak var detailTableView: UITableView!
     var mainPhoto = UIImage()
+    var userProfile = Bool()
     // pass the recipe that is RecipeDetail type.
     // retrieve the data of user with RecipeDetail.userID
     var recipe: RecipeDetail?
@@ -75,7 +77,6 @@ extension RecipeDetailViewController: UITableViewDataSource,UITableViewDelegate{
             return cell
         case 2:
             let cell = (tableView.dequeueReusableCell(withIdentifier: "servingAndTime") as? ServingAndTimeTableViewCell)!
-            
             cell.servingLabel.text = "\(recipe?.serving ?? 0) serving"
             cell.timeLabel.text = "\(recipe?.cookingTime ?? 0) mins"
             
@@ -88,7 +89,11 @@ extension RecipeDetailViewController: UITableViewDataSource,UITableViewDelegate{
             return cell
         case 4:
             let cell = (tableView.dequeueReusableCell(withIdentifier: "creator") as? creatorCellRecpipeTableViewCell)!
-            
+            if userProfile == true{
+            cell.followBtn.isHidden = true
+            }else{
+               cell.followBtn.isHidden = false
+            }
             cell.delegate = self as? creatorCellRecpipeTableViewCellDelegate
 //            cell.imgCreator.setImage(creator.image, for: .normal)
             cell.labelCreator.setTitle(creator?.name, for: .normal)
@@ -96,7 +101,9 @@ extension RecipeDetailViewController: UITableViewDataSource,UITableViewDelegate{
             return cell
         case 5:
             let cell = (tableView.dequeueReusableCell(withIdentifier: "ingredientRecipe") as? IngredientsTableViewCell)!
+//            cell.ingredientsNameLabel.text = recipe?.ingredients[indexPath.row]
             
+//            cell.amountIngredientsLabel.text = recipe?.
 //            cell.ingredientsNameLabel.text = recipe?.ingredients[indexPath.row].name ?? "none"
 //            cell.amountIngredientsLabel.text = recipe?.ingredients[indexPath.row].amount ?? "none"
             
