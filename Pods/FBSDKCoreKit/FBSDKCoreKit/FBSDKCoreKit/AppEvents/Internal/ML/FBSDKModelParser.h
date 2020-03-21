@@ -20,32 +20,19 @@
 
 #if !TARGET_OS_TV
 
-NS_SWIFT_NAME(URLOpening)
-@protocol FBSDKURLOpening <NSObject>
+#import <Foundation/Foundation.h>
 
-// Implementations should make sure they can handle nil parameters
-// which is possible in SafariViewController.
-// see canOpenURL below.
-- (BOOL)application:(UIApplication *)application
-            openURL:(NSURL *)url
-  sourceApplication:(NSString *)sourceApplication
-         annotation:(id)annotation;
+#import "FBSDKStandaloneModel.hpp"
 
-// create a different handler to return YES/NO if the receiver can process the above openURL:.
-// This is separated so that we can process the openURL: in callbacks, while still returning
-// the result of canOpenURL synchronously in FBSDKApplicationDelegate
-- (BOOL)canOpenURL:(NSURL *)url
-    forApplication:(UIApplication *)application
- sourceApplication:(NSString *)sourceApplication
-        annotation:(id)annotation;
+NS_ASSUME_NONNULL_BEGIN
 
-- (void)applicationDidBecomeActive:(UIApplication *)application;
+@interface FBSDKModelParser : NSObject
 
-- (BOOL)isAuthenticationURL:(NSURL *)url;
-
-@optional
-- (BOOL)shouldStopPropagationOfURL:(NSURL *)url;
++ (std::unordered_map<std::string, mat::MTensor>)parseWeightsData:(NSData *)weightsData;
++ (bool)validateWeights:(std::unordered_map<std::string, mat::MTensor>)weights forKey:(NSString *)key;
 
 @end
+
+NS_ASSUME_NONNULL_END
 
 #endif

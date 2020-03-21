@@ -24,6 +24,7 @@ class creatorCellRecpipeTableViewCell: UITableViewCell {
     @IBOutlet weak var imgCreator: UIButton!
     
     
+    @IBOutlet weak var followBtn: UIButton!
     @IBAction func followerAdding(_ sender: Any) {
         self.delegate?.increaseFollower()
     }

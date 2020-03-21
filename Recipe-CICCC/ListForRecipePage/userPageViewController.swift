@@ -10,8 +10,9 @@ import UIKit
 import Firebase
 import FirebaseFirestore
 
-class userPageTableViewController: UITableViewController {
+class userPageViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    @IBOutlet var profileTableVIew: UITableView!
     let fetchData = FetchRecipeData()
     let fetchImage = FetchRecipeImage()
     let uid = Auth.auth().currentUser?.uid
@@ -19,54 +20,37 @@ class userPageTableViewController: UITableViewController {
     var imageList = [UIImage]()
     var urlList = [String]()
     var ridList = [String]()
+   
     
     let buttons = ButtonsList()
-    
+
     override func viewDidLoad() {
         
         super.viewDidLoad()
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.orange ]
+        profileTableVIew.delegate = self
+        profileTableVIew.dataSource = self
         
         fetchData.delegate = self
         fetchImage.delegate = self
         
         let db = Firestore.firestore()
         let queryRef = db.collection("recipe").whereField("userID", isEqualTo: uid as Any).order(by: "time", descending: true)
-        
         recipeList = fetchData.Data(queryRef: queryRef)
-        
-        
     }
     
-    func get_url_rid(){
-        if recipeList.count != 0{
-            for data in recipeList{
-                urlList.append(data.image)
-                ridList.append(data.recipeID)
-                print(data.recipeID)
-            }
-        }
-    }
+
     
-//    func getImage(data: RecipeDetail){
-////        for data in recipeList{
-////        }
-//        let rid = data.recipeID
-//        let url = data.image
-//        fetchImage.getImage(uid: uid!, rid: rid, imageUrl: url)
-//
-//    }
-    
-    override func numberOfSections(in tableView: UITableView) -> Int {
+     func numberOfSections(in tableView: UITableView) -> Int {
         return 3 //4
     }
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
     
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let section = indexPath.section
         
         if section == 0 {
@@ -79,22 +63,25 @@ class userPageTableViewController: UITableViewController {
             
         else if section == 1 {
             let cell = (tableView.dequeueReusableCell(withIdentifier: "show the num", for: indexPath) as? NumberTableViewCell)!
+            cell.numOfRecipeUserPostedButton.setTitle("\(recipeList.count) \nPosted", for: .normal)
             return cell
         }
         
         let cell = (tableView.dequeueReusableCell(withIdentifier: "recipeItemForUser", for: indexPath) as? userRecipeItemTableViewCell)!
-        if recipeList.count != 0{
-            cell.recipeData = recipeList
+            cell.delegate = self
+        
+         if recipeList.count != 0{
+                   cell.recipeData = recipeList
 
-            if imageList.count >= recipeList.count {
-                cell.recipeImage = imageList
-                cell.collectionView.reloadData()
-            }
-        }
+                   if imageList.count >= recipeList.count {
+                       cell.recipeImage = imageList
+                       cell.collectionView.reloadData()
+                   }
+               }
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.section {
         case 0:
             return 135
@@ -110,7 +97,7 @@ class userPageTableViewController: UITableViewController {
         }
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let buttonTitle = buttons.buttons[indexPath.row].titleButton
         //
         //        if buttonTitle == "Shopping List" {
@@ -126,17 +113,40 @@ class userPageTableViewController: UITableViewController {
     
 }
 
-extension userPageTableViewController: ReloadDataDelegate{
+extension userPageViewController: ReloadDataDelegate{
     func reloadData(data:[RecipeDetail]) {
         recipeList = data
         get_url_rid()
         fetchImage.getImage(uid: uid!, rid: ridList, imageUrl: urlList)
         if imageList.count == 0{
-            self.tableView.reloadData()
+           profileTableVIew.reloadData()
         }
     }
     func reloadImg(img:[UIImage]){
         imageList = img
-        self.tableView.reloadData()
+        profileTableVIew.reloadData()
     }
+    
+    func get_url_rid(){
+        if recipeList.count != 0{
+            for data in recipeList{
+                urlList.append(data.image)
+                ridList.append(data.recipeID)
+                print(data.recipeID)
+            }
+        }
+    }
+}
+
+extension userPageViewController: CollectionViewInsideUserTableView{
+    func cellTaped(data: IndexPath) {
+        
+        let storyboard = UIStoryboard(name: "RecipeDetail", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "detailvc") as! RecipeDetailViewController
+        vc.userProfile = true
+        vc.recipe = recipeList[data.row]
+        vc.mainPhoto = imageList[data.row]
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
 }

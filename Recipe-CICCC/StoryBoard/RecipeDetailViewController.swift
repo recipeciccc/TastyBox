@@ -9,10 +9,11 @@
 import UIKit
 
 class RecipeDetailViewController: UIViewController {
-    
-    @IBOutlet weak var tableView: UITableView!
-    
-    
+
+
+    @IBOutlet weak var detailTableView: UITableView!
+    var mainPhoto = UIImage()
+    var userProfile = Bool()
     // pass the recipe that is RecipeDetail type.
     // retrieve the data of user with RecipeDetail.userID
     var recipe: RecipeDetail?
@@ -20,14 +21,11 @@ class RecipeDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         // Do any additional setup after loading the view.
-        
-        tableView.delegate = self
-        tableView.dataSource = self
-        
-        tableView.tableFooterView = UIView()
-        tableView.separatorStyle = .none
+        detailTableView.delegate = self
+        detailTableView.dataSource = self
+        detailTableView.tableFooterView = UIView()
+        detailTableView.separatorStyle = .none
         
     }
     
@@ -44,11 +42,7 @@ class RecipeDetailViewController: UIViewController {
     
 }
 
-extension RecipeDetailViewController: UITableViewDelegate {
-    
-}
-
-extension RecipeDetailViewController: UITableViewDataSource {
+extension RecipeDetailViewController: UITableViewDataSource,UITableViewDelegate{
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 7
@@ -72,8 +66,7 @@ extension RecipeDetailViewController: UITableViewDataSource {
             
         case 0:
             let cell = (tableView.dequeueReusableCell(withIdentifier: "mainImage") as? MainImageRecipeTableViewCell)!
-            
-//            cell.imageVIew.image = Recipe image (now It's string, we need to get image from firebase strage.)
+            cell.mainImageView?.image = mainPhoto
             
             return cell
         case 1:
@@ -84,7 +77,6 @@ extension RecipeDetailViewController: UITableViewDataSource {
             return cell
         case 2:
             let cell = (tableView.dequeueReusableCell(withIdentifier: "servingAndTime") as? ServingAndTimeTableViewCell)!
-            
             cell.servingLabel.text = "\(recipe?.serving ?? 0) serving"
             cell.timeLabel.text = "\(recipe?.cookingTime ?? 0) mins"
             
@@ -92,13 +84,16 @@ extension RecipeDetailViewController: UITableViewDataSource {
             
         case 3:
             let cell = (tableView.dequeueReusableCell(withIdentifier: "icons") as? iconItemTableViewCell)!
-            
             cell.delegate = self as? iconItemTableViewCellDelegate
             
             return cell
         case 4:
             let cell = (tableView.dequeueReusableCell(withIdentifier: "creator") as? creatorCellRecpipeTableViewCell)!
-            
+            if userProfile == true{
+            cell.followBtn.isHidden = true
+            }else{
+               cell.followBtn.isHidden = false
+            }
             cell.delegate = self as? creatorCellRecpipeTableViewCellDelegate
 //            cell.imgCreator.setImage(creator.image, for: .normal)
             cell.labelCreator.setTitle(creator?.name, for: .normal)
@@ -106,7 +101,9 @@ extension RecipeDetailViewController: UITableViewDataSource {
             return cell
         case 5:
             let cell = (tableView.dequeueReusableCell(withIdentifier: "ingredientRecipe") as? IngredientsTableViewCell)!
+//            cell.ingredientsNameLabel.text = recipe?.ingredients[indexPath.row]
             
+//            cell.amountIngredientsLabel.text = recipe?.
 //            cell.ingredientsNameLabel.text = recipe?.ingredients[indexPath.row].name ?? "none"
 //            cell.amountIngredientsLabel.text = recipe?.ingredients[indexPath.row].amount ?? "none"
             
@@ -128,7 +125,7 @@ extension RecipeDetailViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.section {
         case 0:
-            return 160.0
+            return 350
         case 6:
             return 400.0
         default:
@@ -140,6 +137,7 @@ extension RecipeDetailViewController: UITableViewDataSource {
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }
+
 
 
 // this extension tell firebase to increase this recipe's like
