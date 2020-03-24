@@ -227,7 +227,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="amountIngredientsLabel" destination="Md4-28-oeC" id="h9P-gA-1Te"/>
-                                            <outlet property="ingredientsNameLabel" destination="kc1-4c-Leo" id="36R-NB-0TA"/>
+                                            <outlet property="nameIngredientsLabel" destination="kc1-4c-Leo" id="36R-NB-0TA"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="instructionsRecipe" rowHeight="160" id="0GS-pK-S8O" customClass="HowToCookTableViewCell" customModule="Recipe_CICCC" customModuleProvider="target">
@@ -243,7 +243,7 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ncf-sJ-EM6">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imageFile" translatesAutoresizingMaskIntoConstraints="NO" id="ncf-sJ-EM6">
                                                     <rect key="frame" x="244" y="30" width="150" height="100"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="100" id="JbX-hk-C9u"/>

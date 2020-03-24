@@ -29,14 +29,8 @@ class FetchRecipeData{
                         let image = data["image"] as? String
                         let userID = data["userID"] as? String
                         let time = data["time"] as? Timestamp
-                        
-//                        let instructions = data["instruction"] as? [String]
-//                        let ingredients = data["ingredient"] as? [String]
-//                        let comments = data["comment"] as? [String]
  
-                        let recipe = RecipeDetail(recipeID: reipeId!, title: title!, cookingTime: cookingTime!, image: image!, like: like!, serving: serving!, userID: userID!)
-
-//                      let recipe =  RecipeDetail(recipeID: reipeId!, title: title!, cookingTime: cookingTime!, image: image!, like: like!, serving: serving!, userID: userID!, instructions: instructions!, ingredients: ingredients!, comment: comments!)
+                        let recipe = RecipeDetail(recipeID: reipeId!, title: title!, cookingTime: cookingTime ?? 0, image: image!, like: like!, serving: serving ?? 0, userID: userID!)
                         
                         recipeList.append(recipe)
                         print(time?.dateValue())
@@ -59,6 +53,8 @@ class FetchRecipeData{
             delegate?.reloadData(data:data)
         }
     }
+    
+    
     
     
 }

@@ -15,14 +15,14 @@ class IngredientsList {
         let row0Item = IngredientsTableViewCell()
         let row1Item = IngredientsTableViewCell()
         let row2Item = IngredientsTableViewCell()
-        
-        row0Item.ingredientName = "eggplant"
-        row1Item.ingredientName = "egg"
-        row2Item.ingredientName = "Raddish"
-        
-        row0Item.amountIngredient = "2"
-        row1Item.amountIngredient = "4"
-        row2Item.amountIngredient = "199"
+//
+//        row0Item.ingredientName = "eggplant"
+//        row1Item.ingredientName = "egg"
+//        row2Item.ingredientName = "Raddish"
+//
+//        row0Item.amountIngredient = "2"
+//        row1Item.amountIngredient = "4"
+//        row2Item.amountIngredient = "199"
         
         ingredientsList.append(row0Item)
         ingredientsList.append(row1Item)

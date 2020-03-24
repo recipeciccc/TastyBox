@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "B0E7CC02-971C-4180-842A-3D6BA9CE2036"
+   type = "0"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A235305E-0FEA-4E9E-91A2-1285E6375D24"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Recipe-CICCC/ListForRecipePage/userPageTableViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "36"
+            endingLineNumber = "36"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A2752DDA-2550-428E-AF69-6DED5DDFDD71"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Recipe-CICCC/dataManager/FetchRecipeData.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "19"
+            endingLineNumber = "19"
+            landmarkName = "Data(queryRef:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "A2752DDA-2550-428E-AF69-6DED5DDFDD71 - 45a879ff3cbb96f0"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Recipe_CICCC.FetchRecipeData.Data(queryRef: __C.FIRQuery) -&gt; Swift.Array&lt;Recipe_CICCC.RecipeDetail&gt;"
+                  moduleName = "Recipe-CICCC"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fangyilai/Library/Mobile%20Documents/com~apple~CloudDocs/Documents/Swift_Ali/Recipe-CICCC/Recipe-CICCC/dataManager/FetchRecipeData.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "19"
+                  endingLineNumber = "19"
+                  offsetFromSymbolStart = "261">
+               </Location>
+               <Location
+                  uuid = "A2752DDA-2550-428E-AF69-6DED5DDFDD71 - 5e444da182764018"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;__C.FIRQuerySnapshot&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in Recipe_CICCC.FetchRecipeData.Data(queryRef: __C.FIRQuery) -&gt; Swift.Array&lt;Recipe_CICCC.RecipeDetail&gt;"
+                  moduleName = "Recipe-CICCC"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fangyilai/Library/Mobile%20Documents/com~apple~CloudDocs/Documents/Swift_Ali/Recipe-CICCC/Recipe-CICCC/dataManager/FetchRecipeData.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "17"
+                  endingLineNumber = "17"
+                  offsetFromSymbolStart = "303">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "9FBDF6A5-6A11-4344-B989-5B501A8A3E0C"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Recipe-CICCC/dataManager/FetchRecipeData.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "35"
+            endingLineNumber = "35"
+            landmarkName = "Data(queryRef:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "3F2CA993-66C5-4554-9886-D96F8C0B1CBD"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Recipe-CICCC/dataManager/FetchRecipeData.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "42"
+            endingLineNumber = "42"
+            landmarkName = "Data(queryRef:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "9B6E7884-6912-4E29-886D-4B61AA6CAF1A"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Recipe-CICCC/dataManager/FetchRecipeData.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "46"
+            endingLineNumber = "46"
+            landmarkName = "Data(queryRef:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "DB5A077F-B0D1-4E1F-82B3-22BE231C72CF"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Recipe-CICCC/ListForRecipePage/userPageTableViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "124"
+            endingLineNumber = "124"
+            landmarkName = "userPageViewController"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "C5F16244-5FF5-4279-8D5B-D82C98275D57"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Recipe-CICCC/ListForRecipePage/userPageTableViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "120"
+            endingLineNumber = "120"
+            landmarkName = "postedButtonTapped(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "DAE4A02C-2962-4185-97A1-38EDF9DA0CE9"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Recipe-CICCC/CellForUserProfile/userRecipeItemTableViewCell.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "77"
+            endingLineNumber = "77"
+            landmarkName = "collectionView(_:didSelectItemAt:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "08E4F5A3-9A65-4B4E-80D4-78033A50E0C5"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Recipe-CICCC/CellForUserProfile/userRecipeItemTableViewCell.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "78"
+            endingLineNumber = "78"
+            landmarkName = "collectionView(_:didSelectItemAt:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "255E24E9-9CA6-4D16-B90E-496556555944"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Recipe-CICCC/ListForRecipePage/userPageViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "142"
+            endingLineNumber = "142"
+            landmarkName = "cellTaped(data:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "447FEE67-D0BE-4AE0-90E6-CCFF6BD97AFB"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Recipe-CICCC/StoryBoard/RecipeDetailViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "35"
+            endingLineNumber = "35"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E1A00EC2-63F4-4115-951A-15C4BEB501E2"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Recipe-CICCC/StoryBoard/RecipeDetailViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "23"
+            endingLineNumber = "23"
+            landmarkName = "RecipeDetailViewController"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  uuid = "E1A00EC2-63F4-4115-951A-15C4BEB501E2 - a12fb5769103c482"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Recipe_CICCC.RecipeDetailViewController.ingredientList.getter : Swift.Array&lt;Recipe_CICCC.Ingredient&gt;"
+                  moduleName = "Recipe-CICCC"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fangyilai/Library/Mobile%20Documents/com~apple~CloudDocs/Documents/Swift_Ali/Recipe-CICCC/Recipe-CICCC/StoryBoard/RecipeDetailViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "23"
+                  endingLineNumber = "23"
+                  offsetFromSymbolStart = "122">
+               </Location>
+               <Location
+                  uuid = "E1A00EC2-63F4-4115-951A-15C4BEB501E2 - 63584f7760c64bce"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Recipe_CICCC.RecipeDetailViewController.ingredientList.setter : Swift.Array&lt;Recipe_CICCC.Ingredient&gt;"
+                  moduleName = "Recipe-CICCC"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fangyilai/Library/Mobile%20Documents/com~apple~CloudDocs/Documents/Swift_Ali/Recipe-CICCC/Recipe-CICCC/StoryBoard/RecipeDetailViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "23"
+                  endingLineNumber = "23"
+                  offsetFromSymbolStart = "144">
+               </Location>
+               <Location
+                  uuid = "E1A00EC2-63F4-4115-951A-15C4BEB501E2 - c069c17fd45712cf"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Recipe_CICCC.RecipeDetailViewController.ingredientList.modify : Swift.Array&lt;Recipe_CICCC.Ingredient&gt;"
+                  moduleName = "Recipe-CICCC"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fangyilai/Library/Mobile%20Documents/com~apple~CloudDocs/Documents/Swift_Ali/Recipe-CICCC/Recipe-CICCC/StoryBoard/RecipeDetailViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "18">
+               </Location>
+               <Location
+                  uuid = "E1A00EC2-63F4-4115-951A-15C4BEB501E2 - 2249d948a970259b"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Recipe_CICCC.RecipeDetailViewController.ingredientList.modify : Swift.Array&lt;Recipe_CICCC.Ingredient&gt; with unmangled suffix &quot;.resume.0&quot;"
+                  moduleName = "Recipe-CICCC"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fangyilai/Library/Mobile%20Documents/com~apple~CloudDocs/Documents/Swift_Ali/Recipe-CICCC/Recipe-CICCC/StoryBoard/RecipeDetailViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "23"
+                  endingLineNumber = "23"
+                  offsetFromSymbolStart = "4">
+               </Location>
+               <Location
+                  uuid = "E1A00EC2-63F4-4115-951A-15C4BEB501E2 - 624201c070da5427"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Recipe_CICCC.RecipeDetailViewController.init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__C.NSBundle&gt;) -&gt; Recipe_CICCC.RecipeDetailViewController"
+                  moduleName = "Recipe-CICCC"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fangyilai/Library/Mobile%20Documents/com~apple~CloudDocs/Documents/Swift_Ali/Recipe-CICCC/Recipe-CICCC/StoryBoard/RecipeDetailViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "23"
+                  endingLineNumber = "23"
+                  offsetFromSymbolStart = "864">
+               </Location>
+               <Location
+                  uuid = "E1A00EC2-63F4-4115-951A-15C4BEB501E2 - 70d77fd65ffe2a9b"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Recipe_CICCC.RecipeDetailViewController.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;Recipe_CICCC.RecipeDetailViewController&gt;"
+                  moduleName = "Recipe-CICCC"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fangyilai/Library/Mobile%20Documents/com~apple~CloudDocs/Documents/Swift_Ali/Recipe-CICCC/Recipe-CICCC/StoryBoard/RecipeDetailViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "23"
+                  endingLineNumber = "23"
+                  offsetFromSymbolStart = "796">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "8DD96A51-6491-43C2-9973-4A700627C15E"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Recipe-CICCC/StoryBoard/RecipeDetailViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "36"
+            endingLineNumber = "36"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7B15A851-1847-44F3-8484-8DF5C16F5C32"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Recipe-CICCC/StoryBoard/RecipeDetailViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "98"
+            endingLineNumber = "98"
+            landmarkName = "tableView(_:numberOfRowsInSection:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "731CB7B2-A372-4AD6-A0D1-6C03A2D766CF"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Recipe-CICCC/StoryBoard/RecipeDetailViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "156"
+            endingLineNumber = "156"
+            landmarkName = "tableView(_:cellForRowAt:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D0386EC3-C885-407C-8ADE-04316EE23507"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Recipe-CICCC/dataManager/FetchRecipeData.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "33"
+            endingLineNumber = "33"
+            landmarkName = "Data(queryRef:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>

@@ -45,13 +45,14 @@ struct Ingredient {
 }
 
 struct Instruction {
-    var image:UIImage
+    var imageUrl: String  //UIImage
     var text: String
 }
 
 struct Comment {
     var user: User
     var text: String
+    var time: Timestamp
 }
 
 
