@@ -128,6 +128,7 @@ extension RecipeDetailViewController: UITableViewDataSource,UITableViewDelegate{
             
         case 3:
             let cell = (tableView.dequeueReusableCell(withIdentifier: "icons") as? iconItemTableViewCell)!
+            cell.numLikeLabel.text = "\(recipe?.like ?? 0)"
             cell.delegate = self as? iconItemTableViewCellDelegate
             
             return cell
