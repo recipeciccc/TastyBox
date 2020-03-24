@@ -620,15 +620,6 @@
          location = "group:Controller"
          name = "Controller">
          <FileRef
-            location = "group:ShoppinglistViewController.swift">
-         </FileRef>
-         <FileRef
-            location = "group:/Users/kitajimashihomi/tutorialClass/Recipe-CICCC-1/Recipe-CICCC/Controller/showFolllowingFollowedCreatorsViewController.swift">
-         </FileRef>
-         <FileRef
-            location = "group:/Users/kitajimashihomi/tutorialClass/Recipe-CICCC-1/Recipe-CICCC/Controller/PopularRecipeViewController.swift">
-         </FileRef>
-         <FileRef
             location = "group:/Users/kitajimashihomi/tutorialClass/Recipe-CICCC-1/Recipe-CICCC/Controller/showFollowedViewController.swift">
          </FileRef>
          <FileRef
@@ -648,16 +639,10 @@
             </FileRef>
          </Group>
          <FileRef
-            location = "group:FollowingRecipeViewController.swift">
-         </FileRef>
-         <FileRef
             location = "group:Image.swift">
          </FileRef>
          <FileRef
             location = "group:CollectionViewCell.swift">
-         </FileRef>
-         <FileRef
-            location = "group:ShoppinglistViewController.swift">
          </FileRef>
          <FileRef
             location = "group:RecipePostedCollectionViewController.swift">
@@ -828,9 +813,6 @@
          </FileRef>
          <FileRef
             location = "group:RefrigeratorViewController.swift">
-         </FileRef>
-         <FileRef
-            location = "group:AddingShoppingListViewController.swift">
          </FileRef>
          <FileRef
             location = "group:StoresMapViewController.swift">
