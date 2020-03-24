@@ -124,7 +124,7 @@ class CreatorViewController: UIViewController {
                 self.uploadImage(mainPhoto,uid,rid) { (url) in
                     self.recipeUpload(uid,rid,url!.absoluteString)
                     self.ingredientUpload(rid)
-                    self.commentUpload(rid)
+                    self.commentUpload(rid) // we may not need it
                 }
                 
                 for index in 0..<photoList.count{
@@ -220,7 +220,7 @@ extension CreatorViewController{
     }
     
     func commentUpload(_ rid: String){
-        let commentData = ["text":"","user":""]
+        let commentData = ["time":Timestamp(),"text":"","user":""] as [String : Any]
         let ref = self.db.collection("recipe").document(rid)
         ref.collection("comment").document().setData(commentData) { (err) in
             if err != nil{
@@ -409,8 +409,13 @@ extension CreatorViewController: UITableViewDelegate,UITableViewDataSource{
             return cell
             
         default:
+<<<<<<< HEAD
 //            let cell = tableView.dequeueReusableCell(withIdentifier: "ingredient") as! IngredientsCell
             return UITableViewCell()
+=======
+            let cell = tableView.dequeueReusableCell(withIdentifier: "ingredients") as! IngredientsCell
+            return cell
+>>>>>>> 3d4e3ccf64b95563a9efc151d57a78387eee928d
             
         }
     }

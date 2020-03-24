@@ -131,8 +131,7 @@ class DiscoveryViewController: UIViewController {
         if Auth.auth().currentUser != nil{
             do{
                 try Auth.auth().signOut()
-                let vc = UIStoryboard(name: "Login", bundle: nil).instantiateViewController(withIdentifier: "loginPage")
-                navigationController?.pushViewController(vc, animated: true)
+                navigationController?.popViewController(animated: true)
             }catch let error as NSError{
                 print(error.localizedDescription)
             }
