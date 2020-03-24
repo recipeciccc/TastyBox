@@ -3,7 +3,6 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -71,21 +70,21 @@
                                                     <rect key="frame" x="76" y="0.0" width="46" height="30"/>
                                                     <state key="normal" title="Button"/>
                                                     <connections>
-                                                        <segue destination="Pzb-tA-uiI" kind="show" id="9d4-93-sie"/>
+                                                        <segue destination="knv-Xc-TDE" kind="show" id="Tgm-6w-TZy"/>
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="q5G-xM-ZWd">
                                                     <rect key="frame" x="152" y="0.0" width="46" height="30"/>
                                                     <state key="normal" title="Button"/>
                                                     <connections>
-                                                        <segue destination="QoP-je-JpG" kind="show" identifier="following" id="Bfv-8M-WiY"/>
+                                                        <segue destination="0ae-bW-V0x" kind="show" identifier="following" id="Bfv-8M-WiY"/>
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B0a-gf-UhX">
                                                     <rect key="frame" x="228" y="0.0" width="46" height="30"/>
                                                     <state key="normal" title="Button"/>
                                                     <connections>
-                                                        <segue destination="QoP-je-JpG" kind="show" identifier="follower" id="X7L-4n-KbV"/>
+                                                        <segue destination="0ae-bW-V0x" kind="show" identifier="follower" id="X7L-4n-KbV"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -180,112 +179,27 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lCU-Wa-MO2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1819" y="165"/>
+            <point key="canvasLocation" x="1797" y="188"/>
         </scene>
-        <!--Show Folllowing Followed Creators View Controller-->
-        <scene sceneID="k4e-sd-kcK">
+        <!--savedRecipe-->
+        <scene sceneID="GWg-L4-Jm8">
             <objects>
-                <viewController id="QoP-je-JpG" customClass="showFolllowingFollowedCreatorsViewController" customModule="Recipe_CICCC" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Xhf-ee-J8d">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="KeU-1r-E7u">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </searchBar>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Mjn-Wa-Laf">
-                                <rect key="frame" x="0.0" y="56" width="414" height="786"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="786" id="Amk-u4-Nh4"/>
-                                    <constraint firstAttribute="width" constant="414" id="hJb-Hg-12t"/>
-                                </constraints>
-                                <viewLayoutGuide key="contentLayoutGuide" id="X5m-TL-Des"/>
-                                <viewLayoutGuide key="frameLayoutGuide" id="gB6-hE-7er"/>
-                            </scrollView>
-                        </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <gestureRecognizers/>
-                        <constraints>
-                            <constraint firstItem="Mjn-Wa-Laf" firstAttribute="leading" secondItem="KeU-1r-E7u" secondAttribute="leading" id="1iK-Dv-OJy"/>
-                            <constraint firstItem="KeU-1r-E7u" firstAttribute="trailing" secondItem="fyl-Gh-K8W" secondAttribute="trailing" id="ZVt-0i-8nC"/>
-                            <constraint firstItem="KeU-1r-E7u" firstAttribute="leading" secondItem="fyl-Gh-K8W" secondAttribute="leading" id="ayg-3Z-3Fe"/>
-                            <constraint firstItem="KeU-1r-E7u" firstAttribute="top" secondItem="fyl-Gh-K8W" secondAttribute="top" id="qGS-GT-bsI"/>
-                            <constraint firstItem="Mjn-Wa-Laf" firstAttribute="top" secondItem="KeU-1r-E7u" secondAttribute="bottom" id="wbd-bM-fXj"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="fyl-Gh-K8W"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="Umz-B3-Bwq"/>
-                    <connections>
-                        <outlet property="scrollView" destination="Mjn-Wa-Laf" id="9fJ-MN-Ynb"/>
-                        <outlet property="searchBar" destination="KeU-1r-E7u" id="94A-0k-AiS"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="LzE-xs-Fka" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <viewControllerPlaceholder storyboardName="savedRecipe" id="knv-Xc-TDE" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="9ef-yg-epf"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="krY-nF-lH3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2219" y="-256"/>
+            <point key="canvasLocation" x="1798" y="86"/>
         </scene>
-        <!--Saved Recipes View Controller-->
-        <scene sceneID="TgQ-vi-0Ya">
+        <!--followingFollower-->
+        <scene sceneID="uiJ-rz-O0H">
             <objects>
-                <viewController id="Pzb-tA-uiI" customClass="SavedRecipesViewController" customModule="Recipe_CICCC" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="hEn-se-dmL">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="CC6-8d-EbW">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="7SI-gg-cx0">
-                                    <size key="itemSize" width="150" height="150"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                </collectionViewFlowLayout>
-                                <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="H2P-Wt-PkU" customClass="SavedRecipeCollectionViewCell" customModule="Recipe_CICCC" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="BXU-Xa-Diw">
-                                            <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pNS-dm-MQn">
-                                                    <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
-                                                </imageView>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="pNS-dm-MQn" secondAttribute="bottom" id="EEY-4o-H2h"/>
-                                                <constraint firstAttribute="trailing" secondItem="pNS-dm-MQn" secondAttribute="trailing" id="peZ-1l-c8O"/>
-                                                <constraint firstItem="pNS-dm-MQn" firstAttribute="leading" secondItem="BXU-Xa-Diw" secondAttribute="leading" id="zbR-TA-vB3"/>
-                                                <constraint firstItem="pNS-dm-MQn" firstAttribute="top" secondItem="BXU-Xa-Diw" secondAttribute="top" id="zbb-0P-O1D"/>
-                                            </constraints>
-                                        </collectionViewCellContentView>
-                                        <size key="customSize" width="150" height="150"/>
-                                        <connections>
-                                            <outlet property="imageView" destination="pNS-dm-MQn" id="ucG-bE-wOe"/>
-                                        </connections>
-                                    </collectionViewCell>
-                                </cells>
-                            </collectionView>
-                        </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <constraints>
-                            <constraint firstItem="CC6-8d-EbW" firstAttribute="top" secondItem="gXH-BD-YU1" secondAttribute="top" id="0dK-B6-e7j"/>
-                            <constraint firstItem="gXH-BD-YU1" firstAttribute="bottom" secondItem="CC6-8d-EbW" secondAttribute="bottom" id="Gwn-OL-SKa"/>
-                            <constraint firstItem="gXH-BD-YU1" firstAttribute="trailing" secondItem="CC6-8d-EbW" secondAttribute="trailing" id="V3O-xf-z9w"/>
-                            <constraint firstItem="CC6-8d-EbW" firstAttribute="leading" secondItem="gXH-BD-YU1" secondAttribute="leading" id="wEp-TW-DJs"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="gXH-BD-YU1"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="FYB-vF-AuW"/>
-                    <connections>
-                        <outlet property="collectionView" destination="CC6-8d-EbW" id="VT2-A4-nek"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="qjZ-7M-Y6y" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <viewControllerPlaceholder storyboardName="followingFollower" id="0ae-bW-V0x" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="FAB-AQ-DpA"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="A6W-fM-vV7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2250.7246376811595" y="491.51785714285711"/>
+            <point key="canvasLocation" x="1820" y="137"/>
         </scene>
     </scenes>
     <resources>

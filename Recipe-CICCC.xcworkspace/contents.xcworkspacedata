@@ -162,15 +162,6 @@
             location = "group:userRecipeItemCollectionViewCell.swift">
          </FileRef>
          <FileRef
-            location = "group:showFolllowingFollowedCreatorsViewController.swift">
-         </FileRef>
-         <FileRef
-            location = "group:PopularRecipeViewController.swift">
-         </FileRef>
-         <FileRef
-            location = "group:showFollowedViewController.swift">
-         </FileRef>
-         <FileRef
             location = "group:Map.storyboard">
          </FileRef>
          <FileRef
@@ -193,6 +184,9 @@
             location = "group:userPage.storyboard">
          </FileRef>
          <FileRef
+            location = "group:followingFollower.storyboard">
+         </FileRef>
+         <FileRef
             location = "group:followingRecipe.storyboard">
          </FileRef>
          <FileRef
@@ -202,19 +196,10 @@
             location = "group:Monthly.storyboard">
          </FileRef>
          <FileRef
-            location = "group:ShoppinglistViewController.swift">
-         </FileRef>
-         <FileRef
-            location = "group:NumOfCreatorhasTableViewCell.swift">
-         </FileRef>
-         <FileRef
             location = "group:EditorChoice.storyboard">
          </FileRef>
          <FileRef
             location = "group:VIP_page.storyboard">
-         </FileRef>
-         <FileRef
-            location = "group:modelRecipeDetail.swift">
          </FileRef>
          <FileRef
             location = "group:ShoppingList.storyboard">
@@ -634,6 +619,18 @@
       <Group
          location = "group:Controller"
          name = "Controller">
+         <FileRef
+            location = "group:ShoppinglistViewController.swift">
+         </FileRef>
+         <FileRef
+            location = "group:/Users/kitajimashihomi/tutorialClass/Recipe-CICCC-1/Recipe-CICCC/Controller/showFolllowingFollowedCreatorsViewController.swift">
+         </FileRef>
+         <FileRef
+            location = "group:/Users/kitajimashihomi/tutorialClass/Recipe-CICCC-1/Recipe-CICCC/Controller/PopularRecipeViewController.swift">
+         </FileRef>
+         <FileRef
+            location = "group:/Users/kitajimashihomi/tutorialClass/Recipe-CICCC-1/Recipe-CICCC/Controller/showFollowedViewController.swift">
+         </FileRef>
          <FileRef
             location = "group:ImagesCell.swift">
          </FileRef>
