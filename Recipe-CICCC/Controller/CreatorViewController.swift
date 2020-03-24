@@ -124,7 +124,7 @@ class CreatorViewController: UIViewController {
                 self.uploadImage(mainPhoto,uid,rid) { (url) in
                     self.recipeUpload(uid,rid,url!.absoluteString)
                     self.ingredientUpload(rid)
-                    self.commentUpload(rid)
+                    self.commentUpload(rid) // we may not need it
                 }
                 
                 for index in 0..<photoList.count{
@@ -220,7 +220,7 @@ extension CreatorViewController{
     }
     
     func commentUpload(_ rid: String){
-        let commentData = ["text":"","user":""]
+        let commentData = ["time":Timestamp(),"text":"","user":""] as [String : Any]
         let ref = self.db.collection("recipe").document(rid)
         ref.collection("comment").document().setData(commentData) { (err) in
             if err != nil{

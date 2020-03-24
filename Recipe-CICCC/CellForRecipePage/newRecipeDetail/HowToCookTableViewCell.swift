@@ -13,12 +13,10 @@ class HowToCookTableViewCell: UITableViewCell {
     @IBOutlet weak var howToCookLabel: UILabel!
     @IBOutlet weak var imgView: UIImageView!
     
-    var howToCook = ""
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
-        howToCookLabel.text = howToCook
+
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
