@@ -92,10 +92,10 @@ extension PopularRecipeViewController: UITableViewDataSource {
                 cell.numberCommentLabel.text = "\(recipes[indexPath.row].cookingTime)"
                 cell.titleLabel.text = recipes[indexPath.row].title
                 
-                if cell.recipeImageView?.image == nil {
-                    dataManager.getImage(imageString: recipes[indexPath.row].image, imageView: cell.recipeImageView)
+                if recipes[indexPath.row].image == nil {
+                    recipes[indexPath.row].image = dataManager.getImage(uid: recipes[indexPath.row].userID, rid: recipes[indexPath.row].recipeID)
+                    self.assignImage(image: recipes[indexPath.row].image!, reference: cell.imageView!)
                 }
-                
                 
                 switch indexPath.row {
                 case 0:
@@ -121,14 +121,12 @@ extension PopularRecipeViewController: UITableViewDataSource {
         let cell = (tableView.dequeueReusableCell(withIdentifier: "under no.4", for: indexPath) as? UnderNo4TableViewCell)!
         
         
-        cell.rankingLabel.text = "No. \(indexPath.row + 4)"
-        cell.numLikeLabel.text = "\(recipes[1].like)"
-        cell.numCommentLabel.text = "\(recipes[1].cookingTime)"
-        cell.titleLabel.text = recipes[1].title
+        cell.rankingLabel.text = "No. \(indexPath.row + 3)"
+        cell.numLikeLabel.text = "\(recipes[indexPath.row + 3].like)"
+        cell.numCommentLabel.text = "\(recipes[indexPath.row + 3].cookingTime)"
+        cell.titleLabel.text = recipes[indexPath.row + 3].title
+            cell.imageView?.image = recipes[indexPath.row + 3].image
         
-        if cell.recipeImageView?.image == nil {
-            dataManager.getImage(imageString: recipes[1].image, imageView: cell.recipeImageView)
-        }
         
         
         // after the number in firebase is over 10 recipes, comment out them.

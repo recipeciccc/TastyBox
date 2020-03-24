@@ -10,8 +10,6 @@ import UIKit
 
 class RefigeratorTableViewCell: UITableViewCell {
 
-    var nameIngredient = ""
-    var amountIngredient = ""
     
     override func awakeFromNib() {
         super.awakeFromNib()

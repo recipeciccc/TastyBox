@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import FirebaseFirestore
 import Firebase
 
 class UserdataManager {
@@ -76,6 +77,8 @@ class UserdataManager {
                 let data = querysnapshot!.data()
                 
                 print("data count: \(data!.count)")
+                
+                
                 
                 let name = data!["name"] as? String
                 let userID = data!["userID"] as? String

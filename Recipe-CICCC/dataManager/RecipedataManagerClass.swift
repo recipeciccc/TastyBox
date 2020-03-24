@@ -14,8 +14,12 @@ class RecipedataManagerClass {
     
     let db = Firestore.firestore()
     var delegate: getDataFromFirebaseDelegate?
+    let fetchRecipeImage = FetchRecipeImage()
     
     var recipes:[RecipeDetail] = []
+    var instructions : [Instruction] = []
+    var comments : [Comment] = []
+    var ingredients : [Ingredient] = []
     
     func getReipeDetail() {
         
@@ -36,22 +40,21 @@ class RecipedataManagerClass {
                     
                     print("data count: \(data.count)")
                     
-                    let reipeId = data["recipeID"] as? String
+                    let recipeId = data["recipeID"] as? String
                     
                     let title = data["title"] as? String
                     let cookingTime = data["cookingTime"] as? Int
                     let like = data["like"] as? Int
                     let serving = data["serving"] as? Int
-                    let image = data["image"] as? String
-                    let userID = data["userID"] as? String
-//                     let instructions = data["instruction"] as? [Instruction]
-//                     let ingredients = data["ingredient"] as? [Ingredient]
-//                     let comments = data["comment"] as? [Comment]
+                    let userId = data["userID"] as? String
                     
+                    let image:UIImage? = nil
                     
-//                    let recipe = RecipeDetail(recipeID: reipeId!, title: title!, instructions: instructions!, cookingTime: cookingTime!, image: image!, like: like!, serving: serving!, userID: userID!, ingredients: ingredients!, comment: comments!)
+                    self.getInstructions(userId: userId!, recipeId: recipeId!)
+                    self.getIngredients(userId: userId!, recipeId: recipeId!)
+                    self.getComments(userId: userId!, recipeId: recipeId!)
                     
-                    let recipe = RecipeDetail(recipeID: reipeId!, title: title!, cookingTime: cookingTime!, image: image!, like: like!, serving: serving!, userID: userID!)
+                    let recipe = RecipeDetail(recipeID: recipeId!, title: title!, cookingTime: cookingTime!, image: image, like: like!, serving: serving!, userID: userId!, instructions: self.instructions, ingredients: self.ingredients, comment: self.comments)
                     
                     self.recipes.append(recipe)
                 }
@@ -60,25 +63,104 @@ class RecipedataManagerClass {
         }
     }
     
-    func getImage(imageString: String, imageView: UIImageView) {
-        
-        // Get a reference to the storage service using the default Firebase App
-        let storage = Storage.storage()
-        
-        // Create a storage reference from our storage service
-        let storageRef = storage.reference()
+    func getInstructions(userId: String, recipeId: String) {
+        db.collection("recipe").document(recipeId).collection("instruction").addSnapshotListener{
+            (querysnapshot, error) in
+            if error != nil {
+                print("Error getting documents: \(String(describing: error))")
+            } else {
+                for document in querysnapshot!.documents {
+                    let data = document.data()
+                    
+                    let index = data["index"] as! Int
+                    let image = self.getImageInstruction(userId: userId, rid: recipeId, index: index)
+                    let text = data["text"] as! String
+                    
+                    self.instructions.append(Instruction(index: index, image: image, text: text))
+                    
+                }
+            }
+        }
+    }
     
-        let imagesRef = storageRef.child("recipeImages/\(imageString)")
+    
+    
+    func getImageInstruction(userId: String, rid: String, index: Int) -> UIImage? {
+        let storageRef = Storage.storage().reference().child("user/\(userId)/RecipePhoto/\(rid)/\(index)")
+        var image = UIImage()
         
-        // Download in memory with a maximum allowed size of 1MB (1 * 1024 * 1024 bytes)
-        imagesRef.getData(maxSize: 1 * 1024 * 1024) { data, error in
+        
+        storageRef.getData(maxSize: 1 * 1024 * 1024) { data, error in
             if error != nil {
                 // Uh-oh, an error occurred!
             } else {
                 // Data for "images/island.jpg" is returned
-                let image = UIImage(data: data!)!
-                self.delegate?.assignImage(image: image, reference: imageView)
+                image = UIImage(data: data!)!
             }
         }
+        
+        return image
+    }
+    
+    func getIngredients(userId: String, recipeId: String) {
+        db.collection("recipe").document("\(recipeId)").collection("ingredient").addSnapshotListener{
+            (querysnapshot, error) in
+            if error != nil {
+                print("Error getting documents: \(String(describing: error))")
+            } else {
+                for document in querysnapshot!.documents {
+                    let data = document.data()
+                    
+                    let ingredient = data["ingredient"] as! String
+                    let amount = data["amount"] as! String
+                    
+                    self.ingredients.append(Ingredient(name: ingredient, amount: amount))
+                    
+                }
+            }
+        }
+    }
+    
+    func getComments(userId: String, recipeId: String) {
+        
+        db.collection("recipe").document("\(recipeId)").collection("comment").addSnapshotListener{
+            (querysnapshot, error) in
+            if error != nil {
+                print("Error getting documents: \(String(describing: error))")
+            } else {
+                for document in querysnapshot!.documents {
+                    let data = document.data()
+                    
+                    let text = data["text"] as! String
+                    let user = data["user"] as! String
+                    
+                    self.comments.append(Comment(userId: user, text: text))
+                    
+                }
+            }
+        }
+    }
+   
+    
+    func getImage( uid:String, rid: String) -> UIImage {
+
+        var image = UIImage()
+   
+
+        let storageRef =  Storage.storage().reference().child("user/\(uid)/RecipePhoto/\(rid)/\(rid)")
+
+        storageRef.getData(maxSize: 1 * 1024 * 1024) { data, error in   //
+            if error != nil {
+                print(error?.localizedDescription as Any)
+            } else {
+                if let imgData = data{
+                    image = UIImage(data: imgData)!
+                }
+            }
+        }
+
+        return image
+
+
     }
 }

@@ -47,8 +47,8 @@ class userPageTableViewController: UITableViewController {
     
     func get_url_rid(){
         if recipeList.count != 0{
-            for data in recipeList{
-                urlList.append(data.image)
+            for data in recipeList {
+//                urlList.append(data.image)
                 ridList.append(data.recipeID)
                 print(data.recipeID)
             }
@@ -64,7 +64,6 @@ class userPageTableViewController: UITableViewController {
             if segue.identifier == "following" {
                
                 nextVC.titleVC = "Following"
-                
             
             }
             if segue.identifier == "follower" {
@@ -153,16 +152,20 @@ class userPageTableViewController: UITableViewController {
 
 extension userPageTableViewController: ReloadDataDelegate{
     func reloadData(data:[RecipeDetail]) {
+        
         recipeList = data
-        get_url_rid()
-        fetchImage.getImage(uid: uid!, rid: ridList, imageUrl: urlList)
+        
+        recipeList.map {
+            imageList.append($0.image!)
+        }
+        
         if imageList.count == 0 {
             self.tableView.reloadData()
         }
     }
     func reloadImg(img:[UIImage]){
         imageList = img
-        self.tableView.reloadData()
+        self.tableView.reloadData() 
     }
 }
 

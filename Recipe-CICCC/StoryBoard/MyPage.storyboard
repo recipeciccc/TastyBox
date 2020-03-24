@@ -180,7 +180,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lCU-Wa-MO2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1819" y="165"/>
+            <point key="canvasLocation" x="1581" y="263"/>
         </scene>
         <!--savedRecipe-->
         <scene sceneID="B5O-Vd-AOI">
@@ -190,7 +190,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VOD-rg-53w" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1779" y="368"/>
+            <point key="canvasLocation" x="1582" y="-35"/>
         </scene>
         <!--Show Folllowing Followed Creators View Controller-->
         <scene sceneID="k4e-sd-kcK">
@@ -233,7 +233,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LzE-xs-Fka" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2219" y="-256"/>
+            <point key="canvasLocation" x="2388" y="137"/>
         </scene>
     </scenes>
     <resources>
