@@ -45,12 +45,9 @@ struct Ingredient {
 }
 
 struct Instruction {
-<<<<<<< HEAD
     var index: Int
-    var image:UIImage?
-=======
+//    var image:UIImage?
     var imageUrl: String  //UIImage
->>>>>>> 3d4e3ccf64b95563a9efc151d57a78387eee928d
     var text: String
 }
 

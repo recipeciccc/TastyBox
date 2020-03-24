@@ -64,34 +64,18 @@
          </FileRef>
       </Group>
       <Group
-         location = "group:ReusableView"
-         name = "ReusableView">
-         <Group
-            location = "group:CollectionViewPage"
-            name = "CollectionViewPage">
-            <FileRef
-               location = "group:RecipeCollectionView.xib">
-            </FileRef>
-            <FileRef
-               location = "group:RecipeCollectionViewCell.xib">
-            </FileRef>
-            <FileRef
-               location = "group:RecipeCollectionView.swift">
-            </FileRef>
-            <FileRef
-               location = "group:RecipeCollectionViewCell.swift">
-            </FileRef>
-         </Group>
+         location = "container:"
+         name = "infoplist">
+         <FileRef
+            location = "group:/Users/kitajimashihomi/tutorialClass/Recipe-CICCC-1/apiKey.plist">
+         </FileRef>
+         <FileRef
+            location = "group:/Users/kitajimashihomi/tutorialClass/Recipe-CICCC-1/GoogleService-Info.plist">
+         </FileRef>
+         <FileRef
+            location = "group:/Users/kitajimashihomi/tutorialClass/Recipe-CICCC-1/Info.plist">
+         </FileRef>
       </Group>
-      <FileRef
-         location = "group:userRecipeItemCollectionViewCell.swift">
-      </FileRef>
-      <FileRef
-         location = "group:apiKey.plist">
-      </FileRef>
-      <FileRef
-         location = "group:RefigeratorTableViewCell.swift">
-      </FileRef>
       <Group
          location = "group:ListForRecipePage"
          name = "ListForRecipePage">
@@ -159,16 +143,10 @@
             location = "group:Refrigerator.storyboard">
          </FileRef>
          <FileRef
-            location = "group:userRecipeItemCollectionViewCell.swift">
-         </FileRef>
-         <FileRef
             location = "group:Map.storyboard">
          </FileRef>
          <FileRef
             location = "group:MapTableViewCell.swift">
-         </FileRef>
-         <FileRef
-            location = "group:IngredientShoppingTableViewCell.swift">
          </FileRef>
          <Group
             location = "group:Base.lproj"
@@ -214,9 +192,6 @@
             location = "group:shihomi.storyboard">
          </FileRef>
       </Group>
-      <FileRef
-         location = "group:SearchResult.swift">
-      </FileRef>
       <Group
          location = "group:Assets.xcassets"
          name = "Assets.xcassets">
@@ -581,9 +556,6 @@
             </FileRef>
          </Group>
       </Group>
-      <FileRef
-         location = "group:SavedRecipeTableViewCell.swift">
-      </FileRef>
       <Group
          location = "group:CellForUserProfile"
          name = "CellForUserProfile">
@@ -600,9 +572,6 @@
             location = "group:mainUserProfileTableViewCell.swift">
          </FileRef>
       </Group>
-      <FileRef
-         location = "group:GoogleService-Info.plist">
-      </FileRef>
       <Group
          location = "group:Base.lproj"
          name = "Base.lproj">
@@ -610,12 +579,6 @@
             location = "group:LaunchScreen.storyboard">
          </FileRef>
       </Group>
-      <FileRef
-         location = "group:showFollowingViewController.swift">
-      </FileRef>
-      <FileRef
-         location = "group:KeyManager.swift">
-      </FileRef>
       <Group
          location = "group:Controller"
          name = "Controller">
@@ -624,9 +587,6 @@
          </FileRef>
          <FileRef
             location = "group:ImagesCell.swift">
-         </FileRef>
-         <FileRef
-            location = "group:DiscoveryViewController.swift">
          </FileRef>
          <Group
             location = "group:CellForFollowingRecipe"
@@ -761,12 +721,6 @@
             location = "group:EmailRegisterViewController.swift">
          </FileRef>
       </Group>
-      <FileRef
-         location = "group:UnderNo4TableViewCell.swift">
-      </FileRef>
-      <FileRef
-         location = "group:ShoppingList.swift">
-      </FileRef>
       <Group
          location = "group:delegates"
          name = "delegates">
@@ -796,9 +750,6 @@
             location = "group:RefrigeratorList.swift">
          </FileRef>
       </Group>
-      <FileRef
-         location = "group:setRecipeData.swift">
-      </FileRef>
       <Group
          location = "group:ViewController"
          name = "ViewController">
@@ -828,19 +779,7 @@
          </FileRef>
       </Group>
       <FileRef
-         location = "group:Info.plist">
-      </FileRef>
-      <FileRef
          location = "group:SceneDelegate.swift">
-      </FileRef>
-      <FileRef
-         location = "group:explanationTableViewCell.swift">
-      </FileRef>
-      <FileRef
-         location = "group:SavedRecipeCollectionViewCell.swift">
-      </FileRef>
-      <FileRef
-         location = "group:Number123TableViewCell.swift">
       </FileRef>
    </Group>
    <Group

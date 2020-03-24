@@ -73,7 +73,7 @@ extension RecipeDetailViewController{
                         let Data = document.data()
                         let url = Data["image"] as? String
                         let text = Data["text"] as? String
-                        self.instructionList.append(Instruction(imageUrl: url!, text: text!))
+                        self.instructionList.append(Instruction(index: self.ingredientList.count, imageUrl: url!, text: text!))
                     }
                     DispatchQueue.main.async {
                         self.detailTableView.reloadData()
@@ -134,19 +134,16 @@ extension RecipeDetailViewController: UITableViewDataSource,UITableViewDelegate{
             return cell
         case 4:
             let cell = (tableView.dequeueReusableCell(withIdentifier: "creator") as? creatorCellRecpipeTableViewCell)!
-<<<<<<< HEAD
             
             cell.delegate = self as? AddingFollowersDelegate
 //            cell.imgCreator.setImage(creator.image, for: .normal)
-=======
             if userProfile == true{
                 cell.followBtn.isHidden = true
             }else{
                 cell.followBtn.isHidden = false
             }
-            cell.delegate = self as? creatorCellRecpipeTableViewCellDelegate
+            cell.delegate = self as? AddingFollowersDelegate
             //            cell.imgCreator.setImage(creator.image, for: .normal)
->>>>>>> 3d4e3ccf64b95563a9efc151d57a78387eee928d
             cell.labelCreator.setTitle(creator?.name, for: .normal)
             
             return cell

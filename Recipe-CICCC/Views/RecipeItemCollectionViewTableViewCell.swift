@@ -52,7 +52,7 @@ extension RecipeItemCollectionViewTableViewCell: UICollectionViewDataSource, UIC
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-       let cell = (collectionView.dequeueReusableCell(withReuseIdentifier: "recipeItemcollection", for: indexPath) as? TestCollectionViewCell)!
+       let cell = (collectionView.dequeueReusableCell(withReuseIdentifier: "recipeItemcollection", for: indexPath) as? RecipeCreatorPostedCollectionViewCell)!
        
        return cell
     }

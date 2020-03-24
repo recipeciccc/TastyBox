@@ -11,7 +11,7 @@ import Firebase
 
 class profieTableViewCell: UITableViewCell {
     
-    let RecipeListCreator = recipeListCreator()
+    let recipes: [RecipeDetail] = []
     let numOfCreatorhasTableViewCell = NumOfCreatorhasTableViewCell()
     weak var delegate: AddingFollowersDelegate?
 
@@ -22,7 +22,7 @@ class profieTableViewCell: UITableViewCell {
     var userID: String?
     let uid = Auth.auth().currentUser?.uid
     
-    lazy var numRecipes = RecipeListCreator.creatorRecipeLists.count
+    lazy var numRecipes = recipes.count
     
     
     @IBAction func followersAddButton(_ sender: Any) {

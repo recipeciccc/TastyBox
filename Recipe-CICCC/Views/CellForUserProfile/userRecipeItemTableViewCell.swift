@@ -10,7 +10,7 @@ import UIKit
 
 class userRecipeItemTableViewCell: UITableViewCell {
     
-    var recipeData = [RecipeDetail]()
+    var recipeData: [RecipeDetail] = []
     var recipeImage = [UIImage]()
     var delegate : CollectionViewInsideUserTableView?
     
@@ -52,9 +52,9 @@ extension userRecipeItemTableViewCell: UICollectionViewDataSource, UICollectionV
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "recipeItemForUser", for: indexPath) as! userRecipeItemCollectionViewCell
-        cell.imageView.tag = indexPath.row
-        cell.imageView.image = recipeImage[indexPath.row]
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "recipeItemForUser", for: indexPath) as! RecipeCreatorPostedCollectionViewCell
+        cell.imageView?.tag = indexPath.row
+        cell.imageView?.image = recipeImage[indexPath.row]
        return cell
     }
     
