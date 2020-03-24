@@ -69,23 +69,14 @@
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="pFt-N9-939">
                                                     <rect key="frame" x="76" y="0.0" width="46" height="30"/>
                                                     <state key="normal" title="Button"/>
-                                                    <connections>
-                                                        <segue destination="knv-Xc-TDE" kind="show" id="Tgm-6w-TZy"/>
-                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="q5G-xM-ZWd">
                                                     <rect key="frame" x="152" y="0.0" width="46" height="30"/>
                                                     <state key="normal" title="Button"/>
-                                                    <connections>
-                                                        <segue destination="0ae-bW-V0x" kind="show" identifier="following" id="Bfv-8M-WiY"/>
-                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B0a-gf-UhX">
                                                     <rect key="frame" x="228" y="0.0" width="46" height="30"/>
                                                     <state key="normal" title="Button"/>
-                                                    <connections>
-                                                        <segue destination="0ae-bW-V0x" kind="show" identifier="follower" id="X7L-4n-KbV"/>
-                                                    </connections>
                                                 </button>
                                             </subviews>
                                         </stackView>
@@ -142,7 +133,6 @@
                                                     <size key="customSize" width="150" height="150"/>
                                                     <connections>
                                                         <outlet property="imageView" destination="7Pc-Gf-KKY" id="ZSG-Yg-zGO"/>
-                                                        <segue destination="uP0-Bu-gXV" kind="show" id="0YH-lx-g2m"/>
                                                     </connections>
                                                 </collectionViewCell>
                                             </cells>
@@ -171,43 +161,10 @@
             </objects>
             <point key="canvasLocation" x="1042.0289855072465" y="136.60714285714286"/>
         </scene>
-        <!--RecipeDetail-->
-        <scene sceneID="UP4-6P-tCs">
-            <objects>
-                <viewControllerPlaceholder storyboardName="RecipeDetail" id="uP0-Bu-gXV" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="1Wl-a1-jyv"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="lCU-Wa-MO2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1797" y="188"/>
-        </scene>
-        <!--savedRecipe-->
-        <scene sceneID="GWg-L4-Jm8">
-            <objects>
-                <viewControllerPlaceholder storyboardName="savedRecipe" id="knv-Xc-TDE" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="9ef-yg-epf"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="krY-nF-lH3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1798" y="86"/>
-        </scene>
-        <!--followingFollower-->
-        <scene sceneID="uiJ-rz-O0H">
-            <objects>
-                <viewControllerPlaceholder storyboardName="followingFollower" id="0ae-bW-V0x" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="FAB-AQ-DpA"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="A6W-fM-vV7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1820" y="137"/>
-        </scene>
     </scenes>
     <resources>
         <image name="2018_Sweet-Sallty-Snack-Mix_5817_600x600" width="600" height="600"/>
         <image name="imageFile" width="64" height="64"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="X7L-4n-KbV"/>
-    </inferredMetricsTieBreakers>
     <color key="tintColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>
