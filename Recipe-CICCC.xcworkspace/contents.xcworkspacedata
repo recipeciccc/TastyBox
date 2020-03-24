@@ -5,6 +5,7 @@
       location = "group:Recipe-CICCC.xcodeproj">
    </FileRef>
    <Group
+<<<<<<< HEAD
       location = "group:Recipe-CICCC"
       name = "Recipe-CICCC">
       <Group
@@ -865,6 +866,8 @@
       </FileRef>
    </Group>
    <Group
+=======
+>>>>>>> 3d4e3ccf64b95563a9efc151d57a78387eee928d
       location = "group:Pods"
       name = "Pods">
       <Group

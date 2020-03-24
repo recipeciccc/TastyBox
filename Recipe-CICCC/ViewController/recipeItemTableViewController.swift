@@ -156,7 +156,7 @@ class recipeItemTableViewController: UITableViewController {
             
             let _ = HowToCookList.howToCookList[indexPath.row]
             
-            cell.howToCookLabel.text =  HowToCookList.howToCookList[indexPath.row].howToCook
+//            cell.howToCookLabel.text =  HowToCookList.howToCookList[indexPath.row].howToCook
             cell.howToCookLabel.numberOfLines = 0
             
             

@@ -28,6 +28,7 @@ class creatorCellRecpipeTableViewCell: UITableViewCell {
     
     let uid = Auth.auth().currentUser?.uid
     
+    @IBOutlet weak var followBtn: UIButton!
     @IBAction func followerAdding(_ sender: Any) {
         self.delegate?.increaseFollower(userID: userID!, followerID: uid!)
     }

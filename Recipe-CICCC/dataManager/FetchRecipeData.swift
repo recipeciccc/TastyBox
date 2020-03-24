@@ -34,6 +34,7 @@ class FetchRecipeData{
                         
                         let userId = data["userID"] as? String
                         let time = data["time"] as? Timestamp
+<<<<<<< HEAD
                         
                         
                         let image = self.getImage(uid: userId!, rid: recipeId!)
@@ -43,6 +44,10 @@ class FetchRecipeData{
                         self.getComments(userId: userId!, recipeId: recipeId!)
                         
                         let recipe = RecipeDetail(recipeID: recipeId!, title: title!, cookingTime: cookingTime!, image: image, like: like!, serving: serving!, userID: userId!, instructions: self.instructions, ingredients: self.ingredients, comment: self.comments)
+=======
+ 
+                        let recipe = RecipeDetail(recipeID: reipeId!, title: title!, cookingTime: cookingTime ?? 0, image: image!, like: like!, serving: serving ?? 0, userID: userID!)
+>>>>>>> 3d4e3ccf64b95563a9efc151d57a78387eee928d
                         
                         recipeList.append(recipe)
                         print(time?.dateValue())
@@ -165,6 +170,8 @@ class FetchRecipeData{
             delegate?.reloadData(data:data)
         }
     }
+    
+    
     
     
 }

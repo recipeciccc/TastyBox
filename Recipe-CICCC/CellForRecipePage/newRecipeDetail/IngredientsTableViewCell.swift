@@ -10,19 +10,19 @@ import UIKit
 
 class IngredientsTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var ingredientsNameLabel: UILabel!
+    @IBOutlet weak var nameIngredientsLabel: UILabel!
     @IBOutlet weak var amountIngredientsLabel: UILabel!
     
-    var ingredientName = ""
-    var amountIngredient = ""
+//    var ingredientName = ""
+//    var amountIngredient = ""
     
 
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        ingredientsNameLabel.text = ingredientName
-        amountIngredientsLabel.text = amountIngredient
+//        NameIngredientsLabel.text = ingredientName
+//        amountIngredientsLabel.text = amountIngredient
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

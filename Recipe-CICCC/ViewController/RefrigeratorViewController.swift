@@ -134,7 +134,7 @@ extension RefrigeratorViewController: UITableViewDataSource {
             let cell = (tableView.dequeueReusableCell(withIdentifier: "ingredient", for: indexPath) as? IngredientsTableViewCell)!
             
             // Configure the cell...
-            cell.ingredientsNameLabel.text = ingredients[indexPath.row].name
+            cell.nameIngredientsLabel.text = ingredients[indexPath.row].name
             cell.amountIngredientsLabel.text = ingredients[indexPath.row].amount
             
             return cell
