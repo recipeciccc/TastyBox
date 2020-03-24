@@ -99,7 +99,7 @@ extension RecipeDetailViewController: UITableViewDataSource {
         case 4:
             let cell = (tableView.dequeueReusableCell(withIdentifier: "creator") as? creatorCellRecpipeTableViewCell)!
             
-            cell.delegate = self as? creatorCellRecpipeTableViewCellDelegate
+            cell.delegate = self as? AddingFollowersDelegate
 //            cell.imgCreator.setImage(creator.image, for: .normal)
             cell.labelCreator.setTitle(creator?.name, for: .normal)
             

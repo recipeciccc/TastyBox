@@ -7,9 +7,10 @@
 //
 
 import UIKit
+import Firebase
 
-protocol creatorCellRecpipeTableViewCellDelegate: class {
-    func increaseFollower()
+protocol AddingFollowersDelegate: class {
+    func increaseFollower(userID: String, followerID: String)
 }
 
 
@@ -17,15 +18,18 @@ class creatorCellRecpipeTableViewCell: UITableViewCell {
 
     let numOfCreatorhasTableViewCell = NumOfCreatorhasTableViewCell()
     
-    weak var delegate: creatorCellRecpipeTableViewCellDelegate?
+    weak var delegate: AddingFollowersDelegate?
 
 //    @IBOutlet weak var creatorNameLabel: UILabel!
     @IBOutlet weak var labelCreator: UIButton!
     @IBOutlet weak var imgCreator: UIButton!
     
+    var userID: String?
+    
+    let uid = Auth.auth().currentUser?.uid
     
     @IBAction func followerAdding(_ sender: Any) {
-        self.delegate?.increaseFollower()
+        self.delegate?.increaseFollower(userID: userID!, followerID: uid!)
     }
     
     

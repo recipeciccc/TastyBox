@@ -7,15 +7,20 @@
 //
 
 import UIKit
+import Firebase
 
 class profieTableViewCell: UITableViewCell {
     
     let RecipeListCreator = recipeListCreator()
     let numOfCreatorhasTableViewCell = NumOfCreatorhasTableViewCell()
+    weak var delegate: AddingFollowersDelegate?
 
 
     @IBOutlet weak var imgView: UIImageView!
     @IBOutlet weak var creatorNameLabel: UILabel!
+    
+    var userID: String?
+    let uid = Auth.auth().currentUser?.uid
     
     lazy var numRecipes = RecipeListCreator.creatorRecipeLists.count
     
@@ -23,6 +28,7 @@ class profieTableViewCell: UITableViewCell {
     @IBAction func followersAddButton(_ sender: Any) {
         numOfCreatorhasTableViewCell.numOfFollowed += 1
         // how can i show the number when it increase?
+        self.delegate!.increaseFollower(userID: userID!, followerID: uid!)
     }
     
     
