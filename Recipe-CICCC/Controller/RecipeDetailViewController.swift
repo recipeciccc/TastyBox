@@ -16,12 +16,13 @@ class RecipeDetailViewController: UIViewController {
     @IBOutlet weak var detailTableView: UITableView!
     var mainPhoto = UIImage()
     var userProfile = Bool()
-    var ridList = [String]()
     var recipe: RecipeDetail?
     var creator: User?
     
     var ingredientList  = [Ingredient]()
     var instructionList = [Instruction]()
+    
+    var dataManager = RecipeDetailDataManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,56 +35,12 @@ class RecipeDetailViewController: UIViewController {
         
         let query_ingredient = dbRef.collection("ingredient").order(by: "ingredient", descending: false)
         let query_instruction = dbRef.collection("instruction").order(by: "index", descending: false)
-      //  let query_comment = dbRef.collection("comment").order(by: "time", descending: true)
+        //  let query_comment = dbRef.collection("comment").order(by: "time", descending: true)
         
-        getIngredientData(query: query_ingredient)
-        getInstructionData(query: query_instruction)
+        dataManager.getIngredientData(query: query_ingredient, tableView: detailTableView)
+        dataManager.getInstructionData(query: query_instruction, tableView: detailTableView)
     }
 }
-
-extension RecipeDetailViewController{
-    func getIngredientData(query:Query){
-        query.getDocuments { (snapshot, err) in
-            if err != nil{
-                print("Error: Can not fetch data.")
-            }
-            else{
-                if let snap = snapshot?.documents{
-                    for document in snap{
-                        let ingredientData = document.data()
-                        let name = ingredientData["ingredient"] as? String
-                        let amount = ingredientData["amount"] as? String
-                        self.ingredientList.append(Ingredient(name: name!, amount: amount!))
-                    }
-                    DispatchQueue.main.async {
-                        self.detailTableView.reloadData()
-                    }
-                }
-            }
-        }
-    }
-    func getInstructionData(query:Query){
-        query.getDocuments { (snapshot, err) in
-            if err != nil{
-                print("Error: Can not fetch data.")
-            }
-            else{
-                if let snap = snapshot?.documents{
-                    for document in snap{
-                        let Data = document.data()
-                        let url = Data["image"] as? String
-                        let text = Data["text"] as? String
-                        self.instructionList.append(Instruction(index: self.ingredientList.count, imageUrl: url!, text: text!))
-                    }
-                    DispatchQueue.main.async {
-                        self.detailTableView.reloadData()
-                    }
-                }
-            }
-        }
-    }
-}
-
 
 extension RecipeDetailViewController: UITableViewDataSource,UITableViewDelegate{
     
@@ -121,30 +78,31 @@ extension RecipeDetailViewController: UITableViewDataSource,UITableViewDelegate{
             return cell
         case 2:
             let cell = (tableView.dequeueReusableCell(withIdentifier: "servingAndTime") as? ServingAndTimeTableViewCell)!
-            cell.servingLabel.text = "\(recipe?.serving ?? 0) serving"
-            cell.timeLabel.text = "\(recipe?.cookingTime ?? 0) mins"
+            cell.servingLabel.text = "\(String(describing: recipe?.serving)) serving"
+            cell.timeLabel.text = "\(String(describing: recipe?.cookingTime)) mins"
             
             return cell
             
         case 3:
             let cell = (tableView.dequeueReusableCell(withIdentifier: "icons") as? iconItemTableViewCell)!
             cell.numLikeLabel.text = "\(recipe?.like ?? 0)"
-            cell.delegate = self as? iconItemTableViewCellDelegate
+            cell.delegate = self as iconItemTableViewCellDelegate
             
             return cell
         case 4:
             let cell = (tableView.dequeueReusableCell(withIdentifier: "creator") as? creatorCellRecpipeTableViewCell)!
             
-            cell.delegate = self as? AddingFollowersDelegate
-//            cell.imgCreator.setImage(creator.image, for: .normal)
+            cell.delegate = self
+            //            cell.imgCreator.setImage(creator.image, for: .normal)
             if userProfile == true{
                 cell.followBtn.isHidden = true
             }else{
                 cell.followBtn.isHidden = false
             }
-            cell.delegate = self as? AddingFollowersDelegate
+            cell.delegate = self
             //            cell.imgCreator.setImage(creator.image, for: .normal)
             cell.labelCreator.setTitle(creator?.name, for: .normal)
+            cell.userID = recipe?.userID
             
             return cell
         case 5:
@@ -185,19 +143,20 @@ extension RecipeDetailViewController: UITableViewDataSource,UITableViewDelegate{
 
 
 // this extension tell firebase to increase this recipe's like
-//
-//extension RecipeDetailViewController: iconItemTableViewCellDelegate{
-//    func increaseLike() {
-//        <#code#>
-//    }
-//}
+
+extension RecipeDetailViewController: iconItemTableViewCellDelegate{
+    func increaseLike() {
+        recipe?.like += 1
+        dataManager.increaseLike(recipe: recipe!)
+        detailTableView.reloadData()
+    }
+}
 
 // this extension tell firebase to increase this user's follower.
 
-//extension RecipeDetailViewController: creatorCellRecpipeTableViewCellDelegate{
-//    func increaseFollower() {
-//        <#code#>
-//    }
-//
-//
-// }
+extension RecipeDetailViewController: AddingFollowersDelegate{
+    func increaseFollower(followerID: String) {
+        dataManager.increaseFollower(followerID: followerID)
+        detailTableView.reloadData()
+    }
+ }

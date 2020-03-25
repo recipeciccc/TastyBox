@@ -28,7 +28,7 @@ class profieTableViewCell: UITableViewCell {
     @IBAction func followersAddButton(_ sender: Any) {
         numOfCreatorhasTableViewCell.numOfFollowed += 1
         // how can i show the number when it increase?
-        self.delegate!.increaseFollower(userID: userID!, followerID: uid!)
+        self.delegate!.increaseFollower(followerID: uid!)
     }
     
     

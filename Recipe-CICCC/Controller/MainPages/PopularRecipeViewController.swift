@@ -16,12 +16,8 @@ class PopularRecipeViewController: UIViewController {
     
     var recipe: RecipeDetail?
     var recipes = [RecipeDetail]()
+    var images:[UIImage] = []
     let db = Firestore.firestore()
-    
-    //
-    //    var numberLikes = [110, 100, 90, 80, 70, 60, 50, 40, 30, 20, 10]
-    //    var numberComments = [110, 100, 90, 80, 70, 60, 50, 40, 30, 20, 10]
-    //    var titles = ["Courgette and durian salad", "Denjang and fontina cheese salad", "Coriander and duck korma", "Cheese and raisin cupcakes","Cavatelli and nutmeg salad", "Goji berry and arugula salad","Celeriac and spinach wontons", "Lamb and rhubarb pie", "Apricot and cheese cheesecake", "Goat and mushroom madras"]
     
     let dataManager = RecipedataManagerClass()
     
@@ -32,9 +28,9 @@ class PopularRecipeViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         dataManager.delegate = self
+
         dataManager.getReipeDetail()
-        
-        
+      
         tableView.delegate = self as UITableViewDelegate
         tableView.dataSource = self as UITableViewDataSource
         
@@ -53,8 +49,9 @@ class PopularRecipeViewController: UIViewController {
         
         if let vc = segue.destination as? RecipeDetailViewController {
             if let cell = sender as? UITableViewCell, let indexPath = tableView.indexPath(for: cell){
+                print(recipes[indexPath.row].title)
                 if segue.identifier == "Top3" { vc.recipe = recipes[indexPath.row] }
-                else {  vc.recipe = recipes[indexPath.row + 3] }
+                else { vc.recipe = recipes[indexPath.row + 3] }
             }
         }
      }
@@ -77,7 +74,7 @@ extension PopularRecipeViewController: UITableViewDataSource {
         if section == 0 {
             return 3
         } else  {
-            return 7
+            return recipes.count - 3
         }
     }
     
@@ -99,12 +96,11 @@ extension PopularRecipeViewController: UITableViewDataSource {
                 cell.numberLikeLabel.text = "\(recipes[indexPath.row].like)"
                 cell.numberCommentLabel.text = "\(recipes[indexPath.row].cookingTime)"
                 cell.titleLabel.text = recipes[indexPath.row].title
-                
-                if recipes[indexPath.row].image == nil {
-                    recipes[indexPath.row].image = dataManager.getImage(uid: recipes[indexPath.row].userID, rid: recipes[indexPath.row].recipeID)
-                    self.assignImage(image: recipes[indexPath.row].image!, reference: cell.imageView!)
+               
+                if images.isEmpty {
+                    dataManager.getImage(imageView: cell.imageView!)
                 }
-                
+         
                 switch indexPath.row {
                 case 0:
                     cell.badgeImageView.image = #imageLiteral(resourceName: "Group 28")
@@ -168,13 +164,16 @@ extension PopularRecipeViewController: UITableViewDataSource {
 }
 
 extension PopularRecipeViewController: getDataFromFirebaseDelegate {
-    func gotData(recipes: [RecipeDetail]) {
-        
-        self.recipes = recipes.sorted { $0.like > $1.like }
-        
+
+    func gotImagesData(images: [UIImage]) {
+        self.images = images
         tableView.reloadData()
     }
     
+    func gotData(recipes: [RecipeDetail]) {
+        self.recipes = recipes.sorted { $0.like > $1.like }
+        tableView.reloadData()
+    }
     
     func assignImage(image: UIImage, reference: UIImageView) {
         reference.image = image

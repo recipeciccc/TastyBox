@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 
 protocol AddingFollowersDelegate: class {
-    func increaseFollower(userID: String, followerID: String)
+    func increaseFollower(followerID: String)
 }
 
 
@@ -30,7 +30,7 @@ class creatorCellRecpipeTableViewCell: UITableViewCell {
     
     @IBOutlet weak var followBtn: UIButton!
     @IBAction func followerAdding(_ sender: Any) {
-        self.delegate?.increaseFollower(userID: userID!, followerID: uid!)
+        self.delegate?.increaseFollower(followerID: userID!)
     }
     
     

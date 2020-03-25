@@ -42,7 +42,7 @@ class FetchRecipeData{
                         self.getIngredients(userId: userId!, recipeId: recipeId!)
                         self.getComments(userId: userId!, recipeId: recipeId!)
                         
-                        let recipe = RecipeDetail(recipeID: recipeId!, title: title!, cookingTime: cookingTime ?? 0, image: image, like: like!, serving: serving ?? 0, userID: userId!, instructions: self.instructions, ingredients: self.ingredients, comment: self.comments)
+                        let recipe = RecipeDetail(recipeID: recipeId!, title: title!, updatedDate: time!, cookingTime: cookingTime ?? 0, image: image, like: like!, serving: serving ?? 0, userID: userId!, instructions: self.instructions, ingredients: self.ingredients, comment: self.comments)
 
                         recipeList.append(recipe)
                         print(time?.dateValue())

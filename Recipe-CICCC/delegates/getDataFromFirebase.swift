@@ -14,4 +14,6 @@ protocol getDataFromFirebaseDelegate {
     func assignImage(image: UIImage, reference: UIImageView)
     
     func gotData(recipes:[RecipeDetail])
+    
+    func gotImagesData(images:[UIImage])
 }

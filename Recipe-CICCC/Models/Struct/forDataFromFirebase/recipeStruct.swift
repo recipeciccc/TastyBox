@@ -13,7 +13,7 @@ import Firebase
 struct RecipeDetail {
     var recipeID: String
     var title: String
-//    var updatedDate: Date
+    var updatedDate: Timestamp
     var cookingTime: Int
     var image: UIImage?
     var like: Int

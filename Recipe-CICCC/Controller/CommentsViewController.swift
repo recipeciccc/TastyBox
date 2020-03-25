@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class CommentsViewController: UIViewController {
    
@@ -15,9 +16,11 @@ class CommentsViewController: UIViewController {
     @IBOutlet weak var textField: UITextField!
     
     var comments: [Comment] = []
+    var recipe: RecipeDetail?
     
     let dataManager = CommentDataManager()
-    
+    let uid = Auth.auth().currentUser?.uid
+ 
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -27,10 +30,21 @@ class CommentsViewController: UIViewController {
         textField.delegate = self
         dataManager.delegate = self
         
+        tableView.tableFooterView = UIView()
+        
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         
     }
+    
+    @IBAction func postComment(_ sender: UIButton) {
+        
+        let comment = Comment(userId: uid!, text: textField.text ?? "", time: Timestamp())
+        
+        comments.append(comment)
+        dataManager.addComment(recipeId: recipe!.recipeID, userId: uid!, text: comment.text, time: comment.time)
+        tableView.reloadData()
+     }
     
     
     /*
@@ -65,7 +79,7 @@ extension CommentsViewController: UITextFieldDelegate {
         if ((notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue) != nil {
             if self.view.frame.origin.y == 0 {
                 //MARK: adjust it later
-                self.view.frame.origin.y -= 100
+                self.view.frame.origin.y -= 300
             }
         }
     }
