@@ -226,7 +226,7 @@ extension CreatorViewController{
             if err != nil{
                  print(err?.localizedDescription as Any)
             }else{
-                print("Successfully set ingredient data")
+                print("Successfully set comment data")
                 self.navigationController?.popViewController(animated: true)
             }
         }
@@ -409,6 +409,7 @@ extension CreatorViewController: UITableViewDelegate,UITableViewDataSource{
             return cell
             
         default:
+
             let cell = tableView.dequeueReusableCell(withIdentifier: "ingredients") as! IngredientsCell
             return cell
             

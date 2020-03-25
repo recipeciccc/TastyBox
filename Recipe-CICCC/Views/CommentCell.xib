@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="FPL-Fo-QYQ">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="FPL-Fo-QYQ" id="0JQ-X4-IjR">
+                <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="comment plz!" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SHY-U7-B8v">
+                        <rect key="frame" x="10" y="5" width="394" height="34"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits"/>
+                    </textField>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="SHY-U7-B8v" firstAttribute="centerX" secondItem="0JQ-X4-IjR" secondAttribute="centerX" id="0Qm-1X-Q0z"/>
+                    <constraint firstItem="SHY-U7-B8v" firstAttribute="centerY" secondItem="0JQ-X4-IjR" secondAttribute="centerY" id="1Yl-ji-HjV"/>
+                    <constraint firstItem="SHY-U7-B8v" firstAttribute="leading" secondItem="0JQ-X4-IjR" secondAttribute="leading" constant="10" id="5YU-kx-u7o"/>
+                    <constraint firstAttribute="trailing" secondItem="SHY-U7-B8v" secondAttribute="trailing" constant="10" id="SZs-RH-4K4"/>
+                </constraints>
+            </tableViewCellContentView>
+            <point key="canvasLocation" x="31.884057971014496" y="-34.151785714285715"/>
+        </tableViewCell>
+    </objects>
+</document>
