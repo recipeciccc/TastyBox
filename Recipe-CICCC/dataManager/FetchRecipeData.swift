@@ -131,8 +131,8 @@ class FetchRecipeData{
                     
                     let text = data["text"] as! String
                     let user = data["user"] as! String
-                    var time = data["time"] as! Timestamp
-                   
+                    let time = data["time"] as! Timestamp
+                  
                     
                     self.comments.append(Comment(userId: user, text: text, time: time))
                     

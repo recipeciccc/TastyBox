@@ -226,7 +226,7 @@ extension CreatorViewController{
             if err != nil{
                  print(err?.localizedDescription as Any)
             }else{
-                print("Successfully set ingredient data")
+                print("Successfully set comment data")
                 self.navigationController?.popViewController(animated: true)
             }
         }

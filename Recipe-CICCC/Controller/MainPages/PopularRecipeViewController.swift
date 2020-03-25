@@ -42,15 +42,23 @@ class PopularRecipeViewController: UIViewController {
     }
     
     
-    /*
+    
      // MARK: - Navigation
      
      // In a storyboard-based application, you will often want to do a little preparation before navigation
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
      // Get the new view controller using segue.destination.
      // Pass the selected object to the new view controller.
+        
+        
+        if let vc = segue.destination as? RecipeDetailViewController {
+            if let cell = sender as? UITableViewCell, let indexPath = tableView.indexPath(for: cell){
+                if segue.identifier == "Top3" { vc.recipe = recipes[indexPath.row] }
+                else {  vc.recipe = recipes[indexPath.row + 3] }
+            }
+        }
      }
-     */
+     
     
 }
 
@@ -84,7 +92,7 @@ extension PopularRecipeViewController: UITableViewDataSource {
                 
             else {
                 
-                print("recipe:\(recipes) count: \(recipes.count)")
+//                print("recipe:\(recipes) count: \(recipes.count)")
                 
                 let cell = (tableView.dequeueReusableCell(withIdentifier: "medal recipe", for: indexPath) as? Number123TableViewCell)!
                 

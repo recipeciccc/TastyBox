@@ -38,10 +38,8 @@ class RecipedataManagerClass {
                     
                     let data = documents.data()
                     
-                    print("data count: \(data.count)")
                     
                     let recipeId = data["recipeID"] as? String
-                    
                     let title = data["title"] as? String
                     let cookingTime = data["cookingTime"] as? Int
                     let like = data["like"] as? Int
@@ -50,12 +48,14 @@ class RecipedataManagerClass {
                     
                     let image:UIImage? = nil
                     
+                    
+                    //MARK: They dont get anything when recipe is append...
                     self.getInstructions(userId: userId!, recipeId: recipeId!)
                     self.getIngredients(userId: userId!, recipeId: recipeId!)
                     self.getComments(userId: userId!, recipeId: recipeId!)
                     
                     let recipe = RecipeDetail(recipeID: recipeId!, title: title!, cookingTime: cookingTime ?? 0, image: image, like: like!, serving: serving ?? 0 , userID: userId!, instructions: self.instructions, ingredients: self.ingredients, comment: self.comments)
-
+                    
                     
                     self.recipes.append(recipe)
                 }
@@ -74,9 +74,9 @@ class RecipedataManagerClass {
                     let data = document.data()
                     
                     let index = data["index"] as! Int
-//                    let image = self.getImageInstruction(userId: userId, rid: recipeId, index: index)
+                    //                    let image = self.getImageInstruction(userId: userId, rid: recipeId, index: index)
                     let image = data["image"] as! String
-                     let text = data["text"] as! String
+                    let text = data["text"] as! String
                     
                     self.instructions.append(Instruction(index: index, imageUrl: image, text: text))
                     
@@ -124,19 +124,20 @@ class RecipedataManagerClass {
     }
     
     func getComments(userId: String, recipeId: String) {
-        
-        db.collection("recipe").document("\(recipeId)").collection("comment").addSnapshotListener{
+        print("recipeId in getComments:  \(recipeId)")
+        db.collection("recipe").document(recipeId).collection("comment").addSnapshotListener {
             (querysnapshot, error) in
             if error != nil {
                 print("Error getting documents: \(String(describing: error))")
             } else {
+                
                 for document in querysnapshot!.documents {
+                    print("documentID : \(document.documentID)")
                     let data = document.data()
                     
-                   let time = data["time"] as! Timestamp
+                    let time = data["time"] as! Timestamp
                     let user = data["user"] as! String
                     let text = data["text"] as! String
-                    
                     
                     self.comments.append(Comment(userId: user, text: text, time: time))
                     
@@ -144,15 +145,15 @@ class RecipedataManagerClass {
             }
         }
     }
-   
+    
     
     func getImage( uid:String, rid: String) -> UIImage {
-
+        
         var image = UIImage()
-   
-
+        
+        
         let storageRef =  Storage.storage().reference().child("user/\(uid)/RecipePhoto/\(rid)/\(rid)")
-
+        
         storageRef.getData(maxSize: 1 * 1024 * 1024) { data, error in   //
             if error != nil {
                 print(error?.localizedDescription as Any)
@@ -162,9 +163,9 @@ class RecipedataManagerClass {
                 }
             }
         }
-
+        
         return image
-
-
+        
+        
     }
 }
