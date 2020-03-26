@@ -54,7 +54,7 @@ class RecipedataManagerClass {
                     self.getIngredients(userId: userId!, recipeId: recipeId!)
                     self.getComments(userId: userId!, recipeId: recipeId!)
                     
-                    let recipe = RecipeDetail(recipeID: recipeId!, title: title!, cookingTime: cookingTime ?? 0, image: image, like: like!, serving: serving ?? 0 , userID: userId!, instructions: self.instructions, ingredients: self.ingredients, comment: self.comments)
+                    let recipe = RecipeDetail(recipeID: recipeId!, title: title!, updatedDate: Timestamp(), cookingTime: cookingTime ?? 0, image: image, like: like!, serving: serving ?? 0 , userID: userId!, instructions: self.instructions, ingredients: self.ingredients, comment: self.comments)
                     
                     
                     self.recipes.append(recipe)
@@ -147,10 +147,7 @@ class RecipedataManagerClass {
     }
     
     
-    func getImage( uid:String, rid: String) -> UIImage {
-        
-        var image = UIImage()
-        
+    func getImage( uid:String, rid: String, imageView: UIImageView) -> UIImage {
         
         let storageRef =  Storage.storage().reference().child("user/\(uid)/RecipePhoto/\(rid)/\(rid)")
         
@@ -158,14 +155,11 @@ class RecipedataManagerClass {
             if error != nil {
                 print(error?.localizedDescription as Any)
             } else {
-                if let imgData = data{
-                    image = UIImage(data: imgData)!
-                }
+                
+                // Data for "images/island.jpg" is returned
+                let image = UIImage(data: data!)
+                self.delegate?.assignImage(image: image!, reference: imageView)
             }
         }
-        
-        return image
-        
-        
     }
 }

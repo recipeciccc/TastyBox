@@ -49,8 +49,7 @@ class PopularRecipeViewController: UIViewController {
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
      // Get the new view controller using segue.destination.
      // Pass the selected object to the new view controller.
-        
-        
+
         if let vc = segue.destination as? RecipeDetailViewController {
             if let cell = sender as? UITableViewCell, let indexPath = tableView.indexPath(for: cell){
                 if segue.identifier == "Top3" { vc.recipe = recipes[indexPath.row] }
@@ -99,12 +98,8 @@ extension PopularRecipeViewController: UITableViewDataSource {
                 cell.numberLikeLabel.text = "\(recipes[indexPath.row].like)"
                 cell.numberCommentLabel.text = "\(recipes[indexPath.row].cookingTime)"
                 cell.titleLabel.text = recipes[indexPath.row].title
-                
-                if recipes[indexPath.row].image == nil {
-                    recipes[indexPath.row].image = dataManager.getImage(uid: recipes[indexPath.row].userID, rid: recipes[indexPath.row].recipeID)
-                    self.assignImage(image: recipes[indexPath.row].image!, reference: cell.imageView!)
-                }
-                
+               dataManager.getImage(imageView: cell.imageView!)
+
                 switch indexPath.row {
                 case 0:
                     cell.badgeImageView.image = #imageLiteral(resourceName: "Group 28")
@@ -168,6 +163,7 @@ extension PopularRecipeViewController: UITableViewDataSource {
 }
 
 extension PopularRecipeViewController: getDataFromFirebaseDelegate {
+
     func gotData(recipes: [RecipeDetail]) {
         
         self.recipes = recipes.sorted { $0.like > $1.like }
