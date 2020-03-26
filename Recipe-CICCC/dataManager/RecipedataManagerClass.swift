@@ -151,43 +151,21 @@ class RecipedataManagerClass {
     }
     
     
-    func getImage(imageView: UIImageView) {
+
+    func getImage( uid:String, rid: String, imageView: UIImageView) -> UIImage {
         
-        db.collection("recipe").addSnapshotListener {
-            (querysnapshot, error) in
+        let storageRef =  Storage.storage().reference().child("user/\(uid)/RecipePhoto/\(rid)/\(rid)")
+        
+        storageRef.getData(maxSize: 1 * 1024 * 1024) { data, error in   //
+
             if error != nil {
                 print("Error getting documents: \(String(describing: error))")
             } else {
                 
-                self.images.removeAll()
-                
-                for document in querysnapshot!.documents {
-                    
-                    let data = document.data()
-                    let recipeId = data["recipeID"] as? String
-                    let userId = data["userID"] as? String
-                    
-                    
-                    let storageRef =  Storage.storage().reference().child("user/\(String(describing: userId))/RecipePhoto/\(String(describing: recipeId))/\(String(describing: recipeId))")
-                    
-                    
-                    storageRef.getData(maxSize: 1 * 1024 * 1024) { data, error in 
-                        
-                        if error != nil {
-                            print(error?.localizedDescription as Any)
-                        } else {
-                            if let imgData = data {
-                                let image = UIImage(data: imgData)!
-                                self.delegate?.assignImage(image: image, reference: imageView)
-                            }
-                        }
-                    }
-                }
-                
-//                self.delegate?.gotImagesData(images: self.images)
-//                
+                // Data for "images/island.jpg" is returned
+                let image = UIImage(data: data!)
+                self.delegate?.assignImage(image: image!, reference: imageView)
             }
         }
-        
     }
 }

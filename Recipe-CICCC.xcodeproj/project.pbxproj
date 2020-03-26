@@ -242,7 +242,6 @@
 		6F54A4472429D95400D936CD /* SavedRecipeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedRecipeViewController.swift; sourceTree = "<group>"; };
 		6F729375242A159000A7E4E0 /* RecipeCreatorPostedCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeCreatorPostedCollectionViewCell.swift; sourceTree = "<group>"; };
 		6F729377242A183100A7E4E0 /* CommentCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = CommentCell.xib; path = "Recipe-CICCC/Views/CommentCell.xib"; sourceTree = SOURCE_ROOT; };
-		6F729379242A1ACD00A7E4E0 /* CommentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsViewController.swift; sourceTree = SOURCE_ROOT; };
 		6F72937B242A1FDF00A7E4E0 /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
 		6F72937D242AD04700A7E4E0 /* CommentDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentDataManager.swift; sourceTree = "<group>"; };
 		6F72937F242ADE1300A7E4E0 /* GetCommentsDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetCommentsDelegate.swift; sourceTree = "<group>"; };
@@ -641,7 +640,6 @@
 		6FC70D6F2429D215002E14DF /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				6F729379242A1ACD00A7E4E0 /* CommentsViewController.swift */,
 				6FC70D652429CC6E002E14DF /* CreatorProfileTableViewController.swift */,
 				6F54A43F2429D94F00D936CD /* showFolllowingFollowedCreatorsViewController.swift */,
 				6F54A4472429D95400D936CD /* SavedRecipeViewController.swift */,
