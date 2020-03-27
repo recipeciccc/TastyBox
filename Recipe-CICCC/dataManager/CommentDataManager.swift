@@ -16,7 +16,7 @@ class CommentDataManager {
     
     var comments:[Comment] = []
     
-    func addComment(recipeId: String, userId: String, text: String, time: Date) {
+    func addComment(recipeId: String, userId: String, text: String, time: Timestamp) {
         db.collection("recipe").document(recipeId).collection("comment").document().setData([
             "user": userId,
             "text": text,

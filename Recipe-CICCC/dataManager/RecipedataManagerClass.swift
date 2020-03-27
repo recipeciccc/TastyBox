@@ -20,9 +20,9 @@ class RecipedataManagerClass {
     var instructions : [Instruction] = []
     var comments : [Comment] = []
     var ingredients : [Ingredient] = []
+    var images:[UIImage] = []
     
     func getReipeDetail() {
-        
         
         db.collection("recipe").addSnapshotListener {
             (querysnapshot, error) in
@@ -45,20 +45,24 @@ class RecipedataManagerClass {
                     let like = data["like"] as? Int
                     let serving = data["serving"] as? Int
                     let userId = data["userID"] as? String
-                    
-                    let image:UIImage? = nil
-                    
+                    let time = data["time"] as? Timestamp
+                   
+                    let image = data["image"] as? String
                     
                     //MARK: They dont get anything when recipe is append...
-                    self.getInstructions(userId: userId!, recipeId: recipeId!)
-                    self.getIngredients(userId: userId!, recipeId: recipeId!)
-                    self.getComments(userId: userId!, recipeId: recipeId!)
-                    
-                    let recipe = RecipeDetail(recipeID: recipeId!, title: title!, cookingTime: cookingTime ?? 0, image: image, like: like!, serving: serving ?? 0 , userID: userId!, instructions: self.instructions, ingredients: self.ingredients, comment: self.comments)
-                    
-                    
-                    self.recipes.append(recipe)
+                    if userId != nil && recipeId != nil {
+//                        self.getInstructions(userId: userId!, recipeId: recipeId!)
+//                        self.getIngredients(userId: userId!, recipeId: recipeId!)
+//                        self.getComments(userId: userId!, recipeId: recipeId!)
+                        
+                        
+                        let recipe = RecipeDetail(recipeID: recipeId!, title: title!, updatedDate: time!, cookingTime: cookingTime ?? 0, image: image ?? "", like: like!, serving: serving ?? 0 , userID: userId!)
+                        
+                        
+                        self.recipes.append(recipe)
+                    }
                 }
+                
                 self.delegate?.gotData(recipes: self.recipes)
             }
         }
@@ -147,25 +151,22 @@ class RecipedataManagerClass {
     }
     
     
-    func getImage( uid:String, rid: String) -> UIImage {
+
+    func getImage(rid: String, imageView: UIImageView) {
         
-        var image = UIImage()
-        
-        
+        let uid =  Auth.auth().currentUser?.uid
         let storageRef =  Storage.storage().reference().child("user/\(uid)/RecipePhoto/\(rid)/\(rid)")
         
         storageRef.getData(maxSize: 1 * 1024 * 1024) { data, error in   //
+
             if error != nil {
-                print(error?.localizedDescription as Any)
+                print("Error getting documents: \(String(describing: error))")
             } else {
-                if let imgData = data{
-                    image = UIImage(data: imgData)!
-                }
+                
+                // Data for "images/island.jpg" is returned
+                let image = UIImage(data: data!)
+                self.delegate?.assignImage(image: image!, reference: imageView)
             }
         }
-        
-        return image
-        
-        
     }
 }

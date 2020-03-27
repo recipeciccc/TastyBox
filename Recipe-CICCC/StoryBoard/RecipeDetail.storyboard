@@ -373,7 +373,7 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UeD-ta-5Hz">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="UeD-ta-5Hz">
                                 <rect key="frame" x="20" y="750" width="50" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="6jO-u4-msx"/>
@@ -381,7 +381,7 @@
                                     <constraint firstAttribute="width" secondItem="UeD-ta-5Hz" secondAttribute="height" multiplier="1:1" id="yxd-KA-bEI"/>
                                 </constraints>
                             </imageView>
-                            <textField opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="comment plz!" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RO2-rr-uAQ">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="comment plz!" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RO2-rr-uAQ">
                                 <rect key="frame" x="78" y="758" width="316" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -416,25 +416,31 @@
                                     </button>
                                 </subviews>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UuJ-ik-o4a">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UuJ-ik-o4a">
                                 <rect key="frame" x="346" y="760" width="31" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Post"/>
+                                <connections>
+                                    <action selector="postComment:" destination="dy2-5N-L6P" eventType="touchUpInside" id="Y2X-nL-VtJ"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="tjp-D8-6Up" firstAttribute="centerX" secondItem="nVO-9r-qaO" secondAttribute="centerX" id="03X-iq-XBf"/>
                             <constraint firstItem="RO2-rr-uAQ" firstAttribute="centerY" secondItem="UeD-ta-5Hz" secondAttribute="centerY" id="1ru-Qa-g85"/>
+                            <constraint firstItem="U5E-lT-RNa" firstAttribute="trailing" secondItem="UuJ-ik-o4a" secondAttribute="trailing" constant="37" id="2qW-C5-Uki"/>
+                            <constraint firstItem="U5E-lT-RNa" firstAttribute="trailing" secondItem="RO2-rr-uAQ" secondAttribute="trailing" constant="20" id="4ln-Qr-ueW"/>
                             <constraint firstItem="U5E-lT-RNa" firstAttribute="trailing" secondItem="tjp-D8-6Up" secondAttribute="trailing" constant="30" id="9cL-0N-f8n"/>
                             <constraint firstItem="tjp-D8-6Up" firstAttribute="leading" secondItem="U5E-lT-RNa" secondAttribute="leading" constant="30" id="BwK-SV-cGp"/>
                             <constraint firstItem="U5E-lT-RNa" firstAttribute="trailing" secondItem="YWO-1N-bk1" secondAttribute="trailing" id="C9e-C2-rYH"/>
                             <constraint firstItem="YWO-1N-bk1" firstAttribute="leading" secondItem="U5E-lT-RNa" secondAttribute="leading" id="Ka2-nb-d1m"/>
+                            <constraint firstItem="RO2-rr-uAQ" firstAttribute="leading" secondItem="UeD-ta-5Hz" secondAttribute="trailing" constant="8" id="Qm1-df-Iyj"/>
+                            <constraint firstItem="UeD-ta-5Hz" firstAttribute="leading" secondItem="U5E-lT-RNa" secondAttribute="leading" constant="20" id="Rnc-ke-zMb"/>
                             <constraint firstItem="UeD-ta-5Hz" firstAttribute="top" secondItem="tjp-D8-6Up" secondAttribute="bottom" constant="11" id="ZPS-CX-T8M"/>
                             <constraint firstItem="YWO-1N-bk1" firstAttribute="top" secondItem="U5E-lT-RNa" secondAttribute="top" id="gx3-yM-9X0"/>
                             <constraint firstItem="tjp-D8-6Up" firstAttribute="top" secondItem="YWO-1N-bk1" secondAttribute="bottom" constant="25" id="o32-aM-eck"/>
+                            <constraint firstItem="UuJ-ik-o4a" firstAttribute="centerY" secondItem="RO2-rr-uAQ" secondAttribute="centerY" id="sw1-L6-hfX"/>
                             <constraint firstItem="U5E-lT-RNa" firstAttribute="bottom" secondItem="UeD-ta-5Hz" secondAttribute="bottom" constant="8" id="u9X-Lw-gcI"/>
-                            <constraint firstItem="RO2-rr-uAQ" firstAttribute="leading" secondItem="UeD-ta-5Hz" secondAttribute="trailing" constant="8" symbolic="YES" id="x5I-h6-XWV"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="U5E-lT-RNa"/>
                     </view>

@@ -53,7 +53,7 @@ class CreatorProfileTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-       
+        
         return 1
     }
     
@@ -93,7 +93,7 @@ class CreatorProfileTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-       
+        
         tableView.deselectRow(at: indexPath, animated: true)
         
     }
@@ -125,7 +125,7 @@ class CreatorProfileTableViewController: UITableViewController {
     
     
     
-  
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "recipePage Segue" {
@@ -142,8 +142,8 @@ class CreatorProfileTableViewController: UITableViewController {
 
 
 extension CreatorProfileTableViewController: AddingFollowersDelegate {
-    func increaseFollower(userID: String, followerID: String) {
-        dataManager.increaseFollower(userID: userID, followerID: followerID)
+    func increaseFollower(followerID: String) {
+        dataManager.increaseFollower(userID: user!.userID, followerID: followerID)
         tableView.reloadData()
     }
     

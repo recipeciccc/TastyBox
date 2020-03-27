@@ -36,13 +36,13 @@ class FetchRecipeData{
                         let time = data["time"] as? Timestamp
                         
                         
-                        let image = self.getImage(uid: userId!, rid: recipeId!)
+                        let image = data["image"] as? String
                         
-                        self.getInstructions(userId: userId!, recipeId: recipeId!)
-                        self.getIngredients(userId: userId!, recipeId: recipeId!)
-                        self.getComments(userId: userId!, recipeId: recipeId!)
+//                        self.getInstructions(userId: userId!, recipeId: recipeId!)
+//                        self.getIngredients(userId: userId!, recipeId: recipeId!)
+//                        self.getComments(userId: userId!, recipeId: recipeId!)
                         
-                        let recipe = RecipeDetail(recipeID: recipeId!, title: title!, cookingTime: cookingTime ?? 0, image: image, like: like!, serving: serving ?? 0, userID: userId!, instructions: self.instructions, ingredients: self.ingredients, comment: self.comments)
+                        let recipe = RecipeDetail(recipeID: recipeId!, title: title!, updatedDate: time!, cookingTime: cookingTime ?? 0, image: image ?? "", like: like!, serving: serving ?? 0, userID: userId!)
 
                         recipeList.append(recipe)
                         print(time?.dateValue())
@@ -119,9 +119,9 @@ class FetchRecipeData{
         }
     }
     
-    func getComments(userId: String, recipeId: String) {
+    func getComments(queryRef: Query) {
         
-        db.collection("recipe").document("\(recipeId)").collection("comment").addSnapshotListener{
+        queryRef.addSnapshotListener{
             (querysnapshot, error) in
             if error != nil {
                 print("Error getting documents: \(String(describing: error))")
@@ -141,13 +141,11 @@ class FetchRecipeData{
         }
     }
     
-    func getImage( uid:String, rid: String) -> UIImage {
+    func getImage(url: StorageReference) -> UIImage {
         
         var image = UIImage()
-        
-        let storageRef = Storage.storage().reference().child("user/\(uid)/RecipePhoto/\(rid)/\(rid)")
-        
-        storageRef.getData(maxSize: 1 * 1024 * 1024) { data, error in   //
+    
+        url.getData(maxSize: 1 * 1024 * 1024) { data, error in   //
             if error != nil {
                 print(error?.localizedDescription as Any)
             } else {

@@ -73,12 +73,9 @@ class UserdataManager {
                 print("Error getting documents: \(String(describing: error))")
             } else {
                 
-               
                 let data = querysnapshot!.data()
                 
                 print("data count: \(data!.count)")
-                
-                
                 
                 let name = data!["name"] as? String
                 let userID = data!["userID"] as? String

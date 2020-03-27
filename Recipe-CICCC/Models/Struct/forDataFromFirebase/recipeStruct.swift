@@ -13,15 +13,15 @@ import Firebase
 struct RecipeDetail {
     var recipeID: String
     var title: String
-//    var updatedDate: Date
+    var updatedDate: Timestamp
     var cookingTime: Int
-    var image: UIImage?
+    var image: String?
     var like: Int
     var serving: Int
     var userID:String
-    var instructions: [Instruction]
-    var ingredients: [Ingredient]
-    var comment: [Comment]
+//    var instructions: [Instruction]
+//    var ingredients: [Ingredient]
+//    var comment: [Comment]
     
     //    init(snapshot:QueryDocumentSnapshot) {
     //        guard
