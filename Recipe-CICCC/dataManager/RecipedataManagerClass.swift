@@ -14,11 +14,15 @@ class RecipedataManagerClass {
     
     let db = Firestore.firestore()
     var delegate: getDataFromFirebaseDelegate?
+    let fetchRecipeImage = FetchRecipeImage()
     
     var recipes:[RecipeDetail] = []
+    var instructions : [Instruction] = []
+    var comments : [Comment] = []
+    var ingredients : [Ingredient] = []
+    var images:[UIImage] = []
     
     func getReipeDetail() {
-        
         
         db.collection("recipe").addSnapshotListener {
             (querysnapshot, error) in
@@ -34,50 +38,134 @@ class RecipedataManagerClass {
                     
                     let data = documents.data()
                     
-                    print("data count: \(data.count)")
                     
-                    let reipeId = data["recipeID"] as? String
-                    
+                    let recipeId = data["recipeID"] as? String
                     let title = data["title"] as? String
                     let cookingTime = data["cookingTime"] as? Int
                     let like = data["like"] as? Int
                     let serving = data["serving"] as? Int
+                    let userId = data["userID"] as? String
+                    let time = data["time"] as? Timestamp
+                   
                     let image = data["image"] as? String
-                    let userID = data["userID"] as? String
-//                     let instructions = data["instruction"] as? [Instruction]
-//                     let ingredients = data["ingredient"] as? [Ingredient]
-//                     let comments = data["comment"] as? [Comment]
                     
-                    
-//                    let recipe = RecipeDetail(recipeID: reipeId!, title: title!, instructions: instructions!, cookingTime: cookingTime!, image: image!, like: like!, serving: serving!, userID: userID!, ingredients: ingredients!, comment: comments!)
-                    
-                    let recipe = RecipeDetail(recipeID: reipeId!, title: title!, cookingTime: cookingTime ?? 0, image: image!, like: like!, serving: serving ?? 0, userID: userID!)
-                    
-                    self.recipes.append(recipe)
+                    //MARK: They dont get anything when recipe is append...
+                    if userId != nil && recipeId != nil {
+//                        self.getInstructions(userId: userId!, recipeId: recipeId!)
+//                        self.getIngredients(userId: userId!, recipeId: recipeId!)
+//                        self.getComments(userId: userId!, recipeId: recipeId!)
+                        
+                        
+                        let recipe = RecipeDetail(recipeID: recipeId!, title: title!, updatedDate: time!, cookingTime: cookingTime ?? 0, image: image ?? "", like: like!, serving: serving ?? 0 , userID: userId!)
+                        
+                        
+                        self.recipes.append(recipe)
+                    }
                 }
+                
                 self.delegate?.gotData(recipes: self.recipes)
             }
         }
     }
     
-    func getImage(imageString: String, imageView: UIImageView) {
-        
-        // Get a reference to the storage service using the default Firebase App
-        let storage = Storage.storage()
-        
-        // Create a storage reference from our storage service
-        let storageRef = storage.reference()
+    func getInstructions(userId: String, recipeId: String) {
+        db.collection("recipe").document(recipeId).collection("instruction").addSnapshotListener{
+            (querysnapshot, error) in
+            if error != nil {
+                print("Error getting documents: \(String(describing: error))")
+            } else {
+                for document in querysnapshot!.documents {
+                    let data = document.data()
+                    
+                    let index = data["index"] as! Int
+                    //                    let image = self.getImageInstruction(userId: userId, rid: recipeId, index: index)
+                    let image = data["image"] as! String
+                    let text = data["text"] as! String
+                    
+                    self.instructions.append(Instruction(index: index, imageUrl: image, text: text))
+                    
+                }
+            }
+        }
+    }
     
-        let imagesRef = storageRef.child("recipeImages/\(imageString)")
+    
+    
+    func getImageInstruction(userId: String, rid: String, index: Int) -> UIImage? {
+        let storageRef = Storage.storage().reference().child("user/\(userId)/RecipePhoto/\(rid)/\(index)")
+        var image = UIImage()
         
-        // Download in memory with a maximum allowed size of 1MB (1 * 1024 * 1024 bytes)
-        imagesRef.getData(maxSize: 1 * 1024 * 1024) { data, error in
+        
+        storageRef.getData(maxSize: 1 * 1024 * 1024) { data, error in
             if error != nil {
                 // Uh-oh, an error occurred!
             } else {
                 // Data for "images/island.jpg" is returned
-                let image = UIImage(data: data!)!
-                self.delegate?.assignImage(image: image, reference: imageView)
+                image = UIImage(data: data!)!
+            }
+        }
+        
+        return image
+    }
+    
+    func getIngredients(userId: String, recipeId: String) {
+        db.collection("recipe").document("\(recipeId)").collection("ingredient").addSnapshotListener{
+            (querysnapshot, error) in
+            if error != nil {
+                print("Error getting documents: \(String(describing: error))")
+            } else {
+                for document in querysnapshot!.documents {
+                    let data = document.data()
+                    
+                    let ingredient = data["ingredient"] as! String
+                    let amount = data["amount"] as! String
+                    
+                    self.ingredients.append(Ingredient(name: ingredient, amount: amount))
+                    
+                }
+            }
+        }
+    }
+    
+    func getComments(userId: String, recipeId: String) {
+        print("recipeId in getComments:  \(recipeId)")
+        db.collection("recipe").document(recipeId).collection("comment").addSnapshotListener {
+            (querysnapshot, error) in
+            if error != nil {
+                print("Error getting documents: \(String(describing: error))")
+            } else {
+                
+                for document in querysnapshot!.documents {
+                    print("documentID : \(document.documentID)")
+                    let data = document.data()
+                    
+                    let time = data["time"] as! Timestamp
+                    let user = data["user"] as! String
+                    let text = data["text"] as! String
+                    
+                    self.comments.append(Comment(userId: user, text: text, time: time))
+                    
+                }
+            }
+        }
+    }
+    
+    
+
+    func getImage(rid: String, imageView: UIImageView) {
+        
+        let uid =  Auth.auth().currentUser?.uid
+        let storageRef =  Storage.storage().reference().child("user/\(uid)/RecipePhoto/\(rid)/\(rid)")
+        
+        storageRef.getData(maxSize: 1 * 1024 * 1024) { data, error in   //
+
+            if error != nil {
+                print("Error getting documents: \(String(describing: error))")
+            } else {
+                
+                // Data for "images/island.jpg" is returned
+                let image = UIImage(data: data!)
+                self.delegate?.assignImage(image: image!, reference: imageView)
             }
         }
     }

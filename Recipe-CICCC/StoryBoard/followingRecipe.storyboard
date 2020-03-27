@@ -8,10 +8,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--shihomi-->
+        <!--creatorProfile-->
         <scene sceneID="o4U-v0-PR7">
             <objects>
-                <viewControllerPlaceholder storyboardName="shihomi" id="9r8-rV-fug" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="creatorProfile" id="9r8-rV-fug" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="glh-kZ-cHv"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p1u-Hy-q83" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

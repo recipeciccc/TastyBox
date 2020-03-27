@@ -17,6 +17,7 @@ class IngredientShoppingDataManager {
     
     var ingredients:[IngredientShopping] = []
     
+    
     func editIngredient(name: String, amount: String, isBought: Bool, userID: String) {
         
         db.collection("user").document(userID).collection("shoppingList").document(name).setData(
