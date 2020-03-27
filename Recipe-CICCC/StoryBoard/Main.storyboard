@@ -181,7 +181,7 @@
                         <segue destination="mAg-kh-N8h" kind="show" identifier="contact" id="ZhV-6w-emw"/>
                         <segue destination="SZ7-A1-OCM" kind="show" identifier="logout" id="gOP-u2-Bf7"/>
                         <segue destination="mN5-z3-hnC" kind="show" identifier="about" id="04A-vC-zqo"/>
-                        <segue destination="Uzb-vj-7TZ" kind="show" identifier="userProfile" id="TwN-77-yHa"/>
+                        <segue destination="Uzb-vj-7TZ" kind="show" identifier="userProfile" id="DGc-qh-8fF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -436,7 +436,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qr6-sE-R3K" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1921" y="520"/>
+            <point key="canvasLocation" x="1959" y="565"/>
         </scene>
         <!--ShoppingList-->
         <scene sceneID="BTp-qL-ijD">
@@ -446,7 +446,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RIO-Rs-b3f" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1843" y="831"/>
+            <point key="canvasLocation" x="1842" y="847"/>
         </scene>
         <!--Refrigerator-->
         <scene sceneID="KAd-qy-edF">
@@ -456,7 +456,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kG8-az-28Q" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1839" y="802"/>
+            <point key="canvasLocation" x="1842" y="815"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="W76-rR-iLR">

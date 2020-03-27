@@ -20,6 +20,7 @@ class PopularRecipeViewController: UIViewController {
     let db = Firestore.firestore()
     
     let dataManager = RecipedataManagerClass()
+    let fetchData = FetchRecipeImage()
     
     
     override func viewDidLoad() {
@@ -28,8 +29,9 @@ class PopularRecipeViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         dataManager.delegate = self
-
         dataManager.getReipeDetail()
+        
+        fetchData.delegate = self
       
         tableView.delegate = self as UITableViewDelegate
         tableView.dataSource = self as UITableViewDataSource
@@ -95,16 +97,8 @@ extension PopularRecipeViewController: UITableViewDataSource {
                 cell.numberLikeLabel.text = "\(recipes[indexPath.row].like)"
                 cell.numberCommentLabel.text = "\(recipes[indexPath.row].cookingTime)"
                 cell.titleLabel.text = recipes[indexPath.row].title
-<<<<<<< HEAD
-               
-                if images.isEmpty {
-                    dataManager.getImage(imageView: cell.imageView!)
-                }
-         
-=======
-               dataManager.getImage(imageView: cell.imageView!)
+//                cell.imageView?.image = images[indexPath.row]
 
->>>>>>> Profile
                 switch indexPath.row {
                 case 0:
                     cell.badgeImageView.image = #imageLiteral(resourceName: "Group 28")
@@ -133,7 +127,7 @@ extension PopularRecipeViewController: UITableViewDataSource {
         cell.numLikeLabel.text = "\(recipes[indexPath.row + 3].like)"
         cell.numCommentLabel.text = "\(recipes[indexPath.row + 3].cookingTime)"
         cell.titleLabel.text = recipes[indexPath.row + 3].title
-            cell.imageView?.image = recipes[indexPath.row + 3].image
+//        cell.imageView?.image = images[indexPath.row + 3]
         
         
         
@@ -168,9 +162,20 @@ extension PopularRecipeViewController: UITableViewDataSource {
 }
 
 extension PopularRecipeViewController: getDataFromFirebaseDelegate {
-
+ 
     func gotData(recipes: [RecipeDetail]) {
         self.recipes = recipes.sorted { $0.like > $1.like }
+        var userIDs:[String] = []
+        var recipeIDs:[String] = []
+        var imageURLs:[String] = []
+        
+        for recipe in recipes {
+            userIDs.append(recipe.userID)
+            recipeIDs.append(recipe.recipeID)
+            imageURLs.append(recipe.image!)
+        }
+        
+//        fetchData.getImage(uid:userIDs, rid: recipeIDs, imageUrl: imageURLs)
         tableView.reloadData()
     }
     
@@ -180,4 +185,18 @@ extension PopularRecipeViewController: getDataFromFirebaseDelegate {
     
     
 }
+
+
+extension PopularRecipeViewController: ReloadDataDelegate {
+    func reloadData(data: [RecipeDetail]) {
+        
+    }
+    
+    func reloadImg(img: [UIImage]) {
+        self.images = img
+    }
+    
+    
+}
+
 

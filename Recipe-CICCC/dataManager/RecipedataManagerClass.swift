@@ -47,16 +47,16 @@ class RecipedataManagerClass {
                     let userId = data["userID"] as? String
                     let time = data["time"] as? Timestamp
                    
-                    let image = UIImage()
+                    let image = data["image"] as? String
                     
                     //MARK: They dont get anything when recipe is append...
                     if userId != nil && recipeId != nil {
-                        self.getInstructions(userId: userId!, recipeId: recipeId!)
-                        self.getIngredients(userId: userId!, recipeId: recipeId!)
-                        self.getComments(userId: userId!, recipeId: recipeId!)
+//                        self.getInstructions(userId: userId!, recipeId: recipeId!)
+//                        self.getIngredients(userId: userId!, recipeId: recipeId!)
+//                        self.getComments(userId: userId!, recipeId: recipeId!)
                         
                         
-                        let recipe = RecipeDetail(recipeID: recipeId!, title: title!, updatedDate: time!, cookingTime: cookingTime ?? 0, image: image, like: like!, serving: serving ?? 0 , userID: userId!, instructions: self.instructions, ingredients: self.ingredients, comment: self.comments)
+                        let recipe = RecipeDetail(recipeID: recipeId!, title: title!, updatedDate: time!, cookingTime: cookingTime ?? 0, image: image ?? "", like: like!, serving: serving ?? 0 , userID: userId!)
                         
                         
                         self.recipes.append(recipe)
@@ -152,8 +152,9 @@ class RecipedataManagerClass {
     
     
 
-    func getImage( uid:String, rid: String, imageView: UIImageView) -> UIImage {
+    func getImage(rid: String, imageView: UIImageView) {
         
+        let uid =  Auth.auth().currentUser?.uid
         let storageRef =  Storage.storage().reference().child("user/\(uid)/RecipePhoto/\(rid)/\(rid)")
         
         storageRef.getData(maxSize: 1 * 1024 * 1024) { data, error in   //

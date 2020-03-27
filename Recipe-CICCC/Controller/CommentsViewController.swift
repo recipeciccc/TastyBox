@@ -19,6 +19,8 @@ class CommentsViewController: UIViewController {
     var recipe: RecipeDetail?
     
     let dataManager = CommentDataManager()
+    let fetchData = FetchRecipeData()
+    
     let uid = Auth.auth().currentUser?.uid
  
     override func viewDidLoad() {
@@ -32,8 +34,15 @@ class CommentsViewController: UIViewController {
         
         tableView.tableFooterView = UIView()
         
+        let dbRef = Firestore.firestore().collection("recipe").document(recipe?.recipeID ?? "")
+        let query_comment = dbRef.collection("comment").order(by: "time", descending: true)
+        
+        fetchData.getComments(queryRef: query_comment)
+        
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
+        
         
     }
     

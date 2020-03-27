@@ -15,5 +15,5 @@ protocol getDataFromFirebaseDelegate {
     
     func gotData(recipes:[RecipeDetail])
     
-    func gotImagesData(images:[UIImage])
+   
 }

@@ -21,8 +21,10 @@ class RecipeDetailViewController: UIViewController {
     
     var ingredientList  = [Ingredient]()
     var instructionList = [Instruction]()
+//    var comment = [Comment]()
     
-    var dataManager = RecipeDetailDataManager()
+    let dataManager1 = RecipeDetailDataManager()
+    let dataManager2 = FetchRecipeData()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,10 +37,11 @@ class RecipeDetailViewController: UIViewController {
         
         let query_ingredient = dbRef.collection("ingredient").order(by: "ingredient", descending: false)
         let query_instruction = dbRef.collection("instruction").order(by: "index", descending: false)
-        //  let query_comment = dbRef.collection("comment").order(by: "time", descending: true)
         
-        dataManager.getIngredientData(query: query_ingredient, tableView: detailTableView)
-        dataManager.getInstructionData(query: query_instruction, tableView: detailTableView)
+        
+        dataManager1.getIngredientData(query: query_ingredient, tableView: detailTableView)
+        dataManager1.getInstructionData(query: query_instruction, tableView: detailTableView)
+        dataManager1.getUserProvideRecipe(recipe: recipe!)
     }
 }
 
@@ -147,7 +150,7 @@ extension RecipeDetailViewController: UITableViewDataSource,UITableViewDelegate{
 extension RecipeDetailViewController: iconItemTableViewCellDelegate{
     func increaseLike() {
         recipe?.like += 1
-        dataManager.increaseLike(recipe: recipe!)
+        self.dataManager1.increaseLike(recipe: recipe!)
         detailTableView.reloadData()
     }
 }
@@ -156,7 +159,14 @@ extension RecipeDetailViewController: iconItemTableViewCellDelegate{
 
 extension RecipeDetailViewController: AddingFollowersDelegate{
     func increaseFollower(followerID: String) {
-        dataManager.increaseFollower(followerID: followerID)
+        self.dataManager1.increaseFollower(followerID: followerID)
         detailTableView.reloadData()
     }
  }
+
+extension RecipeDetailViewController: RecipeDetailDelegate {
+    func getCreator(creator: User) {
+        self.creator = creator
+    }
+
+}
