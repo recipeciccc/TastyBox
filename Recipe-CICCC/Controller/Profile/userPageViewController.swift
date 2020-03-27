@@ -21,17 +21,11 @@ class userPageViewController: UIViewController, UITableViewDelegate, UITableView
     var imageList = [UIImage]()
     var urlList = [String]()
     var ridList = [String]()
-<<<<<<< HEAD:Recipe-CICCC/ListForRecipePage/userPageTableViewController.swift
     var followers:[User] = []
     var following:[User] = []
     
     var user: User?
-=======
-   
->>>>>>> 3d4e3ccf64b95563a9efc151d57a78387eee928d:Recipe-CICCC/ListForRecipePage/userPageViewController.swift
     
-    let buttons = ButtonsList()
-
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -46,21 +40,20 @@ class userPageViewController: UIViewController, UITableViewDelegate, UITableView
         let db = Firestore.firestore()
         let queryRef = db.collection("recipe").whereField("userID", isEqualTo: uid as Any).order(by: "time", descending: true)
         recipeList = fetchData.Data(queryRef: queryRef)
-<<<<<<< HEAD:Recipe-CICCC/ListForRecipePage/userPageTableViewController.swift
         
         self.userDataManager.getUserDetail(id: uid)
        
     }
     
-    func get_url_rid(){
-        if recipeList.count != 0{
-            for data in recipeList {
-//                urlList.append(data.image)
-                ridList.append(data.recipeID)
-                print(data.recipeID)
-            }
-        }
-    }
+//    func get_url_rid(){
+//        if recipeList.count != 0{
+//            for data in recipeList {
+////                urlList.append(data.image)
+//                ridList.append(data.recipeID)
+//                print(data.recipeID)
+//            }
+//        }
+//    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let nextVC = segue.destination as? showFolllowingFollowedCreatorsViewController {
@@ -91,11 +84,6 @@ class userPageViewController: UIViewController, UITableViewDelegate, UITableView
 //        fetchImage.getImage(uid: uid!, rid: rid, imageUrl: url)
 //
 //    }
-=======
-    }
-    
-
->>>>>>> 3d4e3ccf64b95563a9efc151d57a78387eee928d:Recipe-CICCC/ListForRecipePage/userPageViewController.swift
     
      func numberOfSections(in tableView: UITableView) -> Int {
         return 3 //4
@@ -155,19 +143,8 @@ class userPageViewController: UIViewController, UITableViewDelegate, UITableView
         }
     }
     
-<<<<<<< HEAD:Recipe-CICCC/ListForRecipePage/userPageTableViewController.swift
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-=======
-     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let buttonTitle = buttons.buttons[indexPath.row].titleButton
-        //
-        //        if buttonTitle == "Shopping List" {
-        //            let segue = self.performSegue(withIdentifier: "to Shopping List", sender:nil)
-        //            let distination =  segue.destination as! ShoppingListTableViewController
-        //
-        //        }
->>>>>>> 3d4e3ccf64b95563a9efc151d57a78387eee928d:Recipe-CICCC/ListForRecipePage/userPageViewController.swift
     }
     
     @IBAction func postedButtonTapped(_ sender: Any) {
@@ -177,33 +154,32 @@ class userPageViewController: UIViewController, UITableViewDelegate, UITableView
 }
 
 extension userPageViewController: ReloadDataDelegate{
+  
     func reloadData(data:[RecipeDetail]) {
         
         recipeList = data
-<<<<<<< HEAD:Recipe-CICCC/ListForRecipePage/userPageTableViewController.swift
         
-        recipeList.map {
-            imageList.append($0.image!)
-        }
+//        recipeList.map {
+//            imageList.append($0.image!)
+//        }
         
         if imageList.count == 0 {
-            self.tableView.reloadData()
-=======
+
         get_url_rid()
         fetchImage.getImage(uid: uid!, rid: ridList, imageUrl: urlList)
         if imageList.count == 0{
            profileTableVIew.reloadData()
->>>>>>> 3d4e3ccf64b95563a9efc151d57a78387eee928d:Recipe-CICCC/ListForRecipePage/userPageViewController.swift
         }
     }
+    }
+    
     func reloadImg(img:[UIImage]){
         imageList = img
-<<<<<<< HEAD:Recipe-CICCC/ListForRecipePage/userPageTableViewController.swift
-        self.tableView.reloadData() 
+        self.profileTableVIew.reloadData()
     }
 }
 
-extension userPageTableViewController : getUserDataDelegate {
+extension userPageViewController : getUserDataDelegate {
 //    func gotUsersData(users: [User]) {
 //        <#code#>
 //    }
@@ -211,17 +187,13 @@ extension userPageTableViewController : getUserDataDelegate {
     func gotUserData(user: User) {
         self.user = user
         self.user!.name = (Auth.auth().currentUser?.displayName)!
-    }
-    
-    
-=======
-        profileTableVIew.reloadData()
+        self.profileTableVIew.reloadData()
     }
     
     func get_url_rid(){
         if recipeList.count != 0{
             for data in recipeList{
-                urlList.append(data.image)
+                urlList.append(data.image!)
                 ridList.append(data.recipeID)
                 print(data.recipeID)
             }
@@ -235,11 +207,10 @@ extension userPageViewController: CollectionViewInsideUserTableView{
         let storyboard = UIStoryboard(name: "RecipeDetail", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "detailvc") as! RecipeDetailViewController
         vc.userProfile = true
-        vc.ridList = ridList
+        //vc.ridList = ridList
         vc.recipe = recipeList[data.row]
         vc.mainPhoto = imageList[data.row]
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
->>>>>>> 3d4e3ccf64b95563a9efc151d57a78387eee928d:Recipe-CICCC/ListForRecipePage/userPageViewController.swift
 }

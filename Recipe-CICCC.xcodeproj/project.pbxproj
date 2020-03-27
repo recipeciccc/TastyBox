@@ -102,6 +102,7 @@
 		6F788A34240F350500E46598 /* RecipedataManagerClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F788A33240F350500E46598 /* RecipedataManagerClass.swift */; };
 		6F788A36240F382300E46598 /* recipeStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F788A35240F382300E46598 /* recipeStruct.swift */; };
 		6F822294242DB7DF0020ACF7 /* userPageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F822293242DB7DE0020ACF7 /* userPageTableViewController.swift */; };
+		6F822298242DBD6E0020ACF7 /* userPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F822297242DBD6E0020ACF7 /* userPageViewController.swift */; };
 		6F82F99A240E2E4E007B7D71 /* getDataFromFirebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F82F999240E2E4E007B7D71 /* getDataFromFirebase.swift */; };
 		6F8BE77523EEA96300CEA348 /* Map.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F8BE77423EEA96300CEA348 /* Map.storyboard */; };
 		6F8BE77923EEAA8700CEA348 /* ShoppingList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8BE77823EEAA8700CEA348 /* ShoppingList.swift */; };
@@ -253,6 +254,7 @@
 		6F788A33240F350500E46598 /* RecipedataManagerClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipedataManagerClass.swift; sourceTree = "<group>"; };
 		6F788A35240F382300E46598 /* recipeStruct.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = recipeStruct.swift; sourceTree = "<group>"; };
 		6F822293242DB7DE0020ACF7 /* userPageTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = userPageTableViewController.swift; sourceTree = "<group>"; };
+		6F822297242DBD6E0020ACF7 /* userPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = userPageViewController.swift; sourceTree = "<group>"; };
 		6F82F999240E2E4E007B7D71 /* getDataFromFirebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getDataFromFirebase.swift; sourceTree = "<group>"; };
 		6F8BE77423EEA96300CEA348 /* Map.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Map.storyboard; sourceTree = "<group>"; };
 		6F8BE77823EEAA8700CEA348 /* ShoppingList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShoppingList.swift; sourceTree = "<group>"; };
@@ -646,6 +648,7 @@
 			isa = PBXGroup;
 			children = (
 				6F822293242DB7DE0020ACF7 /* userPageTableViewController.swift */,
+				6F822297242DBD6E0020ACF7 /* userPageViewController.swift */,
 				6FC70D652429CC6E002E14DF /* CreatorProfileTableViewController.swift */,
 				6F54A43F2429D94F00D936CD /* showFolllowingFollowedCreatorsViewController.swift */,
 				6F54A4472429D95400D936CD /* SavedRecipeViewController.swift */,
@@ -1076,6 +1079,7 @@
 				6F54A44D2429D95400D936CD /* NumOfCreatorhasTableViewCell.swift in Sources */,
 				69325D282413D58400340F1F /* FetchRecipeImage.swift in Sources */,
 				6F8BE78A23EEAFFF00CEA348 /* SearchIngredientTableViewCell.swift in Sources */,
+				6F822298242DBD6E0020ACF7 /* userPageViewController.swift in Sources */,
 				4069258123D8350100059C8E /* RecipeViewController.swift in Sources */,
 				4069255A23D834AC00059C8E /* iconItemTableViewCell.swift in Sources */,
 				4069257A23D8350100059C8E /* ImagesCell.swift in Sources */,

@@ -11,7 +11,7 @@
         <!--Your Profile-->
         <scene sceneID="4fc-ik-FQx">
             <objects>
-                <tableViewController storyboardIdentifier="User profile" id="MFD-Bk-wha" customClass="userPageTableViewController" customModule="Recipe_CICCC" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="User profile" id="MFD-Bk-wha" customClass="usePageViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="z8C-ZK-bjh">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
