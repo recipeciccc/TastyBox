@@ -138,8 +138,8 @@ extension RecipeDetailViewController: UITableViewDataSource,UITableViewDelegate{
             return cell
         case 2:
             let cell = (tableView.dequeueReusableCell(withIdentifier: "servingAndTime") as? ServingAndTimeTableViewCell)!
-            cell.servingLabel.text = "\(String(describing: recipe?.serving)) serving"
-            cell.timeLabel.text = "\(String(describing: recipe?.cookingTime)) mins"
+            cell.servingLabel.text = "\(String(describing: recipe?.serving ?? 0)) serving"
+            cell.timeLabel.text = "\(String(describing: recipe?.cookingTime ?? 0)) mins"
             
             return cell
             
