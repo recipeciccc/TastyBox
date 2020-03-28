@@ -57,6 +57,7 @@ class UserdataManager {
 //        }
 //    }
     
+
     func getUserDetail(id: String?) {
         
         var uid: String = ""
@@ -94,7 +95,7 @@ class UserdataManager {
         }
     }
     
-    
+
     
     func increaseFollower(userID: String, followerID: String) {
         db.collection("user").document(userID).collection("followers").document(followerID).setData([

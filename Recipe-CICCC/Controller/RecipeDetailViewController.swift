@@ -48,7 +48,7 @@ class RecipeDetailViewController: UIViewController {
         
         dataManager1.getIngredientData(query: query_ingredient, tableView: detailTableView)
         dataManager1.getInstructionData(query: query_instruction, tableView: detailTableView)
-        dataManager1.getUserProvideRecipe(recipe: recipe!)
+     //   dataManager1.getUserProvideRecipe(recipe: recipe!)
 
         getIngredientData(query: query_ingredient)
         getInstructionData(query: query_instruction)

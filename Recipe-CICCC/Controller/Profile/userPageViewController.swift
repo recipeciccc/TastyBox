@@ -41,7 +41,7 @@ class userPageViewController: UIViewController, UITableViewDelegate, UITableView
         let queryRef = db.collection("recipe").whereField("userID", isEqualTo: uid as Any).order(by: "time", descending: true)
         recipeList = fetchData.Data(queryRef: queryRef)
         
-        self.userDataManager.getUserDetail(id: uid)
+//        self.userDataManager.getUserDetail(id: uid)
        
     }
     
