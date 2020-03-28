@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="E3W-LY-dml">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="E3W-LY-dml">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -160,9 +160,6 @@
                                                 <constraint firstItem="awb-6m-HgI" firstAttribute="leading" secondItem="Pg4-Bs-AEZ" secondAttribute="leading" id="kXI-ZO-jIq"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="collectionView" destination="awb-6m-HgI" id="enk-3I-KGX"/>
-                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -170,9 +167,6 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="hi5-Z6-5Ma"/>
                     </view>
-                    <connections>
-                        <outlet property="profileTableVIew" destination="diL-oL-axJ" id="JwM-bs-Nfg"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MbW-0r-Xc6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -188,40 +182,40 @@
             </objects>
             <point key="canvasLocation" x="820" y="82"/>
         </scene>
-        <!--followingFollower-->
+        <!--Storyboard Reference-->
         <scene sceneID="Cdb-de-kN1">
             <objects>
-                <viewControllerPlaceholder storyboardName="followingFollower" id="gxG-3p-WzR" sceneMemberID="viewController">
+                <viewControllerPlaceholder id="gxG-3p-WzR" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="Q0w-9Q-LFc"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FWr-mS-6wR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="841" y="115"/>
         </scene>
-        <!--followingFollower-->
+        <!--Storyboard Reference-->
         <scene sceneID="5gI-og-nPB">
             <objects>
-                <viewControllerPlaceholder storyboardName="followingFollower" id="IRb-a0-JXa" sceneMemberID="viewController">
+                <placeholder placeholderIdentifier="IBFirstResponder" id="H4r-nR-6DJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <viewControllerPlaceholder id="IRb-a0-JXa" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="aPV-4s-7pa"/>
                 </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="H4r-nR-6DJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="840" y="148"/>
         </scene>
         <!--RecipeDetail-->
         <scene sceneID="UP4-6P-tCs">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="lCU-Wa-MO2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <viewControllerPlaceholder storyboardName="RecipeDetail" id="uP0-Bu-gXV" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="1Wl-a1-jyv"/>
                 </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lCU-Wa-MO2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="819" y="182"/>
         </scene>
     </scenes>
+    <color key="tintColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
     <resources>
         <image name="2018_Sweet-Sallty-Snack-Mix_5817_600x600" width="600" height="600"/>
         <image name="imageFile" width="64" height="64"/>
     </resources>
-    <color key="tintColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>

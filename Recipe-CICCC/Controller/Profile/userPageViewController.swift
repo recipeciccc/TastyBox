@@ -41,7 +41,7 @@ class userPageViewController: UIViewController, UITableViewDelegate, UITableView
         let queryRef = db.collection("recipe").whereField("userID", isEqualTo: uid as Any).order(by: "time", descending: true)
         recipeList = fetchData.Data(queryRef: queryRef)
         
-        self.userDataManager.getUserDetail(id: uid)
+//        self.userDataManager.getUserDetail(id: uid)
        
     }
     
@@ -207,7 +207,6 @@ extension userPageViewController: CollectionViewInsideUserTableView{
         let storyboard = UIStoryboard(name: "RecipeDetail", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "detailvc") as! RecipeDetailViewController
         vc.userProfile = true
-        //vc.ridList = ridList
         vc.recipe = recipeList[data.row]
         vc.mainPhoto = imageList[data.row]
         self.navigationController?.pushViewController(vc, animated: true)
