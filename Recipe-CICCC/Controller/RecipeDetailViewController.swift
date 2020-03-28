@@ -88,7 +88,7 @@ extension RecipeDetailViewController{
                         let Data = document.data()
                         let url = Data["image"] as? String
                         let text = Data["text"] as? String
-                        self.instructionList.append(Instruction(imageUrl: url!, text: text!))
+                        self.instructionList.append(Instruction(index: -1, imageUrl: url!, text: text!))
                     }
                     DispatchQueue.main.async {
                         self.detailTableView.reloadData()
