@@ -42,9 +42,9 @@
 		69124FAA23ECE2C100D116B4 /* followingRecipeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69124FA923ECE2C100D116B4 /* followingRecipeCollectionViewCell.swift */; };
 		691F6AC923FFB0FB005D3231 /* VIPViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 691F6AC823FFB0FB005D3231 /* VIPViewController.swift */; };
 		69202F2E23FB3D33001AB4A9 /* EditorChoice.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 69202F2D23FB3D33001AB4A9 /* EditorChoice.storyboard */; };
-		692327DB242F19FA003C434D /* RecipeDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 692327DA242F19FA003C434D /* RecipeDetail.storyboard */; };
 		692327DF242F289E003C434D /* userPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 692327DE242F289E003C434D /* userPageViewController.swift */; };
 		692327E1242F2B2C003C434D /* RecipeCreatorPostedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 692327E0242F2B2B003C434D /* RecipeCreatorPostedCollectionViewCell.swift */; };
+		692327E3242FED06003C434D /* RecipeDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 692327E2242FED05003C434D /* RecipeDetail.storyboard */; };
 		69325D202413A9B300340F1F /* userRecipeItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69325D1F2413A9B300340F1F /* userRecipeItemTableViewCell.swift */; };
 		69325D222413A9EC00340F1F /* getUserDataDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69325D212413A9EC00340F1F /* getUserDataDelegate.swift */; };
 		69325D242413B62500340F1F /* FetchRecipeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69325D232413B62500340F1F /* FetchRecipeData.swift */; };
@@ -189,9 +189,9 @@
 		69124FA923ECE2C100D116B4 /* followingRecipeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = followingRecipeCollectionViewCell.swift; sourceTree = "<group>"; };
 		691F6AC823FFB0FB005D3231 /* VIPViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VIPViewController.swift; sourceTree = "<group>"; };
 		69202F2D23FB3D33001AB4A9 /* EditorChoice.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = EditorChoice.storyboard; sourceTree = "<group>"; };
-		692327DA242F19FA003C434D /* RecipeDetail.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = RecipeDetail.storyboard; path = ../../../../../../../../Downloads/RecipeDetail.storyboard; sourceTree = "<group>"; };
 		692327DE242F289E003C434D /* userPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = userPageViewController.swift; path = Profile/userPageViewController.swift; sourceTree = "<group>"; };
 		692327E0242F2B2B003C434D /* RecipeCreatorPostedCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeCreatorPostedCollectionViewCell.swift; sourceTree = "<group>"; };
+		692327E2242FED05003C434D /* RecipeDetail.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = RecipeDetail.storyboard; sourceTree = "<group>"; };
 		69325D1F2413A9B300340F1F /* userRecipeItemTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = userRecipeItemTableViewCell.swift; sourceTree = "<group>"; };
 		69325D212413A9EC00340F1F /* getUserDataDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = getUserDataDelegate.swift; sourceTree = "<group>"; };
 		69325D232413B62500340F1F /* FetchRecipeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchRecipeData.swift; sourceTree = "<group>"; };
@@ -476,7 +476,7 @@
 		6F0FBB0623DA4B94009C1775 /* StoryBoard */ = {
 			isa = PBXGroup;
 			children = (
-				692327DA242F19FA003C434D /* RecipeDetail.storyboard */,
+				692327E2242FED05003C434D /* RecipeDetail.storyboard */,
 				40E59BEC23EE6BC60049F9B6 /* Main.storyboard */,
 				6FEC4DB7240088BD00AB2785 /* popularPage.storyboard */,
 				408C319523C98C1C00E74E4A /* MyPage.storyboard */,
@@ -827,7 +827,7 @@
 				40127ADA23A06E4600260AF0 /* LaunchScreen.storyboard in Resources */,
 				408C319223C986FF00E74E4A /* creatorProfile.storyboard in Resources */,
 				699679AF23F3A25800719A36 /* ingredientRecipe.storyboard in Resources */,
-				692327DB242F19FA003C434D /* RecipeDetail.storyboard in Resources */,
+				692327E3242FED06003C434D /* RecipeDetail.storyboard in Resources */,
 				693C9FF423FB4B2400957EF2 /* RecipeCollectionView.xib in Resources */,
 				6FEC4DB8240088BD00AB2785 /* popularPage.storyboard in Resources */,
 				408C319D23C98C1E00E74E4A /* MyPage.storyboard in Resources */,
