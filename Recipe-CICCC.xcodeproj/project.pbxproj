@@ -76,7 +76,6 @@
 		6F27D17F242A054900B5B071 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6FEC4DAE23FFCF3A00AB2785 /* Assets.xcassets */; };
 		6F27D185242A08D900B5B071 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6F27D183242A08D800B5B071 /* GoogleService-Info.plist */; };
 		6F27D186242A08D900B5B071 /* apiKey.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6F27D184242A08D900B5B071 /* apiKey.plist */; };
-		6F27D188242A090C00B5B071 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6F27D187242A090C00B5B071 /* Info.plist */; };
 		6F3FF53F23DAABAD005162C7 /* Refrigerator.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F3FF53E23DAABAD005162C7 /* Refrigerator.storyboard */; };
 		6F3FF54523DAB0F0005162C7 /* RefrigeratorList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4069256D23D834E000059C8E /* RefrigeratorList.swift */; };
 		6F3FF54723DAB62D005162C7 /* StoresMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F3FF54623DAB62D005162C7 /* StoresMapViewController.swift */; };
@@ -837,7 +836,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6F27D188242A090C00B5B071 /* Info.plist in Resources */,
 				6F27D185242A08D900B5B071 /* GoogleService-Info.plist in Resources */,
 				6F27D186242A08D900B5B071 /* apiKey.plist in Resources */,
 				6F27D17F242A054900B5B071 /* Assets.xcassets in Resources */,
