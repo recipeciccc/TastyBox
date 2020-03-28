@@ -14,14 +14,15 @@ class RecipeDetailViewController: UIViewController {
     
     
     @IBOutlet weak var detailTableView: UITableView!
+    var getImg = FetchRecipeImage()
     var mainPhoto = UIImage()
     var userProfile = Bool()
-    var ridList = [String]()
     var recipe: RecipeDetail?
     var creator: User?
     
     var ingredientList  = [Ingredient]()
     var instructionList = [Instruction]()
+    var instructionImgs = [UIImage]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,15 +30,16 @@ class RecipeDetailViewController: UIViewController {
         detailTableView.dataSource = self
         detailTableView.tableFooterView = UIView()
         detailTableView.separatorStyle = .none
+        getImg.delegateImg = self
         
         let dbRef = Firestore.firestore().collection("recipe").document(recipe?.recipeID ?? "")
         
         let query_ingredient = dbRef.collection("ingredient").order(by: "ingredient", descending: false)
         let query_instruction = dbRef.collection("instruction").order(by: "index", descending: false)
-      //  let query_comment = dbRef.collection("comment").order(by: "time", descending: true)
         
         getIngredientData(query: query_ingredient)
         getInstructionData(query: query_instruction)
+        
     }
 }
 
@@ -77,6 +79,8 @@ extension RecipeDetailViewController{
                     }
                     DispatchQueue.main.async {
                         self.detailTableView.reloadData()
+                        
+                        self.instructionImgs = self.getImg.getInstructionImg(uid: self.recipe?.userID ?? "",rid: self.recipe?.recipeID ?? "", count: self.instructionList.count)
                     }
                 }
             }
@@ -153,11 +157,13 @@ extension RecipeDetailViewController: UITableViewDataSource,UITableViewDelegate{
             return cell
         case 6:
             let cell = (tableView.dequeueReusableCell(withIdentifier: "instructionsRecipe") as? HowToCookTableViewCell)!
-            if instructionList.count > 0{
+            if instructionList.count == instructionImgs.count && instructionList.count > 0{
+                cell.stepNum.text = "\(String(indexPath.row + 1)):"
                 cell.howToCookLabel.text = instructionList[indexPath.row].text
+                cell.instructionImg.image = instructionImgs[indexPath.row]
             }
-            //  cell.imageView?.image = recipe?.instructions[indexPath.row].image
             return cell
+            
         default:
             break
         }
@@ -169,6 +175,8 @@ extension RecipeDetailViewController: UITableViewDataSource,UITableViewDelegate{
         switch indexPath.section {
         case 0:
             return 350
+        case 6:
+            return 350
         default:
             return UITableView.automaticDimension
         }
@@ -179,7 +187,15 @@ extension RecipeDetailViewController: UITableViewDataSource,UITableViewDelegate{
     }
 }
 
-
+extension RecipeDetailViewController: ReloadDataDelegate{
+    func reloadData(data: [RecipeDetail]) {
+        
+    }
+    func reloadImg(img:[UIImage]){
+        instructionImgs = img
+        detailTableView.reloadData()
+    }
+}
 
 // this extension tell firebase to increase this recipe's like
 //
