@@ -14,6 +14,7 @@ class RecipeDetailViewController: UIViewController {
     
     
     @IBOutlet weak var detailTableView: UITableView!
+    var getImg = FetchRecipeImage()
     var mainPhoto = UIImage()
     var userProfile = Bool()
     var recipe: RecipeDetail?
@@ -21,10 +22,14 @@ class RecipeDetailViewController: UIViewController {
     
     var ingredientList  = [Ingredient]()
     var instructionList = [Instruction]()
+
 //    var comment = [Comment]()
     
     let dataManager1 = RecipeDetailDataManager()
     let dataManager2 = FetchRecipeData()
+
+    var instructionImgs = [UIImage]()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,16 +37,68 @@ class RecipeDetailViewController: UIViewController {
         detailTableView.dataSource = self
         detailTableView.tableFooterView = UIView()
         detailTableView.separatorStyle = .none
+        getImg.delegateImg = self
         
         let dbRef = Firestore.firestore().collection("recipe").document(recipe?.recipeID ?? "")
         
         let query_ingredient = dbRef.collection("ingredient").order(by: "ingredient", descending: false)
         let query_instruction = dbRef.collection("instruction").order(by: "index", descending: false)
         
+
         
         dataManager1.getIngredientData(query: query_ingredient, tableView: detailTableView)
         dataManager1.getInstructionData(query: query_instruction, tableView: detailTableView)
         dataManager1.getUserProvideRecipe(recipe: recipe!)
+
+        getIngredientData(query: query_ingredient)
+        getInstructionData(query: query_instruction)
+        
+    }
+}
+
+extension RecipeDetailViewController{
+    func getIngredientData(query:Query){
+        query.getDocuments { (snapshot, err) in
+            if err != nil{
+                print("Error: Can not fetch data.")
+            }
+            else{
+                if let snap = snapshot?.documents{
+                    for document in snap{
+                        let ingredientData = document.data()
+                        let name = ingredientData["ingredient"] as? String
+                        let amount = ingredientData["amount"] as? String
+                        self.ingredientList.append(Ingredient(name: name!, amount: amount!))
+                    }
+                    DispatchQueue.main.async {
+                        self.detailTableView.reloadData()
+                    }
+                }
+            }
+        }
+    }
+    func getInstructionData(query:Query){
+        query.getDocuments { (snapshot, err) in
+            if err != nil{
+                print("Error: Can not fetch data.")
+            }
+            else{
+                if let snap = snapshot?.documents{
+                    for document in snap{
+                        let Data = document.data()
+                        let url = Data["image"] as? String
+                        let text = Data["text"] as? String
+                        self.instructionList.append(Instruction(imageUrl: url!, text: text!))
+                    }
+                    DispatchQueue.main.async {
+                        self.detailTableView.reloadData()
+                        
+                        self.instructionImgs = self.getImg.getInstructionImg(uid: self.recipe?.userID ?? "",rid: self.recipe?.recipeID ?? "", count: self.instructionList.count)
+                    }
+                }
+            }
+        }
+
     }
 }
 
@@ -117,11 +174,13 @@ extension RecipeDetailViewController: UITableViewDataSource,UITableViewDelegate{
             return cell
         case 6:
             let cell = (tableView.dequeueReusableCell(withIdentifier: "instructionsRecipe") as? HowToCookTableViewCell)!
-            if instructionList.count > 0{
+            if instructionList.count == instructionImgs.count && instructionList.count > 0{
+                cell.stepNum.text = "\(String(indexPath.row + 1)):"
                 cell.howToCookLabel.text = instructionList[indexPath.row].text
+                cell.instructionImg.image = instructionImgs[indexPath.row]
             }
-            //  cell.imageView?.image = recipe?.instructions[indexPath.row].image
             return cell
+            
         default:
             break
         }
@@ -133,6 +192,8 @@ extension RecipeDetailViewController: UITableViewDataSource,UITableViewDelegate{
         switch indexPath.section {
         case 0:
             return 350
+        case 6:
+            return 350
         default:
             return UITableView.automaticDimension
         }
@@ -143,7 +204,15 @@ extension RecipeDetailViewController: UITableViewDataSource,UITableViewDelegate{
     }
 }
 
-
+extension RecipeDetailViewController: ReloadDataDelegate{
+    func reloadData(data: [RecipeDetail]) {
+        
+    }
+    func reloadImg(img:[UIImage]){
+        instructionImgs = img
+        detailTableView.reloadData()
+    }
+}
 
 // this extension tell firebase to increase this recipe's like
 
