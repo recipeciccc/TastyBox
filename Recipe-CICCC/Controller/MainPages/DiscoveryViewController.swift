@@ -18,7 +18,7 @@ class DiscoveryViewController: UIViewController {
     @IBOutlet weak var IngredientsContainerView: UIView!
     @IBOutlet weak var EditorContainerView: UIView!
     @IBOutlet weak var VIPContainerVIew: UIView!
-
+    
     @IBOutlet weak var MenuCollectionVIew: UICollectionView!
     @IBAction func SideMenuTapped(){
         print("Toggle side Menu")
@@ -131,15 +131,16 @@ class DiscoveryViewController: UIViewController {
         if Auth.auth().currentUser != nil{
             do{
                 try Auth.auth().signOut()
-                navigationController?.popViewController(animated: true)
+//                navigationController?.popViewController(animated: true)
+                
             }catch let error as NSError{
                 print(error.localizedDescription)
             }
         }
-//        let loginStoryboard: UIStoryboard = UIStoryboard(name: "Login", bundle: nil)
-//        if let vc = loginStoryboard.instantiateViewController(withIdentifier: "LoginMain") as? LoginMainpageViewController {
-//            self.navigationController?.pushViewController(vc, animated: true)
-//    }
+        let Storyboard: UIStoryboard = UIStoryboard(name: "Login", bundle: nil)
+        let vc = Storyboard.instantiateViewController(withIdentifier: "loginPage")
+        self.navigationController?.pushViewController(vc, animated: true)
+        
     }
 }
 
@@ -206,7 +207,7 @@ extension DiscoveryViewController: UICollectionViewDelegate, UICollectionViewDat
         return
     }
     
-
+    
 }
 
 
@@ -214,14 +215,14 @@ extension DiscoveryViewController: UICollectionViewDelegate, UICollectionViewDat
 
 class MenuCollectionViewCell: UICollectionViewCell{
     @IBOutlet weak var MenuLabel: UILabel!
-
+    
     //test
-//        override var isSelected: Bool{
-//            didSet(newValue){
-//                contentView.backgroundColor = UIColor.brown
-//                MenuLabel.tintColor = UIColor.white
-//            }
-//        }
+    //        override var isSelected: Bool{
+    //            didSet(newValue){
+    //                contentView.backgroundColor = UIColor.brown
+    //                MenuLabel.tintColor = UIColor.white
+    //            }
+    //        }
     
     
     override func awakeFromNib() {
