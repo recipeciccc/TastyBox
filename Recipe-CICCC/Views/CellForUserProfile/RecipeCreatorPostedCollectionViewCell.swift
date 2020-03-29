@@ -9,7 +9,5 @@
 import UIKit
 
 class RecipeCreatorPostedCollectionViewCell: UICollectionViewCell {
-    
     @IBOutlet weak var imageView: UIImageView!
-    
 }

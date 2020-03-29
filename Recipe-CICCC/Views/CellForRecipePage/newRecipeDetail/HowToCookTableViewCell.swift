@@ -11,8 +11,8 @@ import UIKit
 class HowToCookTableViewCell: UITableViewCell {
 
     @IBOutlet weak var howToCookLabel: UILabel!
-    @IBOutlet weak var imgView: UIImageView!
-    
+    @IBOutlet weak var instructionImg: UIImageView!
+    @IBOutlet weak var stepNum: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
