@@ -78,16 +78,14 @@ class UserdataManager {
                 
                 print("data count: \(data!.count)")
                 
-                let name = data!["name"] as? String
-                let userID = data!["userID"] as? String
                 
-                self.findFollowerFollowing(id: uid, collection: "followers")
-                self.findFollowerFollowing(id: uid, collection: "followers")
+                let userID = data!["id"] as? String
+                let name = data!["userName"] as? String
+                let familySize = data!["familySize"] as? Int
+                let cuisineType = data!["cuisineType"] as? String
                 
-                let followersID = self.followers
-                let followingID = self.following
                 
-                self.user = User(userID: userID!, name: name!, followersID: followersID, followingID: followingID)
+                self.user = User(userID: userID!, name: name!, cuisineType: cuisineType!, familySize: familySize!)
             }
             
             self.delegate?.gotUserData(user: self.user!)
@@ -139,5 +137,27 @@ class UserdataManager {
             }
     }
 }
+    
+    func userRegister(userName: String, eMailAddress: String, familySize: Int, cuisineType: String) {
+        
+        let uid = (Auth.auth().currentUser?.uid)!
+        
+//        db.collection("user").document(uid).collection("proifle").document("info").setData([
+        db.collection("user").document(uid).setData([
+            
+            "id": uid,
+            "userName": userName,
+            "eMailAddress": eMailAddress,
+            "familySize": familySize,
+            "cuisineType": cuisineType
+            
+        ], merge: true) { err in
+            if let err = err {
+                print("Error writing document: \(err)")
+            } else {
+                print("Document successfully written!")
+            }
+        }
+    }
 }
 

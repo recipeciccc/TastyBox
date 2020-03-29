@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 import FirebaseFirestore
 
-class userPageViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet var profileTableVIew: UITableView!
     let fetchData = FetchRecipeData()
@@ -153,7 +153,7 @@ class userPageViewController: UIViewController, UITableViewDelegate, UITableView
     
 }
 
-extension userPageViewController: ReloadDataDelegate{
+extension MyPageViewController: ReloadDataDelegate{
   
     func reloadData(data:[RecipeDetail]) {
         
@@ -179,7 +179,7 @@ extension userPageViewController: ReloadDataDelegate{
     }
 }
 
-extension userPageViewController : getUserDataDelegate {
+extension MyPageViewController : getUserDataDelegate {
 //    func gotUsersData(users: [User]) {
 //        <#code#>
 //    }
@@ -201,7 +201,7 @@ extension userPageViewController : getUserDataDelegate {
     }
 }
 
-extension userPageViewController: CollectionViewInsideUserTableView{
+extension MyPageViewController: CollectionViewInsideUserTableView{
     func cellTaped(data: IndexPath) {
 
         let storyboard = UIStoryboard(name: "RecipeDetail", bundle: nil)

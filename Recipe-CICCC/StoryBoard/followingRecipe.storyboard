@@ -16,7 +16,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p1u-Hy-q83" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-433" y="400"/>
+            <point key="canvasLocation" x="-25" y="518"/>
         </scene>
         <!--RecipeDetail-->
         <scene sceneID="4JZ-m0-4vD">
@@ -26,7 +26,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WX2-1m-2qb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-386" y="-101"/>
+            <point key="canvasLocation" x="206" y="518"/>
         </scene>
         <!--Following Recipe View Controller-->
         <scene sceneID="tsM-yh-V2a">

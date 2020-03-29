@@ -19,19 +19,17 @@ class FollowingUserTableViewCell: UITableViewCell {
             
             
             
+            
         }
     }
     
     var label: UILabel {
-        let temp = UILabel(frame: CGRect(x: 450.0, y: 0, width: 150.0, height: UITableView.automaticDimension))
+        let temp = UILabel()
+        
         temp.textColor = .black
         temp.textAlignment = .right
         
-        //        let horizontalConstraint = temp.centerXAnchor.constraint(equalTo: self.centerXAnchor)
-        //        let verticalConstraint = temp.centerYAnchor.constraint(equalTo: self.centerYAnchor)
-        //
-        //        self.contentView.addConstraints([horizontalConstraint, verticalConstraint])
-        //
+        
         return temp
     }
     
@@ -54,16 +52,44 @@ class FollowingUserTableViewCell: UITableViewCell {
         return imgView
     }
     
+    
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        addSubview(label)
-        addSubview(userImage)
-        //        let leadingConstraint = NSLayoutConstraint(item: label, attribute: NSLayoutConstraint.Attribute.leading, relatedBy: NSLayoutConstraint.Relation.equal, toItem: userImage, attribute: NSLayoutConstraint.Attribute.trailing, multiplier: 1, constant: 30.0)
+        self.addSubview(label)
+        self.addSubview(userImage)
         
         
-       
+        let leadingConstraint = NSLayoutConstraint(item: self.label, attribute: NSLayoutConstraint.Attribute.leading, relatedBy: NSLayoutConstraint.Relation.equal, toItem: self.userImage, attribute: NSLayoutConstraint.Attribute.trailing, multiplier: 1, constant: 30.0)
+        let trainingContraint = NSLayoutConstraint(item: self.label, attribute:  NSLayoutConstraint.Attribute.trailing, relatedBy:  NSLayoutConstraint.Relation.equal, toItem: self.contentView, attribute: NSLayoutConstraint.Attribute.trailing, multiplier: 1.0, constant: 0)
+        let verticalConstraint = NSLayoutConstraint(item: self.label, attribute:  NSLayoutConstraint.Attribute.centerY, relatedBy:  NSLayoutConstraint.Relation.equal, toItem: self.contentView, attribute: NSLayoutConstraint.Attribute.centerY, multiplier: 1.0, constant: 0)
+        //        let leadingConstrait = self.label.leadingAnchor.constraint(equalTo: .userImage.trailingAnchor)
+        let topConstraint = NSLayoutConstraint(item: self.label, attribute:  NSLayoutConstraint.Attribute.top, relatedBy:  NSLayoutConstraint.Relation.lessThanOrEqual, toItem: self.contentView, attribute: NSLayoutConstraint.Attribute.top, multiplier: 1.0, constant: 5)
+        let bottomConstraint = NSLayoutConstraint(item: self.label, attribute:  NSLayoutConstraint.Attribute.bottom, relatedBy:  NSLayoutConstraint.Relation.lessThanOrEqual, toItem: self.contentView, attribute: NSLayoutConstraint.Attribute.bottom, multiplier: 1.0, constant: 5)
         
+        //                self.contentView.addConstraint(topConstraint)
+        //                self.contentView.addConstraint(bottomConstraint)
+        //                self.contentView.addConstraint(verticalConstraint)
+        //                self.contentView.addConstraint(leadingConstraint)
+        //                self.contentView.addConstraint(trainingContraint)
+        
+        topConstraint.isActive = true
+        bottomConstraint.isActive = true
+        verticalConstraint.isActive = true
+        trainingContraint.isActive = true
+        leadingConstraint.isActive = true
+        
+        //
+        
+        
+        //        label.trainingContraint.isActive = true
+        //        verticalConstraint.isActive = true
+        //        leadingConstrait.isActive = true
+        
+        
+        
+        //
         //        let imgeViewlandingConstraint = NSLayoutConstraint(item: userImage, attribute: NSLayoutConstraint.Attribute.leading, relatedBy: NSLayoutConstraint.Relation.equal, toItem: label, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 0, constant: 10)
         
         //        imgViewWidthConstraint.isActive = true
@@ -77,7 +103,9 @@ class FollowingUserTableViewCell: UITableViewCell {
     
     override func layoutSubviews() {
         userImage.layer.cornerRadius = userImage.frame.size.width / 2
-       
+        
+        
+        
     }
     
     override func awakeFromNib() {

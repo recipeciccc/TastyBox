@@ -152,9 +152,10 @@ class RecipedataManagerClass {
     
     
 
-    func getImage(rid: String, imageView: UIImageView) {
+    func getImage(rid: String, uid: String, imageView: UIImageView) {
         
-        let uid =  Auth.auth().currentUser?.uid
+//        let uid =  Auth.auth().currentUser?.uid
+//        let storageRef =  Storage.storage().reference().child("user/\(uid!)/RecipePhoto/\(rid)/\(rid)")
         let storageRef =  Storage.storage().reference().child("user/\(uid)/RecipePhoto/\(rid)/\(rid)")
         
         storageRef.getData(maxSize: 1 * 1024 * 1024) { data, error in   //
@@ -165,6 +166,7 @@ class RecipedataManagerClass {
                 
                 // Data for "images/island.jpg" is returned
                 let image = UIImage(data: data!)
+//                self.delegate?.gotImage(image: image!)
                 self.delegate?.assignImage(image: image!, reference: imageView)
             }
         }

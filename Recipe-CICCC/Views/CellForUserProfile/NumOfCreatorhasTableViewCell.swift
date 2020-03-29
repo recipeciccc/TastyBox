@@ -13,7 +13,7 @@ class NumOfCreatorhasTableViewCell: UITableViewCell {
     
     @IBOutlet weak var NumOfPostedButton: UIButton!
     @IBOutlet weak var NumOffollowingButton: UIButton!
-    @IBOutlet weak var NumOFFollwedButton: UIButton!
+    @IBOutlet weak var NumOFFollwerButton: UIButton!
     
     var numOfFollowed = 0
     
@@ -21,13 +21,15 @@ class NumOfCreatorhasTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         NumOfPostedButton.titleLabel?.numberOfLines = 0
-        NumOfPostedButton.setTitle("\nPosted", for: .normal)
-
+         NumOfPostedButton.titleLabel?.textAlignment = NSTextAlignment.center
+        
         NumOffollowingButton.titleLabel?.numberOfLines = 0
+        NumOffollowingButton.titleLabel?.textAlignment = NSTextAlignment.center
         NumOffollowingButton.setTitle("\nFollowing", for: .normal)
         
-        NumOFFollwedButton.titleLabel?.numberOfLines = 0
-        NumOFFollwedButton.setTitle("\nFollowed", for: .normal)
+        NumOFFollwerButton.titleLabel?.numberOfLines = 0
+        NumOFFollwerButton.titleLabel?.textAlignment = NSTextAlignment.center
+        NumOFFollwerButton.setTitle("\nFollowed", for: .normal)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
