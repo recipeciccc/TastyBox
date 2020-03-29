@@ -212,15 +212,17 @@ extension LoginMainpageViewController: GIDSignInDelegate {
             // present the main view
             if error == nil {
                 
-                if (user?.additionalUserInfo!.isNewUser)! {
+                //MARK: uncomment out and you don't need to edit info every time
+//                if (user?.additionalUserInfo!.isNewUser)! {
                     let Storyboard: UIStoryboard = UIStoryboard(name: "Login", bundle: nil)
                     let vc = Storyboard.instantiateViewController(withIdentifier: "FirstTimeProfile")
                     self.navigationController?.pushViewController(vc, animated: true)
-                } else {
-                    let Storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                    let vc = Storyboard.instantiateViewController(withIdentifier: "Discovery")
-                    self.navigationController?.pushViewController(vc, animated: true)
-                }
+                //MARK: uncomment out and you don't need to edit info every time
+//                } else {
+//                    let Storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+//                    let vc = Storyboard.instantiateViewController(withIdentifier: "Discovery")
+//                    self.navigationController?.pushViewController(vc, animated: true)
+//                }
             }
 
         })

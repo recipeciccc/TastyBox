@@ -11,9 +11,12 @@ import Foundation
 struct User {
     var userID: String
     var name: String
-//    var image: UIImage
-    var followersID: [String]
-    var followingID: [String]
+//    var image: String
+    var cuisineType: String
+    var familySize: Int
+    
+//    var followersID: [String]
+//    var followingID: [String]
 }
 
 

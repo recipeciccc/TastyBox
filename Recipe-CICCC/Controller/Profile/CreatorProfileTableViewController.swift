@@ -114,13 +114,17 @@ class CreatorProfileTableViewController: UITableViewController {
         else if indexPath.section == 1 { //2 {
             //return 150.0
             //            return 50.0
-            return UITableView.automaticDimension
+            return 60.0
             
         }
         //        } else if indexPath.section == 3 {
         //            return 435 // it needs to be until the end of the screen and if the items inside are more than the border, it should become bigger.
         //        }
         // return tableView.frame.height - 135.0
+        
+        if recipes.isEmpty {
+            return self.view.frame.size.height - 195.0
+        }
         
         return self.view.frame.height - ((self.view.frame.origin.y) * -1)
     }
