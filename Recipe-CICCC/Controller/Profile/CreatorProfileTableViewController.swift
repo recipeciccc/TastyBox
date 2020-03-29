@@ -20,11 +20,12 @@ class CreatorProfileTableViewController: UITableViewController {
         return UIColor(red: red, green: green, blue: blue, alpha: 1.0)
     }
     
+    
     var user: User?
     var recipes:[RecipeDetail] = []
     let images: [UIImage] = [#imageLiteral(resourceName: "breakfast-450x310"), #imageLiteral(resourceName: "images"), #imageLiteral(resourceName: "breakfast-450x310"), #imageLiteral(resourceName: "breakfast-450x310"), #imageLiteral(resourceName: "breakfast-450x310"), #imageLiteral(resourceName: "images")]
     let dataManager = UserdataManager()
-    let uid = Auth.auth().currentUser?.uid
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +36,7 @@ class CreatorProfileTableViewController: UITableViewController {
         
         let app = UINavigationBarAppearance()
         
+//        dataManager.getUserDetail(id: <#T##String?#>)
     }
     
     override func viewWillAppear(_ animated: Bool) {

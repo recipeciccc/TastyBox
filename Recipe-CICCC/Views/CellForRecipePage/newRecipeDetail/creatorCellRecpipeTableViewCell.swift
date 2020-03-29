@@ -21,7 +21,7 @@ class creatorCellRecpipeTableViewCell: UITableViewCell {
     weak var delegate: AddingFollowersDelegate?
 
 //    @IBOutlet weak var creatorNameLabel: UILabel!
-    @IBOutlet weak var labelCreator: UIButton!
+    @IBOutlet weak var creatorNameButton: UIButton!
     @IBOutlet weak var imgCreator: UIButton!
     
     var userID: String?
@@ -38,6 +38,7 @@ class creatorCellRecpipeTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+//        creatorNameButton
     }
     
 

@@ -45,9 +45,9 @@ class RecipeDetailViewController: UIViewController {
         let query_instruction = dbRef.collection("instruction").order(by: "index", descending: false)
         
 
-        
-        dataManager1.getIngredientData(query: query_ingredient, tableView: detailTableView)
-        dataManager1.getInstructionData(query: query_instruction, tableView: detailTableView)
+//
+//        dataManager1.getIngredientData(query: query_ingredient, tableView: detailTableView)
+//        dataManager1.getInstructionData(query: query_instruction, tableView: detailTableView)
      //   dataManager1.getUserProvideRecipe(recipe: recipe!)
 
         getIngredientData(query: query_ingredient)
@@ -57,6 +57,7 @@ class RecipeDetailViewController: UIViewController {
 }
 
 extension RecipeDetailViewController{
+    
     func getIngredientData(query:Query){
         query.getDocuments { (snapshot, err) in
             if err != nil{
@@ -77,6 +78,7 @@ extension RecipeDetailViewController{
             }
         }
     }
+    
     func getInstructionData(query:Query){
         query.getDocuments { (snapshot, err) in
             if err != nil{
@@ -156,12 +158,16 @@ extension RecipeDetailViewController: UITableViewDataSource,UITableViewDelegate{
             //            cell.imgCreator.setImage(creator.image, for: .normal)
             if userProfile == true{
                 cell.followBtn.isHidden = true
+                let creatorName = Auth.auth().currentUser?.displayName
+                cell.creatorNameButton.setTitle(creatorName!, for: .normal)
+                
             }else{
                 cell.followBtn.isHidden = false
+                cell.creatorNameButton.setTitle(creator?.name, for: .normal)
             }
             cell.delegate = self
             //            cell.imgCreator.setImage(creator.image, for: .normal)
-            cell.labelCreator.setTitle(creator?.name, for: .normal)
+           
             cell.userID = recipe?.userID
             
             return cell

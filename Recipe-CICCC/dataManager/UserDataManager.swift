@@ -139,5 +139,23 @@ class UserdataManager {
             }
     }
 }
+    
+    func userRegister(userName: String, eMailAddress: String, familySize: Int, cuisineType: String) {
+        
+        let uid = (Auth.auth().currentUser?.uid)!
+        db.collection("user").document(uid).collection("profile").document().setData([
+            "id": uid,
+            "userName": userName,
+            "eMailAddress": eMailAddress,
+            "familySize": familySize
+            
+        ]) { err in
+            if let err = err {
+                print("Error writing document: \(err)")
+            } else {
+                print("Document successfully written!")
+            }
+        }
+    }
 }
 

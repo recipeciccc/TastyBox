@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ebJ-Xu-dih">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ebJ-Xu-dih">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -186,14 +186,16 @@
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gx5-Hj-ihu">
                                                     <rect key="frame" x="206" y="6" width="142" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <state key="normal" title="Button"/>
+                                                    <state key="normal" title="Button">
+                                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </state>
                                                 </button>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="creatorNameButton" destination="Gx5-Hj-ihu" id="5Nr-5i-4Hx"/>
                                             <outlet property="followBtn" destination="gaE-sM-Vua" id="gBa-yU-ZoM"/>
                                             <outlet property="imgCreator" destination="6H6-18-rY5" id="udL-jV-Fy0"/>
-                                            <outlet property="labelCreator" destination="Gx5-Hj-ihu" id="5Nr-5i-4Hx"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ingredientRecipe" id="BiC-Vz-ZOK" customClass="IngredientsTableViewCell" customModule="Recipe_CICCC" customModuleProvider="target">
@@ -471,8 +473,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="ellipses.bubble" catalog="system" width="128" height="110"/>
-        <image name="folder.badge.plus" catalog="system" width="128" height="86"/>
-        <image name="suit.heart" catalog="system" width="128" height="109"/>
+        <image name="ellipses.bubble" catalog="system" width="64" height="54"/>
+        <image name="folder.badge.plus" catalog="system" width="64" height="42"/>
+        <image name="suit.heart" catalog="system" width="64" height="54"/>
     </resources>
 </document>
