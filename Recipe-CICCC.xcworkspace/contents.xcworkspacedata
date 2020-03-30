@@ -12107,9 +12107,6 @@
                location = "group:Classes"
                name = "Classes">
                <FileRef
-                  location = "group:SideMenuNavigationController.swift">
-               </FileRef>
-               <FileRef
                   location = "group:Print.swift">
                </FileRef>
                <FileRef
@@ -12141,6 +12138,9 @@
                </FileRef>
                <FileRef
                   location = "group:SideMenuPushCoordinator.swift">
+               </FileRef>
+               <FileRef
+                  location = "group:SideMenuNavigationController.swift">
                </FileRef>
                <FileRef
                   location = "group:SideMenuTransitionController.swift">

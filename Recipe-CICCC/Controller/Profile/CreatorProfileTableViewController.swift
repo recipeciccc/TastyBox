@@ -20,11 +20,12 @@ class CreatorProfileTableViewController: UITableViewController {
         return UIColor(red: red, green: green, blue: blue, alpha: 1.0)
     }
     
+    
     var user: User?
     var recipes:[RecipeDetail] = []
     let images: [UIImage] = [#imageLiteral(resourceName: "breakfast-450x310"), #imageLiteral(resourceName: "images"), #imageLiteral(resourceName: "breakfast-450x310"), #imageLiteral(resourceName: "breakfast-450x310"), #imageLiteral(resourceName: "breakfast-450x310"), #imageLiteral(resourceName: "images")]
     let dataManager = UserdataManager()
-    let uid = Auth.auth().currentUser?.uid
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +36,7 @@ class CreatorProfileTableViewController: UITableViewController {
         
         let app = UINavigationBarAppearance()
         
+//        dataManager.getUserDetail(id: <#T##String?#>)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -112,13 +114,17 @@ class CreatorProfileTableViewController: UITableViewController {
         else if indexPath.section == 1 { //2 {
             //return 150.0
             //            return 50.0
-            return UITableView.automaticDimension
+            return 60.0
             
         }
         //        } else if indexPath.section == 3 {
         //            return 435 // it needs to be until the end of the screen and if the items inside are more than the border, it should become bigger.
         //        }
         // return tableView.frame.height - 135.0
+        
+        if recipes.isEmpty {
+            return self.view.frame.size.height - 195.0
+        }
         
         return self.view.frame.height - ((self.view.frame.origin.y) * -1)
     }

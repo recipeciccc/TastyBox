@@ -26,7 +26,6 @@ class profieTableViewCell: UITableViewCell {
     
     
     @IBAction func followersAddButton(_ sender: Any) {
-        numOfCreatorhasTableViewCell.numOfFollowed += 1
         // how can i show the number when it increase?
         self.delegate!.increaseFollower(followerID: uid!)
     }
@@ -35,7 +34,7 @@ class profieTableViewCell: UITableViewCell {
     // this is called when it is initialized.
     override func awakeFromNib() {
         super.awakeFromNib()
-        creatorNameLabel.text = "Lay FangYi"
+       
         
     }
 

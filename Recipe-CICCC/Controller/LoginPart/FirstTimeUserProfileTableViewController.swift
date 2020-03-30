@@ -28,7 +28,7 @@ class FirstTimeUserProfileTableViewController: UITableViewController, UIPickerVi
     
     var cuisinePicker = UIPickerView()
     
-    
+    let dataManager = UserdataManager()
     
     override func viewDidLoad() {
         
@@ -109,8 +109,8 @@ class FirstTimeUserProfileTableViewController: UITableViewController, UIPickerVi
                 
             present(alertController, animated: true, completion: nil)
         } else {
-            var ref: DatabaseReference!
-            ref = Database.database().reference()
+            
+            dataManager.userRegister(userName: userNameTextField.text ?? "", eMailAddress: emailTextField.text ?? "", familySize: Int(familySizeTextField!.text!) ?? 0, cuisineType: cuisineTypeTextField!.text ?? "")
             
             let Storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
             let vc = Storyboard.instantiateViewController(withIdentifier: "Discovery")

@@ -16,7 +16,7 @@ class NumberTableViewCell: UITableViewCell {
     
     @IBOutlet weak var numOfFollowerButton: UIButton!
     
-    @IBOutlet weak var numOfFollwingButton: UIButton!
+    @IBOutlet weak var numOfFollowingButton: UIButton!
     
     var numOfRecipeUserSaved = 0
     var numOfRecipeUserPosted = 0
@@ -39,9 +39,9 @@ class NumberTableViewCell: UITableViewCell {
         numOfFollowerButton.setTitle("\(numOfFollower) \nFollower", for: .normal)
         numOfFollowerButton.titleLabel?.textAlignment = NSTextAlignment.center
         
-        numOfFollwingButton.titleLabel?.numberOfLines = 0
-        numOfFollwingButton.setTitle("\(numOfFollwing) \nFollowing", for: .normal)
-        numOfFollwingButton.titleLabel?.textAlignment = NSTextAlignment.center
+        numOfFollowingButton.titleLabel?.numberOfLines = 0
+        numOfFollowingButton.setTitle("\(numOfFollwing) \nFollowing", for: .normal)
+        numOfFollowingButton.titleLabel?.textAlignment = NSTextAlignment.center
         
     }
 

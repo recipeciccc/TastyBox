@@ -21,12 +21,12 @@ class showFolllowingFollowedCreatorsViewController: UIViewController {
     
     var followers: [String] = []
     var following: [String] = []
-   
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
-//        user = User(userID: "jkfl;da", name: "Test", followersID: <#[String]#>)
+        //        user = User(userID: "jkfl;da", name: "Test", followersID: <#[String]#>)
         
         searchBar.delegate = self
         scrollView.delegate = self
@@ -42,12 +42,12 @@ class showFolllowingFollowedCreatorsViewController: UIViewController {
         addTableView()
     }
     
-
+    
     
     // MARK: - Navigation
-
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-   
+    
     
     
     
@@ -57,9 +57,9 @@ class showFolllowingFollowedCreatorsViewController: UIViewController {
         
         scrollView.contentSize = CGSize(width: scrollViewWidth * 2, height: scrollViewHeight)
         
-//        followerTableView.tableFooterView = UIView()
-//        followingTableView.tableFooterView = UIView()
-//        
+        //        followerTableView.tableFooterView = UIView()
+        //        followingTableView.tableFooterView = UIView()
+        //
         followerTableView = UITableView(frame: CGRect(x: 0, y: 0, width: scrollViewWidth, height: scrollViewHeight), style: .plain)
         followingTableView = UITableView(frame: CGRect(x: scrollViewWidth, y: 0, width: scrollViewWidth, height: scrollViewHeight), style: .plain)
         
@@ -69,8 +69,12 @@ class showFolllowingFollowedCreatorsViewController: UIViewController {
         followerTableView.tableFooterView = UIView()
         followingTableView.tableFooterView = UIView()
         
+        let lagel = UILabel()
+        
         followerTableView.register(FollowingUserTableViewCell.self, forCellReuseIdentifier: "follower")
         followingTableView.register(FollowingUserTableViewCell.self, forCellReuseIdentifier: "followingUser")
+        
+        
         
         scrollView.addSubview(followerTableView)
         scrollView.addSubview(followingTableView)
@@ -88,9 +92,9 @@ class showFolllowingFollowedCreatorsViewController: UIViewController {
     }
     
     func createFollowingTableview() {
-       
+        
     }
-
+    
 }
 
 extension showFolllowingFollowedCreatorsViewController: UISearchBarDelegate {
@@ -105,7 +109,7 @@ extension showFolllowingFollowedCreatorsViewController: UIScrollViewDelegate {
         else if scrollView.contentOffset.x == 0 {
             self.navigationItem.title = "Follower"
         }
-       
+        
     }
 }
 
@@ -118,34 +122,34 @@ extension showFolllowingFollowedCreatorsViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-     
+        
         if tableView == followerTableView {
             let cell = tableView.dequeueReusableCell(withIdentifier: "follower") as! FollowingUserTableViewCell
             
-//            cell.user = self.user
-//            cell.userImage.clipsToBounds = true
-//            cell.userImage.layer.masksToBounds = false
-//            cell.userImage.layer.cornerRadius = cell.userImage.frame.size.height / 2
-                   
-//            cell.label.text = "test"
-                   
+            //            cell.user = self.user
+            //            cell.userImage.clipsToBounds = true
+            //            cell.userImage.layer.masksToBounds = false
+            //            cell.userImage.layer.cornerRadius = cell.userImage.frame.size.height / 2
+            
+            //            cell.label.text = "test"
+            
             
             return cell
         }
         
         if tableView == followingTableView {
-         
+            
             let cell = tableView.dequeueReusableCell(withIdentifier: "followingUser") as! FollowingUserTableViewCell
-//            let cell = tableView.dequeueReusableCell(withIdentifier: "followingUser") as! FollowingUserTableViewCell
-//            cell?.textLabel?.text = "followingTableView"
-//           cell.user = User(userID: "jkfl;da", name: "Test")
+            //            let cell = tableView.dequeueReusableCell(withIdentifier: "followingUser") as! FollowingUserTableViewCell
+            //            cell?.textLabel?.text = "followingTableView"
+            //           cell.user = User(userID: "jkfl;da", name: "Test")
             cell.userImage.clipsToBounds = true
             cell.userImage.layer.masksToBounds = false
             cell.userImage.layer.cornerRadius = cell.userImage.frame.size.height / 2
-                   
+            
             cell.label.text = "test"
             
-//            cell.user = user.followingUsers[indexPath.row]
+            //            cell.user = user.followingUsers[indexPath.row]
             
             return cell
         }

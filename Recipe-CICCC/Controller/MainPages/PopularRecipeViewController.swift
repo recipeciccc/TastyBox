@@ -27,27 +27,25 @@ class PopularRecipeViewController: UIViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-        
         dataManager.delegate = self
         dataManager.getReipeDetail()
         
         fetchData.delegate = self
-      
+        
         tableView.delegate = self as UITableViewDelegate
         tableView.dataSource = self as UITableViewDataSource
-        
         
     }
     
     
     
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-
+    // MARK: - Navigation
+    
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destination.
+        // Pass the selected object to the new view controller.
+        
         if let vc = segue.destination as? RecipeDetailViewController {
             if let cell = sender as? UITableViewCell, let indexPath = tableView.indexPath(for: cell){
                 print(recipes[indexPath.row].title)
@@ -55,8 +53,8 @@ class PopularRecipeViewController: UIViewController {
                 else { vc.recipe = recipes[indexPath.row + 3] }
             }
         }
-     }
-     
+    }
+    
     
 }
 
@@ -90,15 +88,17 @@ extension PopularRecipeViewController: UITableViewDataSource {
                 
             else {
                 
-//                print("recipe:\(recipes) count: \(recipes.count)")
+                //                print("recipe:\(recipes) count: \(recipes.count)")
                 
                 let cell = (tableView.dequeueReusableCell(withIdentifier: "medal recipe", for: indexPath) as? Number123TableViewCell)!
                 
                 cell.numberLikeLabel.text = "\(recipes[indexPath.row].like)"
                 cell.numberCommentLabel.text = "\(recipes[indexPath.row].cookingTime)"
                 cell.titleLabel.text = recipes[indexPath.row].title
+                //                dataManager.getImage(rid: recipes[indexPath.row].recipeID, imageView: cell.imageView!)
+                                dataManager.getImage(rid: recipes[indexPath.row].recipeID, uid: recipes[indexPath.row].userID, imageView: cell.imageView!)
 //                cell.imageView?.image = images[indexPath.row]
-
+                
                 switch indexPath.row {
                 case 0:
                     cell.badgeImageView.image = #imageLiteral(resourceName: "Group 28")
@@ -133,14 +133,14 @@ extension PopularRecipeViewController: UITableViewDataSource {
         
         // after the number in firebase is over 10 recipes, comment out them.
         
-//        cell.rankingLabel.text = "No. \(indexPath.row + 4)"
-//        cell.numLikeLabel.text = "\(recipes[indexPath.row + 4].like)"
-//        cell.numCommentLabel.text = "\(recipes[indexPath.row + 4].cookingTime)"
-//        cell.titleLabel.text = recipes[indexPath.row + 4].title
-//        
-//        if cell.recipeImageView?.image == nil {
-//            dataManager.getImage(imageString: recipes[indexPath.row + 4].image, imageView: cell.recipeImageView)
-//        }
+        //        cell.rankingLabel.text = "No. \(indexPath.row + 4)"
+        //        cell.numLikeLabel.text = "\(recipes[indexPath.row + 4].like)"
+        //        cell.numCommentLabel.text = "\(recipes[indexPath.row + 4].cookingTime)"
+        //        cell.titleLabel.text = recipes[indexPath.row + 4].title
+        //
+        //        if cell.recipeImageView?.image == nil {
+        //            dataManager.getImage(imageString: recipes[indexPath.row + 4].image, imageView: cell.recipeImageView)
+        //        }
         
         
         print("recipes.count: \(recipes.count)")
@@ -162,30 +162,41 @@ extension PopularRecipeViewController: UITableViewDataSource {
 }
 
 extension PopularRecipeViewController: getDataFromFirebaseDelegate {
- 
+    func gotImage(image: UIImage) {
+        self.images.append(image)
+    }
+    
+    
     func gotData(recipes: [RecipeDetail]) {
         self.recipes = recipes.sorted { $0.like > $1.like }
         var userIDs:[String] = []
         var recipeIDs:[String] = []
         var imageURLs:[String] = []
         
-        for recipe in recipes {
-            userIDs.append(recipe.userID)
-            recipeIDs.append(recipe.recipeID)
-            imageURLs.append(recipe.image!)
-        }
+        //        for recipe in recipes {
+        //            userIDs.append(recipe.userID)
+        //            recipeIDs.append(recipe.recipeID)
+        //            imageURLs.append(recipe.image!)
+        //
+        //        }
+//        for recipe in recipes {
+//            dataManager.getImage(rid: recipe.recipeID, uid: recipe.userID)
+//        }
         
-//        fetchData.getImage(uid:userIDs, rid: recipeIDs, imageUrl: imageURLs)
+        
+        
+        //        fetchData.getImage(uid:userIDs, rid: recipeIDs, imageUrl: imageURLs)
         tableView.reloadData()
     }
     
     func assignImage(image: UIImage, reference: UIImageView) {
         reference.image = image
+        reference.clipsToBounds = true
+        reference.contentMode = .scaleAspectFit
+        
     }
     
-    
 }
-
 
 extension PopularRecipeViewController: ReloadDataDelegate {
     func reloadData(data: [RecipeDetail]) {

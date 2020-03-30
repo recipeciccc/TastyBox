@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="jEb-wp-ELK">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="jEb-wp-ELK">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -18,53 +18,10 @@
             </objects>
             <point key="canvasLocation" x="1312" y="456"/>
         </scene>
-        <!--Show Folllowing Followed Creators View Controller-->
-        <scene sceneID="k4e-sd-kcK">
-            <objects>
-                <viewController id="QoP-je-JpG" customClass="showFolllowingFollowedCreatorsViewController" customModule="Recipe_CICCC" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Xhf-ee-J8d">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="KeU-1r-E7u">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </searchBar>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Mjn-Wa-Laf">
-                                <rect key="frame" x="0.0" y="56" width="414" height="786"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="786" id="Amk-u4-Nh4"/>
-                                    <constraint firstAttribute="width" constant="414" id="hJb-Hg-12t"/>
-                                </constraints>
-                                <viewLayoutGuide key="contentLayoutGuide" id="X5m-TL-Des"/>
-                                <viewLayoutGuide key="frameLayoutGuide" id="gB6-hE-7er"/>
-                            </scrollView>
-                        </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <gestureRecognizers/>
-                        <constraints>
-                            <constraint firstItem="Mjn-Wa-Laf" firstAttribute="leading" secondItem="KeU-1r-E7u" secondAttribute="leading" id="1iK-Dv-OJy"/>
-                            <constraint firstItem="KeU-1r-E7u" firstAttribute="trailing" secondItem="fyl-Gh-K8W" secondAttribute="trailing" id="ZVt-0i-8nC"/>
-                            <constraint firstItem="KeU-1r-E7u" firstAttribute="leading" secondItem="fyl-Gh-K8W" secondAttribute="leading" id="ayg-3Z-3Fe"/>
-                            <constraint firstItem="KeU-1r-E7u" firstAttribute="top" secondItem="fyl-Gh-K8W" secondAttribute="top" id="qGS-GT-bsI"/>
-                            <constraint firstItem="Mjn-Wa-Laf" firstAttribute="top" secondItem="KeU-1r-E7u" secondAttribute="bottom" id="wbd-bM-fXj"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="fyl-Gh-K8W"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="Umz-B3-Bwq"/>
-                    <connections>
-                        <outlet property="scrollView" destination="Mjn-Wa-Laf" id="9fJ-MN-Ynb"/>
-                        <outlet property="searchBar" destination="KeU-1r-E7u" id="94A-0k-AiS"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="LzE-xs-Fka" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2330" y="76"/>
-        </scene>
-        <!--User Page View Controller-->
+        <!--My Page View Controller-->
         <scene sceneID="n7l-8T-SU7">
             <objects>
-                <viewController storyboardIdentifier="User profile" id="jEb-wp-ELK" customClass="userPageViewController" customModule="Recipe_CICCC" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="User profile" id="jEb-wp-ELK" customClass="MyPageViewController" customModule="Recipe_CICCC" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fv7-nI-HvM">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -135,14 +92,14 @@
                                                             <rect key="frame" x="152" y="0.0" width="46" height="30"/>
                                                             <state key="normal" title="Button"/>
                                                             <connections>
-                                                                <segue destination="QoP-je-JpG" kind="show" identifier="following" id="8ch-qU-LjV"/>
+                                                                <segue destination="7qr-Kl-vLm" kind="show" identifier="following" id="8ch-qU-LjV"/>
                                                             </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TGX-ha-pOC">
                                                             <rect key="frame" x="228" y="0.0" width="46" height="30"/>
                                                             <state key="normal" title="Button"/>
                                                             <connections>
-                                                                <segue destination="QoP-je-JpG" kind="show" identifier="follower" id="wV2-3P-fD7"/>
+                                                                <segue destination="7qr-Kl-vLm" kind="show" identifier="follower" id="wV2-3P-fD7"/>
                                                             </connections>
                                                         </button>
                                                     </subviews>
@@ -155,7 +112,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="numOfFollowerButton" destination="TGX-ha-pOC" id="eGR-mI-We5"/>
-                                            <outlet property="numOfFollwingButton" destination="8pM-hX-J39" id="r28-ea-3IT"/>
+                                            <outlet property="numOfFollowingButton" destination="8pM-hX-J39" id="de9-T2-cwv"/>
                                             <outlet property="numOfRecipeUserPostedButton" destination="OmR-z8-GgN" id="daW-G4-xJe"/>
                                             <outlet property="numOfRecipeUserSavedButton" destination="HkU-oc-Udd" id="1Xa-AI-4fN"/>
                                         </connections>
@@ -222,21 +179,32 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="pw9-b5-H7Y"/>
                     </view>
+                    <navigationItem key="navigationItem" id="4jw-dY-cMi"/>
                     <connections>
-                        <outlet property="profileTableVIew" destination="fyW-DW-Eh2" id="0Rd-bY-CJI"/>
+                        <outlet property="profileTableVIew" destination="fyW-DW-Eh2" id="GdS-st-xJT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tBj-Pl-kXG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1312" y="28"/>
+            <point key="canvasLocation" x="2221.739130434783" y="27.455357142857142"/>
+        </scene>
+        <!--followerFollowing-->
+        <scene sceneID="Fvt-VW-InX">
+            <objects>
+                <viewControllerPlaceholder storyboardName="followerFollowing" id="7qr-Kl-vLm" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="RNM-e1-9xw"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YS5-YA-3X5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3239.8550724637685" y="75.669642857142847"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="wV2-3P-fD7"/>
-    </inferredMetricsTieBreakers>
-    <color key="tintColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
     <resources>
         <image name="2018_Sweet-Sallty-Snack-Mix_5817_600x600" width="600" height="600"/>
         <image name="imageFile" width="64" height="64"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="wV2-3P-fD7"/>
+    </inferredMetricsTieBreakers>
+    <color key="tintColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>
