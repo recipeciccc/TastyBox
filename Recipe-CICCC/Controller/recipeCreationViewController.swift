@@ -25,7 +25,7 @@ struct RecipeData{
 }
 
 // ViewController
-class CreatorViewController: UIViewController {
+class recipeCreationViewController: UIViewController {
 
     let db = Firestore.firestore()
 
@@ -170,7 +170,7 @@ class CreatorViewController: UIViewController {
     }
 }
 
-extension CreatorViewController{
+extension recipeCreationViewController{
     
 //    func checkTextView() -> Bool{
 //        for i in 0..<preparationText.count{
@@ -292,7 +292,7 @@ extension CreatorViewController{
 
 
 //image picker
-extension CreatorViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate{
+extension recipeCreationViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
@@ -322,7 +322,7 @@ extension CreatorViewController: UIImagePickerControllerDelegate, UINavigationCo
 
 
 //tableview
-extension CreatorViewController: UITableViewDelegate,UITableViewDataSource{
+extension recipeCreationViewController: UITableViewDelegate,UITableViewDataSource{
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 7
@@ -492,7 +492,7 @@ extension CreatorViewController: UITableViewDelegate,UITableViewDataSource{
 
 
 // TextField
-extension CreatorViewController: UITextFieldDelegate, UITextViewDelegate{
+extension recipeCreationViewController: UITextFieldDelegate, UITextViewDelegate{
     
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -179,7 +179,6 @@
                         <segue destination="ZEb-Bq-mPO" kind="show" identifier="searchPage" id="AkE-Z9-7TO"/>
                         <segue destination="jN4-wj-ARW" kind="show" identifier="setting" id="MCq-Un-kmZ"/>
                         <segue destination="mAg-kh-N8h" kind="show" identifier="contact" id="ZhV-6w-emw"/>
-                        <segue destination="SZ7-A1-OCM" kind="show" identifier="logout" id="gOP-u2-Bf7"/>
                         <segue destination="mN5-z3-hnC" kind="show" identifier="about" id="04A-vC-zqo"/>
                         <segue destination="Uzb-vj-7TZ" kind="show" identifier="userProfile" id="DGc-qh-8fF"/>
                     </connections>
@@ -193,7 +192,7 @@
             <objects>
                 <tableViewController id="CX1-ld-xBu" customClass="SideMenuTableViewController" customModule="Recipe_CICCC" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="GBn-ny-qu4">
-                        <rect key="frame" x="0.0" y="0.0" width="160" height="774"/>
+                        <rect key="frame" x="0.0" y="0.0" width="160" height="556"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.99759250880000006" green="0.98715764279999996" blue="0.79212433100000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <sections>
@@ -484,7 +483,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lew-sc-Txo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2435" y="830"/>
+            <point key="canvasLocation" x="5041" y="802"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="BRP-pg-MQe">
@@ -531,7 +530,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pkU-bc-MkQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3163.7681159420295" y="801.5625"/>
+            <point key="canvasLocation" x="2604" y="802"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="ABi-fL-jVC">
@@ -559,35 +558,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w99-X8-6Nt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3837.68115942029" y="801.5625"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="jHZ-Cb-h9p">
-            <objects>
-                <viewController id="SZ7-A1-OCM" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="mZQ-mC-92k">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This is login page" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tER-NL-R19">
-                                <rect key="frame" x="140" y="437.5" width="134" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <constraints>
-                            <constraint firstItem="tER-NL-R19" firstAttribute="centerY" secondItem="mZQ-mC-92k" secondAttribute="centerY" id="2Ir-ca-Sjr"/>
-                            <constraint firstItem="tER-NL-R19" firstAttribute="centerX" secondItem="mZQ-mC-92k" secondAttribute="centerX" id="hFA-Zx-0W1"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="Ga2-SX-W6d"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="1Iu-Eh-zqW"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="eWk-GR-HZ6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4496" y="802"/>
+            <point key="canvasLocation" x="3293" y="802"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="spc-uU-tBr">
@@ -615,7 +586,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gec-Q5-ays" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5155" y="802"/>
+            <point key="canvasLocation" x="4372" y="802"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="zI8-Lr-4rl">
@@ -678,10 +649,10 @@
             </objects>
             <point key="canvasLocation" x="2772" y="51"/>
         </scene>
-        <!--Creator View Controller-->
+        <!--Recipe Creation View Controller-->
         <scene sceneID="Lnz-eH-7xC">
             <objects>
-                <viewController id="CG3-wo-2ij" customClass="CreatorViewController" customModule="Recipe_CICCC" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="CG3-wo-2ij" customClass="recipeCreationViewController" customModule="Recipe_CICCC" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="h63-mY-Yy9">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1159,20 +1130,20 @@
             <point key="canvasLocation" x="2760" y="214"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="arrow.uturn.left" catalog="system" width="64" height="56"/>
-        <image name="cake" width="832" height="468"/>
-        <image name="camera.fill" catalog="system" width="64" height="48"/>
-        <image name="doc.plaintext" catalog="system" width="56" height="64"/>
-        <image name="info.circle" catalog="system" width="64" height="60"/>
-        <image name="line.horizontal.3" catalog="system" width="64" height="32"/>
-        <image name="magnifyingglass" catalog="system" width="64" height="56"/>
-        <image name="paperplane" catalog="system" width="64" height="60"/>
-        <image name="person" catalog="system" width="64" height="58"/>
-        <image name="plus" catalog="system" width="64" height="56"/>
-        <image name="plus.circle.fill" catalog="system" width="64" height="60"/>
-        <image name="square.and.pencil" catalog="system" width="64" height="58"/>
-        <image name="square.grid.2x2" catalog="system" width="64" height="56"/>
-    </resources>
     <color key="tintColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+    <resources>
+        <image name="arrow.uturn.left" catalog="system" width="128" height="112"/>
+        <image name="cake" width="832" height="468"/>
+        <image name="camera.fill" catalog="system" width="128" height="96"/>
+        <image name="doc.plaintext" catalog="system" width="115" height="128"/>
+        <image name="info.circle" catalog="system" width="128" height="121"/>
+        <image name="line.horizontal.3" catalog="system" width="128" height="64"/>
+        <image name="magnifyingglass" catalog="system" width="128" height="115"/>
+        <image name="paperplane" catalog="system" width="128" height="121"/>
+        <image name="person" catalog="system" width="128" height="117"/>
+        <image name="plus" catalog="system" width="128" height="113"/>
+        <image name="plus.circle.fill" catalog="system" width="128" height="121"/>
+        <image name="square.and.pencil" catalog="system" width="128" height="118"/>
+        <image name="square.grid.2x2" catalog="system" width="128" height="114"/>
+    </resources>
 </document>
