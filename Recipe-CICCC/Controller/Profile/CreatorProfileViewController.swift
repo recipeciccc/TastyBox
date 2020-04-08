@@ -48,15 +48,17 @@ class CreatorProfileViewController: UIViewController {
     }
     
     
-    /*
+    
      // MARK: - Navigation
      
      // In a storyboard-based application, you will often want to do a little preparation before navigation
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
      // Get the new view controller using segue.destination.
      // Pass the selected object to the new view controller.
+        
+       
      }
-     */
+     
     
 }
 
@@ -89,6 +91,11 @@ extension CreatorProfileViewController: UITableViewDataSource {
         else if indexPath.section == 1 {
             let cell = (tableView.dequeueReusableCell(withIdentifier: "number", for: indexPath) as? NumOfCreatorhasTableViewCell)!
             cell.NumOfPostedButton.setTitle("\(recipeList.count) \nPosted", for: .normal)
+            
+            cell.NumOffollowingButton.setTitle("\(following.count) \nfollowing", for: .normal)
+            
+            cell.NumOFFollwerButton.setTitle("\(followers.count) \nPosted", for: .normal)
+            
             return cell
         }
         

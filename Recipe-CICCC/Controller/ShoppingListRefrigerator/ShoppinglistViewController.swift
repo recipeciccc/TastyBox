@@ -125,6 +125,7 @@ extension ShoppinglistViewController: UITableViewDataSource {
         
         if editingStyle == .delete {
             dataManager.deleteData(name: ingredients[indexPath.row].name, indexPath: indexPath)
+            ingredients.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .automatic)
         }
        

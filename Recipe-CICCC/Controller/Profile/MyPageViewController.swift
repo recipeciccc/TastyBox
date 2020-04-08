@@ -41,25 +41,14 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let queryRef = db.collection("recipe").whereField("userID", isEqualTo: uid as Any).order(by: "time", descending: true)
         recipeList = fetchData.Data(queryRef: queryRef)
         
-//        self.userDataManager.getUserDetail(id: uid)
        
     }
     
-//    func get_url_rid(){
-//        if recipeList.count != 0{
-//            for data in recipeList {
-////                urlList.append(data.image)
-//                ridList.append(data.recipeID)
-//                print(data.recipeID)
-//            }
-//        }
-//    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let nextVC = segue.destination as? showFolllowingFollowedCreatorsViewController {
             
-//            nextVC.followers = user!.followersID
-//            nextVC.following = user!.followingID
+            nextVC.userID = uid
             
             if segue.identifier == "following" {
                
@@ -75,15 +64,6 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
           
     }
-    
-//    func getImage(data: RecipeDetail){
-////        for data in recipeList{
-////        }
-//        let rid = data.recipeID
-//        let url = data.image
-//        fetchImage.getImage(uid: uid!, rid: rid, imageUrl: url)
-//
-//    }
     
      func numberOfSections(in tableView: UITableView) -> Int {
         return 3 //4
@@ -159,10 +139,6 @@ extension MyPageViewController: ReloadDataDelegate{
         
         recipeList = data
         
-//        recipeList.map {
-//            imageList.append($0.image!)
-//        }
-        
         if imageList.count == 0 {
 
         get_url_rid()
@@ -180,10 +156,7 @@ extension MyPageViewController: ReloadDataDelegate{
 }
 
 extension MyPageViewController : getUserDataDelegate {
-//    func gotUsersData(users: [User]) {
-//        <#code#>
-//    }
-//
+
     func gotUserData(user: User) {
         self.user = user
         self.user!.name = (Auth.auth().currentUser?.displayName)!

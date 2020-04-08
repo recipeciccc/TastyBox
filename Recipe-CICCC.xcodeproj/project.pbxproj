@@ -82,6 +82,8 @@
 		6F3FF55D23E1068B005162C7 /* ShoppingList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F3FF55C23E1068B005162C7 /* ShoppingList.storyboard */; };
 		6F49661A2410DBF600397B4F /* UserDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4966192410DBF600397B4F /* UserDataManager.swift */; };
 		6F49661E2410DD1500397B4F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F49661D2410DD1500397B4F /* User.swift */; };
+		6F4A345A2431847700909D7A /* followingFollower.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F4A34592431847700909D7A /* followingFollower.storyboard */; };
+		6F4A345C2432F4E000909D7A /* FolllowingFollowerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4A345B2432F4E000909D7A /* FolllowingFollowerDelegate.swift */; };
 		6F50283A2415B79D0031D204 /* RefigeratorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5028362415B79C0031D204 /* RefigeratorTableViewCell.swift */; };
 		6F54A4492429D95400D936CD /* PopularRecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F54A43E2429D94E00D936CD /* PopularRecipeViewController.swift */; };
 		6F54A44A2429D95400D936CD /* showFolllowingFollowedCreatorsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F54A43F2429D94F00D936CD /* showFolllowingFollowedCreatorsViewController.swift */; };
@@ -99,7 +101,6 @@
 		6F729386242D68CF00A7E4E0 /* RecipeDetailDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F729385242D68CF00A7E4E0 /* RecipeDetailDelegate.swift */; };
 		6F788A34240F350500E46598 /* RecipedataManagerClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F788A33240F350500E46598 /* RecipedataManagerClass.swift */; };
 		6F788A36240F382300E46598 /* recipeStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F788A35240F382300E46598 /* recipeStruct.swift */; };
-		6F8222A924307E5D0020ACF7 /* followerFollowing.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F8222A824307E5D0020ACF7 /* followerFollowing.storyboard */; };
 		6F8222AB243086590020ACF7 /* CreatorProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8222AA243086590020ACF7 /* CreatorProfileViewController.swift */; };
 		6F82F99A240E2E4E007B7D71 /* getDataFromFirebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F82F999240E2E4E007B7D71 /* getDataFromFirebase.swift */; };
 		6F8BE77523EEA96300CEA348 /* Map.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F8BE77423EEA96300CEA348 /* Map.storyboard */; };
@@ -230,6 +231,8 @@
 		6F3FF55C23E1068B005162C7 /* ShoppingList.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ShoppingList.storyboard; sourceTree = "<group>"; };
 		6F4966192410DBF600397B4F /* UserDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataManager.swift; sourceTree = "<group>"; };
 		6F49661D2410DD1500397B4F /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		6F4A34592431847700909D7A /* followingFollower.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = followingFollower.storyboard; sourceTree = "<group>"; };
+		6F4A345B2432F4E000909D7A /* FolllowingFollowerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolllowingFollowerDelegate.swift; sourceTree = "<group>"; };
 		6F5028362415B79C0031D204 /* RefigeratorTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefigeratorTableViewCell.swift; sourceTree = "<group>"; };
 		6F54A43E2429D94E00D936CD /* PopularRecipeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopularRecipeViewController.swift; sourceTree = "<group>"; };
 		6F54A43F2429D94F00D936CD /* showFolllowingFollowedCreatorsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = showFolllowingFollowedCreatorsViewController.swift; sourceTree = "<group>"; };
@@ -247,7 +250,6 @@
 		6F729385242D68CF00A7E4E0 /* RecipeDetailDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailDelegate.swift; sourceTree = "<group>"; };
 		6F788A33240F350500E46598 /* RecipedataManagerClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipedataManagerClass.swift; sourceTree = "<group>"; };
 		6F788A35240F382300E46598 /* recipeStruct.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = recipeStruct.swift; sourceTree = "<group>"; };
-		6F8222A824307E5D0020ACF7 /* followerFollowing.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = followerFollowing.storyboard; sourceTree = "<group>"; };
 		6F8222AA243086590020ACF7 /* CreatorProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatorProfileViewController.swift; sourceTree = "<group>"; };
 		6F82F999240E2E4E007B7D71 /* getDataFromFirebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getDataFromFirebase.swift; sourceTree = "<group>"; };
 		6F8BE77423EEA96300CEA348 /* Map.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Map.storyboard; sourceTree = "<group>"; };
@@ -482,12 +484,12 @@
 				40E59BEC23EE6BC60049F9B6 /* Main.storyboard */,
 				6FEC4DB7240088BD00AB2785 /* popularPage.storyboard */,
 				408C319523C98C1C00E74E4A /* MyPage.storyboard */,
-				6F8222A824307E5D0020ACF7 /* followerFollowing.storyboard */,
 				6F3FF55C23E1068B005162C7 /* ShoppingList.storyboard */,
 				6F8BE77423EEA96300CEA348 /* Map.storyboard */,
 				6F3FF53E23DAABAD005162C7 /* Refrigerator.storyboard */,
 				408C319123C986FF00E74E4A /* creatorProfile.storyboard */,
 				6FC70D692429CFA7002E14DF /* Login.storyboard */,
+				6F4A34592431847700909D7A /* followingFollower.storyboard */,
 				6F0FBAFC23DA3E49009C1775 /* savedRecipe.storyboard */,
 				69DB5BBB23ECB2940027A238 /* followingRecipe.storyboard */,
 				699679AE23F3A25800719A36 /* ingredientRecipe.storyboard */,
@@ -538,6 +540,7 @@
 				69325D252413C59200340F1F /* ReloadDataDelegate.swift */,
 				6F72937F242ADE1300A7E4E0 /* GetCommentsDelegate.swift */,
 				6F729385242D68CF00A7E4E0 /* RecipeDetailDelegate.swift */,
+				6F4A345B2432F4E000909D7A /* FolllowingFollowerDelegate.swift */,
 			);
 			path = delegates;
 			sourceTree = "<group>";
@@ -815,6 +818,7 @@
 				6F27D186242A08D900B5B071 /* apiKey.plist in Resources */,
 				6F27D17F242A054900B5B071 /* Assets.xcassets in Resources */,
 				6970F4E423F6302A00F94541 /* Monthly.storyboard in Resources */,
+				6F4A345A2431847700909D7A /* followingFollower.storyboard in Resources */,
 				6F8BE77523EEA96300CEA348 /* Map.storyboard in Resources */,
 				6999A49324170EE40013BD5B /* Podfile in Resources */,
 				69202F2E23FB3D33001AB4A9 /* EditorChoice.storyboard in Resources */,
@@ -827,7 +831,6 @@
 				6F3FF55D23E1068B005162C7 /* ShoppingList.storyboard in Resources */,
 				69DB5BBC23ECB2940027A238 /* followingRecipe.storyboard in Resources */,
 				6F0FBAFD23DA3E49009C1775 /* savedRecipe.storyboard in Resources */,
-				6F8222A924307E5D0020ACF7 /* followerFollowing.storyboard in Resources */,
 				40E59BED23EE6BC60049F9B6 /* Main.storyboard in Resources */,
 				40127ADA23A06E4600260AF0 /* LaunchScreen.storyboard in Resources */,
 				408C319223C986FF00E74E4A /* creatorProfile.storyboard in Resources */,
@@ -1088,6 +1091,7 @@
 				40127AD023A06E3C00260AF0 /* SceneDelegate.swift in Sources */,
 				4069254B23D8346F00059C8E /* mainUserProfileTableViewCell.swift in Sources */,
 				4069254923D8346F00059C8E /* NumberTableViewCell.swift in Sources */,
+				6F4A345C2432F4E000909D7A /* FolllowingFollowerDelegate.swift in Sources */,
 				6F788A34240F350500E46598 /* RecipedataManagerClass.swift in Sources */,
 				69E57A3924235BAD00753243 /* CollectionViewInsideUserTableView.swift in Sources */,
 				4069257B23D8350100059C8E /* DiscoveryViewController.swift in Sources */,
