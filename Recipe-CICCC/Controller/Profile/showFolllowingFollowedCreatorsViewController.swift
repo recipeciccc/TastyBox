@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class showFolllowingFollowedCreatorsViewController: UIViewController {
     
@@ -16,11 +17,17 @@ class showFolllowingFollowedCreatorsViewController: UIViewController {
     var followerTableView = UITableView()
     var followingTableView = UITableView()
     
-    var user: User?
+    //    var user: User?
     var titleVC: String?
+    var userID: String?
     
-    var followers: [String] = []
-    var following: [String] = []
+    var followersID: [String] = []
+    var followingID: [String] = []
+    var followers: [User] = []
+    var following: [User] = []
+    
+    
+    let dataManager = UserdataManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +37,7 @@ class showFolllowingFollowedCreatorsViewController: UIViewController {
         
         searchBar.delegate = self
         scrollView.delegate = self
+        dataManager.delegateFollowerFollowing = self
         
         self.navigationItem.title = titleVC
         
@@ -40,6 +48,10 @@ class showFolllowingFollowedCreatorsViewController: UIViewController {
         self.navigationItem.title = titleVC
         
         addTableView()
+//        dataManager.findFollowerFollowing(id: userID!, collection: "following")
+//        dataManager.findFollowerFollowing(id: userID!, collection: "follower")
+            
+        
     }
     
     
@@ -97,6 +109,28 @@ class showFolllowingFollowedCreatorsViewController: UIViewController {
     
 }
 
+extension showFolllowingFollowedCreatorsViewController: FolllowingFollowerDelegate {
+    func assignFollowersFollowings(users: [User]) {
+        
+    }
+
+    func passFollowerFollowing(followingsIDs: [String], followersIDs: [String]) {
+        self.followersID = followersIDs
+        self.followingID = followingsIDs
+        
+        
+        // MARK: Problem!
+        // can get the ids and pass them
+        // firebase skip implementation once, if the fuction to retrieve data is called in viewDidLoad,
+        // it is executed. but the fuction below is not. Therefore it doesnt retrieve user data from firebase.
+        // i moved it to viewDidLoad once, but when it is called, self.followingID is empty.
+//        self.dataManager.getFollowersFollowings(followingsIDs: self.followingID, followersIDs: self.followingID)
+    }
+
+    
+    
+}
+
 extension showFolllowingFollowedCreatorsViewController: UISearchBarDelegate {
     
 }
@@ -126,13 +160,12 @@ extension showFolllowingFollowedCreatorsViewController: UITableViewDataSource {
         if tableView == followerTableView {
             let cell = tableView.dequeueReusableCell(withIdentifier: "follower") as! FollowingUserTableViewCell
             
-            //            cell.user = self.user
-            //            cell.userImage.clipsToBounds = true
-            //            cell.userImage.layer.masksToBounds = false
-            //            cell.userImage.layer.cornerRadius = cell.userImage.frame.size.height / 2
             
-            //            cell.label.text = "test"
+            cell.userImage.clipsToBounds = true
+            cell.userImage.layer.masksToBounds = false
+            cell.userImage.layer.cornerRadius = cell.userImage.frame.size.height / 2
             
+            cell.label.text = "test"
             
             return cell
         }
@@ -147,8 +180,9 @@ extension showFolllowingFollowedCreatorsViewController: UITableViewDataSource {
             cell.userImage.layer.masksToBounds = false
             cell.userImage.layer.cornerRadius = cell.userImage.frame.size.height / 2
             
-            cell.label.text = "test"
-            
+            if !following.isEmpty {
+                cell.label.text = following[indexPath.row].name
+            }
             //            cell.user = user.followingUsers[indexPath.row]
             
             return cell

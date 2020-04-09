@@ -16,7 +16,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VOD-rg-53w" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1312" y="456"/>
+            <point key="canvasLocation" x="2222" y="470"/>
         </scene>
         <!--My Page View Controller-->
         <scene sceneID="n7l-8T-SU7">
@@ -196,7 +196,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YS5-YA-3X5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3239.8550724637685" y="75.669642857142847"/>
+            <point key="canvasLocation" x="2793" y="27"/>
         </scene>
     </scenes>
     <resources>
@@ -204,7 +204,7 @@
         <image name="imageFile" width="64" height="64"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="wV2-3P-fD7"/>
+        <segue reference="8ch-qU-LjV"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>

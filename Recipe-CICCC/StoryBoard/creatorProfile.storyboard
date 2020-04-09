@@ -245,7 +245,7 @@
                                                             <rect key="frame" x="0.0" y="0.0" width="46" height="30"/>
                                                             <state key="normal" title="Button"/>
                                                             <connections>
-                                                                <segue destination="L26-kz-n4A" kind="show" id="5AM-Bc-X8Q"/>
+                                                                <segue destination="L26-kz-n4A" kind="show" identifier="saveRecipe" id="5AM-Bc-X8Q"/>
                                                             </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rkj-7j-Ol3">

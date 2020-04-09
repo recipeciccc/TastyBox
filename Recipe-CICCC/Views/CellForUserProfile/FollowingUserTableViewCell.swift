@@ -62,23 +62,27 @@ class FollowingUserTableViewCell: UITableViewCell {
         
         
         let leadingConstraint = NSLayoutConstraint(item: self.label, attribute: NSLayoutConstraint.Attribute.leading, relatedBy: NSLayoutConstraint.Relation.equal, toItem: self.userImage, attribute: NSLayoutConstraint.Attribute.trailing, multiplier: 1, constant: 30.0)
+        
         let trainingContraint = NSLayoutConstraint(item: self.label, attribute:  NSLayoutConstraint.Attribute.trailing, relatedBy:  NSLayoutConstraint.Relation.equal, toItem: self.contentView, attribute: NSLayoutConstraint.Attribute.trailing, multiplier: 1.0, constant: 0)
+        
         let verticalConstraint = NSLayoutConstraint(item: self.label, attribute:  NSLayoutConstraint.Attribute.centerY, relatedBy:  NSLayoutConstraint.Relation.equal, toItem: self.contentView, attribute: NSLayoutConstraint.Attribute.centerY, multiplier: 1.0, constant: 0)
         //        let leadingConstrait = self.label.leadingAnchor.constraint(equalTo: .userImage.trailingAnchor)
+        
         let topConstraint = NSLayoutConstraint(item: self.label, attribute:  NSLayoutConstraint.Attribute.top, relatedBy:  NSLayoutConstraint.Relation.lessThanOrEqual, toItem: self.contentView, attribute: NSLayoutConstraint.Attribute.top, multiplier: 1.0, constant: 5)
+        
         let bottomConstraint = NSLayoutConstraint(item: self.label, attribute:  NSLayoutConstraint.Attribute.bottom, relatedBy:  NSLayoutConstraint.Relation.lessThanOrEqual, toItem: self.contentView, attribute: NSLayoutConstraint.Attribute.bottom, multiplier: 1.0, constant: 5)
         
-        //                self.contentView.addConstraint(topConstraint)
-        //                self.contentView.addConstraint(bottomConstraint)
-        //                self.contentView.addConstraint(verticalConstraint)
-        //                self.contentView.addConstraint(leadingConstraint)
-        //                self.contentView.addConstraint(trainingContraint)
+                        self.contentView.addConstraint(topConstraint)
+                        self.contentView.addConstraint(bottomConstraint)
+                        self.contentView.addConstraint(verticalConstraint)
+                        self.contentView.addConstraint(leadingConstraint)
+                        self.contentView.addConstraint(trainingContraint)
         
-        topConstraint.isActive = true
-        bottomConstraint.isActive = true
-        verticalConstraint.isActive = true
-        trainingContraint.isActive = true
-        leadingConstraint.isActive = true
+//        topConstraint.isActive = true
+//        bottomConstraint.isActive = true
+//        verticalConstraint.isActive = true
+//        trainingContraint.isActive = true
+//        leadingConstraint.isActive = true
         
         //
         

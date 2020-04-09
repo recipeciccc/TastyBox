@@ -22,14 +22,15 @@ class RecipeDetailViewController: UIViewController {
     
     var ingredientList  = [Ingredient]()
     var instructionList = [Instruction]()
-
-//    var comment = [Comment]()
+    
+    //    var comment = [Comment]()
     
     let dataManager1 = RecipeDetailDataManager()
     let dataManager2 = FetchRecipeData()
-
+    let userDataManager = UserdataManager()
+    
     var instructionImgs = [UIImage]()
-
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,21 +39,32 @@ class RecipeDetailViewController: UIViewController {
         detailTableView.tableFooterView = UIView()
         detailTableView.separatorStyle = .none
         getImg.delegateImg = self
+        userDataManager.delegate = self
         
         let dbRef = Firestore.firestore().collection("recipe").document(recipe?.recipeID ?? "")
         
         let query_ingredient = dbRef.collection("ingredient").order(by: "ingredient", descending: false)
         let query_instruction = dbRef.collection("instruction").order(by: "index", descending: false)
         
-
-//
-//        dataManager1.getIngredientData(query: query_ingredient, tableView: detailTableView)
-//        dataManager1.getInstructionData(query: query_instruction, tableView: detailTableView)
-     //   dataManager1.getUserProvideRecipe(recipe: recipe!)
-
+        
+        //
+        //        dataManager1.getIngredientData(query: query_ingredient, tableView: detailTableView)
+        //        dataManager1.getInstructionData(query: query_instruction, tableView: detailTableView)
+        //   dataManager1.getUserProvideRecipe(recipe: recipe!)
+        
         getIngredientData(query: query_ingredient)
         getInstructionData(query: query_instruction)
         
+        userDataManager.getUserDetail(id: recipe?.userID)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "savingRecipe" {
+            if let vc = segue.destination as? SavedRecipeViewController {
+                vc.isSavingRecipe = true
+                vc.savingRecipeID = recipe?.recipeID
+            }
+        }
     }
 }
 
@@ -100,7 +112,7 @@ extension RecipeDetailViewController{
                 }
             }
         }
-
+        
     }
 }
 
@@ -167,7 +179,7 @@ extension RecipeDetailViewController: UITableViewDataSource,UITableViewDelegate{
             }
             cell.delegate = self
             //            cell.imgCreator.setImage(creator.image, for: .normal)
-           
+            
             cell.userID = recipe?.userID
             
             return cell
@@ -237,11 +249,18 @@ extension RecipeDetailViewController: AddingFollowersDelegate{
         self.dataManager1.increaseFollower(followerID: followerID)
         detailTableView.reloadData()
     }
- }
+}
 
 extension RecipeDetailViewController: RecipeDetailDelegate {
     func getCreator(creator: User) {
         self.creator = creator
     }
+    
+}
 
+extension RecipeDetailViewController: getUserDataDelegate {
+    func gotUserData(user: User) {
+        self.creator = user
+    }
+    
 }
