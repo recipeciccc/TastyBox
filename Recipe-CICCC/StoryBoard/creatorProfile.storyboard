@@ -351,10 +351,10 @@
             </objects>
             <point key="canvasLocation" x="4085.507246376812" y="754.6875"/>
         </scene>
-        <!--followingFollower-->
+        <!--followerFollowing-->
         <scene sceneID="9NQ-H7-uB3">
             <objects>
-                <viewControllerPlaceholder storyboardName="followingFollower" id="Ka6-9a-Z8z" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="followerFollowing" id="Ka6-9a-Z8z" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="0sT-mz-bxj"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5fl-8E-ciL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

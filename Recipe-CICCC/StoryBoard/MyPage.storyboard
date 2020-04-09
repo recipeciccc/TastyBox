@@ -188,10 +188,10 @@
             </objects>
             <point key="canvasLocation" x="2221.739130434783" y="27.455357142857142"/>
         </scene>
-        <!--followingFollower-->
+        <!--followerFollowing-->
         <scene sceneID="Fvt-VW-InX">
             <objects>
-                <viewControllerPlaceholder storyboardName="followingFollower" id="7qr-Kl-vLm" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="followerFollowing" id="7qr-Kl-vLm" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="RNM-e1-9xw"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YS5-YA-3X5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -204,7 +204,7 @@
         <image name="imageFile" width="64" height="64"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="wV2-3P-fD7"/>
+        <segue reference="8ch-qU-LjV"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>
