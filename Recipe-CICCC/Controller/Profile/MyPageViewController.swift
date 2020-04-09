@@ -21,8 +21,8 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var imageList = [UIImage]()
     var urlList = [String]()
     var ridList = [String]()
-    var followers:[User] = []
-    var following:[User] = []
+    var followers:[String] = []
+    var following:[String] = []
     
     var user: User?
     
@@ -36,30 +36,23 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         fetchData.delegate = self
         fetchImage.delegate = self
         userDataManager.delegate = self
+        userDataManager.delegateFollowerFollowing = self
         
         let db = Firestore.firestore()
         let queryRef = db.collection("recipe").whereField("userID", isEqualTo: uid as Any).order(by: "time", descending: true)
         recipeList = fetchData.Data(queryRef: queryRef)
-        
-//        self.userDataManager.getUserDetail(id: uid)
        
+        userDataManager.findFollowerFollowing(id: uid, collection: "following")
+       userDataManager.findFollowerFollowing(id: uid, collection: "follower")
     }
     
-//    func get_url_rid(){
-//        if recipeList.count != 0{
-//            for data in recipeList {
-////                urlList.append(data.image)
-//                ridList.append(data.recipeID)
-//                print(data.recipeID)
-//            }
-//        }
-//    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let nextVC = segue.destination as? showFolllowingFollowedCreatorsViewController {
+        if let nextVC = segue.destination as? followerFollowingPageViewController {
             
-//            nextVC.followers = user!.followersID
-//            nextVC.following = user!.followingID
+            nextVC.userID = uid!
+            nextVC.followersID = followers
+            nextVC.followingsID = following
             
             if segue.identifier == "following" {
                
@@ -75,15 +68,6 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
           
     }
-    
-//    func getImage(data: RecipeDetail){
-////        for data in recipeList{
-////        }
-//        let rid = data.recipeID
-//        let url = data.image
-//        fetchImage.getImage(uid: uid!, rid: rid, imageUrl: url)
-//
-//    }
     
      func numberOfSections(in tableView: UITableView) -> Int {
         return 3 //4
@@ -109,7 +93,11 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
             
         else if section == 1 {
             let cell = (tableView.dequeueReusableCell(withIdentifier: "show the num", for: indexPath) as? NumberTableViewCell)!
+            
             cell.numOfRecipeUserPostedButton.setTitle("\(recipeList.count) \nPosted", for: .normal)
+            cell.numOfFollowerButton.setTitle("\(followers.count) \nFollowers", for: .normal)
+            cell.numOfFollowingButton.setTitle("\(following.count) \nFollowings", for: .normal)
+            
             return cell
         }
         
@@ -159,10 +147,6 @@ extension MyPageViewController: ReloadDataDelegate{
         
         recipeList = data
         
-//        recipeList.map {
-//            imageList.append($0.image!)
-//        }
-        
         if imageList.count == 0 {
 
         get_url_rid()
@@ -180,10 +164,7 @@ extension MyPageViewController: ReloadDataDelegate{
 }
 
 extension MyPageViewController : getUserDataDelegate {
-//    func gotUsersData(users: [User]) {
-//        <#code#>
-//    }
-//
+
     func gotUserData(user: User) {
         self.user = user
         self.user!.name = (Auth.auth().currentUser?.displayName)!
@@ -211,5 +192,18 @@ extension MyPageViewController: CollectionViewInsideUserTableView{
         vc.mainPhoto = imageList[data.row]
         self.navigationController?.pushViewController(vc, animated: true)
     }
+    
+}
+
+extension MyPageViewController: FolllowingFollowerDelegate {
+    func assignFollowersFollowings(users: [User]) {
+        
+    }
+    
+    func passFollowerFollowing(followingsIDs: [String], followersIDs: [String]) {
+        self.following = followingsIDs
+        self.followers = followersIDs
+    }
+
     
 }

@@ -15,7 +15,8 @@ class NumOfCreatorhasTableViewCell: UITableViewCell {
     @IBOutlet weak var NumOffollowingButton: UIButton!
     @IBOutlet weak var NumOFFollwerButton: UIButton!
     
-    var numOfFollowed = 0
+   
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()

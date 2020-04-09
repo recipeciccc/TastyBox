@@ -115,7 +115,7 @@
                                                     <color key="tintColor" red="1" green="0.57637232540000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <state key="normal" image="folder.badge.plus" catalog="system"/>
                                                     <connections>
-                                                        <segue destination="kqc-Xs-jh8" kind="show" id="siK-7E-AfB"/>
+                                                        <segue destination="kqc-Xs-jh8" kind="show" identifier="savingRecipe" id="siK-7E-AfB"/>
                                                     </connections>
                                                 </button>
                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="eeW-Hw-SqT">

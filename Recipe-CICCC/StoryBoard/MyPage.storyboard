@@ -16,7 +16,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VOD-rg-53w" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1312" y="456"/>
+            <point key="canvasLocation" x="2222" y="470"/>
         </scene>
         <!--My Page View Controller-->
         <scene sceneID="n7l-8T-SU7">
@@ -188,15 +188,15 @@
             </objects>
             <point key="canvasLocation" x="2221.739130434783" y="27.455357142857142"/>
         </scene>
-        <!--followerFollowing-->
+        <!--followingFollower-->
         <scene sceneID="Fvt-VW-InX">
             <objects>
-                <viewControllerPlaceholder storyboardName="followerFollowing" id="7qr-Kl-vLm" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="followingFollower" id="7qr-Kl-vLm" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="RNM-e1-9xw"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YS5-YA-3X5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3239.8550724637685" y="75.669642857142847"/>
+            <point key="canvasLocation" x="2793" y="27"/>
         </scene>
     </scenes>
     <resources>
