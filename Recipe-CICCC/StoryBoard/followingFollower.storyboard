@@ -129,8 +129,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="UUg-f9-dZx"/>
                     <connections>
-                        <outlet property="searchBar" destination="zwt-9d-N9B" id="L5h-ah-00U"/>
-                        <outlet property="tableView" destination="7Du-AJ-CI5" id="1gZ-aS-tgx"/>
+                        <outlet property="searchBar" destination="zwt-9d-N9B" id="iKY-ky-7hz"/>
+                        <outlet property="tableView" destination="7Du-AJ-CI5" id="YVG-Wv-y4E"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="C50-U2-a6K" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -209,8 +209,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="nNW-zR-bCt"/>
                     <connections>
-                        <outlet property="searchBar" destination="boB-s4-CFw" id="Hav-Zo-i7S"/>
-                        <outlet property="tableView" destination="qBf-JN-Amg" id="GDx-QV-spL"/>
+                        <outlet property="searchBar" destination="boB-s4-CFw" id="iNq-9Y-Twx"/>
+                        <outlet property="tableView" destination="qBf-JN-Amg" id="HvH-Uf-suX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HRs-Ld-RMX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
