@@ -121,151 +121,125 @@ class UserdataManager {
         }
     }
     
-    func getFollowersFollowings(followingsIDs: [String], followersIDs: [String]) {
-        
-        for ID in followingsIDs {
-            
-            db.collection("user").document(ID).addSnapshotListener {
-                (querysnapshot, error) in
-                if error != nil {
-                    print("Error getting documents: \(String(describing: error))")
-                } else {
-                    
-                    let data = querysnapshot!.data()
-                    
-                    print("data count: \(data!.count)")
-                    
-                    
-                    let userID = data!["id"] as? String
-                    let name = data!["userName"] as? String
-                    let familySize = data!["familySize"] as? Int
-                    let cuisineType = data!["cuisineType"] as? String
-                    
-                    
-                    self.user = User(userID: userID!, name: name!, cuisineType: cuisineType!, familySize: familySize!)
-                    self.followings.append(self.user!)
-                    
-                }
-                
-            }
-            
-        }
-        
-        
-        
-        for ID in followersIDs {
-            db.collection("user").document(ID).addSnapshotListener {
-                (querysnapshot, error) in
-                if error != nil {
-                    print("Error getting documents: \(String(describing: error))")
-                } else {
-                    
-                    let data = querysnapshot!.data()
-                    
-                    print("data count: \(data!.count)")
-                    
-                    
-                    let userID = data!["id"] as? String
-                    let name = data!["userName"] as? String
-                    let familySize = data!["familySize"] as? Int
-                    let cuisineType = data!["cuisineType"] as? String
-                    
-                    
-                    self.user = User(userID: userID!, name: name!, cuisineType: cuisineType!, familySize: familySize!)
-                    self.followers.append(self.user!)
-                }
-                
-            }
-        }
-        
-        self.delegateFollowerFollowing?.assignFollowersFollowings(followers: self.followers, followings: self.followings)
-        
-    }
+    func getFollowersFollowings(IDs: [String], followerOrFollowing: String) {
     
-    func findFollowerFollowing(id: String?, collection: String) {
-        var uid = (Auth.auth().currentUser?.uid)!
-        
-        if id != nil {
-            uid = id!
-        }
-        
-        db.collection("user").document(uid).collection(collection).addSnapshotListener {
-            (querysnapshot, error) in
-            if error != nil {
-                print("Error getting documents: \(String(describing: error))")
-            } else {
-                for document in querysnapshot!.documents {
-                    let data = document.data()
+        for ID in IDs {
+            
+            db.collection("user").document(ID).addSnapshotListener {
+                (querysnapshot, error) in
+                if error != nil {
+                    print("Error getting documents: \(String(describing: error))")
+                } else {
                     
-                    if collection == "following" {
+                    let data = querysnapshot!.data()
+                    
+                    print("data count: \(data!.count)")
+                    
+                    
+                    let userID = data!["id"] as? String
+                    let name = data!["userName"] as? String
+                    let familySize = data!["familySize"] as? Int
+                    let cuisineType = data!["cuisineType"] as? String
+                    
+                    
+                    self.user = User(userID: userID!, name: name!, cuisineType: cuisineType!, familySize: familySize!)
+                    
+                    if followerOrFollowing == "following" {
+                        self.followings.append(self.user!)
+                        self.delegateFollowerFollowing?.assignFollowersFollowings(users: self.followings)
+                    }
+                    if followerOrFollowing == "follower" {
+                        self.followers.append(self.user!)
+                        self.delegateFollowerFollowing?.assignFollowersFollowings(users: self.followers)
+                    }
+                    
+                }
+                
+            }
+            
+        }
+    }
+        
+        func findFollowerFollowing(id: String?, collection: String) {
+            var uid = (Auth.auth().currentUser?.uid)!
+            
+            if id != nil {
+                uid = id!
+            }
+            
+            db.collection("user").document(uid).collection("following").addSnapshotListener {
+                (querysnapshot, error) in
+                if error != nil {
+                    print("Error getting documents: \(String(describing: error))")
+                } else {
+                    for document in querysnapshot!.documents {
+                        let data = document.data()
                         self.followingsIDs.append(data["id"] as! String)
-                    } else {
-                        self.followersIDs.append(data["id"] as! String)
                     }
-                }
-                self.db.collection("user").document(uid).collection("follower").addSnapshotListener {
-                    (querysnapshot, error) in
-                    if error != nil {
-                        print("Error getting documents: \(String(describing: error))")
-                    } else {
-                        for document in querysnapshot!.documents {
-                            let data = document.data()
+                    
+                    self.db.collection("user").document(uid).collection("follower").addSnapshotListener {
+                        (querysnapshot, error) in
+                        if error != nil {
+                            print("Error getting documents: \(String(describing: error))")
+                        } else {
+                            for document in querysnapshot!.documents {
+                                let data = document.data()
+                                
+                                self.followersIDs.append(data["followerID"] as! String)
+                                
+                            }
                             
-                            self.followersIDs.append(data["id"] as! String)
-                            
+                            self.delegateFollowerFollowing?.passFollowerFollowing(followingsIDs: self.followingsIDs, followersIDs: self.followersIDs)
                         }
-                        
-                        self.delegateFollowerFollowing?.passFollowerFollowing(followingsIDs: self.followingsIDs, followersIDs: self.followersIDs)
                     }
                 }
             }
         }
-    }
-    
-    func userRegister(userName: String, eMailAddress: String, familySize: Int, cuisineType: String) {
         
-        let uid = (Auth.auth().currentUser?.uid)!
-        
-        //        db.collection("user").document(uid).collection("proifle").document("info").setData([
-        db.collection("user").document(uid).setData([
+        func userRegister(userName: String, eMailAddress: String, familySize: Int, cuisineType: String) {
             
-            "id": uid,
-            "userName": userName,
-            "eMailAddress": eMailAddress,
-            "familySize": familySize,
-            "cuisineType": cuisineType
+            let uid = (Auth.auth().currentUser?.uid)!
             
-        ], merge: true) { err in
-            if let err = err {
-                print("Error writing document: \(err)")
-            } else {
-                print("Document successfully written!")
+            //        db.collection("user").document(uid).collection("proifle").document("info").setData([
+            db.collection("user").document(uid).setData([
+                
+                "id": uid,
+                "userName": userName,
+                "eMailAddress": eMailAddress,
+                "familySize": familySize,
+                "cuisineType": cuisineType
+                
+            ], merge: true) { err in
+                if let err = err {
+                    print("Error writing document: \(err)")
+                } else {
+                    print("Document successfully written!")
+                }
             }
         }
-    }
-    
-    func saveRecipe(recipeID: String) {
         
-        let uid = Auth.auth().currentUser?.uid
-        db.collection("user").document(uid!).collection("savedRecipes").document(recipeID).setData([
+        func saveRecipe(recipeID: String) {
             
-            "id": recipeID,
-            "savedTime": Timestamp(),
-            
-        ], merge: true) { err in
-            if let err = err {
-                print("Error writing document: \(err)")
-            } else {
-                print("Document successfully written!")
+            let uid = Auth.auth().currentUser?.uid
+            db.collection("user").document(uid!).collection("savedRecipes").document(recipeID).setData([
+                
+                "id": recipeID,
+                "savedTime": Timestamp(),
+                
+            ], merge: true) { err in
+                if let err = err {
+                    print("Error writing document: \(err)")
+                } else {
+                    print("Document successfully written!")
+                }
             }
         }
-    }
-    
-    func getSavedRecipesImage(recipeIDs: [String]) {
         
-        for recipeID in recipeIDs {
+        func getSavedRecipesImage(recipeIDs: [String]) {
             
+            for recipeID in recipeIDs {
+                
+            }
         }
-    }
+    
 }
-

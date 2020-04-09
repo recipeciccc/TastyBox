@@ -10,5 +10,5 @@ import Foundation
 
 protocol FolllowingFollowerDelegate {
     func passFollowerFollowing(followingsIDs: [String], followersIDs: [String])
-    func assignFollowersFollowings(followers: [User], followings: [User])
+    func assignFollowersFollowings(users: [User])
 }

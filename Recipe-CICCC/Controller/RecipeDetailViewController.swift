@@ -27,6 +27,7 @@ class RecipeDetailViewController: UIViewController {
     
     let dataManager1 = RecipeDetailDataManager()
     let dataManager2 = FetchRecipeData()
+    let userDataManager = UserdataManager()
     
     var instructionImgs = [UIImage]()
     
@@ -38,6 +39,7 @@ class RecipeDetailViewController: UIViewController {
         detailTableView.tableFooterView = UIView()
         detailTableView.separatorStyle = .none
         getImg.delegateImg = self
+        userDataManager.delegate = self
         
         let dbRef = Firestore.firestore().collection("recipe").document(recipe?.recipeID ?? "")
         
@@ -53,6 +55,7 @@ class RecipeDetailViewController: UIViewController {
         getIngredientData(query: query_ingredient)
         getInstructionData(query: query_instruction)
         
+        userDataManager.getUserDetail(id: recipe?.userID)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -251,6 +254,13 @@ extension RecipeDetailViewController: AddingFollowersDelegate{
 extension RecipeDetailViewController: RecipeDetailDelegate {
     func getCreator(creator: User) {
         self.creator = creator
+    }
+    
+}
+
+extension RecipeDetailViewController: getUserDataDelegate {
+    func gotUserData(user: User) {
+        self.creator = user
     }
     
 }

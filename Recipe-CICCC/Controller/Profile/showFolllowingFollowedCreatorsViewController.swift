@@ -48,7 +48,7 @@ class showFolllowingFollowedCreatorsViewController: UIViewController {
         self.navigationItem.title = titleVC
         
         addTableView()
-        dataManager.findFollowerFollowing(id: userID!, collection: "following")
+//        dataManager.findFollowerFollowing(id: userID!, collection: "following")
 //        dataManager.findFollowerFollowing(id: userID!, collection: "follower")
             
         
@@ -110,6 +110,10 @@ class showFolllowingFollowedCreatorsViewController: UIViewController {
 }
 
 extension showFolllowingFollowedCreatorsViewController: FolllowingFollowerDelegate {
+    func assignFollowersFollowings(users: [User]) {
+        
+    }
+
     func passFollowerFollowing(followingsIDs: [String], followersIDs: [String]) {
         self.followersID = followersIDs
         self.followingID = followingsIDs
@@ -120,16 +124,9 @@ extension showFolllowingFollowedCreatorsViewController: FolllowingFollowerDelega
         // firebase skip implementation once, if the fuction to retrieve data is called in viewDidLoad,
         // it is executed. but the fuction below is not. Therefore it doesnt retrieve user data from firebase.
         // i moved it to viewDidLoad once, but when it is called, self.followingID is empty.
-        self.dataManager.getFollowersFollowings(followingsIDs: self.followingID, followersIDs: self.followingID)
+//        self.dataManager.getFollowersFollowings(followingsIDs: self.followingID, followersIDs: self.followingID)
     }
-    
-    func assignFollowersFollowings(followers: [User], followings: [User]) {
-        self.followers = followers
-        self.following = followings
-        
-        self.followingTableView.reloadData()
-        self.followerTableView.reloadData()
-    }
+
     
     
 }

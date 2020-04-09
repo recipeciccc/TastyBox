@@ -21,8 +21,8 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var imageList = [UIImage]()
     var urlList = [String]()
     var ridList = [String]()
-    var followers:[User] = []
-    var following:[User] = []
+    var followers:[String] = []
+    var following:[String] = []
     
     var user: User?
     
@@ -36,19 +36,23 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         fetchData.delegate = self
         fetchImage.delegate = self
         userDataManager.delegate = self
+        userDataManager.delegateFollowerFollowing = self
         
         let db = Firestore.firestore()
         let queryRef = db.collection("recipe").whereField("userID", isEqualTo: uid as Any).order(by: "time", descending: true)
         recipeList = fetchData.Data(queryRef: queryRef)
-        
        
+        userDataManager.findFollowerFollowing(id: uid, collection: "following")
+       userDataManager.findFollowerFollowing(id: uid, collection: "follower")
     }
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let nextVC = segue.destination as? showFolllowingFollowedCreatorsViewController {
+        if let nextVC = segue.destination as? followerFollowingPageViewController {
             
-            nextVC.userID = uid
+            nextVC.userID = uid!
+            nextVC.followersID = followers
+            nextVC.followingsID = following
             
             if segue.identifier == "following" {
                
@@ -89,7 +93,11 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
             
         else if section == 1 {
             let cell = (tableView.dequeueReusableCell(withIdentifier: "show the num", for: indexPath) as? NumberTableViewCell)!
+            
             cell.numOfRecipeUserPostedButton.setTitle("\(recipeList.count) \nPosted", for: .normal)
+            cell.numOfFollowerButton.setTitle("\(followers.count) \nFollowers", for: .normal)
+            cell.numOfFollowingButton.setTitle("\(following.count) \nFollowings", for: .normal)
+            
             return cell
         }
         
@@ -184,5 +192,18 @@ extension MyPageViewController: CollectionViewInsideUserTableView{
         vc.mainPhoto = imageList[data.row]
         self.navigationController?.pushViewController(vc, animated: true)
     }
+    
+}
+
+extension MyPageViewController: FolllowingFollowerDelegate {
+    func assignFollowersFollowings(users: [User]) {
+        
+    }
+    
+    func passFollowerFollowing(followingsIDs: [String], followersIDs: [String]) {
+        self.following = followingsIDs
+        self.followers = followersIDs
+    }
+
     
 }
