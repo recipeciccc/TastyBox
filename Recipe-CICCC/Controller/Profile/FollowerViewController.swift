@@ -28,7 +28,9 @@ class FollowerViewController: UIViewController {
         
         let parentVC = self.parent as! followerFollowingPageViewController
         followersIDs = parentVC.followersID
-        userDataManager.getFollowersFollowings(IDs: self.followingsID, followerOrFollowing: "follower")
+        userDataManager.getFollowersFollowings(IDs: self.followersIDs, followerOrFollowing: "follower")
+        
+        self.navigationItem.title = "Follower"
     }
     
 
@@ -52,6 +54,7 @@ extension FollowerViewController: FolllowingFollowerDelegate {
     
     func assignFollowersFollowings(users: [User]) {
         self.followers = users
+        self.tableView.reloadData()
     }
     
 }
@@ -65,7 +68,7 @@ extension FollowerViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = (tableView.dequeueReusableCell(withIdentifier: "followerUser") as? follwerUserTableViewCell)!
         
-        if followings.isEmpty {
+        if followersIDs.isEmpty {
             cell.userNameLabel.text = "no follower"
         } else {
             cell.userNameLabel.text = followers[indexPath.row].name

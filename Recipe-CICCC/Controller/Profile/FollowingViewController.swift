@@ -30,6 +30,8 @@ class FollowingViewController: UIViewController {
         let parentVC = self.parent as! followerFollowingPageViewController
         followingsID = parentVC.followingsID
         userDataManager.getFollowersFollowings(IDs: self.followingsID, followerOrFollowing: "following")
+        
+         self.navigationItem.title = "Following"
     }
     
 
@@ -52,6 +54,7 @@ extension FollowingViewController: FolllowingFollowerDelegate {
     
     func assignFollowersFollowings(users: [User]) {
         self.followings = users
+        self.tableView.reloadData()
     }
     
 }
@@ -63,7 +66,7 @@ extension FollowingViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = (tableView.dequeueReusableCell(withIdentifier: "followerUser") as? follwerUserTableViewCell )!
+        let cell = (tableView.dequeueReusableCell(withIdentifier: "followingUser") as? followingUserTableViewCell )!
         
         if followings.isEmpty {
             cell.userNameLabel.text = "no following"
