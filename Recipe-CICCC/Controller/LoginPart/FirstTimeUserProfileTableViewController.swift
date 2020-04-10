@@ -60,6 +60,11 @@ class FirstTimeUserProfileTableViewController: UITableViewController, UIPickerVi
         
     }
     
+    @IBAction func changeAccountImage(_ sender: UITapGestureRecognizer) {
+        let imagePickerVC = UIStoryboard(name: "MyPage", bundle: nil).instantiateViewController(withIdentifier: "imagePickerVC")
+              navigationController?.pushViewController(imagePickerVC, animated: true)
+        
+    }
     @objc func closeKeyboard(){
         self.view.endEditing(true)
     }
@@ -108,10 +113,11 @@ class FirstTimeUserProfileTableViewController: UITableViewController, UIPickerVi
             alertController.addAction(defaultAction)
                 
             present(alertController, animated: true, completion: nil)
+        
         } else {
-            
+
             dataManager.userRegister(userName: userNameTextField.text ?? "", eMailAddress: emailTextField.text ?? "", familySize: Int(familySizeTextField!.text!) ?? 0, cuisineType: cuisineTypeTextField!.text ?? "")
-            
+
             let Storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
             let vc = Storyboard.instantiateViewController(withIdentifier: "Discovery")
             self.navigationController?.pushViewController(vc, animated: true)

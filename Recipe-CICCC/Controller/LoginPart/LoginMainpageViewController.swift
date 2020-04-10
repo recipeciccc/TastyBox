@@ -78,10 +78,11 @@ class LoginMainpageViewController: UIViewController, UITextFieldDelegate {
                 }
                 self.view.endEditing(true)
                 self.passwordTextField.text = ""
-                let Storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                let vc = Storyboard.instantiateViewController(withIdentifier: "Discovery")
-                self.navigationController?.pushViewController(vc, animated: true)
-                
+         
+                    let Storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                    let vc = Storyboard.instantiateViewController(withIdentifier: "Discovery")
+                    self.navigationController?.pushViewController(vc, animated: true)
+//
 //                if error == nil {
 //                    // means no error, login successfully
 //                    self.login.isEnabled = false
@@ -213,16 +214,16 @@ extension LoginMainpageViewController: GIDSignInDelegate {
             if error == nil {
                 
                 //MARK: uncomment out and you don't need to edit info every time
-                if (user?.additionalUserInfo!.isNewUser)! {
+//                if (user?.additionalUserInfo!.isNewUser)! {
                     let Storyboard: UIStoryboard = UIStoryboard(name: "Login", bundle: nil)
                     let vc = Storyboard.instantiateViewController(withIdentifier: "FirstTimeProfile")
                     self.navigationController?.pushViewController(vc, animated: true)
                 //MARK: uncomment out and you don't need to edit info every time
-                } else {
-                    let Storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                    let vc = Storyboard.instantiateViewController(withIdentifier: "Discovery")
-                    self.navigationController?.pushViewController(vc, animated: true)
-                }
+//                } else {
+//                    let Storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+//                    let vc = Storyboard.instantiateViewController(withIdentifier: "Discovery")
+//                    self.navigationController?.pushViewController(vc, animated: true)
+//                }
             }
 
         })

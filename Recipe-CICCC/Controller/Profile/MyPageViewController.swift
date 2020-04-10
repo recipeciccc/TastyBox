@@ -32,6 +32,7 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.orange ]
         profileTableVIew.delegate = self
         profileTableVIew.dataSource = self
+        profileTableVIew.allowsSelection = false
         
         fetchData.delegate = self
         fetchImage.delegate = self
@@ -139,6 +140,12 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.view.frame.origin.y = -195.0
     }
     
+    
+    // MARK: cant tap image although put tap recognizer.
+    @IBAction func changeAccountImage(_ sender: UITapGestureRecognizer) {
+        let imagePickerVC = UIStoryboard(name: "MyPage", bundle: nil).instantiateViewController(withIdentifier: "imagePickerVC")
+        navigationController?.pushViewController(imagePickerVC, animated: true)
+    }
 }
 
 extension MyPageViewController: ReloadDataDelegate{
@@ -204,6 +211,5 @@ extension MyPageViewController: FolllowingFollowerDelegate {
         self.following = followingsIDs
         self.followers = followersIDs
     }
-
     
 }

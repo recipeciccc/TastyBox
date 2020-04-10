@@ -9,6 +9,7 @@
 import Foundation
 import FirebaseFirestore
 import Firebase
+import FirebaseAuth
 
 class UserdataManager {
     
@@ -23,44 +24,6 @@ class UserdataManager {
     var followingsIDs: [String] = []
     var followers: [User] = []
     var followings: [User] = []
-    
-    //    func getUsersDetail() {
-    //        guard let uid = Auth.auth().currentUser?.uid else { return }
-    //
-    //        db.collection("user").addSnapshotListener {
-    //            (querysnapshot, error) in
-    //            if error != nil {
-    //                print("Error getting documents: \(String(describing: error))")
-    //            } else {
-    //
-    //                //For-loop
-    //                for documents in querysnapshot!.documents
-    //                {
-    //
-    //                    let data = documents.data()
-    //
-    //                    print("data count: \(data.count)")
-    //
-    //                    let name = data["name"] as? String
-    //                    let userID = data["userID"] as? String
-    //
-    //                    self.findFollowerFollowing(id: uid, collection: "followers")
-    //                    self.findFollowerFollowing(id: uid, collection: "followers")
-    //
-    //                    let followersID = self.followers
-    //                    let followingID = self.following
-    //
-    //                    let user = User(userID: userID!, name: name!, followersID: followersID, followingID: followingID)
-    //
-    //                    self.users.append(user)
-    //                }
-    //            }
-    //
-    //            self.delegate?.gotUsersData(users: self.users)
-    //
-    //        }
-    //    }
-    
     
     func getUserDetail(id: String?) {
         
@@ -241,5 +204,7 @@ class UserdataManager {
                 
             }
         }
+    
+ 
     
 }

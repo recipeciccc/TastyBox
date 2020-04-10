@@ -231,7 +231,7 @@
                                 <state key="normal" title="Log In !"/>
                                 <connections>
                                     <action selector="pressBackToLogin:" destination="ZrB-fw-QEE" eventType="touchDown" id="k2N-9K-jVo"/>
-                                    <segue destination="SoH-tz-dVu" kind="show" id="c5d-fm-ve9"/>
+                                    <segue destination="SoH-tz-dVu" kind="show" identifier="LoginMainPage" id="c5d-fm-ve9"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Already had an account?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oCz-bS-Wga">
@@ -290,16 +290,24 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="200"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PKH-dp-Vtz">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PKH-dp-Vtz">
                                                     <rect key="frame" x="195" y="91" width="24" height="18"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="24" id="9kx-is-1Nb"/>
+                                                    </constraints>
                                                 </imageView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
+                                                <constraint firstItem="PKH-dp-Vtz" firstAttribute="top" secondItem="tha-Gp-6m4" secondAttribute="topMargin" constant="80" id="5AP-3N-jJ4"/>
                                                 <constraint firstItem="PKH-dp-Vtz" firstAttribute="centerY" secondItem="tha-Gp-6m4" secondAttribute="centerY" id="ZSd-eX-BWx"/>
                                                 <constraint firstItem="PKH-dp-Vtz" firstAttribute="centerX" secondItem="tha-Gp-6m4" secondAttribute="centerX" id="xEr-wm-y3a"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <gestureRecognizers/>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="iZc-fR-bEU" appends="YES" id="iVZ-OD-a7r"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="88" id="aeu-Vz-pjx">
                                         <rect key="frame" x="0.0" y="228" width="414" height="88"/>
@@ -441,6 +449,11 @@
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r0N-0w-uQJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="iZc-fR-bEU">
+                    <connections>
+                        <action selector="changeAccountImage:" destination="ZbZ-ay-B0T" id="SHX-gW-sQn"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="4695.652173913044" y="281.91964285714283"/>
         </scene>
