@@ -205,46 +205,13 @@
             </objects>
             <point key="canvasLocation" x="2793" y="27"/>
         </scene>
-        <!--Image Picker View Controller-->
-        <scene sceneID="0J8-hd-dmI">
+        <!--imagePickerVC-->
+        <scene sceneID="tpU-Ex-KrM">
             <objects>
-                <viewController storyboardIdentifier="imagePickerVC" id="8e5-AH-nST" customClass="ImagePickerViewController" customModule="Recipe_CICCC" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="l4p-ZI-4pg">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ne5-zJ-vbh">
-                                <rect key="frame" x="0.0" y="79" width="414" height="414"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="ne5-zJ-vbh" secondAttribute="height" multiplier="1:1" id="a0w-R6-opt"/>
-                                    <constraint firstAttribute="width" constant="414" id="d5P-cz-qNI"/>
-                                    <constraint firstAttribute="height" constant="414" id="d8Y-PG-Ysy"/>
-                                </constraints>
-                            </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pSX-Ft-bE4">
-                                <rect key="frame" x="184" y="568" width="46" height="30"/>
-                                <state key="normal" title="Button"/>
-                                <connections>
-                                    <action selector="selectPicture:" destination="8e5-AH-nST" eventType="touchUpInside" id="uzX-BF-SLW"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <constraints>
-                            <constraint firstItem="pSX-Ft-bE4" firstAttribute="top" secondItem="ne5-zJ-vbh" secondAttribute="bottom" constant="75" id="Ggf-qi-91a"/>
-                            <constraint firstItem="ne5-zJ-vbh" firstAttribute="centerX" secondItem="pSX-Ft-bE4" secondAttribute="centerX" id="MgL-jt-u5D"/>
-                            <constraint firstItem="ne5-zJ-vbh" firstAttribute="top" secondItem="IYj-by-KBC" secondAttribute="top" constant="35" id="VhW-wO-yNY"/>
-                            <constraint firstItem="ne5-zJ-vbh" firstAttribute="centerX" secondItem="l4p-ZI-4pg" secondAttribute="centerX" id="xqi-ic-Jlh"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="IYj-by-KBC"/>
-                    </view>
-                    <connections>
-                        <outlet property="imageView" destination="ne5-zJ-vbh" id="wId-ys-gkA"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="aZ0-E5-gfH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <viewControllerPlaceholder storyboardIdentifier="imagePickerVC" storyboardName="pickUserAccountImage" referencedIdentifier="imagePickerVC" id="XgG-TD-PgQ" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="49E-UW-p7d" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3289.8550724637685" y="41.517857142857139"/>
+            <point key="canvasLocation" x="4200" y="41.517857142857139"/>
         </scene>
     </scenes>
     <resources>

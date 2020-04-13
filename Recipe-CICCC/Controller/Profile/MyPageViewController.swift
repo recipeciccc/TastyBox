@@ -13,18 +13,21 @@ import FirebaseFirestore
 class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet var profileTableVIew: UITableView!
+    
     let fetchData = FetchRecipeData()
     let fetchImage = FetchRecipeImage()
     let userDataManager = UserdataManager()
+    
     let uid = Auth.auth().currentUser?.uid
+    
     var recipeList = [RecipeDetail]()
     var imageList = [UIImage]()
     var urlList = [String]()
     var ridList = [String]()
     var followers:[String] = []
     var following:[String] = []
-    
     var user: User?
+    var userImage: UIImage = #imageLiteral(resourceName: "imageFile")
     
     override func viewDidLoad() {
         
@@ -87,7 +90,7 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
             cell.userImageView.layer.masksToBounds = false
             cell.userImageView.layer.cornerRadius = cell.userImageView.bounds.width / 2
             cell.userImageView.clipsToBounds = true
-            
+            cell.imageView?.image = self.userImage
             
             return cell
         }
@@ -212,4 +215,11 @@ extension MyPageViewController: FolllowingFollowerDelegate {
         self.followers = followersIDs
     }
     
+}
+
+extension MyPageViewController: setImageDelegate {
+    func setAccountImage(image: UIImage) {
+        self.userImage = image
+        self.profileTableVIew.reloadData()
+    }
 }

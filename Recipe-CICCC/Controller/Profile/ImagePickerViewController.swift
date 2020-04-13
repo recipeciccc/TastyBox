@@ -10,16 +10,20 @@ import UIKit
 
 class ImagePickerViewController: UIViewController {
     
+    var delegate: setImageDelegate?
+    var image:UIImage?
     
-    @IBOutlet weak var imageView: UIImageView! {
-        didSet {
-            // デフォルトの画像を表示する
-            imageView.image = UIImage(named: "no_image.png")
-        }
-    }
+//    @IBOutlet weak var imageView: UIImageView! {
+//        didSet {
+//            // デフォルトの画像を表示する
+//            imageView.image = UIImage(named: "no_image.png")
+//        }
+//    }
+    @IBOutlet weak var imageView: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        imageView.image = image
     }
     
     @IBAction func selectPicture(_ sender: UIButton) {
@@ -35,6 +39,24 @@ class ImagePickerViewController: UIViewController {
             // ビューに表示
             self.present(pickerView, animated: true)
         }
+    }
+    @IBAction func takeYourImage(_ sender: UIButton) {
+        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
+            // 写真を選ぶビュー
+            let pickerView = UIImagePickerController()
+            // 写真の選択元をカメラロールにする
+            // 「.camera」にすればカメラを起動できる
+            pickerView.sourceType = .camera
+            // デリゲート
+            pickerView.delegate = self
+            // ビューに表示
+            self.present(pickerView, animated: true)
+        }
+    }
+    
+    @IBAction func done(_ sender: Any) {
+        self.delegate?.setAccountImage(image: imageView.image!)
+        navigationController?.popViewController(animated: true)
     }
     
     @IBAction func deletePicture(_ sender: UIButton) {

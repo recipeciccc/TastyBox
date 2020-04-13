@@ -20,6 +20,10 @@ class FirstTimeUserProfileTableViewController: UITableViewController, UIPickerVi
     
     @IBOutlet weak var cuisineTypeTextField: UITextField!
     
+    @IBOutlet weak var userImageButton: UIButton!
+    
+    var userImage: UIImage?
+    
     var familySize = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20"]
     
     var familyPicker = UIPickerView()
@@ -29,6 +33,8 @@ class FirstTimeUserProfileTableViewController: UITableViewController, UIPickerVi
     var cuisinePicker = UIPickerView()
     
     let dataManager = UserdataManager()
+    
+    var pickerVC = ImagePickerViewController()
     
     override func viewDidLoad() {
         
@@ -57,12 +63,21 @@ class FirstTimeUserProfileTableViewController: UITableViewController, UIPickerVi
         let tap = UITapGestureRecognizer(target: self, action: #selector(closeKeyboard))
         view.addGestureRecognizer(tap)
         
+        pickerVC.delegate = self
+        
+        userImage = #imageLiteral(resourceName: "Easy-strawberry-desserts-–-Greek-Yogurt-recipes-–-Valentines-desserts")
+        userImageButton.imageView?.contentMode = .scaleAspectFit
+        userImage?.withRenderingMode(.alwaysOriginal)
+        userImageButton.setImage(userImage, for: .normal)
+        
         
     }
     
     @IBAction func changeAccountImage(_ sender: UITapGestureRecognizer) {
-        let imagePickerVC = UIStoryboard(name: "MyPage", bundle: nil).instantiateViewController(withIdentifier: "imagePickerVC")
-              navigationController?.pushViewController(imagePickerVC, animated: true)
+        
+        let imagePickerVC = UIStoryboard(name: "MyPage", bundle: nil).instantiateViewController(withIdentifier: "imagePickerVC") as! ImagePickerViewController
+        imagePickerVC.imageView?.image = self.userImage
+        self.navigationController?.pushViewController(imagePickerVC, animated: true)
         
     }
     @objc func closeKeyboard(){
@@ -124,6 +139,21 @@ class FirstTimeUserProfileTableViewController: UITableViewController, UIPickerVi
         }
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+         let imagePickerVC = UIStoryboard(name: "pickUserAccountImage", bundle: nil).instantiateViewController(identifier: "imagePickerVC") as! ImagePickerViewController
+        if segue.identifier == "imagePickerVC" {
+            imagePickerVC.image = self.userImage
+        }
+    }
     
+}
+
+extension FirstTimeUserProfileTableViewController: setImageDelegate {
+    func setAccountImage(image: UIImage) {
+       userImageButton.setImage(image, for: .normal)
+        loadView()
+        viewDidLoad()
+    }
     
 }
