@@ -35,6 +35,7 @@ class CreatorProfileViewController: UIViewController {
         self.tableView.dataSource = self
         self.tableView.delegate = self
         self.tableView.tableFooterView = UIView()
+        self.tableView.allowsSelection = false
         
         fetchData.delegate = self
         fetchImage.delegate = self
@@ -126,8 +127,6 @@ extension CreatorProfileViewController: UITableViewDelegate {
             return 135
         case 1:
             return 60
-            //        case 2:
-        //            return 38
         default:
             
             
@@ -146,10 +145,6 @@ extension CreatorProfileViewController: ReloadDataDelegate{
         
         recipeList = data
         
-        //        recipeList.map {
-        //            imageList.append($0.image!)
-        //        }
-        
         if imageList.count == 0 {
             
             get_url_rid()
@@ -167,10 +162,7 @@ extension CreatorProfileViewController: ReloadDataDelegate{
 }
 
 extension CreatorProfileViewController : getUserDataDelegate {
-    //    func gotUsersData(users: [User]) {
-    //        <#code#>
-    //    }
-    //
+  
     func gotUserData(user: User) {
         
         userName = user.name

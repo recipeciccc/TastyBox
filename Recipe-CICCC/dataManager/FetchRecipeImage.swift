@@ -19,25 +19,41 @@ class FetchRecipeImage{
         var image = UIImage()
         let storage = Storage.storage()
         let storageRef = storage.reference()
-        var imageList = [UIImage]()
+        var imageList: [UIImage] = []
+        var imageRefs: [StorageReference] = []
         
         for index in 0..<rid.count{
-            
+                   
+            print("\(index): \(rid[index])")
             let imagesRef = storageRef.child("user/\(uid)/RecipePhoto/\(rid[index])/\(rid[index])")
-            imagesRef.getData(maxSize: 1 * 1024 * 1024) { data, error in   //
+            imageRefs.append(imagesRef)
+        }
+        
+        print(imageRefs)
+        imageList = Array(repeating: UIImage(), count: imageRefs.count)
+        
+        for (index, imageRef) in imageRefs.enumerated() {
+            
+           
+            imageRef.getData(maxSize: 1 * 1024 * 1024) { data, error in   //
                 if error != nil {
                     print(error?.localizedDescription as Any)
                 } else {
                     if let imgData = data{
                         
+                        print("imageRef: \(imageRef)")
+                        
                         image = UIImage(data: imgData)!
-                        imageList.append(image)
+                        print(index)
+                        imageList.remove(at: index)
+                        imageList.insert(image, at: index)
+                        
                         self.delegate?.reloadImg(img: imageList)
                     }
                 }
-                self.delegate?.reloadImg(img: imageList)
-            }
         }
+        
+    }
     }
     
     func getInstructionImg( uid:String, rid: String, count: Int) -> [UIImage]{

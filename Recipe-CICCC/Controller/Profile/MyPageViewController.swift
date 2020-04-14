@@ -13,18 +13,21 @@ import FirebaseFirestore
 class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet var profileTableVIew: UITableView!
+    
     let fetchData = FetchRecipeData()
     let fetchImage = FetchRecipeImage()
     let userDataManager = UserdataManager()
+    
     let uid = Auth.auth().currentUser?.uid
+    
     var recipeList = [RecipeDetail]()
     var imageList = [UIImage]()
     var urlList = [String]()
     var ridList = [String]()
     var followers:[String] = []
     var following:[String] = []
-    
     var user: User?
+    var userImage: UIImage = #imageLiteral(resourceName: "imageFile")
     
     override func viewDidLoad() {
         
@@ -32,6 +35,7 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.orange ]
         profileTableVIew.delegate = self
         profileTableVIew.dataSource = self
+        profileTableVIew.allowsSelection = false
         
         fetchData.delegate = self
         fetchImage.delegate = self
@@ -86,7 +90,7 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
             cell.userImageView.layer.masksToBounds = false
             cell.userImageView.layer.cornerRadius = cell.userImageView.bounds.width / 2
             cell.userImageView.clipsToBounds = true
-            
+            cell.imageView?.image = self.userImage
             
             return cell
         }
@@ -139,6 +143,12 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.view.frame.origin.y = -195.0
     }
     
+    
+    // MARK: cant tap image although put tap recognizer.
+    @IBAction func changeAccountImage(_ sender: UITapGestureRecognizer) {
+        let imagePickerVC = UIStoryboard(name: "MyPage", bundle: nil).instantiateViewController(withIdentifier: "imagePickerVC")
+        navigationController?.pushViewController(imagePickerVC, animated: true)
+    }
 }
 
 extension MyPageViewController: ReloadDataDelegate{
@@ -151,16 +161,19 @@ extension MyPageViewController: ReloadDataDelegate{
 
         get_url_rid()
         fetchImage.getImage(uid: uid!, rid: ridList, imageUrl: urlList)
+        
         if imageList.count == 0{
            profileTableVIew.reloadData()
         }
     }
     }
     
+    // MARK: initialized ImageList
     func reloadImg(img:[UIImage]){
         imageList = img
         self.profileTableVIew.reloadData()
     }
+    
 }
 
 extension MyPageViewController : getUserDataDelegate {
@@ -170,15 +183,24 @@ extension MyPageViewController : getUserDataDelegate {
         self.user!.name = (Auth.auth().currentUser?.displayName)!
         self.profileTableVIew.reloadData()
     }
+     // MARK: initialized recipe id and image id
     
     func get_url_rid(){
         if recipeList.count != 0{
             for data in recipeList{
                 urlList.append(data.image!)
                 ridList.append(data.recipeID)
+                
                 print(data.recipeID)
+                print(data.updatedDate)
+                print(data.image!)
+            
             }
+//           urlListが日付順になっているか調べる
+            // po urlList, ridList and po recipeList
+            // この時点では上記全てが日付順になっている
         }
+            
     }
 }
 
@@ -204,6 +226,12 @@ extension MyPageViewController: FolllowingFollowerDelegate {
         self.following = followingsIDs
         self.followers = followersIDs
     }
-
     
+}
+
+extension MyPageViewController: setImageDelegate {
+    func setAccountImage(image: UIImage) {
+        self.userImage = image
+        self.profileTableVIew.reloadData()
+    }
 }

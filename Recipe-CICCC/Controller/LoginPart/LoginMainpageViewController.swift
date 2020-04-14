@@ -13,6 +13,8 @@ import GoogleSignIn
 
 class LoginMainpageViewController: UIViewController, UITextFieldDelegate {
     
+    var userImage: UIImage = #imageLiteral(resourceName: "imageFile")
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -78,10 +80,11 @@ class LoginMainpageViewController: UIViewController, UITextFieldDelegate {
                 }
                 self.view.endEditing(true)
                 self.passwordTextField.text = ""
-                let Storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                let vc = Storyboard.instantiateViewController(withIdentifier: "Discovery")
-                self.navigationController?.pushViewController(vc, animated: true)
-                
+         
+                    let Storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                    let vc = Storyboard.instantiateViewController(withIdentifier: "Discovery")
+                    self.navigationController?.pushViewController(vc, animated: true)
+//
 //                if error == nil {
 //                    // means no error, login successfully
 //                    self.login.isEnabled = false

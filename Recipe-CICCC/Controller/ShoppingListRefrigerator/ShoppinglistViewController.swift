@@ -14,6 +14,7 @@ class ShoppinglistViewController: UIViewController {
     
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var findStoresButton: UIButton!
     
     var ingredients:[IngredientShopping] = []
     let db = Firestore.firestore()
@@ -30,7 +31,7 @@ class ShoppinglistViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.tableFooterView = UIView()
-        tableView.allowsMultipleSelectionDuringEditing = true
+        tableView.allowsMultipleSelectionDuringEditing = false
         
         dataManager.getShoppingListDetail(userID: uid)
         dataManager.delegate = self
@@ -66,6 +67,11 @@ class ShoppinglistViewController: UIViewController {
         }
     }
     
+    @IBAction func edit(_ sender: UIBarButtonItem) {
+       
+    }
+    
+    
     
 }
 
@@ -77,25 +83,15 @@ extension ShoppinglistViewController: UITableViewDelegate {
 extension ShoppinglistViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        if section == 0 { return 1 }
-        
         return ingredients.count
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        if indexPath.section == 0 {
-            
-            let cell = (tableView.dequeueReusableCell(withIdentifier: "findStores", for: indexPath) as? searchButtonTableViewCell)!
-            
-            return cell
-        }
-        else {
-            
+       
             let cell = (tableView.dequeueReusableCell(withIdentifier: "ingredientShopping", for: indexPath) as? IngredientShoppingTableViewCell)!
             
             cell.nameLabel.text = ingredients[indexPath.row].name
@@ -103,7 +99,7 @@ extension ShoppinglistViewController: UITableViewDataSource {
             cell.accessoryType = .none
             
             return cell
-        }
+        
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
@@ -120,15 +116,13 @@ extension ShoppinglistViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        
-         let cell = (tableView.dequeueReusableCell(withIdentifier: "ingredientShopping", for: indexPath) as? IngredientShoppingTableViewCell)!
-        
+       
         if editingStyle == .delete {
             dataManager.deleteData(name: ingredients[indexPath.row].name, indexPath: indexPath)
             ingredients.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .automatic)
         }
-       
+    
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
@@ -146,6 +140,7 @@ extension ShoppinglistViewController: UITableViewDataSource {
         super.setEditing(editing, animated: animated)
         tableView.setEditing(tableView.isEditing, animated: true)
     }
+    
     
 }
 
