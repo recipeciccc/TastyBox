@@ -161,16 +161,19 @@ extension MyPageViewController: ReloadDataDelegate{
 
         get_url_rid()
         fetchImage.getImage(uid: uid!, rid: ridList, imageUrl: urlList)
+        
         if imageList.count == 0{
            profileTableVIew.reloadData()
         }
     }
     }
     
+    // MARK: initialized ImageList
     func reloadImg(img:[UIImage]){
         imageList = img
         self.profileTableVIew.reloadData()
     }
+    
 }
 
 extension MyPageViewController : getUserDataDelegate {
@@ -180,15 +183,24 @@ extension MyPageViewController : getUserDataDelegate {
         self.user!.name = (Auth.auth().currentUser?.displayName)!
         self.profileTableVIew.reloadData()
     }
+     // MARK: initialized recipe id and image id
     
     func get_url_rid(){
         if recipeList.count != 0{
             for data in recipeList{
                 urlList.append(data.image!)
                 ridList.append(data.recipeID)
+                
                 print(data.recipeID)
+                print(data.updatedDate)
+                print(data.image!)
+            
             }
+//           urlListが日付順になっているか調べる
+            // po urlList, ridList and po recipeList
+            // この時点では上記全てが日付順になっている
         }
+            
     }
 }
 

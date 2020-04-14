@@ -1,6 +1,11 @@
-
+Pods/GoogleMaps/Example/GoogleMapsDemos.xcodeproj/xcuserdata/
+	Pods/GooglePlaces/Example/GooglePlacesDemos.xcodeproj/xcuserdata/
+	Pods/Pods.xcodeproj/xcuserdata/kitajimashihomi.xcuserdatad/
+	Recipe-CICCC.xcodeproj/xcuserdata/kitajimashihomi.xcuserdatad/
+	Recipe-CICCC.xcworkspace/xcuserdata/
 
 Recipe-CICCC/.DS_Store
+
 <?xml version="1.0" encoding="UTF-8"?>
 <Bucket
    uuid = "EF71335D-D850-4903-8D18-2C2173BF2D0A"
@@ -165,3 +170,4 @@ Recipe-CICCC/.DS_Store
       </BreakpointProxy>
    </Breakpoints>
 </Bucket>
+
