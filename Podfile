@@ -40,11 +40,12 @@ pod 'Bolts'
 pod 'FBSDKCoreKit'
 pod 'FBSDKLoginKit'
 
-#pod CHIPageControl, ~> 0.1.3
-#pod CHIPageControl/Jalapeno
+#pods for Google Map
 pod 'GoogleMaps'
 pod 'GooglePlaces'
-pod 'SideMenu'
 
+pod 'SideMenu'
+# edit image 
+pod 'RSKImageCropper'
 
 end

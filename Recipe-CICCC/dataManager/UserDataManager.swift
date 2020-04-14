@@ -14,6 +14,7 @@ import FirebaseAuth
 class UserdataManager {
     
     let db = Firestore.firestore()
+    let storageRef = Storage.storage().reference()
     var delegate: getUserDataDelegate?
     var delegateFollowerFollowing :FolllowingFollowerDelegate?
     
@@ -52,7 +53,7 @@ class UserdataManager {
                 let cuisineType = data!["cuisineType"] as? String
                 
                 
-                self.user = User(userID: userID!, name: name!, cuisineType: cuisineType!, familySize: familySize!)
+                self.user = User(userID: userID!, name: name!, cuisineType: cuisineType!, familySize: familySize)
             }
             
             self.delegate?.gotUserData(user: self.user!)
@@ -132,6 +133,7 @@ class UserdataManager {
             
             db.collection("user").document(uid).collection("following").addSnapshotListener {
                 (querysnapshot, error) in
+                
                 if error != nil {
                     print("Error getting documents: \(String(describing: error))")
                 } else {
@@ -159,7 +161,7 @@ class UserdataManager {
             }
         }
         
-        func userRegister(userName: String, eMailAddress: String, familySize: Int, cuisineType: String) {
+    func userRegister(userName: String, eMailAddress: String, familySize: Int, cuisineType: String, accountImage: UIImage) {
             
             let uid = (Auth.auth().currentUser?.uid)!
             
@@ -179,6 +181,19 @@ class UserdataManager {
                     print("Document successfully written!")
                 }
             }
+            
+        guard let imgData = accountImage.jpegData(compressionQuality: 0.75) else{ return }
+        let metaData = StorageMetadata()
+        metaData.contentType = "image/jpg"
+        
+        storageRef.child("user/\(uid)/userAccountImage").putData(imgData, metadata: metaData){ (metaData, error) in
+            if error == nil, metaData != nil{
+                print("success")
+               
+            }else{
+                print("error in save image")
+            }
+        }
         }
         
         func saveRecipe(recipeID: String) {
@@ -196,6 +211,8 @@ class UserdataManager {
                     print("Document successfully written!")
                 }
             }
+            
+            
         }
         
         func getSavedRecipesImage(recipeIDs: [String]) {

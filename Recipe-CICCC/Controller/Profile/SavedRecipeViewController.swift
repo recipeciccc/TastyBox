@@ -26,21 +26,26 @@ class SavedRecipeViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         collectionView.dataSource = self
-    self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         
         self.navigationItem.title = "Saved"
         
+        if isSavingRecipe == nil { isSavingRecipe = false }
         
         if isSavingRecipe! {
            
-            let alertController = UIAlertController(title: "Do you save this recipe?", message: "", preferredStyle: .alert)
+            let alertController = UIAlertController(title: "Save it?", message: "", preferredStyle: .alert)
             let yesAction = UIAlertAction(title: "OK", style: .default, handler: { action in
                 self.dataManger.saveRecipe(recipeID: self.savingRecipeID!)
                 // call the fucntions to retrieve recipeId and recipeimage
                 self.collectionView.reloadData()
             })
             alertController.addAction(yesAction)
-            let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
+            
+            let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: { action in
+                self.navigationController?.popViewController(animated: true)
+            })
+            
             alertController.addAction(cancelAction)
             
             self.present(alertController, animated: true)

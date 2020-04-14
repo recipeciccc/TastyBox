@@ -290,19 +290,27 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="200"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ONe-l8-e57">
-                                                    <rect key="frame" x="107" y="0.0" width="200" height="200"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ONe-l8-e57">
+                                                    <rect key="frame" x="112" y="5" width="190" height="190"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="ONe-l8-e57" secondAttribute="height" multiplier="1:1" id="Moe-zZ-Dnb"/>
+                                                        <constraint firstAttribute="height" constant="190" id="vNp-Kh-0ch"/>
+                                                    </constraints>
                                                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <state key="normal">
                                                         <color key="titleColor" red="1" green="0.57647058819999997" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     </state>
                                                     <connections>
-                                                        <segue destination="bDA-cS-WBG" kind="show" id="GUM-TL-jFn"/>
+                                                        <action selector="showChoice:" destination="ZbZ-ay-B0T" eventType="touchUpInside" id="elf-6p-kdQ"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
                                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstItem="ONe-l8-e57" firstAttribute="top" secondItem="tha-Gp-6m4" secondAttribute="top" constant="5" id="iJK-Yb-2uM"/>
+                                                <constraint firstAttribute="bottom" secondItem="ONe-l8-e57" secondAttribute="bottom" constant="5" id="qEz-JZ-v1D"/>
+                                                <constraint firstItem="ONe-l8-e57" firstAttribute="centerX" secondItem="tha-Gp-6m4" secondAttribute="centerX" id="wWD-pf-JGi"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <gestureRecognizers/>
                                     </tableViewCell>

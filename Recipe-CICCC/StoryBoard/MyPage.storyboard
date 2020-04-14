@@ -211,7 +211,7 @@
                 <viewControllerPlaceholder storyboardIdentifier="imagePickerVC" storyboardName="pickUserAccountImage" referencedIdentifier="imagePickerVC" id="XgG-TD-PgQ" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="49E-UW-p7d" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4200" y="41.517857142857139"/>
+            <point key="canvasLocation" x="2781" y="-76"/>
         </scene>
     </scenes>
     <resources>

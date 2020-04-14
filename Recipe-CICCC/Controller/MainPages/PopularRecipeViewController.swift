@@ -49,8 +49,14 @@ class PopularRecipeViewController: UIViewController {
         if let vc = segue.destination as? RecipeDetailViewController {
             if let cell = sender as? UITableViewCell, let indexPath = tableView.indexPath(for: cell){
                 print(recipes[indexPath.row].title)
-                if segue.identifier == "Top3" { vc.recipe = recipes[indexPath.row] }
-                else { vc.recipe = recipes[indexPath.row + 3] }
+                if segue.identifier == "Top3" {
+                    vc.recipe = recipes[indexPath.row]
+                    vc.mainPhoto = images[indexPath.row]
+                }
+                else {
+                    vc.recipe = recipes[indexPath.row + 3]
+                    vc.mainPhoto = images[indexPath.row + 3]
+                }
             }
         }
     }
@@ -156,6 +162,7 @@ extension PopularRecipeViewController: getDataFromFirebaseDelegate {
     
     func assignImage(image: UIImage, reference: UIImageView) {
         reference.image = image
+        self.images.append(image)
     }
     
    
