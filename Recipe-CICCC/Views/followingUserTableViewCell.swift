@@ -12,6 +12,8 @@ class followingUserTableViewCell: UITableViewCell {
     
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var imgView: UIImageView!
+    @IBOutlet weak var followingButton: UIButton!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

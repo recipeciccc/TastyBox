@@ -19,6 +19,7 @@ class RecipeDetailViewController: UIViewController {
     var userProfile = Bool()
     var recipe: RecipeDetail?
     var creator: User?
+    var creatorImage: UIImage?
     
     var ingredientList  = [Ingredient]()
     var instructionList = [Instruction]()
@@ -56,6 +57,7 @@ class RecipeDetailViewController: UIViewController {
         getInstructionData(query: query_instruction)
         
         userDataManager.getUserDetail(id: recipe?.userID)
+        userDataManager.getUserImage(uid: recipe!.userID)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -65,7 +67,22 @@ class RecipeDetailViewController: UIViewController {
                 vc.savingRecipeID = recipe?.recipeID
             }
         }
+        
+        if segue.identifier == "commentSegue" {
+            if let vc = segue.destination as? CommentsViewController {
+                vc.recipe = recipe
+            }
+        }
     }
+    
+    @IBAction func goToUserProfile(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "creatorProfile", bundle: nil)
+        let profileVC = storyboard.instantiateViewController(identifier: "creatorProfile") as! CreatorProfileViewController
+        
+        profileVC.id = self.creator!.userID
+        navigationController?.pushViewController(profileVC, animated: true)
+    }
+    
 }
 
 extension RecipeDetailViewController{
@@ -176,6 +193,7 @@ extension RecipeDetailViewController: UITableViewDataSource,UITableViewDelegate{
             }else{
                 cell.followBtn.isHidden = false
                 cell.creatorNameButton.setTitle(creator?.name, for: .normal)
+                cell.imgCreator.setBackgroundImage(creatorImage, for: .normal)
             }
             cell.delegate = self
             //            cell.imgCreator.setImage(creator.image, for: .normal)
@@ -259,6 +277,11 @@ extension RecipeDetailViewController: RecipeDetailDelegate {
 }
 
 extension RecipeDetailViewController: getUserDataDelegate {
+    func assignUserImage(image: UIImage) {
+        self.creatorImage = image
+        self.detailTableView.reloadData()
+    }
+    
     func gotUserData(user: User) {
         self.creator = user
     }

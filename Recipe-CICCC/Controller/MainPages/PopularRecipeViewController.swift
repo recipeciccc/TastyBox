@@ -46,13 +46,6 @@ class PopularRecipeViewController: UIViewController {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
         
-        if let vc = segue.destination as? RecipeDetailViewController {
-            if let cell = sender as? UITableViewCell, let indexPath = tableView.indexPath(for: cell){
-                print(recipes[indexPath.row].title)
-                if segue.identifier == "Top3" { vc.recipe = recipes[indexPath.row] }
-                else { vc.recipe = recipes[indexPath.row + 3] }
-            }
-        }
     }
     
     
@@ -89,6 +82,7 @@ extension PopularRecipeViewController: UITableViewDataSource {
             else {
                                 
                 let cell = (tableView.dequeueReusableCell(withIdentifier: "medal recipe", for: indexPath) as? Number123TableViewCell)!
+                cell.selectionStyle = .none
                 
                 cell.numberLikeLabel.text = "\(recipes[indexPath.row].like)"
                 cell.numberCommentLabel.text = "\(recipes[indexPath.row].cookingTime)"
@@ -120,6 +114,7 @@ extension PopularRecipeViewController: UITableViewDataSource {
         
         let cell = (tableView.dequeueReusableCell(withIdentifier: "under no.4", for: indexPath) as? UnderNo4TableViewCell)!
         
+        cell.selectionStyle = .none
         
         cell.rankingLabel.text = "No. \(indexPath.row + 3)"
         cell.numLikeLabel.text = "\(recipes[indexPath.row + 3].like)"
@@ -137,7 +132,23 @@ extension PopularRecipeViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+
+        let recipeVC = UIStoryboard(name: "RecipeDetail", bundle: nil).instantiateViewController(identifier: "detailvc") as! RecipeDetailViewController
+        
+        if indexPath.section == 0 {
+            let cell = (tableView.cellForRow(at: indexPath) as? Number123TableViewCell)!
+            recipeVC.recipe = self.recipes[indexPath.row]
+            recipeVC.mainPhoto = cell.recipeImageView!.image!
+        }
+        else if indexPath.section == 1 {
+            let cell = (tableView.cellForRow(at: indexPath) as? UnderNo4TableViewCell)!
+            recipeVC.recipe = self.recipes[indexPath.row + 3]
+            recipeVC.mainPhoto = cell.recipeImageView!.image!
+        }
+        
         tableView.deselectRow(at: indexPath, animated: true)
+        navigationController?.pushViewController(recipeVC, animated: true)
     }
     
 }
@@ -156,6 +167,7 @@ extension PopularRecipeViewController: getDataFromFirebaseDelegate {
     
     func assignImage(image: UIImage, reference: UIImageView) {
         reference.image = image
+        self.images.append(image)
     }
     
    

@@ -10,6 +10,6 @@ import Foundation
 import UIKit
 
 
-protocol setImageDelegate {
+protocol setImageDelegate: class {
     func setAccountImage(image: UIImage)
 }

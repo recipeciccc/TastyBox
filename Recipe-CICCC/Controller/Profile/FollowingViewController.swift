@@ -11,10 +11,11 @@ import UIKit
 class FollowingViewController: UIViewController {
     
     @IBOutlet weak var searchBar: UISearchBar!
-       @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var tableView: UITableView!
     
     var followingsID:[String] = []
     var followings:[User] = []
+    var followingsImages:[UIImage] = []
 
     let userDataManager = UserdataManager()
     
@@ -26,12 +27,15 @@ class FollowingViewController: UIViewController {
         self.searchBar.delegate = self as? UISearchBarDelegate
         self.tableView.dataSource = self
         userDataManager.delegateFollowerFollowing = self
+        userDataManager.delegate = self
         
         let parentVC = self.parent as! followerFollowingPageViewController
         followingsID = parentVC.followingsID
         userDataManager.getFollowersFollowings(IDs: self.followingsID, followerOrFollowing: "following")
-        
+       
          self.navigationItem.title = "Following"
+        
+        tableView.tableFooterView = UIView()
     }
     
 
@@ -66,7 +70,7 @@ extension FollowingViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = (tableView.dequeueReusableCell(withIdentifier: "followingUser") as? followingUserTableViewCell )!
+        let cell = (tableView.dequeueReusableCell(withIdentifier: "followingUser") as? followingUserTableViewCell)!
         
         if followings.isEmpty {
             cell.userNameLabel.text = "no following"
@@ -74,8 +78,30 @@ extension FollowingViewController: UITableViewDataSource {
             cell.userNameLabel.text = followings[indexPath.row].name
         }
         
+        userDataManager.getUserImage(uid: self.followingsID[indexPath.row])
+        
+        cell.imgView?.contentMode = .scaleAspectFit
+        cell.imgView.layer.masksToBounds = false
+        cell.imgView.layer.cornerRadius = cell.imgView.bounds.width / 2
+        cell.imgView.clipsToBounds = true
+        
+        if !followingsImages.isEmpty {
+            cell.imgView.image = followingsImages[indexPath.row]
+        }
+        
         return cell
     }
     
     
+}
+
+extension FollowingViewController: getUserDataDelegate {
+    func gotUserData(user: User) {
+        
+    }
+    
+    func assignUserImage(image: UIImage) {
+        self.followingsImages.append(image)
+        self.tableView.reloadData()
+    }
 }

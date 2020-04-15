@@ -52,13 +52,14 @@ class RecipeItemCollectionViewTableViewCell: UITableViewCell {
 extension RecipeItemCollectionViewTableViewCell: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         print(recipeImage.count)
-        return recipeImage.count
+        return recipeData.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = (collectionView.dequeueReusableCell(withReuseIdentifier: "creatorRecipes", for: indexPath) as? RecipeCreatorPostedCollectionViewCell)!
-        cell.imageView?.tag = indexPath.row
-         cell.imageView?.image = recipeImage[indexPath.row]
+        
+        cell.imageView!.tag = indexPath.row
+        cell.imageView!.image = recipeImage[indexPath.row]
         
         return cell
     }

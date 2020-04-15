@@ -8,6 +8,6 @@
 
 import UIKit
 
-class RecipeCreatorPostedCollectionViewCell: UICollectionViewCell {
+class RecipeUserPostedCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var imageView: UIImageView!
 }

@@ -60,56 +60,6 @@ class RecipeDetailDataManager {
         }
     }
     
-//    func getUserProvideRecipe(recipe: RecipeDetail) {
-//        
-//        let userID = recipe.userID
-//        var name: String?
-//        var followersID: [String] = []
-//        var followingID: [String] = []
-//        
-//        
-//        db.collection("user").document(recipe.userID).addSnapshotListener {(querysnapshot, error) in
-//            if error != nil {
-//                print("Error getting documents: \(String(describing: error))")
-//            } else {
-//                let data = querysnapshot?.data()
-//                
-//                name = data!["name"] as? String
-//            }
-//        }
-//        
-//        db.collection("user").document(recipe.userID).collection("follower").addSnapshotListener {(querysnapshot, error) in
-//            if error != nil {
-//                print("Error getting documents: \(String(describing: error))")
-//            } else {
-//                for document in querysnapshot!.documents {
-//                    let data = document.data()
-//                    
-//                    let id = data["followerID"] as! String
-//                    followersID.append(id)
-//                }
-//                
-//            }
-//        }
-//        
-//        db.collection("user").document(recipe.userID).collection("following").addSnapshotListener {(querysnapshot, error) in
-//            if error != nil {
-//                print("Error getting documents: \(String(describing: error))")
-//            } else {
-//                for document in querysnapshot!.documents {
-//                    let data = document.data()
-//                    
-//                    let id = data["followingID"] as! String
-//                    followingID.append(id)
-//                }
-//                
-//            }
-//        }
-//        
-//        
-//        self.delegate?.getCreator(creator: User(userID: userID, name: name!, cuisineType: followersID, familySize: followingID))
-//    }
-    
     func increaseLike(recipe: RecipeDetail) {
         
         db.collection("recipe").document(recipe.recipeID).setData (
@@ -128,7 +78,7 @@ class RecipeDetailDataManager {
         
         guard let uid = Auth.auth().currentUser?.uid else { return }
         db.collection("user").document(followerID).collection("follower").document(uid).setData([
-            "followerID": uid
+            "id": uid
         ], merge: true ){ err in
             if let err = err {
                 print("Error writing document: \(err)")

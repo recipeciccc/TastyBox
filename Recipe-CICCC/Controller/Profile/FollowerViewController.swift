@@ -9,41 +9,45 @@
 import UIKit
 
 class FollowerViewController: UIViewController {
-
+    
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     
     var followersIDs: [String] = []
     var followers:[User] = []
-
+    var followersImages: [UIImage] = []
     let userDataManager = UserdataManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         self.searchBar.delegate = self as? UISearchBarDelegate
         self.tableView.dataSource = self
+        
         userDataManager.delegateFollowerFollowing = self
+        userDataManager.delegate = self
         
         let parentVC = self.parent as! followerFollowingPageViewController
         followersIDs = parentVC.followersID
         userDataManager.getFollowersFollowings(IDs: self.followersIDs, followerOrFollowing: "follower")
         
+        self.tableView.tableFooterView = UIView()
+        
         self.navigationItem.title = "Follower"
     }
     
-
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destination.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }
 
 
@@ -73,9 +77,30 @@ extension FollowerViewController: UITableViewDataSource {
         } else {
             cell.userNameLabel.text = followers[indexPath.row].name
         }
+        userDataManager.getUserImage(uid: self.followersIDs[indexPath.row])
+        
+        cell.imgView?.contentMode = .scaleAspectFit
+        cell.imgView.layer.masksToBounds = false
+        cell.imgView.layer.cornerRadius = cell.imgView.bounds.width / 2
+        cell.imgView.clipsToBounds = true
+        
+        if !followersImages.isEmpty {
+            cell.imgView.image = followersImages[indexPath.row]
+        }
         
         return cell
     }
     
     
+}
+
+extension FollowerViewController: getUserDataDelegate {
+    func gotUserData(user: User) {
+        
+    }
+    
+    func assignUserImage(image: UIImage) {
+        self.followersImages.append(image)
+        self.tableView.reloadData()
+    }
 }

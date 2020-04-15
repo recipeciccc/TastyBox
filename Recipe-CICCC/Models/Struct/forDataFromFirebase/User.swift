@@ -13,7 +13,7 @@ struct User {
     var name: String
 //    var image: String
     var cuisineType: String
-    var familySize: Int
+    var familySize: Int?
     
 //    var followersID: [String]
 //    var followingID: [String]

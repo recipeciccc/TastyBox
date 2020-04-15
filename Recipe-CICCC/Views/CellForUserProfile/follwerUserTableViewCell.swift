@@ -12,6 +12,7 @@ class follwerUserTableViewCell: UITableViewCell {
 
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var imgView: UIImageView!
+    @IBOutlet weak var followingButton: UIView!
     
     override func awakeFromNib() {
         super.awakeFromNib()

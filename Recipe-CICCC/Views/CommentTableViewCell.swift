@@ -17,6 +17,12 @@ class CommentTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        commentLabel.numberOfLines = 0
+        //contentsのサイズに合わせてobujectのサイズを変える
+        commentLabel.sizeToFit()
+        //単語の途中で改行されないようにする
+        commentLabel.lineBreakMode = .byCharWrapping
+               
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
