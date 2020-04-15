@@ -49,7 +49,7 @@ class CreatorProfileViewController: UIViewController {
         let queryRef = db.collection("recipe").whereField("userID", isEqualTo: id as Any).order(by: "time", descending: true)
         recipeList = fetchData.Data(queryRef: queryRef)
         
-        dataManager.findFollowerFollowing(id: id, collection: "follower")
+        dataManager.findFollowerFollowing(id: id)
         
         dataManager.getUserImage(uid: id)
     }
@@ -171,7 +171,7 @@ extension CreatorProfileViewController: ReloadDataDelegate{
         if imageList.count == 0 {
             
             get_url_rid()
-            fetchImage.getImage(uid: id, rid: ridList, imageUrl: urlList)
+            fetchImage.getImage(uid: id, rid: ridList)
             
             if imageList.count == 0{
                 tableView.reloadData()

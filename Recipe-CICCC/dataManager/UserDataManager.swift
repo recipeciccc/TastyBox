@@ -127,7 +127,7 @@ class UserdataManager {
         }
     }
     
-    func findFollowerFollowing(id: String?, collection: String) {
+    func findFollowerFollowing(id: String?) {
         var uid = (Auth.auth().currentUser?.uid)!
         
         if id != nil {

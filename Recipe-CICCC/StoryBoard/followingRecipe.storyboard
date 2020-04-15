@@ -16,17 +16,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p1u-Hy-q83" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-25" y="518"/>
-        </scene>
-        <!--RecipeDetail-->
-        <scene sceneID="4JZ-m0-4vD">
-            <objects>
-                <viewControllerPlaceholder storyboardName="RecipeDetail" id="guP-fT-jPn" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="883-Bp-Bwl"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="WX2-1m-2qb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="206" y="518"/>
+            <point key="canvasLocation" x="164" y="523"/>
         </scene>
         <!--Following Recipe View Controller-->
         <scene sceneID="tsM-yh-V2a">
@@ -95,7 +85,6 @@
                                                             <connections>
                                                                 <outlet property="RecipeImage" destination="2MT-8c-2dG" id="va1-cf-k2U"/>
                                                                 <outlet property="RecipeName" destination="bjM-6P-vAN" id="AJQ-C0-Vi5"/>
-                                                                <segue destination="guP-fT-jPn" kind="show" id="rLr-VF-bgt"/>
                                                             </connections>
                                                         </collectionViewCell>
                                                     </cells>
@@ -158,7 +147,7 @@
                         <viewLayoutGuide key="safeArea" id="gg6-7k-lg3"/>
                     </view>
                     <connections>
-                        <outlet property="folowingTableView" destination="1e6-Fi-obH" id="fKI-pv-nqO"/>
+                        <outlet property="followingTableView" destination="1e6-Fi-obH" id="fKI-pv-nqO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZaL-Tg-i6M" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

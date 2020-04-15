@@ -85,7 +85,6 @@ extension PopularRecipeViewController: UITableViewDataSource {
                 cell.selectionStyle = .none
                 
                 cell.numberLikeLabel.text = "\(recipes[indexPath.row].like)"
-                cell.numberCommentLabel.text = "\(recipes[indexPath.row].cookingTime)"
                 cell.titleLabel.text = recipes[indexPath.row].title
                
                 dataManager.getImage(rid: recipes[indexPath.row].recipeID, uid: recipes[indexPath.row].userID, imageView: cell.recipeImageView!)
@@ -118,7 +117,6 @@ extension PopularRecipeViewController: UITableViewDataSource {
         
         cell.rankingLabel.text = "No. \(indexPath.row + 3)"
         cell.numLikeLabel.text = "\(recipes[indexPath.row + 3].like)"
-        cell.numCommentLabel.text = "\(recipes[indexPath.row + 3].cookingTime)"
         cell.titleLabel.text = recipes[indexPath.row + 3].title
         dataManager.getImage(rid: recipes[indexPath.row + 3].recipeID, uid: recipes[indexPath.row + 3].userID, imageView: cell.recipeImageView)
         

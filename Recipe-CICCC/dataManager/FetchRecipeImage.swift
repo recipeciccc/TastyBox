@@ -15,7 +15,7 @@ class FetchRecipeImage{
     var delegate: ReloadDataDelegate?
     var delegateImg: ReloadDataDelegate?
     
-    func getImage( uid:String, rid: [String], imageUrl: [String]){
+    func getImage( uid:String, rid: [String]){
         var image = UIImage()
         let storage = Storage.storage()
         let storageRef = storage.reference()
@@ -41,10 +41,10 @@ class FetchRecipeImage{
                 } else {
                     if let imgData = data{
                         
-                        print("imageRef: \(imageRef)")
+//                        print("imageRef: \(imageRef)")
                         
                         image = UIImage(data: imgData)!
-                        print(index)
+//                        print(index)
                         imageList.remove(at: index)
                         imageList.insert(image, at: index)
                         

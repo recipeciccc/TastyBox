@@ -46,7 +46,7 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let queryRef = db.collection("recipe").whereField("userID", isEqualTo: uid as Any).order(by: "time", descending: true)
         recipeList = fetchData.Data(queryRef: queryRef)
        
-        userDataManager.findFollowerFollowing(id: uid, collection: "following")
+        userDataManager.findFollowerFollowing(id: uid)
         userDataManager.getUserImage(uid: uid!)
         userDataManager.getUserDetail(id: uid!)
     }
@@ -166,7 +166,7 @@ extension MyPageViewController: ReloadDataDelegate{
         if imageList.count == 0 {
 
         get_url_rid()
-        fetchImage.getImage(uid: uid!, rid: ridList, imageUrl: urlList)
+        fetchImage.getImage(uid: uid!, rid: ridList)
         
         if imageList.count == 0{
            profileTableVIew.reloadData()
