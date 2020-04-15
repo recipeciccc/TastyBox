@@ -113,7 +113,6 @@
                                             <outlet property="numberLikeLabel" destination="rNq-Bl-XjM" id="7Z4-UI-OnM"/>
                                             <outlet property="recipeImageView" destination="fA8-IV-M1c" id="g4P-d9-58d"/>
                                             <outlet property="titleLabel" destination="dep-ao-6ft" id="tWQ-6O-qse"/>
-                                            <segue destination="GZV-6q-qVZ" kind="show" identifier="Top3" id="L3u-H3-XaT"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="under no.4" rowHeight="450" id="wNz-5s-8JC" customClass="UnderNo4TableViewCell" customModule="Recipe_CICCC" customModuleProvider="target">
@@ -206,7 +205,6 @@
                                             <outlet property="rankingLabel" destination="yhn-xw-1bq" id="nXG-NQ-jRw"/>
                                             <outlet property="recipeImageView" destination="cpr-zE-zDY" id="4ub-ka-vEG"/>
                                             <outlet property="titleLabel" destination="8um-qg-IN2" id="sgR-JE-iyM"/>
-                                            <segue destination="GZV-6q-qVZ" kind="show" id="GR1-WI-oYL"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -230,24 +228,11 @@
             </objects>
             <point key="canvasLocation" x="659" y="-731"/>
         </scene>
-        <!--RecipeDetail-->
-        <scene sceneID="DOQ-N7-vTm">
-            <objects>
-                <viewControllerPlaceholder storyboardName="RecipeDetail" id="GZV-6q-qVZ" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="c1Y-8I-vfc"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="abz-K7-H7u" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1310" y="-730"/>
-        </scene>
     </scenes>
     <resources>
         <image name="heart.fill" catalog="system" width="64" height="54"/>
         <image name="suit.heart.fill" catalog="system" width="64" height="54"/>
         <image name="text.bubble" catalog="system" width="64" height="54"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="L3u-H3-XaT"/>
-    </inferredMetricsTieBreakers>
     <color key="tintColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>
