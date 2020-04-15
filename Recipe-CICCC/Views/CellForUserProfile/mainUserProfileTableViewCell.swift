@@ -18,7 +18,10 @@ class mainUserProfileTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        userNameLabel.text = Auth.auth().currentUser?.displayName
+        if let name = Auth.auth().currentUser?.displayName {
+            userNameLabel.text = name
+        }
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

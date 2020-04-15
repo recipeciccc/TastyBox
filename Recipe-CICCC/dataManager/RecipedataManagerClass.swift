@@ -32,36 +32,39 @@ class RecipedataManagerClass {
                 
                 self.recipes.removeAll()
                 
-                //For-loop
-                for documents in querysnapshot!.documents
-                {
-                    
-                    let data = documents.data()
-                    
-                    
-                    let recipeId = data["recipeID"] as? String
-                    let title = data["title"] as? String
-                    let cookingTime = data["cookingTime"] as? Int
-                    let like = data["like"] as? Int
-                    let serving = data["serving"] as? Int
-                    let userId = data["userID"] as? String
-                    let time = data["time"] as? Timestamp
-                   
-                    let image = data["image"] as? String
-                    
-                    //MARK: They dont get anything when recipe is append...
-                    if userId != nil && recipeId != nil {
-//                        self.getInstructions(userId: userId!, recipeId: recipeId!)
-//                        self.getIngredients(userId: userId!, recipeId: recipeId!)
-//                        self.getComments(userId: userId!, recipeId: recipeId!)
+                if let documents = querysnapshot?.documents {
+                    //For-loop
+                    for documents in querysnapshot!.documents
+                    {
+                        
+                        let data = documents.data()
                         
                         
-                        let recipe = RecipeDetail(recipeID: recipeId!, title: title!, updatedDate: time!, cookingTime: cookingTime ?? 0, image: image ?? "", like: like!, serving: serving ?? 0 , userID: userId!)
+                        let recipeId = data["recipeID"] as? String
+                        let title = data["title"] as? String
+                        let cookingTime = data["cookingTime"] as? Int
+                        let like = data["like"] as? Int
+                        let serving = data["serving"] as? Int
+                        let userId = data["userID"] as? String
+                        let time = data["time"] as? Timestamp
                         
+                        let image = data["image"] as? String
                         
-                        self.recipes.append(recipe)
+                        //MARK: They dont get anything when recipe is append...
+                        if userId != nil && recipeId != nil {
+                            //                        self.getInstructions(userId: userId!, recipeId: recipeId!)
+                            //                        self.getIngredients(userId: userId!, recipeId: recipeId!)
+                            //                        self.getComments(userId: userId!, recipeId: recipeId!)
+                            
+                            
+                            let recipe = RecipeDetail(recipeID: recipeId!, title: title!, updatedDate: time!, cookingTime: cookingTime ?? 0, image: image ?? "", like: like!, serving: serving ?? 0 , userID: userId!)
+                            
+                            
+                            self.recipes.append(recipe)
+                        }
                     }
                 }
+                
                 
                 self.delegate?.gotData(recipes: self.recipes)
             }
@@ -74,16 +77,19 @@ class RecipedataManagerClass {
             if error != nil {
                 print("Error getting documents: \(String(describing: error))")
             } else {
-                for document in querysnapshot!.documents {
-                    let data = document.data()
-                    
-                    let index = data["index"] as! Int
-                    //                    let image = self.getImageInstruction(userId: userId, rid: recipeId, index: index)
-                    let image = data["image"] as! String
-                    let text = data["text"] as! String
-                    
-                    self.instructions.append(Instruction(index: index, imageUrl: image, text: text))
-                    
+                
+                if let documents = querysnapshot?.documents {
+                    for document in documents {
+                        let data = document.data()
+                        
+                        let index = data["index"] as! Int
+                        //                    let image = self.getImageInstruction(userId: userId, rid: recipeId, index: index)
+                        let image = data["image"] as! String
+                        let text = data["text"] as! String
+                        
+                        self.instructions.append(Instruction(index: index, imageUrl: image, text: text))
+                        
+                    }
                 }
             }
         }
@@ -101,6 +107,7 @@ class RecipedataManagerClass {
                 // Uh-oh, an error occurred!
             } else {
                 // Data for "images/island.jpg" is returned
+                
                 image = UIImage(data: data!)!
             }
         }
@@ -114,15 +121,19 @@ class RecipedataManagerClass {
             if error != nil {
                 print("Error getting documents: \(String(describing: error))")
             } else {
-                for document in querysnapshot!.documents {
-                    let data = document.data()
-                    
-                    let ingredient = data["ingredient"] as! String
-                    let amount = data["amount"] as! String
-                    
-                    self.ingredients.append(Ingredient(name: ingredient, amount: amount))
-                    
+                
+                if let documents = querysnapshot?.documents {
+                    for document in documents {
+                        let data = document.data()
+                        
+                        let ingredient = data["ingredient"] as! String
+                        let amount = data["amount"] as! String
+                        
+                        self.ingredients.append(Ingredient(name: ingredient, amount: amount))
+                        
+                    }
                 }
+                
             }
         }
     }
@@ -135,39 +146,41 @@ class RecipedataManagerClass {
                 print("Error getting documents: \(String(describing: error))")
             } else {
                 
-                for document in querysnapshot!.documents {
-                    print("documentID : \(document.documentID)")
-                    let data = document.data()
+                if let documents = querysnapshot?.documents {
                     
-                    let time = data["time"] as! Timestamp
-                    let user = data["user"] as! String
-                    let text = data["text"] as! String
-                    
-                    self.comments.append(Comment(userId: user, text: text, time: time))
-                    
+                    for document in documents {
+                        print("documentID : \(document.documentID)")
+                        let data = document.data()
+                        
+                        let time = data["time"] as! Timestamp
+                        let user = data["user"] as! String
+                        let text = data["text"] as! String
+                        
+                        self.comments.append(Comment(userId: user, text: text, time: time))
+                        
+                    }
                 }
             }
         }
     }
     
     
-
+    
     func getImage(rid: String, uid: String, imageView: UIImageView) {
         
-//        let uid =  Auth.auth().currentUser?.uid
-//        let storageRef =  Storage.storage().reference().child("user/\(uid!)/RecipePhoto/\(rid)/\(rid)")
+        //        let uid =  Auth.auth().currentUser?.uid
+        //        let storageRef =  Storage.storage().reference().child("user/\(uid!)/RecipePhoto/\(rid)/\(rid)")
         let storageRef =  Storage.storage().reference().child("user/\(uid)/RecipePhoto/\(rid)/\(rid)")
         
         storageRef.getData(maxSize: 1 * 1024 * 1024) { data, error in   //
-
+            
             if error != nil {
                 print("Error getting documents: \(String(describing: error))")
             } else {
-                
-                // Data for "images/island.jpg" is returned
-                let image = UIImage(data: data!)
-//                self.delegate?.gotImage(image: image!)
-                self.delegate?.assignImage(image: image!, reference: imageView)
+                if let imageData = data {
+                    let image = UIImage(data: imageData)
+                    self.delegate?.assignImage(image: image!, reference: imageView)
+                }
             }
         }
     }

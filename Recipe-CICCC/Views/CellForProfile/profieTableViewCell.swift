@@ -16,8 +16,9 @@ class profieTableViewCell: UITableViewCell {
     weak var delegate: AddingFollowersDelegate?
 
 
-    @IBOutlet weak var imgView: UIImageView!
+    @IBOutlet weak var creatorImageView: UIImageView!
     @IBOutlet weak var creatorNameLabel: UILabel!
+    @IBOutlet weak var followMeButton: UIButton!
     
     var userID: String?
     let uid = Auth.auth().currentUser?.uid

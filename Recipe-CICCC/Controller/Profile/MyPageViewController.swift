@@ -27,7 +27,7 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var followers:[String] = []
     var following:[String] = []
     var user: User?
-    var userImage: UIImage = #imageLiteral(resourceName: "imageFile")
+    var userImage: UIImage?
     
     override func viewDidLoad() {
         
@@ -47,7 +47,8 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         recipeList = fetchData.Data(queryRef: queryRef)
        
         userDataManager.findFollowerFollowing(id: uid, collection: "following")
-       userDataManager.findFollowerFollowing(id: uid, collection: "follower")
+        userDataManager.getUserImage(uid: uid!)
+        userDataManager.getUserDetail(id: uid!)
     }
     
     
@@ -70,7 +71,6 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
             }
         }
         
-          
     }
     
      func numberOfSections(in tableView: UITableView) -> Int {
@@ -87,10 +87,16 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         if section == 0 {
             let cell = (tableView.dequeueReusableCell(withIdentifier: "Main User Page", for: indexPath) as? mainUserProfileTableViewCell)!
+            
+            cell.userImageView?.image = self.userImage
+            cell.userImageView?.contentMode = .scaleAspectFit
             cell.userImageView.layer.masksToBounds = false
             cell.userImageView.layer.cornerRadius = cell.userImageView.bounds.width / 2
             cell.userImageView.clipsToBounds = true
-            cell.imageView?.image = self.userImage
+           
+            if Auth.auth().currentUser?.displayName == nil {
+                cell.userNameLabel.text = self.user?.name
+             }
             
             return cell
         }
@@ -177,10 +183,13 @@ extension MyPageViewController: ReloadDataDelegate{
 }
 
 extension MyPageViewController : getUserDataDelegate {
+    func assignUserImage(image: UIImage) {
+        self.userImage = image
+        self.profileTableVIew.reloadData()
+    }
 
     func gotUserData(user: User) {
         self.user = user
-        self.user!.name = (Auth.auth().currentUser?.displayName)!
         self.profileTableVIew.reloadData()
     }
      // MARK: initialized recipe id and image id
@@ -196,9 +205,7 @@ extension MyPageViewController : getUserDataDelegate {
                 print(data.image!)
             
             }
-//           urlListが日付順になっているか調べる
-            // po urlList, ridList and po recipeList
-            // この時点では上記全てが日付順になっている
+
         }
             
     }

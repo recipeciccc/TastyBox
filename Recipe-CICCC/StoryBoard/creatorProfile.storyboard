@@ -11,7 +11,7 @@
         <!--Creator Profile View Controller-->
         <scene sceneID="1V3-YF-wtE">
             <objects>
-                <viewController id="GdU-xa-aMC" customClass="CreatorProfileViewController" customModule="Recipe_CICCC" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="creatorProfile" id="GdU-xa-aMC" customClass="CreatorProfileViewController" customModule="Recipe_CICCC" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="oQ4-yA-rOL">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -27,9 +27,6 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="135"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="tj0-7j-QfR">
-                                                    <rect key="frame" x="20" y="17" width="100" height="101"/>
-                                                </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hLl-yl-mAZ">
                                                     <rect key="frame" x="128" y="29" width="266" height="20.5"/>
                                                     <constraints>
@@ -41,31 +38,43 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oMV-5u-zPo">
-                                                    <rect key="frame" x="196" y="75" width="130" height="30"/>
+                                                    <rect key="frame" x="211" y="74" width="100" height="34"/>
                                                     <color key="backgroundColor" red="1" green="0.57647058819999997" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="34" id="nK7-HS-1jH"/>
+                                                        <constraint firstAttribute="width" constant="100" id="q0h-LO-xYD"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                     <state key="normal" title="Follow me!">
                                                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="followersAddButton:" destination="aRt-dF-TCA" eventType="touchUpInside" id="1WW-Ne-zud"/>
+                                                    </connections>
                                                 </button>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ld5-ik-8wx">
+                                                    <rect key="frame" x="20" y="17.5" width="100" height="100"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="100" id="ho8-b6-Pnz"/>
+                                                        <constraint firstAttribute="width" constant="100" id="xvn-KD-c5m"/>
+                                                    </constraints>
+                                                </imageView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="oMV-5u-zPo" firstAttribute="bottom" secondItem="tj0-7j-QfR" secondAttribute="bottom" constant="-13" id="5yF-i2-u2C"/>
-                                                <constraint firstItem="hLl-yl-mAZ" firstAttribute="leading" secondItem="tj0-7j-QfR" secondAttribute="trailing" constant="8" id="8P3-su-fwk"/>
+                                                <constraint firstItem="ld5-ik-8wx" firstAttribute="leading" secondItem="zPd-rr-W0j" secondAttribute="leadingMargin" id="2Is-if-gcI"/>
                                                 <constraint firstItem="hLl-yl-mAZ" firstAttribute="trailing" secondItem="zPd-rr-W0j" secondAttribute="trailingMargin" id="BTk-gI-91i"/>
-                                                <constraint firstItem="oMV-5u-zPo" firstAttribute="leading" secondItem="tj0-7j-QfR" secondAttribute="trailing" constant="76" id="HfE-y2-cbx"/>
+                                                <constraint firstItem="oMV-5u-zPo" firstAttribute="top" secondItem="hLl-yl-mAZ" secondAttribute="bottom" constant="24.5" id="CVD-jN-R8Z"/>
                                                 <constraint firstItem="hLl-yl-mAZ" firstAttribute="top" secondItem="zPd-rr-W0j" secondAttribute="topMargin" constant="18" id="QRS-yo-Qnz"/>
-                                                <constraint firstItem="tj0-7j-QfR" firstAttribute="centerY" secondItem="zPd-rr-W0j" secondAttribute="centerY" id="WfL-r6-Nuq"/>
-                                                <constraint firstItem="oMV-5u-zPo" firstAttribute="top" secondItem="hLl-yl-mAZ" secondAttribute="bottom" constant="25.5" id="ckM-98-CF9"/>
-                                                <constraint firstItem="tj0-7j-QfR" firstAttribute="top" secondItem="zPd-rr-W0j" secondAttribute="topMargin" constant="6" id="jWw-T8-Urs"/>
-                                                <constraint firstItem="tj0-7j-QfR" firstAttribute="leading" secondItem="zPd-rr-W0j" secondAttribute="leadingMargin" id="mdJ-fC-oeW"/>
-                                                <constraint firstItem="oMV-5u-zPo" firstAttribute="centerX" secondItem="hLl-yl-mAZ" secondAttribute="centerX" id="rLM-eb-Lle"/>
+                                                <constraint firstItem="ld5-ik-8wx" firstAttribute="centerY" secondItem="zPd-rr-W0j" secondAttribute="centerY" id="a82-fW-pUG"/>
+                                                <constraint firstItem="ld5-ik-8wx" firstAttribute="centerY" secondItem="zPd-rr-W0j" secondAttribute="centerY" id="cNF-IF-ekf"/>
+                                                <constraint firstItem="oMV-5u-zPo" firstAttribute="centerX" secondItem="hLl-yl-mAZ" secondAttribute="centerX" id="fyC-St-dBU"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="1" green="0.57647058819999997" blue="0.0" alpha="0.2577322346" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
+                                            <outlet property="creatorImageView" destination="ld5-ik-8wx" id="dx1-GT-9DC"/>
                                             <outlet property="creatorNameLabel" destination="hLl-yl-mAZ" id="mAU-x9-HK7"/>
-                                            <outlet property="imgView" destination="tj0-7j-QfR" id="J8E-J3-d21"/>
+                                            <outlet property="followMeButton" destination="oMV-5u-zPo" id="0UM-nJ-iMc"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="number" id="Xqt-Yo-GUL" customClass="NumOfCreatorhasTableViewCell" customModule="Recipe_CICCC" customModuleProvider="target">
@@ -89,14 +98,14 @@
                                                             <rect key="frame" x="124" y="0.0" width="46" height="30"/>
                                                             <state key="normal" title="Button"/>
                                                             <connections>
-                                                                <segue destination="Ka6-9a-Z8z" kind="show" id="0U7-du-jes"/>
+                                                                <segue destination="Ka6-9a-Z8z" kind="show" identifier="following" id="0U7-du-jes"/>
                                                             </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9qg-v9-89m">
                                                             <rect key="frame" x="248" y="0.0" width="46" height="30"/>
                                                             <state key="normal" title="Button"/>
                                                             <connections>
-                                                                <segue destination="Ka6-9a-Z8z" kind="show" id="Y5t-UO-wdP"/>
+                                                                <segue destination="Ka6-9a-Z8z" kind="show" identifier="follower" id="Y5t-UO-wdP"/>
                                                             </connections>
                                                         </button>
                                                     </subviews>
@@ -137,20 +146,22 @@
                                                                 <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <subviews>
-                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eyt-nq-XEC">
+                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eyt-nq-XEC">
                                                                         <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="width" constant="150" id="W86-oP-FLf"/>
+                                                                            <constraint firstAttribute="height" constant="150" id="k0O-lj-MU1"/>
+                                                                        </constraints>
                                                                     </imageView>
                                                                 </subviews>
                                                                 <constraints>
-                                                                    <constraint firstItem="eyt-nq-XEC" firstAttribute="leading" secondItem="arr-Pu-FWs" secondAttribute="leading" id="0BC-VU-IXz"/>
-                                                                    <constraint firstAttribute="bottom" secondItem="eyt-nq-XEC" secondAttribute="bottom" id="Gzr-dv-6Cy"/>
-                                                                    <constraint firstItem="eyt-nq-XEC" firstAttribute="top" secondItem="arr-Pu-FWs" secondAttribute="top" id="QQn-Qt-SB5"/>
-                                                                    <constraint firstAttribute="trailing" secondItem="eyt-nq-XEC" secondAttribute="trailing" id="aBE-6h-ebT"/>
+                                                                    <constraint firstItem="eyt-nq-XEC" firstAttribute="centerX" secondItem="arr-Pu-FWs" secondAttribute="centerX" id="lBZ-jr-tue"/>
+                                                                    <constraint firstItem="eyt-nq-XEC" firstAttribute="centerY" secondItem="arr-Pu-FWs" secondAttribute="centerY" id="xjO-0M-1Ab"/>
                                                                 </constraints>
                                                             </collectionViewCellContentView>
                                                             <size key="customSize" width="150" height="150"/>
                                                             <connections>
-                                                                <segue destination="z8x-ue-Rwk" kind="show" id="E8W-Ia-UxJ"/>
+                                                                <outlet property="imageView" destination="eyt-nq-XEC" id="sGK-uE-VBS"/>
                                                             </connections>
                                                         </collectionViewCell>
                                                     </cells>
@@ -196,7 +207,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5fl-8E-ciL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4681.884057971015" y="754.6875"/>
+            <point key="canvasLocation" x="4718" y="769"/>
         </scene>
         <!--savedRecipe-->
         <scene sceneID="VRv-J7-aYg">
@@ -206,17 +217,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gTN-bm-njT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4681.884057971015" y="707.8125"/>
-        </scene>
-        <!--RecipeDetail-->
-        <scene sceneID="Spy-vu-qWe">
-            <objects>
-                <viewControllerPlaceholder storyboardName="RecipeDetail" id="z8x-ue-Rwk" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="PIy-uM-F9s"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="DWu-jR-J5Q" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4682.608695652174" y="800.22321428571422"/>
+            <point key="canvasLocation" x="4696" y="721"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>

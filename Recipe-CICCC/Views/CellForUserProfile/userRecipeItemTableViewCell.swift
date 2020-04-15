@@ -52,7 +52,7 @@ extension userRecipeItemTableViewCell: UICollectionViewDataSource, UICollectionV
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "recipeItemForUser", for: indexPath) as! RecipeCreatorPostedCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "recipeItemForUser", for: indexPath) as! RecipeUserPostedCollectionViewCell
         cell.imageView?.tag = indexPath.row
         cell.imageView?.image = recipeImage[indexPath.row]
        return cell

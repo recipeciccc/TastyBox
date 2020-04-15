@@ -36,6 +36,8 @@ class FirstTimeUserProfileTableViewController: UITableViewController, UIPickerVi
     
     let dataManager = UserdataManager()
     
+    let uid = Auth.auth().currentUser?.uid
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -63,13 +65,14 @@ class FirstTimeUserProfileTableViewController: UITableViewController, UIPickerVi
         let tap = UITapGestureRecognizer(target: self, action: #selector(closeKeyboard))
         view.addGestureRecognizer(tap)
         
-        
-        userImage = #imageLiteral(resourceName: "Easy-strawberry-desserts-–-Greek-Yogurt-recipes-–-Valentines-desserts")
+        dataManager.delegate = self
+        dataManager.getUserImageInFirst()
+        dataManager.getUserDetail(id: uid!)
+       
         userImageButton.imageView?.contentMode = .scaleAspectFit
         userImageButton.layer.cornerRadius = 0.5 * userImageButton.bounds.size.width
         userImageButton.clipsToBounds = true
         userImage?.withRenderingMode(.alwaysOriginal)
-        userImageButton.setBackgroundImage(userImage!, for: .normal)
     }
     
     @objc func closeKeyboard(){
@@ -221,6 +224,7 @@ class FirstTimeUserProfileTableViewController: UITableViewController, UIPickerVi
     }
     
 }
+
 extension FirstTimeUserProfileTableViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     //　撮影が完了時した時に呼ばれる
     func imagePickerController(_ imagePicker: UIImagePickerController,
@@ -236,7 +240,7 @@ extension FirstTimeUserProfileTableViewController: UIImagePickerControllerDelega
             
             imageCropVC.moveAndScaleLabel.text = "Triming"
             imageCropVC.cancelButton.setTitle("Cancel", for: .normal)
-            imageCropVC.chooseButton.setTitle("done", for: .normal)
+            imageCropVC.chooseButton.setTitle("Done", for: .normal)
             
             imageCropVC.delegate = self
             
@@ -280,3 +284,45 @@ extension FirstTimeUserProfileTableViewController:  RSKImageCropViewControllerDe
     
 }
 
+extension FirstTimeUserProfileTableViewController: getUserDataDelegate {
+    func gotUserData(user: User) {
+        self.familySizeTextField.text = String(user.familySize!)
+        self.cuisineTypeTextField.text = user.cuisineType
+        
+        if Auth.auth().currentUser?.displayName == nil {
+            self.userNameTextField.text = user.name
+        }
+        
+        var rowNumberCuisineType: Int {
+            var temp: Int?
+            
+            cuisineType.map { if $0 == self.cuisineTypeTextField.text {
+                temp = cuisineType.firstIndex(of: $0)
+                }
+            }
+            
+            return temp!
+        }
+        
+        self.cuisinePicker.selectRow(rowNumberCuisineType, inComponent: 0, animated: true)
+        
+        var rowNumberFamilySize: Int {
+            var temp: Int?
+            
+            familySize.map { if $0 == self.familySizeTextField.text {
+                temp = familySize.firstIndex(of: $0)
+                }
+            }
+            
+            return temp!
+        }
+        
+        self.familyPicker.selectRow(rowNumberFamilySize, inComponent: 0, animated: true)
+    }
+    
+    func assignUserImage(image: UIImage) {
+        self.userImage = image
+        self.userImageButton.setBackgroundImage(image, for: .normal)
+    }
+    
+}
