@@ -67,6 +67,12 @@ class RecipeDetailViewController: UIViewController {
                 vc.savingRecipeID = recipe?.recipeID
             }
         }
+        
+        if segue.identifier == "commentSegue" {
+            if let vc = segue.destination as? CommentsViewController {
+                vc.recipe = recipe
+            }
+        }
     }
     
     @IBAction func goToUserProfile(_ sender: Any) {
