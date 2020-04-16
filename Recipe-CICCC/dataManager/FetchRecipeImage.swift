@@ -29,7 +29,7 @@ class FetchRecipeImage{
             imageRefs.append(imagesRef)
         }
         
-        print(imageRefs)
+//        print(imageRefs)
         imageList = Array(repeating: UIImage(), count: imageRefs.count)
         
         for (index, imageRef) in imageRefs.enumerated() {
@@ -53,8 +53,11 @@ class FetchRecipeImage{
                 }
         }
         
+        }
+       
     }
-    }
+    
+ 
     
     func getInstructionImg( uid:String, rid: String, count: Int) -> [UIImage]{
         var image = UIImage()

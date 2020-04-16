@@ -179,7 +179,8 @@ class RecipedataManagerClass {
             } else {
                 if let imageData = data {
                     let image = UIImage(data: imageData)
-                    self.delegate?.assignImage(image: image!, reference: imageView)
+                    imageView.image = image
+//                    self.delegate?.assignImage(image: image!, reference: imageView)
                 }
             }
         }
