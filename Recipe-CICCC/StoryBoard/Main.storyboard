@@ -67,38 +67,23 @@
                             </collectionView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wNH-OO-IJE">
                                 <rect key="frame" x="0.0" y="138" width="414" height="724"/>
-                                <connections>
-                                    <segue destination="5S8-PP-0s1" kind="embed" id="PKE-cV-bUt"/>
-                                </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="alY-9v-5Rz">
                                 <rect key="frame" x="0.0" y="138" width="414" height="724"/>
-                                <connections>
-                                    <segue destination="bOG-U9-byp" kind="embed" id="Lv7-R8-vhA"/>
-                                </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lme-57-Dk4">
                                 <rect key="frame" x="0.0" y="138" width="414" height="724"/>
-                                <connections>
-                                    <segue destination="LJl-fZ-Rb0" kind="embed" id="nJp-SI-oQ2"/>
-                                </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sOE-X1-ybW">
                                 <rect key="frame" x="0.0" y="138" width="414" height="724"/>
-                                <connections>
-                                    <segue destination="go2-jv-AyD" kind="embed" identifier="" id="wiR-ez-raX"/>
-                                </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tLa-kL-8Ef">
                                 <rect key="frame" x="0.0" y="138" width="414" height="724"/>
-                                <connections>
-                                    <segue destination="jg4-s1-OQ3" kind="embed" id="edi-fS-nd0"/>
-                                </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ebh-34-Zi3">
                                 <rect key="frame" x="0.0" y="138" width="414" height="724"/>
                                 <connections>
-                                    <segue destination="9VU-Un-7z1" kind="embed" id="eTc-NM-da3"/>
+                                    <segue destination="oTD-iG-l4V" kind="show" id="87d-1w-1KT"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FId-yb-en9">
@@ -670,10 +655,22 @@
             </objects>
             <point key="canvasLocation" x="2755" y="81"/>
         </scene>
+        <!--Main View Controller-->
+        <scene sceneID="JTn-Ah-2Sb">
+            <objects>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="pageCurl" navigationOrientation="horizontal" spineLocation="min" id="oTD-iG-l4V" customClass="MainViewController" customModule="Recipe_CICCC" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="A4C-xC-Bzy"/>
+                </pageViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LHI-WY-T5F" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2738" y="-521"/>
+        </scene>
         <!--ingredientRecipe-->
         <scene sceneID="B5Y-pC-TKc">
             <objects>
-                <viewControllerPlaceholder storyboardName="ingredientRecipe" id="go2-jv-AyD" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="ingredientRecipe" id="go2-jv-AyD" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="krb-hE-x7l"/>
+                </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jF5-fa-Upo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2772" y="51"/>

@@ -72,6 +72,7 @@
 		6F144E2B2445B4A300AC0520 /* RecipeCreatorPostedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F144E2A2445B4A300AC0520 /* RecipeCreatorPostedCollectionViewCell.swift */; };
 		6F144E2F2448675500AC0520 /* FollowingDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F144E2E2448675400AC0520 /* FollowingDataManager.swift */; };
 		6F144E31244867CD00AC0520 /* FollowingDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F144E30244867CD00AC0520 /* FollowingDelegate.swift */; };
+		6F144E372448B3D800AC0520 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F144E362448B3D800AC0520 /* MainViewController.swift */; };
 		6F27D1752429EC9700B5B071 /* FollowingUserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F27D1742429EC9700B5B071 /* FollowingUserTableViewCell.swift */; };
 		6F27D1772429F28300B5B071 /* ServingAndTimeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F27D1762429F28200B5B071 /* ServingAndTimeTableViewCell.swift */; };
 		6F27D1792429F45700B5B071 /* IngredientShoppingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F27D1782429F45700B5B071 /* IngredientShoppingTableViewCell.swift */; };
@@ -230,6 +231,7 @@
 		6F144E2A2445B4A300AC0520 /* RecipeCreatorPostedCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeCreatorPostedCollectionViewCell.swift; sourceTree = "<group>"; };
 		6F144E2E2448675400AC0520 /* FollowingDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FollowingDataManager.swift; path = "Recipe-CICCC/StoryBoard/FollowingDataManager.swift"; sourceTree = SOURCE_ROOT; };
 		6F144E30244867CD00AC0520 /* FollowingDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowingDelegate.swift; sourceTree = "<group>"; };
+		6F144E362448B3D800AC0520 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = SOURCE_ROOT; };
 		6F27D1742429EC9700B5B071 /* FollowingUserTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowingUserTableViewCell.swift; sourceTree = "<group>"; };
 		6F27D1762429F28200B5B071 /* ServingAndTimeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServingAndTimeTableViewCell.swift; sourceTree = "<group>"; };
 		6F27D1782429F45700B5B071 /* IngredientShoppingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IngredientShoppingTableViewCell.swift; sourceTree = "<group>"; };
@@ -419,6 +421,7 @@
 		4069257123D8350100059C8E /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				6F144E362448B3D800AC0520 /* MainViewController.swift */,
 				6FC70D632429CB76002E14DF /* CreatorViewController.swift */,
 				6F729381242B159D00A7E4E0 /* CommentsViewController.swift */,
 				6F3FF54623DAB62D005162C7 /* StoresMapViewController.swift */,
@@ -1103,6 +1106,7 @@
 				6F729380242ADE1300A7E4E0 /* GetCommentsDelegate.swift in Sources */,
 				69325D222413A9EC00340F1F /* getUserDataDelegate.swift in Sources */,
 				6F8BE79823EEB86200CEA348 /* SearchResult.swift in Sources */,
+				6F144E372448B3D800AC0520 /* MainViewController.swift in Sources */,
 				6FF61C61241501D8008B55B5 /* RefrigeratorViewController.swift in Sources */,
 				692327E1242F2B2C003C434D /* RecipeUserPostedCollectionViewCell.swift in Sources */,
 				4069259A23D8355200059C8E /* RecipeItemCollectionViewCell.swift in Sources */,
