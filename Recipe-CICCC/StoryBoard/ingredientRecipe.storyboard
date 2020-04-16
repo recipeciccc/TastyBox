@@ -21,7 +21,7 @@
         <!--Ingredients View Controller-->
         <scene sceneID="JGT-OA-ma6">
             <objects>
-                <viewController storyboardIdentifier="RecipeViewController" id="Aua-h9-SUW" customClass="IngredientsViewController" customModule="Recipe_CICCC" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ingredientRecipe" id="Aua-h9-SUW" customClass="IngredientsViewController" customModule="Recipe_CICCC" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Qtv-i0-jWl">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

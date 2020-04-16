@@ -14,16 +14,34 @@ class MainViewController: UIPageViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
+        self.dataSource = self
+        // PageViewControllerにViewControllerをセット
+        self.setViewControllers([editorChoiceVC], direction: .forward, animated: true,completion: nil)
     }
     
-    let FollowingVC = UIStoryboard(name: "followeringRecipe", bundle: nil).instantiateViewController(identifier: "followeringRecipe") as! FollowingRecipeViewController
-    let ingredientVC = UIStoryboard(name: "ingredientRecipe", bundle: nil).instantiateViewController(identifier: "RecipeViewController") as! RecipeViewController
+    let FollowingVC = UIStoryboard(name: "followingRecipe", bundle: nil).instantiateViewController(identifier: "followingRecipe") as! FollowingRecipeViewController
+    let ingredientVC = UIStoryboard(name: "ingredientRecipe", bundle: nil).instantiateViewController(identifier: "ingredientRecipe") as! IngredientsViewController
     let poppularVC = UIStoryboard(name: "popularPage", bundle: nil).instantiateViewController(identifier: "popularPage") as! PopularRecipeViewController
     let editorChoiceVC = UIStoryboard(name: "EditorChoice", bundle: nil).instantiateViewController(identifier: "EditorChoice") as EditorChoiceViewController
     let monthlyVC = UIStoryboard(name: "Monthly", bundle: nil).instantiateViewController(identifier: "Monthly") as! MonthlyViewController
-    let VIPVC = UIStoryboard(name: "VIP_page", bundle: nil).instantiateViewController(identifier: "VIP_page") as! VIPviewController
+    let VIPVC = UIStoryboard(name: "VIP_page", bundle: nil).instantiateViewController(identifier: "VIP_page") as! VIPViewController
     
     
+    
+
+/*
+ // MARK: - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+ // Get the new view controller using segue.destination.
+ // Pass the selected object to the new view controller.
+ }
+ */
+
+}
+
+extension MainViewController: UIPageViewControllerDataSource {
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         print(viewController)
@@ -43,22 +61,11 @@ class MainViewController: UIPageViewController {
         
         let VCs = [FollowingVC, ingredientVC, poppularVC, editorChoiceVC, VIPVC]
         
-        if viewController is VIPviewController {
+        if viewController is VIPViewController {
             
             return nil
         }
         
         return VCs[ VCs.firstIndex(of: viewController)! + 1]
     }
-
-/*
- // MARK: - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
- // Get the new view controller using segue.destination.
- // Pass the selected object to the new view controller.
- }
- */
-
 }

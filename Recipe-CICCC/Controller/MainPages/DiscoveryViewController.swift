@@ -12,12 +12,12 @@ import FirebaseAuth
 
 class DiscoveryViewController: UIViewController {
     
-    @IBOutlet weak var MonthlyContainerView: UIView!
+//    @IBOutlet weak var MonthlyContainerView: UIView!
     @IBOutlet weak var PopularContainerView: UIView!
-    @IBOutlet weak var SubscribedContainerView: UIView!
-    @IBOutlet weak var IngredientsContainerView: UIView!
-    @IBOutlet weak var EditorContainerView: UIView!
-    @IBOutlet weak var VIPContainerVIew: UIView!
+//    @IBOutlet weak var SubscribedContainerView: UIView!
+//    @IBOutlet weak var IngredientsContainerView: UIView!
+//    @IBOutlet weak var EditorContainerView: UIView!
+//    @IBOutlet weak var VIPContainerVIew: UIView!
     
     @IBOutlet weak var MenuCollectionVIew: UICollectionView!
     @IBAction func SideMenuTapped(){
@@ -50,7 +50,7 @@ class DiscoveryViewController: UIViewController {
         layout.itemSize = CGSize(width: width, height: width)
         
         initialContentView()
-        EditorContainerView.isHidden = false
+//        EditorContainerView.isHidden = false
         
         NotificationCenter.default.addObserver(self, selector: #selector(toggleSideMenu), name: NSNotification.Name("ToggleSideMenu"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(showSearch), name: NSNotification.Name("ShowSearch"), object: nil)
@@ -61,15 +61,19 @@ class DiscoveryViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(showAbout), name: NSNotification.Name("ShowAbout"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(showLogout), name: NSNotification.Name("ShowLogout"), object: nil)
         
+        let pageControllView = MainViewController()
+        
     }
     
     func initialContentView(){
-        self.SubscribedContainerView.isHidden = true
-        self.MonthlyContainerView.isHidden = true
-        self.PopularContainerView.isHidden = true
-        self.IngredientsContainerView.isHidden = true
-        self.EditorContainerView.isHidden = true
-        self.VIPContainerVIew.isHidden = true
+//        self.SubscribedContainerView.isHidden = true
+//        self.MonthlyContainerView.isHidden = true
+//        self.PopularContainerView.isHidden = true
+//        self.IngredientsContainerView.isHidden = true
+//        self.EditorContainerView.isHidden = true
+//        self.VIPContainerVIew.isHidden = true
+        self.PopularContainerView.isHidden = false
+
     }
     func CreateMenuLabel() {
         
@@ -171,37 +175,37 @@ extension DiscoveryViewController: UICollectionViewDelegate, UICollectionViewDat
         case 0:
             UIView.animate(withDuration: 0.5, animations: {
                 self.initialContentView()
-                self.SubscribedContainerView.isHidden = false
+//                self.SubscribedContainerView.isHidden = false
             })
         case 1:
             UIView.animate(withDuration: 0.5, animations: {
                 self.initialContentView()
-                self.IngredientsContainerView.isHidden = false
+//                self.IngredientsContainerView.isHidden = false
             })
         case 2:
             UIView.animate(withDuration: 0.5, animations: {
                 self.initialContentView()
-                self.PopularContainerView.isHidden = false
+//                self.PopularContainerView.isHidden = false
             })
         case 3:
             UIView.animate(withDuration: 0.5, animations: {
                 self.initialContentView()
-                self.EditorContainerView.isHidden = false
+//                self.EditorContainerView.isHidden = false
             })
         case 4:
             UIView.animate(withDuration: 0.7, animations: {
                 self.initialContentView()
-                self.MonthlyContainerView.isHidden = false
+//                self.MonthlyContainerView.isHidden = false
             })
         case 5:
             UIView.animate(withDuration: 0.5, animations: {
                 self.initialContentView()
-                self.VIPContainerVIew.isHidden = false
+//                self.VIPContainerVIew.isHidden = false
             })
             
         default:
             initialContentView()
-            self.EditorContainerView.isHidden = false
+//            self.EditorContainerView.isHidden = false
         }
         
         return

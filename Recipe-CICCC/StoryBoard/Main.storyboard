@@ -67,23 +67,8 @@
                             </collectionView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wNH-OO-IJE">
                                 <rect key="frame" x="0.0" y="138" width="414" height="724"/>
-                            </containerView>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="alY-9v-5Rz">
-                                <rect key="frame" x="0.0" y="138" width="414" height="724"/>
-                            </containerView>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lme-57-Dk4">
-                                <rect key="frame" x="0.0" y="138" width="414" height="724"/>
-                            </containerView>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sOE-X1-ybW">
-                                <rect key="frame" x="0.0" y="138" width="414" height="724"/>
-                            </containerView>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tLa-kL-8Ef">
-                                <rect key="frame" x="0.0" y="138" width="414" height="724"/>
-                            </containerView>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ebh-34-Zi3">
-                                <rect key="frame" x="0.0" y="138" width="414" height="724"/>
                                 <connections>
-                                    <segue destination="oTD-iG-l4V" kind="show" id="87d-1w-1KT"/>
+                                    <segue destination="oTD-iG-l4V" kind="embed" id="IDc-2M-c9W"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FId-yb-en9">
@@ -99,35 +84,15 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="wNH-OO-IJE" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="0SJ-BI-nk4"/>
-                            <constraint firstItem="sOE-X1-ybW" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="2LR-iH-ih1"/>
-                            <constraint firstItem="alY-9v-5Rz" firstAttribute="top" secondItem="zXR-PY-DLF" secondAttribute="bottom" id="3Fi-sL-SfK"/>
-                            <constraint firstItem="sOE-X1-ybW" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="AO7-Dr-UXY"/>
                             <constraint firstItem="FId-yb-en9" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="DH3-qK-9Mr"/>
-                            <constraint firstItem="alY-9v-5Rz" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="Dfg-5j-RgL"/>
-                            <constraint firstItem="ebh-34-Zi3" firstAttribute="top" secondItem="zXR-PY-DLF" secondAttribute="bottom" id="Dii-gV-xDD"/>
                             <constraint firstItem="FId-yb-en9" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="H1O-pR-bsg"/>
                             <constraint firstItem="wNH-OO-IJE" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="Hd7-Nl-6We"/>
                             <constraint firstItem="FId-yb-en9" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="-230" id="J8a-1d-o0u"/>
-                            <constraint firstItem="tLa-kL-8Ef" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="LFs-u9-Zz1"/>
-                            <constraint firstItem="alY-9v-5Rz" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="N3L-6S-tYp"/>
                             <constraint firstItem="zXR-PY-DLF" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="NQk-id-QjC"/>
                             <constraint firstItem="zXR-PY-DLF" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="Nse-Ef-KMF"/>
-                            <constraint firstItem="lme-57-Dk4" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="RAn-zr-m1z"/>
-                            <constraint firstItem="lme-57-Dk4" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="V8o-Bu-QAb"/>
-                            <constraint firstItem="sOE-X1-ybW" firstAttribute="top" secondItem="zXR-PY-DLF" secondAttribute="bottom" id="Wow-fo-GSX"/>
-                            <constraint firstItem="ebh-34-Zi3" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="neS-Hc-wfL"/>
-                            <constraint firstItem="tLa-kL-8Ef" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="o63-UE-lun"/>
-                            <constraint firstItem="sOE-X1-ybW" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="obX-Cg-eUF"/>
                             <constraint firstItem="wNH-OO-IJE" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="pRk-Kg-d1A"/>
-                            <constraint firstItem="lme-57-Dk4" firstAttribute="top" secondItem="zXR-PY-DLF" secondAttribute="bottom" id="ps0-MV-enb"/>
-                            <constraint firstItem="tLa-kL-8Ef" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="qWO-2X-Zqz"/>
-                            <constraint firstItem="tLa-kL-8Ef" firstAttribute="top" secondItem="zXR-PY-DLF" secondAttribute="bottom" id="qwf-km-hFc"/>
-                            <constraint firstItem="alY-9v-5Rz" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="ryx-LN-7Zq"/>
-                            <constraint firstItem="ebh-34-Zi3" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="tUI-YB-UZg"/>
                             <constraint firstItem="wNH-OO-IJE" firstAttribute="top" secondItem="zXR-PY-DLF" secondAttribute="bottom" id="wY7-zG-5XB"/>
                             <constraint firstItem="zXR-PY-DLF" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="xRw-kd-JOU"/>
-                            <constraint firstItem="ebh-34-Zi3" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="xbd-8a-KVx"/>
-                            <constraint firstItem="lme-57-Dk4" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="y19-zi-Hvq"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -153,14 +118,9 @@
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
-                        <outlet property="EditorContainerView" destination="tLa-kL-8Ef" id="YyT-gY-GTb"/>
-                        <outlet property="IngredientsContainerView" destination="sOE-X1-ybW" id="Gan-Ld-TKk"/>
                         <outlet property="MenuCollectionVIew" destination="zXR-PY-DLF" id="hi7-4T-hVb"/>
-                        <outlet property="MonthlyContainerView" destination="alY-9v-5Rz" id="QeE-PE-Z8Z"/>
                         <outlet property="PopularContainerView" destination="wNH-OO-IJE" id="Wol-dl-YEh"/>
                         <outlet property="SideMenuConstraint" destination="J8a-1d-o0u" id="CVe-gd-sih"/>
-                        <outlet property="SubscribedContainerView" destination="lme-57-Dk4" id="cat-gc-Mbb"/>
-                        <outlet property="VIPContainerVIew" destination="ebh-34-Zi3" id="hTo-lK-tqd"/>
                         <segue destination="ZEb-Bq-mPO" kind="show" identifier="searchPage" id="AkE-Z9-7TO"/>
                         <segue destination="jN4-wj-ARW" kind="show" identifier="setting" id="MCq-Un-kmZ"/>
                         <segue destination="mAg-kh-N8h" kind="show" identifier="contact" id="ZhV-6w-emw"/>
@@ -660,10 +620,11 @@
             <objects>
                 <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="pageCurl" navigationOrientation="horizontal" spineLocation="min" id="oTD-iG-l4V" customClass="MainViewController" customModule="Recipe_CICCC" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="A4C-xC-Bzy"/>
+                    <size key="freeformSize" width="414" height="724"/>
                 </pageViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LHI-WY-T5F" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2738" y="-521"/>
+            <point key="canvasLocation" x="2696" y="-325"/>
         </scene>
         <!--ingredientRecipe-->
         <scene sceneID="B5Y-pC-TKc">
