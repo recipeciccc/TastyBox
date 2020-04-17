@@ -322,20 +322,9 @@ class MenuCollectionViewCell: UICollectionViewCell{
 
 extension DiscoveryViewController : UIPageViewControllerDelegate {
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
-//
-//
-//          let FollowingVC = UIStoryboard(name: "followingRecipe", bundle: nil).instantiateViewController(identifier: "followingRecipe") as! FollowingRecipeViewController
-//          let ingredientVC = UIStoryboard(name: "ingredientRecipe", bundle: nil).instantiateViewController(identifier: "ingredientRecipe") as! IngredientsViewController
-//          let poppularVC = UIStoryboard(name: "popularPage", bundle: nil).instantiateViewController(identifier: "popularPage") as! PopularRecipeViewController
-//          let editorChoiceVC = UIStoryboard(name: "EditorChoice", bundle: nil).instantiateViewController(identifier: "EditorChoice") as EditorChoiceViewController
-//          let monthlyVC = UIStoryboard(name: "Monthly", bundle: nil).instantiateViewController(identifier: "Monthly") as! MonthlyViewController
-//          let VIPVC = UIStoryboard(name: "VIP_page", bundle: nil).instantiateViewController(identifier: "VIP_page") as! VIPViewController
-//
-//        let VCs = [FollowingVC, ingredientVC, poppularVC, editorChoiceVC, monthlyVC, VIPVC]
+
         var index: Int = selectedIndex
-//        //現在表示しているContentViewControllerを取得
-//        var currentVc: UIViewController?
-        
+
         if pageViewController.viewControllers?.first! is FollowingRecipeViewController {
             index = 0
         }
