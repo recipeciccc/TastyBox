@@ -8,8 +8,11 @@
 
 import UIKit
 
+protocol MainPageViewControllerDelegate : class {
+    func indexPageCurledInContainer (index: Int, indexPathUserselectedBefore: Int, indexPath: IndexPath)
+}
+
 class MainPageViewController: UIPageViewController {
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -18,6 +21,9 @@ class MainPageViewController: UIPageViewController {
         // PageViewControllerにViewControllerをセット
         
         self.setViewControllers([editorChoiceVC], direction: .forward, animated: true,completion: nil)
+        
+      
+        
     }
     
     let FollowingVC = UIStoryboard(name: "followingRecipe", bundle: nil).instantiateViewController(identifier: "followingRecipe") as! FollowingRecipeViewController
@@ -27,8 +33,8 @@ class MainPageViewController: UIPageViewController {
     let monthlyVC = UIStoryboard(name: "Monthly", bundle: nil).instantiateViewController(identifier: "Monthly") as! MonthlyViewController
     let VIPVC = UIStoryboard(name: "VIP_page", bundle: nil).instantiateViewController(identifier: "VIP_page") as! VIPViewController
     
-    
-    
+    weak var pageControllerDelegate: MainPageViewControllerDelegate?
+    var indexPath: IndexPath?
     
     /*
      // MARK: - Navigation
@@ -47,25 +53,32 @@ extension MainPageViewController: UIPageViewControllerDataSource {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         print(viewController)
         
-        
         switch viewController {
             
         case is FollowingRecipeViewController:
             return nil
             
         case is IngredientsViewController:
+            
+            self.pageControllerDelegate?.indexPageCurledInContainer(index: 0, indexPathUserselectedBefore: 1, indexPath: indexPath!)
+            
             return FollowingVC
             
         case is PopularRecipeViewController:
+            self.pageControllerDelegate?.indexPageCurledInContainer(index: 1, indexPathUserselectedBefore: 2, indexPath: indexPath!)
             return ingredientVC
             
         case is EditorChoiceViewController:
+            self.pageControllerDelegate?.indexPageCurledInContainer(index: 2, indexPathUserselectedBefore: 3, indexPath: indexPath!)
             return poppularVC
             
         case is MonthlyViewController:
+            self.pageControllerDelegate?.indexPageCurledInContainer(index: 3, indexPathUserselectedBefore: 4, indexPath: indexPath!)
             return editorChoiceVC
             
         case is VIPViewController:
+            self.pageControllerDelegate?.indexPageCurledInContainer(index: 4, indexPathUserselectedBefore: 5, indexPath: indexPath!)
+            
             return monthlyVC
             
         default:
@@ -77,23 +90,37 @@ extension MainPageViewController: UIPageViewControllerDataSource {
     
     // 現在表示されているページの、Afterに位置する、つまり右側に位置するviewを呼び出す関数
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        print(viewController)
+      
         
         switch viewController {
             
         case is FollowingRecipeViewController:
+            
+            self.pageControllerDelegate?.indexPageCurledInContainer(index: 1, indexPathUserselectedBefore: 0, indexPath: indexPath!)
+            
             return ingredientVC
             
         case is IngredientsViewController:
+            
+            self.pageControllerDelegate?.indexPageCurledInContainer(index: 2, indexPathUserselectedBefore: 1, indexPath: indexPath!)
+            
             return poppularVC
             
         case is PopularRecipeViewController:
+            
+            self.pageControllerDelegate?.indexPageCurledInContainer(index: 3, indexPathUserselectedBefore: 2, indexPath: indexPath!)
+            
             return editorChoiceVC
             
         case is EditorChoiceViewController:
+            
+            self.pageControllerDelegate?.indexPageCurledInContainer(index: 4, indexPathUserselectedBefore: 3, indexPath: indexPath!)
+            
             return monthlyVC
             
         case is MonthlyViewController:
+            self.pageControllerDelegate?.indexPageCurledInContainer(index: 5, indexPathUserselectedBefore: 4, indexPath: indexPath!)
+            
             return VIPVC
         
         case is VIPViewController:
@@ -105,4 +132,6 @@ extension MainPageViewController: UIPageViewControllerDataSource {
         return nil
         
     }
+    
 }
+

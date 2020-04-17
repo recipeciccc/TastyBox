@@ -135,6 +135,7 @@ extension FollowingRecipeViewController : UICollectionViewDelegate,UICollectionV
         if followingsID.count == recipeImages.count {
             cell.RecipeImage.image = recipeImages[collectionView.tag]?[indexPath.row]
         }
+        
 //        if !followingsID.isEmpty {
 //
 //            self.followingsID.enumerated().map {
