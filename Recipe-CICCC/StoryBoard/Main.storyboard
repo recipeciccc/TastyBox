@@ -1092,12 +1092,19 @@
                         <viewLayoutGuide key="safeArea" id="BNN-zH-3ZH"/>
                     </view>
                     <navigationItem key="navigationItem" id="yIT-ec-yoe">
-                        <barButtonItem key="rightBarButtonItem" title="Save" id="4aE-bI-cFe">
-                            <color key="tintColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <connections>
-                                <action selector="SaveData:" destination="CG3-wo-2ij" id="Ztd-p5-JSC"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem title="Save" id="4aE-bI-cFe">
+                                <color key="tintColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <action selector="SaveData:" destination="CG3-wo-2ij" id="Ztd-p5-JSC"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Item" id="6Yg-C9-Kc2">
+                                <connections>
+                                    <segue destination="nIB-ep-KXl" kind="show" id="TcX-I1-awu"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="MainTableView" destination="8yZ-fb-6hL" id="oeS-4a-Vxy"/>
@@ -1106,6 +1113,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gFL-in-ZTE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2923" y="-491"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="K4x-3y-R2G">
+            <objects>
+                <viewController id="nIB-ep-KXl" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Rhg-o2-ebq">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="Cse-1Z-Qek"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="SCq-hJ-863">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="ybs-Yt-jWj"/>
+                        <barButtonItem key="rightBarButtonItem" title="Item" id="wKw-bH-36t"/>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="shb-q4-EBx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3662" y="-492"/>
         </scene>
         <!--popularPage-->
         <scene sceneID="Iwr-84-YcL">

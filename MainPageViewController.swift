@@ -20,8 +20,11 @@ class MainPageViewController: UIPageViewController {
         self.dataSource = self
         // PageViewControllerにViewControllerをセット
         
-        self.setViewControllers([editorChoiceVC], direction: .forward, animated: true,completion: nil)
+        // tapによるページめくりを担当するインスタンスを取得
+        let tapGestureRecognizer = self.gestureRecognizers.filter{ $0 is UITapGestureRecognizer }.first as! UITapGestureRecognizer
         
+        self.setViewControllers([editorChoiceVC], direction: .forward, animated: true,completion: nil)
+        tapGestureRecognizer.isEnabled = false
       
         
     }
