@@ -12,14 +12,25 @@ import FirebaseAuth
 
 class DiscoveryViewController: UIViewController {
     
-//    @IBOutlet weak var MonthlyContainerView: UIView!
+    //    @IBOutlet weak var MonthlyContainerView: UIView!
     @IBOutlet weak var PopularContainerView: UIView!
-//    @IBOutlet weak var SubscribedContainerView: UIView!
-//    @IBOutlet weak var IngredientsContainerView: UIView!
-//    @IBOutlet weak var EditorContainerView: UIView!
-//    @IBOutlet weak var VIPContainerVIew: UIView!
+    //    @IBOutlet weak var SubscribedContainerView: UIView!
+    //    @IBOutlet weak var IngredientsContainerView: UIView!
+    //    @IBOutlet weak var EditorContainerView: UIView!
+    //    @IBOutlet weak var VIPContainerVIew: UIView!
     
-    @IBOutlet weak var MenuCollectionVIew: UICollectionView!
+    var pageControllView = MainPageViewController()
+    
+    let FollowingVC = UIStoryboard(name: "followingRecipe", bundle: nil).instantiateViewController(identifier: "followingRecipe") as! FollowingRecipeViewController
+    let ingredientVC = UIStoryboard(name: "ingredientRecipe", bundle: nil).instantiateViewController(identifier: "ingredientRecipe") as! IngredientsViewController
+    let poppularVC = UIStoryboard(name: "popularPage", bundle: nil).instantiateViewController(identifier: "popularPage") as! PopularRecipeViewController
+    let editorChoiceVC = UIStoryboard(name: "EditorChoice", bundle: nil).instantiateViewController(identifier: "EditorChoice") as EditorChoiceViewController
+    let monthlyVC = UIStoryboard(name: "Monthly", bundle: nil).instantiateViewController(identifier: "Monthly") as! MonthlyViewController
+    let VIPVC = UIStoryboard(name: "VIP_page", bundle: nil).instantiateViewController(identifier: "VIP_page") as! VIPViewController
+    
+    var indexPathUserselectedBefore: IndexPath?
+    
+    @IBOutlet weak var MenuCollectionView: UICollectionView!
     @IBAction func SideMenuTapped(){
         print("Toggle side Menu")
         NotificationCenter.default.post(name: NSNotification.Name("ToggleSideMenu"), object: nil)
@@ -45,12 +56,12 @@ class DiscoveryViewController: UIViewController {
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.orange ]
         CreateMenuLabel()
         
-        let width = (MenuCollectionVIew.frame.size.width - 5) / 2
-        let layout = MenuCollectionVIew.collectionViewLayout as! UICollectionViewFlowLayout
+        let width = (MenuCollectionView.frame.size.width - 5) / 2
+        let layout = MenuCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
         layout.itemSize = CGSize(width: width, height: width)
         
         initialContentView()
-//        EditorContainerView.isHidden = false
+        //        EditorContainerView.isHidden = false
         
         NotificationCenter.default.addObserver(self, selector: #selector(toggleSideMenu), name: NSNotification.Name("ToggleSideMenu"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(showSearch), name: NSNotification.Name("ShowSearch"), object: nil)
@@ -61,19 +72,21 @@ class DiscoveryViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(showAbout), name: NSNotification.Name("ShowAbout"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(showLogout), name: NSNotification.Name("ShowLogout"), object: nil)
         
-        let pageControllView = MainViewController()
+        pageControllView = self.children[0] as! MainPageViewController
+        self.MenuCollectionView.showsHorizontalScrollIndicator = false
+        
         
     }
     
     func initialContentView(){
-//        self.SubscribedContainerView.isHidden = true
-//        self.MonthlyContainerView.isHidden = true
-//        self.PopularContainerView.isHidden = true
-//        self.IngredientsContainerView.isHidden = true
-//        self.EditorContainerView.isHidden = true
-//        self.VIPContainerVIew.isHidden = true
+        //        self.SubscribedContainerView.isHidden = true
+        //        self.MonthlyContainerView.isHidden = true
+        //        self.PopularContainerView.isHidden = true
+        //        self.IngredientsContainerView.isHidden = true
+        //        self.EditorContainerView.isHidden = true
+        //        self.VIPContainerVIew.isHidden = true
         self.PopularContainerView.isHidden = false
-
+        
     }
     func CreateMenuLabel() {
         
@@ -135,7 +148,7 @@ class DiscoveryViewController: UIViewController {
         if Auth.auth().currentUser != nil{
             do{
                 try Auth.auth().signOut()
-//                navigationController?.popViewController(animated: true)
+                //                navigationController?.popViewController(animated: true)
                 
             }catch let error as NSError{
                 print(error.localizedDescription)
@@ -157,7 +170,16 @@ extension DiscoveryViewController: UICollectionViewDelegate, UICollectionViewDat
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = MenuCollectionVIew.dequeueReusableCell(withReuseIdentifier: "MenuCell", for: indexPath) as! MenuCollectionViewCell
+        
+        
+        if indexPathUserselectedBefore == nil  && indexPath.row == 3 {
+            indexPathUserselectedBefore = indexPath
+            let cell = (collectionView.dequeueReusableCell(withReuseIdentifier: "MenuCell", for: indexPath) as? MenuCollectionViewCell)!
+            cell.isUserInteractionEnabled = false
+            return cell
+        }
+        
+        let cell = MenuCollectionView.dequeueReusableCell(withReuseIdentifier: "MenuCell", for: indexPath) as! MenuCollectionViewCell
         cell.MenuLabel.text = arrayMenu[indexPath.row]
         return cell
     }
@@ -171,41 +193,106 @@ extension DiscoveryViewController: UICollectionViewDelegate, UICollectionViewDat
         //        4 = "Monthly Choice"
         //        5 = "VIP Only"
         
+        let cellUserTapped = (collectionView.cellForItem(at: indexPath) as? MenuCollectionViewCell)!
+        let cellUserTappedbefore = (collectionView.cellForItem(at: indexPathUserselectedBefore!) as? MenuCollectionViewCell)!
+        
+        
+        var isPageCurlDirection:  UIPageViewController.NavigationDirection?
+        
+        if self.indexPathUserselectedBefore != nil {
+            if indexPath.row < self.indexPathUserselectedBefore!.row {
+                isPageCurlDirection = .reverse
+            } else {
+                isPageCurlDirection = .forward
+            }
+        } else {
+            switch indexPath.row {
+            case 0 ..< 3:
+                isPageCurlDirection = .reverse
+            case 4 ..< 6:
+                isPageCurlDirection = .forward
+            default:
+                break
+            }
+        }
+        
         switch indexPath.row{
         case 0:
             UIView.animate(withDuration: 0.5, animations: {
+                
                 self.initialContentView()
-//                self.SubscribedContainerView.isHidden = false
+                
+                self.indexPathUserselectedBefore = indexPath
+                
+                cellUserTapped.isUserInteractionEnabled = false
+                cellUserTappedbefore.isUserInteractionEnabled = true
+                
+                
+                self.pageControllView.setViewControllers([self.FollowingVC], direction: isPageCurlDirection!, animated: true,completion: nil)
+                //                self.SubscribedContainerView.isHidden = false
             })
         case 1:
             UIView.animate(withDuration: 0.5, animations: {
                 self.initialContentView()
-//                self.IngredientsContainerView.isHidden = false
+                self.indexPathUserselectedBefore = indexPath
+                
+                cellUserTapped.isUserInteractionEnabled = false
+                cellUserTappedbefore.isUserInteractionEnabled = true
+                
+                self.pageControllView.setViewControllers([self.ingredientVC], direction: isPageCurlDirection!, animated: true,completion: nil)
+                
+                //                self.IngredientsContainerView.isHidden = false
             })
         case 2:
             UIView.animate(withDuration: 0.5, animations: {
                 self.initialContentView()
-//                self.PopularContainerView.isHidden = false
+                self.indexPathUserselectedBefore = indexPath
+                
+                cellUserTapped.isUserInteractionEnabled = false
+                cellUserTappedbefore.isUserInteractionEnabled = true
+                
+                self.pageControllView.setViewControllers([self.poppularVC], direction: isPageCurlDirection!, animated: true,completion: nil)
+                //                self.PopularContainerView.isHidden = false
             })
         case 3:
             UIView.animate(withDuration: 0.5, animations: {
                 self.initialContentView()
-//                self.EditorContainerView.isHidden = false
+                
+                if self.indexPathUserselectedBefore == indexPath { return }
+                
+                self.indexPathUserselectedBefore = indexPath
+                cellUserTapped.isUserInteractionEnabled = false
+                cellUserTappedbefore.isUserInteractionEnabled = true
+                
+                self.pageControllView.setViewControllers([self.editorChoiceVC], direction: isPageCurlDirection!, animated: true,completion: nil)
+                //                self.EditorContainerView.isHidden = false
             })
         case 4:
             UIView.animate(withDuration: 0.7, animations: {
                 self.initialContentView()
-//                self.MonthlyContainerView.isHidden = false
+                self.indexPathUserselectedBefore = indexPath
+                
+                cellUserTapped.isUserInteractionEnabled = false
+                cellUserTappedbefore.isUserInteractionEnabled = true
+                
+                self.pageControllView.setViewControllers([self.monthlyVC], direction: isPageCurlDirection!, animated: true,completion: nil)
+                //                self.MonthlyContainerView.isHidden = false
             })
         case 5:
             UIView.animate(withDuration: 0.5, animations: {
                 self.initialContentView()
-//                self.VIPContainerVIew.isHidden = false
+                self.indexPathUserselectedBefore = indexPath
+                
+                cellUserTapped.isUserInteractionEnabled = false
+                cellUserTappedbefore.isUserInteractionEnabled = true
+                
+                self.pageControllView.setViewControllers([self.VIPVC], direction: isPageCurlDirection!, animated: true,completion: nil)
+                //                self.VIPContainerVIew.isHidden = false
             })
             
         default:
             initialContentView()
-//            self.EditorContainerView.isHidden = false
+            //            self.EditorContainerView.isHidden = false
         }
         
         return

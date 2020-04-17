@@ -118,7 +118,7 @@
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
-                        <outlet property="MenuCollectionVIew" destination="zXR-PY-DLF" id="hi7-4T-hVb"/>
+                        <outlet property="MenuCollectionView" destination="zXR-PY-DLF" id="hi7-4T-hVb"/>
                         <outlet property="PopularContainerView" destination="wNH-OO-IJE" id="Wol-dl-YEh"/>
                         <outlet property="SideMenuConstraint" destination="J8a-1d-o0u" id="CVe-gd-sih"/>
                         <segue destination="ZEb-Bq-mPO" kind="show" identifier="searchPage" id="AkE-Z9-7TO"/>
@@ -587,7 +587,7 @@
                 <viewControllerPlaceholder storyboardName="Monthly" id="bOG-U9-byp" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ebk-D1-WKP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2741" y="153"/>
+            <point key="canvasLocation" x="1980" y="-368"/>
         </scene>
         <!--followingRecipe-->
         <scene sceneID="gjd-K3-Lmm">
@@ -597,7 +597,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fJK-29-8mL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2767" y="185"/>
+            <point key="canvasLocation" x="2005" y="-336"/>
         </scene>
         <!--VIP_page-->
         <scene sceneID="rtR-na-5dT">
@@ -605,7 +605,7 @@
                 <viewControllerPlaceholder storyboardName="VIP_page" id="9VU-Un-7z1" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nsi-cG-GZV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2738" y="115"/>
+            <point key="canvasLocation" x="1977" y="-406"/>
         </scene>
         <!--EditorChoice-->
         <scene sceneID="MAc-LR-SoQ">
@@ -613,18 +613,18 @@
                 <viewControllerPlaceholder storyboardName="EditorChoice" id="jg4-s1-OQ3" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Syn-7A-a1g" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2755" y="81"/>
+            <point key="canvasLocation" x="1993" y="-441"/>
         </scene>
-        <!--Main View Controller-->
+        <!--Main Page View Controller-->
         <scene sceneID="JTn-Ah-2Sb">
             <objects>
-                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="pageCurl" navigationOrientation="horizontal" spineLocation="min" id="oTD-iG-l4V" customClass="MainViewController" customModule="Recipe_CICCC" customModuleProvider="target" sceneMemberID="viewController">
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="pageCurl" navigationOrientation="horizontal" spineLocation="min" id="oTD-iG-l4V" customClass="MainPageViewController" customModule="Recipe_CICCC" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="A4C-xC-Bzy"/>
                     <size key="freeformSize" width="414" height="724"/>
                 </pageViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LHI-WY-T5F" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2696" y="-325"/>
+            <point key="canvasLocation" x="2923" y="139"/>
         </scene>
         <!--ingredientRecipe-->
         <scene sceneID="B5Y-pC-TKc">
@@ -634,7 +634,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jF5-fa-Upo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2772" y="51"/>
+            <point key="canvasLocation" x="1998" y="-279"/>
         </scene>
         <!--Creator View Controller-->
         <scene sceneID="Lnz-eH-7xC">
@@ -1023,15 +1023,6 @@
                                                         <outlet property="delegate" destination="CG3-wo-2ij" id="U1a-cu-CvJ"/>
                                                     </connections>
                                                 </textView>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6yW-Ck-PUc">
-                                                    <rect key="frame" x="20" y="34" width="308" height="60"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="60" id="qOG-Fb-4no"/>
-                                                    </constraints>
-                                                    <connections>
-                                                        <action selector="StepTextViewPosition:" destination="CG3-wo-2ij" eventType="touchUpInside" id="hdm-Qn-ZUN"/>
-                                                    </connections>
-                                                </button>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="P2d-qM-mhN">
                                                     <rect key="frame" x="334" y="34" width="60" height="60"/>
                                                     <constraints>
@@ -1047,6 +1038,15 @@
                                                     </constraints>
                                                     <connections>
                                                         <action selector="UploadPhotoAction:" destination="CG3-wo-2ij" eventType="touchUpInside" id="GhW-OT-8OD"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6yW-Ck-PUc">
+                                                    <rect key="frame" x="20" y="34" width="308" height="60"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="60" id="qOG-Fb-4no"/>
+                                                    </constraints>
+                                                    <connections>
+                                                        <action selector="StepTextViewPosition:" destination="CG3-wo-2ij" eventType="touchUpInside" id="hdm-Qn-ZUN"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -1106,7 +1106,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gFL-in-ZTE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3357" y="18"/>
+            <point key="canvasLocation" x="2923" y="-491"/>
         </scene>
         <!--popularPage-->
         <scene sceneID="Iwr-84-YcL">
@@ -1114,7 +1114,7 @@
                 <viewControllerPlaceholder storyboardName="popularPage" id="5S8-PP-0s1" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c36-G1-ma5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2760" y="214"/>
+            <point key="canvasLocation" x="1998" y="-307"/>
         </scene>
     </scenes>
     <resources>

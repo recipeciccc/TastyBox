@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MainViewController: UIPageViewController {
+class MainPageViewController: UIPageViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -16,6 +16,7 @@ class MainViewController: UIPageViewController {
         // Do any additional setup after loading the view.
         self.dataSource = self
         // PageViewControllerにViewControllerをセット
+        
         self.setViewControllers([editorChoiceVC], direction: .forward, animated: true,completion: nil)
     }
     
@@ -28,44 +29,80 @@ class MainViewController: UIPageViewController {
     
     
     
-
-/*
- // MARK: - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
- // Get the new view controller using segue.destination.
- // Pass the selected object to the new view controller.
- }
- */
-
+    
+    /*
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destination.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }
 
-extension MainViewController: UIPageViewControllerDataSource {
+extension MainPageViewController: UIPageViewControllerDataSource {
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         print(viewController)
-        let VCs = [FollowingVC, ingredientVC, poppularVC, editorChoiceVC, VIPVC]
         
-        if viewController is FollowingRecipeViewController {
+        
+        switch viewController {
             
+        case is FollowingRecipeViewController:
             return nil
+            
+        case is IngredientsViewController:
+            return FollowingVC
+            
+        case is PopularRecipeViewController:
+            return ingredientVC
+            
+        case is EditorChoiceViewController:
+            return poppularVC
+            
+        case is MonthlyViewController:
+            return editorChoiceVC
+            
+        case is VIPViewController:
+            return monthlyVC
+            
+        default:
+            break
         }
         
-        return VCs[ VCs.firstIndex(of: viewController)! - 1]
+        return nil
     }
     
     // 現在表示されているページの、Afterに位置する、つまり右側に位置するviewを呼び出す関数
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         print(viewController)
         
-        let VCs = [FollowingVC, ingredientVC, poppularVC, editorChoiceVC, VIPVC]
-        
-        if viewController is VIPViewController {
+        switch viewController {
             
+        case is FollowingRecipeViewController:
+            return ingredientVC
+            
+        case is IngredientsViewController:
+            return poppularVC
+            
+        case is PopularRecipeViewController:
+            return editorChoiceVC
+            
+        case is EditorChoiceViewController:
+            return monthlyVC
+            
+        case is MonthlyViewController:
+            return VIPVC
+        
+        case is VIPViewController:
             return nil
+        default:
+            break
         }
         
-        return VCs[ VCs.firstIndex(of: viewController)! + 1]
+        return nil
+        
     }
 }
