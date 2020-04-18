@@ -33,18 +33,23 @@ class CreatorViewController: UIViewController {
     var imagePicker = UIImagePickerController()
     var mainPhoto = UIImage()
     var photoList = [UIImage]()
+    
     var preparationText = [String]()
     var recipeTitle = String()
     var recipeTime = String()
     var recipeServings = String()
     var ingredientList = [String]()
     var amountList = [String]()
+    var genres: [String] = []
+    
     var position = CGPoint()
     var tableviewHeight = CGFloat()
     
+    let genreVC = GenreSelectViewController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         tableviewHeight = MainTableView.frame.origin.y
         imagePicker.delegate = self
         amountList.append("")
@@ -59,6 +64,7 @@ class CreatorViewController: UIViewController {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyBoard))
         self.view.addGestureRecognizer(tap)
         
+       
     }
     
     deinit {
@@ -85,15 +91,23 @@ class CreatorViewController: UIViewController {
         ingredientList.append("")
         amountList.append("")
         MainTableView.insertRows(at: [IndexPath(row: ingredientList.count-1, section: 4)], with: .top)
+       
+        let cell = (self.MainTableView.cellForRow(at: IndexPath(row: 0, section: 4)) as! EditIngredientsCell)
+        self.view.frame.origin.y -= (cell.frame.height)
     }
     
     @IBAction func AddPreparationStep(_ sender: Any) {
         photoList.append(#imageLiteral(resourceName: "imageFile"))
         preparationText.append("")
         MainTableView.insertRows(at: [IndexPath(row: photoList.count-1, section: 6)], with: .top)
+        
+        let cell = (self.MainTableView.cellForRow(at: IndexPath(row: 0, section: 6)) as! PreparationCell)
+        self.view.frame.origin.y -= (cell.frame.height)
+
     }
     
     @IBAction func SaveData(_ sender: Any) {
+        print(genres)
         MainTableView.reloadData()
         RecipeData.mainphoto.append(mainPhoto)
         RecipeData.title.append(recipeTitle)
@@ -123,6 +137,7 @@ class CreatorViewController: UIViewController {
             //if checkTextView(){
                 self.uploadImage(mainPhoto,uid,rid) { (url) in
                     self.recipeUpload(uid,rid,url!.absoluteString)
+                    self.uploadGenres(genres: self.genres, rid: rid)
                     self.ingredientUpload(rid)
                     self.commentUpload(rid) // we may not need it
                 }
@@ -132,6 +147,7 @@ class CreatorViewController: UIViewController {
                         self.instructionUpload(rid,index,url!.absoluteString)
                     }
                 }
+            navigationController?.popViewController(animated: true)
             //}
         }
     }
@@ -150,9 +166,14 @@ class CreatorViewController: UIViewController {
     @objc func keyboardWillShow(_ notification: Notification) {
         
         UITextView.animate(withDuration: 0.2, animations:{
-            var frame = self.MainTableView.frame
-            frame.origin.y = -243 // keyboardSize.size.height
-            self.MainTableView.frame = frame
+//            var frame = self.MainTableView.frame
+//            frame.origin.y = -243 // keyboardSize.size.height
+//            self.MainTableView.frame = frame
+            
+            if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+                let keyboardHeight = keyboardSize.height
+                self.view.frame.origin.y = -1 * keyboardHeight
+            }
         })
     }
     
@@ -163,6 +184,14 @@ class CreatorViewController: UIViewController {
 //            frame.origin.y = 0 // self.tableviewHeight
 //            self.MainTableView.frame = frame})
         self.view.endEditing(true)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let vc = segue.destination as? GenreSelectViewController {
+            vc.delegate = self
+            vc.tagsSelected = self.genres
+            
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -199,7 +228,7 @@ extension CreatorViewController{
                 print(err?.localizedDescription as Any)
             }else{
                 print("Successfully set data")
-                self.navigationController?.popViewController(animated: true)
+//                self.navigationController?.popViewController(animated: true)
             }
         }
     }
@@ -213,7 +242,7 @@ extension CreatorViewController{
                      print(err?.localizedDescription as Any)
                 }else{
                     print("Successfully set ingredient data")
-                    self.navigationController?.popViewController(animated: true)
+//                    self.navigationController?.popViewController(animated: true)
                 }
             }
         }
@@ -227,7 +256,7 @@ extension CreatorViewController{
                  print(err?.localizedDescription as Any)
             }else{
                 print("Successfully set comment data")
-                self.navigationController?.popViewController(animated: true)
+//                self.navigationController?.popViewController(animated: true)
             }
         }
     }
@@ -242,7 +271,7 @@ extension CreatorViewController{
                 print(err?.localizedDescription as Any)
             }else{
                 print("Successfully set instruction data")
-                self.navigationController?.popViewController(animated: true)
+//                self.navigationController?.popViewController(animated: true)
             }
         }
         
@@ -284,6 +313,25 @@ extension CreatorViewController{
                 completion(nil)
             }
             
+        }
+    }
+    
+    func uploadGenres(genres: [String], rid: String) {
+        
+        var recipeGenres: [String:String] = [:]
+        for genre in genres {
+            recipeGenres[genre] = genre
+        }
+        
+       
+        self.db.collection("recipe").document(rid).collection("genres").document("genres").setData(recipeGenres, merge: true) { (err) in
+            if err != nil{
+                print(err?.localizedDescription as Any)
+            }else{
+                 print(genres)
+                print("Successfully set genres")
+//                self.navigationController?.popViewController(animated: true)
+            }
         }
     }
 }
@@ -496,12 +544,10 @@ extension CreatorViewController: UITextFieldDelegate, UITextViewDelegate{
     
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
         textField.resignFirstResponder()
-        UITextView.animate(withDuration: 0.3, animations:{
-            var frame = self.MainTableView.frame
-            frame.origin.y = 0 // self.tableviewHeight
-            self.MainTableView.frame = frame})
         return true
+    
     }
     
     func textFieldDidChangeSelection(_ textField: UITextField) {
@@ -509,6 +555,9 @@ extension CreatorViewController: UITextFieldDelegate, UITextViewDelegate{
         
     }
     func textFieldDidEndEditing(_ textField: UITextField) {
+        if self.view.frame.origin.y != 0 {
+               self.view.frame.origin.y = 0
+           }
         MainTableView.reloadData()
     }
     
@@ -543,7 +592,11 @@ extension CreatorViewController: UITextFieldDelegate, UITextViewDelegate{
 }
 
 
-
+extension CreatorViewController: GenreSelectViewControllerDelegate {
+    func assignGenres(genres: [String]) {
+        self.genres = genres
+    }
+}
 
 
 
