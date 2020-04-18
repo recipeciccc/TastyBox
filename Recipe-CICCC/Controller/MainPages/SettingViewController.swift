@@ -24,7 +24,6 @@ class SettingViewController: UIViewController {
     let cuisineType = ["Chinese","Japanese","Korean","Canadian"]
     var arrayPicker = [[String]]()
     var array = [String]()
-    let picker = UIPickerView()
     var selectItem = String()
     var pickItem = Bool()
     var arrayRow = Int()
@@ -40,9 +39,6 @@ class SettingViewController: UIViewController {
         preferenceTableVIew.delegate = self
         preferenceTableVIew.dataSource = self
         
-        picker.delegate = self
-        picker.dataSource = self
-        
         pickItem = false
         
         self.accounttableView.separatorStyle = UITableViewCell.SeparatorStyle.none
@@ -55,8 +51,6 @@ class SettingViewController: UIViewController {
         accountData[1] = email ?? ""
         
         arrayPicker = [allergies,mealSize,cuisineType]
-//        let tap = UITapGestureRecognizer(target: self, action: #selector(closeKeyboard))
-//        view.addGestureRecognizer(tap)
     }
     
     @objc func closeKeyboard(){
@@ -94,21 +88,10 @@ extension SettingViewController: UITableViewDataSource,UITableViewDelegate{
             cell.infoLabel.text = accountData[indexPath.row]
             return cell
         }
-        
-     
+    
             let cell = tableView.dequeueReusableCell(withIdentifier: "preferenceCell") as! PreferenceTableViewCell
             cell.title.text = preferenceTitle[indexPath.row]
-            cell.pickerTextfield.inputView = picker
-            if let row = cell.row {
-                arrayRow = row
-            }
-           // textfield = cell.pickerTextfield
-            picker.tag = indexPath.row
-        
-            cell.pickerTextfield.text = "Choose your answer..."
-            if pickItem != false{
-                cell.pickerTextfield.text = selectItem
-            }
+            cell.choices.text = "Choose your answer..."
             return cell
     }
     
@@ -117,58 +100,22 @@ extension SettingViewController: UITableViewDataSource,UITableViewDelegate{
             switch indexPath.row{
             case 0:
                 print("select row 0")
+                let vc = UIStoryboard(name: "Setting", bundle: nil).instantiateViewController(withIdentifier: "preferences") as! AccountSettingViewController
+                  vc.row = indexPath.row
+                  vc.OriginalData = accountData[0]
+                self.navigationController?.pushViewController(vc, animated: true)
             case 1:
                 print("select row 1")
-                let vc = UIStoryboard(name: "Setting", bundle: nil).instantiateViewController(withIdentifier: "preferences") as! MealPreferenceViewController
+                let vc = UIStoryboard(name: "Setting", bundle: nil).instantiateViewController(withIdentifier: "preferences") as! AccountSettingViewController
+                vc.row = indexPath.row
+                vc.OriginalData = accountData[1]
                 self.navigationController?.pushViewController(vc, animated: true)
             default:
                 print("No row be selected")
             }
         }else{
-            
         print("select PreferenceTableView")
+            print("row:\(indexPath.row)")
         }
-     
-      
-        
     }
 }
-
-extension SettingViewController: UIPickerViewDelegate, UIPickerViewDataSource{
-    
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-      
-        print("picke tag = \(picker.tag)")
-        
-        return 1
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        let cell = preferenceTableVIew.dequeueReusableCell(withIdentifier: "preferenceCell") as! PreferenceTableViewCell
-            cell.pickerTextfield.inputView = picker
-        
-        if array.count != 0{
-             return array.count
-        }
-        return 0
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        if array.count != 0{
-            return array[row]
-        }
-        return ""
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        array = arrayPicker[self.arrayRow]
-        if array.count != 0{
-            selectItem = array[row]
-            pickItem = true
-            preferenceTableVIew.reloadData()
-        }
-    }
-    
-}
-
-

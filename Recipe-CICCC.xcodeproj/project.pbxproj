@@ -48,7 +48,7 @@
 		692327E52432A2CB003C434D /* Setting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 692327E42432A2CB003C434D /* Setting.storyboard */; };
 		692327E724353AFC003C434D /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 692327E624353AFC003C434D /* SettingViewController.swift */; };
 		692327EA243543E3003C434D /* AccountSettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 692327E9243543E3003C434D /* AccountSettingTableViewCell.swift */; };
-		692327EC24354D2B003C434D /* MealPreferenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 692327EB24354D2B003C434D /* MealPreferenceViewController.swift */; };
+		692327EC24354D2B003C434D /* AccountSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 692327EB24354D2B003C434D /* AccountSettingViewController.swift */; };
 		692327F22435693D003C434D /* PreferenceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 692327F12435693D003C434D /* PreferenceTableViewCell.swift */; };
 		69325D202413A9B300340F1F /* userRecipeItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69325D1F2413A9B300340F1F /* userRecipeItemTableViewCell.swift */; };
 		69325D222413A9EC00340F1F /* getUserDataDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69325D212413A9EC00340F1F /* getUserDataDelegate.swift */; };
@@ -201,7 +201,7 @@
 		692327E42432A2CB003C434D /* Setting.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Setting.storyboard; sourceTree = "<group>"; };
 		692327E624353AFC003C434D /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		692327E9243543E3003C434D /* AccountSettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettingTableViewCell.swift; sourceTree = "<group>"; };
-		692327EB24354D2B003C434D /* MealPreferenceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealPreferenceViewController.swift; sourceTree = "<group>"; };
+		692327EB24354D2B003C434D /* AccountSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettingViewController.swift; sourceTree = "<group>"; };
 		692327F12435693D003C434D /* PreferenceTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferenceTableViewCell.swift; sourceTree = "<group>"; };
 		69325D1F2413A9B300340F1F /* userRecipeItemTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = userRecipeItemTableViewCell.swift; sourceTree = "<group>"; };
 		69325D212413A9EC00340F1F /* getUserDataDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = getUserDataDelegate.swift; sourceTree = "<group>"; };
@@ -622,7 +622,7 @@
 				4069257323D8350100059C8E /* DiscoveryViewController.swift */,
 				6985A53523F48B5E001257A8 /* IngredientsViewController.swift */,
 				692327E624353AFC003C434D /* SettingViewController.swift */,
-				692327EB24354D2B003C434D /* MealPreferenceViewController.swift */,
+				692327EB24354D2B003C434D /* AccountSettingViewController.swift */,
 			);
 			path = MainPages;
 			sourceTree = "<group>";
@@ -1032,7 +1032,7 @@
 				6FB2983F2414E8970094F5F4 /* IngredientRefrigeratorDataManager.swift in Sources */,
 				6F54A4492429D95400D936CD /* PopularRecipeViewController.swift in Sources */,
 				69325D242413B62500340F1F /* FetchRecipeData.swift in Sources */,
-				692327EC24354D2B003C434D /* MealPreferenceViewController.swift in Sources */,
+				692327EC24354D2B003C434D /* AccountSettingViewController.swift in Sources */,
 				4069255C23D834AC00059C8E /* IngredientsTableViewCell.swift in Sources */,
 				6985A53A23F4924A001257A8 /* IngredientTitleCollectionViewCell.swift in Sources */,
 				69325D202413A9B300340F1F /* userRecipeItemTableViewCell.swift in Sources */,

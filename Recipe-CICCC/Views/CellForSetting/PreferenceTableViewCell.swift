@@ -11,11 +11,9 @@ import UIKit
 class PreferenceTableViewCell: UITableViewCell {
     
     @IBOutlet weak var title: UILabel!
-    @IBOutlet weak var pickerTextfield: UITextField!
-    var row : Int?
+    @IBOutlet weak var choices: UILabel!
     
     override func awakeFromNib() {
-        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -24,11 +22,4 @@ class PreferenceTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    @IBAction func ClickTextField(_ sender: Any) {
-        let tb = self.superview as? UITableView
-        row = tb?.indexPath(for: self)?.row
-        print("row is \(String(describing: row))")
-    }
 }
-
-
