@@ -14,7 +14,6 @@ class RecipedataManagerClass {
     
     let db = Firestore.firestore()
     var delegate: getDataFromFirebaseDelegate?
-    let fetchRecipeImage = FetchRecipeImage()
     
     var recipes:[RecipeDetail] = []
     var instructions : [Instruction] = []
@@ -179,7 +178,8 @@ class RecipedataManagerClass {
             } else {
                 if let imageData = data {
                     let image = UIImage(data: imageData)
-                    self.delegate?.assignImage(image: image!, reference: imageView)
+                    imageView.image = image
+//                    self.delegate?.assignImage(image: image!, reference: imageView)
                 }
             }
         }

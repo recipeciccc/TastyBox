@@ -86,6 +86,15 @@ class RecipeDetailDataManager {
                 print("Document successfully written!")
             }
         }
+        db.collection("user").document(uid).collection("following").document(followerID).setData([
+            "id": followerID
+        ]) { err in
+            if let err = err {
+                print("Error writing document: \(err)")
+            } else {
+                print("Document successfully written!")
+            }
+        }
         
     }
 }

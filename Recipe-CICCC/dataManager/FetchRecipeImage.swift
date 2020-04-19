@@ -15,21 +15,26 @@ class FetchRecipeImage{
     var delegate: ReloadDataDelegate?
     var delegateImg: ReloadDataDelegate?
     
-    func getImage( uid:String, rid: [String], imageUrl: [String]){
+    func getImage( uid:String?, rid: [String]){
         var image = UIImage()
         let storage = Storage.storage()
         let storageRef = storage.reference()
         var imageList: [UIImage] = []
         var imageRefs: [StorageReference] = []
         
+        
+        guard let uid = uid else {
+            return
+        }
+        
         for index in 0..<rid.count{
                    
             print("\(index): \(rid[index])")
-            let imagesRef = storageRef.child("user/\(uid)/RecipePhoto/\(rid[index])/\(rid[index])")
+        let imagesRef = storageRef.child("user/\(uid)/RecipePhoto/\(rid[index])/\(rid[index])")
             imageRefs.append(imagesRef)
         }
         
-        print(imageRefs)
+//        print(imageRefs)
         imageList = Array(repeating: UIImage(), count: imageRefs.count)
         
         for (index, imageRef) in imageRefs.enumerated() {
@@ -44,7 +49,7 @@ class FetchRecipeImage{
                         print("imageRef: \(imageRef)")
                         
                         image = UIImage(data: imgData)!
-                        print(index)
+//                        print(index)
                         imageList.remove(at: index)
                         imageList.insert(image, at: index)
                         
@@ -53,8 +58,11 @@ class FetchRecipeImage{
                 }
         }
         
+        }
+       
     }
-    }
+    
+ 
     
     func getInstructionImg( uid:String, rid: String, count: Int) -> [UIImage]{
         var image = UIImage()

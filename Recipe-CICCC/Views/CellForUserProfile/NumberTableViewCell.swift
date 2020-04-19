@@ -27,6 +27,7 @@ class NumberTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+       
         numOfRecipeUserSavedButton.titleLabel?.numberOfLines = 0
         numOfRecipeUserSavedButton.setTitle("\(numOfRecipeUserSaved) \nSaved", for: .normal)
         numOfRecipeUserSavedButton.titleLabel?.textAlignment = NSTextAlignment.center

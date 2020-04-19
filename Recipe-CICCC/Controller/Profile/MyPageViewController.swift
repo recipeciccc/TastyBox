@@ -46,7 +46,7 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let queryRef = db.collection("recipe").whereField("userID", isEqualTo: uid as Any).order(by: "time", descending: true)
         recipeList = fetchData.Data(queryRef: queryRef)
        
-        userDataManager.findFollowerFollowing(id: uid, collection: "following")
+        userDataManager.findFollowerFollowing(id: uid)
         userDataManager.getUserImage(uid: uid!)
         userDataManager.getUserDetail(id: uid!)
     }
@@ -89,10 +89,7 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
             let cell = (tableView.dequeueReusableCell(withIdentifier: "Main User Page", for: indexPath) as? mainUserProfileTableViewCell)!
             
             cell.userImageView?.image = self.userImage
-            cell.userImageView?.contentMode = .scaleAspectFit
-            cell.userImageView.layer.masksToBounds = false
-            cell.userImageView.layer.cornerRadius = cell.userImageView.bounds.width / 2
-            cell.userImageView.clipsToBounds = true
+            
            
             if Auth.auth().currentUser?.displayName == nil {
                 cell.userNameLabel.text = self.user?.name
@@ -166,7 +163,7 @@ extension MyPageViewController: ReloadDataDelegate{
         if imageList.count == 0 {
 
         get_url_rid()
-        fetchImage.getImage(uid: uid!, rid: ridList, imageUrl: urlList)
+        fetchImage.getImage(uid: uid!, rid: ridList)
         
         if imageList.count == 0{
            profileTableVIew.reloadData()

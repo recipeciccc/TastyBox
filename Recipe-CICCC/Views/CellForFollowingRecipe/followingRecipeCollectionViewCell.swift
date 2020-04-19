@@ -11,4 +11,10 @@ import UIKit
 class followingRecipeCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var RecipeImage: UIImageView!
     @IBOutlet weak var RecipeName: UILabel!
+    
+    
+    override func awakeFromNib() {
+        RecipeName.textAlignment = .center
+    }
+    
 }

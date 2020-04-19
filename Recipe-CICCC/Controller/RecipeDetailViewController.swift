@@ -58,6 +58,8 @@ class RecipeDetailViewController: UIViewController {
         
         userDataManager.getUserDetail(id: recipe?.userID)
         userDataManager.getUserImage(uid: recipe!.userID)
+        
+       
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -76,11 +78,18 @@ class RecipeDetailViewController: UIViewController {
     }
     
     @IBAction func goToUserProfile(_ sender: Any) {
+        if creator?.name == Auth.auth().currentUser?.displayName {
+            let storyboard = UIStoryboard(name: "MyPage", bundle: nil)
+            let profileVC = storyboard.instantiateViewController(identifier: "User profile") as! MyPageViewController
+            
+            navigationController?.pushViewController(profileVC, animated: true)
+        } else {
         let storyboard = UIStoryboard(name: "creatorProfile", bundle: nil)
         let profileVC = storyboard.instantiateViewController(identifier: "creatorProfile") as! CreatorProfileViewController
         
         profileVC.id = self.creator!.userID
         navigationController?.pushViewController(profileVC, animated: true)
+        }
     }
     
 }
@@ -229,10 +238,20 @@ extension RecipeDetailViewController: UITableViewDataSource,UITableViewDelegate{
         case 0:
             return 350
         case 6:
-            return 350
+            return UITableView.automaticDimension
         default:
             return UITableView.automaticDimension
         }
+    }
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.row == 6 {
+            return 368
+        }
+        if indexPath.row == 0 {
+            return 350
+        }
+        return UITableView.automaticDimension
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
