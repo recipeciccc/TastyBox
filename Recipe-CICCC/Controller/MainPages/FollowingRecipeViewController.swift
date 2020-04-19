@@ -17,32 +17,26 @@ class FollowingRecipeViewController: UIViewController {
     var creatorNameList = [String]()
     var recipeImageOneFollowinghas: [Int:UIImage] = [:]
     var recipeImages:[Int: [Int: UIImage]] = [:]
-    var recipes: [[RecipeDetail]] = []
+    var recipes: [Int:[RecipeDetail]] = [:]
+    var tempRecipes:[RecipeDetail] = []
     var creators:[User] = []
     var followingsID:[Int:String] = [:]
     var followings:[User] = []
     
     let uid = Auth.auth().currentUser?.uid
-    let userDataManager = UserdataManager()
-    let dataManagerWithQuery = FetchRecipeData()
-    let fetchImageDataManager = FetchRecipeImage()
-    let followingDataManger = FollowingDataManager()
+    let dataManager = FollowingRecipeDataManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        userDataManager.delegate = self
-        userDataManager.delegateFollowerFollowing = self
-        fetchImageDataManager.delegate = self
-        dataManagerWithQuery.delegate = self
-        followingDataManger.delegate = self
+        dataManager.delegate = self
         
-        userDataManager.findFollowerFollowing(id: uid)
+        dataManager.findFollowerFollowing(id: uid)
         
         self.followingTableView.tableFooterView = UIView()
         
     }
-
+    
 }
 
 extension FollowingRecipeViewController: UITableViewDataSource,UITableViewDelegate{
@@ -86,7 +80,7 @@ extension FollowingRecipeViewController : UICollectionViewDelegate,UICollectionV
             return 0
         }
         if recipes.count == followingsID.count {
-            return recipes[collectionView.tag].count
+            return recipes[collectionView.tag]!.count
         }
         return 0
     }
@@ -99,7 +93,7 @@ extension FollowingRecipeViewController : UICollectionViewDelegate,UICollectionV
         }
         
         if !recipes.isEmpty {
-            cell.RecipeName.text = recipes[collectionView.tag][indexPath.row].title
+            cell.RecipeName.text = recipes[collectionView.tag]![indexPath.row].title
             
         }
         
@@ -115,7 +109,7 @@ extension FollowingRecipeViewController : UICollectionViewDelegate,UICollectionV
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let recipeDetailVC = UIStoryboard(name: "RecipeDetail", bundle: nil).instantiateViewController(identifier: "detailvc") as! RecipeDetailViewController
         
-        recipeDetailVC.recipe = recipes[collectionView.tag][indexPath.row]
+        recipeDetailVC.recipe = recipes[collectionView.tag]![indexPath.row]
         recipeDetailVC.creator = creators[collectionView.tag]
         
         let cell = (collectionView.cellForItem(at: indexPath) as? followingRecipeCollectionViewCell )
@@ -126,20 +120,38 @@ extension FollowingRecipeViewController : UICollectionViewDelegate,UICollectionV
     
 }
 
-extension FollowingRecipeViewController: getUserDataDelegate {
-    func gotUserData(user: User) {
+extension FollowingRecipeViewController : FollowingRecipeDataManagerDelegate {
+    func assignFollowings(users: [User]) {
+        
+        self.creators = users
+               
+        self.followingTableView.reloadData()
+           
+    }
+    
+    func reloadData(data: [RecipeDetail], index: Int) {
+        recipes[index] = data
+        
+        if recipes.count == followingsID.count {
+            
+            for element in self.followingsID{
+                
+                recipeImageOneFollowinghas.removeAll()
+                for (indexRecipe, recipe) in recipes[element.key]!.enumerated() {
+                    
+                    self.dataManager.getImageOfRecipesFollowing(uid: element.value, rid: recipe.recipeID, indexOfImage: indexRecipe, orderFollowing: element.key)
+                    
+                }
+            }
+        }
+        
+        self.followingTableView.reloadData()
+        
         
     }
     
-    func assignUserImage(image: UIImage) {
-        self.creatorImageList.append(image)
-        self.followingTableView.reloadData()
-    }
-}
-extension FollowingRecipeViewController: FolllowingFollowerDelegate {
-    func passFollowerFollowing(followingsIDs: [String], followersIDs: [String]) {
-        
-        userDataManager.getFollowersFollowings(IDs: followingsIDs, followerOrFollowing: "following")
+    func passFollowing(followingsIDs: [String]) {
+        dataManager.getFollowings(IDs: followingsIDs)
         
         for (index, id) in followingsIDs.enumerated() {
             self.followingsID[index] = id
@@ -150,69 +162,23 @@ extension FollowingRecipeViewController: FolllowingFollowerDelegate {
             
             followingsIDs.enumerated().map {
                 
-                userDataManager.getUserImage(uid: followingsIDs[$0.0])
+                dataManager.getUserImage(uid: followingsIDs[$0.0])
                 
                 let queryRef = Firestore.firestore().collection("recipe").whereField("userID", isEqualTo: $0.1).order(by: "time", descending: true).limit(to: 10)
                 
-                _ = dataManagerWithQuery.Data(queryRef: queryRef)
+                _ = dataManager.Data(queryRef: queryRef, index: $0.0)
                 
             }
             
         }
     }
     
-    func assignFollowersFollowings(users: [User]) {
-        
-        self.creators = users
-        
+    
+    func assignUserImage(image: UIImage) {
+        self.creatorImageList.append(image)
         self.followingTableView.reloadData()
     }
     
-}
-
-extension FollowingRecipeViewController: ReloadDataDelegate {
-    func reloadData(data: [RecipeDetail]) {
-        
-        recipes.append(data)
-        
-        if recipes.count == followingsID.count {
-            
-            for element in self.followingsID{
-                
-                recipeImageOneFollowinghas.removeAll()
-                for (indexRecipe, recipe) in recipes[element.key].enumerated() {
-                    
-                    self.followingDataManger.getImageOfRecipesFollowing(uid: element.value, rid: recipe.recipeID, indexOfImage: indexRecipe, orderFollowing: element.key)
-                    
-                }
-            }
-        }
-        
-        self.followingTableView.reloadData()
-    }
-    
-    func reloadImg(img: [UIImage]) {
-        self.followingTableView.reloadData()
-    }
-    
-}
-
-extension FollowingRecipeViewController: getDataFromFirebaseDelegate {
-    func assignImage(image: UIImage, reference: UIImageView) {
-        self.followingTableView.reloadData()
-    }
-    
-    func gotData(recipes: [RecipeDetail]) {
-        
-    }
-    
-    func gotImage(image: UIImage) {
-        
-    }
-    
-}
-
-extension FollowingRecipeViewController:FollowingDelegate {
     func appendRecipeImage(imgs: UIImage, indexOfImage: Int, orderFollowing: Int) {
         recipeImageOneFollowinghas[indexOfImage] = imgs
         recipeImages[orderFollowing] = recipeImageOneFollowinghas
@@ -222,7 +188,7 @@ extension FollowingRecipeViewController:FollowingDelegate {
 
 extension FollowingRecipeViewController:FollowingRecipeTableViewCellDelegate {
     func goToCreatorProfile(indexPath: IndexPath) {
-       let profileVC = UIStoryboard(name: "creatorProfile", bundle: nil).instantiateViewController(identifier: "creatorProfile") as! CreatorProfileViewController
+        let profileVC = UIStoryboard(name: "creatorProfile", bundle: nil).instantiateViewController(identifier: "creatorProfile") as! CreatorProfileViewController
         
         profileVC.id = creators[indexPath.row].userID
         
