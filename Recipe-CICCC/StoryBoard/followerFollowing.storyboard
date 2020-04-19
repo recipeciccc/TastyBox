@@ -66,8 +66,10 @@
                                                 <constraint firstItem="kbH-wc-puq" firstAttribute="centerY" secondItem="WHy-QC-gqq" secondAttribute="centerY" id="FTt-eu-vB2"/>
                                                 <constraint firstItem="eTm-1R-Ea2" firstAttribute="centerY" secondItem="WHy-QC-gqq" secondAttribute="centerY" id="KCQ-gW-RQI"/>
                                                 <constraint firstItem="eTm-1R-Ea2" firstAttribute="leading" secondItem="WHy-QC-gqq" secondAttribute="leadingMargin" id="LWZ-Qa-kqS"/>
+                                                <constraint firstItem="eTm-1R-Ea2" firstAttribute="top" secondItem="WHy-QC-gqq" secondAttribute="top" constant="10" id="NMN-83-am1"/>
                                                 <constraint firstItem="QKc-G0-ipa" firstAttribute="leading" secondItem="kbH-wc-puq" secondAttribute="trailing" constant="8" id="Ub9-2I-42u"/>
                                                 <constraint firstItem="QKc-G0-ipa" firstAttribute="centerY" secondItem="WHy-QC-gqq" secondAttribute="centerY" id="fVA-pI-hPC"/>
+                                                <constraint firstAttribute="bottom" secondItem="eTm-1R-Ea2" secondAttribute="bottom" constant="10" id="orz-4X-Vd6"/>
                                                 <constraint firstItem="kbH-wc-puq" firstAttribute="leading" secondItem="eTm-1R-Ea2" secondAttribute="trailing" constant="8" id="rS9-6H-EZy"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -164,8 +166,10 @@
                                                 <constraint firstItem="A30-1g-eKC" firstAttribute="centerY" secondItem="aMV-pO-FYU" secondAttribute="centerY" id="QtW-dO-kD9"/>
                                                 <constraint firstItem="A30-1g-eKC" firstAttribute="centerY" secondItem="saD-KI-qwt" secondAttribute="centerY" id="RYV-En-Lmp"/>
                                                 <constraint firstItem="A30-1g-eKC" firstAttribute="leading" secondItem="L5n-r4-owq" secondAttribute="trailing" constant="8" id="SVh-WK-UVC"/>
+                                                <constraint firstAttribute="bottom" secondItem="saD-KI-qwt" secondAttribute="bottom" constant="10" id="WFT-FS-jxQ"/>
                                                 <constraint firstItem="saD-KI-qwt" firstAttribute="leading" secondItem="aMV-pO-FYU" secondAttribute="leadingMargin" id="cay-Zn-Xaf"/>
                                                 <constraint firstItem="A30-1g-eKC" firstAttribute="trailing" secondItem="aMV-pO-FYU" secondAttribute="trailingMargin" id="gY1-CU-NrO"/>
+                                                <constraint firstItem="saD-KI-qwt" firstAttribute="top" secondItem="aMV-pO-FYU" secondAttribute="top" constant="10" id="rA2-Ab-nCg"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>

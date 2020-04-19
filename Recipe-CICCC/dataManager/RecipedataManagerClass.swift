@@ -14,7 +14,6 @@ class RecipedataManagerClass {
     
     let db = Firestore.firestore()
     var delegate: getDataFromFirebaseDelegate?
-    let fetchRecipeImage = FetchRecipeImage()
     
     var recipes:[RecipeDetail] = []
     var instructions : [Instruction] = []

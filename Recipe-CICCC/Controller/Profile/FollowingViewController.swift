@@ -33,6 +33,10 @@ class FollowingViewController: UIViewController {
         followingsID = parentVC.followingsID
         userDataManager.getFollowersFollowings(IDs: self.followingsID, followerOrFollowing: "following")
        
+        followingsID.map {
+             userDataManager.getUserImage(uid: $0)
+        }
+        
          self.navigationItem.title = "Following"
         
         tableView.tableFooterView = UIView()
@@ -78,14 +82,14 @@ extension FollowingViewController: UITableViewDataSource {
             cell.userNameLabel.text = followings[indexPath.row].name
         }
         
-        userDataManager.getUserImage(uid: self.followingsID[indexPath.row])
+       
         
         cell.imgView?.contentMode = .scaleAspectFit
         cell.imgView.layer.masksToBounds = false
         cell.imgView.layer.cornerRadius = cell.imgView.bounds.width / 2
         cell.imgView.clipsToBounds = true
         
-        if !followingsImages.isEmpty {
+        if followingsID.count == followingsImages.count {
             cell.imgView.image = followingsImages[indexPath.row]
         }
         

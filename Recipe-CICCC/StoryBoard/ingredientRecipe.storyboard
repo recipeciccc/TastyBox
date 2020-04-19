@@ -43,9 +43,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="175" height="158"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="13PAIRING-articleLarge" translatesAutoresizingMaskIntoConstraints="NO" id="cZQ-GS-aeu" userLabel="ingredientRecipeImage">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="cZQ-GS-aeu" userLabel="ingredientRecipeImage">
                                                     <rect key="frame" x="0.0" y="0.0" width="175" height="139"/>
-                                                    <color key="backgroundColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="OCr-Ed-8Kr">
                                                     <rect key="frame" x="0.0" y="141" width="175" height="17"/>
@@ -71,7 +70,6 @@
                                         <connections>
                                             <outlet property="ingredientRecipeImage" destination="cZQ-GS-aeu" id="vdt-Ux-QvD"/>
                                             <outlet property="ingredientRecipeName" destination="OCr-Ed-8Kr" id="fF7-Zk-gUl"/>
-                                            <segue destination="fuN-ZP-66L" kind="show" id="trb-eY-SD6"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -142,7 +140,7 @@
                         <viewLayoutGuide key="safeArea" id="ZhU-Ym-2UX"/>
                     </view>
                     <connections>
-                        <outlet property="ImageCollecitonVIew" destination="28Z-CY-jex" id="O10-co-2HV"/>
+                        <outlet property="ImageCollecitonView" destination="28Z-CY-jex" id="O10-co-2HV"/>
                         <outlet property="TitleCollectionView" destination="c3v-63-Co7" id="gBo-6I-vGi"/>
                     </connections>
                 </viewController>
@@ -151,7 +149,4 @@
             <point key="canvasLocation" x="-2504.8000000000002" y="-649.92503748125944"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="13PAIRING-articleLarge" width="600" height="400"/>
-    </resources>
 </document>

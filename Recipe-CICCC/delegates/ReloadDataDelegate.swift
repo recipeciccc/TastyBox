@@ -10,7 +10,6 @@ import Foundation
 import UIKit
 
 protocol ReloadDataDelegate{
-    
     func reloadData(data:[RecipeDetail])
     func reloadImg(img:[UIImage])
 }

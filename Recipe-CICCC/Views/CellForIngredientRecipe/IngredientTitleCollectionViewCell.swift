@@ -12,6 +12,8 @@ class IngredientTitleCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var ingredient: UILabel!
     @IBOutlet weak var titleView: UIView!
     
-    
+    override func awakeFromNib() {
+        ingredient.textAlignment = .center
+    }
     
 }
