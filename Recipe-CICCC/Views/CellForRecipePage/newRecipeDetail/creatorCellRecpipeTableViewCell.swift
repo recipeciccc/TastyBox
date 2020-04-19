@@ -39,6 +39,11 @@ class creatorCellRecpipeTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
 //        creatorNameButton
+        self.contentView.backgroundColor = #colorLiteral(red: 0.9959775805, green: 0.9961397052, blue: 0.7093081474, alpha: 1)
+        creatorNameButton.setTitleColor( #colorLiteral(red: 0.6666666667, green: 0.4745098039, blue: 0.2588235294, alpha: 1), for: .normal)
+        imgCreator.layer.cornerRadius = imgCreator.layer.frame.width / 2
+        imgCreator.layer.backgroundColor = #colorLiteral(red: 0.9959775805, green: 0.9961397052, blue: 0.7093081474, alpha: 1)
+        
     }
     
 

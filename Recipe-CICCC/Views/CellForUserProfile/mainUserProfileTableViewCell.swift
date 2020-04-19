@@ -13,6 +13,7 @@ class mainUserProfileTableViewCell: UITableViewCell {
     
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var userImageView: UIImageView!
+    @IBOutlet weak var editProfilebutton: UIButton!
     
 
     override func awakeFromNib() {
@@ -20,14 +21,20 @@ class mainUserProfileTableViewCell: UITableViewCell {
         // Initialization code
         if let name = Auth.auth().currentUser?.displayName {
             userNameLabel.text = name
+            
         }
-        
+        editProfilebutton.layer.cornerRadius = 10
+        self.userImageView?.contentMode = .scaleAspectFit
+        self.userImageView.layer.masksToBounds = false
+        self.userImageView.layer.cornerRadius = self.userImageView.bounds.width / 2
+        self.userImageView.clipsToBounds = true
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+        
     }
 
 }

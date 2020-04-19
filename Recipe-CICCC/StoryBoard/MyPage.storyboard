@@ -48,12 +48,16 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3kd-ze-j0h">
                                                     <rect key="frame" x="158" y="27" width="236" height="24"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                    <nil key="textColor"/>
+                                                    <color key="textColor" red="0.66666666669999997" green="0.47450980390000003" blue="0.25882352939999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iqr-Mj-WoC">
                                                     <rect key="frame" x="226" y="74" width="100" height="34"/>
                                                     <color key="backgroundColor" red="1" green="0.57647058819999997" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="34" id="ivS-wi-Ogj"/>
+                                                        <constraint firstAttribute="width" constant="100" id="iw7-jN-omG"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                     <state key="normal" title="Edit Profile">
                                                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -72,8 +76,9 @@
                                                 <constraint firstItem="xtT-7L-dpk" firstAttribute="top" secondItem="xtX-wW-MMV" secondAttribute="topMargin" constant="6" id="uV7-6q-4KW"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" red="1" green="0.57637232540000005" blue="0.0" alpha="0.2577322346" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" red="1" green="0.57647058823529407" blue="0.0" alpha="0.10081335617534247" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
+                                            <outlet property="editProfilebutton" destination="Iqr-Mj-WoC" id="rFE-J5-4FM"/>
                                             <outlet property="userImageView" destination="xtT-7L-dpk" id="1RH-ba-60Y"/>
                                             <outlet property="userNameLabel" destination="3kd-ze-j0h" id="0k6-aR-d78"/>
                                         </connections>
@@ -122,6 +127,7 @@
                                                 <constraint firstItem="86m-C8-Fqu" firstAttribute="centerY" secondItem="Fwp-Uz-Mrc" secondAttribute="centerY" id="YKZ-wp-dA3"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" red="1" green="0.57647058823529407" blue="0.0" alpha="0.10001070204794522" colorSpace="custom" customColorSpace="displayP3"/>
                                         <connections>
                                             <outlet property="numOfFollowerButton" destination="TGX-ha-pOC" id="eGR-mI-We5"/>
                                             <outlet property="numOfFollowingButton" destination="8pM-hX-J39" id="de9-T2-cwv"/>
@@ -138,7 +144,7 @@
                                             <subviews>
                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="0ZP-1U-cGn">
                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="560"/>
-                                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                    <color key="backgroundColor" red="1" green="0.57647058819999997" blue="0.0" alpha="0.10000000000000001" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="6PB-lI-g9W">
                                                         <size key="itemSize" width="150" height="150"/>
                                                         <size key="headerReferenceSize" width="0.0" height="0.0"/>

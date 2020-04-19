@@ -89,10 +89,7 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
             let cell = (tableView.dequeueReusableCell(withIdentifier: "Main User Page", for: indexPath) as? mainUserProfileTableViewCell)!
             
             cell.userImageView?.image = self.userImage
-            cell.userImageView?.contentMode = .scaleAspectFit
-            cell.userImageView.layer.masksToBounds = false
-            cell.userImageView.layer.cornerRadius = cell.userImageView.bounds.width / 2
-            cell.userImageView.clipsToBounds = true
+            
            
             if Auth.auth().currentUser?.displayName == nil {
                 cell.userNameLabel.text = self.user?.name

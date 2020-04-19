@@ -131,6 +131,11 @@ class FirstTimeUserProfileTableViewController: UITableViewController, UIPickerVi
             let Storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
             let vc = Storyboard.instantiateViewController(withIdentifier: "Discovery")
             self.navigationController?.pushViewController(vc, animated: true)
+            
+            if Auth.auth().currentUser?.displayName == nil {
+            let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
+                changeRequest?.displayName = userNameTextField.text
+            }
         }
     }
     

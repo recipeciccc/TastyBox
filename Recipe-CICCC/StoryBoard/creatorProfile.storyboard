@@ -70,7 +70,7 @@
                                                 <constraint firstItem="oMV-5u-zPo" firstAttribute="centerX" secondItem="hLl-yl-mAZ" secondAttribute="centerX" id="fyC-St-dBU"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" red="1" green="0.57647058819999997" blue="0.0" alpha="0.2577322346" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" red="1" green="0.57647058819999997" blue="0.0" alpha="0.10000000000000001" colorSpace="custom" customColorSpace="displayP3"/>
                                         <connections>
                                             <outlet property="creatorImageView" destination="ld5-ik-8wx" id="dx1-GT-9DC"/>
                                             <outlet property="creatorNameLabel" destination="hLl-yl-mAZ" id="mAU-x9-HK7"/>
@@ -89,21 +89,27 @@
                                                     <subviews>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FPy-d3-5No">
                                                             <rect key="frame" x="0.0" y="0.0" width="46" height="30"/>
-                                                            <state key="normal" title="Button"/>
+                                                            <state key="normal" title="Button">
+                                                                <color key="titleColor" red="1" green="0.57647058819999997" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                            </state>
                                                             <connections>
                                                                 <segue destination="L26-kz-n4A" kind="show" identifier="saveRecipe" id="5AM-Bc-X8Q"/>
                                                             </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rkj-7j-Ol3">
                                                             <rect key="frame" x="124" y="0.0" width="46" height="30"/>
-                                                            <state key="normal" title="Button"/>
+                                                            <state key="normal" title="Button">
+                                                                <color key="titleColor" red="1" green="0.57647058819999997" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                            </state>
                                                             <connections>
                                                                 <segue destination="Ka6-9a-Z8z" kind="show" identifier="following" id="0U7-du-jes"/>
                                                             </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9qg-v9-89m">
                                                             <rect key="frame" x="248" y="0.0" width="46" height="30"/>
-                                                            <state key="normal" title="Button"/>
+                                                            <state key="normal" title="Button">
+                                                                <color key="titleColor" red="1" green="0.57647058819999997" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                            </state>
                                                             <connections>
                                                                 <segue destination="Ka6-9a-Z8z" kind="show" identifier="follower" id="Y5t-UO-wdP"/>
                                                             </connections>
@@ -116,6 +122,7 @@
                                                 <constraint firstItem="1Dk-uq-ePj" firstAttribute="centerY" secondItem="ZOL-K5-ItX" secondAttribute="centerY" id="n2n-9d-TZ5"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" red="1" green="0.57647058819999997" blue="0.0" alpha="0.10000000000000001" colorSpace="custom" customColorSpace="displayP3"/>
                                         <connections>
                                             <outlet property="NumOFFollwerButton" destination="9qg-v9-89m" id="KOn-Ku-3ws"/>
                                             <outlet property="NumOfPostedButton" destination="FPy-d3-5No" id="nPa-9j-fEG"/>
@@ -131,7 +138,7 @@
                                             <subviews>
                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="KOq-HV-cLl">
                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="632"/>
-                                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                    <color key="backgroundColor" red="1" green="0.57647058823529407" blue="0.0" alpha="0.10000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="1fX-uN-FUG">
                                                         <size key="itemSize" width="87" height="89"/>
                                                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
