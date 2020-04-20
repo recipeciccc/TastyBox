@@ -29,6 +29,7 @@ class FetchRecipeData{
             if err == nil {
                 if let snap = snapshot?.documents {
                     for document in snap{
+                        
                         let data = document.data()
                         let recipeId = data["recipeID"] as? String
                         let title = data["title"] as? String
@@ -39,17 +40,18 @@ class FetchRecipeData{
                         let userId = data["userID"] as? String
                         let time = data["time"] as? Timestamp
                         
-                        
                         let image = data["image"] as? String
+                        let genresData = data["genres"] as? [String: Bool]
                         
-                        //                        self.getInstructions(userId: userId!, recipeId: recipeId!)
-                        //                        self.getIngredients(userId: userId!, recipeId: recipeId!)
-                        //                        self.getComments(userId: userId!, recipeId: recipeId!)
+                        var genresArr: [String] = []
+                        for genre in genresData! {
+                            genresArr.append(genre.key)
+                        }
                         
-                        let recipe = RecipeDetail(recipeID: recipeId!, title: title!, updatedDate: time!, cookingTime: cookingTime ?? 0, image: image ?? "", like: like!, serving: serving ?? 0, userID: userId!)
+                        let recipe = RecipeDetail(recipeID: recipeId!, title: title!, updatedDate: time!, cookingTime: cookingTime ?? 0, image: image ?? "", like: like!, serving: serving ?? 0, userID: userId!, genres: genresArr)
                         
                         recipeList.append(recipe)
-                        print(time?.dateValue())
+                        
                     }
                 }
                 exist = true
@@ -189,12 +191,12 @@ class FetchRecipeData{
                             
                             self.users.append(self.user!)
                             self.commentDelegate?.getCommentUser(user: self.users, comments: self.comments)
-
+                            
                         }
                     }
                 }
                 
-              
+                
                 
             }
         }

@@ -144,7 +144,6 @@
                                                 <connections>
                                                     <outlet property="collectionImage" destination="45U-Je-HVx" id="iau-iS-c1L"/>
                                                     <outlet property="collectionLabel" destination="ltZ-qp-eRW" id="VZs-7E-fG2"/>
-                                                    <segue destination="0mO-ES-kGT" kind="show" id="DG0-cU-l9r"/>
                                                 </connections>
                                             </collectionViewCell>
                                         </cells>

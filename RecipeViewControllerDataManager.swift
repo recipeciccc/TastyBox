@@ -1,28 +1,22 @@
 //
-//  fetchDataInIngredients.swift
+//  RecipeViewControllerDataManager.swift
 //  Recipe-CICCC
 //
-//  Created by 北島　志帆美 on 2020-04-18.
+//  Created by 北島　志帆美 on 2020-04-19.
 //  Copyright © 2020 Argus Chen. All rights reserved.
 //
 
 import Foundation
 import Firebase
 
-class fetchDataInIngredients {
+class RecipeViewControllerDataManager {
     
-    weak var delegate : fetchDataInIngredientsDelegate?
-    var commentDelegate: GetCommentsDelegate?
     let db = Firestore.firestore()
-    let storageRef = Storage.storage().reference()
+    weak var delegate: RecipeViewControllerDelegate?
     
-    var instructions : [Instruction] = []
-    var comments : [Comment] = []
-    var ingredients : [Ingredient] = []
-    var users : [User] = []
-    var user:User?
+    var user: User?
     
-    func Data(queryRef:Query) -> [RecipeDetail]{
+    func Data(queryRef:Query) {
         var recipeList = [RecipeDetail]()
         var exist = Bool()
         queryRef.getDocuments { (snapshot, err) in
@@ -45,7 +39,6 @@ class fetchDataInIngredients {
                         let genresData = data["genres"] as? [String: Bool]
                         
                         var genresArr: [String] = []
-                        
                         if let gotGenresData = genresData {
                             for genre in gotGenresData {
                                 genresArr.append(genre.key)
@@ -53,11 +46,10 @@ class fetchDataInIngredients {
                         }
                         
                         
-                        
                         let recipe = RecipeDetail(recipeID: recipeId!, title: title!, updatedDate: time!, cookingTime: cookingTime ?? 0, image: image ?? "", like: like!, serving: serving ?? 0, userID: userId!, genres: genresArr)
                         
                         recipeList.append(recipe)
-                        print(time?.dateValue() as Any)
+                        
                     }
                 }
                 exist = true
@@ -69,7 +61,7 @@ class fetchDataInIngredients {
             
             self.isRecipeExist(exist,recipeList)
         }
-        return recipeList
+        
     }
     
     func isRecipeExist(_ exist:Bool, _ data: [RecipeDetail]){
@@ -78,40 +70,38 @@ class fetchDataInIngredients {
         }
     }
     
-    
-    func getIngredients(userId: String, recipeId: String) {
-        
-        var ingredients:[Ingredient] = []
-        var exist = false
-        
-        db.collection("recipe").document("\(recipeId)").collection("ingredient").addSnapshotListener{
-            (querysnapshot, error) in
-            if error != nil {
-                print("Error getting documents: \(String(describing: error))")
-            } else {
-                for document in querysnapshot!.documents {
-                    let data = document.data()
-                    
-                    let ingredient = data["ingredient"] as! String
-                    let amount = data["amount"] as! String
-                    
-                    ingredients.append(Ingredient(name: ingredient, amount: amount))
-                    
-                }
-                exist = true
-                self.isIngredientExist(exist, ingredients, recipeId)
-            }
-        }
-        
-        isIngredientExist(exist, ingredients, recipeId)
-        
-    }
-    
-    func isIngredientExist(_ exist:Bool, _ data: [Ingredient], _ recipeID: String){
-        if exist{
-            delegate?.reloadIngredients(data: data, recipeID: recipeID)
-        }
-    }
+    //
+    //    func getGenres(userId: String, recipeId: String) {
+    //
+    //        var genres:[String] = []
+    //        var exist = false
+    //
+    //        db.collection("recipe").document("\(recipeId)").collection("genre").addSnapshotListener{
+    //            (querysnapshot, error) in
+    //            if error != nil {
+    //                print("Error getting documents: \(String(describing: error))")
+    //            } else {
+    //                for document in querysnapshot!.documents {
+    //                    let data = document.data()
+    //
+    //
+    //
+    //                }
+    //
+    //                exist = true
+    //                self.isGenreExist(exist, genres, recipeId)
+    //            }
+    //        }
+    //
+    //        isGenreExist(exist, genres, recipeId)
+    //
+    //    }
+    //
+    //    func isGenreExist(_ exist:Bool, _ data: [String], _ recipeID: String){
+    //        if exist{
+    //            delegate?.reloadGenres(data: data, recipeID: recipeID)
+    //        }
+    //    }
     
     func getImage( uid:String?, rid: String, index: Int){
         
@@ -182,10 +172,9 @@ class fetchDataInIngredients {
     }
 }
 
-
-protocol fetchDataInIngredientsDelegate: class {
+protocol RecipeViewControllerDelegate: class {
     func reloadRecipe(data:[RecipeDetail])
+    //    func reloadGenres(data: [String], recipeID: String)
     func reloadImg(image: UIImage, index: Int)
-    func reloadIngredients(data:[Ingredient], recipeID: String)
     func gotUserData(user: User)
 }
