@@ -1,5 +1,5 @@
 //
-//  SearchingGenreViewController.swift
+//  SearchingIngredientsViewController.swift
 //  Recipe-CICCC
 //
 //  Created by 北島　志帆美 on 2020-04-20.
@@ -8,9 +8,10 @@
 
 import UIKit
 
-class SearchingGenreViewController: UIViewController {
+class SearchingIngredientsViewController: UIViewController {
 
-    @IBOutlet var collectionView:UICollectionView!
+      @IBOutlet weak var collectionView: UICollectionView!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,7 +21,8 @@ class SearchingGenreViewController: UIViewController {
     
     }
     
-
+  
+    
     /*
     // MARK: - Navigation
 
@@ -33,14 +35,13 @@ class SearchingGenreViewController: UIViewController {
 
 }
 
-extension SearchingGenreViewController : UICollectionViewDataSource {
+extension SearchingIngredientsViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 5
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = (collectionView.dequeueReusableCell(withReuseIdentifier: "searcingGenre", for: indexPath) as? SearchingGenreCollectionViewCell)!
-        
+        let cell = (collectionView.dequeueReusableCell(withReuseIdentifier: "searcingIngredient", for: indexPath) as? SearchingIngredientCollectionViewCell)!
         cell.imgView.image = #imageLiteral(resourceName: "shenggeng-lin-XoN3v3Ge7EE-unsplash")
         
         return cell
@@ -49,7 +50,7 @@ extension SearchingGenreViewController : UICollectionViewDataSource {
     
 }
 
-extension SearchingGenreViewController: UICollectionViewDelegateFlowLayout {
+extension SearchingIngredientsViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
            return UIEdgeInsets(top: 0, left: 0, bottom: 10, right: 0)
@@ -68,5 +69,3 @@ extension SearchingGenreViewController: UICollectionViewDelegateFlowLayout {
            return 10
        }
 }
-
-
