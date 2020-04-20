@@ -13,7 +13,7 @@ import FirebaseStorage
 class RecipedataManagerClass {
     
     let db = Firestore.firestore()
-    var delegate: getDataFromFirebaseDelegate?
+    weak var delegate: getDataFromFirebaseDelegate?
     
     var recipes:[RecipeDetail] = []
     var instructions : [Instruction] = []
@@ -165,7 +165,7 @@ class RecipedataManagerClass {
     
     
     
-    func getImage(rid: String, uid: String, imageView: UIImageView) {
+    func getImage(rid: String, uid: String, index: Int) {
         
         //        let uid =  Auth.auth().currentUser?.uid
         //        let storageRef =  Storage.storage().reference().child("user/\(uid!)/RecipePhoto/\(rid)/\(rid)")
@@ -178,8 +178,8 @@ class RecipedataManagerClass {
             } else {
                 if let imageData = data {
                     let image = UIImage(data: imageData)
-                    imageView.image = image
-//                    self.delegate?.assignImage(image: image!, reference: imageView)
+                    
+                    self.delegate?.assignImage(image: image!, index: index)
                 }
             }
         }

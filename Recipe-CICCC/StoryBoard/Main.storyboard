@@ -402,33 +402,182 @@
             </objects>
             <point key="canvasLocation" x="1842" y="815"/>
         </scene>
-        <!--View Controller-->
+        <!--Searching View Controller-->
         <scene sceneID="W76-rR-iLR">
             <objects>
-                <viewController id="ZEb-Bq-mPO" sceneMemberID="viewController">
+                <viewController id="ZEb-Bq-mPO" customClass="SearchingViewController" customModule="Recipe_CICCC" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="SKQ-tM-OWC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This is searching page" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xeI-oJ-Ymd">
-                                <rect key="frame" x="121.5" y="437.5" width="171" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nlv-6E-V8W">
+                                <rect key="frame" x="0.0" y="147" width="414" height="715"/>
+                                <connections>
+                                    <segue destination="DEg-yT-N3P" kind="embed" id="pn9-h7-5v3"/>
+                                </connections>
+                            </containerView>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="MWN-Ve-M4j">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="fke-Sc-eea">
+                                <rect key="frame" x="0.0" y="108" width="414" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="414" id="hmh-pF-SCe"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="First"/>
+                                    <segment title="Second"/>
+                                    <segment title=""/>
+                                </segments>
+                                <connections>
+                                    <action selector="actionSegmentActionWithSender:" destination="ZEb-Bq-mPO" eventType="valueChanged" id="atT-5p-VAN"/>
+                                </connections>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="xeI-oJ-Ymd" firstAttribute="centerY" secondItem="SKQ-tM-OWC" secondAttribute="centerY" id="UoS-zP-C4o"/>
-                            <constraint firstItem="xeI-oJ-Ymd" firstAttribute="centerX" secondItem="SKQ-tM-OWC" secondAttribute="centerX" id="dR6-0f-7Hd"/>
+                            <constraint firstItem="fke-Sc-eea" firstAttribute="top" secondItem="MWN-Ve-M4j" secondAttribute="bottom" constant="64" id="2yg-Av-h1C"/>
+                            <constraint firstItem="Nlv-6E-V8W" firstAttribute="top" secondItem="fke-Sc-eea" secondAttribute="bottom" constant="8" id="3YF-se-4pE"/>
+                            <constraint firstItem="MWN-Ve-M4j" firstAttribute="top" secondItem="SKQ-tM-OWC" secondAttribute="topMargin" constant="-88" id="L19-ph-p7N"/>
+                            <constraint firstItem="fke-Sc-eea" firstAttribute="leading" secondItem="Nlv-6E-V8W" secondAttribute="leading" id="Zbo-CU-ePA"/>
+                            <constraint firstItem="fke-Sc-eea" firstAttribute="trailing" secondItem="Nlv-6E-V8W" secondAttribute="trailing" id="bn8-KA-WCF"/>
+                            <constraint firstItem="fke-Sc-eea" firstAttribute="leading" secondItem="MWN-Ve-M4j" secondAttribute="leading" id="ivs-AT-YLM"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="Nlv-6E-V8W" secondAttribute="bottom" id="sji-0O-fqf"/>
+                            <constraint firstItem="fke-Sc-eea" firstAttribute="top" secondItem="GQZ-SB-Vjo" secondAttribute="top" constant="20" id="voU-Lq-OOU"/>
+                            <constraint firstItem="fke-Sc-eea" firstAttribute="trailing" secondItem="MWN-Ve-M4j" secondAttribute="trailing" id="xpJ-6U-Zyg"/>
+                            <constraint firstItem="fke-Sc-eea" firstAttribute="centerX" secondItem="SKQ-tM-OWC" secondAttribute="centerX" id="zAU-9b-Ynr"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="GQZ-SB-Vjo"/>
                     </view>
                     <navigationItem key="navigationItem" id="c11-j1-EmF"/>
+                    <connections>
+                        <outlet property="containerView" destination="Nlv-6E-V8W" id="480-dr-DIZ"/>
+                        <outlet property="segmentControl" destination="fke-Sc-eea" id="8AT-iW-AyO"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lew-sc-Txo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2435" y="830"/>
+            <point key="canvasLocation" x="2434.7826086956525" y="829.6875"/>
+        </scene>
+        <!--Searching Creators View Controller-->
+        <scene sceneID="nun-GG-Lot">
+            <objects>
+                <viewController storyboardIdentifier="creatroVC" id="lmh-we-v8i" customClass="SearchingCreatorsViewController" customModule="Recipe_CICCC" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="USa-f6-IHu">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="751"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="TXa-zM-KlB">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="726"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="serchingCreator" rowHeight="60" id="UNg-dw-FH1" customClass="SearchingCreatorTableViewCell" customModule="Recipe_CICCC" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="60"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="UNg-dw-FH1" id="gEx-Fe-Tha">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zrz-aA-mEB">
+                                                    <rect key="frame" x="78" y="19.5" width="328" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hI0-tA-sxv">
+                                                    <rect key="frame" x="20" y="5" width="50" height="50"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="50" id="6CB-8u-5ah"/>
+                                                        <constraint firstAttribute="height" constant="50" id="CwJ-qB-AZQ"/>
+                                                    </constraints>
+                                                </imageView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="hI0-tA-sxv" firstAttribute="centerY" secondItem="gEx-Fe-Tha" secondAttribute="centerY" id="Dkz-es-5pk"/>
+                                                <constraint firstItem="hI0-tA-sxv" firstAttribute="leading" secondItem="gEx-Fe-Tha" secondAttribute="leading" constant="20" id="NxA-Uv-aGY"/>
+                                                <constraint firstItem="zrz-aA-mEB" firstAttribute="centerY" secondItem="gEx-Fe-Tha" secondAttribute="centerY" id="Poo-Wi-9hT"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="creatorNameLabel" destination="zrz-aA-mEB" id="ieb-R6-k4U"/>
+                                            <outlet property="imgView" destination="hI0-tA-sxv" id="F35-Ed-RBZ"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="68b-VW-8ys"/>
+                    </view>
+                    <size key="freeformSize" width="414" height="751"/>
+                    <connections>
+                        <outlet property="tableView" destination="TXa-zM-KlB" id="n2R-EZ-WVJ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QBo-Eq-Hzb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3282.608695652174" y="1552.9017857142856"/>
+        </scene>
+        <!--Searching Genre View Controller-->
+        <scene sceneID="o7P-Or-4Z5">
+            <objects>
+                <viewController storyboardIdentifier="genreVC" id="ees-57-bx1" customClass="SearchingGenreViewController" customModule="Recipe_CICCC" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="bos-al-wWM">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="751"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="R9I-CM-qtR">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="726"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="pw1-rd-7Cz">
+                                    <size key="itemSize" width="100" height="100"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="searcingGenre" id="kJ1-HA-hN9" customClass="SearchingGenreCollectionViewCell" customModule="Recipe_CICCC" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Bvc-Fw-ikb">
+                                            <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="m2F-YR-ZTt">
+                                                    <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                            </subviews>
+                                        </collectionViewCellContentView>
+                                        <connections>
+                                            <outlet property="imgView" destination="m2F-YR-ZTt" id="Lnn-fs-kSM"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="O94-rx-0ai"/>
+                    </view>
+                    <size key="freeformSize" width="414" height="751"/>
+                    <connections>
+                        <outlet property="collectionView" destination="R9I-CM-qtR" id="DtV-q1-cCC"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ze5-mk-lG2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4098.5507246376819" y="1552.9017857142856"/>
+        </scene>
+        <!--Searching Page View Controller-->
+        <scene sceneID="gQG-Cc-SvZ">
+            <objects>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="pageCurl" navigationOrientation="horizontal" spineLocation="min" id="DEg-yT-N3P" customClass="SearchingPageViewController" customModule="Recipe_CICCC" customModuleProvider="target" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EKP-Mk-SQp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2442" y="1553"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="BRP-pg-MQe">
@@ -1199,6 +1348,57 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c36-G1-ma5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1998" y="-307"/>
+        </scene>
+        <!--Searching Ingredients View Controller-->
+        <scene sceneID="T3B-Vg-GyH">
+            <objects>
+                <viewController storyboardIdentifier="ingredientVC" id="sJ2-Jc-m0R" customClass="SearchingIngredientsViewController" customModule="Recipe_CICCC" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="4YV-d3-GZ9">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="751"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="rwV-NH-2SN">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="726"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="oYK-vc-Vzo">
+                                    <size key="itemSize" width="100" height="100"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="searcingIngredient" id="XrA-YE-wxn" customClass="SearchingIngredientCollectionViewCell" customModule="Recipe_CICCC" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Aqu-g0-gq6">
+                                            <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7f3-Mm-XN6">
+                                                    <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                            </subviews>
+                                        </collectionViewCellContentView>
+                                        <connections>
+                                            <outlet property="imgView" destination="7f3-Mm-XN6" id="rRi-Wt-2jC"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="uVW-Ld-7Oq"/>
+                    </view>
+                    <size key="freeformSize" width="414" height="751"/>
+                    <connections>
+                        <outlet property="collectionView" destination="rwV-NH-2SN" id="QVu-Lg-Etj"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ejL-bd-Oay" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4924.6376811594209" y="1552.9017857142856"/>
         </scene>
     </scenes>
     <resources>
