@@ -68,11 +68,7 @@ class RecipeViewController: UIViewController {
         dataManager.Data(queryRef: query)
         
     }
-    
-    //    private func setupCollection() {
-    //        CollectionImage = recipeImages
-    //        CollectionLabel = recipeLabels
-    //    }
+
 }
 
 
@@ -82,15 +78,12 @@ extension RecipeViewController: UISearchBarDelegate{
         
         if searchBar.text! == "" {
             searchedRecipes.removeAll()
-//            recipes.enumerated().map {
-//                searchedRecipes.append($0.1)
-//                searchedRecipesImages[$0.0] = recipesImages[$0.0]
-//            }
+
             searching = false
             searchBar.showsCancelButton = true
             collectionRef.reloadData()
         } else {
-//        searchNames = CollectionLabel.filter({ $0.lowercased().contains(searchText.lowercased())})
+
             searchedRecipes.removeAll()
             searchedRecipesImages.removeAll()
             searchedCreators.removeAll()
