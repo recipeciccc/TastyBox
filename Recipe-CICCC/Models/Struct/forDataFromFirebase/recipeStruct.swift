@@ -19,6 +19,7 @@ struct RecipeDetail {
     var like: Int
     var serving: Int
     var userID:String
+    var genres: [String] = []
 //    var instructions: [Instruction]
 //    var ingredients: [Ingredient]
 //    var comment: [Comment]

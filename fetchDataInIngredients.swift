@@ -42,11 +42,19 @@ class fetchDataInIngredients {
                         
                         let image = data["image"] as? String
                         
-                        //                        self.getInstructions(userId: userId!, recipeId: recipeId!)
-                        //                        self.getIngredients(userId: userId!, recipeId: recipeId!)
-                        //                        self.getComments(userId: userId!, recipeId: recipeId!)
+                        let genresData = data["genres"] as? [String: Bool]
                         
-                        let recipe = RecipeDetail(recipeID: recipeId!, title: title!, updatedDate: time!, cookingTime: cookingTime ?? 0, image: image ?? "", like: like!, serving: serving ?? 0, userID: userId!)
+                        var genresArr: [String] = []
+                        
+                        if let gotGenresData = genresData {
+                            for genre in gotGenresData {
+                                genresArr.append(genre.key)
+                            }
+                        }
+                        
+                        
+                        
+                        let recipe = RecipeDetail(recipeID: recipeId!, title: title!, updatedDate: time!, cookingTime: cookingTime ?? 0, image: image ?? "", like: like!, serving: serving ?? 0, userID: userId!, genres: genresArr)
                         
                         recipeList.append(recipe)
                         print(time?.dateValue() as Any)
@@ -115,22 +123,22 @@ class fetchDataInIngredients {
             return
         }
         
-      
+        
         let imagesRef = storageRef.child("user/\(uid)/RecipePhoto/\(rid)/\(rid)")
-       
+        
         imagesRef.getData(maxSize: 1 * 1024 * 1024) { data, error in
-                if error != nil {
-                    print(error?.localizedDescription as Any)
-                } else {
-                    if let imgData = data{
-                        
-                        print("imagesRef: \(imagesRef)")
-                        
-                        image = UIImage(data: imgData)!
-                        
-                        self.delegate?.reloadImg(image: image, index: index)
-                    }
+            if error != nil {
+                print(error?.localizedDescription as Any)
+            } else {
+                if let imgData = data{
+                    
+                    print("imagesRef: \(imagesRef)")
+                    
+                    image = UIImage(data: imgData)!
+                    
+                    self.delegate?.reloadImg(image: image, index: index)
                 }
+            }
             
         }
         
@@ -152,21 +160,21 @@ class fetchDataInIngredients {
                 print("Error getting documents: \(String(describing: error))")
             }
             else {
-               
+                
                 if let data = querysnapshot!.data() {
-                
+                    
                     print("data count: \(data.count)")
-                
-                
+                    
+                    
                     let userID = data["id"] as? String
                     let name = data["userName"] as? String
                     let familySize = data["familySize"] as? Int
                     let cuisineType = data["cuisineType"] as? String
-                
-                
-                self.user = User(userID: userID!, name: name!, cuisineType: cuisineType!, familySize: familySize)
-                self.delegate?.gotUserData(user: self.user!)
-
+                    
+                    
+                    self.user = User(userID: userID!, name: name!, cuisineType: cuisineType!, familySize: familySize)
+                    self.delegate?.gotUserData(user: self.user!)
+                    
                 }
             }
             
