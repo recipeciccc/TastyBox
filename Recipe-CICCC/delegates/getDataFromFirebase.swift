@@ -10,10 +10,10 @@ import Foundation
 import UIKit
 
 
-protocol getDataFromFirebaseDelegate {
-    func assignImage(image: UIImage, reference: UIImageView)
+protocol getDataFromFirebaseDelegate:class {
+    func assignImage(image: UIImage, index: Int)
     
     func gotData(recipes:[RecipeDetail])
     
-    func gotImage(image: UIImage)
+    
 }

@@ -39,6 +39,7 @@ class RecipeViewControllerDataManager {
                         let genresData = data["genres"] as? [String: Bool]
                         
                         var genresArr: [String] = []
+                        
                         if let gotGenresData = genresData {
                             for genre in gotGenresData {
                                 genresArr.append(genre.key)

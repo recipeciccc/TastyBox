@@ -44,9 +44,14 @@ class FetchRecipeData{
                         let genresData = data["genres"] as? [String: Bool]
                         
                         var genresArr: [String] = []
-                        for genre in genresData! {
-                            genresArr.append(genre.key)
+                        
+                        if let gotData = genresData {
+                            for genre in gotData {
+                                genresArr.append(genre.key)
+                            }
                         }
+                        
+                        
                         
                         let recipe = RecipeDetail(recipeID: recipeId!, title: title!, updatedDate: time!, cookingTime: cookingTime ?? 0, image: image ?? "", like: like!, serving: serving ?? 0, userID: userId!, genres: genresArr)
                         

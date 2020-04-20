@@ -46,7 +46,7 @@ class CreatorProfileViewController: UIViewController {
         dataManager.getUserDetail(id: id!)
         
         let db = Firestore.firestore()
-        let queryRef = db.collection("recipe").whereField("userID", isEqualTo: id as Any).order(by: "time", descending: true)
+        let queryRef = db.collection("recipe").whereField("userID", isEqualTo: id! as Any).order(by: "time", descending: true)
         recipeList = fetchData.Data(queryRef: queryRef)
         
         dataManager.findFollowerFollowing(id: id!)
