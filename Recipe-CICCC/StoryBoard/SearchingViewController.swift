@@ -14,7 +14,7 @@ protocol SearchingViewControllerDelegate: class {
 
 class SearchingViewController: UIViewController {
     
-    lazy  var SearchBar: UISearchBar = UISearchBar(frame: CGRect(x: 0, y: 0, width: 600, height: 20))
+    
     
     @IBOutlet weak var segmentControl: UISegmentedControl!
     @IBOutlet weak var containerView: UIView!
@@ -31,16 +31,13 @@ class SearchingViewController: UIViewController {
     
     var VCs: [UIViewController] = []
     
-    
+    lazy  var SearchBar: UISearchBar = UISearchBar(frame: CGRect(x: 0, y: 0, width: 600, height: 20))
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-        SearchBar.delegate = self
-        SearchBar.placeholder = "Search Recipe "
-        let RightNavBarButton = UIBarButtonItem(customView:SearchBar)
-        self.navigationItem.rightBarButtonItem = RightNavBarButton
+       
         
         pageController = self.children[0] as! SearchingPageViewController
         pageController.dataSource = self
@@ -50,6 +47,11 @@ class SearchingViewController: UIViewController {
         setSegmentControl()
         let sortedViews = segmentControl.subviews.sorted( by: { $0.frame.origin.x < $1.frame.origin.x } )
         sortedViews[0].tintColor = UIColor.orange //Default Selection colo
+        
+        SearchBar.delegate = self
+        SearchBar.placeholder = "Search Recipe"
+        let RightNavBarButton = UIBarButtonItem(customView:SearchBar)
+        self.navigationItem.rightBarButtonItem = RightNavBarButton
     }
     
     fileprivate func setSegmentControl() {
@@ -77,15 +79,15 @@ class SearchingViewController: UIViewController {
                 direction = .reverse
             }
             
-            let sortedViews = sender.subviews.sorted( by: { $0.frame.origin.x < $1.frame.origin.x } )
-                  
-                  for (index, view) in sortedViews.enumerated() {
-                      if index == sender.selectedSegmentIndex { //When selected
-                          view.tintColor = UIColor.orange
-                      } else {//Unselected
-                          view.tintColor = nil
-                      }
-                  }
+//            let sortedViews = sender.subviews.sorted( by: { $0.frame.origin.x < $1.frame.origin.x } )
+//
+//                  for (index, view) in sortedViews.enumerated() {
+//                      if index == sender.selectedSegmentIndex { //When selected
+//                          view.tintColor = UIColor.orange
+//                      } else {//Unselected
+//                          view.tintColor = nil
+//                      }
+//                  }
             
             
             switch segmentControl.selectedSegmentIndex {
@@ -189,8 +191,25 @@ extension SearchingViewController:UIPageViewControllerDataSource {
         
     }
     
+    
+    
 }
 
 extension SearchingViewController:UISearchBarDelegate {
     
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        searchBar.showsCancelButton = true
+        
+        let pageController = self.children[0] as! SearchingPageViewController
+        pageController.searchingWord = searchBar.text!
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+         searchBar.resignFirstResponder()
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+         searchBar.resignFirstResponder()
+    }
 }

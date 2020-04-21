@@ -9,15 +9,24 @@
 import UIKit
 
 class SearchingGenreViewController: UIViewController {
-
-    @IBOutlet var collectionView:UICollectionView!
+    
+    @IBOutlet weak var tableView: UITableView!
+    
+    var searchingWord = ""
+    var genresArray:[String] = []
+    
+    let dataManager = SearchingGenreDataManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        collectionView.dataSource = self
-    
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.tableFooterView = UIView()
+        
+        dataManager.delegate = self
+        dataManager.getGenres()
     }
     
 
@@ -33,40 +42,42 @@ class SearchingGenreViewController: UIViewController {
 
 }
 
-extension SearchingGenreViewController : UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+extension SearchingGenreViewController : UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return genresArray.count
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = (collectionView.dequeueReusableCell(withReuseIdentifier: "searcingGenre", for: indexPath) as? SearchingGenreCollectionViewCell)!
-        
-        cell.imgView.image = #imageLiteral(resourceName: "shenggeng-lin-XoN3v3Ge7EE-unsplash")
-        
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = (tableView.dequeueReusableCell(withIdentifier: "searcingGenre") as? SearchingGenresTableViewCell)!
+        cell.genresLabel.text = "test"
+        cell.genresLabel.text = genresArray[indexPath.row]
         return cell
     }
     
     
 }
 
-extension SearchingGenreViewController: UICollectionViewDelegateFlowLayout {
+extension SearchingGenreViewController : UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let cell = tableView.cellForRow(at: indexPath) as? SearchingGenresTableViewCell {
+            let query = dataManager.createQuery(searchingWord: cell.genresLabel.text!)
+            let vc = storyboard?.instantiateViewController(identifier: "resultRecipes") as! ResultRecipesViewController
+            
+            vc.query = query
+            
+            navigationController?.pushViewController(vc, animated: true)
+            tableView.deselectRow(at: indexPath, animated: true)
+        }
+    }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-           return UIEdgeInsets(top: 0, left: 0, bottom: 10, right: 0)
-       }
-       
-       func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-           return CGSize(width: (collectionView.frame.size.width-30) / 2, height: (collectionView.frame.size.width-30) / 2)
-       }
-       
-       func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-           return 10
-       }
-       
-       func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-           
-           return 10
-       }
+}
+
+extension SearchingGenreViewController :SearchingGenreDataManagerDelegate {
+    func gotGenres(getGenres: [String]) {
+        genresArray = getGenres
+        self.tableView.reloadData()
+    }
+
 }
 
 

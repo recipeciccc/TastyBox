@@ -243,6 +243,17 @@ extension CreatorViewController{
                     //                    self.navigationController?.popViewController(animated: true)
                 }
             }
+            
+            let dictonary = ["ingredient": [self.ingredientList[index]:true]]
+            
+            self.db.collection("ingredient").document("ingredient").setData(dictonary, merge: true) { (err) in
+                if err != nil{
+                    print(err?.localizedDescription as Any)
+                }else{
+                    print(dictonary)
+                    print("Successfully set ingredient docement data")
+                }
+            }
         }
     }
     
@@ -329,6 +340,15 @@ extension CreatorViewController{
             }else{
                 print(genres)
                 print("Successfully set genres")
+            }
+        }
+        
+        self.db.collection("genres").document("genre").setData(recipeGenres, merge: true) { (err) in
+            if err != nil{
+                print(err?.localizedDescription as Any)
+            }else{
+                print(genres)
+                print("Successfully set genres document data")
             }
         }
     }

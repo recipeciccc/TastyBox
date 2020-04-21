@@ -7,17 +7,32 @@
 //
 
 import UIKit
+import Firebase
 
 class SearchingCreatorsViewController: UIViewController {
 
     @IBOutlet var tableView: UITableView!
     
+    let dataManager = SearchingDataManager()
+    
+    var searchedCreators: [User] = []
+    var searchingWord = ""
+    
+    let db = Firestore.firestore()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        tableView.delegate = self
+        
         tableView.dataSource = self
+        tableView.tableFooterView = UIView()
+        
+        let query = db.collection("user").whereField("name", isGreaterThanOrEqualTo: searchingWord)
+        
+        if searchingWord != "" {
+            dataManager.getSearchedCreator(query: query)
+        }
     }
     
 
@@ -51,5 +66,5 @@ extension SearchingCreatorsViewController: UITableViewDataSource {
 }
 
 
-extension SearchingCreatorsViewController: UITableViewDelegate {
+extension SearchingCreatorsViewController: UISearchBarDelegate {
 }
