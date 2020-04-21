@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 protocol SearchingViewControllerDelegate: class {
     func segmentSetted(index:Int)
@@ -14,35 +15,65 @@ protocol SearchingViewControllerDelegate: class {
 
 class SearchingViewController: UIViewController {
     
-    
-    
     @IBOutlet weak var segmentControl: UISegmentedControl!
     @IBOutlet weak var containerView: UIView!
-    
     
     var pageController = SearchingPageViewController()
     var previousIndex = 0
     let underlineLayer = CALayer()
     var segmentItemWidth:CGFloat = 0
+    var startOffset = CGFloat(0)
     
     let genreVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "genreVC") as! SearchingGenreViewController
     let ingredientVC =  UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "ingredientVC") as! SearchingIngredientsViewController
-    let creatroVC =  UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "creatroVC") as! SearchingCreatorsViewController
+    let creatorVC =  UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "creatroVC") as! SearchingCreatorsViewController
     
     var VCs: [UIViewController] = []
     
     lazy  var SearchBar: UISearchBar = UISearchBar(frame: CGRect(x: 0, y: 0, width: 600, height: 20))
     
+    let dataManager = SearchingDataManager()
+    let db = Firestore.firestore()
+    
+    var searchingWord : String = "" {
+        didSet {
+            
+            guard searchingWord != "" else {
+                searchedResults.removeAll()
+                searchedUsersImages.removeAll()
+                return
+            }
+            
+            let query = db.collection("user")
+            dataManager.delegateChild = self
+            dataManager.getSearchedCreator(query: query, searchingWord: searchingWord)
+        }
+    }
+    
+    var searchedResults:[User] = [] {
+        didSet {
+            creatorVC.searchedCreators = searchedResults
+//            creatroVC.tableView.reloadData()
+        }
+    }
+    
+    var searchedUsersImages: [Int: UIImage] = [:] {
+        didSet {
+            creatorVC.searchedCreatorsImage = searchedUsersImages
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-       
+        
         
         pageController = self.children[0] as! SearchingPageViewController
         pageController.dataSource = self
+       
         
-        VCs =  [ingredientVC, genreVC, creatroVC]
+        VCs =  [ingredientVC, genreVC, creatorVC]
         
         setSegmentControl()
         let sortedViews = segmentControl.subviews.sorted( by: { $0.frame.origin.x < $1.frame.origin.x } )
@@ -60,7 +91,7 @@ class SearchingViewController: UIViewController {
             segmentControl.setTitle(titles[index], forSegmentAt: index)
             
         }
-    
+        
         segmentControl.addUnderlineForSelectedSegment()
         
     }
@@ -78,18 +109,7 @@ class SearchingViewController: UIViewController {
             else {
                 direction = .reverse
             }
-            
-//            let sortedViews = sender.subviews.sorted( by: { $0.frame.origin.x < $1.frame.origin.x } )
-//
-//                  for (index, view) in sortedViews.enumerated() {
-//                      if index == sender.selectedSegmentIndex { //When selected
-//                          view.tintColor = UIColor.orange
-//                      } else {//Unselected
-//                          view.tintColor = nil
-//                      }
-//                  }
-            
-            
+  
             switch segmentControl.selectedSegmentIndex {
             case 0:
                 
@@ -110,11 +130,6 @@ class SearchingViewController: UIViewController {
         
     }
     
-    func setSelectedSegmentColor(with foregroundColor: UIColor, and tintColor: UIColor) {
-        
-    }
-    
-    
     /*
      // MARK: - Navigation
      
@@ -126,6 +141,7 @@ class SearchingViewController: UIViewController {
      */
     
 }
+
 
 extension SearchingViewController:UIPageViewControllerDataSource {
     
@@ -141,7 +157,7 @@ extension SearchingViewController:UIPageViewControllerDataSource {
             currentVC = ingredientVC
             
         case is SearchingCreatorsViewController:
-            currentVC = creatroVC
+            currentVC = creatorVC
         default:
             return nil
         }
@@ -150,11 +166,17 @@ extension SearchingViewController:UIPageViewControllerDataSource {
             return nil
         }
         
+        if currentIndex == 0 {
+            segmentControl.selectedSegmentIndex = 0
+            segmentControl.changeUnderlinePosition(index: 0)
+            return nil
+            
+        }
         
-        if currentIndex == 0 { return nil }
         
-        segmentControl.selectedSegmentIndex = currentIndex - 1
-        segmentControl.changeUnderlinePosition(index: currentIndex - 1)
+        segmentControl.selectedSegmentIndex = segmentControl.selectedSegmentIndex - 1
+        segmentControl.changeUnderlinePosition(index: segmentControl.selectedSegmentIndex)
+        
         
         return VCs[currentIndex - 1]
         
@@ -173,7 +195,7 @@ extension SearchingViewController:UIPageViewControllerDataSource {
             currentVC = ingredientVC
             
         case is SearchingCreatorsViewController:
-            currentVC = creatroVC
+            currentVC = creatorVC
         default:
             return nil
         }
@@ -182,10 +204,16 @@ extension SearchingViewController:UIPageViewControllerDataSource {
             return nil
         }
         
-        if currentIndex == 2 { return nil }
+        if currentIndex == 2 {
+            
+            segmentControl.selectedSegmentIndex = 2
+            segmentControl.changeUnderlinePosition(index:2)
+            
+            return nil
+        }
         
-        segmentControl.selectedSegmentIndex = currentIndex + 1
-        segmentControl.changeUnderlinePosition(index: currentIndex + 1)
+        segmentControl.selectedSegmentIndex = segmentControl.selectedSegmentIndex + 1
+        segmentControl.changeUnderlinePosition(index: segmentControl.selectedSegmentIndex)
         
         return VCs[currentIndex + 1]
         
@@ -197,19 +225,39 @@ extension SearchingViewController:UIPageViewControllerDataSource {
 
 extension SearchingViewController:UISearchBarDelegate {
     
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchBar.showsCancelButton = true
+    }
+    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
-        searchBar.showsCancelButton = true
-        
-        let pageController = self.children[0] as! SearchingPageViewController
-        pageController.searchingWord = searchBar.text!
+//        let pageController = self.children[0] as! SearchingPageViewController
+        searchingWord = searchBar.text!
+        if searchingWord == "" {
+            searchedResults.removeAll()
+            searchedUsersImages.removeAll()
+            creatorVC.searchedCreators.removeAll()
+            creatorVC.searchedCreatorsImage.removeAll()
+            if creatorVC.tableView != nil {
+            creatorVC.tableView.reloadData()
+            }
+        }
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-         searchBar.resignFirstResponder()
+        searchBar.showsCancelButton = false
+        searchBar.resignFirstResponder()
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-         searchBar.resignFirstResponder()
+        
+        searchBar.showsCancelButton = false
+        
+//        let pageController = self.children[0] as! SearchingPageViewController
+        searchingWord = searchBar.text!
+        
+        searchBar.resignFirstResponder()
     }
 }
+
+

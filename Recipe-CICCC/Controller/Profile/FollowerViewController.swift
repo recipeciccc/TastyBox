@@ -24,6 +24,7 @@ class FollowerViewController: UIViewController {
         // Do any additional setup after loading the view.
         self.searchBar.delegate = self as? UISearchBarDelegate
         self.tableView.dataSource = self
+        self.tableView.delegate = self
         
         userDataManager.delegateFollowerFollowing = self
         userDataManager.delegate = self
@@ -97,6 +98,17 @@ extension FollowerViewController: UITableViewDataSource {
     }
     
     
+}
+
+extension FollowerViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = UIStoryboard(name: "creatorProfile", bundle: nil).instantiateViewController(identifier: "creatorProfile") as! CreatorProfileViewController
+
+        vc.id = followers[indexPath.row].userID
+        tableView.deselectRow(at: indexPath, animated: true)
+
+        navigationController?.pushViewController(vc, animated: true)
+    }
 }
 
 extension FollowerViewController: getUserDataDelegate {

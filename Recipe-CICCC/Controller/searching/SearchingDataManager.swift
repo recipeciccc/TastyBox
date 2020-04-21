@@ -10,28 +10,30 @@ import Foundation
 import Firebase
 
 protocol SearchingCreatorsDataManagerDelegate: class {
-    func gotGenres(getGenres: [String])
-    func gotIngredients(ingredients: [String])
+    //    func gotGenres(getGenres: [String])
+    //    func gotIngredients(ingredients: [String])
     func searchedUsers(users: [User])
-    func reloadData(data:[RecipeDetail])
+    func assignUserImage(image: UIImage, index: Int)
+    //    func reloadData(data:[RecipeDetail])
 }
 
 class SearchingDataManager: fetchRecipes {
     
     let db = Firestore.firestore()
-   
+    let storageRef = Storage.storage().reference()
+    
     weak var delegateChild: SearchingCreatorsDataManagerDelegate?
     
-    func createQuery(searchWord word: String, selectedIndex index: Int) {
-        
-        let query = db.collection("user").whereField("name", isGreaterThanOrEqualTo: word)
-            
-        getSearchedCreator(query: query)
-            
-        Data(queryRef: query)
-    }
+    //    func createQuery(searchWord word: String, selectedIndex index: Int) {
+    //
+    //        let query = db.collection("user").whereField("name", isGreaterThanOrEqualTo: word)
+    //
+    //        getSearchedCreator(query: query)
+    //
+    //        Data(queryRef: query)
+    //    }
     
-    func getSearchedCreator(query: Query) {
+    func getSearchedCreator(query: CollectionReference, searchingWord: String) {
         
         query.addSnapshotListener {
             (querySnapshot, error) in
@@ -50,15 +52,44 @@ class SearchingDataManager: fetchRecipes {
                     
                     
                     user = User(userID: userID!, name: name!, cuisineType: cuisineType!, familySize: familySize!)
-                    users.append(user!)
+                    
+                    if let userName = user?.name.lowercased() {
+                        let searchingWord = searchingWord.lowercased()
+                        if userName.contains(searchingWord) {
+                        users.append(user!)
+                        
+                    }
+                    
                 }
                 
-                self.delegateChild?.searchedUsers(users: users)
+                
             }
-            
+            self.delegateChild?.searchedUsers(users: users)
+        }
+        
+    }
+}
+
+func getUserImage(uid: String, index: Int) {
+    let imageRef = storageRef.child("user/\(uid)/userAccountImage")
+    var image: UIImage?
+    // Fetch the download URL
+    imageRef.getData(maxSize: 1 * 1024 * 1024) { data, error in
+        if error != nil {
+            print(error?.localizedDescription as Any)
+        } else {
+            if let imgData = data {
+                
+                print("imageRef: \(imageRef)")
+                
+                image = UIImage(data: imgData)!
+                self.delegateChild?.assignUserImage(image: image!, index: index)
+            }
         }
     }
-    
+}
+
+
 //    func Data(queryRef:Query) {
 //        var recipeList = [RecipeDetail]()
 //        var exist = Bool()
@@ -115,6 +146,6 @@ class SearchingDataManager: fetchRecipes {
 //       }
 //
 //
-       
-       
+
+
 }

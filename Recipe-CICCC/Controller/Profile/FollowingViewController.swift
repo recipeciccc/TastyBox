@@ -99,6 +99,17 @@ extension FollowingViewController: UITableViewDataSource {
     
 }
 
+extension FollowingViewController:UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = UIStoryboard(name: "creatorProfile", bundle: nil).instantiateViewController(identifier: "creatorProfile") as! CreatorProfileViewController
+
+        vc.id = followings[indexPath.row].userID
+        tableView.deselectRow(at: indexPath, animated: true)
+
+        navigationController?.pushViewController(vc, animated: true)
+    }
+}
+
 extension FollowingViewController: getUserDataDelegate {
     func gotUserData(user: User) {
         
