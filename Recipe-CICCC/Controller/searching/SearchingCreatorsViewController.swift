@@ -94,8 +94,7 @@ extension SearchingCreatorsViewController: UITableViewDataSource {
 
 extension SearchingCreatorsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-       
+    
         let id = searchedCreators[indexPath.row].userID
         
         if id == Auth.auth().currentUser?.uid {

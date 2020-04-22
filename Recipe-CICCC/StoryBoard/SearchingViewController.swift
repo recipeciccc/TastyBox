@@ -32,21 +32,27 @@ class SearchingViewController: UIViewController {
     
     lazy  var SearchBar: UISearchBar = UISearchBar(frame: CGRect(x: 0, y: 0, width: 600, height: 20))
     
-    let dataManager = SearchingDataManager()
+    let CreatorDataManager = SearchingDataManager()
+    let IngredientDataManager = SearchingIngredientsDataManager()
     let db = Firestore.firestore()
     
     var searchingWord : String = "" {
         didSet {
             
             guard searchingWord != "" else {
-                searchedResults.removeAll()
-                searchedUsersImages.removeAll()
+//                searchedResults.removeAll()
+//                searchedUsersImages.removeAll()
+                
                 return
             }
             
+//            ingredientVC.searchingWord = searchingWord
             let query = db.collection("user")
-            dataManager.delegateChild = self
-            dataManager.getSearchedCreator(query: query, searchingWord: searchingWord)
+            CreatorDataManager.delegateChild = self
+            CreatorDataManager.getSearchedCreator(query: query, searchingWord: searchingWord)
+            IngredientDataManager.getIngredientDelegate = self
+            IngredientDataManager.getIngredients(searchingWord: searchingWord)
+            ingredientVC.searchingWord = searchingWord
         }
     }
     
@@ -60,6 +66,24 @@ class SearchingViewController: UIViewController {
     var searchedUsersImages: [Int: UIImage] = [:] {
         didSet {
             creatorVC.searchedCreatorsImage = searchedUsersImages
+        }
+    }
+    
+    var searchedIngredient: [String] = [] {
+        didSet {
+            ingredientVC.ingredientArray = searchedIngredient
+            if segmentControl.selectedSegmentIndex == 0 {
+            pageController.setViewControllers([ingredientVC], direction: .forward, animated: false, completion: nil)
+        }
+            
+        }
+    }
+    
+    var searchedIngredientRecipe:[RecipeDetail] = [] {
+        didSet {
+            ingredientVC.searchedRecipes = searchedIngredientRecipe
+            ingredientVC.loadView()
+            ingredientVC.viewDidLoad()
         }
     }
     
@@ -233,15 +257,20 @@ extension SearchingViewController:UISearchBarDelegate {
         
 //        let pageController = self.children[0] as! SearchingPageViewController
         searchingWord = searchBar.text!
+        
         if searchingWord == "" {
             searchedResults.removeAll()
             searchedUsersImages.removeAll()
             creatorVC.searchedCreators.removeAll()
             creatorVC.searchedCreatorsImage.removeAll()
+            ingredientVC.ingredientArray.removeAll()
             if creatorVC.tableView != nil {
-            creatorVC.tableView.reloadData()
+//                creatorVC.tableView.reloadData()
+                ingredientVC.tableView.reloadData()
             }
         }
+        
+        
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {

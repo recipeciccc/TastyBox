@@ -13,18 +13,31 @@ extension SearchingViewController : SearchingCreatorsDataManagerDelegate{
         self.searchedResults = users
         
         for (index, user) in self.searchedResults.enumerated() {
-            dataManager.getUserImage(uid: user.userID, index: index)
+            CreatorDataManager.getUserImage(uid: user.userID, index: index)
         }
         if creatorVC.tableView != nil {
-        creatorVC.tableView.reloadData()
+            creatorVC.tableView.reloadData()
         }
     }
     
     func assignUserImage(image: UIImage, index: Int) {
         self.searchedUsersImages[index] = image
         if creatorVC.tableView != nil {
-        creatorVC.tableView.reloadData()
+            creatorVC.tableView.reloadData()
         }
+    }
+    
+}
+
+extension SearchingViewController : getIngredientsDelegate {
+    
+    func gotIngredients(ingredients: [String]) {
+        
+        self.searchedIngredient = ingredients
+        if ingredientVC.tableView != nil {
+            ingredientVC.tableView.reloadData()
+        }
+        
     }
     
 }
