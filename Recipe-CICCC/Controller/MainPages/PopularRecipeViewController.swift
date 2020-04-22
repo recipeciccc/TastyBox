@@ -19,7 +19,7 @@ class PopularRecipeViewController: UIViewController {
     var images:[Int:UIImage] = [:]
     let db = Firestore.firestore()
     
-    let dataManager = RecipedataManagerClass()
+    let dataManager = popularDataManager()
     
     
     override func viewDidLoad() {
@@ -150,12 +150,14 @@ extension PopularRecipeViewController: UITableViewDataSource {
 extension PopularRecipeViewController: getDataFromFirebaseDelegate {
     func assignImage(image: UIImage, index: Int) {
          self.images[index] = image
+        print("\(index): \(image)")
         self.tableView.reloadData()
     }
     
     func gotData(recipes: [RecipeDetail]) {
-        self.recipes = recipes.sorted { $0.like > $1.like }
-         
+//        self.recipes = recipes.sorted { $0.like > $1.like }
+        self.recipes = recipes
+        images.removeAll()
         recipes.enumerated().map {
             dataManager.getImage(rid: $0.1.recipeID, uid: $0.1.userID, index: $0.0)
         }

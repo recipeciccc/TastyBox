@@ -10,7 +10,7 @@ import Foundation
 import Firebase
 import FirebaseStorage
 
-class RecipedataManagerClass {
+class popularDataManager {
     
     let db = Firestore.firestore()
     weak var delegate: getDataFromFirebaseDelegate?
@@ -23,7 +23,7 @@ class RecipedataManagerClass {
     
     func getReipeDetail() {
         
-        db.collection("recipe").addSnapshotListener {
+        db.collection("recipe").order(by: "like", descending: true).limit(to: 10).addSnapshotListener {
             (querysnapshot, error) in
             if error != nil {
                 print("Error getting documents: \(String(describing: error))")
@@ -51,10 +51,6 @@ class RecipedataManagerClass {
                         
                         //MARK: They dont get anything when recipe is append...
                         if userId != nil && recipeId != nil {
-                            //                        self.getInstructions(userId: userId!, recipeId: recipeId!)
-                            //                        self.getIngredients(userId: userId!, recipeId: recipeId!)
-                            //                        self.getComments(userId: userId!, recipeId: recipeId!)
-                            
                             
                             let recipe = RecipeDetail(recipeID: recipeId!, title: title!, updatedDate: time!, cookingTime: cookingTime ?? 0, image: image ?? "", like: like!, serving: serving ?? 0 , userID: userId!)
                             
