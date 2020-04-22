@@ -14,10 +14,12 @@ class ResultRecipesViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
     
-    var query: Query?
+//    var query: Query?
     var searchingWord: String?
+    var searchingCategory: String?
     
-    let dataManager = ResultRecipesDataManager()
+    
+    var dataManager = ResultRecipesDataManager()
     
     var resultRecipes:[RecipeDetail] = []
     var resultRecipesImages:[Int:UIImage] = [:]
@@ -33,8 +35,12 @@ class ResultRecipesViewController: UIViewController {
         
         resultRecipesImages.removeAll()
         resultRecipesImages.removeAll()
-        dataManager.getAllRecipes(searchingWord: searchingWord!)
         
+        if searchingCategory! == "genres" {
+            dataManager.searchingGenreRecipe(searchingWord: searchingWord!)
+        } else if searchingCategory! == "ingredient" {
+            dataManager.getAllRecipes(searchingWord: searchingWord!)
+        }
         navigationItem.title = searchingWord!
         
     }
@@ -102,6 +108,11 @@ extension ResultRecipesViewController: UICollectionViewDelegateFlowLayout {
 
 
 extension ResultRecipesViewController : ResultRecipesDataManagerDelegate {
+    func passRecipesData(recipes: [RecipeDetail]) {
+        resultRecipes = recipes
+        self.collectionView.reloadData()
+    }
+    
     func reloadImg(img: UIImage, index: Int) {
         if resultRecipesImages.count != resultRecipes.count {
              resultRecipesImages[index] = img

@@ -41,3 +41,14 @@ extension SearchingViewController : getIngredientsDelegate {
     }
     
 }
+
+extension SearchingViewController : isGenreExistDelegate {
+    func gotGenres(getGenres: [String]) {
+        searchedGenre = getGenres
+        
+        if genreVC.tableView != nil {
+            genreVC.tableView.reloadData()
+        }
+    }
+    
+}

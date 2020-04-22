@@ -34,25 +34,26 @@ class SearchingViewController: UIViewController {
     
     let CreatorDataManager = SearchingDataManager()
     let IngredientDataManager = SearchingIngredientsDataManager()
+    let GenreDataManager = SearchingGenreDataManager()
     let db = Firestore.firestore()
     
     var searchingWord : String = "" {
         didSet {
             
             guard searchingWord != "" else {
-//                searchedResults.removeAll()
-//                searchedUsersImages.removeAll()
-                
                 return
             }
             
-//            ingredientVC.searchingWord = searchingWord
             let query = db.collection("user")
             CreatorDataManager.delegateChild = self
             CreatorDataManager.getSearchedCreator(query: query, searchingWord: searchingWord)
+            
             IngredientDataManager.getIngredientDelegate = self
             IngredientDataManager.getIngredients(searchingWord: searchingWord)
             ingredientVC.searchingWord = searchingWord
+            
+            GenreDataManager.isGenreExistDelegate = self
+            GenreDataManager.getIngredients(searchingWord: searchingWord)
         }
     }
     
@@ -82,9 +83,15 @@ class SearchingViewController: UIViewController {
     var searchedIngredientRecipe:[RecipeDetail] = [] {
         didSet {
             ingredientVC.searchedRecipes = searchedIngredientRecipe
-            ingredientVC.loadView()
-            ingredientVC.viewDidLoad()
+//            ingredientVC.loadView()
+//            ingredientVC.viewDidLoad()
         }
+    }
+    
+    var searchedGenre:[String] = [] {
+        didSet {
+            genreVC.genresArray = searchedGenre
+         }
     }
     
     override func viewDidLoad() {
@@ -261,12 +268,20 @@ extension SearchingViewController:UISearchBarDelegate {
         if searchingWord == "" {
             searchedResults.removeAll()
             searchedUsersImages.removeAll()
+            
             creatorVC.searchedCreators.removeAll()
             creatorVC.searchedCreatorsImage.removeAll()
             ingredientVC.ingredientArray.removeAll()
-            if creatorVC.tableView != nil {
+            
+            genreVC.genresArray.removeAll()
+            
+            if ingredientVC.tableView != nil {
 //                creatorVC.tableView.reloadData()
                 ingredientVC.tableView.reloadData()
+            }
+            
+            if genreVC.tableView != nil {
+                genreVC.tableView.reloadData()
             }
         }
         
@@ -281,8 +296,6 @@ extension SearchingViewController:UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
         searchBar.showsCancelButton = false
-        
-//        let pageController = self.children[0] as! SearchingPageViewController
         searchingWord = searchBar.text!
         
         searchBar.resignFirstResponder()

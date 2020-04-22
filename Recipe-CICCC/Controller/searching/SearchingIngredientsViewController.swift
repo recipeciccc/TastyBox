@@ -77,6 +77,7 @@ extension SearchingIngredientsViewController: UITableViewDelegate {
         let cell = tableView.cellForRow(at: indexPath) as! SearchingIngredientsTableViewCell
        
         vc.searchingWord = cell.ingredientLabel.text
+        vc.searchingCategory = "ingredient"
         
         tableView.deselectRow(at: indexPath, animated: true)
         navigationController?.pushViewController(vc, animated: true)

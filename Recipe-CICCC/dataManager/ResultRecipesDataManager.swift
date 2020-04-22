@@ -12,6 +12,7 @@ import Firebase
 protocol ResultRecipesDataManagerDelegate: class {
     func reloadImg(img: UIImage, index: Int)
     func reloadIngredients(recipes: [RecipeDetail])
+    func passRecipesData(recipes: [RecipeDetail])
 }
 
 class ResultRecipesDataManager {
@@ -20,16 +21,30 @@ class ResultRecipesDataManager {
     let db = Firestore.firestore()
     var searchingIngredient = ""
     var searchedRecipes:[RecipeDetail] = []
+     var genreOrNot = Bool()
     
     func getAllRecipes(searchingWord: String) {
+        genreOrNot = false
            self.searchingIngredient = searchingWord
            let query = db.collection("recipe").order(by: "like", descending: true)
            Data(queryRef: query)
        }
+    
+    
+    func searchingGenreRecipe(searchingWord word: String) {
+        
+        genreOrNot = true
+        let query = db.collection("recipe").whereField("genres.\(word)", isEqualTo: true)
+          
+        Data(queryRef: query)
+            
+    }
+    
        
        func Data(queryRef:Query) {
            var recipeList = [RecipeDetail]()
            var exist = Bool()
+       
            queryRef.addSnapshotListener { (snapshot, err) in
                if err == nil {
                    if let snap = snapshot?.documents {
@@ -64,7 +79,12 @@ class ResultRecipesDataManager {
                            
                        }
                     exist = true
-                     self.isDataExist(exist,recipeList)
+                    
+                    if self.genreOrNot {
+                        self.isSearchingGenreDataExist(exist, recipeList)
+                    } else {
+                        self.isIngredientData(exist,recipeList)
+                    }
                    }
                    
                } else {
@@ -73,82 +93,81 @@ class ResultRecipesDataManager {
                    exist = false
                }
                
-//               self.isDataExist(exist,recipeList)
            }
            
        }
-       
-       func isDataExist(_ exist:Bool, _ data: [RecipeDetail]){
+
+       func isIngredientData(_ exist:Bool, _ data: [RecipeDetail]){
            if exist{
-               
-               searchingRecipes(recipes: data)
-               
+
+               searchingIngredientRecipes(recipes: data)
+
            }
        }
-       
-       
-       func searchingRecipes(recipes: [RecipeDetail]) {
+    
+    func isSearchingGenreDataExist(_ exist: Bool, _ data: [RecipeDetail]) {
            
-           var isFinished = false
+           if exist {
+               delegate?.passRecipesData(recipes: data)
+               
+               for (index, recipe) in data.enumerated() {
+                   getImage(uid: recipe.userID, rid: recipe.recipeID, index: index)
+               }
+           }
+           
+       }
+
+
+       func searchingIngredientRecipes(recipes: [RecipeDetail]) {
+
+//           var isFinished = false
            for (index, recipe) in recipes.enumerated() {
                db.collection("recipe").document("\(recipe.recipeID)").collection("ingredient").addSnapshotListener{
                    (querysnapshot, error) in
                    if error != nil {
                        print("Error getting documents: \(String(describing: error))")
                    } else {
-                       
+
                     for document in querysnapshot!.documents {
                            let data = document.data()
-                           
+
                            let ingredient = data["ingredient"] as! String
                         if  self.searchingIngredient.capitalized == ingredient.capitalized {
                                self.searchedRecipes.append(recipe)
                                break
                            }
                            if index == recipes.count - 1{
-                               isFinished = true
+//                               isFinished = true
                             self.passRecipes()
                            }
                        }
-                    
-                    
-                    
+
+
+
                    }
-                   
+
                }
-               
+
            }
-          
+
        }
-       
-       
+
+
        func passRecipes() {
         delegate?.reloadIngredients(recipes: self.searchedRecipes)
        }
+    
+   
     
     func getImage(uid:String?, rid: String, index: Int){
         var image = UIImage()
        
         let storageRef = Storage.storage().reference()
-        //            var imageList: [UIImage] = []
-        //            var imageRefs: [StorageReference] = []
-        
         
         guard let uid = uid else {
             return
         }
         
-        //            for index in 0..<rid.count{
-        
-        //                print("\(index): \(rid[index])")
-        //            let imagesRef = storageRef.child("user/\(uid)/RecipePhoto/\(rid[index])/\(rid[index])")
-        //                imageRefs.append(imagesRef)
-        //            }
-        
-        //        print(imageRefs)
-        //            imageList = Array(repeating: UIImage(), count: imageRefs.count)
-        
-        //            for (index, imageRef) in imageRefs.enumerated() {
         
         let imageRef = storageRef.child("user/\(uid)/RecipePhoto/\(rid)/\(rid)")
         print(imageRef)
