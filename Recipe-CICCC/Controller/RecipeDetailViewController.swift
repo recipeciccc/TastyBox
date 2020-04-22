@@ -198,7 +198,7 @@ extension RecipeDetailViewController: UITableViewDataSource,UITableViewDelegate{
                 cell.followBtn.isHidden = true
                 let creatorName = Auth.auth().currentUser?.displayName
                 cell.creatorNameButton.setTitle(creatorName!, for: .normal)
-                
+                cell.imgCreator.setBackgroundImage(creatorImage, for: .normal)
             }else{
                 cell.followBtn.isHidden = false
                 cell.creatorNameButton.setTitle(creator?.name, for: .normal)

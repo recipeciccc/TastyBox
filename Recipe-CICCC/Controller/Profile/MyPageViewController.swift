@@ -216,6 +216,7 @@ extension MyPageViewController: CollectionViewInsideUserTableView{
         vc.userProfile = true
         vc.recipe = recipeList[data.row]
         vc.mainPhoto = imageList[data.row]
+        vc.creator = self.user
         self.navigationController?.pushViewController(vc, animated: true)
     }
     

@@ -9,19 +9,25 @@
 import Foundation
 import Firebase
 
-protocol SearchingIngredientsDelegate: class {
+protocol getIngredientsDelegate: class {
     func gotIngredients(ingredients: [String])
-    //    func reloadData(data: [RecipeDetail])
-    func reloadIngredients(recipe: RecipeDetail)
+    
 }
 
-class SearchingIngredientsDataManager: fetchRecipes {
+protocol searchingResultDelegate: class {
+    func reloadIngredients(recipe: [RecipeDetail])
+}
+
+class SearchingIngredientsDataManager: ResultFetchRecipeData {
     
-    let db = Firestore.firestore()
-    weak var delegateChild: SearchingIngredientsDelegate?
+    //    let db = Firestore.firestore()
+    weak var getIngredientDelegate: getIngredientsDelegate?
+    weak var searchingResultDelegate: searchingResultDelegate?
     
+    //    var searchingIngredient: String?
+    var searchedRecipes: [RecipeDetail] = []
     
-    func getIngredients() {
+    func getIngredients(searchingWord: String) {
         
         var arr:[String] = []
         db.collection("ingredient").document("ingredient").addSnapshotListener() {
@@ -36,62 +42,61 @@ class SearchingIngredientsDataManager: fetchRecipes {
                 let arrOfData = data!["ingredient"] as? [String:Bool]
                 
                 for element in arrOfData! {
-                    arr.append(element.key)
+                    if element.key.lowercased().contains(searchingWord.lowercased()) {
+                        arr.append(element.key)
+                    }
                 }
                 
-                self.delegateChild?.gotIngredients(ingredients: arr)
+                self.getIngredientDelegate?.gotIngredients(ingredients: arr)
             }
         }
         
     }
     
-    func getAllRecipes() {
-        let query = db.collection("recipe").order(by: "like", descending: true)
-        Data(queryRef: query)
-    }
+//    override func isDataExist(_ exist: Bool, _ data: [RecipeDetail]) {
+//        if exist{
+//            
+//            searchingRecipes(recipes: data)
+//            
+//        }
+//    }
+//    
+//    
+//    func searchingRecipes(recipes: [RecipeDetail]) {
+//        
+//        var isFinished = false
+//        for (index, recipe) in recipes.enumerated() {
+//            db.collection("recipe").document("\(recipe.recipeID)").collection("ingredient").addSnapshotListener{
+//                (querysnapshot, error) in
+//                if error != nil {
+//                    print("Error getting documents: \(String(describing: error))")
+//                } else {
+//                    for document in querysnapshot!.documents {
+//                        let data = document.data()
+//                        
+//                        let ingredient = data["ingredient"] as! String
+//                        if  self.searchingIngredient!.capitalized == ingredient.capitalized {
+//                            self.searchedRecipes.append(recipe)
+//                            break
+//                        }
+//                        
+//                    }
+//                    
+//                }
+//                
+//            }
+//            if index == recipes.count - 1{
+//                isFinished = true
+//            }
+//        }
+//        if isFinished {
+//            self.passRecipes()
+//        }
+//    }
+//    
+//    
+//    func passRecipes() {
+//        searchingResultDelegate?.reloadIngredients(recipe: self.searchedRecipes)
+//    }
     
-    func getAllIngredients(recipe: RecipeDetail, searchingWord: String) {
-        
-        var ingredients:[Ingredient] = []
-        var exist = false
-        
-        db.collection("recipe").document("\(recipe.recipeID)").collection("ingredient").addSnapshotListener{
-            (querysnapshot, error) in
-            if error != nil {
-                print("Error getting documents: \(String(describing: error))")
-            } else {
-                for document in querysnapshot!.documents {
-                    let data = document.data()
-                    
-                    let ingredient = data["ingredient"] as! String
-                    let amount = data["amount"] as! String
-                    
-                    ingredients.append(Ingredient(name: ingredient, amount: amount))
-                    
-                }
-                exist = true
-                self.isSearchingIngredientExist(exist, ingredients, recipe, searchingWord: searchingWord)
-            }
-            
-            self.isSearchingIngredientExist(exist, ingredients, recipe, searchingWord: searchingWord)
-            
-        }
-    }
-    
-    func isSearchingIngredientExist(_ exist:Bool, _ data: [Ingredient], _ recipe: RecipeDetail, searchingWord: String){
-        
-        if exist{
-            for ingredient in data {
-                if  searchingWord.capitalized == ingredient.name.capitalized {
-                    delegateChild?.reloadIngredients(recipe: recipe)
-                    break
-                }
-            }
-            
-        }
-    }
-    
-    //    func getSearchedRecipes(recpes:[RecipeDetail]) {
-    //        <#function body#>
-    //    }
 }

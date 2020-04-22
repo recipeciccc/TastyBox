@@ -25,8 +25,8 @@ class SearchingGenreViewController: UIViewController {
         tableView.delegate = self
         tableView.tableFooterView = UIView()
         
-        dataManager.delegate = self
-        dataManager.getGenres()
+        dataManager.isGenreExistDelegate = self
+//        dataManager.getGenres()
     }
     
 
@@ -49,8 +49,9 @@ extension SearchingGenreViewController : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = (tableView.dequeueReusableCell(withIdentifier: "searcingGenre") as? SearchingGenresTableViewCell)!
-        cell.genresLabel.text = "test"
+       
         cell.genresLabel.text = genresArray[indexPath.row]
+       
         return cell
     }
     
@@ -59,20 +60,21 @@ extension SearchingGenreViewController : UITableViewDataSource {
 
 extension SearchingGenreViewController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let cell = tableView.cellForRow(at: indexPath) as? SearchingGenresTableViewCell {
-            let query = dataManager.createQuery(searchingWord: cell.genresLabel.text!)
+//        if let cell = tableView.cellForRow(at: indexPath) as? SearchingGenresTableViewCell {
+//            let query = dataManager.createQuery(searchingWord: cell.genresLabel.text!)
             let vc = storyboard?.instantiateViewController(identifier: "resultRecipes") as! ResultRecipesViewController
             
-            vc.query = query
-            
+//            vc.query = query
+            vc.searchingCategory = "genres"
+            vc.searchingWord = genresArray[indexPath.row]
             navigationController?.pushViewController(vc, animated: true)
             tableView.deselectRow(at: indexPath, animated: true)
         }
-    }
+//    }
     
 }
 
-extension SearchingGenreViewController :SearchingGenreDataManagerDelegate {
+extension SearchingGenreViewController :isGenreExistDelegate {
     func gotGenres(getGenres: [String]) {
         genresArray = getGenres
         self.tableView.reloadData()

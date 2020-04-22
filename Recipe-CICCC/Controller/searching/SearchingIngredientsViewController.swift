@@ -12,23 +12,34 @@ class SearchingIngredientsViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    var ingredientArray: [String] = []
+    var ingredientArray: [String] = [] {
+        didSet {
+            if tableView != nil {
+                tableView.reloadData()
+            }
+//            dataManager.getAllRecipes(searchingWord: searchingWord)
+        }
+    }
+    
     var searchingWord = ""
+    
     var searchedRecipes:[RecipeDetail] = []
     
-    let dataManager = SearchingIngredientsDataManager()
     
+//    let dataManager = SearchingIngredientsDataManager()
+//    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
         tableView.dataSource = self
+        tableView.delegate = self
         tableView.tableFooterView = UIView()
-        dataManager.delegate = self
-        dataManager.delegateChild = self
+        tableView.reloadData()
+//        dataManager.delegate = self
         
-        dataManager.getAllRecipes()
-        dataManager.getIngredients()
+//        dataManager.getAllRecipes(searchingWord: searchingWord)
+       
     }
     
     
@@ -60,25 +71,17 @@ extension SearchingIngredientsViewController: UITableViewDataSource {
     
 }
 
-extension SearchingIngredientsViewController: fetchRecipesDelegate {
-    func reloadData(data: [RecipeDetail]) {
+extension SearchingIngredientsViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = storyboard?.instantiateViewController(identifier: "resultRecipes") as! ResultRecipesViewController
+        let cell = tableView.cellForRow(at: indexPath) as! SearchingIngredientsTableViewCell
+       
+        vc.searchingWord = cell.ingredientLabel.text
+        vc.searchingCategory = "ingredient"
         
-        for recipe in data {
-            dataManager.getAllIngredients(recipe: recipe, searchingWord: searchingWord)
-        }
+        tableView.deselectRow(at: indexPath, animated: true)
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 
-extension SearchingIngredientsViewController: SearchingIngredientsDelegate {
-    func gotIngredients(ingredients: [String]) {
-        ingredientArray = ingredients
-        tableView.reloadData()
-    }
-    
-    func reloadIngredients(recipe: RecipeDetail) {
-        searchedRecipes.append(recipe)
-        
-    }
-    
-}
 

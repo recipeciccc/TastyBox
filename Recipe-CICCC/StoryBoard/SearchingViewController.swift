@@ -32,21 +32,28 @@ class SearchingViewController: UIViewController {
     
     lazy  var SearchBar: UISearchBar = UISearchBar(frame: CGRect(x: 0, y: 0, width: 600, height: 20))
     
-    let dataManager = SearchingDataManager()
+    let CreatorDataManager = SearchingDataManager()
+    let IngredientDataManager = SearchingIngredientsDataManager()
+    let GenreDataManager = SearchingGenreDataManager()
     let db = Firestore.firestore()
     
     var searchingWord : String = "" {
         didSet {
             
             guard searchingWord != "" else {
-                searchedResults.removeAll()
-                searchedUsersImages.removeAll()
                 return
             }
             
             let query = db.collection("user")
-            dataManager.delegateChild = self
-            dataManager.getSearchedCreator(query: query, searchingWord: searchingWord)
+            CreatorDataManager.delegateChild = self
+            CreatorDataManager.getSearchedCreator(query: query, searchingWord: searchingWord)
+            
+            IngredientDataManager.getIngredientDelegate = self
+            IngredientDataManager.getIngredients(searchingWord: searchingWord)
+            ingredientVC.searchingWord = searchingWord
+            
+            GenreDataManager.isGenreExistDelegate = self
+            GenreDataManager.getIngredients(searchingWord: searchingWord)
         }
     }
     
@@ -61,6 +68,30 @@ class SearchingViewController: UIViewController {
         didSet {
             creatorVC.searchedCreatorsImage = searchedUsersImages
         }
+    }
+    
+    var searchedIngredient: [String] = [] {
+        didSet {
+            ingredientVC.ingredientArray = searchedIngredient
+            if segmentControl.selectedSegmentIndex == 0 {
+            pageController.setViewControllers([ingredientVC], direction: .forward, animated: false, completion: nil)
+        }
+            
+        }
+    }
+    
+    var searchedIngredientRecipe:[RecipeDetail] = [] {
+        didSet {
+            ingredientVC.searchedRecipes = searchedIngredientRecipe
+//            ingredientVC.loadView()
+//            ingredientVC.viewDidLoad()
+        }
+    }
+    
+    var searchedGenre:[String] = [] {
+        didSet {
+            genreVC.genresArray = searchedGenre
+         }
     }
     
     override func viewDidLoad() {
@@ -233,15 +264,28 @@ extension SearchingViewController:UISearchBarDelegate {
         
 //        let pageController = self.children[0] as! SearchingPageViewController
         searchingWord = searchBar.text!
+        
         if searchingWord == "" {
             searchedResults.removeAll()
             searchedUsersImages.removeAll()
+            
             creatorVC.searchedCreators.removeAll()
             creatorVC.searchedCreatorsImage.removeAll()
-            if creatorVC.tableView != nil {
-            creatorVC.tableView.reloadData()
+            ingredientVC.ingredientArray.removeAll()
+            
+            genreVC.genresArray.removeAll()
+            
+            if ingredientVC.tableView != nil {
+//                creatorVC.tableView.reloadData()
+                ingredientVC.tableView.reloadData()
+            }
+            
+            if genreVC.tableView != nil {
+                genreVC.tableView.reloadData()
             }
         }
+        
+        
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
@@ -252,8 +296,6 @@ extension SearchingViewController:UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
         searchBar.showsCancelButton = false
-        
-//        let pageController = self.children[0] as! SearchingPageViewController
         searchingWord = searchBar.text!
         
         searchBar.resignFirstResponder()
