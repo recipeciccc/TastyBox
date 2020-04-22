@@ -13,7 +13,7 @@ class CreatorProfileViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-        var id: String?
+    var id: String?
 //    var id = "3AsWJvUdZkQNPX0pukMcNDabnK53"
     var userName:String = ""
     var creatorImage: UIImage?

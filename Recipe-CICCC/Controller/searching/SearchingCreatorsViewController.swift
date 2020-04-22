@@ -7,20 +7,60 @@
 //
 
 import UIKit
+import Firebase
 
 class SearchingCreatorsViewController: UIViewController {
 
     @IBOutlet var tableView: UITableView!
     
+    let dataManager = SearchingDataManager()
+    
+    var searchedCreators: [User] = [] {
+        didSet {
+//            tableReload(tableView: self.tableView)
+        }
+    }
+//    var searchedCreators: [User] = []
+    var searchedCreatorsImage:[Int:UIImage] = [:] {
+    
+        didSet {
+//            tableReload(tableView: self.tableView)
+        }
+
+    }
+//    var searchedCreatorsImage:[Int:UIImage] = [:]
+    
+//    var searchingWord : String = "" {
+//        didSet {
+//            let query = db.collection("user")
+//            dataManager.delegateChild = self
+//            dataManager.getSearchedCreator(query: query, searchingWord: searchingWord)
+//        }
+//    }
+    
+    let db = Firestore.firestore()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        tableView.delegate = self
+//        dataManager.delegateChild = self
         tableView.dataSource = self
+        tableView.delegate = self
+        tableView.tableFooterView = UIView()
+
+        
+        let query = db.collection("user")
+        
+//        if searchingWord != "" {
+//            dataManager.getSearchedCreator(query: query, searchingWord: searchingWord)
+//        }
+//
+    
+        
     }
     
-
+    
     /*
     // MARK: - Navigation
 
@@ -36,20 +76,46 @@ class SearchingCreatorsViewController: UIViewController {
 extension SearchingCreatorsViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return searchedCreators.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = ( tableView.dequeueReusableCell(withIdentifier: "serchingCreator", for: indexPath) as? SearchingCreatorTableViewCell)!
         
-        cell.creatorNameLabel.text = "test"
-        cell.imgView.image = #imageLiteral(resourceName: "download1")
+        if  !searchedCreators.isEmpty && !searchedCreators.isEmpty {
+            cell.creatorNameLabel.text = searchedCreators[indexPath.row].name
+            cell.imgView.image = searchedCreatorsImage[indexPath.row]
+        }
         
         return cell
     }
     
 }
 
-
 extension SearchingCreatorsViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    
+        let id = searchedCreators[indexPath.row].userID
+        
+        if id == Auth.auth().currentUser?.uid {
+            
+            let profileVC = UIStoryboard(name: "MyPage", bundle: nil).instantiateViewController(identifier: "User profile") as! MyPageViewController
+            navigationController?.pushViewController(profileVC, animated: true)
+            
+        } else {
+            let profileVC = UIStoryboard(name: "creatorProfile", bundle: nil).instantiateViewController(identifier: "creatorProfile") as! CreatorProfileViewController
+            profileVC.id = id
+            navigationController?.pushViewController(profileVC, animated: true)
+        }
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        
+        
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 60.0
+    }
 }
+
+

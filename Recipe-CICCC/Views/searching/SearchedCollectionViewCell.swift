@@ -1,5 +1,5 @@
 //
-//  SearchingCollectionViewCell.swift
+//  SearchingGenreCollectionViewCell.swift
 //  Recipe-CICCC
 //
 //  Created by 北島　志帆美 on 2020-04-20.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SearchingIngredientCollectionViewCell: UICollectionViewCell {
+class SearchedCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var imgView: UIImageView!
 }

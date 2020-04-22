@@ -56,7 +56,6 @@
                                                     <color key="backgroundColor" red="1" green="0.57647058819999997" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="34" id="ivS-wi-Ogj"/>
-                                                        <constraint firstAttribute="width" constant="100" id="iw7-jN-omG"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                     <state key="normal" title="Edit Profile">
@@ -67,8 +66,9 @@
                                             <constraints>
                                                 <constraint firstItem="xtT-7L-dpk" firstAttribute="centerY" secondItem="3kd-ze-j0h" secondAttribute="centerY" constant="28.5" id="9s3-QM-tLN"/>
                                                 <constraint firstItem="Iqr-Mj-WoC" firstAttribute="top" secondItem="3kd-ze-j0h" secondAttribute="bottom" constant="23" id="FQ1-0l-eMN"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="Iqr-Mj-WoC" secondAttribute="trailing" constant="68" id="H6n-HV-wIr"/>
+                                                <constraint firstAttribute="trailingMargin" relation="lessThanOrEqual" secondItem="Iqr-Mj-WoC" secondAttribute="trailing" constant="68" id="H6n-HV-wIr"/>
                                                 <constraint firstItem="3kd-ze-j0h" firstAttribute="leading" secondItem="xtT-7L-dpk" secondAttribute="trailing" constant="38" id="RQ9-r2-hLt"/>
+                                                <constraint firstItem="Iqr-Mj-WoC" firstAttribute="leading" relation="lessThanOrEqual" secondItem="xtT-7L-dpk" secondAttribute="trailing" constant="106" id="Ube-EV-xKZ"/>
                                                 <constraint firstItem="xtT-7L-dpk" firstAttribute="centerY" secondItem="xtX-wW-MMV" secondAttribute="centerY" id="Wzw-UP-fpK"/>
                                                 <constraint firstItem="xtT-7L-dpk" firstAttribute="leading" secondItem="xtX-wW-MMV" secondAttribute="leadingMargin" id="bM2-IY-e9D"/>
                                                 <constraint firstItem="Iqr-Mj-WoC" firstAttribute="centerX" secondItem="3kd-ze-j0h" secondAttribute="centerX" id="hwT-fl-oIv"/>
@@ -220,14 +220,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YS5-YA-3X5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2793" y="27"/>
-        </scene>
-        <!--imagePickerVC-->
-        <scene sceneID="tpU-Ex-KrM">
-            <objects>
-                <viewControllerPlaceholder storyboardIdentifier="imagePickerVC" storyboardName="pickUserAccountImage" referencedIdentifier="imagePickerVC" id="XgG-TD-PgQ" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="49E-UW-p7d" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2781" y="-76"/>
         </scene>
     </scenes>
     <resources>

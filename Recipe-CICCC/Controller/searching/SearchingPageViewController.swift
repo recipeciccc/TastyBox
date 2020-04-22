@@ -10,8 +10,6 @@ import UIKit
 
 class SearchingPageViewController: UIPageViewController {
     
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -22,9 +20,10 @@ class SearchingPageViewController: UIPageViewController {
         self.setViewControllers([ingredientVC], direction: .forward, animated: true,completion: nil)
         
         // tapによるページめくりを担当するインスタンスを取得
-        let tapGestureRecognizer = self.gestureRecognizers.filter{ $0 is UITapGestureRecognizer }.first as! UITapGestureRecognizer
+//        let tapGestureRecognizer = self.gestureRecognizers.filter{ $0 is UITapGestureRecognizer }.first as! UITapGestureRecognizer
         
-        tapGestureRecognizer.isEnabled = false
+//        tapGestureRecognizer.isEnabled = false
+        
         
     }
     
@@ -44,14 +43,14 @@ class SearchingPageViewController: UIPageViewController {
 
 
 
-extension SearchingPageViewController: SearchingViewControllerDelegate {
-    func segmentSetted(index: Int) {
-        
-        let genreVC = storyboard?.instantiateViewController(identifier: "genreVC") as! SearchingGenreViewController
-        let ingredientVC = storyboard?.instantiateViewController(identifier: "ingredientVC") as! SearchingIngredientsViewController
-        let creatroVC = storyboard?.instantiateViewController(identifier: "creatroVC") as! SearchingCreatorsViewController
-        
-        let VCs = [ingredientVC,genreVC,creatroVC]
-        self.setViewControllers([VCs[index]], direction: .forward, animated: true, completion: nil)
-    }
-}
+//extension SearchingPageViewController: SearchingViewControllerDelegate {
+//    func segmentSetted(index: Int) {
+//
+//        let genreVC = storyboard?.instantiateViewController(identifier: "genreVC") as! SearchingGenreViewController
+//        let ingredientVC = storyboard?.instantiateViewController(identifier: "ingredientVC") as! SearchingIngredientsViewController
+//        let creatorVC = storyboard?.instantiateViewController(identifier: "creatroVC") as! SearchingCreatorsViewController
+//
+//        let VCs = [ingredientVC,genreVC,creatorVC]
+//        self.setViewControllers([VCs[index]], direction: .forward, animated: true, completion: nil)
+//    }
+//}

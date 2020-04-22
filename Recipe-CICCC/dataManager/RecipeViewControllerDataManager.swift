@@ -19,7 +19,7 @@ class RecipeViewControllerDataManager {
     func Data(queryRef:Query) {
         var recipeList = [RecipeDetail]()
         var exist = Bool()
-        queryRef.getDocuments { (snapshot, err) in
+        queryRef.addSnapshotListener { (snapshot, err) in
             if err == nil {
                 if let snap = snapshot?.documents {
                     for document in snap{

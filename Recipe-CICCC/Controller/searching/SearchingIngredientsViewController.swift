@@ -9,63 +9,79 @@
 import UIKit
 
 class SearchingIngredientsViewController: UIViewController {
-
-      @IBOutlet weak var collectionView: UICollectionView!
+    
+    @IBOutlet weak var tableView: UITableView!
+    
+    var ingredientArray: [String] = [] {
+        didSet {
+            if tableView != nil {
+                tableView.reloadData()
+            }
+//            dataManager.getAllRecipes(searchingWord: searchingWord)
+        }
+    }
+    
+    var searchingWord = ""
+    
+    var searchedRecipes:[RecipeDetail] = []
     
     
+//    let dataManager = SearchingIngredientsDataManager()
+//    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
-        collectionView.dataSource = self
-    
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.tableFooterView = UIView()
+        tableView.reloadData()
+//        dataManager.delegate = self
+        
+//        dataManager.getAllRecipes(searchingWord: searchingWord)
+       
     }
     
-  
+    
     
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destination.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }
 
-extension SearchingIngredientsViewController: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+extension SearchingIngredientsViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return ingredientArray.count
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = (collectionView.dequeueReusableCell(withReuseIdentifier: "searcingIngredient", for: indexPath) as? SearchingIngredientCollectionViewCell)!
-        cell.imgView.image = #imageLiteral(resourceName: "shenggeng-lin-XoN3v3Ge7EE-unsplash")
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = (tableView.dequeueReusableCell(withIdentifier: "searchingIngredient") as? SearchingIngredientsTableViewCell)!
+        
+        cell.ingredientLabel.text = ingredientArray[indexPath.row]
         
         return cell
     }
     
-    
 }
 
-extension SearchingIngredientsViewController: UICollectionViewDelegateFlowLayout {
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-           return UIEdgeInsets(top: 0, left: 0, bottom: 10, right: 0)
-       }
+extension SearchingIngredientsViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = storyboard?.instantiateViewController(identifier: "resultRecipes") as! ResultRecipesViewController
+        let cell = tableView.cellForRow(at: indexPath) as! SearchingIngredientsTableViewCell
        
-       func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-           return CGSize(width: (collectionView.frame.size.width-30) / 2, height: (collectionView.frame.size.width-30) / 2)
-       }
-       
-       func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-           return 10
-       }
-       
-       func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-           
-           return 10
-       }
+        vc.searchingWord = cell.ingredientLabel.text
+        vc.searchingCategory = "ingredient"
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+        navigationController?.pushViewController(vc, animated: true)
+    }
 }
+
+
