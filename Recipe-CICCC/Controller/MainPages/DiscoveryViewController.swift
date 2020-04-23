@@ -41,9 +41,34 @@ class DiscoveryViewController: UIViewController {
     var indexPageCurledInContainer: Int?
     var PreviousIndexPageCurledInContainer: Int?
     
+    var menuOpend = false
+    
     @IBOutlet weak var MenuCollectionView: UICollectionView!
     @IBAction func SideMenuTapped(){
         print("Toggle side Menu")
+        
+        
+        
+        if sideMenuOpen == false {
+            // Init a UIVisualEffectView which going to do the blur for us
+            let blurView = UIVisualEffectView()
+            // Make its frame equal the main view frame so that every pixel is under blurred
+            blurView.frame = view.frame
+            // Choose the style of the blur effect to regular.
+            // You can choose dark, light, or extraLight if you wants
+            blurView.effect = UIBlurEffect(style: .light)
+            // Now add the blur view to the main view
+            blurView.tag = 100
+            self.view.insertSubview(blurView, at: 2)
+        } else {
+            if let viewWithTag = self.view.viewWithTag(100) {
+                viewWithTag.removeFromSuperview()
+            }else{
+                print("No!")
+            }
+        }
+        
+        
         NotificationCenter.default.post(name: NSNotification.Name("ToggleSideMenu"), object: nil)
     }
     @IBOutlet weak var SideMenuConstraint: NSLayoutConstraint!
@@ -60,7 +85,7 @@ class DiscoveryViewController: UIViewController {
     
     var arrayMenu = [String]()
     var sideMenuOpen = false
-//    weak var delegate: MenuViewControllerDelegate?
+    //    weak var delegate: MenuViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -88,9 +113,11 @@ class DiscoveryViewController: UIViewController {
         pageControllView.delegate = self
         self.MenuCollectionView.showsHorizontalScrollIndicator = false
         
-         self.MenuCollectionView?.scrollToItem(at: NSIndexPath(item: selectedIndex, section: 0) as IndexPath, at: .centeredHorizontally, animated: true)
+        self.MenuCollectionView?.scrollToItem(at: NSIndexPath(item: selectedIndex, section: 0) as IndexPath, at: .centeredHorizontally, animated: true)
         
     }
+    
+    
     
     func initialContentView(){
         //        self.SubscribedContainerView.isHidden = true
@@ -125,6 +152,7 @@ class DiscoveryViewController: UIViewController {
         }else{
             sideMenuOpen = true
             SideMenuConstraint.constant = 0
+            
         }
         UIView.animate(withDuration: 0.3) {
             self.view.layoutIfNeeded()
@@ -175,11 +203,11 @@ class DiscoveryViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == "embedPageViewController" {
-//            pageControllView = (segue.destination as? MainPageViewController)!
-//            pageControllView.dataSource = self
-//            pageControllView.delegate = self  // 追加
-//        }
+        //        if segue.identifier == "embedPageViewController" {
+        //            pageControllView = (segue.destination as? MainPageViewController)!
+        //            pageControllView.dataSource = self
+        //            pageControllView.delegate = self  // 追加
+        //        }
     }
 }
 
@@ -196,7 +224,7 @@ extension DiscoveryViewController: UICollectionViewDelegate, UICollectionViewDat
         //        if indexPath.row == 3 && selectedIndex == 3 {
         //            self.MenuCollectionView?.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
         //        }
-     
+        
         
         let cell = MenuCollectionView.dequeueReusableCell(withReuseIdentifier: "MenuCell", for: indexPath) as! MenuCollectionViewCell
         let active = (indexPath.row == selectedIndex)
@@ -206,64 +234,64 @@ extension DiscoveryViewController: UICollectionViewDelegate, UICollectionViewDat
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-  
+        
         focusCell(indexPath: indexPath)
         
         menuViewController(viewController: self.children[0] as! MainPageViewController, at: indexPath.row)
         
     }
-        //MARK:- MenuViewControllerDelegate
-        func menuViewController(viewController: MainPageViewController, at index: Int) {
-
-            // 現在表示されているViewControllerを取得する
-            var currentIndex: Int = 0
-            //        //現在表示しているContentViewControllerを取得
-            var vc: UIViewController?
-            
-            let FollowingVC = UIStoryboard(name: "followingRecipe", bundle: nil).instantiateViewController(identifier: "followingRecipe") as! FollowingRecipeViewController
-            let ingredientVC = UIStoryboard(name: "ingredientRecipe", bundle: nil).instantiateViewController(identifier: "ingredientRecipe") as! IngredientsViewController
-            let popularVC = UIStoryboard(name: "popularPage", bundle: nil).instantiateViewController(identifier: "popularPage") as! PopularRecipeViewController
-            let editorChoiceVC = UIStoryboard(name: "EditorChoice", bundle: nil).instantiateViewController(identifier: "EditorChoice") as EditorChoiceViewController
-            let monthlyVC = UIStoryboard(name: "Monthly", bundle: nil).instantiateViewController(identifier: "Monthly") as! MonthlyViewController
-            let VIPVC = UIStoryboard(name: "VIP_page", bundle: nil).instantiateViewController(identifier: "VIP_page") as! VIPViewController
-            
-            let Vcs = [FollowingVC, ingredientVC, popularVC, editorChoiceVC, monthlyVC, VIPVC]
-            vc = Vcs[index]
-            
-            if viewController.viewControllers?.first is FollowingViewController {
-                currentIndex = 0
-                
-            }
-            else if viewController.viewControllers?.first is IngredientsViewController {
-                currentIndex = 1
-               
-            }
-            else if viewController.viewControllers?.first is PopularRecipeViewController {
-                currentIndex = 2
-                
-            }
-            else if viewController.viewControllers?.first is EditorChoiceViewController {
-                currentIndex = 3
-               
-            }
-            else if viewController.viewControllers?.first is MonthlyViewController {
-                currentIndex = 4
-                
-            }
-            else if viewController.viewControllers?.first is VIPViewController {
-                currentIndex = 5
-                
-            }
-            
-            // 選択したindexが表示しているコンテンツと同じなら処理を止める
-            guard currentIndex != index else { return }
-
-            // 選択したindexと現在表示されているindexを比較して、ページングの方法を決める
-            let direction : UIPageViewController.NavigationDirection = currentIndex < index ? .forward : .reverse
+    //MARK:- MenuViewControllerDelegate
+    func menuViewController(viewController: MainPageViewController, at index: Int) {
         
-            // 新しくViewControllerを設定する　※　下のスワイプと組み合わせる時はanimatedはfalseに設定しておいたほうが無難
-            viewController.setViewControllers([vc!], direction: direction, animated: true)
+        // 現在表示されているViewControllerを取得する
+        var currentIndex: Int = 0
+        //        //現在表示しているContentViewControllerを取得
+        var vc: UIViewController?
+        
+        let FollowingVC = UIStoryboard(name: "followingRecipe", bundle: nil).instantiateViewController(identifier: "followingRecipe") as! FollowingRecipeViewController
+        let ingredientVC = UIStoryboard(name: "ingredientRecipe", bundle: nil).instantiateViewController(identifier: "ingredientRecipe") as! IngredientsViewController
+        let popularVC = UIStoryboard(name: "popularPage", bundle: nil).instantiateViewController(identifier: "popularPage") as! PopularRecipeViewController
+        let editorChoiceVC = UIStoryboard(name: "EditorChoice", bundle: nil).instantiateViewController(identifier: "EditorChoice") as EditorChoiceViewController
+        let monthlyVC = UIStoryboard(name: "Monthly", bundle: nil).instantiateViewController(identifier: "Monthly") as! MonthlyViewController
+        let VIPVC = UIStoryboard(name: "VIP_page", bundle: nil).instantiateViewController(identifier: "VIP_page") as! VIPViewController
+        
+        let Vcs = [FollowingVC, ingredientVC, popularVC, editorChoiceVC, monthlyVC, VIPVC]
+        vc = Vcs[index]
+        
+        if viewController.viewControllers?.first is FollowingViewController {
+            currentIndex = 0
             
+        }
+        else if viewController.viewControllers?.first is IngredientsViewController {
+            currentIndex = 1
+            
+        }
+        else if viewController.viewControllers?.first is PopularRecipeViewController {
+            currentIndex = 2
+            
+        }
+        else if viewController.viewControllers?.first is EditorChoiceViewController {
+            currentIndex = 3
+            
+        }
+        else if viewController.viewControllers?.first is MonthlyViewController {
+            currentIndex = 4
+            
+        }
+        else if viewController.viewControllers?.first is VIPViewController {
+            currentIndex = 5
+            
+        }
+        
+        // 選択したindexが表示しているコンテンツと同じなら処理を止める
+        guard currentIndex != index else { return }
+        
+        // 選択したindexと現在表示されているindexを比較して、ページングの方法を決める
+        let direction : UIPageViewController.NavigationDirection = currentIndex < index ? .forward : .reverse
+        
+        // 新しくViewControllerを設定する　※　下のスワイプと組み合わせる時はanimatedはfalseに設定しておいたほうが無難
+        viewController.setViewControllers([vc!], direction: direction, animated: true)
+        
     }
     
     // 指定したindexPathのセルを選択状態にして移動させる。(collectionViewなので表示されていないセルは存在しない)
@@ -272,7 +300,7 @@ extension DiscoveryViewController: UICollectionViewDelegate, UICollectionViewDat
         if let previousCell = self.MenuCollectionView?.cellForItem(at: NSIndexPath(item: selectedIndex, section: 0) as IndexPath) as? MenuCollectionViewCell {
             previousCell.focusCell(active: false)
         }
-
+        
         // 新しく選択したセルを選択状態にする(collectionViewなので表示されていないセルは存在しない)
         if let nextCell = self.MenuCollectionView?.cellForItem(at: indexPath) as? MenuCollectionViewCell {
             nextCell.focusCell(active: true)
@@ -307,24 +335,24 @@ class MenuCollectionViewCell: UICollectionViewCell{
     override func awakeFromNib() {
         super.awakeFromNib()
         
-//        let OriginalView = UIView()
-//        let ChangeView = UIView()
-//
-//        if OriginalView.isEqual(ChangeView){
-//            ChangeView.backgroundColor = #colorLiteral(red: 0.9607843161, green: 0.7058823705, blue: 0.200000003, alpha: 1)
-//            self.selectedBackgroundView = ChangeView
-//        }else{
-//            ChangeView.backgroundColor = #colorLiteral(red: 0.9998212457, green: 0.9867780805, blue: 0.7689660192, alpha: 1)
-//            self.backgroundView = ChangeView
-        }
+        //        let OriginalView = UIView()
+        //        let ChangeView = UIView()
+        //
+        //        if OriginalView.isEqual(ChangeView){
+        //            ChangeView.backgroundColor = #colorLiteral(red: 0.9607843161, green: 0.7058823705, blue: 0.200000003, alpha: 1)
+        //            self.selectedBackgroundView = ChangeView
+        //        }else{
+        //            ChangeView.backgroundColor = #colorLiteral(red: 0.9998212457, green: 0.9867780805, blue: 0.7689660192, alpha: 1)
+        //            self.backgroundView = ChangeView
+    }
     
 }
 
 extension DiscoveryViewController : UIPageViewControllerDelegate {
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
-
+        
         var index: Int = selectedIndex
-
+        
         if pageViewController.viewControllers?.first! is FollowingRecipeViewController {
             index = 0
         }
@@ -341,7 +369,7 @@ extension DiscoveryViewController : UIPageViewControllerDelegate {
             index = 4
         }
         else if pageViewController.viewControllers?.first! is VIPViewController {
-           index = 5
+            index = 5
         }
         
         // MenuViewControllerの特定のセルにフォーカスをあてる

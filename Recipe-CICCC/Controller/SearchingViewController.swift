@@ -283,6 +283,10 @@ extension SearchingViewController:UISearchBarDelegate {
             if genreVC.tableView != nil {
                 genreVC.tableView.reloadData()
             }
+            
+            if creatorVC.tableView != nil {
+                self.creatorVC.tableView.reloadData()
+            }
         }
         
         

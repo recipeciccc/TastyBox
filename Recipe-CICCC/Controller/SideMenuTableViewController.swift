@@ -15,6 +15,10 @@ class SideMenuTableViewController: UITableViewController {
          NotificationCenter.default.post(name: NSNotification.Name("ToggleSideMenu"), object: nil)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+      
+    }
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print(indexPath.row)
 //        NotificationCenter.default.post(name: NSNotification.Name("ToggleSideMenu"), object: nil)

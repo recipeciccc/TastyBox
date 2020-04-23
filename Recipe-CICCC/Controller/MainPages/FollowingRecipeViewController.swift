@@ -186,7 +186,7 @@ extension FollowingRecipeViewController : FollowingRecipeDataManagerDelegate {
          print("\(indexOfImage): \(imgs)")
        
         if recipeImages[orderFollowing] == nil {
-            recipeImages[orderFollowing] = [Int :UIImage]()
+            recipeImages[orderFollowing] = [Int:UIImage]()
         }
         recipeImages[orderFollowing]?[indexOfImage] = imgs
         self.followingTableView.reloadData()
