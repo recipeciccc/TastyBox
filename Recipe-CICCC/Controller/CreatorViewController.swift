@@ -72,7 +72,7 @@ class CreatorViewController: UIViewController {
         tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyBoard))
         self.view.addGestureRecognizer(tap!)
         
-      
+        
         
     }
     
@@ -99,7 +99,7 @@ class CreatorViewController: UIViewController {
     @IBAction func AddIngredients(_ sender: Any) {
         ingredientList.append("")
         amountList.append("")
-        MainTableView.insertRows(at: [IndexPath(row: ingredientList.count-1, section: 4)], with: .top)
+        MainTableView.insertRows(at: [IndexPath(row: ingredientList.count-1, section: 4)], with: .bottom)
         
         let cell = (self.MainTableView.cellForRow(at: IndexPath(row: 0, section: 4)) as! EditIngredientsCell)
         //        self.view.frame.origin.y -= (cell.frame.height)
@@ -108,8 +108,10 @@ class CreatorViewController: UIViewController {
         // 2
         if isKeyboardOpen {
             self.MainTableView.scrollToRow(at: ingredientRow, at: .bottom, animated: true)
+            
+        } else {
+            self.MainTableView.scrollToRow(at: ingredientRow, at: .middle, animated: true)
         }
-        self.MainTableView.scrollToRow(at: ingredientRow, at: .middle, animated: true)
     }
     
     @IBAction func AddPreparationStep(_ sender: Any) {
@@ -188,35 +190,38 @@ class CreatorViewController: UIViewController {
     @objc func keyboardWillShow(_ notification: Notification) {
         self.contentOffset =  self.MainTableView.contentOffset.y
         
-        UITextView.animate(withDuration: 0.2, animations:{
-            //            var frame = self.MainTableView.frame
-            //            frame.origin.y = -243 // keyboardSize.size.height
-            //            self.MainTableView.frame = frame
+        //        UITextView.animate(withDuration: 0.2, animations:{
+        //            var frame = self.MainTableView.frame
+        //            frame.origin.y = -243 // keyboardSize.size.height
+        //            self.MainTableView.frame = frame
+        
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            let keyboardHeight = keyboardSize.height
+            self.keyboardHeight = keyboardHeight
             
-            if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-                let keyboardHeight = keyboardSize.height
-                self.keyboardHeight = keyboardHeight
+            
+            if self.isKeyboardOpen == false {
                 
-                
-                if self.isKeyboardOpen == false {
+                if self.selectedIndexPath != nil {
                     
-                    if self.selectedIndexPath != nil {
-                    
-                        if self.selectedIndexPath?.section == 1 {
-                              self.view.frame.origin.y -= keyboardHeight
-                            self.MainTableView.scrollToRow(at: self.selectedIndexPath!, at: .middle, animated: true)
+                    if self.selectedIndexPath?.section == 1 {
                         
-                        } else {
                         self.MainTableView.scrollToRow(at: self.selectedIndexPath!, at: .middle, animated: true)
-                          self.view.frame.origin.y -= keyboardHeight
+                        self.view.frame.origin.y -= keyboardHeight
+                        
+                        
+                    } else {
+                        self.MainTableView.scrollToRow(at: self.selectedIndexPath!, at: .middle, animated: true)
+                        self.view.frame.origin.y -= keyboardHeight
                     }
-                    }
-                  
                     self.isKeyboardOpen = true
                 }
                 
+                //                    self.isKeyboardOpen = true
             }
-        })
+            
+        }
+        //        })
     }
     
     @objc func dismissKeyBoard() {
@@ -225,12 +230,15 @@ class CreatorViewController: UIViewController {
         //            let keyboardHeight = keyboardSize.height
         //         let keyboardFrame = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
         //        self.MainTableView.contentOffset.y = 0
-        self.view.frame.origin.y = 0
-        let preparationRow =  IndexPath(row: photoList.count-1, section: 6)
+        
+        
         
         // 2
         UIView.animate(withDuration: 0.3, animations: {
+            self.view.frame.origin.y = 0
+            let preparationRow =  IndexPath(row: self.photoList.count-1, section: 6)
             self.MainTableView.scrollToRow(at: preparationRow, at: .bottom, animated: true)
+            self.view.endEditing(true)
         })
         
         //        }
@@ -241,7 +249,7 @@ class CreatorViewController: UIViewController {
         //                    self.MainTableView.frame = frame})
         
         isKeyboardOpen = false
-        self.view.endEditing(true)
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -524,7 +532,7 @@ extension CreatorViewController: UITableViewDelegate,UITableViewDataSource{
             
             cell.ingredientTextField.tag = 340 + indexPath.row
             cell.AmountTextField.tag = 350 + indexPath.row
-                      
+            
             
             return cell
         case 5:
@@ -537,7 +545,7 @@ extension CreatorViewController: UITableViewDelegate,UITableViewDataSource{
             
             
             cell.textView.tag = 460 + indexPath.row
-                               
+            
             if tableView.isEditing == true {
                 preparationText[indexPath.row] =  cell.textView.text
                 // cell.textView.text = preparationText[indexPath.row]
@@ -557,17 +565,17 @@ extension CreatorViewController: UITableViewDelegate,UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-//         self.view.endEditing(true)
-               
+        //         self.view.endEditing(true)
+        
         tableView.cellForRow(at: indexPath)?.selectionStyle = .none
     }
     
-//    func tableView(_ tableView: UITableView, didSelectRowAt : IndexPath) {
-//
-//        self.view.endEditing(true)
-//
-//        tableView.cellForRow(at: didSelectRowAt)?.selectionStyle = .none
-//    }
+    //    func tableView(_ tableView: UITableView, didSelectRowAt : IndexPath) {
+    //
+    //        self.view.endEditing(true)
+    //
+    //        tableView.cellForRow(at: didSelectRowAt)?.selectionStyle = .none
+    //    }
     
     func tableView(_ tableView: UITableView, targetIndexPathForMoveFromRowAt sourceIndexPath: IndexPath, toProposedIndexPath proposedDestinationIndexPath: IndexPath) -> IndexPath {
         if proposedDestinationIndexPath.section != sourceIndexPath.section{
@@ -679,8 +687,8 @@ extension CreatorViewController: UITextFieldDelegate, UITextViewDelegate{
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-      
-     
+        
+        
         let cell = textField.superview?.superview as! UITableViewCell
         let tableView = cell.superview as! UITableView
         
@@ -694,11 +702,27 @@ extension CreatorViewController: UITextFieldDelegate, UITextViewDelegate{
             textView.text = ""
             textView.textColor = UIColor.black
             
+            if selectedIndexPath == nil {
+                let cell = textView.superview?.superview as! UITableViewCell
+                let tableView = cell.superview as! UITableView
+                
+                let textFieldIndexPath = tableView.indexPath(for: cell)
+                selectedIndexPath = textFieldIndexPath
+                
+                UITextView.animate(withDuration: 0.4, animations: {
+                    self.MainTableView.scrollToRow(at: self.selectedIndexPath!, at: .bottom, animated: true)
+                    self.view.frame.origin.y -= self.keyboardHeight
+                })
+                
+                
+                self.isKeyboardOpen = true
+            }
+            
             let cell = textView.superview?.superview as! UITableViewCell
-                   let tableView = cell.superview as! UITableView
-                   
-                   let textFieldIndexPath = tableView.indexPath(for: cell)
-                   selectedIndexPath = textFieldIndexPath
+            let tableView = cell.superview as! UITableView
+            
+            let textFieldIndexPath = tableView.indexPath(for: cell)
+            selectedIndexPath = textFieldIndexPath
             
         }
         
@@ -755,7 +779,7 @@ class CreatorPhotoCell: UITableViewCell{
 class TitleCell: UITableViewCell{
     @IBOutlet weak var TitleTextField: UITextField!
     
-   
+    
 }
 
 
@@ -763,7 +787,17 @@ class TimeNSearvingCell: UITableViewCell {
     @IBOutlet weak  var TimeTextFieldCell: UITextField!
     @IBOutlet weak  var ServingsTextFieldCell: UITextField!
     
-   
+    override func awakeFromNib() {
+        self.TimeTextFieldCell.addDoneButton(title: "Done", target: self, selector: #selector(tapDone(sender:)))
+        
+          self.ServingsTextFieldCell.addDoneButton(title: "Done", target: self, selector: #selector(tapDone(sender:)))
+    }
+    
+    // 2
+    @objc func tapDone(sender: Any) {
+        self.TimeTextFieldCell.endEditing(true)
+        self.ServingsTextFieldCell.endEditing(true)
+    }
 }
 
 class IngredientsCell: UITableViewCell{
@@ -773,7 +807,7 @@ class EditIngredientsCell: UITableViewCell{
     @IBOutlet weak var ingredientTextField: UITextField!
     @IBOutlet weak var AmountTextField: UITextField!
     
-  
+    
 }
 
 class InstructionTitleCell: UITableViewCell{
@@ -786,5 +820,43 @@ class PreparationCell: UITableViewCell{
     @IBOutlet weak var StepButton: UIButton!
     var imagePicker = UIImagePickerController()
     
-  
+    override func awakeFromNib() {
+        self.textView.addDoneButton(title: "Done", target: self, selector: #selector(tapDone(sender:)))
+        
+    }
+    
+    // 2
+    @objc func tapDone(sender: Any) {
+        self.textView.endEditing(true)
+    }
+}
+
+extension UITextView {
+    
+    func addDoneButton(title: String, target: Any, selector: Selector) {
+        
+        let toolBar = UIToolbar(frame: CGRect(x: 0.0,
+                                              y: 0.0,
+                                              width: UIScreen.main.bounds.size.width,
+                                              height: 44.0))//1
+        let flexible = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)//2
+        let barButton = UIBarButtonItem(title: title, style: .plain, target: target, action: selector)//3
+        toolBar.setItems([flexible, barButton], animated: false)//4
+        self.inputAccessoryView = toolBar//5
+    }
+}
+
+extension UITextField {
+    
+    func addDoneButton(title: String, target: Any, selector: Selector) {
+        
+        let toolBar = UIToolbar(frame: CGRect(x: 0.0,
+                                              y: 0.0,
+                                              width: UIScreen.main.bounds.size.width,
+                                              height: 44.0))//1
+        let flexible = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)//2
+        let barButton = UIBarButtonItem(title: title, style: .plain, target: target, action: selector)//3
+        toolBar.setItems([flexible, barButton], animated: false)//4
+        self.inputAccessoryView = toolBar//5
+    }
 }
