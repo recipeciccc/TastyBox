@@ -40,6 +40,8 @@ class FirstTimeUserProfileTableViewController: UITableViewController, UIPickerVi
     
     let uid = Auth.auth().currentUser?.uid
     
+    var isVIP: Bool = false
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -131,7 +133,7 @@ class FirstTimeUserProfileTableViewController: UITableViewController, UIPickerVi
         } else {
 
             
-            dataManager.userRegister(userName: userNameTextField.text ?? "", eMailAddress: emailTextField.text ?? "", familySize: Int(familySizeTextField!.text!) ?? 0, cuisineType: cuisineTypeTextField!.text ?? "", accountImage: userImage!)
+            dataManager.userRegister(userName: userNameTextField.text ?? "", eMailAddress: emailTextField.text ?? "", familySize: Int(familySizeTextField!.text!) ?? 0, cuisineType: cuisineTypeTextField!.text ?? "", accountImage: userImage!, isVIP: isVIP)
 
             let Storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
             let vc = Storyboard.instantiateViewController(withIdentifier: "Discovery")
@@ -298,6 +300,10 @@ extension FirstTimeUserProfileTableViewController: getUserDataDelegate {
     func gotUserData(user: User) {
         self.familySizeTextField.text = String(user.familySize!)
         self.cuisineTypeTextField.text = user.cuisineType
+        
+        if let isVIP = user.isVIP {
+            self.isVIP = isVIP
+        }
         
         if Auth.auth().currentUser?.displayName == nil {
             self.userNameTextField.text = user.name

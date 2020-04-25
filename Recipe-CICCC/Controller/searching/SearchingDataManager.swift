@@ -40,9 +40,9 @@ class SearchingDataManager: fetchRecipes {
                     let name = data["userName"] as? String
                     let familySize = data["familySize"] as? Int
                     let cuisineType = data["cuisineType"] as? String
+                     let isVIP = data["isVIP"] as? Bool
                     
-                    
-                    user = User(userID: userID!, name: name!, cuisineType: cuisineType!, familySize: familySize!)
+                    user = User(userID: userID!, name: name!, cuisineType: cuisineType!, familySize: familySize!, isVIP: isVIP)
                     
                     if let userName = user?.name.lowercased() {
                         let searchingWord = searchingWord.lowercased()

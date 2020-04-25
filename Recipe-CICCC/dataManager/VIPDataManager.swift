@@ -10,9 +10,11 @@ import Foundation
 import Firebase
 
 protocol VIPDataManagerDelegate: class {
-//    func passFollowing(followingsIDs: [String])
+    //    func passFollowing(followingsIDs: [String])
+    func isVIP(isVIP: Bool, isMessageWillShow: Bool)
     func reloadRecipes(data:[RecipeDetail])
     func reloadImages(data: [Int: UIImage])
+    func reloadCreators(data: [User])
 }
 
 class VIPDataManager {
@@ -22,14 +24,51 @@ class VIPDataManager {
     var VIPRecipesIDs: [String] = []
     var recipeList:[RecipeDetail] = []
     var recipeImages: [Int: UIImage] = [:]
+    var user: User?
+    var users:[User] = []
+    let uid = (Auth.auth().currentUser?.uid)!
     weak var delegate: VIPDataManagerDelegate?
     
-    func findFollowing(id: String?) {
-        var uid = (Auth.auth().currentUser?.uid)!
-        
-        if id != nil {
-            uid = id!
+    
+    func isVIP() {
+        db.collection("user").document(uid).addSnapshotListener {
+            (querysnapshot, error) in
+            
+            if error != nil {
+                print("Error getting documents: \(String(describing: error))")
+            } else {
+                
+                if let data = querysnapshot?.data() {
+                    if let isVIP = data["isVIP"] as? Bool {
+                        
+                        guard let isMessageWillShow = data["isMessageWillShow"] as? Bool else {
+                            self.delegate?.isVIP(isVIP: isVIP, isMessageWillShow: false)
+                            return
+                        }
+                        self.delegate?.isVIP(isVIP: isVIP, isMessageWillShow: isMessageWillShow)
+                    }
+                    
+                }
+                
+            }
         }
+    }
+    
+    
+    func nolongerShowMessage() {
+        db.collection("user").document(uid).setData([
+            "isMessageWillShow" : true
+        ], merge: true) { err in
+            if let err = err {
+                print("Error writing document: \(err)")
+            } else {
+                print("Document successfully written!")
+            }
+        }
+    }
+    
+    
+    func findFollowing() {
         
         db.collection("user").document(uid).collection("following").addSnapshotListener {
             (querysnapshot, error) in
@@ -47,6 +86,8 @@ class VIPDataManager {
         }
     }
     
+    
+    
     func VIPGetRecipes() {
         for followingID in self.followingsIDs {
             db.collection("user").document(followingID).addSnapshotListener {  (querysnapshot, error) in
@@ -56,7 +97,7 @@ class VIPDataManager {
                     
                     
                     if let data = querysnapshot!.data() {
-                        if let gotVIPRecipesIDs = data["VIP"] as? [String: Bool] {
+                        if let gotVIPRecipesIDs = data["VIPRecipes"] as? [String: Bool] {
                             
                             for id in gotVIPRecipesIDs {
                                 self.VIPRecipesIDs.append(id.key)
@@ -76,7 +117,7 @@ class VIPDataManager {
     }
     
     func Data() {
-//        var recipeList = [RecipeDetail]()
+        //        var recipeList = [RecipeDetail]()
         var exist = Bool()
         
         for recipeID in self.VIPRecipesIDs {
@@ -121,7 +162,7 @@ class VIPDataManager {
                         exist = false
                     }
                     
-//                    self.isDataExist(exist)
+                    //                    self.isDataExist(exist)
                 }
                 
             }
@@ -134,7 +175,45 @@ class VIPDataManager {
         if exist{
             delegate?.reloadRecipes(data:self.recipeList)
             getImage()
+            getUserDetail()
         }
+    }
+    
+    func getUserDetail() {
+        
+        for (index, recipe) in self.recipeList.enumerated() {
+            
+            db.collection("user").document(recipe.userID).addSnapshotListener {
+                (querysnapshot, error) in
+                if error != nil {
+                    print("Error getting documents: \(String(describing: error))")
+                }
+                else {
+                    
+                    if let data = querysnapshot!.data() {
+                        
+                        print("data count: \(data.count)")
+                        
+                        
+                        let userID = data["id"] as? String
+                        let name = data["userName"] as? String
+                        let familySize = data["familySize"] as? Int
+                        let cuisineType = data["cuisineType"] as? String
+                        let isVIP = data["isVIP"] as? Bool
+                        
+                        self.user = User(userID: userID!, name: name!, cuisineType: cuisineType!, familySize: familySize!, isVIP: isVIP)
+                        self.users.append(self.user!)
+                        if index == self.recipeList.count - 1 {
+                            self.delegate?.reloadCreators(data: self.users)
+                        }
+                        
+                    }
+                }
+                
+                
+            }
+        }
+        
     }
     
     
@@ -156,11 +235,11 @@ class VIPDataManager {
                     }
                 }
             }
-        
+            
         }
         
         
-      
+        
         
         
     }

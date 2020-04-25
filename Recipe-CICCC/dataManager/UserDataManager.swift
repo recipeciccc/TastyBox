@@ -60,9 +60,9 @@ class UserdataManager {
                     let name = data["userName"] as? String
                     let familySize = data["familySize"] as? Int
                     let cuisineType = data["cuisineType"] as? String
-                
-                
-                self.user = User(userID: userID!, name: name!, cuisineType: cuisineType!, familySize: familySize)
+                    let isVIP = data["isVIP"] as? Bool
+ 
+                self.user = User(userID: userID!, name: name!, cuisineType: cuisineType!, familySize: familySize, isVIP: isVIP!)
                 self.delegate?.gotUserData(user: self.user!)
 
                 }
@@ -177,7 +177,7 @@ class UserdataManager {
         }
     }
     
-    func userRegister(userName: String, eMailAddress: String, familySize: Int, cuisineType: String, accountImage: UIImage) {
+    func userRegister(userName: String, eMailAddress: String, familySize: Int, cuisineType: String, accountImage: UIImage, isVIP: Bool) {
         
         let uid = (Auth.auth().currentUser?.uid)!
         
@@ -188,7 +188,8 @@ class UserdataManager {
             "userName": userName,
             "eMailAddress": eMailAddress,
             "familySize": familySize,
-            "cuisineType": cuisineType
+            "cuisineType": cuisineType,
+            "isVIP": isVIP
             
         ], merge: true) { err in
             if let err = err {

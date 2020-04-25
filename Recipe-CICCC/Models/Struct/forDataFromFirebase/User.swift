@@ -14,6 +14,7 @@ struct User {
 //    var image: String
     var cuisineType: String
     var familySize: Int?
+    var isVIP: Bool?
     
 //    var followersID: [String]
 //    var followingID: [String]

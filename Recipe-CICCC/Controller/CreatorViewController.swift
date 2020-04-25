@@ -450,7 +450,7 @@ extension CreatorViewController{
             //        db.collection("user").document(uid).collection("proifle").document("info").setData([
             db.collection("user").document(uid).setData([
                 
-                "VIP": [rid: true]
+                "VIPRecipes": [rid: true]
                 
             ], merge: true) { err in
                 if let err = err {

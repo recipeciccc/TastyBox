@@ -170,9 +170,9 @@ class fetchDataInIngredients {
                     let name = data["userName"] as? String
                     let familySize = data["familySize"] as? Int
                     let cuisineType = data["cuisineType"] as? String
-                    
-                    
-                    self.user = User(userID: userID!, name: name!, cuisineType: cuisineType!, familySize: familySize)
+                     let isVIP = data["isVIP"] as? Bool
+                                       
+                    self.user = User(userID: userID!, name: name!, cuisineType: cuisineType!, familySize: familySize!, isVIP: isVIP)
                     self.delegate?.gotUserData(user: self.user!)
                     
                 }
