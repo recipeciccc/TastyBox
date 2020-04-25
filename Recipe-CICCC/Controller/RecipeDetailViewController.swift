@@ -32,6 +32,12 @@ class RecipeDetailViewController: UIViewController {
     
     var instructionImgs = [UIImage]()
     
+    override func loadView() {
+        userDataManager.recipeDetailDelegate = self
+        if recipe!.isVIPRecipe! {
+            userDataManager.getUserDetail(id: nil)
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -296,6 +302,7 @@ extension RecipeDetailViewController: RecipeDetailDelegate {
 }
 
 extension RecipeDetailViewController: getUserDataDelegate {
+    
     func assignUserImage(image: UIImage) {
         self.creatorImage = image
         self.detailTableView.reloadData()
@@ -305,4 +312,14 @@ extension RecipeDetailViewController: getUserDataDelegate {
         self.creator = user
     }
     
+}
+
+extension RecipeDetailViewController: recipeDetailDelegate {
+    func isVIP(isVIP: Bool) {
+        if isVIP {
+            
+        } else {
+            
+        }
+    }
 }

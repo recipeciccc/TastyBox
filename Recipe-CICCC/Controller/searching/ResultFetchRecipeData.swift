@@ -50,8 +50,9 @@ class ResultFetchRecipeData {
                         }
                         
                         
-                        
-                        let recipe = RecipeDetail(recipeID: recipeId!, title: title!, updatedDate: time!, cookingTime: cookingTime ?? 0, image: image ?? "", like: like!, serving: serving ?? 0, userID: userId!, genres: genresArr)
+                        let isVIPRecipe = data["VIP"] as? Bool
+                                               
+                        let recipe = RecipeDetail(recipeID: recipeId!, title: title!, updatedDate: time!, cookingTime: cookingTime ?? 0, image: image ?? "", like: like!, serving: serving ?? 0, userID: userId!, genres: genresArr, isVIPRecipe: isVIPRecipe!)
                         
                         recipeList.append(recipe)
                         

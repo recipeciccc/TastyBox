@@ -19,6 +19,8 @@ class VIPViewController: UIViewController {
         
 //        collectionview.width = UIScreen.main.bounds.size.width
 //        collectionview.height = UIScreen.main.bounds.size.height
+        
+        
         dataManager.delegate = self
         collectionview.delegate = self
         
@@ -72,6 +74,13 @@ extension VIPViewController :RecipeCollectionViewDelegate {
             let alertController = UIAlertController(title: "Register VIP member", message: "This recipe is VIP only. You need to be VIP member.", preferredStyle: .alert)
                            
             let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+            let registerAction = UIAlertAction(title: "Sign up VIP membership", style: .default, handler: { action in
+                let registerVC = self.storyboard?.instantiateViewController(identifier: "registerVIP") as! ExplainationVIPViewController
+                
+                self.navigationController?.pushViewController(registerVC, animated: true)
+            })
+            
+             alertController.addAction(registerAction)
             alertController.addAction(defaultAction)
              
             navigationController!.present(alertController, animated: true, completion: nil)

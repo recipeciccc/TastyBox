@@ -13,6 +13,11 @@ import FirebaseAuth
 
 protocol SavedRecipeDelegate: class {
     func reloadData(data: [RecipeDetail])
+   
+}
+
+protocol recipeDetailDelegate: class {
+    func isVIP(isVIP: Bool)
 }
 
 class UserdataManager {
@@ -22,7 +27,7 @@ class UserdataManager {
     weak var delegate: getUserDataDelegate?
     weak var delegateFollowerFollowing :FolllowingFollowerDelegate?
     weak var savedRecipesDelegate: SavedRecipeDelegate?
-    
+    weak var recipeDetailDelegate: recipeDetailDelegate?
     
     var users: [User] = []
     var user: User?
@@ -33,6 +38,31 @@ class UserdataManager {
     var savedRecipesIDs:[String] = []
     let uid = Auth.auth().currentUser?.uid
     
+    func checkVIP() {
+           
+           let uid: String = Auth.auth().currentUser!.uid
+          
+           db.collection("user").document(uid).addSnapshotListener {
+               (querysnapshot, error) in
+               if error != nil {
+                   print("Error getting documents: \(String(describing: error))")
+               }
+               else {
+                  
+                   if let data = querysnapshot!.data() {
+                   
+                       print("data count: \(data.count)")
+                
+                    if let isVIP = data["isVIP"] as? Bool {
+                        self.recipeDetailDelegate?.isVIP(isVIP: isVIP)
+                    }
+
+                   }
+               }
+               
+               
+           }
+       }
     
     func getUserDetail(id: String?) {
         
@@ -288,8 +318,10 @@ class UserdataManager {
                         
                         
                         
-                        let recipe = RecipeDetail(recipeID: recipeId!, title: title!, updatedDate: time!, cookingTime: cookingTime ?? 0, image: image ?? "", like: like!, serving: serving ?? 0, userID: userId!, genres: genresArr)
-                        
+                          let isVIPRecipe = data["VIP"] as? Bool
+                                                                    
+                    let recipe = RecipeDetail(recipeID: recipeId!, title: title!, updatedDate: time!, cookingTime: cookingTime ?? 0, image: image ?? "", like: like!, serving: serving ?? 0, userID: userId!, genres: genresArr, isVIPRecipe: isVIPRecipe!)
+                                             
                         recipeList.append(recipe)
                         exist = true
                 }
