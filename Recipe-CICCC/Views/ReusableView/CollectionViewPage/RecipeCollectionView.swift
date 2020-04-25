@@ -78,6 +78,10 @@ extension RecipeCollectionView: UICollectionViewDataSource, UICollectionViewDele
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RecipeCollectionViewCell", for: indexPath) as! RecipeCollectionViewCell
+        if isVIP == true {
+            cell.lockImage.isHidden = true
+        }
+        
         cell.R_image.image = imageDictionary[indexPath.row]
         cell.R_Label.text = recipes[indexPath.row].title
         return cell

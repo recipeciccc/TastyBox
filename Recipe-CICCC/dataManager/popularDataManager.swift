@@ -56,12 +56,16 @@ class popularDataManager {
                             
                             
                             self.recipes.append(recipe)
+                            
+                            if documents == querysnapshot?.documents.last! {
+                                self.delegate?.gotData(recipes: self.recipes)
+                            }
                         }
                     }
                 }
                 
                 
-                self.delegate?.gotData(recipes: self.recipes)
+                
             }
         }
     }
