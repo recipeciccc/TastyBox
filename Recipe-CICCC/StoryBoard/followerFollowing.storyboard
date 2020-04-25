@@ -77,7 +77,6 @@
                                             <outlet property="followingButton" destination="QKc-G0-ipa" id="krP-Jy-uqG"/>
                                             <outlet property="imgView" destination="eTm-1R-Ea2" id="3Hq-y8-iaQ"/>
                                             <outlet property="userNameLabel" destination="kbH-wc-puq" id="lpp-iJ-Ilm"/>
-                                            <segue destination="gr7-gC-azg" kind="show" id="6aT-0u-IEk"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -176,7 +175,6 @@
                                             <outlet property="followingButton" destination="aMV-pO-FYU" id="w3P-Ua-76o"/>
                                             <outlet property="imgView" destination="saD-KI-qwt" id="FXV-xH-mWn"/>
                                             <outlet property="userNameLabel" destination="L5n-r4-owq" id="pzr-qo-sPd"/>
-                                            <segue destination="gr7-gC-azg" kind="show" id="YoB-3V-16E"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -203,16 +201,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HRs-Ld-RMX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="6218.840579710145" y="-569.19642857142856"/>
-        </scene>
-        <!--creatorProfile-->
-        <scene sceneID="54f-8z-5qn">
-            <objects>
-                <viewControllerPlaceholder storyboardName="creatorProfile" id="gr7-gC-azg" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="h9x-qe-l3c"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="88v-gB-ey7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="7234" y="-50"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="lUt-c9-elf">
@@ -251,8 +239,5 @@
             <point key="canvasLocation" x="5307" y="242"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="6aT-0u-IEk"/>
-    </inferredMetricsTieBreakers>
     <color key="tintColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>

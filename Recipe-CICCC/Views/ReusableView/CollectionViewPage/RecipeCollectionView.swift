@@ -16,8 +16,8 @@ class RecipeCollectionView: UIView {
     @IBOutlet weak var width: NSLayoutConstraint!
     @IBOutlet weak var height: NSLayoutConstraint!
     
-    var imageArray = [UIImage]()
-    var recipeName = [String]()
+    var imageDictionary = [Int:UIImage]() 
+    var recipes = [RecipeDetail]()
 
     let layout = UICollectionViewFlowLayout()
 
@@ -55,14 +55,14 @@ class RecipeCollectionView: UIView {
         
         func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 
-            return imageArray.count
+            return recipes.count
         }
         
         func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
             
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RecipeCollectionViewCell", for: indexPath) as! RecipeCollectionViewCell
-            cell.R_image.image = imageArray[indexPath.row]
-            cell.R_Label.text = recipeName[indexPath.row]
+            cell.R_image.image = imageDictionary[indexPath.row]
+            cell.R_Label.text = recipes[indexPath.row].title
             return cell
         }
         

@@ -26,6 +26,7 @@ struct RecipeData{
 // ViewController
 class CreatorViewController: UIViewController {
     
+    //MARK: properties
     let db = Firestore.firestore()
     
     var move = false
@@ -40,6 +41,7 @@ class CreatorViewController: UIViewController {
     var ingredientList = [String]()
     var amountList = [String]()
     var genres: [String] = []
+    var isVIP = false
     
     var position = CGPoint()
     var tableviewHeight = CGFloat()
@@ -53,10 +55,12 @@ class CreatorViewController: UIViewController {
     
     var tap: UITapGestureRecognizer?
     
+    //MARK: view cicles
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.saveButton.isEnabled = false
         tableviewHeight = MainTableView.frame.origin.y
         imagePicker.delegate = self
         amountList.append("")
@@ -80,8 +84,12 @@ class CreatorViewController: UIViewController {
         NotificationCenter.default.removeObserver(self)
     }
     
+    //MARK: IBOutlet
     @IBOutlet weak var MainTableView: UITableView!
+    @IBOutlet weak var saveButton: UIBarButtonItem!
     
+    
+    //MARK: decide position
     @IBAction func UploadPhotoAction(_ sender: Any) {
         imagePicker.sourceType = .photoLibrary
         imagePicker.allowsEditing = true
@@ -95,6 +103,8 @@ class CreatorViewController: UIViewController {
         sender.isHidden = true
         print(sender.isHidden)
     }
+    
+    //MARK: add cells
     
     @IBAction func AddIngredients(_ sender: Any) {
         ingredientList.append("")
@@ -131,51 +141,7 @@ class CreatorViewController: UIViewController {
         
     }
     
-    @IBAction func SaveData(_ sender: Any) {
-        print(genres)
-        MainTableView.reloadData()
-        RecipeData.mainphoto.append(mainPhoto)
-        RecipeData.title.append(recipeTitle)
-        RecipeData.cookingtime.append(recipeTime)
-        RecipeData.servings.append(recipeServings)
-        RecipeData.ingredients.append(ingredientList)
-        RecipeData.amounts.append(amountList)
-        RecipeData.stepPhotos.append(photoList)
-        RecipeData.stepTexts.append(preparationText)
-        
-        print(RecipeData.title,RecipeData.cookingtime,RecipeData.servings, RecipeData.ingredients, RecipeData.amounts,RecipeData.stepTexts)
-        //print(preparationText)
-        let cgref = mainPhoto.cgImage
-        let cim = mainPhoto.ciImage
-        guard let uid = Auth.auth().currentUser?.uid else{return}
-        let rid = self.db.collection("recipe").document().documentID
-        
-        if recipeTitle == "" || (cgref == nil && cim == nil){
-            let alertController = UIAlertController(title: "Error:", message: "Please enter recipe title and upload your main photo.", preferredStyle: .alert)
-            let alertAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-            alertController.addAction(alertAction)
-            present(alertController, animated: true, completion: nil)
-            
-        }else{
-            
-            //if checkTextView(){
-            self.uploadImage(mainPhoto,uid,rid) { (url) in
-                self.recipeUpload(uid,rid,url!.absoluteString)
-                self.uploadGenres(genres: self.genres, rid: rid)
-                self.ingredientUpload(rid)
-                self.commentUpload(rid) // we may not need it
-            }
-            
-            for index in 0..<photoList.count{
-                self.uploadInstructionImage(photoList[index], uid, rid, index) { (url) in
-                    self.instructionUpload(rid,index,url!.absoluteString)
-                }
-            }
-            navigationController?.popViewController(animated: true)
-            //}
-        }
-    }
-    
+
     @IBAction func EditMode(_ sender: UIButton) {
         
         MainTableView.isEditing = !MainTableView.isEditing
@@ -187,6 +153,7 @@ class CreatorViewController: UIViewController {
         }
     }
     
+// MARK: keyboard method
     @objc func keyboardWillShow(_ notification: Notification) {
         self.contentOffset =  self.MainTableView.contentOffset.y
         
@@ -265,6 +232,7 @@ class CreatorViewController: UIViewController {
     }
 }
 
+//MARK: upload recipe
 extension CreatorViewController{
     
     //    func checkTextView() -> Bool{
@@ -279,6 +247,51 @@ extension CreatorViewController{
     //        }
     //        return true
     //    }
+    
+    @IBAction func SaveData(_ sender: Any) {
+           print(genres)
+           MainTableView.reloadData()
+           RecipeData.mainphoto.append(mainPhoto)
+           RecipeData.title.append(recipeTitle)
+           RecipeData.cookingtime.append(recipeTime)
+           RecipeData.servings.append(recipeServings)
+           RecipeData.ingredients.append(ingredientList)
+           RecipeData.amounts.append(amountList)
+           RecipeData.stepPhotos.append(photoList)
+           RecipeData.stepTexts.append(preparationText)
+           
+           print(RecipeData.title,RecipeData.cookingtime,RecipeData.servings, RecipeData.ingredients, RecipeData.amounts,RecipeData.stepTexts)
+           //print(preparationText)
+           let cgref = mainPhoto.cgImage
+           let cim = mainPhoto.ciImage
+           guard let uid = Auth.auth().currentUser?.uid else{return}
+           let rid = self.db.collection("recipe").document().documentID
+           
+           if recipeTitle == "" || (cgref == nil && cim == nil){
+               let alertController = UIAlertController(title: "Error:", message: "Please enter recipe title and upload your main photo.", preferredStyle: .alert)
+               let alertAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+               alertController.addAction(alertAction)
+               present(alertController, animated: true, completion: nil)
+               
+           }else{
+               
+               //if checkTextView(){
+               self.uploadImage(mainPhoto,uid,rid) { (url) in
+                   self.recipeUpload(uid,rid,url!.absoluteString)
+                   self.uploadGenres(genres: self.genres, rid: rid)
+                   self.ingredientUpload(rid)
+                   self.commentUpload(rid) // we may not need it
+               }
+               
+               for index in 0..<photoList.count{
+                   self.uploadInstructionImage(photoList[index], uid, rid, index) { (url) in
+                       self.instructionUpload(rid,index,url!.absoluteString)
+                   }
+               }
+               navigationController?.popViewController(animated: true)
+               //}
+           }
+       }
     
     func recipeUpload(_ uid:String,_ rid:String, _ url:String){
         let recipeData = ["userID": uid,
@@ -419,13 +432,40 @@ extension CreatorViewController{
                 print("Successfully set genres document data")
             }
         }
+        
+        if isVIP == true {
+            self.db.collection("recipe").document(rid).setData(
+                ["VIP": true]
+            , merge: true) { (err) in
+                if err != nil{
+                    print(err?.localizedDescription as Any)
+                }else{
+                    print(genres)
+                    print("Successfully set VIP")
+                }
+            }
+            
+            let uid = (Auth.auth().currentUser?.uid)!
+            
+            //        db.collection("user").document(uid).collection("proifle").document("info").setData([
+            db.collection("user").document(uid).setData([
+                
+                "VIP": [rid: true]
+                
+            ], merge: true) { err in
+                if let err = err {
+                    print("Error writing document: \(err)")
+                } else {
+                    print("user VIP successfully written!")
+                }
+            }
+        }
     }
 }
 
 
 
-
-//image picker
+//MARK: image picker
 extension CreatorViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
@@ -455,7 +495,7 @@ extension CreatorViewController: UIImagePickerControllerDelegate, UINavigationCo
 }
 
 
-//tableview
+//MARK: tableview delegate and datasorce
 extension CreatorViewController: UITableViewDelegate,UITableViewDataSource{
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -654,10 +694,10 @@ extension CreatorViewController: UITableViewDelegate,UITableViewDataSource{
 }
 
 
-// TextField
+
 extension CreatorViewController: UITextFieldDelegate, UITextViewDelegate{
     
-    
+//MARK: TextField
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         let tag = textField.tag / 100
@@ -696,7 +736,7 @@ extension CreatorViewController: UITextFieldDelegate, UITextViewDelegate{
         selectedIndexPath = textFieldIndexPath
     }
     
-    //Text view
+//MARK: Text view
     func textViewDidBeginEditing(_ textView: UITextView) {
         if textView.text == "Please press [return] after the last character to finish editing." {
             textView.text = ""
@@ -760,17 +800,21 @@ extension CreatorViewController: UITextFieldDelegate, UITextViewDelegate{
     
 }
 
-
+//MARK: genre delegate
 extension CreatorViewController: GenreSelectViewControllerDelegate {
-    func assignGenres(genres: [String]) {
+    func assignGenres(genres: [String], isVIP: Bool) {
         self.genres = genres
+        self.isVIP = isVIP
+        self.saveButton.isEnabled = true
+        
     }
+    
 }
 
 
 
 
-//TableView Cells
+//MARK: TableView Cells
 class CreatorPhotoCell: UITableViewCell{
     @IBOutlet weak var Mainphoto: UIImageView!
 }
@@ -790,7 +834,7 @@ class TimeNSearvingCell: UITableViewCell {
     override func awakeFromNib() {
         self.TimeTextFieldCell.addDoneButton(title: "Done", target: self, selector: #selector(tapDone(sender:)))
         
-          self.ServingsTextFieldCell.addDoneButton(title: "Done", target: self, selector: #selector(tapDone(sender:)))
+        self.ServingsTextFieldCell.addDoneButton(title: "Done", target: self, selector: #selector(tapDone(sender:)))
     }
     
     // 2
@@ -831,6 +875,7 @@ class PreparationCell: UITableViewCell{
     }
 }
 
+//MARK: textview extension
 extension UITextView {
     
     func addDoneButton(title: String, target: Any, selector: Selector) {
@@ -845,7 +890,7 @@ extension UITextView {
         self.inputAccessoryView = toolBar//5
     }
 }
-
+//MARK: TextField extension
 extension UITextField {
     
     func addDoneButton(title: String, target: Any, selector: Selector) {

@@ -22,7 +22,7 @@ class FollowingRecipeDataManager {
     
     
     
-       func findFollowerFollowing(id: String?) {
+       func findFollowing(id: String?) {
            var uid = (Auth.auth().currentUser?.uid)!
            
            if id != nil {

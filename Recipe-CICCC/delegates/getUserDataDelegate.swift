@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol getUserDataDelegate {
+protocol getUserDataDelegate : class {
 //    func gotUsersData(users: [User])
     func gotUserData(user: User)
     func assignUserImage(image: UIImage)

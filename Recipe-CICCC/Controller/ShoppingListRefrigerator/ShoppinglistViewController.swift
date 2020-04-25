@@ -31,10 +31,11 @@ class ShoppinglistViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.tableFooterView = UIView()
-        tableView.allowsMultipleSelectionDuringEditing = false
+//        tableView.allowsMultipleSelectionDuringEditing = true
         
         dataManager.getShoppingListDetail(userID: uid)
         dataManager.delegate = self
+        
         
         searchBar.delegate = self
     }
@@ -68,7 +69,8 @@ class ShoppinglistViewController: UIViewController {
     }
     
     @IBAction func edit(_ sender: UIBarButtonItem) {
-       
+     
+        self.tableView.isEditing = true
     }
     
     
@@ -104,14 +106,14 @@ extension ShoppinglistViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        if tableView.isEditing {
+        if !tableView.isEditing {
             performSegue(withIdentifier: "editItemShopping", sender: nil)
         }
         else {
-            ingredients[indexPath.row].isBought = true
-            dataManager.deleteData(name: ingredients[indexPath.row].name, indexPath: indexPath)
-            ingredients.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .automatic)
+//            ingredients[indexPath.row].isBought = true
+//            dataManager.deleteData(name: ingredients[indexPath.row].name, indexPath: indexPath)
+//            ingredients.remove(at: indexPath.row)
+//            tableView.deleteRows(at: [indexPath], with: .automatic)
         }
     }
     
@@ -130,14 +132,14 @@ extension ShoppinglistViewController: UITableViewDataSource {
     }
     
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-        if !tableView.isEditing, identifier == "editItemShopping" {
+        if tableView.isEditing, identifier == "editItemShopping" {
             return false
         }
         return true
     }
     
     override func setEditing(_ editing: Bool, animated: Bool) {
-        super.setEditing(editing, animated: animated)
+//        super.setEditing(editing, animated: animated)
         tableView.setEditing(tableView.isEditing, animated: true)
     }
     

@@ -23,7 +23,7 @@ class SideMenuTableViewController: UITableViewController {
         print(indexPath.row)
 //        NotificationCenter.default.post(name: NSNotification.Name("ToggleSideMenu"), object: nil)
         
-        
+        tableView.deselectRow(at: indexPath, animated: true)
         switch indexPath.row {
         case 0:
             NotificationCenter.default.post(name: NSNotification.Name("ShowProfile"), object: nil)

@@ -31,7 +31,7 @@ class FollowingRecipeViewController: UIViewController {
         
         dataManager.delegate = self
         
-        dataManager.findFollowerFollowing(id: uid)
+        dataManager.findFollowing(id: uid)
         
         self.followingTableView.tableFooterView = UIView()
         

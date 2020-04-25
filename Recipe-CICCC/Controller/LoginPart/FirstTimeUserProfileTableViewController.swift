@@ -24,6 +24,8 @@ class FirstTimeUserProfileTableViewController: UITableViewController, UIPickerVi
     
     @IBOutlet weak var userImageButton: UIButton!
     
+    @IBOutlet weak var doneButton: UIBarButtonItem!
+    
     var userImage: UIImage?
     
     var familySize = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20"]
@@ -41,6 +43,8 @@ class FirstTimeUserProfileTableViewController: UITableViewController, UIPickerVi
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        
+        doneButton.isEnabled = false
         
         userNameTextField.text = Auth.auth().currentUser?.displayName
         emailTextField.text = Auth.auth().currentUser?.email
@@ -126,6 +130,7 @@ class FirstTimeUserProfileTableViewController: UITableViewController, UIPickerVi
         
         } else {
 
+            
             dataManager.userRegister(userName: userNameTextField.text ?? "", eMailAddress: emailTextField.text ?? "", familySize: Int(familySizeTextField!.text!) ?? 0, cuisineType: cuisineTypeTextField!.text ?? "", accountImage: userImage!)
 
             let Storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
@@ -328,6 +333,7 @@ extension FirstTimeUserProfileTableViewController: getUserDataDelegate {
     func assignUserImage(image: UIImage) {
         self.userImage = image
         self.userImageButton.setBackgroundImage(image, for: .normal)
+        doneButton.isEnabled = true
     }
     
 }

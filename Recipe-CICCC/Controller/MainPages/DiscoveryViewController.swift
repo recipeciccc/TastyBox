@@ -59,6 +59,10 @@ class DiscoveryViewController: UIViewController {
             blurView.effect = UIBlurEffect(style: .light)
             // Now add the blur view to the main view
             blurView.tag = 100
+            
+            let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(closeSideMenu))
+            blurView.addGestureRecognizer(tapRecognizer)
+            
             self.view.insertSubview(blurView, at: 2)
         } else {
             if let viewWithTag = self.view.viewWithTag(100) {
@@ -71,6 +75,20 @@ class DiscoveryViewController: UIViewController {
         
         NotificationCenter.default.post(name: NSNotification.Name("ToggleSideMenu"), object: nil)
     }
+    
+    @objc func closeSideMenu() {
+        if let viewWithTag = self.view.viewWithTag(100) {
+            viewWithTag.removeFromSuperview()
+            sideMenuOpen = false
+            SideMenuConstraint.constant = -160
+            UIView.animate(withDuration: 0.3) {
+                self.view.layoutIfNeeded()
+            }
+        }else{
+            print("No!")
+        }
+    }
+    
     @IBOutlet weak var SideMenuConstraint: NSLayoutConstraint!
     
     @IBAction func SearchBarItem() {

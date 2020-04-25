@@ -11,12 +11,17 @@ import FirebaseFirestore
 import Firebase
 import FirebaseAuth
 
+protocol SavedRecipeDelegate: class {
+    func reloadData(data: [RecipeDetail])
+}
+
 class UserdataManager {
     
     let db = Firestore.firestore()
     let storageRef = Storage.storage().reference()
-    var delegate: getUserDataDelegate?
-    var delegateFollowerFollowing :FolllowingFollowerDelegate?
+    weak var delegate: getUserDataDelegate?
+    weak var delegateFollowerFollowing :FolllowingFollowerDelegate?
+    weak var savedRecipesDelegate: SavedRecipeDelegate?
     
     
     var users: [User] = []
@@ -25,6 +30,9 @@ class UserdataManager {
     var followingsIDs: [String] = []
     var followers: [User] = []
     var followings: [User] = []
+    var savedRecipesIDs:[String] = []
+    let uid = Auth.auth().currentUser?.uid
+    
     
     func getUserDetail(id: String?) {
         
@@ -67,6 +75,7 @@ class UserdataManager {
     
     
     func increaseFollower(userID: String, followerID: String) {
+        
         db.collection("user").document(userID).collection("follower").document(followerID).setData([
             "id": followerID
         ]) { err in
@@ -205,7 +214,7 @@ class UserdataManager {
     
     func saveRecipe(recipeID: String) {
         
-        let uid = Auth.auth().currentUser?.uid
+        
         db.collection("user").document(uid!).collection("savedRecipes").document(recipeID).setData([
             
             "id": recipeID,
@@ -222,12 +231,84 @@ class UserdataManager {
         
     }
     
-    func getSavedRecipesImage(recipeIDs: [String]) {
+    func getSavedRecipes() {
         
-        for recipeID in recipeIDs {
-            
+        db.collection("user").document(uid!).collection("savedRecipes").order(by: "savedTime", descending: true).addSnapshotListener {
+        (querysnapshot, error) in
+        
+        if error != nil {
+            print("Error getting documents: \(String(describing: error))")
+        } else {
+            if let documents = querysnapshot?.documents {
+                
+                for document in documents {
+                    let data = document.data()
+                    if let id = data["id"] as? String {
+                        self.savedRecipesIDs.append(id)
+                    }
+                }
+                
+                for id in self.savedRecipesIDs {
+                   
+                }
+            }
+            }
         }
     }
+    
+    func Data(id: String) {
+        var recipeList = [RecipeDetail]()
+        var exist = Bool()
+        db.collection("recipe").document(id).addSnapshotListener { (snapshot, err) in
+            if err == nil {
+               
+                
+                        
+                if let data = snapshot?.data() {
+                        let recipeId = data["recipeID"] as? String
+                        let title = data["title"] as? String
+                        let cookingTime = data["cookingTime"] as? Int
+                        let like = data["like"] as? Int
+                        let serving = data["serving"] as? Int
+                        
+                        let userId = data["userID"] as? String
+                        let time = data["time"] as? Timestamp
+                        
+                        let image = data["image"] as? String
+                        let genresData = data["genres"] as? [String: Bool]
+                        
+                        var genresArr: [String] = []
+                        
+                        if let gotData = genresData {
+                            for genre in gotData {
+                                genresArr.append(genre.key)
+                            }
+                        }
+                        
+                        
+                        
+                        let recipe = RecipeDetail(recipeID: recipeId!, title: title!, updatedDate: time!, cookingTime: cookingTime ?? 0, image: image ?? "", like: like!, serving: serving ?? 0, userID: userId!, genres: genresArr)
+                        
+                        recipeList.append(recipe)
+                        exist = true
+                }
+            } else {
+                print(err?.localizedDescription as Any)
+                print("Document does not exist")
+                exist = false
+            }
+            
+            self.isDataExist(exist,recipeList)
+        }
+       
+    }
+    
+       func isDataExist(_ exist:Bool, _ data: [RecipeDetail]){
+           if exist{
+               savedRecipesDelegate?.reloadData(data:data)
+           }
+       }
+    
     
     func getUserImage(uid: String) {
         let imageRef = storageRef.child("user/\(uid)/userAccountImage")
