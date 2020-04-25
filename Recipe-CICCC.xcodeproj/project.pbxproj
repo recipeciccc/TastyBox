@@ -581,11 +581,11 @@
 			isa = PBXGroup;
 			children = (
 				6F73935A24502BEB00F77848 /* ResultRecipesViewController.swift */,
+				6F5344B3244D38480004F78D /* MainPageViewController.swift */,
 				6F73935C24502C4200F77848 /* SearchingViewController.swift */,
 				6FCBE8C5244ECBDA00A97454 /* searchingControllerExtensions.swift */,
 				6F20C3FD244DB7E2009092FD /* SearchingIngredientsViewController.swift */,
 				6F20C3F8244DB742009092FD /* SearchingGenreViewController.swift */,
-				6F5344B3244D38480004F78D /* MainPageViewController.swift */,
 				6F20C3FA244DB76B009092FD /* SearchingCreatorsViewController.swift */,
 				6F20C3FF244DB9EF009092FD /* SearchingPageViewController.swift */,
 			);

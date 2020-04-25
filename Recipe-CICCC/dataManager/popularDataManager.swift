@@ -46,7 +46,7 @@ class popularDataManager {
                         let serving = data["serving"] as? Int
                         let userId = data["userID"] as? String
                         let time = data["time"] as? Timestamp
-                        let isVIPRecipe = data["VIP"] as? Bool
+                        let isVIPRecipe = data["VIP"] as? Bool ?? false
 
                         let image = data["image"] as? String
                         
@@ -58,12 +58,13 @@ class popularDataManager {
                                 genresArr.append(genre.key)
                             }
                         }
+                   
                         
                         //MARK: They dont get anything when recipe is append...
                         if userId != nil && recipeId != nil {
                             
-                                                                         
-                                                  let recipe = RecipeDetail(recipeID: recipeId!, title: title!, updatedDate: time!, cookingTime: cookingTime ?? 0, image: image ?? "", like: like!, serving: serving ?? 0, userID: userId!, genres: genresArr, isVIPRecipe: isVIPRecipe!)
+                                                                                                                                               
+                            let recipe = RecipeDetail(recipeID: recipeId!, title: title!, updatedDate: time!, cookingTime: cookingTime ?? 0, image: image ?? "", like: like!, serving: serving ?? 0, userID: userId!, genres: genresArr, isVIPRecipe: isVIPRecipe)
                                                   
                             
                             self.recipes.append(recipe)

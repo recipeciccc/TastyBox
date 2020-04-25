@@ -111,6 +111,7 @@ class SearchingViewController: UIViewController {
         sortedViews[0].tintColor = UIColor.orange //Default Selection colo
         
         SearchBar.delegate = self
+        SearchBar.becomeFirstResponder()
         SearchBar.placeholder = "Search Recipe"
         let RightNavBarButton = UIBarButtonItem(customView:SearchBar)
         self.navigationItem.rightBarButtonItem = RightNavBarButton
