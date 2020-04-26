@@ -55,7 +55,7 @@ class SavedRecipeViewController: UIViewController {
             self.present(alertController, animated: true)
         
     }
-         dataManger.Data(recipeID: savedIDs)
+        dataManger.getSavedRecipes()
         
         
         
@@ -107,13 +107,26 @@ extension SavedRecipeViewController: UICollectionViewDataSource, UICollectionVie
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = (collectionView.frame.width - 2) / 3
-        let height = width
-        return CGSize(width: width, height: height)
-    }
     
 }
+
+
+extension SavedRecipeViewController: UICollectionViewDelegateFlowLayout {
+       
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width = (collectionView.frame.width - 3) / 3
+        return CGSize(width: width, height: width)
+    }
+}
+
 
 extension SavedRecipeViewController: SavedRecipeDelegate {
     func gotUserData(user: User) {
