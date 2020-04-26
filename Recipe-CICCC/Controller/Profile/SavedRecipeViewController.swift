@@ -15,16 +15,19 @@ class SavedRecipeViewController: UIViewController {
     private let reuseIdentifier = "Cell"
     
     var savedRecipes:[RecipeDetail] = []
+    var savedRecipesImages:[Int:UIImage] = [:]
+    var users:[User] = []
     
     var isSavingRecipe: Bool?
     var savingRecipeID: String?
-    let dataManger = UserdataManager()
+    let dataManger = savingRecipesDataManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        
+        dataManger.delegate = self
+        collectionView.delegate = self
         collectionView.dataSource = self
         self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         
@@ -51,6 +54,10 @@ class SavedRecipeViewController: UIViewController {
             self.present(alertController, animated: true)
         
     }
+         dataManger.getSavedRecipes()
+        
+        
+        
     }
     
 
@@ -66,7 +73,7 @@ class SavedRecipeViewController: UIViewController {
 
 }
 
-extension SavedRecipeViewController: UICollectionViewDataSource {
+extension SavedRecipeViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
@@ -75,15 +82,28 @@ extension SavedRecipeViewController: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return 0
+        return savedRecipes.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = (collectionView.dequeueReusableCell(withReuseIdentifier: "savedRecipes", for: indexPath) as? SavedRecipesCollectionViewCell)!
     
         // Configure the cell
+        cell.imageView.image = savedRecipesImages[indexPath.row]
+        
     
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+         let storyboard = UIStoryboard(name: "RecipeDetail", bundle: nil)
+               let vc = storyboard.instantiateViewController(withIdentifier: "detailvc") as! RecipeDetailViewController
+        
+        vc.recipe = savedRecipes[indexPath.row]
+        vc.mainPhoto = savedRecipesImages[indexPath.row]!
+        vc.creator = self.users[indexPath.row]
+        
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -92,5 +112,20 @@ extension SavedRecipeViewController: UICollectionViewDataSource {
         return CGSize(width: width, height: height)
     }
     
+}
+
+extension SavedRecipeViewController: SavedRecipeDelegate {
+    func gotUserData(user: User) {
+        users.append(user)
+    }
+    
+    func reloadData(data: [RecipeDetail]) {
+        self.savedRecipes = data
+    }
+    
+    func reloadImg(img: UIImage, index: Int) {
+        self.savedRecipesImages[index] = img
+        self.collectionView.reloadData()
+    }
 }
 

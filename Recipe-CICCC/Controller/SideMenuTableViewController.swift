@@ -12,6 +12,7 @@ class SideMenuTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         self.tableView.separatorColor = UIColor.clear
+        self.tableView.allowsSelection = true
          NotificationCenter.default.post(name: NSNotification.Name("ToggleSideMenu"), object: nil)
     }
     

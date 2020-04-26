@@ -11,11 +11,6 @@ import FirebaseFirestore
 import Firebase
 import FirebaseAuth
 
-protocol SavedRecipeDelegate: class {
-    func reloadData(data: [RecipeDetail])
-   
-}
-
 protocol recipeDetailDelegate: class {
     func isVIP(isVIP: Bool)
 }
@@ -90,9 +85,9 @@ class UserdataManager {
                     let name = data["userName"] as? String
                     let familySize = data["familySize"] as? Int
                     let cuisineType = data["cuisineType"] as? String
-                    let isVIP = data["isVIP"] as? Bool
+                    let isVIP = data["isVIP"] as? Bool ?? false
  
-                self.user = User(userID: userID!, name: name!, cuisineType: cuisineType!, familySize: familySize, isVIP: isVIP!)
+                    self.user = User(userID: userID!, name: name!, cuisineType: cuisineType!, familySize: familySize, isVIP: isVIP)
                 self.delegate?.gotUserData(user: self.user!)
 
                 }
@@ -102,6 +97,30 @@ class UserdataManager {
         }
     }
     
+//     func getSavedRecipes() {
+//            db.collection("user").document(uid!).collection("savedRecipes").order(by: "savedTime", descending: true).addSnapshotListener {
+//                querySnapshot, error in
+//                if error != nil {
+//                    print("Error getting documents: \(String(describing: error))")
+//                } else {
+//                    if let documents = querySnapshot?.documents {
+//                        for document in documents {
+//                            let data = document.data()
+//                            if let id = data["id"] as? String {
+//                                self.savedRecipesIDs.append(id)
+//
+//                                if document == documents.last! {
+//
+//    //                                self.Data(recipeID: self.savedRecipesID)
+//                                }
+//                            }
+//
+//                        }
+//                    }
+//                }
+//            }
+//        }
+        
     
     
     func increaseFollower(userID: String, followerID: String) {
@@ -152,11 +171,15 @@ class UserdataManager {
                     
                     if followerOrFollowing == "following" {
                         self.followings.append(self.user!)
+                        if ID == IDs.last! {
                         self.delegateFollowerFollowing?.assignFollowersFollowings(users: self.followings)
+                        }
                     }
                     if followerOrFollowing == "follower" {
                         self.followers.append(self.user!)
+                         if ID == IDs.last! {
                         self.delegateFollowerFollowing?.assignFollowersFollowings(users: self.followers)
+                        }
                     }
                     
                 }
@@ -243,24 +266,7 @@ class UserdataManager {
         }
     }
     
-    func saveRecipe(recipeID: String) {
-        
-        
-        db.collection("user").document(uid!).collection("savedRecipes").document(recipeID).setData([
-            
-            "id": recipeID,
-            "savedTime": Timestamp(),
-            
-        ], merge: true) { err in
-            if let err = err {
-                print("Error writing document: \(err)")
-            } else {
-                print("Document successfully written!")
-            }
-        }
-        
-        
-    }
+    
     
     func getSavedRecipes() {
         
@@ -278,10 +284,7 @@ class UserdataManager {
                         self.savedRecipesIDs.append(id)
                     }
                 }
-                
-                for id in self.savedRecipesIDs {
-                   
-                }
+               
             }
             }
         }
