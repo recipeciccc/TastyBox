@@ -15,7 +15,7 @@ class SettingViewController: UIViewController {
     @IBOutlet weak var preferenceTableVIew: UITableView!
     
     let accountTitle = ["Name:", "Email:"]
-    var accountData = ["name","email"]
+    static var accountData = ["name","email"]
     
     let preferenceTitle = ["Allergies or Dislike Ingredients", "Meal Size","Cuisine Type"]
 
@@ -29,16 +29,17 @@ class SettingViewController: UIViewController {
     var arrayRow = Int()
     
     var textfield = UITextField()
-
-    
+    var accountSettingVC = AccountSettingViewController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        NotificationCenter.default.addObserver(self, selector: #selector(self.refresh), name: NSNotification.Name(rawValue: "dataUpdate"), object: nil)
         accounttableView.delegate = self
         accounttableView.dataSource = self
         preferenceTableVIew.delegate = self
         preferenceTableVIew.dataSource = self
         
+        accountSettingVC.delegate = self
         pickItem = false
         
         self.accounttableView.separatorStyle = UITableViewCell.SeparatorStyle.none
@@ -47,10 +48,15 @@ class SettingViewController: UIViewController {
         preferenceTableVIew.isHidden = true
         let name = Auth.auth().currentUser?.displayName
         let email = Auth.auth().currentUser?.email
-        accountData[0] = name ?? ""
-        accountData[1] = email ?? ""
+
+        SettingViewController.accountData[0]  = name ?? ""
+        SettingViewController.accountData[1]  = email ?? ""
         
         arrayPicker = [allergies,mealSize,cuisineType]
+    }
+    
+    @objc func refresh(){
+        self.accounttableView.reloadData()
     }
     
     @objc func closeKeyboard(){
@@ -85,7 +91,7 @@ extension SettingViewController: UITableViewDataSource,UITableViewDelegate{
         if tableView == accounttableView{
             let cell = tableView.dequeueReusableCell(withIdentifier: "settingCell") as! AccountSettingTableViewCell
             cell.accountLabel.text = accountTitle[indexPath.row]
-            cell.infoLabel.text = accountData[indexPath.row]
+            cell.infoLabel.text =  SettingViewController.accountData[indexPath.row]
             return cell
         }
     
@@ -102,13 +108,13 @@ extension SettingViewController: UITableViewDataSource,UITableViewDelegate{
                 print("select row 0")
                 let vc = UIStoryboard(name: "Setting", bundle: nil).instantiateViewController(withIdentifier: "preferences") as! AccountSettingViewController
                   vc.row = indexPath.row
-                  vc.OriginalData = accountData[0]
+                  vc.OriginalData =  SettingViewController.accountData[0]
                 self.navigationController?.pushViewController(vc, animated: true)
             case 1:
                 print("select row 1")
                 let vc = UIStoryboard(name: "Setting", bundle: nil).instantiateViewController(withIdentifier: "preferences") as! AccountSettingViewController
                 vc.row = indexPath.row
-                vc.OriginalData = accountData[1]
+                vc.OriginalData =  SettingViewController.accountData[1]
                 self.navigationController?.pushViewController(vc, animated: true)
             default:
                 print("No row be selected")
@@ -117,5 +123,12 @@ extension SettingViewController: UITableViewDataSource,UITableViewDelegate{
         print("select PreferenceTableView")
             print("row:\(indexPath.row)")
         }
+    }
+}
+
+extension SettingViewController: SaveChangeDelegate{
+    func reloadVC(text:String,index: Int) {
+        print("delegate is working")
+        SettingViewController.accountData[index] = text
     }
 }

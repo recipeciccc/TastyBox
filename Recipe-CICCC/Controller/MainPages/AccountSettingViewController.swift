@@ -7,6 +7,12 @@
 //
 
 import UIKit
+import Firebase
+
+protocol SaveChangeDelegate{
+    func reloadVC(text:String,index: Int)
+}
+
 
 class AccountSettingViewController: UIViewController {
     
@@ -16,15 +22,20 @@ class AccountSettingViewController: UIViewController {
     @IBOutlet weak var newData: UITextField!
     var row = Int()
     var OriginalData = String()
+    var delegate: SaveChangeDelegate?
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         configureLabel()
         configureTextField()
         configureTapGesture()
-        
+        configureDelegate()
     }
-    
+    private func configureDelegate(){
+        let vc = SettingViewController()
+        self.delegate = vc
+    }
     private func configureLabel(){
         switch row {
         case 0:
@@ -48,6 +59,37 @@ class AccountSettingViewController: UIViewController {
     }
     @objc func handelTap(){
         view.endEditing(true)
+    }
+    
+    @IBAction func saveData(_ sender: Any) {
+        if newData.text != nil && newData.text != ""{
+            let user = Auth.auth().currentUser
+            switch row {
+            case 0:
+                let changeRequest = user?.createProfileChangeRequest()
+                changeRequest?.displayName = newData.text
+                changeRequest?.commitChanges(completion: { (error) in
+                    print("Erroe is \(error.debugDescription)")
+                })
+                
+                
+                self.navigationController?.popViewController(animated: true)
+                self.delegate?.reloadVC(text:newData.text ?? "",index: row)
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "dataUpdate"), object: nil)
+                //some issues of changing data from popVC
+                
+            case 1:
+                user?.updateEmail(to: newData.text!) { (error) in
+                    print("Erroe is \(error.debugDescription)")
+                }
+                print("save data")
+                self.navigationController?.popViewController(animated: true)
+                self.delegate?.reloadVC(text:newData.text ?? "",index: row)
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "dataUpdate"), object: nil)
+            default:
+                print("no row")
+            }
+        }
     }
 }
 
