@@ -22,6 +22,7 @@ class SettingViewController: UIViewController {
     let allergies = ["Peanut","Onion","Egg","Milk"]
     let mealSize = ["1-2","3-4","5-6","7-8","9-10","above 10"]
     let cuisineType = ["Chinese","Japanese","Korean","Canadian"]
+    
     var arrayPicker = [[String]]()
     var array = [String]()
     var selectItem = String()
@@ -97,31 +98,41 @@ extension SettingViewController: UITableViewDataSource,UITableViewDelegate{
     
             let cell = tableView.dequeueReusableCell(withIdentifier: "preferenceCell") as! PreferenceTableViewCell
             cell.title.text = preferenceTitle[indexPath.row]
-            cell.choices.text = "Choose your answer..."
+            cell.choices.text = "Choose"
             return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView == accounttableView{
+            let vc = UIStoryboard(name: "Setting", bundle: nil).instantiateViewController(withIdentifier: "accountSetting") as! AccountSettingViewController
+            vc.row = indexPath.row
+            
             switch indexPath.row{
             case 0:
                 print("select row 0")
-                let vc = UIStoryboard(name: "Setting", bundle: nil).instantiateViewController(withIdentifier: "preferences") as! AccountSettingViewController
-                  vc.row = indexPath.row
-                  vc.OriginalData =  SettingViewController.accountData[0]
-                self.navigationController?.pushViewController(vc, animated: true)
+                vc.OriginalData =  SettingViewController.accountData[0]
             case 1:
                 print("select row 1")
-                let vc = UIStoryboard(name: "Setting", bundle: nil).instantiateViewController(withIdentifier: "preferences") as! AccountSettingViewController
-                vc.row = indexPath.row
                 vc.OriginalData =  SettingViewController.accountData[1]
-                self.navigationController?.pushViewController(vc, animated: true)
             default:
-                print("No row be selected")
+                print("No row is selected")
             }
+            self.navigationController?.pushViewController(vc, animated: true)
+            
         }else{
-        print("select PreferenceTableView")
-            print("row:\(indexPath.row)")
+            let vc = UIStoryboard(name: "Setting", bundle: nil).instantiateViewController(withIdentifier: "PreferenceSetting") as! PreferenceViewController
+            
+            switch indexPath.row {
+            case 0:
+                vc.lists = allergies
+            case 1:
+                vc.lists = mealSize
+            case 2:
+                vc.lists = cuisineType
+            default:
+                print("defalt")
+            }
+            self.navigationController?.pushViewController(vc, animated: true)
         }
     }
 }
