@@ -14,6 +14,7 @@ class SavedRecipeViewController: UIViewController {
     
     private let reuseIdentifier = "Cell"
     
+    var savedIDs: [String] = []
     var savedRecipes:[RecipeDetail] = []
     var savedRecipesImages:[Int:UIImage] = [:]
     var users:[User] = []
@@ -54,7 +55,7 @@ class SavedRecipeViewController: UIViewController {
             self.present(alertController, animated: true)
         
     }
-         dataManger.getSavedRecipes()
+         dataManger.Data(recipeID: savedIDs)
         
         
         

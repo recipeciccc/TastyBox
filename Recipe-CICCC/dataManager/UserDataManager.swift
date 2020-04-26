@@ -97,29 +97,7 @@ class UserdataManager {
         }
     }
     
-//     func getSavedRecipes() {
-//            db.collection("user").document(uid!).collection("savedRecipes").order(by: "savedTime", descending: true).addSnapshotListener {
-//                querySnapshot, error in
-//                if error != nil {
-//                    print("Error getting documents: \(String(describing: error))")
-//                } else {
-//                    if let documents = querySnapshot?.documents {
-//                        for document in documents {
-//                            let data = document.data()
-//                            if let id = data["id"] as? String {
-//                                self.savedRecipesIDs.append(id)
-//
-//                                if document == documents.last! {
-//
-//    //                                self.Data(recipeID: self.savedRecipesID)
-//                                }
-//                            }
-//
-//                        }
-//                    }
-//                }
-//            }
-//        }
+
         
     
     
