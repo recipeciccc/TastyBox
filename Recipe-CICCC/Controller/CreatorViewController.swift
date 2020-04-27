@@ -87,8 +87,7 @@ class CreatorViewController: UIViewController {
     //MARK: IBOutlet
     @IBOutlet weak var MainTableView: UITableView!
     @IBOutlet weak var saveButton: UIBarButtonItem!
-    
-    
+
     //MARK: decide position
     @IBAction func UploadPhotoAction(_ sender: Any) {
         imagePicker.sourceType = .photoLibrary
@@ -223,7 +222,7 @@ class CreatorViewController: UIViewController {
         if let vc = segue.destination as? GenreSelectViewController {
             vc.delegate = self
             vc.tagsSelected = self.genres
-            
+             vc.image = mainPhoto
         }
     }
     

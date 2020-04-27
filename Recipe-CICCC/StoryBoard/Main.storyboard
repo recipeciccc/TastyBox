@@ -1480,6 +1480,7 @@
                             </barButtonItem>
                             <barButtonItem title="Next" id="6Yg-C9-Kc2">
                                 <connections>
+                                    <action selector="passMainPhoto:" destination="CG3-wo-2ij" id="ewO-sW-Uem"/>
                                     <segue destination="nIB-ep-KXl" kind="show" id="TcX-I1-awu"/>
                                 </connections>
                             </barButtonItem>
@@ -1497,7 +1498,7 @@
         <!--Genre Select View Controller-->
         <scene sceneID="K4x-3y-R2G">
             <objects>
-                <viewController id="nIB-ep-KXl" customClass="GenreSelectViewController" customModule="Recipe_CICCC" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="selectGenre" id="nIB-ep-KXl" customClass="GenreSelectViewController" customModule="Recipe_CICCC" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Rhg-o2-ebq">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
