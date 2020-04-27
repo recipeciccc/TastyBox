@@ -64,9 +64,10 @@
 		69909F3324560DC800AACEC7 /* PreferenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69909F3224560DC800AACEC7 /* PreferenceViewController.swift */; };
 		69909F3524561F3900AACEC7 /* recipePreferenceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69909F3424561F3900AACEC7 /* recipePreferenceTableViewCell.swift */; };
 		69909F372456227A00AACEC7 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69909F362456227A00AACEC7 /* SettingViewController.swift */; };
-		69909F39245632BD00AACEC7 /* Setting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 69909F38245632BD00AACEC7 /* Setting.storyboard */; };
 		69909F3B2456375C00AACEC7 /* SettingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69909F3A2456375C00AACEC7 /* SettingManager.swift */; };
 		69909F412456A85F00AACEC7 /* CreatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69909F402456A85F00AACEC7 /* CreatorViewController.swift */; };
+		69909F432456B81000AACEC7 /* Setting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 69909F422456B80F00AACEC7 /* Setting.storyboard */; };
+		69909F452456C9C700AACEC7 /* AutoSizedTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69909F442456C9C700AACEC7 /* AutoSizedTableView.swift */; };
 		699679AF23F3A25800719A36 /* ingredientRecipe.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 699679AE23F3A25800719A36 /* ingredientRecipe.storyboard */; };
 		6999A49024170ED00013BD5B /* Podfile.lock in Resources */ = {isa = PBXBuildFile; fileRef = 6999A48F24170ED00013BD5B /* Podfile.lock */; };
 		6999A49324170EE40013BD5B /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 6999A49224170EE40013BD5B /* Podfile */; };
@@ -253,9 +254,10 @@
 		69909F3224560DC800AACEC7 /* PreferenceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceViewController.swift; sourceTree = "<group>"; };
 		69909F3424561F3900AACEC7 /* recipePreferenceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = recipePreferenceTableViewCell.swift; sourceTree = "<group>"; };
 		69909F362456227A00AACEC7 /* SettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
-		69909F38245632BD00AACEC7 /* Setting.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Setting.storyboard; sourceTree = "<group>"; };
 		69909F3A2456375C00AACEC7 /* SettingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingManager.swift; sourceTree = "<group>"; };
 		69909F402456A85F00AACEC7 /* CreatorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreatorViewController.swift; sourceTree = "<group>"; };
+		69909F422456B80F00AACEC7 /* Setting.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Setting.storyboard; sourceTree = "<group>"; };
+		69909F442456C9C700AACEC7 /* AutoSizedTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoSizedTableView.swift; sourceTree = "<group>"; };
 		699679AE23F3A25800719A36 /* ingredientRecipe.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ingredientRecipe.storyboard; sourceTree = "<group>"; };
 		6999A48F24170ED00013BD5B /* Podfile.lock */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile.lock; sourceTree = "<group>"; };
 		6999A49224170EE40013BD5B /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
@@ -483,12 +485,12 @@
 		4069257123D8350100059C8E /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				6F20C3FC244DB775009092FD /* searching */,
 				6F8408C92449E1C3008B2A25 /* GenreSelectViewController.swift */,
 				6F729381242B159D00A7E4E0 /* CommentsViewController.swift */,
 				6F3FF54623DAB62D005162C7 /* StoresMapViewController.swift */,
 				4069257923D8350100059C8E /* RecipeViewController.swift */,
 				6F54A4412429D95000D936CD /* RecipeDetailViewController.swift */,
+				6F20C3FC244DB775009092FD /* searching */,
 				40A8051D23A078FA0094E52A /* LoginPart */,
 				6FC70D6F2429D215002E14DF /* Profile */,
 				6FC70D6E2429D178002E14DF /* ShoppingListRefrigerator */,
@@ -527,6 +529,7 @@
 				692327F12435693D003C434D /* PreferenceTableViewCell.swift */,
 				692327E9243543E3003C434D /* AccountSettingTableViewCell.swift */,
 				69909F3424561F3900AACEC7 /* recipePreferenceTableViewCell.swift */,
+				69909F442456C9C700AACEC7 /* AutoSizedTableView.swift */,
 			);
 			path = CellForSetting;
 			sourceTree = "<group>";
@@ -597,7 +600,7 @@
 				6970F4E323F6302A00F94541 /* Monthly.storyboard */,
 				69202F2D23FB3D33001AB4A9 /* EditorChoice.storyboard */,
 				693CA00B23FF43CE00957EF2 /* VIP_page.storyboard */,
-				69909F38245632BD00AACEC7 /* Setting.storyboard */,
+				69909F422456B80F00AACEC7 /* Setting.storyboard */,
 			);
 			path = StoryBoard;
 			sourceTree = "<group>";
@@ -970,8 +973,8 @@
 				6F27D186242A08D900B5B071 /* apiKey.plist in Resources */,
 				6F27D17F242A054900B5B071 /* Assets.xcassets in Resources */,
 				6970F4E423F6302A00F94541 /* Monthly.storyboard in Resources */,
+				69909F432456B81000AACEC7 /* Setting.storyboard in Resources */,
 				6F8BE77523EEA96300CEA348 /* Map.storyboard in Resources */,
-				69909F39245632BD00AACEC7 /* Setting.storyboard in Resources */,
 				6999A49324170EE40013BD5B /* Podfile in Resources */,
 				69202F2E23FB3D33001AB4A9 /* EditorChoice.storyboard in Resources */,
 				693CA00A23FF437600957EF2 /* RecipeCollectionViewCell.xib in Resources */,
@@ -1223,6 +1226,7 @@
 				6F7D4D8B243F17ED006D0A35 /* FollowerViewController.swift in Sources */,
 				6FB86C0923E8839800672851 /* KeyManager.swift in Sources */,
 				6F27D1772429F28300B5B071 /* ServingAndTimeTableViewCell.swift in Sources */,
+				69909F452456C9C700AACEC7 /* AutoSizedTableView.swift in Sources */,
 				6F3FF54723DAB62D005162C7 /* StoresMapViewController.swift in Sources */,
 				6F54A44D2429D95400D936CD /* NumOfCreatorhasTableViewCell.swift in Sources */,
 				69325D282413D58400340F1F /* FetchRecipeImage.swift in Sources */,

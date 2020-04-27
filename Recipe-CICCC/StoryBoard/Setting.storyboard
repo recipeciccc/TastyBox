@@ -39,12 +39,9 @@
                                             <action selector="accountBtnClick:" destination="rka-ve-09M" eventType="touchUpInside" id="Nuq-PL-vq8"/>
                                         </connections>
                                     </button>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="vwO-Le-9Cx">
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" placeholderIntrinsicWidth="374" placeholderIntrinsicHeight="80" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="vwO-Le-9Cx" customClass="AutoSizedTableView" customModule="Recipe_CICCC" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="40" width="374" height="80"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="80" id="4N9-sh-wmV"/>
-                                        </constraints>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="settingCell" id="c3Q-ua-AX6" customClass="AccountSettingTableViewCell" customModule="Recipe_CICCC" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="28" width="374" height="42"/>
@@ -112,12 +109,9 @@
                                             <action selector="preferenceBtnClick:" destination="rka-ve-09M" eventType="touchUpInside" id="aip-WI-7J1"/>
                                         </connections>
                                     </button>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="2WL-p8-iwn">
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" placeholderIntrinsicWidth="374" placeholderIntrinsicHeight="140" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="2WL-p8-iwn" customClass="AutoSizedTableView" customModule="Recipe_CICCC" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="40" width="374" height="140"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="140" id="jlX-Ee-aaK"/>
-                                        </constraints>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="preferenceCell" rowHeight="41" id="wk0-ct-KTG" customClass="PreferenceTableViewCell" customModule="Recipe_CICCC" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="28" width="374" height="41"/>
@@ -267,8 +261,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ash-3y-d6f">
-                                <rect key="frame" x="0.0" y="88" width="414" height="808"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="632" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ash-3y-d6f" customClass="AutoSizedTableView" customModule="Recipe_CICCC" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="88" width="414" height="632"/>
                                 <color key="backgroundColor" red="0.99670392269999997" green="0.98830622430000004" blue="0.69406294820000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="preferenceItem" id="YxX-oU-C5K" customClass="recipePreferenceTableViewCell" customModule="Recipe_CICCC" customModuleProvider="target">
@@ -301,10 +295,23 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RbS-HT-bu9">
+                                <rect key="frame" x="150" y="750" width="114" height="33"/>
+                                <color key="backgroundColor" red="0.97974365949999997" green="0.82784348730000001" blue="0.49011576179999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="114" id="C5N-Q0-Uqc"/>
+                                    <constraint firstAttribute="height" constant="33" id="wKc-b2-8DW"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <state key="normal" title="Save">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.99670392269999997" green="0.98830622430000004" blue="0.69406294820000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="ash-3y-d6f" secondAttribute="bottom" id="5pS-uE-02k"/>
+                            <constraint firstItem="RbS-HT-bu9" firstAttribute="top" secondItem="ash-3y-d6f" secondAttribute="bottom" constant="30" id="DGL-EN-uAg"/>
+                            <constraint firstItem="RbS-HT-bu9" firstAttribute="centerX" secondItem="Obh-X8-Epj" secondAttribute="centerX" id="RQy-he-3u3"/>
                             <constraint firstItem="ash-3y-d6f" firstAttribute="top" secondItem="HBS-0z-PAH" secondAttribute="top" id="gAz-Lh-i5k"/>
                             <constraint firstItem="ash-3y-d6f" firstAttribute="leading" secondItem="HBS-0z-PAH" secondAttribute="leading" id="hzg-LC-ETA"/>
                             <constraint firstItem="ash-3y-d6f" firstAttribute="trailing" secondItem="HBS-0z-PAH" secondAttribute="trailing" id="tTU-G3-mrF"/>

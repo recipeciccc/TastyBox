@@ -19,16 +19,13 @@ class PreferenceViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         configureDelegate()
-        initVariable()
     }
     private func configureDelegate(){
         AddTextField.delegate = self
         ListTableView.delegate = self
         ListTableView.dataSource = self
     }
-    private func initVariable(){
-        
-    }
+   
     
     @IBAction func AddItem(_ sender: UIBarButtonItem) {
         print("tab add button")
