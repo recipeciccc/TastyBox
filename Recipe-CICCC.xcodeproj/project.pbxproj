@@ -70,6 +70,10 @@
 		69F0D39323F63C5C001BF696 /* EditorChoiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F0D39223F63C5C001BF696 /* EditorChoiceViewController.swift */; };
 		6F039DCE2454FC9D00C76516 /* savingRecipesDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F039DCD2454FC9D00C76516 /* savingRecipesDataManager.swift */; };
 		6F039DD024552CB100C76516 /* MyPageDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F039DCF24552CB100C76516 /* MyPageDataManager.swift */; };
+		6F039DD424561F3300C76516 /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F039DD324561F3300C76516 /* SettingsTableViewCell.swift */; };
+		6F039DDA245627E400C76516 /* MainSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F039DD8245627E300C76516 /* MainSettingsViewController.swift */; };
+		6F039DDB245627E400C76516 /* SettingProifleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F039DD9245627E400C76516 /* SettingProifleViewController.swift */; };
+		6F039DDD2456281800C76516 /* SettingNotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F039DDC2456281800C76516 /* SettingNotificationViewController.swift */; };
 		6F084075244F58D200CA7E6E /* ResultRecipesDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F084074244F58D200CA7E6E /* ResultRecipesDataManager.swift */; };
 		6F084077244F5B7E00CA7E6E /* ResultRecipeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F084076244F5B7E00CA7E6E /* ResultRecipeCollectionViewCell.swift */; };
 		6F0FBAFD23DA3E49009C1775 /* savedRecipe.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F0FBAFC23DA3E49009C1775 /* savedRecipe.storyboard */; };
@@ -257,6 +261,10 @@
 		69F0D39223F63C5C001BF696 /* EditorChoiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorChoiceViewController.swift; sourceTree = "<group>"; };
 		6F039DCD2454FC9D00C76516 /* savingRecipesDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = savingRecipesDataManager.swift; sourceTree = SOURCE_ROOT; };
 		6F039DCF24552CB100C76516 /* MyPageDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MyPageDataManager.swift; path = "Recipe-CICCC/Controller/Profile/MyPageDataManager.swift"; sourceTree = SOURCE_ROOT; };
+		6F039DD324561F3300C76516 /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SettingsTableViewCell.swift; path = "Recipe-CICCC/StoryBoard/SettingsTableViewCell.swift"; sourceTree = SOURCE_ROOT; };
+		6F039DD8245627E300C76516 /* MainSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainSettingsViewController.swift; sourceTree = "<group>"; };
+		6F039DD9245627E400C76516 /* SettingProifleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingProifleViewController.swift; sourceTree = "<group>"; };
+		6F039DDC2456281800C76516 /* SettingNotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingNotificationViewController.swift; sourceTree = "<group>"; };
 		6F084074244F58D200CA7E6E /* ResultRecipesDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultRecipesDataManager.swift; sourceTree = "<group>"; };
 		6F084076244F5B7E00CA7E6E /* ResultRecipeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ResultRecipeCollectionViewCell.swift; path = "Recipe-CICCC/Controller/searching/ResultRecipeCollectionViewCell.swift"; sourceTree = SOURCE_ROOT; };
 		6F0FBAFC23DA3E49009C1775 /* savedRecipe.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = savedRecipe.storyboard; sourceTree = "<group>"; };
@@ -480,6 +488,7 @@
 		4069257123D8350100059C8E /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				6F039DD7245627A800C76516 /* settings */,
 				6F15281524540FC700E242D9 /* ExplainationVIPViewController.swift */,
 				6F20C3FC244DB775009092FD /* searching */,
 				6F8408C92449E1C3008B2A25 /* GenreSelectViewController.swift */,
@@ -556,6 +565,16 @@
 				69124FA923ECE2C100D116B4 /* followingRecipeCollectionViewCell.swift */,
 			);
 			path = CellForFollowingRecipe;
+			sourceTree = "<group>";
+		};
+		6F039DD7245627A800C76516 /* settings */ = {
+			isa = PBXGroup;
+			children = (
+				6F039DD8245627E300C76516 /* MainSettingsViewController.swift */,
+				6F039DD9245627E400C76516 /* SettingProifleViewController.swift */,
+				6F039DDC2456281800C76516 /* SettingNotificationViewController.swift */,
+			);
+			path = settings;
 			sourceTree = "<group>";
 		};
 		6F0FBB0623DA4B94009C1775 /* StoryBoard */ = {
@@ -781,6 +800,7 @@
 		6FC70D782429D478002E14DF /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				6F039DD324561F3300C76516 /* SettingsTableViewCell.swift */,
 				6F8408CB2449E2EC008B2A25 /* GenreCollectionViewCell.swift */,
 				6F54A4462429D95300D936CD /* MapTableViewCell.swift */,
 				4069257523D8350100059C8E /* CollectionViewCell.swift */,
@@ -1142,6 +1162,7 @@
 				6FC70D642429CB7D002E14DF /* CreatorViewController.swift in Sources */,
 				6F8FC6D9244E28DA0092BF61 /* SearchingIngredientsTableViewCell.swift in Sources */,
 				6F8BE78823EEAFFF00CEA348 /* IngredietntShoppingListTableViewCell.swift in Sources */,
+				6F039DDD2456281800C76516 /* SettingNotificationViewController.swift in Sources */,
 				4069257C23D8350100059C8E /* Image.swift in Sources */,
 				6FB2983F2414E8970094F5F4 /* IngredientRefrigeratorDataManager.swift in Sources */,
 				6F54A4492429D95400D936CD /* PopularRecipeViewController.swift in Sources */,
@@ -1153,6 +1174,7 @@
 				69325D202413A9B300340F1F /* userRecipeItemTableViewCell.swift in Sources */,
 				4069258C23D8351800059C8E /* profieTableViewCell.swift in Sources */,
 				69DB5BC123ECBF240027A238 /* FollowingRecipeTableViewCell.swift in Sources */,
+				6F039DDB245627E400C76516 /* SettingProifleViewController.swift in Sources */,
 				6F20C3F9244DB742009092FD /* SearchingGenreViewController.swift in Sources */,
 				6F8BE79423EEB80900CEA348 /* Location.swift in Sources */,
 				69E57A4124255A7D00753243 /* UserRecipeDetail.swift in Sources */,
@@ -1210,8 +1232,10 @@
 				6F54A4512429D95400D936CD /* MapTableViewCell.swift in Sources */,
 				4069255D23D834AC00059C8E /* HowToCookTableViewCell.swift in Sources */,
 				6F729386242D68CF00A7E4E0 /* RecipeDetailDelegate.swift in Sources */,
+				6F039DDA245627E400C76516 /* MainSettingsViewController.swift in Sources */,
 				402CAC6B23D92A37004A46F1 /* searchStoresTableViewCell.swift in Sources */,
 				6F8FC6DB244E2ACD0092BF61 /* SearchingIngredientsDataManager.swift in Sources */,
+				6F039DD424561F3300C76516 /* SettingsTableViewCell.swift in Sources */,
 				6F729382242B159E00A7E4E0 /* CommentsViewController.swift in Sources */,
 				6F72937C242A1FDF00A7E4E0 /* CommentTableViewCell.swift in Sources */,
 				6F084075244F58D200CA7E6E /* ResultRecipesDataManager.swift in Sources */,
