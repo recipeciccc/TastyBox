@@ -7,14 +7,18 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseFirestoreSwift
 
 class PreferenceViewController: UIViewController{
 
     @IBOutlet weak var ListTableView: UITableView!
     @IBOutlet weak var AddTextField: UITextField!
-    
+    var row = Int()
     var lists = [String]()
     var slectedList = Set<String>()
+    var settingManager = SettingManager()
+    let uid = Auth.auth().currentUser?.uid
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,6 +42,26 @@ class PreferenceViewController: UIViewController{
         print(slectedList)
     }
     
+    @IBAction func saveData(_ sender: Any) {
+        if row == 0{
+            deleteData()
+            updateData()
+        }
+    }
+    
+    func deleteData(){
+        let currentfoodsName = settingManager.getAllergicFood(userID: uid ?? "")
+        for item in currentfoodsName{
+            print(item)
+            settingManager.deleteFood(userID: uid ?? "", allergicFood: item)
+        }
+    }
+
+    func updateData(){
+        for item in slectedList{
+            settingManager.addAllergicFood(userID: uid ?? "", allergicFood: item)
+        }
+    }
 }
 
 extension PreferenceViewController: UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate{

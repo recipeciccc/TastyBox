@@ -137,10 +137,13 @@ extension SettingViewController: UITableViewDataSource,UITableViewDelegate{
             
             switch indexPath.row {
             case 0:
+                vc.row = indexPath.row
                 vc.lists = allergies
             case 1:
+                vc.row = indexPath.row
                 vc.lists = mealSize
             case 2:
+                vc.row = indexPath.row
                 vc.lists = cuisineType
             default:
                 print("defalt")
