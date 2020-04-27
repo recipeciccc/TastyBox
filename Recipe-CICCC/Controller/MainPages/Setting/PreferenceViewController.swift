@@ -14,6 +14,7 @@ class PreferenceViewController: UIViewController{
     @IBOutlet weak var AddTextField: UITextField!
     
     var lists = [String]()
+    var slectedList = Set<String>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,13 +27,18 @@ class PreferenceViewController: UIViewController{
         ListTableView.dataSource = self
     }
     private func initVariable(){
+        
     }
     
     @IBAction func AddItem(_ sender: UIBarButtonItem) {
         print("tab add button")
-        lists.append(AddTextField.text!)
-        AddTextField.text = ""
-        ListTableView.reloadData()
+        if AddTextField.text! != "" && AddTextField.text! != "Add new choice"{
+            lists.append(AddTextField.text!)
+            AddTextField.text = ""
+            AddTextField.textColor = #colorLiteral(red: 1, green: 0.816192925, blue: 0.350728631, alpha: 1)
+            ListTableView.reloadData()
+        }
+        print(slectedList)
     }
     
 }
@@ -59,12 +65,14 @@ extension PreferenceViewController: UITableViewDelegate,UITableViewDataSource,UI
             cell.backgroundColor = #colorLiteral(red: 1, green: 0.8206811547, blue: 0.4302719235, alpha: 1)
             cell.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
             cell.accessoryType = UITableViewCell.AccessoryType.checkmark
+            slectedList.insert(cell.item.text!)
         }
         else{
             cell.select = false
             cell.item.textColor = #colorLiteral(red: 1, green: 0.6749868989, blue: 0, alpha: 1)
             cell.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
             cell.accessoryType = UITableViewCell.AccessoryType.none
+            slectedList.remove(cell.item.text!)
         }
       
         
@@ -74,5 +82,12 @@ extension PreferenceViewController: UITableViewDelegate,UITableViewDataSource,UI
         textField.resignFirstResponder()
         return true
     }
+    
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        textField.text = ""
+        textField.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        return true
+    }
+    
     
 }

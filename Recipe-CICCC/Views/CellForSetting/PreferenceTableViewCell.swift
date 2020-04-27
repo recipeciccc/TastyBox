@@ -11,7 +11,6 @@ import UIKit
 class PreferenceTableViewCell: UITableViewCell {
     
     @IBOutlet weak var title: UILabel!
-    @IBOutlet weak var choices: UILabel!
     
     override func awakeFromNib() {
     }

@@ -98,7 +98,6 @@ extension SettingViewController: UITableViewDataSource,UITableViewDelegate{
     
             let cell = tableView.dequeueReusableCell(withIdentifier: "preferenceCell") as! PreferenceTableViewCell
             cell.title.text = preferenceTitle[indexPath.row]
-            cell.choices.text = "Choose"
             return cell
     }
     
