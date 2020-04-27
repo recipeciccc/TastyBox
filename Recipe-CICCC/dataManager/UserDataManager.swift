@@ -11,13 +11,18 @@ import FirebaseFirestore
 import Firebase
 import FirebaseAuth
 
+protocol recipeDetailDelegate: class {
+    func isVIP(isVIP: Bool)
+}
+
 class UserdataManager {
     
     let db = Firestore.firestore()
     let storageRef = Storage.storage().reference()
-    var delegate: getUserDataDelegate?
-    var delegateFollowerFollowing :FolllowingFollowerDelegate?
-    
+    weak var delegate: getUserDataDelegate?
+    weak var delegateFollowerFollowing :FolllowingFollowerDelegate?
+    weak var savedRecipesDelegate: SavedRecipeDelegate?
+    weak var recipeDetailDelegate: recipeDetailDelegate?
     
     var users: [User] = []
     var user: User?
@@ -25,6 +30,34 @@ class UserdataManager {
     var followingsIDs: [String] = []
     var followers: [User] = []
     var followings: [User] = []
+    var savedRecipesIDs:[String] = []
+    let uid = Auth.auth().currentUser?.uid
+    
+    func checkVIP() {
+           
+           let uid: String = Auth.auth().currentUser!.uid
+          
+           db.collection("user").document(uid).addSnapshotListener {
+               (querysnapshot, error) in
+               if error != nil {
+                   print("Error getting documents: \(String(describing: error))")
+               }
+               else {
+                  
+                   if let data = querysnapshot!.data() {
+                   
+                       print("data count: \(data.count)")
+                
+                    if let isVIP = data["isVIP"] as? Bool {
+                        self.recipeDetailDelegate?.isVIP(isVIP: isVIP)
+                    }
+
+                   }
+               }
+               
+               
+           }
+       }
     
     func getUserDetail(id: String?) {
         
@@ -52,9 +85,9 @@ class UserdataManager {
                     let name = data["userName"] as? String
                     let familySize = data["familySize"] as? Int
                     let cuisineType = data["cuisineType"] as? String
-                
-                
-                self.user = User(userID: userID!, name: name!, cuisineType: cuisineType!, familySize: familySize)
+                    let isVIP = data["isVIP"] as? Bool ?? false
+ 
+                    self.user = User(userID: userID!, name: name!, cuisineType: cuisineType!, familySize: familySize, isVIP: isVIP)
                 self.delegate?.gotUserData(user: self.user!)
 
                 }
@@ -64,9 +97,12 @@ class UserdataManager {
         }
     }
     
+
+        
     
     
     func increaseFollower(userID: String, followerID: String) {
+        
         db.collection("user").document(userID).collection("follower").document(followerID).setData([
             "id": followerID
         ]) { err in
@@ -113,11 +149,15 @@ class UserdataManager {
                     
                     if followerOrFollowing == "following" {
                         self.followings.append(self.user!)
+                        if ID == IDs.last! {
                         self.delegateFollowerFollowing?.assignFollowersFollowings(users: self.followings)
+                        }
                     }
                     if followerOrFollowing == "follower" {
                         self.followers.append(self.user!)
+                         if ID == IDs.last! {
                         self.delegateFollowerFollowing?.assignFollowersFollowings(users: self.followers)
+                        }
                     }
                     
                 }
@@ -168,7 +208,7 @@ class UserdataManager {
         }
     }
     
-    func userRegister(userName: String, eMailAddress: String, familySize: Int, cuisineType: String, accountImage: UIImage) {
+    func userRegister(userName: String, eMailAddress: String, familySize: Int, cuisineType: String, accountImage: UIImage, isVIP: Bool) {
         
         let uid = (Auth.auth().currentUser?.uid)!
         
@@ -179,7 +219,8 @@ class UserdataManager {
             "userName": userName,
             "eMailAddress": eMailAddress,
             "familySize": familySize,
-            "cuisineType": cuisineType
+            "cuisineType": cuisineType,
+            "isVIP": isVIP
             
         ], merge: true) { err in
             if let err = err {
@@ -203,31 +244,84 @@ class UserdataManager {
         }
     }
     
-    func saveRecipe(recipeID: String) {
+    
+    
+    func getSavedRecipes() {
         
-        let uid = Auth.auth().currentUser?.uid
-        db.collection("user").document(uid!).collection("savedRecipes").document(recipeID).setData([
-            
-            "id": recipeID,
-            "savedTime": Timestamp(),
-            
-        ], merge: true) { err in
-            if let err = err {
-                print("Error writing document: \(err)")
-            } else {
-                print("Document successfully written!")
+        db.collection("user").document(uid!).collection("savedRecipes").order(by: "savedTime", descending: true).addSnapshotListener {
+        (querysnapshot, error) in
+        
+        if error != nil {
+            print("Error getting documents: \(String(describing: error))")
+        } else {
+            if let documents = querysnapshot?.documents {
+                
+                for document in documents {
+                    let data = document.data()
+                    if let id = data["id"] as? String {
+                        self.savedRecipesIDs.append(id)
+                    }
+                }
+               
+            }
             }
         }
-        
-        
     }
     
-    func getSavedRecipesImage(recipeIDs: [String]) {
-        
-        for recipeID in recipeIDs {
+    func Data(id: String) {
+        var recipeList = [RecipeDetail]()
+        var exist = Bool()
+        db.collection("recipe").document(id).addSnapshotListener { (snapshot, err) in
+            if err == nil {
+               
+                
+                        
+                if let data = snapshot?.data() {
+                        let recipeId = data["recipeID"] as? String
+                        let title = data["title"] as? String
+                        let cookingTime = data["cookingTime"] as? Int
+                        let like = data["like"] as? Int
+                        let serving = data["serving"] as? Int
+                        
+                        let userId = data["userID"] as? String
+                        let time = data["time"] as? Timestamp
+                        
+                        let image = data["image"] as? String
+                        let genresData = data["genres"] as? [String: Bool]
+                        
+                        var genresArr: [String] = []
+                        
+                        if let gotData = genresData {
+                            for genre in gotData {
+                                genresArr.append(genre.key)
+                            }
+                        }
+                        
+                        
+                  let isVIPRecipe = data["VIP"] as? Bool ?? false
+                                                                                              
+                                               let recipe = RecipeDetail(recipeID: recipeId!, title: title!, updatedDate: time!, cookingTime: cookingTime ?? 0, image: image ?? "", like: like!, serving: serving ?? 0, userID: userId!, genres: genresArr, isVIPRecipe: isVIPRecipe)
+                                             
+                        recipeList.append(recipe)
+                        exist = true
+                }
+            } else {
+                print(err?.localizedDescription as Any)
+                print("Document does not exist")
+                exist = false
+            }
             
+            self.isDataExist(exist,recipeList)
         }
+       
     }
+    
+       func isDataExist(_ exist:Bool, _ data: [RecipeDetail]){
+           if exist{
+               savedRecipesDelegate?.reloadData(data:data)
+           }
+       }
+    
     
     func getUserImage(uid: String) {
         let imageRef = storageRef.child("user/\(uid)/userAccountImage")

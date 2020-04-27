@@ -20,6 +20,7 @@ struct RecipeDetail {
     var serving: Int
     var userID:String
     var genres: [String] = []
+    var isVIPRecipe: Bool?
 //    var instructions: [Instruction]
 //    var ingredients: [Ingredient]
 //    var comment: [Comment]

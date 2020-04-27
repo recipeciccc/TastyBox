@@ -33,33 +33,35 @@ class RecipeDetailViewController: UIViewController {
     var instructionImgs = [UIImage]()
     
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         detailTableView.delegate = self
         detailTableView.dataSource = self
         detailTableView.tableFooterView = UIView()
         detailTableView.separatorStyle = .none
         getImg.delegateImg = self
         userDataManager.delegate = self
+        userDataManager.recipeDetailDelegate = self
         
-        let dbRef = Firestore.firestore().collection("recipe").document(recipe?.recipeID ?? "")
+        if recipe!.isVIPRecipe! {
+            userDataManager.checkVIP()
+        } else {
+            
+            let dbRef = Firestore.firestore().collection("recipe").document(recipe?.recipeID ?? "")
+            let query_ingredient = dbRef.collection("ingredient").order(by: "ingredient", descending: false)
+            let query_instruction = dbRef.collection("instruction").order(by: "index", descending: false)
+            
+            getIngredientData(query: query_ingredient)
+            getInstructionData(query: query_instruction)
+            
+            userDataManager.getUserDetail(id: recipe?.userID)
+            userDataManager.getUserImage(uid: recipe!.userID)
+            
+            
+        }
         
-        let query_ingredient = dbRef.collection("ingredient").order(by: "ingredient", descending: false)
-        let query_instruction = dbRef.collection("instruction").order(by: "index", descending: false)
-        
-        
-        //
-        //        dataManager1.getIngredientData(query: query_ingredient, tableView: detailTableView)
-        //        dataManager1.getInstructionData(query: query_instruction, tableView: detailTableView)
-        //   dataManager1.getUserProvideRecipe(recipe: recipe!)
-        
-        getIngredientData(query: query_ingredient)
-        getInstructionData(query: query_instruction)
-        
-        userDataManager.getUserDetail(id: recipe?.userID)
-        userDataManager.getUserImage(uid: recipe!.userID)
-        
-       
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -84,11 +86,11 @@ class RecipeDetailViewController: UIViewController {
             
             navigationController?.pushViewController(profileVC, animated: true)
         } else {
-        let storyboard = UIStoryboard(name: "creatorProfile", bundle: nil)
-        let profileVC = storyboard.instantiateViewController(identifier: "creatorProfile") as! CreatorProfileViewController
-        
-        profileVC.id = self.creator!.userID
-        navigationController?.pushViewController(profileVC, animated: true)
+            let storyboard = UIStoryboard(name: "creatorProfile", bundle: nil)
+            let profileVC = storyboard.instantiateViewController(identifier: "creatorProfile") as! CreatorProfileViewController
+            
+            profileVC.id = self.creator!.userID
+            navigationController?.pushViewController(profileVC, animated: true)
         }
     }
     
@@ -296,6 +298,7 @@ extension RecipeDetailViewController: RecipeDetailDelegate {
 }
 
 extension RecipeDetailViewController: getUserDataDelegate {
+    
     func assignUserImage(image: UIImage) {
         self.creatorImage = image
         self.detailTableView.reloadData()
@@ -305,4 +308,39 @@ extension RecipeDetailViewController: getUserDataDelegate {
         self.creator = user
     }
     
+}
+
+extension RecipeDetailViewController: recipeDetailDelegate {
+    func isVIP(isVIP: Bool) {
+        if isVIP {
+            let dbRef = Firestore.firestore().collection("recipe").document(recipe?.recipeID ?? "")
+            let query_ingredient = dbRef.collection("ingredient").order(by: "ingredient", descending: false)
+            let query_instruction = dbRef.collection("instruction").order(by: "index", descending: false)
+            
+            getIngredientData(query: query_ingredient)
+            getInstructionData(query: query_instruction)
+            
+            userDataManager.getUserDetail(id: recipe?.userID)
+            userDataManager.getUserImage(uid: recipe!.userID)
+            
+        } else {
+                
+            let alertController = UIAlertController(title: "Register VIP member", message: "This recipe is VIP only. You need to be VIP member.", preferredStyle: .alert)
+            
+            let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: { action in
+                self.navigationController?.popViewController(animated: true)
+            })
+            let registerAction = UIAlertAction(title: "Sign up VIP membership", style: .default, handler: { action in
+                let registerVC = UIStoryboard(name: "VIP_page", bundle: nil).instantiateViewController(identifier: "registerVIP") as! ExplainationVIPViewController
+                
+                self.navigationController?.pushViewController(registerVC, animated: true)
+            })
+            
+            alertController.addAction(registerAction)
+            alertController.addAction(defaultAction)
+            
+            present(alertController, animated: true, completion: nil)
+            
+        }
+    }
 }

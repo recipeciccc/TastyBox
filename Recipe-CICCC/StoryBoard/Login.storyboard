@@ -448,6 +448,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="cuisineTypeTextField" destination="VOH-F2-PKJ" id="28P-ys-8bB"/>
+                        <outlet property="doneButton" destination="vm6-1C-7fH" id="3TU-jg-bi8"/>
                         <outlet property="emailTextField" destination="1oj-Lc-ZDV" id="LTN-Eh-dzz"/>
                         <outlet property="familySizeTextField" destination="mYP-Po-aon" id="0E6-7f-BAm"/>
                         <outlet property="userImageButton" destination="ONe-l8-e57" id="Ow7-JY-oJu"/>

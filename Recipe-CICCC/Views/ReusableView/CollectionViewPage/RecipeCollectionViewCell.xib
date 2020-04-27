@@ -19,14 +19,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="170" height="139"/>
                     </imageView>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lock.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="7cV-ac-A8W">
-                        <rect key="frame" x="55" y="40.5" width="60" height="59"/>
+                        <rect key="frame" x="55" y="49.5" width="60" height="59"/>
                         <color key="tintColor" white="1" alpha="0.60344373082822089" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="60" id="5PP-h0-sOc"/>
                             <constraint firstAttribute="height" constant="60" id="PVS-mA-sBk"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="fFt-0f-d4u">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="fFt-0f-d4u">
                         <rect key="frame" x="0.0" y="141" width="170" height="17"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -37,12 +37,12 @@
             </view>
             <constraints>
                 <constraint firstItem="Idl-0t-Sdh" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="8Xc-Ae-soY"/>
+                <constraint firstItem="7cV-ac-A8W" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="ETp-zN-CCH"/>
                 <constraint firstAttribute="trailing" secondItem="Idl-0t-Sdh" secondAttribute="trailing" id="IFE-yR-3Q8"/>
                 <constraint firstItem="7cV-ac-A8W" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="Jc6-5g-9tE"/>
                 <constraint firstAttribute="trailing" secondItem="fFt-0f-d4u" secondAttribute="trailing" id="MYv-0u-aMo"/>
                 <constraint firstItem="Idl-0t-Sdh" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="XEN-97-RMA"/>
                 <constraint firstItem="fFt-0f-d4u" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="jeD-G0-s1c"/>
-                <constraint firstItem="7cV-ac-A8W" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="40" id="lKy-5l-2p9"/>
                 <constraint firstItem="fFt-0f-d4u" firstAttribute="top" secondItem="Idl-0t-Sdh" secondAttribute="bottom" constant="2" id="ppC-ti-7Hc"/>
                 <constraint firstAttribute="bottom" secondItem="fFt-0f-d4u" secondAttribute="bottom" id="q9t-cr-2KL"/>
             </constraints>

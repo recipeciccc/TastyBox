@@ -24,6 +24,8 @@ class FirstTimeUserProfileTableViewController: UITableViewController, UIPickerVi
     
     @IBOutlet weak var userImageButton: UIButton!
     
+    @IBOutlet weak var doneButton: UIBarButtonItem!
+    
     var userImage: UIImage?
     
     var familySize = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20"]
@@ -38,9 +40,13 @@ class FirstTimeUserProfileTableViewController: UITableViewController, UIPickerVi
     
     let uid = Auth.auth().currentUser?.uid
     
+    var isVIP: Bool = false
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        
+        doneButton.isEnabled = false
         
         userNameTextField.text = Auth.auth().currentUser?.displayName
         emailTextField.text = Auth.auth().currentUser?.email
@@ -126,7 +132,8 @@ class FirstTimeUserProfileTableViewController: UITableViewController, UIPickerVi
         
         } else {
 
-            dataManager.userRegister(userName: userNameTextField.text ?? "", eMailAddress: emailTextField.text ?? "", familySize: Int(familySizeTextField!.text!) ?? 0, cuisineType: cuisineTypeTextField!.text ?? "", accountImage: userImage!)
+            
+            dataManager.userRegister(userName: userNameTextField.text ?? "", eMailAddress: emailTextField.text ?? "", familySize: Int(familySizeTextField!.text!) ?? 0, cuisineType: cuisineTypeTextField!.text ?? "", accountImage: userImage!, isVIP: isVIP)
 
             let Storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
             let vc = Storyboard.instantiateViewController(withIdentifier: "Discovery")
@@ -294,6 +301,10 @@ extension FirstTimeUserProfileTableViewController: getUserDataDelegate {
         self.familySizeTextField.text = String(user.familySize!)
         self.cuisineTypeTextField.text = user.cuisineType
         
+        if let isVIP = user.isVIP {
+            self.isVIP = isVIP
+        }
+        
         if Auth.auth().currentUser?.displayName == nil {
             self.userNameTextField.text = user.name
         }
@@ -328,6 +339,7 @@ extension FirstTimeUserProfileTableViewController: getUserDataDelegate {
     func assignUserImage(image: UIImage) {
         self.userImage = image
         self.userImageButton.setBackgroundImage(image, for: .normal)
+        doneButton.isEnabled = true
     }
     
 }
