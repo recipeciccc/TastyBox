@@ -16,7 +16,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VOD-rg-53w" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1312" y="456"/>
+            <point key="canvasLocation" x="2222" y="470"/>
         </scene>
         <!--My Page View Controller-->
         <scene sceneID="n7l-8T-SU7">
@@ -40,29 +40,45 @@
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imageFile" translatesAutoresizingMaskIntoConstraints="NO" id="xtT-7L-dpk">
                                                     <rect key="frame" x="20" y="17" width="100" height="101"/>
+                                                    <gestureRecognizers/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="100" id="aGv-Ux-HXW"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3kd-ze-j0h">
-                                                    <rect key="frame" x="158" y="49" width="236" height="37"/>
+                                                    <rect key="frame" x="158" y="27" width="236" height="24"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                    <nil key="textColor"/>
+                                                    <color key="textColor" red="0.66666666669999997" green="0.47450980390000003" blue="0.25882352939999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iqr-Mj-WoC">
+                                                    <rect key="frame" x="226" y="74" width="100" height="34"/>
+                                                    <color key="backgroundColor" red="1" green="0.57647058819999997" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="34" id="ivS-wi-Ogj"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                    <state key="normal" title="Edit Profile">
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </state>
+                                                </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="xtT-7L-dpk" firstAttribute="centerY" secondItem="3kd-ze-j0h" secondAttribute="centerY" id="9s3-QM-tLN"/>
+                                                <constraint firstItem="xtT-7L-dpk" firstAttribute="centerY" secondItem="3kd-ze-j0h" secondAttribute="centerY" constant="28.5" id="9s3-QM-tLN"/>
+                                                <constraint firstItem="Iqr-Mj-WoC" firstAttribute="top" secondItem="3kd-ze-j0h" secondAttribute="bottom" constant="23" id="FQ1-0l-eMN"/>
+                                                <constraint firstAttribute="trailingMargin" relation="lessThanOrEqual" secondItem="Iqr-Mj-WoC" secondAttribute="trailing" constant="68" id="H6n-HV-wIr"/>
                                                 <constraint firstItem="3kd-ze-j0h" firstAttribute="leading" secondItem="xtT-7L-dpk" secondAttribute="trailing" constant="38" id="RQ9-r2-hLt"/>
-                                                <constraint firstItem="3kd-ze-j0h" firstAttribute="top" secondItem="xtX-wW-MMV" secondAttribute="topMargin" constant="38" id="W51-yu-d0I"/>
+                                                <constraint firstItem="Iqr-Mj-WoC" firstAttribute="leading" relation="lessThanOrEqual" secondItem="xtT-7L-dpk" secondAttribute="trailing" constant="106" id="Ube-EV-xKZ"/>
                                                 <constraint firstItem="xtT-7L-dpk" firstAttribute="centerY" secondItem="xtX-wW-MMV" secondAttribute="centerY" id="Wzw-UP-fpK"/>
                                                 <constraint firstItem="xtT-7L-dpk" firstAttribute="leading" secondItem="xtX-wW-MMV" secondAttribute="leadingMargin" id="bM2-IY-e9D"/>
+                                                <constraint firstItem="Iqr-Mj-WoC" firstAttribute="centerX" secondItem="3kd-ze-j0h" secondAttribute="centerX" id="hwT-fl-oIv"/>
                                                 <constraint firstItem="3kd-ze-j0h" firstAttribute="trailing" secondItem="xtX-wW-MMV" secondAttribute="trailingMargin" id="t8l-J2-Tfa"/>
                                                 <constraint firstItem="xtT-7L-dpk" firstAttribute="top" secondItem="xtX-wW-MMV" secondAttribute="topMargin" constant="6" id="uV7-6q-4KW"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" red="1" green="0.57637232540000005" blue="0.0" alpha="0.2577322346" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" red="1" green="0.57647058823529407" blue="0.0" alpha="0.10081335617534247" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
+                                            <outlet property="editProfilebutton" destination="Iqr-Mj-WoC" id="rFE-J5-4FM"/>
                                             <outlet property="userImageView" destination="xtT-7L-dpk" id="1RH-ba-60Y"/>
                                             <outlet property="userNameLabel" destination="3kd-ze-j0h" id="0k6-aR-d78"/>
                                         </connections>
@@ -85,6 +101,7 @@
                                                             <rect key="frame" x="76" y="0.0" width="46" height="30"/>
                                                             <state key="normal" title="Button"/>
                                                             <connections>
+                                                                <action selector="postedButtonTapped:" destination="jEb-wp-ELK" eventType="touchUpInside" id="rEY-oi-QHR"/>
                                                                 <segue destination="q2S-V4-Gs5" kind="show" id="B0o-de-Mlk"/>
                                                             </connections>
                                                         </button>
@@ -110,6 +127,7 @@
                                                 <constraint firstItem="86m-C8-Fqu" firstAttribute="centerY" secondItem="Fwp-Uz-Mrc" secondAttribute="centerY" id="YKZ-wp-dA3"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" red="1" green="0.57647058823529407" blue="0.0" alpha="0.10001070204794522" colorSpace="custom" customColorSpace="displayP3"/>
                                         <connections>
                                             <outlet property="numOfFollowerButton" destination="TGX-ha-pOC" id="eGR-mI-We5"/>
                                             <outlet property="numOfFollowingButton" destination="8pM-hX-J39" id="de9-T2-cwv"/>
@@ -126,7 +144,7 @@
                                             <subviews>
                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="0ZP-1U-cGn">
                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="560"/>
-                                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                    <color key="backgroundColor" red="1" green="0.57647058819999997" blue="0.0" alpha="0.10000000000000001" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="6PB-lI-g9W">
                                                         <size key="itemSize" width="150" height="150"/>
                                                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -134,7 +152,7 @@
                                                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                     </collectionViewFlowLayout>
                                                     <cells>
-                                                        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="recipeItemForUser" id="6dx-Sc-nTC" customClass="RecipeCreatorPostedCollectionViewCell" customModule="Recipe_CICCC" customModuleProvider="target">
+                                                        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="recipeItemForUser" id="6dx-Sc-nTC" customClass="RecipeUserPostedCollectionViewCell" customModule="Recipe_CICCC" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="B8k-bZ-S23">
@@ -185,6 +203,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tBj-Pl-kXG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="gUq-bj-da9">
+                    <connections>
+                        <action selector="changeAccountImage:" destination="jEb-wp-ELK" id="o1B-eD-C7T"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="2221.739130434783" y="27.455357142857142"/>
         </scene>
@@ -196,7 +219,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YS5-YA-3X5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3239.8550724637685" y="75.669642857142847"/>
+            <point key="canvasLocation" x="2793" y="27"/>
         </scene>
     </scenes>
     <resources>
@@ -204,7 +227,7 @@
         <image name="imageFile" width="64" height="64"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="wV2-3P-fD7"/>
+        <segue reference="8ch-qU-LjV"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>

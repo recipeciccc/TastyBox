@@ -48,6 +48,7 @@ class IngredientRefrigeratorDataManager {
             } else {
                 
                 self.ingredients.removeAll()
+                
                 //For-loop
                 for documents in querySnapshot!.documents
                 {

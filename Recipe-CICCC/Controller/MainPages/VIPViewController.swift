@@ -8,7 +8,7 @@
 
 import UIKit
 
-class VIPviewController: UIViewController {
+class VIPViewController: UIViewController {
 
     @IBOutlet weak var collectionview: RecipeCollectionView!
     

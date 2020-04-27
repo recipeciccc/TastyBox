@@ -11,9 +11,14 @@ import UIKit
 class SavedRecipeViewController: UIViewController {
 
     @IBOutlet weak var collectionView: UICollectionView!
+    
     private let reuseIdentifier = "Cell"
     
     var savedRecipes:[RecipeDetail] = []
+    
+    var isSavingRecipe: Bool?
+    var savingRecipeID: String?
+    let dataManger = UserdataManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,9 +26,31 @@ class SavedRecipeViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         collectionView.dataSource = self
-    self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         
         self.navigationItem.title = "Saved"
+        
+        if isSavingRecipe == nil { isSavingRecipe = false }
+        
+        if isSavingRecipe! {
+           
+            let alertController = UIAlertController(title: "Save it?", message: "", preferredStyle: .alert)
+            let yesAction = UIAlertAction(title: "OK", style: .default, handler: { action in
+                self.dataManger.saveRecipe(recipeID: self.savingRecipeID!)
+                // call the fucntions to retrieve recipeId and recipeimage
+                self.collectionView.reloadData()
+            })
+            alertController.addAction(yesAction)
+            
+            let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: { action in
+                self.navigationController?.popViewController(animated: true)
+            })
+            
+            alertController.addAction(cancelAction)
+            
+            self.present(alertController, animated: true)
+        
+    }
     }
     
 

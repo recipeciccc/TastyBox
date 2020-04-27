@@ -18,7 +18,7 @@ class userRecipeItemTableViewCell: UITableViewCell {
         didSet{
             collectionView.dataSource = self as UICollectionViewDataSource
             collectionView.delegate = self as UICollectionViewDelegate
-            
+           
         }
     }
     
@@ -34,13 +34,14 @@ class userRecipeItemTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+       
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    
     }
 }
 
@@ -52,7 +53,7 @@ extension userRecipeItemTableViewCell: UICollectionViewDataSource, UICollectionV
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "recipeItemForUser", for: indexPath) as! RecipeCreatorPostedCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "recipeItemForUser", for: indexPath) as! RecipeUserPostedCollectionViewCell
         cell.imageView?.tag = indexPath.row
         cell.imageView?.image = recipeImage[indexPath.row]
        return cell

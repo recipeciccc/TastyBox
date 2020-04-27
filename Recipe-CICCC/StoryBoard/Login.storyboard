@@ -231,7 +231,7 @@
                                 <state key="normal" title="Log In !"/>
                                 <connections>
                                     <action selector="pressBackToLogin:" destination="ZrB-fw-QEE" eventType="touchDown" id="k2N-9K-jVo"/>
-                                    <segue destination="SoH-tz-dVu" kind="show" id="c5d-fm-ve9"/>
+                                    <segue destination="SoH-tz-dVu" kind="show" identifier="LoginMainPage" id="c5d-fm-ve9"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Already had an account?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oCz-bS-Wga">
@@ -290,16 +290,29 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="200"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PKH-dp-Vtz">
-                                                    <rect key="frame" x="195" y="91" width="24" height="18"/>
-                                                </imageView>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ONe-l8-e57">
+                                                    <rect key="frame" x="112" y="5" width="190" height="190"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="ONe-l8-e57" secondAttribute="height" multiplier="1:1" id="Moe-zZ-Dnb"/>
+                                                        <constraint firstAttribute="height" constant="190" id="vNp-Kh-0ch"/>
+                                                    </constraints>
+                                                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <state key="normal">
+                                                        <color key="titleColor" red="1" green="0.57647058819999997" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="showChoice:" destination="ZbZ-ay-B0T" eventType="touchUpInside" id="elf-6p-kdQ"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
-                                                <constraint firstItem="PKH-dp-Vtz" firstAttribute="centerY" secondItem="tha-Gp-6m4" secondAttribute="centerY" id="ZSd-eX-BWx"/>
-                                                <constraint firstItem="PKH-dp-Vtz" firstAttribute="centerX" secondItem="tha-Gp-6m4" secondAttribute="centerX" id="xEr-wm-y3a"/>
+                                                <constraint firstItem="ONe-l8-e57" firstAttribute="top" secondItem="tha-Gp-6m4" secondAttribute="top" constant="5" id="iJK-Yb-2uM"/>
+                                                <constraint firstAttribute="bottom" secondItem="ONe-l8-e57" secondAttribute="bottom" constant="5" id="qEz-JZ-v1D"/>
+                                                <constraint firstItem="ONe-l8-e57" firstAttribute="centerX" secondItem="tha-Gp-6m4" secondAttribute="centerX" id="wWD-pf-JGi"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <gestureRecognizers/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="88" id="aeu-Vz-pjx">
                                         <rect key="frame" x="0.0" y="228" width="414" height="88"/>
@@ -437,12 +450,23 @@
                         <outlet property="cuisineTypeTextField" destination="VOH-F2-PKJ" id="28P-ys-8bB"/>
                         <outlet property="emailTextField" destination="1oj-Lc-ZDV" id="LTN-Eh-dzz"/>
                         <outlet property="familySizeTextField" destination="mYP-Po-aon" id="0E6-7f-BAm"/>
+                        <outlet property="userImageButton" destination="ONe-l8-e57" id="Ow7-JY-oJu"/>
                         <outlet property="userNameTextField" destination="Fid-uI-vBj" id="KaX-0c-bFe"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r0N-0w-uQJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4695.652173913044" y="281.91964285714283"/>
+        </scene>
+        <!--pickUserAccountImage-->
+        <scene sceneID="JuI-mI-0Aw">
+            <objects>
+                <viewControllerPlaceholder storyboardName="pickUserAccountImage" id="bDA-cS-WBG" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="AxO-Fo-vbo"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="su9-Pm-CC3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5488" y="282"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="caM-3U-f73">

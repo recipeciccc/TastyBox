@@ -16,11 +16,10 @@ class PopularRecipeViewController: UIViewController {
     
     var recipe: RecipeDetail?
     var recipes = [RecipeDetail]()
-    var images:[UIImage] = []
+    var images:[Int:UIImage] = [:]
     let db = Firestore.firestore()
     
     let dataManager = RecipedataManagerClass()
-    let fetchData = FetchRecipeImage()
     
     
     override func viewDidLoad() {
@@ -29,8 +28,6 @@ class PopularRecipeViewController: UIViewController {
         // Do any additional setup after loading the view.
         dataManager.delegate = self
         dataManager.getReipeDetail()
-        
-        fetchData.delegate = self
         
         tableView.delegate = self as UITableViewDelegate
         tableView.dataSource = self as UITableViewDataSource
@@ -46,13 +43,6 @@ class PopularRecipeViewController: UIViewController {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
         
-        if let vc = segue.destination as? RecipeDetailViewController {
-            if let cell = sender as? UITableViewCell, let indexPath = tableView.indexPath(for: cell){
-                print(recipes[indexPath.row].title)
-                if segue.identifier == "Top3" { vc.recipe = recipes[indexPath.row] }
-                else { vc.recipe = recipes[indexPath.row + 3] }
-            }
-        }
     }
     
     
@@ -87,17 +77,14 @@ extension PopularRecipeViewController: UITableViewDataSource {
             }
                 
             else {
-                
-                //                print("recipe:\(recipes) count: \(recipes.count)")
-                
+                                
                 let cell = (tableView.dequeueReusableCell(withIdentifier: "medal recipe", for: indexPath) as? Number123TableViewCell)!
+                cell.selectionStyle = .none
                 
                 cell.numberLikeLabel.text = "\(recipes[indexPath.row].like)"
-                cell.numberCommentLabel.text = "\(recipes[indexPath.row].cookingTime)"
                 cell.titleLabel.text = recipes[indexPath.row].title
-                //                dataManager.getImage(rid: recipes[indexPath.row].recipeID, imageView: cell.imageView!)
-                                dataManager.getImage(rid: recipes[indexPath.row].recipeID, uid: recipes[indexPath.row].userID, imageView: cell.imageView!)
-//                cell.imageView?.image = images[indexPath.row]
+                cell.recipeImageView.image = images[indexPath.row]
+               
                 
                 switch indexPath.row {
                 case 0:
@@ -122,29 +109,12 @@ extension PopularRecipeViewController: UITableViewDataSource {
         
         let cell = (tableView.dequeueReusableCell(withIdentifier: "under no.4", for: indexPath) as? UnderNo4TableViewCell)!
         
+        cell.selectionStyle = .none
         
         cell.rankingLabel.text = "No. \(indexPath.row + 3)"
         cell.numLikeLabel.text = "\(recipes[indexPath.row + 3].like)"
-        cell.numCommentLabel.text = "\(recipes[indexPath.row + 3].cookingTime)"
         cell.titleLabel.text = recipes[indexPath.row + 3].title
-//        cell.imageView?.image = images[indexPath.row + 3]
-        
-        
-        
-        // after the number in firebase is over 10 recipes, comment out them.
-        
-        //        cell.rankingLabel.text = "No. \(indexPath.row + 4)"
-        //        cell.numLikeLabel.text = "\(recipes[indexPath.row + 4].like)"
-        //        cell.numCommentLabel.text = "\(recipes[indexPath.row + 4].cookingTime)"
-        //        cell.titleLabel.text = recipes[indexPath.row + 4].title
-        //
-        //        if cell.recipeImageView?.image == nil {
-        //            dataManager.getImage(imageString: recipes[indexPath.row + 4].image, imageView: cell.recipeImageView)
-        //        }
-        
-        
-        print("recipes.count: \(recipes.count)")
-        
+        cell.recipeImageView.image = images[indexPath.row + 3]
         
         return cell
     }
@@ -156,58 +126,45 @@ extension PopularRecipeViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+
+        let recipeVC = UIStoryboard(name: "RecipeDetail", bundle: nil).instantiateViewController(identifier: "detailvc") as! RecipeDetailViewController
+        
+        if indexPath.section == 0 {
+            let cell = (tableView.cellForRow(at: indexPath) as? Number123TableViewCell)!
+            recipeVC.recipe = self.recipes[indexPath.row]
+            recipeVC.mainPhoto = cell.recipeImageView!.image!
+        }
+        else if indexPath.section == 1 {
+            let cell = (tableView.cellForRow(at: indexPath) as? UnderNo4TableViewCell)!
+            recipeVC.recipe = self.recipes[indexPath.row + 3]
+            recipeVC.mainPhoto = cell.recipeImageView!.image!
+        }
+        
         tableView.deselectRow(at: indexPath, animated: true)
+        navigationController?.pushViewController(recipeVC, animated: true)
     }
     
 }
 
 extension PopularRecipeViewController: getDataFromFirebaseDelegate {
-    func gotImage(image: UIImage) {
-        self.images.append(image)
+    func assignImage(image: UIImage, index: Int) {
+         self.images[index] = image
+        self.tableView.reloadData()
     }
-    
     
     func gotData(recipes: [RecipeDetail]) {
         self.recipes = recipes.sorted { $0.like > $1.like }
-        var userIDs:[String] = []
-        var recipeIDs:[String] = []
-        var imageURLs:[String] = []
+         
+        recipes.enumerated().map {
+            dataManager.getImage(rid: $0.1.recipeID, uid: $0.1.userID, index: $0.0)
+        }
         
-        //        for recipe in recipes {
-        //            userIDs.append(recipe.userID)
-        //            recipeIDs.append(recipe.recipeID)
-        //            imageURLs.append(recipe.image!)
-        //
-        //        }
-//        for recipe in recipes {
-//            dataManager.getImage(rid: recipe.recipeID, uid: recipe.userID)
-//        }
-        
-        
-        
-        //        fetchData.getImage(uid:userIDs, rid: recipeIDs, imageUrl: imageURLs)
         tableView.reloadData()
     }
     
-    func assignImage(image: UIImage, reference: UIImageView) {
-        reference.image = image
-        reference.clipsToBounds = true
-        reference.contentMode = .scaleAspectFit
-        
-    }
-    
+   
 }
 
-extension PopularRecipeViewController: ReloadDataDelegate {
-    func reloadData(data: [RecipeDetail]) {
-        
-    }
-    
-    func reloadImg(img: [UIImage]) {
-        self.images = img
-    }
-    
-    
-}
 
 

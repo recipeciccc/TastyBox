@@ -15,30 +15,54 @@ class FetchRecipeImage{
     var delegate: ReloadDataDelegate?
     var delegateImg: ReloadDataDelegate?
     
-    func getImage( uid:String, rid: [String], imageUrl: [String]){
+    func getImage( uid:String?, rid: [String]){
         var image = UIImage()
         let storage = Storage.storage()
         let storageRef = storage.reference()
-        var imageList = [UIImage]()
+        var imageList: [UIImage] = []
+        var imageRefs: [StorageReference] = []
+        
+        
+        guard let uid = uid else {
+            return
+        }
         
         for index in 0..<rid.count{
+                   
+            print("\(index): \(rid[index])")
+        let imagesRef = storageRef.child("user/\(uid)/RecipePhoto/\(rid[index])/\(rid[index])")
+            imageRefs.append(imagesRef)
+        }
+        
+//        print(imageRefs)
+        imageList = Array(repeating: UIImage(), count: imageRefs.count)
+        
+        for (index, imageRef) in imageRefs.enumerated() {
             
-            let imagesRef = storageRef.child("user/\(uid)/RecipePhoto/\(rid[index])/\(rid[index])")
-            imagesRef.getData(maxSize: 1 * 1024 * 1024) { data, error in   //
+           
+            imageRef.getData(maxSize: 1 * 1024 * 1024) { data, error in   //
                 if error != nil {
                     print(error?.localizedDescription as Any)
                 } else {
                     if let imgData = data{
                         
+                        print("imageRef: \(imageRef)")
+                        
                         image = UIImage(data: imgData)!
-                        imageList.append(image)
+//                        print(index)
+                        imageList.remove(at: index)
+                        imageList.insert(image, at: index)
+                        
                         self.delegate?.reloadImg(img: imageList)
                     }
                 }
-                self.delegate?.reloadImg(img: imageList)
-            }
         }
+        
+        }
+       
     }
+    
+ 
     
     func getInstructionImg( uid:String, rid: String, count: Int) -> [UIImage]{
         var image = UIImage()

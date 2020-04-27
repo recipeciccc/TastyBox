@@ -13,16 +13,17 @@ class CreatorProfileViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    //    var id: String?
-    var id = "3AsWJvUdZkQNPX0pukMcNDabnK53"
+    var id: String?
+//    var id = "3AsWJvUdZkQNPX0pukMcNDabnK53"
     var userName:String = ""
+    var creatorImage: UIImage?
     
     var recipeList = [RecipeDetail]()
     var imageList = [UIImage]()
     var urlList = [String]()
     var ridList = [String]()
-    var followers:[User] = []
-    var following:[User] = []
+    var followers:[String] = []
+    var following:[String] = []
     
     let fetchData = FetchRecipeData()
     let fetchImage = FetchRecipeImage()
@@ -35,28 +36,52 @@ class CreatorProfileViewController: UIViewController {
         self.tableView.dataSource = self
         self.tableView.delegate = self
         self.tableView.tableFooterView = UIView()
+        self.tableView.allowsSelection = false
         
         fetchData.delegate = self
         fetchImage.delegate = self
         dataManager.delegate = self
+        dataManager.delegateFollowerFollowing = self
         
-        dataManager.getUserDetail(id: id)
+        dataManager.getUserDetail(id: id!)
         
         let db = Firestore.firestore()
-        let queryRef = db.collection("recipe").whereField("userID", isEqualTo: id as Any).order(by: "time", descending: true)
+        let queryRef = db.collection("recipe").whereField("userID", isEqualTo: id! as Any).order(by: "time", descending: true)
         recipeList = fetchData.Data(queryRef: queryRef)
+        
+        dataManager.findFollowerFollowing(id: id!)
+        
+        dataManager.getUserImage(uid: id!)
     }
     
     
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
+    
+    // MARK: - Navigation
+    
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destination.
+        // Pass the selected object to the new view controller.
+        if let nextVC = segue.destination as? followerFollowingPageViewController {
+            
+            nextVC.userID = id
+            nextVC.followersID = followers
+            nextVC.followingsID = following
+            
+            if segue.identifier == "following" {
+                
+                nextVC.titleVC = "Following"
+                
+            }
+            if segue.identifier == "follower" {
+                
+                nextVC.titleVC = "Follower"
+                
+            }
+        }
+        
+    }
+    
     
 }
 
@@ -77,10 +102,12 @@ extension CreatorProfileViewController: UITableViewDataSource {
             let cell = (tableView.dequeueReusableCell(withIdentifier: "creatorsProfie", for: indexPath) as? profieTableViewCell)!
             cell.delegate = self
             
-            cell.imageView!.layer.masksToBounds = false
-            cell.imageView!.layer.cornerRadius = cell.imageView!.bounds.width / 2
-            cell.imageView!.clipsToBounds = true
+            cell.creatorImageView!.image = self.creatorImage
+            cell.creatorImageView!.layer.masksToBounds = false
+            cell.creatorImageView!.layer.cornerRadius = cell.creatorImageView!.bounds.width / 2
+            cell.creatorImageView!.clipsToBounds = true
             
+            cell.followMeButton!.layer.cornerRadius = 10
             
             cell.creatorNameLabel.text = userName
             return cell
@@ -89,6 +116,11 @@ extension CreatorProfileViewController: UITableViewDataSource {
         else if indexPath.section == 1 {
             let cell = (tableView.dequeueReusableCell(withIdentifier: "number", for: indexPath) as? NumOfCreatorhasTableViewCell)!
             cell.NumOfPostedButton.setTitle("\(recipeList.count) \nPosted", for: .normal)
+            
+            cell.NumOffollowingButton.setTitle("\(following.count) \nfollowing", for: .normal)
+            
+            cell.NumOFFollwerButton.setTitle("\(followers.count) \nfollower", for: .normal)
+            
             return cell
         }
         
@@ -119,10 +151,7 @@ extension CreatorProfileViewController: UITableViewDelegate {
             return 135
         case 1:
             return 60
-            //        case 2:
-        //            return 38
         default:
-            
             
             if recipeList.isEmpty {
                 return self.view.frame.size.height - 195.0
@@ -139,14 +168,11 @@ extension CreatorProfileViewController: ReloadDataDelegate{
         
         recipeList = data
         
-        //        recipeList.map {
-        //            imageList.append($0.image!)
-        //        }
-        
         if imageList.count == 0 {
             
             get_url_rid()
-            fetchImage.getImage(uid: id, rid: ridList, imageUrl: urlList)
+            fetchImage.getImage(uid: id!, rid: ridList)
+            
             if imageList.count == 0{
                 tableView.reloadData()
             }
@@ -160,10 +186,11 @@ extension CreatorProfileViewController: ReloadDataDelegate{
 }
 
 extension CreatorProfileViewController : getUserDataDelegate {
-    //    func gotUsersData(users: [User]) {
-    //        <#code#>
-    //    }
-    //
+    func assignUserImage(image: UIImage) {
+        self.creatorImage = image
+        self.tableView.reloadData()
+    }
+    
     func gotUserData(user: User) {
         
         userName = user.name
@@ -186,7 +213,7 @@ extension CreatorProfileViewController: CollectionViewInsideUserTableView {
     func cellTaped(data: IndexPath) {
         let storyboard = UIStoryboard(name: "RecipeDetail", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "detailvc") as! RecipeDetailViewController
-        vc.userProfile = true
+        vc.userProfile = false
         vc.recipe = recipeList[data.row]
         vc.mainPhoto = imageList[data.row]
         self.navigationController?.pushViewController(vc, animated: true)
@@ -194,9 +221,21 @@ extension CreatorProfileViewController: CollectionViewInsideUserTableView {
     
 }
 
+extension CreatorProfileViewController: FolllowingFollowerDelegate {
+    func assignFollowersFollowings(users: [User]) {
+        
+    }
+    
+    func passFollowerFollowing(followingsIDs: [String], followersIDs: [String]) {
+        self.following = followingsIDs
+        self.followers = followersIDs
+    }
+}
+
+
 extension CreatorProfileViewController: AddingFollowersDelegate {
     func increaseFollower(followerID: String) {
-        self.dataManager.increaseFollower(userID: id, followerID: followerID)
+        self.dataManager.increaseFollower(userID: id!, followerID: followerID)
         tableView.reloadData()
     }
 }

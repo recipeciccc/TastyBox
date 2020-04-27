@@ -19,28 +19,10 @@ class StoresMapViewController: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        if CLLocationManager.locationServicesEnabled() {
-            locationManager.delegate = self
-            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-            locationManager.requestWhenInUseAuthorization()
-            locationManager.startUpdatingLocation()
-        }
-        let camera = GMSCameraPosition.camera(withLatitude: locationManager.location!.coordinate.latitude, longitude: locationManager.location!.coordinate.longitude, zoom: 15);
-        mapView = GMSMapView.map(withFrame: self.view.bounds, camera: camera)
-        mapView.delegate = self
-        self.view.addSubview(mapView)
-        mapView.settings.myLocationButton = true
-        mapView.isMyLocationEnabled = true
         
-        mapView.translatesAutoresizingMaskIntoConstraints = false
-          NSLayoutConstraint.activate([
-          mapView.topAnchor.constraint(equalTo: view.topAnchor),
-          mapView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-          mapView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-          mapView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-        ])
-
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+       
 
         if CLLocationManager.locationServicesEnabled() {
           switch (CLLocationManager.authorizationStatus()) {
@@ -48,12 +30,35 @@ class StoresMapViewController: UIViewController{
               print("No access")
             case .authorizedAlways, .authorizedWhenInUse:
               print("Access")
+//             createMap()
+          default:
+            break
           }
         } else {
           print("Location services are not enabled")
         }
         
-        getSupermarketImformation()
+      
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        locationManager.requestWhenInUseAuthorization()
+        
+        if CLLocationManager.locationServicesEnabled() {
+          switch (CLLocationManager.authorizationStatus()) {
+            case .notDetermined, .restricted, .denied:
+              print("No access")
+            case .authorizedAlways, .authorizedWhenInUse:
+              print("Access")
+//             createMap()
+            
+          default:
+            break
+          }
+        } else {
+          print("Location services are not enabled")
+        }
     }
     
     func getSupermarketImformation()  {
@@ -79,7 +84,7 @@ class StoresMapViewController: UIViewController{
             
             do {
                 let json = try JSONSerialization.jsonObject(with: data!, options: [])
-                print(json)
+            
             } catch {
                 print("JSON error: \(error.localizedDescription)")
             }
@@ -88,8 +93,9 @@ class StoresMapViewController: UIViewController{
                 let decoder = JSONDecoder()
                 decoder.keyDecodingStrategy = .convertFromSnakeCase
                 let root = try decoder.decode(Root.self, from: data!)
-                print(root)
+//                print(root)
                 self.createMarkers(root: root)
+               
             } catch {
                 print(error)
             }
@@ -114,13 +120,38 @@ class StoresMapViewController: UIViewController{
             marker.title = "\(place.name)"
             marker.snippet = "\(place.vicinity)"
             markers.append(marker)
-            marker.map = mapView
+            marker.map = mapView!
         }
         
     }
     
     
-    
+    func createMap() {
+        
+        
+        locationManager.startUpdatingLocation()
+      
+        let camera = GMSCameraPosition.camera(withLatitude: locationManager.location!.coordinate.latitude, longitude: locationManager.location!.coordinate.longitude, zoom: 15);
+        
+        mapView = GMSMapView.map(withFrame: self.view.bounds, camera: camera)
+        mapView.isMyLocationEnabled = true
+        mapView.settings.myLocationButton = true
+        mapView.delegate = self
+        
+        self.view.addSubview(mapView)
+
+        mapView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            mapView.topAnchor.constraint(equalTo: view.topAnchor),
+            mapView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            mapView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            mapView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        ])
+        
+        getSupermarketImformation()
+
+        locationManager.stopUpdatingLocation()
+    }
    
     
 
@@ -154,8 +185,6 @@ extension StoresMapViewController: GMSMapViewDelegate {
             }
              
             
-            print(result)
-            
             if (UIApplication.shared.canOpenURL(URL(string:"comgooglemaps://")!)) {
                 
                 let urlHasAddressAndName:String? =         "comgooglemaps://?q=\(result),+\(marker.title!)&center=\(marker.position.latitude),\(marker.position.longitude)&zoom=14&views=traffic"
@@ -166,15 +195,6 @@ extension StoresMapViewController: GMSMapViewDelegate {
                 
                 UIApplication.shared.openURL(url!)
                 
-                
-    //            let urlString :String? =         "comgooglemaps://?q=\(marker.title!)&center=\(marker.position.latitude),\(marker.position.longitude)&zoom=14&views=traffic"
-    //
-    //            let  urlHasAddress:String? =         "comgooglemaps://?q=\(result)&center=\(marker.position.latitude),\(marker.position.longitude)&zoom=14&views=traffic"
-    //
-    //            let url = URL(string: urlString!) ?? URL(string: urlHasAddress!)
-                              
-    //            UIApplication.shared.openURL(url!)
-                
              } else {
                print("Can't use comgooglemaps://");
              }
@@ -182,24 +202,27 @@ extension StoresMapViewController: GMSMapViewDelegate {
 }
 
 extension StoresMapViewController: CLLocationManagerDelegate {
+    
+    // this is called as soon as changing status
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        
         guard status == .authorizedWhenInUse else {
             return
         }
         
-        locationManager.startUpdatingLocation()
-        mapView.isMyLocationEnabled = true
-        mapView.settings.myLocationButton = true
-     
-        
+        if status == .authorizedAlways || status == .authorizedWhenInUse {
+            createMap()
+        }
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let location = locations.first else {
             return
         }
-        mapView.camera = GMSCameraPosition(target: location.coordinate, zoom: 15, bearing: 0, viewingAngle: 0)
+        mapView?.camera = GMSCameraPosition(target: location.coordinate, zoom: 15, bearing: 0, viewingAngle: 0)        
         locationManager.stopUpdatingLocation()
         
     }
+    
+
 }

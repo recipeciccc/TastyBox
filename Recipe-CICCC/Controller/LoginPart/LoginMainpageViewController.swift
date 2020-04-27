@@ -13,6 +13,8 @@ import GoogleSignIn
 
 class LoginMainpageViewController: UIViewController, UITextFieldDelegate {
     
+    var userImage: UIImage = #imageLiteral(resourceName: "imageFile")
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -28,12 +30,12 @@ class LoginMainpageViewController: UIViewController, UITextFieldDelegate {
         
         emailTextField.delegate = self
         passwordTextField.delegate = self
-      
+        
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-        }
-        
-        
+    }
+    
+    
     
     
     @IBAction func unwindtoLoginMain(segue: UIStoryboardSegue) {
@@ -78,31 +80,40 @@ class LoginMainpageViewController: UIViewController, UITextFieldDelegate {
                 }
                 self.view.endEditing(true)
                 self.passwordTextField.text = ""
-                let Storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                let vc = Storyboard.instantiateViewController(withIdentifier: "Discovery")
-                self.navigationController?.pushViewController(vc, animated: true)
                 
-//                if error == nil {
-//                    // means no error, login successfully
-//                    self.login.isEnabled = false
-//                    let Storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-//                    let vc = Storyboard.instantiateViewController(withIdentifier: "Discovery")
-//                    self.navigationController?.pushViewController(vc, animated: true)
-//                   // self.present(vc, animated: true, completion: nil)
-//
-//                } else {
-//                    // mention there's some error
-//                    let alertController = UIAlertController(title: "error", message: error?.localizedDescription, preferredStyle: .alert)
-//                    let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-//                    alertController.addAction(defaultAction)
-//                    self.present(alertController, animated: true, completion: nil)
-//                }
+                //MARK: uncomment out and you don't need to edit info every time
+                //                if (user?.additionalUserInfo!.isNewUser)! {
+                let Storyboard: UIStoryboard = UIStoryboard(name: "Login", bundle: nil)
+                let vc = Storyboard.instantiateViewController(withIdentifier: "FirstTimeProfile")
+                self.navigationController?.pushViewController(vc, animated: true)
+                //MARK: uncomment out and you don't need to edit info every time
+                //                } else {
+                //                    let Storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                //                    let vc = Storyboard.instantiateViewController(withIdentifier: "Discovery")
+                //                    self.navigationController?.pushViewController(vc, animated: true)
+                //                }
+                //
+                //                if error == nil {
+                //                    // means no error, login successfully
+                //                    self.login.isEnabled = false
+                //                    let Storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                //                    let vc = Storyboard.instantiateViewController(withIdentifier: "Discovery")
+                //                    self.navigationController?.pushViewController(vc, animated: true)
+                //                   // self.present(vc, animated: true, completion: nil)
+                //
+                //                } else {
+                //                    // mention there's some error
+                //                    let alertController = UIAlertController(title: "error", message: error?.localizedDescription, preferredStyle: .alert)
+                //                    let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                //                    alertController.addAction(defaultAction)
+                //                    self.present(alertController, animated: true, completion: nil)
+                //                }
                 //LoginProperties.user = AppUser(authData: user!)
             }
         }
     }
     
-// Facebook Login
+    // Facebook Login
     @IBAction func facebookLogin(_ sender: UIButton) {
         let fbLoginManager = LoginManager()
         fbLoginManager.logIn(permissions: ["public_profile", "email"], from: self) {(
@@ -139,20 +150,20 @@ class LoginMainpageViewController: UIViewController, UITextFieldDelegate {
                     self.navigationController?.pushViewController(vc, animated: true)
                 }
                 
-//                LoginProperties.user = AppUser(authData: user!)
+                //                LoginProperties.user = AppUser(authData: user!)
             })
         }
     }
-        func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-//        emailTextField.resignFirstResponder()
-//        let nextTag = emailTextField.tag + 1
-//        if let}nextTextField = self.view.viewWithTag(nextTag) {
-//            nextTextField.becomeFirstResponder()
-//            return true
-//        }
-//        passwordTextField.resignFirstResponder()
-//        return true
-
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        //        emailTextField.resignFirstResponder()
+        //        let nextTag = emailTextField.tag + 1
+        //        if let}nextTextField = self.view.viewWithTag(nextTag) {
+        //            nextTextField.becomeFirstResponder()
+        //            return true
+        //        }
+        //        passwordTextField.resignFirstResponder()
+        //        return true
+        
         switch textField.tag {
         case 1:
             // they work
@@ -168,7 +179,7 @@ class LoginMainpageViewController: UIViewController, UITextFieldDelegate {
         }
         return true
     }
-
+    
     @objc func keyboardWillShow(notification: NSNotification) {
         if ((notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue) != nil {
             if self.view.frame.origin.y == 0 {
@@ -176,13 +187,13 @@ class LoginMainpageViewController: UIViewController, UITextFieldDelegate {
             }
         }
     }
-
+    
     @objc func keyboardWillHide(notification: NSNotification) {
         if self.view.frame.origin.y != 0 {
             self.view.frame.origin.y = 0
         }
     }
-  
+    
     @IBAction func googleLogin(sender: UIButton) {
         GIDSignIn.sharedInstance().signIn()
     }
@@ -213,22 +224,22 @@ extension LoginMainpageViewController: GIDSignInDelegate {
             if error == nil {
                 
                 //MARK: uncomment out and you don't need to edit info every time
-//                if (user?.additionalUserInfo!.isNewUser)! {
-                    let Storyboard: UIStoryboard = UIStoryboard(name: "Login", bundle: nil)
-                    let vc = Storyboard.instantiateViewController(withIdentifier: "FirstTimeProfile")
-                    self.navigationController?.pushViewController(vc, animated: true)
+                //                if (user?.additionalUserInfo!.isNewUser)! {
+                let Storyboard: UIStoryboard = UIStoryboard(name: "Login", bundle: nil)
+                let vc = Storyboard.instantiateViewController(withIdentifier: "FirstTimeProfile")
+                self.navigationController?.pushViewController(vc, animated: true)
                 //MARK: uncomment out and you don't need to edit info every time
-//                } else {
-//                    let Storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-//                    let vc = Storyboard.instantiateViewController(withIdentifier: "Discovery")
-//                    self.navigationController?.pushViewController(vc, animated: true)
-//                }
+                //                } else {
+                //                    let Storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                //                    let vc = Storyboard.instantiateViewController(withIdentifier: "Discovery")
+                //                    self.navigationController?.pushViewController(vc, animated: true)
+                //                }
             }
-
-        })
-     
-    }
             
+        })
+        
+    }
+    
 }
 
 //    @IBAction func otherWayToLogin(_ sender: Any) {
@@ -243,4 +254,4 @@ extension LoginMainpageViewController: GIDSignInDelegate {
 //            }
 //        }
 //    }
-    
+

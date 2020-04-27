@@ -18,10 +18,12 @@ class MonthlyViewController: UIViewController {
     var recipeImages = [UIImage]()
     var recipeLabels = [String]()
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         CategoryArray()
-        RecipeArray()
+//        RecipeArray()
     
     }
     
@@ -41,10 +43,10 @@ class MonthlyViewController: UIViewController {
         imageArray.append(image5)
     }
     
-    func RecipeArray(){
-        recipeImages = [#imageLiteral(resourceName: "huevos-rancheros"),#imageLiteral(resourceName: "2018_Sweet-Sallty-Snack-Mix_5817_600x600"),#imageLiteral(resourceName: "Lemon-Garlic-Butter-Salmon-with-Zucchini-Noodles-recipes"),#imageLiteral(resourceName: "candied-yams-5"),#imageLiteral(resourceName: "best-salad-7"),#imageLiteral(resourceName: "guacamole-foto-heroe-1024x723"),#imageLiteral(resourceName: "huevos-rancheros"),#imageLiteral(resourceName: "How-to-Make-the-Best-Juiciest-Turkey-Meatballs_055"),#imageLiteral(resourceName: "Intrepid-Travel-Taiwan-dumplings-Xiao-Long-Bao_577219075"),#imageLiteral(resourceName: "guacamole-foto-heroe-1024x723")]
-        recipeLabels = ["Title:a1\nCreator:","Title:a2\nCreator:","Title:a3\nCreator:","Title:b1\nCreator:","Title:b2\nCreator:","Title:b3\nCreator:","Title:\nCreator:","Title:\nCreator:","Title:\nCreator:","It's a test for auto-shrink!!!!!!!!!!!!"]
-    }
+//    func RecipeArray(){
+//        recipeImages = [#imageLiteral(resourceName: "huevos-rancheros"),#imageLiteral(resourceName: "2018_Sweet-Sallty-Snack-Mix_5817_600x600"),#imageLiteral(resourceName: "Lemon-Garlic-Butter-Salmon-with-Zucchini-Noodles-recipes"),#imageLiteral(resourceName: "candied-yams-5"),#imageLiteral(resourceName: "best-salad-7"),#imageLiteral(resourceName: "guacamole-foto-heroe-1024x723"),#imageLiteral(resourceName: "huevos-rancheros"),#imageLiteral(resourceName: "How-to-Make-the-Best-Juiciest-Turkey-Meatballs_055"),#imageLiteral(resourceName: "Intrepid-Travel-Taiwan-dumplings-Xiao-Long-Bao_577219075"),#imageLiteral(resourceName: "guacamole-foto-heroe-1024x723")]
+//        recipeLabels = ["Title:a1\nCreator:","Title:a2\nCreator:","Title:a3\nCreator:","Title:b1\nCreator:","Title:b2\nCreator:","Title:b3\nCreator:","Title:\nCreator:","Title:\nCreator:","Title:\nCreator:","It's a test for auto-shrink!!!!!!!!!!!!"]
+//    }
 }
 
 extension MonthlyViewController: UITableViewDataSource, UITableViewDelegate{
@@ -69,27 +71,17 @@ extension MonthlyViewController: UITableViewDataSource, UITableViewDelegate{
         let image = imageArray[indexPath.row]
         viewContoller?.T_image = image.image
         viewContoller?.T_Name = image.title
-        
-        /* pseudo code:
-            if indexPath.row == dataBase Category Number {
-                fetch data from database;
-                viewContoller?.recipeImages = Images data;
-                viewContoller?.recipeLabels = labels data;
-            }
-        */
+
         switch indexPath.row{
-        case 0: viewContoller?.recipeImages = self.recipeImages; viewContoller?.recipeLabels = self.recipeLabels; break
-        case 1: viewContoller?.recipeImages = self.recipeImages; viewContoller?.recipeLabels = self.recipeLabels; break
-        case 2: viewContoller?.recipeImages = self.recipeImages; viewContoller?.recipeLabels = self.recipeLabels; break
-        case 3: viewContoller?.recipeImages = self.recipeImages; viewContoller?.recipeLabels = self.recipeLabels; break
-        case 4: viewContoller?.recipeImages = self.recipeImages; viewContoller?.recipeLabels = self.recipeLabels; break
-        case 5: viewContoller?.recipeImages = self.recipeImages; viewContoller?.recipeLabels = self.recipeLabels; break
-        default: print("no category"); break
-        }
-        
-        
-       // viewContoller?.category = indexPath.row
-        
+               case 0: viewContoller?.recipeLabels = self.recipeLabels; break
+               case 1: viewContoller?.recipeLabels = self.recipeLabels; break
+               case 2:  viewContoller?.recipeLabels = self.recipeLabels; break
+               case 3:  viewContoller?.recipeLabels = self.recipeLabels; break
+               case 4:  viewContoller?.recipeLabels = self.recipeLabels; break
+               case 5:  viewContoller?.recipeLabels = self.recipeLabels; break
+               default: print("no category"); break
+               }
+               
         self.navigationController?.pushViewController(viewContoller!, animated: true)
     }
         

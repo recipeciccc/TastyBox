@@ -42,7 +42,7 @@ class RefrigeratorViewController: UIViewController {
         dataManager.delegate = self //as getIngredientRefrigeratorDataDelegate
         searchBar.enablesReturnKeyAutomatically = false
         
-        let addButton = UIBarButtonItem(title: "＋", style: .plain, target: self, action: #selector(addButtunTapped))
+//        let addButton = UIBarButtonItem(title: "＋", style: .plain, target: self, action: #selector(addButtunTapped))
         
 //        self.navigationItem.rightBarButtonItems = [addButton, editButtonItem]
     }
@@ -53,20 +53,16 @@ class RefrigeratorViewController: UIViewController {
     
     
     @IBAction func edit(_ sender: Any) {
-        if tableView.isEditing == false {
-            tableView.isEditing = true
-        } else {
-            tableView.isEditing = false
-            
-        }
-
+        
+        
+        self.tableView.isEditing = !self.tableView.isEditing
     }
-    
-    override func setEditing(_ editing: Bool, animated: Bool) {
-           super.setEditing(editing, animated: animated)
-           tableView.setEditing(tableView.isEditing, animated: true)
-       }
-    
+//
+//    override func setEditing(_ editing: Bool, animated: Bool) {
+//           super.setEditing(editing, animated: animated)
+//           tableView.setEditing(tableView.isEditing, animated: true)
+//       }
+//
 
     // MARK: - Navigation
     
@@ -164,8 +160,6 @@ extension RefrigeratorViewController: UITableViewDataSource {
         dataManager.deleteData(name: ingredients[indexPath.row].name, indexPath: indexPath)
         ingredients.remove(at: indexPath.row)
         tableView.deleteRows(at: [indexPath], with: .automatic)
-        
-
         
         }
     }

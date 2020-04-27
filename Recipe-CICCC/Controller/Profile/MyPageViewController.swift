@@ -13,18 +13,21 @@ import FirebaseFirestore
 class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet var profileTableVIew: UITableView!
+    
     let fetchData = FetchRecipeData()
     let fetchImage = FetchRecipeImage()
     let userDataManager = UserdataManager()
+    
     let uid = Auth.auth().currentUser?.uid
+    
     var recipeList = [RecipeDetail]()
     var imageList = [UIImage]()
     var urlList = [String]()
     var ridList = [String]()
-    var followers:[User] = []
-    var following:[User] = []
-    
+    var followers:[String] = []
+    var following:[String] = []
     var user: User?
+    var userImage: UIImage?
     
     override func viewDidLoad() {
         
@@ -32,34 +35,29 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.orange ]
         profileTableVIew.delegate = self
         profileTableVIew.dataSource = self
+        profileTableVIew.allowsSelection = false
         
         fetchData.delegate = self
         fetchImage.delegate = self
         userDataManager.delegate = self
+        userDataManager.delegateFollowerFollowing = self
         
         let db = Firestore.firestore()
         let queryRef = db.collection("recipe").whereField("userID", isEqualTo: uid as Any).order(by: "time", descending: true)
         recipeList = fetchData.Data(queryRef: queryRef)
-        
-//        self.userDataManager.getUserDetail(id: uid)
        
+        userDataManager.findFollowerFollowing(id: uid)
+        userDataManager.getUserImage(uid: uid!)
+        userDataManager.getUserDetail(id: uid!)
     }
     
-//    func get_url_rid(){
-//        if recipeList.count != 0{
-//            for data in recipeList {
-////                urlList.append(data.image)
-//                ridList.append(data.recipeID)
-//                print(data.recipeID)
-//            }
-//        }
-//    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let nextVC = segue.destination as? showFolllowingFollowedCreatorsViewController {
+        if let nextVC = segue.destination as? followerFollowingPageViewController {
             
-//            nextVC.followers = user!.followersID
-//            nextVC.following = user!.followingID
+            nextVC.userID = uid!
+            nextVC.followersID = followers
+            nextVC.followingsID = following
             
             if segue.identifier == "following" {
                
@@ -73,17 +71,7 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
             }
         }
         
-          
     }
-    
-//    func getImage(data: RecipeDetail){
-////        for data in recipeList{
-////        }
-//        let rid = data.recipeID
-//        let url = data.image
-//        fetchImage.getImage(uid: uid!, rid: rid, imageUrl: url)
-//
-//    }
     
      func numberOfSections(in tableView: UITableView) -> Int {
         return 3 //4
@@ -99,17 +87,24 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         if section == 0 {
             let cell = (tableView.dequeueReusableCell(withIdentifier: "Main User Page", for: indexPath) as? mainUserProfileTableViewCell)!
-            cell.userImageView.layer.masksToBounds = false
-            cell.userImageView.layer.cornerRadius = cell.userImageView.bounds.width / 2
-            cell.userImageView.clipsToBounds = true
             
+            cell.userImageView?.image = self.userImage
+            
+           
+            if Auth.auth().currentUser?.displayName == nil {
+                cell.userNameLabel.text = self.user?.name
+             }
             
             return cell
         }
             
         else if section == 1 {
             let cell = (tableView.dequeueReusableCell(withIdentifier: "show the num", for: indexPath) as? NumberTableViewCell)!
+            
             cell.numOfRecipeUserPostedButton.setTitle("\(recipeList.count) \nPosted", for: .normal)
+            cell.numOfFollowerButton.setTitle("\(followers.count) \nFollowers", for: .normal)
+            cell.numOfFollowingButton.setTitle("\(following.count) \nFollowings", for: .normal)
+            
             return cell
         }
         
@@ -151,6 +146,12 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.view.frame.origin.y = -195.0
     }
     
+    
+    // MARK: cant tap image although put tap recognizer.
+    @IBAction func changeAccountImage(_ sender: UITapGestureRecognizer) {
+        let imagePickerVC = UIStoryboard(name: "MyPage", bundle: nil).instantiateViewController(withIdentifier: "imagePickerVC")
+        navigationController?.pushViewController(imagePickerVC, animated: true)
+    }
 }
 
 extension MyPageViewController: ReloadDataDelegate{
@@ -159,45 +160,51 @@ extension MyPageViewController: ReloadDataDelegate{
         
         recipeList = data
         
-//        recipeList.map {
-//            imageList.append($0.image!)
-//        }
-        
         if imageList.count == 0 {
 
         get_url_rid()
-        fetchImage.getImage(uid: uid!, rid: ridList, imageUrl: urlList)
+        fetchImage.getImage(uid: uid!, rid: ridList)
+        
         if imageList.count == 0{
            profileTableVIew.reloadData()
         }
     }
     }
     
+    // MARK: initialized ImageList
     func reloadImg(img:[UIImage]){
         imageList = img
         self.profileTableVIew.reloadData()
     }
+    
 }
 
 extension MyPageViewController : getUserDataDelegate {
-//    func gotUsersData(users: [User]) {
-//        <#code#>
-//    }
-//
-    func gotUserData(user: User) {
-        self.user = user
-        self.user!.name = (Auth.auth().currentUser?.displayName)!
+    func assignUserImage(image: UIImage) {
+        self.userImage = image
         self.profileTableVIew.reloadData()
     }
+
+    func gotUserData(user: User) {
+        self.user = user
+        self.profileTableVIew.reloadData()
+    }
+     // MARK: initialized recipe id and image id
     
     func get_url_rid(){
         if recipeList.count != 0{
             for data in recipeList{
                 urlList.append(data.image!)
                 ridList.append(data.recipeID)
+                
                 print(data.recipeID)
+                print(data.updatedDate)
+                print(data.image!)
+            
             }
+
         }
+            
     }
 }
 
@@ -209,7 +216,27 @@ extension MyPageViewController: CollectionViewInsideUserTableView{
         vc.userProfile = true
         vc.recipe = recipeList[data.row]
         vc.mainPhoto = imageList[data.row]
+        vc.creator = self.user
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
+}
+
+extension MyPageViewController: FolllowingFollowerDelegate {
+    func assignFollowersFollowings(users: [User]) {
+        
+    }
+    
+    func passFollowerFollowing(followingsIDs: [String], followersIDs: [String]) {
+        self.following = followingsIDs
+        self.followers = followersIDs
+    }
+    
+}
+
+extension MyPageViewController: setImageDelegate {
+    func setAccountImage(image: UIImage) {
+        self.userImage = image
+        self.profileTableVIew.reloadData()
+    }
 }

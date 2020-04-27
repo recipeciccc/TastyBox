@@ -12,11 +12,15 @@ import FirebaseFirestore
 
 class FetchRecipeData{
     var delegate : ReloadDataDelegate?
+    var commentDelegate: GetCommentsDelegate?
     let db = Firestore.firestore()
+    let storageRef = Storage.storage().reference()
     
     var instructions : [Instruction] = []
     var comments : [Comment] = []
     var ingredients : [Ingredient] = []
+    var users : [User] = []
+    var user:User?
     
     func Data(queryRef:Query) -> [RecipeDetail]{
         var recipeList = [RecipeDetail]()
@@ -25,6 +29,7 @@ class FetchRecipeData{
             if err == nil {
                 if let snap = snapshot?.documents {
                     for document in snap{
+                        
                         let data = document.data()
                         let recipeId = data["recipeID"] as? String
                         let title = data["title"] as? String
@@ -35,17 +40,23 @@ class FetchRecipeData{
                         let userId = data["userID"] as? String
                         let time = data["time"] as? Timestamp
                         
-                        
                         let image = data["image"] as? String
+                        let genresData = data["genres"] as? [String: Bool]
                         
-//                        self.getInstructions(userId: userId!, recipeId: recipeId!)
-//                        self.getIngredients(userId: userId!, recipeId: recipeId!)
-//                        self.getComments(userId: userId!, recipeId: recipeId!)
+                        var genresArr: [String] = []
                         
-                        let recipe = RecipeDetail(recipeID: recipeId!, title: title!, updatedDate: time!, cookingTime: cookingTime ?? 0, image: image ?? "", like: like!, serving: serving ?? 0, userID: userId!)
-
+                        if let gotData = genresData {
+                            for genre in gotData {
+                                genresArr.append(genre.key)
+                            }
+                        }
+                        
+                        
+                        
+                        let recipe = RecipeDetail(recipeID: recipeId!, title: title!, updatedDate: time!, cookingTime: cookingTime ?? 0, image: image ?? "", like: like!, serving: serving ?? 0, userID: userId!, genres: genresArr)
+                        
                         recipeList.append(recipe)
-                        print(time?.dateValue())
+                        
                     }
                 }
                 exist = true
@@ -59,7 +70,7 @@ class FetchRecipeData{
         }
         return recipeList
     }
-
+    
     
     func getInstructions(userId: String, recipeId: String) {
         db.collection("recipe").document(recipeId).collection("instruction").addSnapshotListener{
@@ -119,8 +130,33 @@ class FetchRecipeData{
         }
     }
     
+    // get images of users who commented and assign image to imageView
+    
+    func getCommenterImages(imageView: UIImageView, users: [User]) {
+        for user in users {
+            let imageRef = storageRef.child("user/\(user.userID)/userAccountImage")
+            var image: UIImage?
+            // Fetch the download URL
+            imageRef.getData(maxSize: 1 * 1024 * 1024) { data, error in
+                if error != nil {
+                    print(error?.localizedDescription as Any)
+                } else {
+                    if let imgData = data {
+                        
+                        print("imageRef: \(imageRef)")
+                        
+                        image = UIImage(data: imgData)!
+                        self.commentDelegate?.assignImageCommentUser(imageView: imageView, image: image!)
+                    }
+                }
+            }
+        }
+    }
+    
     func getComments(queryRef: Query) {
         
+        
+        // get comments
         queryRef.addSnapshotListener{
             (querysnapshot, error) in
             if error != nil {
@@ -132,19 +168,54 @@ class FetchRecipeData{
                     let text = data["text"] as! String
                     let user = data["user"] as! String
                     let time = data["time"] as! Timestamp
-                  
+                    
                     
                     self.comments.append(Comment(userId: user, text: text, time: time))
                     
                 }
+                self.commentDelegate?.gotData(comments: self.comments)
+                // get users who commented
+                
+                for comment in self.comments {
+                    self.db.collection("user").document(comment.userId).addSnapshotListener { querySnapshot, error in
+                        if error != nil {
+                            print("Error getting documents: \(String(describing: error))")
+                        } else {
+                            let data = querySnapshot!.data()
+                            
+                            print("data count: \(data!.count)")
+                            
+                            
+                            let userID = data!["id"] as? String
+                            let name = data!["userName"] as? String
+                            let familySize = data!["familySize"] as? Int
+                            let cuisineType = data!["cuisineType"] as? String
+                            
+                            
+                            self.user = User(userID: userID!, name: name!, cuisineType: cuisineType!, familySize: familySize!)
+                            
+                            self.users.append(self.user!)
+                            self.commentDelegate?.getCommentUser(user: self.users, comments: self.comments)
+                            
+                        }
+                    }
+                }
+                
+                
+                
             }
         }
+        
+        
+        
+        
+        
     }
     
     func getImage(url: StorageReference) -> UIImage {
         
         var image = UIImage()
-    
+        
         url.getData(maxSize: 1 * 1024 * 1024) { data, error in   //
             if error != nil {
                 print(error?.localizedDescription as Any)

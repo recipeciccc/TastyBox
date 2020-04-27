@@ -15,6 +15,7 @@ class CommentDataManager {
     var delegate: GetCommentsDelegate?
     
     var comments:[Comment] = []
+    var user:User?
     
     func addComment(recipeId: String, userId: String, text: String, time: Timestamp) {
         db.collection("recipe").document(recipeId).collection("comment").document().setData([
@@ -32,26 +33,57 @@ class CommentDataManager {
     }
     
     func getComments(recipeId: String) {
+        
         db.collection("recipe").document(recipeId).collection("comment").addSnapshotListener { querySnapshot, error in
             if error != nil {
                 print("Error getting documents: \(String(describing: error))")
             } else {
                 
                 self.comments.removeAll()
-                for document in querySnapshot!.documents {
-                    let data = document.data()
+                
+                if let documents = querySnapshot?.documents {
                     
-                    let userId = data["userId"] as! String
-                    let text = data["text"] as! String
-                    
-                    let time = data["time"] as! Timestamp
-                    
-                    let comment = Comment(userId: userId, text: text, time: time)
-                    
-                    self.comments.append(comment)
+                    for document in documents {
+                        let data = document.data()
+                        
+                        let userId = data["user"] as! String
+                        let text = data["text"] as! String
+                        
+                        let time = data["time"] as! Timestamp
+                        
+                        let comment = Comment(userId: userId, text: text, time: time)
+                        
+                        self.comments.append(comment)
+                    }
+                    self.delegate?.gotData(comments: self.comments)
+                }
+                
+            }
+            
+        }
+        
+        if !comments.isEmpty {
+            for comment in comments {
+                db.collection("user").document(comment.userId).addSnapshotListener { querySnapshot, error in
+                    if error != nil {
+                        print("Error getting documents: \(String(describing: error))")
+                    } else {
+                        let data = querySnapshot!.data()
+                        
+                        print("data count: \(data!.count)")
+                        
+                        
+                        let userID = data!["id"] as? String
+                        let name = data!["userName"] as? String
+                        let familySize = data!["familySize"] as? Int
+                        let cuisineType = data!["cuisineType"] as? String
+                        
+                        
+                        self.user = User(userID: userID!, name: name!, cuisineType: cuisineType!, familySize: familySize!)
+                    }
                 }
             }
-            self.delegate?.gotData(comments: self.comments)
         }
+        
     }
 }
