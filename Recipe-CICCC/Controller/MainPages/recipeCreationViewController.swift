@@ -25,7 +25,7 @@ struct RecipeData{
 
 // ViewController
 
-class CreatorViewController: UIViewController {
+class recipeCreationViewController: UIViewController {
     
     let db = Firestore.firestore()
     
@@ -612,7 +612,7 @@ extension recipeCreationViewController: UITextFieldDelegate, UITextViewDelegate{
 }
 
 
-extension CreatorViewController: GenreSelectViewControllerDelegate {
+extension recipeCreationViewController: GenreSelectViewControllerDelegate {
     func assignGenres(genres: [String]) {
         self.genres = genres
     }

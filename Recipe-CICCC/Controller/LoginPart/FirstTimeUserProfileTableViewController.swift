@@ -307,7 +307,7 @@ extension FirstTimeUserProfileTableViewController: getUserDataDelegate {
                 }
             }
             
-            return temp!
+            return temp ?? 0
         }
         
         self.cuisinePicker.selectRow(rowNumberCuisineType, inComponent: 0, animated: true)
