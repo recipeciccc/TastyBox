@@ -66,7 +66,7 @@
 		69909F372456227A00AACEC7 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69909F362456227A00AACEC7 /* SettingViewController.swift */; };
 		69909F39245632BD00AACEC7 /* Setting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 69909F38245632BD00AACEC7 /* Setting.storyboard */; };
 		69909F3B2456375C00AACEC7 /* SettingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69909F3A2456375C00AACEC7 /* SettingManager.swift */; };
-		69909F3F2456703900AACEC7 /* CreatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69909F3E2456703900AACEC7 /* CreatorViewController.swift */; };
+		69909F412456A85F00AACEC7 /* CreatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69909F402456A85F00AACEC7 /* CreatorViewController.swift */; };
 		699679AF23F3A25800719A36 /* ingredientRecipe.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 699679AE23F3A25800719A36 /* ingredientRecipe.storyboard */; };
 		6999A49024170ED00013BD5B /* Podfile.lock in Resources */ = {isa = PBXBuildFile; fileRef = 6999A48F24170ED00013BD5B /* Podfile.lock */; };
 		6999A49324170EE40013BD5B /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 6999A49224170EE40013BD5B /* Podfile */; };
@@ -255,7 +255,7 @@
 		69909F362456227A00AACEC7 /* SettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		69909F38245632BD00AACEC7 /* Setting.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Setting.storyboard; sourceTree = "<group>"; };
 		69909F3A2456375C00AACEC7 /* SettingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingManager.swift; sourceTree = "<group>"; };
-		69909F3E2456703900AACEC7 /* CreatorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreatorViewController.swift; sourceTree = "<group>"; };
+		69909F402456A85F00AACEC7 /* CreatorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreatorViewController.swift; sourceTree = "<group>"; };
 		699679AE23F3A25800719A36 /* ingredientRecipe.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ingredientRecipe.storyboard; sourceTree = "<group>"; };
 		6999A48F24170ED00013BD5B /* Podfile.lock */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile.lock; sourceTree = "<group>"; };
 		6999A49224170EE40013BD5B /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
@@ -605,7 +605,7 @@
 		6F20C3FC244DB775009092FD /* searching */ = {
 			isa = PBXGroup;
 			children = (
-				69909F3E2456703900AACEC7 /* CreatorViewController.swift */,
+				69909F402456A85F00AACEC7 /* CreatorViewController.swift */,
 				6F73935A24502BEB00F77848 /* ResultRecipesViewController.swift */,
 				6F73935C24502C4200F77848 /* SearchingViewController.swift */,
 				6FCBE8C5244ECBDA00A97454 /* searchingControllerExtensions.swift */,
@@ -1213,7 +1213,6 @@
 				69325D262413C59200340F1F /* ReloadDataDelegate.swift in Sources */,
 				691F6AC923FFB0FB005D3231 /* VIPViewController.swift in Sources */,
 				6F54A44C2429D95400D936CD /* RecipeDetailViewController.swift in Sources */,
-				69909F3F2456703900AACEC7 /* CreatorViewController.swift in Sources */,
 				6F9BB7972410BF1300CE7F60 /* IngredientShoppingDataManager.swift in Sources */,
 				693C9FF823FB4D2A00957EF2 /* RecipeCollectionView.swift in Sources */,
 				69F0D39323F63C5C001BF696 /* EditorChoiceViewController.swift in Sources */,
@@ -1227,6 +1226,7 @@
 				6F3FF54723DAB62D005162C7 /* StoresMapViewController.swift in Sources */,
 				6F54A44D2429D95400D936CD /* NumOfCreatorhasTableViewCell.swift in Sources */,
 				69325D282413D58400340F1F /* FetchRecipeImage.swift in Sources */,
+				69909F412456A85F00AACEC7 /* CreatorViewController.swift in Sources */,
 				6F8BE78A23EEAFFF00CEA348 /* SearchIngredientTableViewCell.swift in Sources */,
 				6F144E2B2445B4A300AC0520 /* RecipeCreatorPostedCollectionViewCell.swift in Sources */,
 				4069258123D8350100059C8E /* RecipeViewController.swift in Sources */,
