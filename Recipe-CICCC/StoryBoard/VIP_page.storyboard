@@ -37,5 +37,77 @@
             </objects>
             <point key="canvasLocation" x="-89.855072463768124" y="-234.375"/>
         </scene>
+        <!--ExplainationVIP View Controller-->
+        <scene sceneID="O7T-S0-7Ih">
+            <objects>
+                <viewController storyboardIdentifier="registerVIP" id="mzw-a7-bKz" customClass="ExplainationVIPViewController" customModule="Recipe_CICCC" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="dc8-Qz-T0o">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iS3-MC-vsn">
+                                <rect key="frame" x="16" y="41" width="343" height="21"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <color key="textColor" red="0.66666666669999997" green="0.47450980390000003" blue="0.25882352939999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U4o-pj-LtV">
+                                <rect key="frame" x="16" y="97" width="343" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.66666666669999997" green="0.47450980390000003" blue="0.25882352939999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="biE-Kf-wDr">
+                                <rect key="frame" x="87.5" y="137.5" width="200" height="30"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="jWo-4q-ZMm"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="25"/>
+                                <color key="textColor" red="1" green="0.57647058819999997" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nVK-7d-KNN">
+                                <rect key="frame" x="137.5" y="237.5" width="100" height="30"/>
+                                <color key="backgroundColor" red="1" green="0.57647058819999997" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="4Nq-vF-RVg"/>
+                                </constraints>
+                                <state key="normal" title="Register!">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="registerVIPWithSender:" destination="mzw-a7-bKz" eventType="touchUpInside" id="lr7-ow-iRp"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.99607843139999996" green="0.98823529409999999" blue="0.79215686269999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <constraints>
+                            <constraint firstItem="nVK-7d-KNN" firstAttribute="top" secondItem="biE-Kf-wDr" secondAttribute="bottom" constant="70" id="0PT-db-W40"/>
+                            <constraint firstItem="biE-Kf-wDr" firstAttribute="centerX" secondItem="dc8-Qz-T0o" secondAttribute="centerX" id="0z9-Km-Gtf"/>
+                            <constraint firstItem="kyj-my-O7U" firstAttribute="trailing" secondItem="U4o-pj-LtV" secondAttribute="trailing" constant="16" id="1Pb-W0-QNg"/>
+                            <constraint firstItem="iS3-MC-vsn" firstAttribute="centerX" secondItem="dc8-Qz-T0o" secondAttribute="centerX" id="2Sx-52-Aum"/>
+                            <constraint firstItem="biE-Kf-wDr" firstAttribute="top" secondItem="U4o-pj-LtV" secondAttribute="bottom" constant="20" id="2zC-JW-jOd"/>
+                            <constraint firstItem="iS3-MC-vsn" firstAttribute="leading" secondItem="kyj-my-O7U" secondAttribute="leading" constant="16" id="boT-6u-shP"/>
+                            <constraint firstItem="kyj-my-O7U" firstAttribute="trailing" secondItem="iS3-MC-vsn" secondAttribute="trailing" constant="16" id="d6y-Mt-zRv"/>
+                            <constraint firstItem="U4o-pj-LtV" firstAttribute="top" secondItem="iS3-MC-vsn" secondAttribute="bottom" constant="35" id="de5-AR-7Uz"/>
+                            <constraint firstItem="U4o-pj-LtV" firstAttribute="centerX" secondItem="dc8-Qz-T0o" secondAttribute="centerX" id="jlD-of-ZlP"/>
+                            <constraint firstItem="biE-Kf-wDr" firstAttribute="centerX" secondItem="nVK-7d-KNN" secondAttribute="centerX" id="lha-qC-KNQ"/>
+                            <constraint firstItem="iS3-MC-vsn" firstAttribute="top" secondItem="kyj-my-O7U" secondAttribute="top" constant="41" id="qsg-zr-zky"/>
+                            <constraint firstItem="U4o-pj-LtV" firstAttribute="leading" secondItem="kyj-my-O7U" secondAttribute="leading" constant="16" id="uOf-BF-PA4"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="kyj-my-O7U"/>
+                    </view>
+                    <connections>
+                        <outlet property="priceLabel" destination="biE-Kf-wDr" id="WlU-NM-hk7"/>
+                        <outlet property="registerButton" destination="nVK-7d-KNN" id="9WH-4W-qVu"/>
+                        <outlet property="thereeMonthsFreeLabel" destination="U4o-pj-LtV" id="Msz-Ku-w3H"/>
+                        <outlet property="titleLabel" destination="iS3-MC-vsn" id="JRz-6D-wOf"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZM7-af-vH8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="855.20000000000005" y="-232.53373313343329"/>
+        </scene>
     </scenes>
 </document>

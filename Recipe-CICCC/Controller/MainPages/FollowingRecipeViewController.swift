@@ -31,7 +31,7 @@ class FollowingRecipeViewController: UIViewController {
         
         dataManager.delegate = self
         
-        dataManager.findFollowerFollowing(id: uid)
+        dataManager.findFollowing(id: uid)
         
         self.followingTableView.tableFooterView = UIView()
         
@@ -89,8 +89,10 @@ extension FollowingRecipeViewController : UICollectionViewDelegate,UICollectionV
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionCell", for: indexPath) as! followingRecipeCollectionViewCell
         
         if followingsID.count == recipeImages.count {
-            cell.RecipeImage.image = recipeImages[collectionView.tag]?[indexPath.row]
+           
+                cell.RecipeImage.image = self.recipeImages[collectionView.tag]?[indexPath.row]
         }
+        
         
         if !recipes.isEmpty {
             cell.RecipeName.text = recipes[collectionView.tag]![indexPath.row].title
@@ -113,6 +115,7 @@ extension FollowingRecipeViewController : UICollectionViewDelegate,UICollectionV
         recipeDetailVC.creator = creators[collectionView.tag]
         
         let cell = (collectionView.cellForItem(at: indexPath) as? followingRecipeCollectionViewCell )
+        
         recipeDetailVC.mainPhoto = (cell?.RecipeImage.image)!
         
         navigationController?.pushViewController(recipeDetailVC, animated: true)
@@ -138,7 +141,7 @@ extension FollowingRecipeViewController : FollowingRecipeDataManagerDelegate {
                 
                 recipeImageOneFollowinghas.removeAll()
                 for (indexRecipe, recipe) in recipes[element.key]!.enumerated() {
-                    
+                    print("\(recipe.title): \(indexRecipe)")
                     self.dataManager.getImageOfRecipesFollowing(uid: element.value, rid: recipe.recipeID, indexOfImage: indexRecipe, orderFollowing: element.key)
                     
                 }
@@ -180,10 +183,16 @@ extension FollowingRecipeViewController : FollowingRecipeDataManagerDelegate {
     }
     
     func appendRecipeImage(imgs: UIImage, indexOfImage: Int, orderFollowing: Int) {
-        recipeImageOneFollowinghas[indexOfImage] = imgs
-        recipeImages[orderFollowing] = recipeImageOneFollowinghas
+         print("\(indexOfImage): \(imgs)")
+       
+        if recipeImages[orderFollowing] == nil {
+            recipeImages[orderFollowing] = [Int:UIImage]()
+        }
+        recipeImages[orderFollowing]?[indexOfImage] = imgs
         self.followingTableView.reloadData()
-    }
+        
+        }
+    
 }
 
 extension FollowingRecipeViewController:FollowingRecipeTableViewCellDelegate {

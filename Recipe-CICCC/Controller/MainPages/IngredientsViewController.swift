@@ -9,6 +9,10 @@
 import UIKit
 import Firebase
 
+protocol stopPagingDelegate:  class {
+    func stopPaging(isPaging: Bool)
+}
+
 class IngredientsViewController: UIViewController {
     @IBOutlet weak var TitleCollectionView: UICollectionView!
     @IBOutlet weak var ImageCollecitonView: UICollectionView!
@@ -34,11 +38,14 @@ class IngredientsViewController: UIViewController {
     let getRecipeImageDataManager = FetchRecipeImage()
     var tempImages: [UIImage] = []
     
+    weak var delegate: stopPagingDelegate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         ingredientArray = ["Tomato","Beef","Egg","Broccoli","Carrot","Onion","Test for length"]
         
         dataManager.delegate = self
+        ImageCollecitonView.delegate = self
         searchingIngredient = "Tomato"
         showingIngredient = searchingIngredient
         
@@ -113,6 +120,33 @@ extension IngredientsViewController: UICollectionViewDataSource, UICollectionVie
         vc.recipe = recipes[showingIngredient!]![indexPath.row]
         navigationController?.pushViewController(vc, animated: true)
         }
+    }
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer,
+                           shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        
+        return self.ImageCollecitonView.isDecelerating || self.ImageCollecitonView.contentOffset.y < 0 || self.ImageCollecitonView.contentOffset.y > max(0, self.ImageCollecitonView.contentSize.height - self.ImageCollecitonView.bounds.size.height); // @Jordan edited - we don't need to always enable simultaneous gesture for bounce enabled tableViews
+
+    }
+    
+    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        
+        if let gestureRecognizer = gestureRecognizer as? UIPanGestureRecognizer {
+        
+            let velocity: CGPoint = gestureRecognizer.velocity(in: ImageCollecitonView)
+            if (abs(velocity.y) * 2 < abs(velocity.x)) {
+                return true
+            }
+        }
+        return false
+    }
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        delegate?.stopPaging(isPaging: false)
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        delegate?.stopPaging(isPaging: true)
     }
 }
 

@@ -14,10 +14,8 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     @IBOutlet var profileTableVIew: UITableView!
     
-    let fetchData = FetchRecipeData()
-    let fetchImage = FetchRecipeImage()
-    let userDataManager = UserdataManager()
-    
+    let dataManager = MyPageDataManager()
+   
     let uid = Auth.auth().currentUser?.uid
     
     var recipeList = [RecipeDetail]()
@@ -28,6 +26,8 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var following:[String] = []
     var user: User?
     var userImage: UIImage?
+    var numberSavedRecipes = 0
+    
     
     override func viewDidLoad() {
         
@@ -37,18 +37,16 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         profileTableVIew.dataSource = self
         profileTableVIew.allowsSelection = false
         
-        fetchData.delegate = self
-        fetchImage.delegate = self
-        userDataManager.delegate = self
-        userDataManager.delegateFollowerFollowing = self
+        dataManager.delegate = self
         
         let db = Firestore.firestore()
         let queryRef = db.collection("recipe").whereField("userID", isEqualTo: uid as Any).order(by: "time", descending: true)
-        recipeList = fetchData.Data(queryRef: queryRef)
+        recipeList = dataManager.Data(queryRef: queryRef)
        
-        userDataManager.findFollowerFollowing(id: uid)
-        userDataManager.getUserImage(uid: uid!)
-        userDataManager.getUserDetail(id: uid!)
+        dataManager.findFollowerFollowing(id: uid)
+        dataManager.getUserImage(uid: uid!)
+        dataManager.getUserDetail(id: uid!)
+        dataManager.getSavedRecipes()
     }
     
     
@@ -102,6 +100,7 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
             let cell = (tableView.dequeueReusableCell(withIdentifier: "show the num", for: indexPath) as? NumberTableViewCell)!
             
             cell.numOfRecipeUserPostedButton.setTitle("\(recipeList.count) \nPosted", for: .normal)
+            cell.numOfRecipeUserSavedButton.setTitle("\(numberSavedRecipes) \nSaved", for: .normal)
             cell.numOfFollowerButton.setTitle("\(followers.count) \nFollowers", for: .normal)
             cell.numOfFollowingButton.setTitle("\(following.count) \nFollowings", for: .normal)
             
@@ -154,32 +153,34 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
 }
 
-extension MyPageViewController: ReloadDataDelegate{
-  
-    func reloadData(data:[RecipeDetail]) {
-        
-        recipeList = data
-        
-        if imageList.count == 0 {
-
-        get_url_rid()
-        fetchImage.getImage(uid: uid!, rid: ridList)
-        
-        if imageList.count == 0{
-           profileTableVIew.reloadData()
-        }
-    }
-    }
-    
-    // MARK: initialized ImageList
-    func reloadImg(img:[UIImage]){
-        imageList = img
+extension MyPageViewController: MyPageDataManagerDelegate{
+    func passSaveingRecipesNumber(number: Int) {
+        self.numberSavedRecipes = number
         self.profileTableVIew.reloadData()
     }
     
-}
 
-extension MyPageViewController : getUserDataDelegate {
+        func reloadData(data:[RecipeDetail]) {
+            
+            recipeList = data
+            
+            if imageList.count == 0 {
+
+            get_url_rid()
+            dataManager.getImage(uid: uid!, rid: ridList)
+            
+            if imageList.count == 0{
+               profileTableVIew.reloadData()
+            }
+        }
+        }
+        
+         //MARK: initialized ImageList
+    func reloadImg(images:[UIImage]){
+            imageList = images
+            self.profileTableVIew.reloadData()
+        }
+    
     func assignUserImage(image: UIImage) {
         self.userImage = image
         self.profileTableVIew.reloadData()
@@ -206,7 +207,26 @@ extension MyPageViewController : getUserDataDelegate {
         }
             
     }
+    
+    func passFollowerFollowing(followingsIDs: [String], followersIDs: [String]) {
+          self.following = followingsIDs
+          self.followers = followersIDs
+      }
+    
+    func setAccountImage(image: UIImage) {
+        self.userImage = image
+        self.profileTableVIew.reloadData()
+    }
 }
+//
+//extension MyPageViewController: ReloadDataDelegate{
+//
+//
+//}
+//
+//extension MyPageViewController : getUserDataDelegate {
+//
+//}
 
 extension MyPageViewController: CollectionViewInsideUserTableView{
     func cellTaped(data: IndexPath) {
@@ -222,21 +242,15 @@ extension MyPageViewController: CollectionViewInsideUserTableView{
     
 }
 
-extension MyPageViewController: FolllowingFollowerDelegate {
-    func assignFollowersFollowings(users: [User]) {
-        
-    }
-    
-    func passFollowerFollowing(followingsIDs: [String], followersIDs: [String]) {
-        self.following = followingsIDs
-        self.followers = followersIDs
-    }
-    
-}
-
-extension MyPageViewController: setImageDelegate {
-    func setAccountImage(image: UIImage) {
-        self.userImage = image
-        self.profileTableVIew.reloadData()
-    }
-}
+//extension MyPageViewController: FolllowingFollowerDelegate {
+//    func assignFollowersFollowings(users: [User]) {
+//
+//    }
+//
+//
+//
+//}
+//
+//extension MyPageViewController: setImageDelegate {
+//
+//}

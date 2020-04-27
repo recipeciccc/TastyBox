@@ -15,81 +15,98 @@ class RefrigeratorViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     var ingredients: [IngredientRefrigerator] = []
-    //    var searchResult:[IngredientRefrigerator] = []
     
     let db = Firestore.firestore()
     let dataManager = IngredientRefrigeratorDataManager()
+    var readyDelete = false
     
-        @IBOutlet weak var editButton: UIBarButtonItem!
     
-    
+    var deletebutton = UIBarButtonItem()
+    var addButton = UIBarButtonItem()
+    var editButton = UIBarButtonItem()
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
         guard let uid = Auth.auth().currentUser?.uid else { return }
         
+//        tableView.allowsMultipleSelectionDuringEditing = true
         self.searchBar.delegate = self
         tableView.delegate = self
         tableView.dataSource = self
         
         tableView.tableFooterView = UIView()
-        tableView.allowsMultipleSelectionDuringEditing = true
+//        tableView.allowsMultipleSelectionDuringEditing = true
         tableView.isEditing = false
         
         
         dataManager.getRefrigeratorDetail(userID: uid)
-        dataManager.delegate = self //as getIngredientRefrigeratorDataDelegate
-        searchBar.enablesReturnKeyAutomatically = false
+        dataManager.delegate = self
+        editButton.title = "Edit"
+    
+        addButton = UIBarButtonItem(title:  "＋", style: .plain, target: self, action: #selector(add))
+        editButton = UIBarButtonItem(title:  "Edit", style: .plain, target: self, action: #selector(edit))
+        deletebutton = UIBarButtonItem(title:  "Delete", style: .plain, target: self, action:
+            #selector(deleteRows))
+        self.navigationItem.rightBarButtonItems = [addButton, editButton]
         
-//        let addButton = UIBarButtonItem(title: "＋", style: .plain, target: self, action: #selector(addButtunTapped))
-        
-//        self.navigationItem.rightBarButtonItems = [addButton, editButtonItem]
     }
     
-    @objc func addButtunTapped() {
-        performSegue(withIdentifier: "addIItemRefrigerator", sender: nil)
-    }
     
     
-    @IBAction func edit(_ sender: Any) {
+    @objc func edit() {
         
-        
-        self.tableView.isEditing = !self.tableView.isEditing
-    }
-//
-//    override func setEditing(_ editing: Bool, animated: Bool) {
-//           super.setEditing(editing, animated: animated)
-//           tableView.setEditing(tableView.isEditing, animated: true)
-//       }
-//
-
-    // MARK: - Navigation
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-        if segue.identifier == "editItemRefrigerator" {
-            if let addVC = segue.destination as? AddingIngredientRefrigeratorViewController {
-                if let cell = sender as? UITableViewCell, let indexPath = tableView.indexPath(for: cell) {
-                    //                    let item = ingredients[indexPath.row]//shoppingList.list[indexPath.row]
-                    //                                        addVC.item = item
-                    addVC.indexPath = indexPath
-                    addVC.delegate = self as AddingIngredientRefrigeratorViewControllerDelegate
-                    addVC.itemIsEmpty = false
-                    addVC.name = ingredients[indexPath.row].name
-                    addVC.amount = ingredients[indexPath.row].amount
-                }
-            }
+        //
+        if self.tableView.isEditing == false {
+            setEditing(true, animated: true)
+            self.tableView.isEditing = true
+            editButton.title = "Done"
+//            tableView.allowsMultipleSelectionDuringEditing = true
+            self.navigationItem.rightBarButtonItems =  [editButton, deletebutton]
+            
+            
+        } else {
+            setEditing(false, animated: true)
+            self.tableView.isEditing = false
+            
+            editButton.title = "Edit"
+            self.navigationItem.rightBarButtonItems =  [addButton, editButton]
+            
         }
-        if segue.identifier == "addIItemRefrigerator" {
-            if let addVC = segue.destination as? AddingIngredientRefrigeratorViewController {
-                addVC.delegate = self as AddingIngredientRefrigeratorViewControllerDelegate
-                addVC.itemIsEmpty = true
-            }
-        }
+        
     }
-
+    
+    @objc private func deleteRows() {
+        guard let selectedIndexPaths = self.tableView.indexPathsForSelectedRows else {
+            return
+        }
+        
+        // 配列の要素削除で、indexの矛盾を防ぐため、降順にソートする
+        let sortedIndexPaths =  selectedIndexPaths.sorted { $0.row > $1.row }
+        
+        for indexPathList in sortedIndexPaths {
+            dataManager.deleteData(name: ingredients[indexPathList.row].name, indexPath: indexPathList)
+            ingredients.remove(at: indexPathList.row) // 選択肢のindexPathから配列の要素を削除
+        }
+        
+        // tableViewの行を削除
+        tableView.deleteRows(at: sortedIndexPaths, with: .automatic)
+        
+    }
+    
+    @objc func add() {
+        let vc = storyboard?.instantiateViewController(identifier: "editIngredientsRefrigerator") as! AddingIngredientRefrigeratorViewController
+        vc.itemIsEmpty = true
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    //    override func setEditing(_ editing: Bool, animated: Bool) {
+    //        super.setEditing(editing, animated: animated)
+    //        tableView.setEditing(editing, animated: true)
+    //        //        navigationItem.rightBarButtonItems?.remove(at: 1)
+    //    }
+    
+    
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         
         if tableView.isEditing {
@@ -99,76 +116,92 @@ class RefrigeratorViewController: UIViewController {
         }
         return true
     }
-
+    
 }
 
 extension RefrigeratorViewController: UITableViewDataSource {
     
-//    func numberOfSections(in tableView: UITableView) -> Int {
-//        return 2
-//    }
-//
+    //    func numberOfSections(in tableView: UITableView) -> Int {
+    //        return 2
+    //    }
+    //
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        if section == 0 {
-//            return 1
-//        }
+        //        if section == 0 {
+        //            return 1
+        //        }
         return ingredients.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         
-//        if indexPath.section == 0 {
-//            let cell = (tableView.dequeueReusableCell(withIdentifier: "search stores", for: indexPath) as? searchStoresTableViewCell)!
-//
-//            // Configure the cell...
-//
-//            return cell
-//        }
-//        else if indexPath.section == 1 {
-            
-            let cell = (tableView.dequeueReusableCell(withIdentifier: "ingredient", for: indexPath) as? IngredientsTableViewCell)!
-            
-            // Configure the cell...
-            cell.nameIngredientsLabel.text = ingredients[indexPath.row].name
-            cell.amountIngredientsLabel.text = ingredients[indexPath.row].amount
-            
-            return cell
-//        }
-//
-//        return UITableViewCell()
-    }
-    
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            if tableView.isEditing == true {
-                   
-                   dataManager.deleteData(name: ingredients[indexPath.row].name, indexPath: indexPath)
-                   ingredients.remove(at: indexPath.row)
-                   tableView.deleteRows(at: [indexPath], with: .automatic)
-                   
-                   
-            }
-        }
+        //        if indexPath.section == 0 {
+        //            let cell = (tableView.dequeueReusableCell(withIdentifier: "search stores", for: indexPath) as? searchStoresTableViewCell)!
+        //
+        //            // Configure the cell...
+        //
+        //            return cell
+        //        }
+        //        else if indexPath.section == 1 {
+        
+        let cell = (tableView.dequeueReusableCell(withIdentifier: "ingredient", for: indexPath) as? IngredientsTableViewCell)!
+        
+        // Configure the cell...
+        cell.nameIngredientsLabel.text = ingredients[indexPath.row].name
+        cell.amountIngredientsLabel.text = ingredients[indexPath.row].amount
+        
+        
+        return cell
+        //        }
+        //
+        //        return UITableViewCell()
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
         
-        if tableView.isEditing == true {
-
-        dataManager.deleteData(name: ingredients[indexPath.row].name, indexPath: indexPath)
-        ingredients.remove(at: indexPath.row)
-        tableView.deleteRows(at: [indexPath], with: .automatic)
         
+        //        if tableView.allowsMultipleSelectionDuringEditing == true {
+        let cell = (tableView.cellForRow(at: indexPath) as? IngredientsTableViewCell)!
+        if tableView.isEditing == false {
+            let addVC = storyboard?.instantiateViewController(identifier: "editIngredientsRefrigerator") as! AddingIngredientRefrigeratorViewController
+            //                    let item = ingredients[indexPath.row]//shoppingList.list[indexPath.row]
+            //                                        addVC.item = item
+            addVC.indexPath = indexPath
+            addVC.delegate = self as AddingIngredientRefrigeratorViewControllerDelegate
+            addVC.itemIsEmpty = false
+            addVC.name = ingredients[indexPath.row].name
+            addVC.amount = ingredients[indexPath.row].amount
+            
+            navigationController?.pushViewController(addVC, animated: true)
+        } else {
+            
         }
+        
+//        if let selectedRows = tableView.indexPathsForSelectedRows {
+//            if selectedRows.count == 0 {
+//                self.navigationItem.rightBarButtonItems?.append(deletebutton)
+//            }
+//
+//        }
+        
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        
+    }
     
 }
 
 extension RefrigeratorViewController: UITableViewDelegate {
     
+//    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+//        if tableView.isEditing {
+//            return .delete
+//        }
+//        return .none
+//    }
+//}
 }
 
 
@@ -242,4 +275,4 @@ extension RefrigeratorViewController: UISearchBarDelegate {
     
 }
 
-    
+

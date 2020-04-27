@@ -26,8 +26,10 @@ class FollowingViewController: UIViewController {
         
         self.searchBar.delegate = self as? UISearchBarDelegate
         self.tableView.dataSource = self
+        self.tableView.delegate = self
         userDataManager.delegateFollowerFollowing = self
         userDataManager.delegate = self
+        
         
         let parentVC = self.parent as! followerFollowingPageViewController
         followingsID = parentVC.followingsID

@@ -45,10 +45,9 @@ class RecipeViewControllerDataManager {
                                 genresArr.append(genre.key)
                             }
                         }
-                        
-                        
-                        let recipe = RecipeDetail(recipeID: recipeId!, title: title!, updatedDate: time!, cookingTime: cookingTime ?? 0, image: image ?? "", like: like!, serving: serving ?? 0, userID: userId!, genres: genresArr)
-                        
+                         let isVIPRecipe = data["VIP"] as? Bool ?? false
+                                                                                              
+                        let recipe = RecipeDetail(recipeID: recipeId!, title: title!, updatedDate: time!, cookingTime: cookingTime ?? 0, image: image ?? "", like: like!, serving: serving ?? 0, userID: userId!, genres: genresArr, isVIPRecipe: isVIPRecipe)
                         recipeList.append(recipe)
                         
                     }
@@ -161,9 +160,9 @@ class RecipeViewControllerDataManager {
                     let name = data["userName"] as? String
                     let familySize = data["familySize"] as? Int
                     let cuisineType = data["cuisineType"] as? String
-                    
-                    
-                    self.user = User(userID: userID!, name: name!, cuisineType: cuisineType!, familySize: familySize)
+                     let isVIP = data["isVIP"] as? Bool
+                                       
+                    self.user = User(userID: userID!, name: name!, cuisineType: cuisineType!, familySize: familySize!, isVIP: isVIP)
                     self.delegate?.gotUserData(user: self.user!)
                     
                 }

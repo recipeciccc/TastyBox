@@ -9,7 +9,7 @@
 import UIKit
 
 protocol GenreSelectViewControllerDelegate: class {
-    func assignGenres(genres: [String])
+    func assignGenres(genres: [String], isVIP: Bool)
 }
 
 class GenreSelectViewController: UIViewController {
@@ -77,7 +77,7 @@ class GenreSelectViewController: UIViewController {
         }
         print(tagsSelected)
        
-        self.delegate?.assignGenres(genres: tagsSelected)
+        self.delegate?.assignGenres(genres: tagsSelected, isVIP: isHighlightVIP)
         navigationController?.popViewController(animated: true)
     }
     

@@ -22,7 +22,7 @@ class FollowingRecipeDataManager {
     
     
     
-       func findFollowerFollowing(id: String?) {
+       func findFollowing(id: String?) {
            var uid = (Auth.auth().currentUser?.uid)!
            
            if id != nil {
@@ -72,9 +72,9 @@ class FollowingRecipeDataManager {
                         
                         
                         let image = data["image"] as? String
-                
-                        
-                        let recipe = RecipeDetail(recipeID: recipeId!, title: title!, updatedDate: time!, cookingTime: cookingTime ?? 0, image: image ?? "", like: like!, serving: serving ?? 0, userID: userId!, genres: genresArr)
+                        let isVIPRecipe = data["VIP"] as? Bool ?? false
+                                                                                              
+                        let recipe = RecipeDetail(recipeID: recipeId!, title: title!, updatedDate: time!, cookingTime: cookingTime ?? 0, image: image ?? "", like: like!, serving: serving ?? 0, userID: userId!, genres: genresArr, isVIPRecipe: isVIPRecipe)
                         
                         recipeList.append(recipe)
                        

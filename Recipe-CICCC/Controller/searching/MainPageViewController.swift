@@ -13,6 +13,8 @@ protocol MainPageViewControllerDelegate : class {
 }
 
 class MainPageViewController: UIPageViewController {
+    var isPaging = true
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -23,10 +25,14 @@ class MainPageViewController: UIPageViewController {
         // tapによるページめくりを担当するインスタンスを取得
         let tapGestureRecognizer = self.gestureRecognizers.filter{ $0 is UITapGestureRecognizer }.first as! UITapGestureRecognizer
         
-        self.setViewControllers([editorChoiceVC], direction: .forward, animated: true,completion: nil)
         tapGestureRecognizer.isEnabled = false
-      
         
+        self.setViewControllers([editorChoiceVC], direction: .forward, animated: true,completion: nil)
+       
+      
+        ingredientVC.delegate = self
+        
+       
     }
     
     let FollowingVC = UIStoryboard(name: "followingRecipe", bundle: nil).instantiateViewController(identifier: "followingRecipe") as! FollowingRecipeViewController
@@ -49,6 +55,26 @@ class MainPageViewController: UIPageViewController {
      }
      */
     
+}
+extension MainPageViewController: stopPagingDelegate , UIGestureRecognizerDelegate {
+    func stopPaging(isPaging: Bool) {
+      
+    }
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer,
+         shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer)
+         -> Bool {
+        // Returning true from here means, page view controller will behave as it is
+        // Returning false means, paging will be blocked
+        // As I needed to block paging only for landscape orientation, I'm just returning
+        // if orientation is in portrait or not
+            if isPaging == false {
+                return false
+            } else {
+            
+                return UIApplication.shared.statusBarOrientation.isPortrait
+            }
+    }
+
 }
 
 extension MainPageViewController: UIPageViewControllerDataSource {

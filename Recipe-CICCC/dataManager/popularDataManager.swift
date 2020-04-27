@@ -10,7 +10,7 @@ import Foundation
 import Firebase
 import FirebaseStorage
 
-class RecipedataManagerClass {
+class popularDataManager {
     
     let db = Firestore.firestore()
     weak var delegate: getDataFromFirebaseDelegate?
@@ -23,7 +23,7 @@ class RecipedataManagerClass {
     
     func getReipeDetail() {
         
-        db.collection("recipe").addSnapshotListener {
+        db.collection("recipe").order(by: "like", descending: true).limit(to: 10).addSnapshotListener {
             (querysnapshot, error) in
             if error != nil {
                 print("Error getting documents: \(String(describing: error))")
@@ -46,26 +46,38 @@ class RecipedataManagerClass {
                         let serving = data["serving"] as? Int
                         let userId = data["userID"] as? String
                         let time = data["time"] as? Timestamp
-                        
+                        let isVIPRecipe = data["VIP"] as? Bool ?? false
+
                         let image = data["image"] as? String
+                        
+                        let genres = data["genres"] as? [String:Bool]
+                        
+                        var genresArr: [String] = []
+                        if let gotGenresData = genres {
+                            for genre in gotGenresData {
+                                genresArr.append(genre.key)
+                            }
+                        }
+                   
                         
                         //MARK: They dont get anything when recipe is append...
                         if userId != nil && recipeId != nil {
-                            //                        self.getInstructions(userId: userId!, recipeId: recipeId!)
-                            //                        self.getIngredients(userId: userId!, recipeId: recipeId!)
-                            //                        self.getComments(userId: userId!, recipeId: recipeId!)
                             
-                            
-                            let recipe = RecipeDetail(recipeID: recipeId!, title: title!, updatedDate: time!, cookingTime: cookingTime ?? 0, image: image ?? "", like: like!, serving: serving ?? 0 , userID: userId!)
-                            
+                                                                                                                                               
+                            let recipe = RecipeDetail(recipeID: recipeId!, title: title!, updatedDate: time!, cookingTime: cookingTime ?? 0, image: image ?? "", like: like!, serving: serving ?? 0, userID: userId!, genres: genresArr, isVIPRecipe: isVIPRecipe)
+                                                  
                             
                             self.recipes.append(recipe)
+                            
+                            if documents == querysnapshot?.documents.last! {
+                                self.delegate?.gotData(recipes: self.recipes)
+                            }
                         }
                     }
                 }
                 
                 
-                self.delegate?.gotData(recipes: self.recipes)
+                
             }
         }
     }

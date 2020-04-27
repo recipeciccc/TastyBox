@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol FolllowingFollowerDelegate {
+protocol FolllowingFollowerDelegate : class{
     func passFollowerFollowing(followingsIDs: [String], followersIDs: [String])
     func assignFollowersFollowings(users: [User])
 }
