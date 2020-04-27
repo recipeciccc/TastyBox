@@ -11,55 +11,69 @@ import Firebase
 
 class SettingViewController: UIViewController {
     
+    @IBOutlet weak var photo: UIImageView!
     @IBOutlet weak var accounttableView: UITableView!
     @IBOutlet weak var preferenceTableVIew: UITableView!
     
-    let accountTitle = ["Name:", "Email:"]
-    static var accountData = ["name","email"]
+    static var accountData = [String]()
+    var accountTitle = [String]()
+    var preferenceTitle = [String]()
+    var allergies = [String]()
+    var mealSize = [String]()
+    var cuisineType = [String]()
     
-    let preferenceTitle = ["Allergies or Dislike Ingredients", "Meal Size","Cuisine Type"]
-
-    let allergies = ["Peanut","Onion","Egg","Milk"]
-    let mealSize = ["1-2","3-4","5-6","7-8","9-10","above 10"]
-    let cuisineType = ["Chinese","Japanese","Korean","Canadian"]
-    
-    var arrayPicker = [[String]]()
-    var array = [String]()
-    var selectItem = String()
-    var pickItem = Bool()
-    var arrayRow = Int()
-    
-    var textfield = UITextField()
+    let userManager =  UserdataManager()
     var accountSettingVC = AccountSettingViewController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(self.refresh), name: NSNotification.Name(rawValue: "dataUpdate"), object: nil)
+    
+        initDefaultData()
+        delegate_dataSource_Setup()
+        userDataSetup()
+        photoSetup()
+        UIviewSetup()
+    }
+    private func initDefaultData(){
+         accountTitle = ["Name:", "Email:"]
+         preferenceTitle = ["Allergies or Dislike Ingredients", "Meal Size","Cuisine Type"]
+         allergies = ["Peanut","Onion","Egg","Milk"]
+         mealSize = ["1-2","3-4","5-6","7-8","9-10","above 10"]
+         cuisineType = ["Chinese","Japanese","Korean","Canadian"]
+    }
+    private func delegate_dataSource_Setup(){
         accounttableView.delegate = self
         accounttableView.dataSource = self
         preferenceTableVIew.delegate = self
         preferenceTableVIew.dataSource = self
-        
         accountSettingVC.delegate = self
-        pickItem = false
-        
+    }
+    private func UIviewSetup(){
         self.accounttableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         self.preferenceTableVIew.separatorStyle = UITableViewCell.SeparatorStyle.none
         accounttableView.isHidden = true
         preferenceTableVIew.isHidden = true
+    }
+    private func userDataSetup(){
         let name = Auth.auth().currentUser?.displayName
         let email = Auth.auth().currentUser?.email
-
+        SettingViewController.accountData = ["",""]
         SettingViewController.accountData[0]  = name ?? ""
         SettingViewController.accountData[1]  = email ?? ""
-        
-        arrayPicker = [allergies,mealSize,cuisineType]
+    }
+    private func photoSetup(){
+        self.photo?.contentMode = .scaleAspectFit
+        self.photo.layer.masksToBounds = false
+        self.photo.layer.cornerRadius = self.photo.bounds.width / 2
+        self.photo.clipsToBounds = true
+        userManager.getUserImage(uid: Auth.auth().currentUser!.uid)
+        userManager.delegate = self
     }
     
     @objc func refresh(){
         self.accounttableView.reloadData()
     }
-    
     @objc func closeKeyboard(){
            self.view.endEditing(true)
     }
@@ -138,7 +152,15 @@ extension SettingViewController: UITableViewDataSource,UITableViewDelegate{
 
 extension SettingViewController: SaveChangeDelegate{
     func reloadVC(text:String,index: Int) {
-        print("delegate is working")
         SettingViewController.accountData[index] = text
+    }
+}
+
+extension SettingViewController: getUserDataDelegate{
+    func gotUserData(user: User) {
+    }
+    
+    func assignUserImage(image: UIImage) {
+        self.photo.image = image
     }
 }
