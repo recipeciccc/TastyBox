@@ -16,28 +16,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="ry4-yo-opS">
-                                <rect key="frame" x="0.0" y="32" width="414" height="44"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="8Up-A9-y6u"/>
                                 </constraints>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vs4-Dq-HGc">
-                                <rect key="frame" x="132" y="96" width="150" height="33"/>
-                                <color key="backgroundColor" red="1" green="0.57647058819999997" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="150" id="eJX-Fm-Byf"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                                <state key="normal" title="Find Stores">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <segue destination="Sv8-Rf-beF" kind="show" id="eY0-w5-Qra"/>
-                                </connections>
-                            </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="cjk-bj-h3x">
-                                <rect key="frame" x="0.0" y="150" width="414" height="746"/>
+                                <rect key="frame" x="0.0" y="161" width="414" height="735"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ingredient" id="uaf-o7-o2Y" customClass="IngredientsTableViewCell" customModule="Recipe_CICCC" customModuleProvider="target">
@@ -76,6 +62,20 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vs4-Dq-HGc">
+                                <rect key="frame" x="132" y="108" width="150" height="33"/>
+                                <color key="backgroundColor" red="1" green="0.57647058819999997" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="eJX-Fm-Byf"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                <state key="normal" title="Find Stores">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <segue destination="Sv8-Rf-beF" kind="show" id="eY0-w5-Qra"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -85,12 +85,13 @@
                             <constraint firstItem="ry4-yo-opS" firstAttribute="leading" secondItem="Eu1-lr-k0V" secondAttribute="leading" id="SxQ-So-XqH"/>
                             <constraint firstItem="ry4-yo-opS" firstAttribute="centerX" secondItem="aLj-WW-2vB" secondAttribute="centerX" id="ZgO-tX-3ZS"/>
                             <constraint firstItem="Vs4-Dq-HGc" firstAttribute="top" secondItem="ry4-yo-opS" secondAttribute="bottom" constant="20" id="hg8-KT-zym"/>
-                            <constraint firstItem="ry4-yo-opS" firstAttribute="top" secondItem="aLj-WW-2vB" secondAttribute="topMargin" constant="-12" id="ssO-Lk-CfN"/>
-                            <constraint firstItem="cjk-bj-h3x" firstAttribute="top" secondItem="Vs4-Dq-HGc" secondAttribute="bottom" constant="21" id="vda-9Z-eB3"/>
+                            <constraint firstItem="ry4-yo-opS" firstAttribute="top" secondItem="aLj-WW-2vB" secondAttribute="topMargin" id="ssO-Lk-CfN"/>
+                            <constraint firstItem="cjk-bj-h3x" firstAttribute="top" secondItem="Vs4-Dq-HGc" secondAttribute="bottom" constant="20" id="vda-9Z-eB3"/>
                             <constraint firstItem="ry4-yo-opS" firstAttribute="trailing" secondItem="cjk-bj-h3x" secondAttribute="trailing" id="vnK-bn-rfI"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Eu1-lr-k0V"/>
                     </view>
+                    <navigationItem key="navigationItem" id="T2j-m4-h7p"/>
                     <connections>
                         <outlet property="searchBar" destination="ry4-yo-opS" id="2BF-nr-Yk5"/>
                         <outlet property="tableView" destination="cjk-bj-h3x" id="OSN-dU-1c7"/>
@@ -98,7 +99,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4w5-x5-Pyj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6547.826086956522" y="871.875"/>
+            <point key="canvasLocation" x="7457.971014492754" y="871.875"/>
         </scene>
         <!--Map-->
         <scene sceneID="dsc-Yh-fDa">
@@ -108,7 +109,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kWQ-XQ-TBN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7000" y="872"/>
+            <point key="canvasLocation" x="7910.1449275362329" y="871.875"/>
         </scene>
         <!--Adding Ingredient Refrigerator View Controller-->
         <scene sceneID="fje-GK-DLr">
@@ -172,7 +173,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Us-yu-LHy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7462.3188405797109" y="871.875"/>
+            <point key="canvasLocation" x="8372.463768115942" y="871.875"/>
         </scene>
     </scenes>
 </document>

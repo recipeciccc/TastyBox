@@ -20,6 +20,7 @@ class MainPageViewController: UIPageViewController {
         
         // Do any additional setup after loading the view.
         self.dataSource = self
+        self.isPaging = false
         // PageViewControllerにViewControllerをセット
         
         // tapによるページめくりを担当するインスタンスを取得
@@ -32,7 +33,7 @@ class MainPageViewController: UIPageViewController {
       
         ingredientVC.delegate = self
         
-       
+//        self.view.isUserInteractionEnabled = false
     }
     
     let FollowingVC = UIStoryboard(name: "followingRecipe", bundle: nil).instantiateViewController(identifier: "followingRecipe") as! FollowingRecipeViewController
@@ -58,7 +59,7 @@ class MainPageViewController: UIPageViewController {
 }
 extension MainPageViewController: stopPagingDelegate , UIGestureRecognizerDelegate {
     func stopPaging(isPaging: Bool) {
-      
+        self.view.isUserInteractionEnabled = isPaging
     }
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer,
          shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer)

@@ -9,75 +9,147 @@
 import UIKit
 
 protocol GenreSelectViewControllerDelegate: class {
-    func assignGenres(genres: [String], isVIP: Bool)
+    func assignGenres(genres: [String], imagesLabels: [String], imagesLabelsSelected: [String], isVIP: Bool)
 }
 
 class GenreSelectViewController: UIViewController {
-
+    
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var doneButton: UIBarButtonItem!
     
     var tags = ["Valentine's Day", "Cozy Spring", "Quick and Simple", "Home Cooking", "Appetizer",  "Main Dish", "Salad", "Dessert", "Beverage"]
-    var isHighrights: [String:Bool] = [:]
+    var imageLabelingTags: [String] = []
+    var imageLabelingTagsSelected: [String] = []
+    var isHighlightsNotImageLabelsGenres: [String:Bool] = [:]
+    var isHighlightsImageLabelsGenres = [String:Bool]()
     var isHighlightVIP = false
+    var image: UIImage?
+    let indicator = UIActivityIndicatorView()
+    var uiView = UIView()
     
     var tagsSelected: [String] = []
     weak var delegate: GenreSelectViewControllerDelegate?
+    let dataManager = GenreMLKitDataManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         collectionView.dataSource = self
         collectionView.delegate = self
+        dataManager.delegate = self
         
         if tagsSelected.isEmpty {
             for tag in tags {
-                isHighrights[tag] = false
+                isHighlightsNotImageLabelsGenres[tag] = false
             }
-        
+            doneButton.isEnabled = false
         } else {
-           print("passed tags \(tagsSelected)")
+            print("passed tags \(tagsSelected)")
             for tag in tags {
                 
-                    for tagSelected in tagsSelected {
-                        if tag == tagSelected {
-                            isHighrights[tag] = true
-                            break
-                        }
-                        else {  isHighrights[tag] = false }
+                for tagSelected in tagsSelected {
+                    if tag == tagSelected {
+                        isHighlightsNotImageLabelsGenres[tag] = true
+                        break
                     }
-               
+                    else {  isHighlightsNotImageLabelsGenres[tag] = false }
+                }
+                
             }
             
         }
         
+        if imageLabelingTagsSelected.isEmpty && image != nil {
+            dataManager.labelingImage(image: image!)
+            
+            uiView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height:  self.view.frame.size.height))
+            uiView.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 0.5)
+            uiView.tag = 100
+            
+            indicator.hidesWhenStopped = true
+            indicator.color = .orange
+            indicator.center = self.view.center
+            
+            uiView.addSubview(indicator)
+            
+            self.view.addSubview(uiView)
+            
+            
+            DispatchQueue.global(qos: .default).async {
+                
+                // Do heavy work here
+                
+                DispatchQueue.main.async { [weak self] in
+                    // UI updates must be on main thread
+                    self?.indicator.startAnimating()
+                }
+            }
+            
+            doneButton.isEnabled = false
+        }
+        else if !imageLabelingTagsSelected.isEmpty {
+            
+            print("passed tags \(imageLabelingTagsSelected)")
+            
+            for tag in imageLabelingTags {
+                
+                for tagSelected in imageLabelingTagsSelected {
+                    if tag == tagSelected {
+                        isHighlightsImageLabelsGenres[tag] = Bool()
+                        isHighlightsImageLabelsGenres[tag] = true
+                        break
+                    }
+                    else {
+                        isHighlightsImageLabelsGenres[tag] = Bool()
+                        isHighlightsImageLabelsGenres[tag] = false
+                        
+                    }
+                }
+                
+            }
+            self.collectionView.reloadData()
+        }
+        
+        
     }
     
-
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destination.
+     // Pass the selected object to the new view controller.
+     }
+     */
     @IBAction func cancel(_ sender: Any) {
+        
+        self.delegate?.assignGenres(genres: tagsSelected, imagesLabels: imageLabelingTags, imagesLabelsSelected: imageLabelingTagsSelected, isVIP: isHighlightVIP)
         navigationController?.popViewController(animated: true)
     }
     
     @IBAction func done(_ sender: Any) {
-       
+        
         tagsSelected.removeAll()
         for tag in tags {
-            if isHighrights[tag]! {
+            if isHighlightsNotImageLabelsGenres[tag]! {
                 tagsSelected.append(tag)
             }
         }
         print(tagsSelected)
-       
-        self.delegate?.assignGenres(genres: tagsSelected, isVIP: isHighlightVIP)
+        
+        for tag in imageLabelingTags {
+            if isHighlightsImageLabelsGenres[tag]! {
+                imageLabelingTagsSelected.append(tag)
+            }
+        }
+        
+        print(imageLabelingTagsSelected)
+        
+        self.delegate?.assignGenres(genres: tagsSelected, imagesLabels: imageLabelingTags, imagesLabelsSelected: imageLabelingTagsSelected, isVIP: isHighlightVIP)
+        
         navigationController?.popViewController(animated: true)
     }
     
@@ -86,19 +158,20 @@ class GenreSelectViewController: UIViewController {
 extension GenreSelectViewController: UICollectionViewDataSource {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 2
+        return 3
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if section == 0 { return 1 }
+        else if section == 1 { return imageLabelingTags.count}
         return tags.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        
+        let cell = (collectionView.dequeueReusableCell(withReuseIdentifier: "genreCell", for: indexPath) as? GenreCollectionViewCell)!
         
         if indexPath.section == 0 {
-            let cell = (collectionView.dequeueReusableCell(withReuseIdentifier: "genreCell", for: indexPath) as? GenreCollectionViewCell)!
+            //            let cell = (collectionView.dequeueReusableCell(withReuseIdentifier: "genreCell", for: indexPath) as? GenreCollectionViewCell)!
             
             
             cell.genreLabel.text = "VIP"
@@ -106,15 +179,32 @@ extension GenreSelectViewController: UICollectionViewDataSource {
             
             return cell
         }
-        
-        let cell = (collectionView.dequeueReusableCell(withReuseIdentifier: "genreCell", for: indexPath) as? GenreCollectionViewCell)!
-        
-        cell.genreLabel.text = tags[indexPath.row]
-        
-        if isHighrights[tags[indexPath.row]]! {
-            cell.highlight(active: true)
+        else if indexPath.section == 1 {
+            
+            let cell = (collectionView.dequeueReusableCell(withReuseIdentifier: "genreCell", for: indexPath) as? GenreCollectionViewCell)!
+            
+            cell.genreLabel.text = imageLabelingTags[indexPath.row]
+            
+            if !imageLabelingTags.isEmpty && !isHighlightsImageLabelsGenres.isEmpty {
+                if isHighlightsImageLabelsGenres[imageLabelingTags[indexPath.row]]! {
+                    cell.highlight(active: true)
+                } else {
+                    cell.highlight(active: false)
+                }
+            }
+            return cell
+            
         } else {
-            cell.highlight(active: false)
+            
+            cell.genreLabel.text = tags[indexPath.row]
+            
+            if isHighlightsNotImageLabelsGenres[tags[indexPath.row]]! {
+                cell.highlight(active: true)
+            } else {
+                cell.highlight(active: false)
+            }
+            
+            
         }
         
         return cell
@@ -122,18 +212,90 @@ extension GenreSelectViewController: UICollectionViewDataSource {
     
     
 }
+extension GenreSelectViewController: GenreMLKitDataManagerDelegate {
+    func passLabeledArray(arr: [String]) {
+        imageLabelingTags = arr
+        
+        //        if imageLabelingTags.isEmpty {
+        for tag in imageLabelingTags {
+            isHighlightsImageLabelsGenres[tag] = Bool()
+            isHighlightsNotImageLabelsGenres[tag] = false
+        }
+        //        }
+        
+        self.collectionView.reloadData()
+        if let viewWithTag = self.view.viewWithTag(100) {
+            viewWithTag.removeFromSuperview()
+        }else{
+            print("No!")
+        }
+        
+        DispatchQueue.global(qos: .default).async {
+            
+            // Do heavy work here
+            
+            DispatchQueue.main.async { [weak self] in
+                // UI updates must be on main thread
+                self?.indicator.stopAnimating()
+            }
+        }
+    }
+}
+
 extension GenreSelectViewController: UICollectionViewDelegate {
+    fileprivate func shouldDoneButtonEnabled() {
+        
+        doneButton.isEnabled = false
+
+        for isHighLight in isHighlightsImageLabelsGenres {
+            if isHighLight.value && doneButton.isEnabled == false{
+                doneButton.isEnabled = true
+                break
+            }
+            
+            
+        }
+        
+        if doneButton.isEnabled == false {
+            
+            for isHighLight in isHighlightsNotImageLabelsGenres {
+                if isHighLight.value && doneButton.isEnabled == false{
+                    doneButton.isEnabled = true
+                    break
+                }
+            
+            }
+        }
+        
+        
+    }
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let cell = (collectionView.cellForItem(at: indexPath) as? GenreCollectionViewCell)!
         
         if indexPath.section == 0 {
-            let cell = (collectionView.cellForItem(at: indexPath) as? GenreCollectionViewCell)!
-                   
+            
+            
             isHighlightVIP =  !isHighlightVIP
             cell.highlight(active: isHighlightVIP)
         }
-        let cell = (collectionView.cellForItem(at: indexPath) as? GenreCollectionViewCell)!
+        else if indexPath.section == 1{
+            //            let cell = (collectionView.cellForItem(at: indexPath) as? GenreCollectionViewCell)!
+            
+            isHighlightsImageLabelsGenres[imageLabelingTags[indexPath.row]] =  !isHighlightsImageLabelsGenres[imageLabelingTags[indexPath.row]]!
+            
+            cell.highlight(active: isHighlightsImageLabelsGenres[imageLabelingTags[indexPath.row]]!)
+        } else {
+            
+            //            let cell = (collectionView.cellForItem(at: indexPath) as? GenreCollectionViewCell)!
+            
+            isHighlightsNotImageLabelsGenres[tags[indexPath.row]]! =  !isHighlightsNotImageLabelsGenres[tags[indexPath.row]]!
+            cell.highlight(active: isHighlightsNotImageLabelsGenres[tags[indexPath.row]]!)
+        }
         
-        isHighrights[tags[indexPath.row]]! =  !isHighrights[tags[indexPath.row]]!
-        cell.highlight(active: isHighrights[tags[indexPath.row]]!)
+        shouldDoneButtonEnabled()
+        
     }
 }
+
+

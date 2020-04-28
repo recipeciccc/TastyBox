@@ -9,6 +9,10 @@
 import UIKit
 import Firebase
 
+protocol FollowingRecipestopPagingDelegate:  class {
+    func stopPaging(isPaging: Bool)
+}
+
 class FollowingRecipeViewController: UIViewController {
     
     @IBOutlet weak var followingTableView: UITableView!
@@ -22,9 +26,13 @@ class FollowingRecipeViewController: UIViewController {
     var creators:[User] = []
     var followingsID:[Int:String] = [:]
     var followings:[User] = []
+    var pageViewControllerDataSource: UIPageViewControllerDataSource?
+    var mainViewController: MainPageViewController?
     
     let uid = Auth.auth().currentUser?.uid
     let dataManager = FollowingRecipeDataManager()
+    
+    weak var delegate: FollowingRecipestopPagingDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +43,7 @@ class FollowingRecipeViewController: UIViewController {
         
         self.followingTableView.tableFooterView = UIView()
         
+      
     }
     
 }
@@ -121,6 +130,36 @@ extension FollowingRecipeViewController : UICollectionViewDelegate,UICollectionV
         navigationController?.pushViewController(recipeDetailVC, animated: true)
     }
     
+//    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+////        delegate?.stopPaging(isPaging: false)
+//        mainViewController = self.parent as! MainPageViewController
+//        pageViewControllerDataSource = mainViewController!.dataSource
+//
+////        if  mainViewController!.dataSource != nil {
+//        mainViewController!.dataSource = nil
+//            mainViewController?.isPaging = false
+////        }
+//    }
+    
+    
+    // they and self.ispaging = false in pageviewcontroller prevent from paging when collection view is scrollings 
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+          
+        mainViewController = self.parent as? MainPageViewController
+        
+        if  mainViewController!.dataSource == nil {
+            
+            mainViewController!.dataSource = mainViewController
+        }
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        mainViewController = self.parent as? MainPageViewController
+        pageViewControllerDataSource = mainViewController!.dataSource
+                
+        mainViewController!.dataSource = nil
+        mainViewController?.isPaging = false
+    }
 }
 
 extension FollowingRecipeViewController : FollowingRecipeDataManagerDelegate {

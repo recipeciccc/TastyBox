@@ -45,7 +45,11 @@ pod 'GoogleMaps'
 pod 'GooglePlaces'
 
 pod 'SideMenu'
+
 # edit image 
 pod 'RSKImageCropper'
+
+# to justify what the main photo recipe is
+pod 'Firebase/MLVision'
 
 end

@@ -133,6 +133,8 @@ class DiscoveryViewController: UIViewController {
         
         self.MenuCollectionView?.scrollToItem(at: NSIndexPath(item: selectedIndex, section: 0) as IndexPath, at: .centeredHorizontally, animated: true)
         
+        
+        FollowingVC.delegate = self
     }
     
     
@@ -226,6 +228,13 @@ class DiscoveryViewController: UIViewController {
         //            pageControllView.dataSource = self
         //            pageControllView.delegate = self  // 追加
         //        }
+    }
+}
+
+
+extension DiscoveryViewController: FollowingRecipestopPagingDelegate {
+    func stopPaging(isPaging: Bool) {
+        self.pageControllView.isPaging = isPaging
     }
 }
 

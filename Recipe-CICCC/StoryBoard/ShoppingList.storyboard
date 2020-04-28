@@ -10,31 +10,14 @@
         <!--Shopping List-->
         <scene sceneID="n9Z-Vq-jV3">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1kb-vD-huf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <viewController id="SXD-cV-Qmj" customClass="ShoppinglistViewController" customModule="Recipe_CICCC" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7tP-n5-ZJY">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="bjH-NU-MM9">
-                                <rect key="frame" x="0.0" y="44" width="414" height="65"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </searchBar>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mH4-hz-Sef">
-                                <rect key="frame" x="107" y="119" width="200" height="33"/>
-                                <color key="backgroundColor" red="1" green="0.57637232540000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="200" id="Wuu-3h-QNP"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                <state key="normal" title="Find Stores">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <segue destination="h0v-Pw-8TT" kind="show" id="Bxe-6i-r3W"/>
-                                </connections>
-                            </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Cmd-u5-Dje">
-                                <rect key="frame" x="0.0" y="172" width="414" height="724"/>
+                                <rect key="frame" x="0.0" y="161" width="414" height="735"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ingredientShopping" id="mM4-i9-zdI" customClass="IngredientShoppingTableViewCell" customModule="Recipe_CICCC" customModuleProvider="target">
@@ -80,18 +63,40 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="Rvj-jW-U8r">
+                                <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="SyP-QS-2C2"/>
+                                </constraints>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mH4-hz-Sef">
+                                <rect key="frame" x="107" y="108" width="200" height="33"/>
+                                <color key="backgroundColor" red="1" green="0.57637232540000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="SYB-6l-hYT"/>
+                                    <constraint firstAttribute="height" constant="33" id="jrl-DA-EIz"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                <state key="normal" title="Find Stores">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <segue destination="h0v-Pw-8TT" kind="show" id="Bxe-6i-r3W"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="bjH-NU-MM9" secondAttribute="trailing" id="6iQ-gf-kOe"/>
-                            <constraint firstItem="bjH-NU-MM9" firstAttribute="leading" secondItem="5zV-DK-G4u" secondAttribute="leading" id="BI4-1H-qWY"/>
-                            <constraint firstItem="bjH-NU-MM9" firstAttribute="top" secondItem="5zV-DK-G4u" secondAttribute="top" id="HSg-2O-npc"/>
+                            <constraint firstItem="Rvj-jW-U8r" firstAttribute="top" secondItem="5zV-DK-G4u" secondAttribute="top" id="78V-Xa-kPA"/>
+                            <constraint firstItem="Rvj-jW-U8r" firstAttribute="trailing" secondItem="Cmd-u5-Dje" secondAttribute="trailing" id="8hN-Pj-Xg8"/>
+                            <constraint firstItem="mH4-hz-Sef" firstAttribute="centerX" secondItem="7tP-n5-ZJY" secondAttribute="centerX" id="9yY-UP-rNT"/>
+                            <constraint firstItem="Cmd-u5-Dje" firstAttribute="top" secondItem="mH4-hz-Sef" secondAttribute="bottom" constant="20" id="FeL-yv-keG"/>
                             <constraint firstItem="5zV-DK-G4u" firstAttribute="bottom" secondItem="Cmd-u5-Dje" secondAttribute="bottom" constant="-34" id="IJs-gf-ewo"/>
-                            <constraint firstItem="mH4-hz-Sef" firstAttribute="top" secondItem="bjH-NU-MM9" secondAttribute="bottom" constant="10" id="SIG-Dw-piC"/>
+                            <constraint firstItem="mH4-hz-Sef" firstAttribute="centerX" secondItem="Rvj-jW-U8r" secondAttribute="centerX" id="eAe-7b-RV0"/>
+                            <constraint firstItem="Rvj-jW-U8r" firstAttribute="leading" secondItem="Cmd-u5-Dje" secondAttribute="leading" id="m0F-9H-Rox"/>
                             <constraint firstItem="5zV-DK-G4u" firstAttribute="trailing" secondItem="Cmd-u5-Dje" secondAttribute="trailing" id="oRM-lG-HXo"/>
-                            <constraint firstItem="Cmd-u5-Dje" firstAttribute="top" secondItem="mH4-hz-Sef" secondAttribute="bottom" constant="20" id="ogF-hb-EtU"/>
-                            <constraint firstItem="mH4-hz-Sef" firstAttribute="centerX" secondItem="7tP-n5-ZJY" secondAttribute="centerX" id="wr9-57-BD3"/>
-                            <constraint firstItem="mH4-hz-Sef" firstAttribute="centerY" secondItem="7tP-n5-ZJY" secondAttribute="centerY" constant="-312.5" id="xta-Ng-VjH"/>
+                            <constraint firstItem="mH4-hz-Sef" firstAttribute="top" secondItem="Rvj-jW-U8r" secondAttribute="bottom" constant="20" id="uk9-wn-Eia"/>
                             <constraint firstItem="Cmd-u5-Dje" firstAttribute="leading" secondItem="5zV-DK-G4u" secondAttribute="leading" id="zHW-og-NGI"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="5zV-DK-G4u"/>
@@ -112,13 +117,12 @@
                     </navigationItem>
                     <connections>
                         <outlet property="findStoresButton" destination="mH4-hz-Sef" id="nKC-cD-Zfx"/>
-                        <outlet property="searchBar" destination="bjH-NU-MM9" id="vEP-Qx-c2j"/>
+                        <outlet property="searchBar" destination="Rvj-jW-U8r" id="KXI-eq-nel"/>
                         <outlet property="tableView" destination="Cmd-u5-Dje" id="Tld-q4-KZ3"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="1kb-vD-huf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="10046.376811594204" y="805.58035714285711"/>
+            <point key="canvasLocation" x="10956.521739130436" y="805.58035714285711"/>
         </scene>
         <!--Map-->
         <scene sceneID="UAI-Yj-Run">
@@ -128,7 +132,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WLL-kw-dRP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="10581.159420289856" y="609.375"/>
+            <point key="canvasLocation" x="11491.304347826088" y="609.375"/>
         </scene>
         <!--Add-->
         <scene sceneID="1ob-CF-Gxc">
@@ -191,10 +195,10 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="baR-fx-slA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="9136" y="1671"/>
+            <point key="canvasLocation" x="10957" y="1566"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="c4N-Tl-uQc"/>
+        <segue reference="fy0-va-3gm"/>
     </inferredMetricsTieBreakers>
 </document>
