@@ -17,8 +17,6 @@ class LoginMainpageViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//         navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.9984802604, green: 0.9880111814, blue: 0.655043602, alpha: 1)
-//        self.navigationController!.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.orange]
         roundCorners(view: login, cornerRadius: 5.0)
         GIDSignIn.sharedInstance()?.delegate = self
         GIDSignIn.sharedInstance()?.presentingViewController = self
