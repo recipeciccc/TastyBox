@@ -10,8 +10,10 @@ import Foundation
 import Firebase
 
 class ResetPasswordViewController: UIViewController {
-    
-
+    override func viewDidLoad() {
+        roundCorners(view: submitBtn, cornerRadius: 5.0)
+    }
+    @IBOutlet weak var submitBtn: UIButton!
     @IBOutlet weak var emailTextField: UITextField!
     
     @IBAction func submitAction(_ sender: Any) {
@@ -51,3 +53,9 @@ class ResetPasswordViewController: UIViewController {
 }
     
 
+extension ResetPasswordViewController{
+    func roundCorners(view: UIView, cornerRadius: Double) {
+        view.layer.cornerRadius = CGFloat(cornerRadius)
+        view.clipsToBounds = true
+    }
+}

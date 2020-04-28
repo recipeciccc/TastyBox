@@ -79,8 +79,16 @@ class FirstTimeUserProfileTableViewController: UITableViewController, UIPickerVi
         userImageButton.layer.cornerRadius = 0.5 * userImageButton.bounds.size.width
         userImageButton.clipsToBounds = true
         userImage?.withRenderingMode(.alwaysOriginal)
+        
+        PickerColor()
     }
-    
+    private func PickerColor(){
+        
+        familyPicker.setValue( #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1) , forKey: "backgroundColor")
+        familyPicker.setValue(#colorLiteral(red: 0.5170344114, green: 0.3871352673, blue: 0.1388392448, alpha: 1), forKey: "textColor")
+        cuisinePicker.setValue( #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1) , forKey: "backgroundColor")
+        cuisinePicker.setValue(#colorLiteral(red: 0.5170344114, green: 0.3871352673, blue: 0.1388392448, alpha: 1), forKey: "textColor")
+    }
     @objc func closeKeyboard(){
         self.view.endEditing(true)
     }
