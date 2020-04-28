@@ -365,4 +365,20 @@ class UserdataManager {
         }
         
     }
+    
+    func updateUserImage(Img: UIImage){
+        let uid = Auth.auth().currentUser?.uid
+        let imageRef = storageRef.child("user/\(String(describing: uid!))/userAccountImage")
+        if let uploadData = Img.jpegData(compressionQuality: 0.9){
+            imageRef.putData(uploadData, metadata: nil) { (metaData, err) in
+                 if err != nil {
+                    print(err.debugDescription)
+                }
+                else {
+                    print(metaData)
+                }
+            }
+        }
+        
+    }
 }

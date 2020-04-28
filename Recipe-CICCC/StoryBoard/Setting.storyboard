@@ -150,6 +150,16 @@
                                     <constraint firstAttribute="bottom" secondItem="2WL-p8-iwn" secondAttribute="bottom" id="qQK-Do-CA9"/>
                                 </constraints>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fHa-YY-XvZ">
+                                <rect key="frame" x="139" y="711" width="162" height="150"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="150" id="OKl-U8-CP6"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="showChoice:" destination="rka-ve-09M" eventType="touchUpInside" id="8Rq-n5-uEx"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.99759250880000006" green="0.98386182639999997" blue="0.72722791710000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
@@ -160,14 +170,27 @@
                             <constraint firstItem="dZB-jx-2rP" firstAttribute="top" secondItem="DH8-Kq-tuL" secondAttribute="top" constant="20" id="dAq-rF-oVj"/>
                             <constraint firstItem="FmL-Ut-gDS" firstAttribute="leading" secondItem="DH8-Kq-tuL" secondAttribute="leading" constant="20" id="fdo-qF-gEN"/>
                             <constraint firstItem="5JH-F5-E77" firstAttribute="leading" secondItem="DH8-Kq-tuL" secondAttribute="leading" constant="20" id="g0B-X2-ksj"/>
+                            <constraint firstItem="fHa-YY-XvZ" firstAttribute="top" secondItem="5JH-F5-E77" secondAttribute="bottom" constant="27" id="kDo-MD-yB6"/>
+                            <constraint firstItem="fHa-YY-XvZ" firstAttribute="leading" secondItem="DH8-Kq-tuL" secondAttribute="leading" constant="139" id="qbA-OH-DOe"/>
                             <constraint firstItem="DH8-Kq-tuL" firstAttribute="trailing" secondItem="FmL-Ut-gDS" secondAttribute="trailing" constant="20" id="sHn-0e-54J"/>
+                            <constraint firstItem="DH8-Kq-tuL" firstAttribute="trailing" secondItem="fHa-YY-XvZ" secondAttribute="trailing" constant="113" id="xY7-Vr-5tI"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="DH8-Kq-tuL"/>
                     </view>
-                    <navigationItem key="navigationItem" id="avh-uf-b09"/>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="avh-uf-b09">
+                        <barButtonItem key="rightBarButtonItem" title="Item" id="kZA-ZG-reH">
+                            <connections>
+                                <action selector="ImageEditingIsDone:" destination="rka-ve-09M" id="AYx-kR-QPB"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="DoneBtn" destination="kZA-ZG-reH" id="MFs-dR-5gK"/>
                         <outlet property="accounttableView" destination="vwO-Le-9Cx" id="5Is-4c-kdh"/>
                         <outlet property="photo" destination="dZB-jx-2rP" id="wMw-aQ-4x6"/>
+                        <outlet property="photoBtn" destination="fHa-YY-XvZ" id="SoM-dZ-cwQ"/>
                         <outlet property="preferenceTableVIew" destination="2WL-p8-iwn" id="rOw-82-kZo"/>
                     </connections>
                 </viewController>
