@@ -9,6 +9,10 @@
 import UIKit
 import Firebase
 
+protocol FollowingRecipestopPagingDelegate:  class {
+    func stopPaging(isPaging: Bool)
+}
+
 class FollowingRecipeViewController: UIViewController {
     
     @IBOutlet weak var followingTableView: UITableView!
@@ -22,9 +26,13 @@ class FollowingRecipeViewController: UIViewController {
     var creators:[User] = []
     var followingsID:[Int:String] = [:]
     var followings:[User] = []
+    var pageViewControllerDataSource: UIPageViewControllerDataSource?
+    var mainViewController: MainPageViewController?
     
     let uid = Auth.auth().currentUser?.uid
     let dataManager = FollowingRecipeDataManager()
+    
+    weak var delegate: FollowingRecipestopPagingDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -121,6 +129,27 @@ extension FollowingRecipeViewController : UICollectionViewDelegate,UICollectionV
         navigationController?.pushViewController(recipeDetailVC, animated: true)
     }
     
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+//        delegate?.stopPaging(isPaging: false)
+        mainViewController = self.parent as! MainPageViewController
+        pageViewControllerDataSource = mainViewController!.dataSource
+        mainViewController!.dataSource = nil
+        
+    }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+          
+        mainViewController = self.parent as! MainPageViewController
+        
+        mainViewController!.dataSource = pageViewControllerDataSource
+    }
+    
+//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+////        delegate?.stopPaging(isPaging: true)
+//
+//        let mainViewController = self.parent as! MainPageViewController
+//        mainViewController.dataSource = pageViewControllerDataSource
+//    }
 }
 
 extension FollowingRecipeViewController : FollowingRecipeDataManagerDelegate {

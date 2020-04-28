@@ -75,15 +75,21 @@ class CreatorViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(dismissKeyBoard), name: UIResponder.keyboardWillHideNotification, object: nil)
         
-        tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyBoard))
+//        tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyBoard:))
+//        self.view.addGestureRecognizer(tap!)
+        
+        tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
         self.view.addGestureRecognizer(tap!)
-        
-        
-        
+        self.view.isUserInteractionEnabled = true
     }
     
     deinit {
         NotificationCenter.default.removeObserver(self)
+    }
+    
+    @objc func handleTap(_ sender: UITapGestureRecognizer) {
+        self.view.endEditing(true)
+        print(sender)
     }
     
     //MARK: IBOutlet
@@ -715,10 +721,10 @@ extension CreatorViewController: UITextFieldDelegate, UITextViewDelegate{
         if let nextField = self.MainTableView.subviews[tag].viewWithTag(textField.tag + 10 + indexPathRow) as? UITextField {
             nextField.becomeFirstResponder()
         } else {
-            textField.resignFirstResponder()
+//            textField.resignFirstResponder()
         }
         
-        textField.resignFirstResponder()
+//        textField.resignFirstResponder()
         
         
         return true
@@ -733,7 +739,7 @@ extension CreatorViewController: UITextFieldDelegate, UITextViewDelegate{
         if self.view.frame.origin.y != 0 {
             self.view.frame.origin.y = 0
         }
-        MainTableView.reloadData()
+//        MainTableView.reloadData()
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
