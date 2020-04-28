@@ -37,6 +37,8 @@ class IngredientsViewController: UIViewController {
     let dataManager = fetchDataInIngredients()
     let getRecipeImageDataManager = FetchRecipeImage()
     var tempImages: [UIImage] = []
+     var mainViewController: MainPageViewController?
+     var pageViewControllerDataSource: UIPageViewControllerDataSource?
     
     weak var delegate: stopPagingDelegate?
     
@@ -140,14 +142,25 @@ extension IngredientsViewController: UICollectionViewDataSource, UICollectionVie
         }
         return false
     }
-    
-    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        delegate?.stopPaging(isPaging: false)
-    }
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        delegate?.stopPaging(isPaging: true)
-    }
+  
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+           
+         mainViewController = self.parent as? MainPageViewController
+         
+         if  mainViewController!.dataSource == nil {
+             
+             mainViewController!.dataSource = mainViewController
+         }
+     }
+     
+     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+         mainViewController = self.parent as? MainPageViewController
+         pageViewControllerDataSource = mainViewController!.dataSource
+                 
+         mainViewController!.dataSource = nil
+         mainViewController?.isPaging = false
+     }
+     
 }
 
 extension IngredientsViewController: UICollectionViewDelegateFlowLayout {
@@ -184,8 +197,8 @@ extension IngredientsViewController: UICollectionViewDelegateFlowLayout {
     //    }
     //
     
-    
-    
+    // they and self.ispaging = false in pageviewcontroller prevent from paging when collection view is scrollings
+ 
     
     
     func roundCorners(view: UIView, cornerRadius: Double) {

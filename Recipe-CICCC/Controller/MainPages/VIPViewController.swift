@@ -13,6 +13,8 @@ class VIPViewController: UIViewController {
     @IBOutlet weak var collectionview: RecipeCollectionView!
     
     let dataManager = VIPDataManager()
+     var mainViewController: MainPageViewController?
+     var pageViewControllerDataSource: UIPageViewControllerDataSource?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -95,5 +97,24 @@ extension VIPViewController :RecipeCollectionViewDelegate {
         
         navigationController?.pushViewController(vc, animated: true)
     }
+    }
+    
+    // they and self.ispaging = false in pageviewcontroller prevent from paging when collection view is scrollings
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+          
+        mainViewController = self.parent as? MainPageViewController
+        
+        if  mainViewController!.dataSource == nil {
+            
+            mainViewController!.dataSource = mainViewController
+        }
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        mainViewController = self.parent as? MainPageViewController
+        pageViewControllerDataSource = mainViewController!.dataSource
+                
+        mainViewController!.dataSource = nil
+        mainViewController?.isPaging = false
     }
 }
