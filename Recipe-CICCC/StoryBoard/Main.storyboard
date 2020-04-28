@@ -82,7 +82,7 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="wNH-OO-IJE" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" constant="34" id="0SJ-BI-nk4"/>
+                            <constraint firstItem="wNH-OO-IJE" firstAttribute="bottom" secondItem="8bC-Xf-vdC" secondAttribute="bottom" id="0SJ-BI-nk4"/>
                             <constraint firstItem="FId-yb-en9" firstAttribute="bottom" secondItem="8bC-Xf-vdC" secondAttribute="bottom" id="DH3-qK-9Mr"/>
                             <constraint firstItem="FId-yb-en9" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="H1O-pR-bsg"/>
                             <constraint firstItem="wNH-OO-IJE" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="Hd7-Nl-6We"/>

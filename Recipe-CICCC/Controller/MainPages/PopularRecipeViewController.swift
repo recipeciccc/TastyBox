@@ -20,7 +20,8 @@ class PopularRecipeViewController: UIViewController {
     let db = Firestore.firestore()
     
     let dataManager = popularDataManager()
-    
+     var mainViewController: MainPageViewController?
+     var pageViewControllerDataSource: UIPageViewControllerDataSource?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -165,7 +166,24 @@ extension PopularRecipeViewController: getDataFromFirebaseDelegate {
         tableView.reloadData()
     }
     
+   // they and self.ispaging = false in pageviewcontroller prevent from paging when collection view is scrollings
+   func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+         
+       mainViewController = self.parent as? MainPageViewController
+       
+       if  mainViewController!.dataSource == nil {
+           
+           mainViewController!.dataSource = mainViewController
+       }
+   }
    
+   func scrollViewDidScroll(_ scrollView: UIScrollView) {
+       mainViewController = self.parent as? MainPageViewController
+       pageViewControllerDataSource = mainViewController!.dataSource
+               
+       mainViewController!.dataSource = nil
+       mainViewController?.isPaging = false
+   }
 }
 
 

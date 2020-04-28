@@ -142,12 +142,11 @@ extension FollowingRecipeViewController : UICollectionViewDelegate,UICollectionV
 //    }
     
     
-    
+    // they and self.ispaging = false in pageviewcontroller prevent from paging when collection view is scrollings 
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
           
-        mainViewController = self.parent as! MainPageViewController
+        mainViewController = self.parent as? MainPageViewController
         
-//        mainViewController!.dataSource = pageViewControllerDataSource
         if  mainViewController!.dataSource == nil {
             
             mainViewController!.dataSource = mainViewController
@@ -155,15 +154,11 @@ extension FollowingRecipeViewController : UICollectionViewDelegate,UICollectionV
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        delegate?.stopPaging(isPaging: true)
-        mainViewController = self.parent as! MainPageViewController
-                pageViewControllerDataSource = mainViewController!.dataSource
+        mainViewController = self.parent as? MainPageViewController
+        pageViewControllerDataSource = mainViewController!.dataSource
                 
-        //        if  mainViewController!.dataSource != nil {
-                mainViewController!.dataSource = nil
-                    mainViewController?.isPaging = false
-//        let mainViewController = self.parent as! MainPageViewController
-//        mainViewController.dataSource = pageViewControllerDataSource
+        mainViewController!.dataSource = nil
+        mainViewController?.isPaging = false
     }
 }
 
