@@ -31,7 +31,7 @@ class CreatorViewController: UIViewController {
     
     var move = false
     var imagePicker = UIImagePickerController()
-    var mainPhoto = UIImage()
+    var mainPhoto:UIImage?
     var photoList = [UIImage]()
     
     var preparationText = [String]()
@@ -41,6 +41,8 @@ class CreatorViewController: UIViewController {
     var ingredientList = [String]()
     var amountList = [String]()
     var genres: [String] = []
+    var imagesLabelsSelected:[String] = []
+    var imagesLabels: [String] = []
     var isVIP = false
     
     var position = CGPoint()
@@ -218,11 +220,15 @@ class CreatorViewController: UIViewController {
         
     }
     
+    
+    //MARK: prepare
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? GenreSelectViewController {
             vc.delegate = self
             vc.tagsSelected = self.genres
-             vc.image = mainPhoto
+            vc.imageLabelingTagsSelected = self.imagesLabelsSelected
+            vc.imageLabelingTags = imagesLabels
+            vc.image = mainPhoto
         }
     }
     
@@ -250,7 +256,7 @@ extension CreatorViewController{
     @IBAction func SaveData(_ sender: Any) {
            print(genres)
            MainTableView.reloadData()
-           RecipeData.mainphoto.append(mainPhoto)
+        RecipeData.mainphoto.append(mainPhoto!)
            RecipeData.title.append(recipeTitle)
            RecipeData.cookingtime.append(recipeTime)
            RecipeData.servings.append(recipeServings)
@@ -261,8 +267,8 @@ extension CreatorViewController{
            
            print(RecipeData.title,RecipeData.cookingtime,RecipeData.servings, RecipeData.ingredients, RecipeData.amounts,RecipeData.stepTexts)
            //print(preparationText)
-           let cgref = mainPhoto.cgImage
-           let cim = mainPhoto.ciImage
+        let cgref = mainPhoto?.cgImage
+        let cim = mainPhoto?.ciImage
            guard let uid = Auth.auth().currentUser?.uid else{return}
            let rid = self.db.collection("recipe").document().documentID
            
@@ -275,9 +281,9 @@ extension CreatorViewController{
            }else{
                
                //if checkTextView(){
-               self.uploadImage(mainPhoto,uid,rid) { (url) in
+            self.uploadImage(mainPhoto!,uid,rid) { (url) in
                    self.recipeUpload(uid,rid,url!.absoluteString)
-                   self.uploadGenres(genres: self.genres, rid: rid)
+                self.uploadGenres(genres: self.genres, imageLabels: self.imagesLabelsSelected, rid: rid)
                    self.ingredientUpload(rid)
                    self.commentUpload(rid) // we may not need it
                }
@@ -405,10 +411,15 @@ extension CreatorViewController{
         }
     }
     
-    func uploadGenres(genres: [String], rid: String) {
+    func uploadGenres(genres: [String], imageLabels: [String], rid: String) {
         var recipeGenres: [String : [String: Bool]] = [:]
         var dictionary: [String:Bool] = [:]
+        
         for genre in genres {
+            dictionary[genre] = true
+        }
+        
+        for genre in imageLabels {
             dictionary[genre] = true
         }
         
@@ -801,11 +812,13 @@ extension CreatorViewController: UITextFieldDelegate, UITextViewDelegate{
 
 //MARK: genre delegate
 extension CreatorViewController: GenreSelectViewControllerDelegate {
-    func assignGenres(genres: [String], isVIP: Bool) {
+    func assignGenres(genres: [String], imagesLabels: [String], imagesLabelsSelected: [String], isVIP: Bool) {
+        
         self.genres = genres
         self.isVIP = isVIP
+        self.imagesLabelsSelected = imagesLabelsSelected
+        self.imagesLabels = imagesLabels
         self.saveButton.isEnabled = true
-        
     }
     
 }

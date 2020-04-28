@@ -68,13 +68,13 @@
 		69E57A3F2424185A00753243 /* MainImageRecipeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E57A3E2424185A00753243 /* MainImageRecipeTableViewCell.swift */; };
 		69E57A4124255A7D00753243 /* UserRecipeDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E57A4024255A7D00753243 /* UserRecipeDetail.swift */; };
 		69F0D39323F63C5C001BF696 /* EditorChoiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F0D39223F63C5C001BF696 /* EditorChoiceViewController.swift */; };
-		6F039DCE2454FC9D00C76516 /* savingRecipesDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F039DCD2454FC9D00C76516 /* savingRecipesDataManager.swift */; };
 		6F039DD024552CB100C76516 /* MyPageDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F039DCF24552CB100C76516 /* MyPageDataManager.swift */; };
 		6F039DD424561F3300C76516 /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F039DD324561F3300C76516 /* SettingsTableViewCell.swift */; };
 		6F039DDA245627E400C76516 /* MainSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F039DD8245627E300C76516 /* MainSettingsViewController.swift */; };
 		6F039DDB245627E400C76516 /* SettingProifleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F039DD9245627E400C76516 /* SettingProifleViewController.swift */; };
 		6F039DDD2456281800C76516 /* SettingNotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F039DDC2456281800C76516 /* SettingNotificationViewController.swift */; };
-		6F039DE12456C53200C76516 /* GenreMLKitDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F039DE02456C53200C76516 /* GenreMLKitDataManager.swift */; };
+		6F039DE42456D7FD00C76516 /* GenreMLKitDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F039DE22456D7FD00C76516 /* GenreMLKitDataManager.swift */; };
+		6F039DE52456D7FD00C76516 /* savingRecipesDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F039DE32456D7FD00C76516 /* savingRecipesDataManager.swift */; };
 		6F084075244F58D200CA7E6E /* ResultRecipesDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F084074244F58D200CA7E6E /* ResultRecipesDataManager.swift */; };
 		6F084077244F5B7E00CA7E6E /* ResultRecipeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F084076244F5B7E00CA7E6E /* ResultRecipeCollectionViewCell.swift */; };
 		6F0FBAFD23DA3E49009C1775 /* savedRecipe.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F0FBAFC23DA3E49009C1775 /* savedRecipe.storyboard */; };
@@ -260,13 +260,13 @@
 		69E57A3E2424185A00753243 /* MainImageRecipeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainImageRecipeTableViewCell.swift; sourceTree = "<group>"; };
 		69E57A4024255A7D00753243 /* UserRecipeDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRecipeDetail.swift; sourceTree = "<group>"; };
 		69F0D39223F63C5C001BF696 /* EditorChoiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorChoiceViewController.swift; sourceTree = "<group>"; };
-		6F039DCD2454FC9D00C76516 /* savingRecipesDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = savingRecipesDataManager.swift; sourceTree = SOURCE_ROOT; };
 		6F039DCF24552CB100C76516 /* MyPageDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MyPageDataManager.swift; path = "Recipe-CICCC/Controller/Profile/MyPageDataManager.swift"; sourceTree = SOURCE_ROOT; };
 		6F039DD324561F3300C76516 /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SettingsTableViewCell.swift; path = "Recipe-CICCC/StoryBoard/SettingsTableViewCell.swift"; sourceTree = SOURCE_ROOT; };
 		6F039DD8245627E300C76516 /* MainSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainSettingsViewController.swift; sourceTree = "<group>"; };
 		6F039DD9245627E400C76516 /* SettingProifleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingProifleViewController.swift; sourceTree = "<group>"; };
 		6F039DDC2456281800C76516 /* SettingNotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingNotificationViewController.swift; sourceTree = "<group>"; };
-		6F039DE02456C53200C76516 /* GenreMLKitDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreMLKitDataManager.swift; sourceTree = SOURCE_ROOT; };
+		6F039DE22456D7FD00C76516 /* GenreMLKitDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenreMLKitDataManager.swift; sourceTree = "<group>"; };
+		6F039DE32456D7FD00C76516 /* savingRecipesDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = savingRecipesDataManager.swift; sourceTree = "<group>"; };
 		6F084074244F58D200CA7E6E /* ResultRecipesDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultRecipesDataManager.swift; sourceTree = "<group>"; };
 		6F084076244F5B7E00CA7E6E /* ResultRecipeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ResultRecipeCollectionViewCell.swift; path = "Recipe-CICCC/Controller/searching/ResultRecipeCollectionViewCell.swift"; sourceTree = SOURCE_ROOT; };
 		6F0FBAFC23DA3E49009C1775 /* savedRecipe.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = savedRecipe.storyboard; sourceTree = "<group>"; };
@@ -716,9 +716,9 @@
 		6F9BB7982410BF1F00CE7F60 /* dataManager */ = {
 			isa = PBXGroup;
 			children = (
-				6F039DE02456C53200C76516 /* GenreMLKitDataManager.swift */,
 				6F039DCF24552CB100C76516 /* MyPageDataManager.swift */,
-				6F039DCD2454FC9D00C76516 /* savingRecipesDataManager.swift */,
+				6F039DE22456D7FD00C76516 /* GenreMLKitDataManager.swift */,
+				6F039DE32456D7FD00C76516 /* savingRecipesDataManager.swift */,
 				6F1528172454127700E242D9 /* ExplainationVIPDatamanager.swift */,
 				6F7393672453D9E500F77848 /* FollowingRecipeDataManager.swift */,
 				6F7393582450133C00F77848 /* ResultFetchRecipeData.swift */,
@@ -1154,8 +1154,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				6F20C3FE244DB7E3009092FD /* SearchingIngredientsViewController.swift in Sources */,
-				6F039DE12456C53200C76516 /* GenreMLKitDataManager.swift in Sources */,
 				6F20C40A244DC006009092FD /* SearchedCollectionViewCell.swift in Sources */,
+				6F039DE42456D7FD00C76516 /* GenreMLKitDataManager.swift in Sources */,
 				6F50283A2415B79D0031D204 /* RefigeratorTableViewCell.swift in Sources */,
 				6FB2983D2414E8350094F5F4 /* ShoppinglistViewController.swift in Sources */,
 				6FEC4DBC2400D26E00AB2785 /* UnderNo4TableViewCell.swift in Sources */,
@@ -1269,6 +1269,7 @@
 				40127ACE23A06E3C00260AF0 /* AppDelegate.swift in Sources */,
 				6F73935F24502C4E00F77848 /* SearchingGenreDataManager.swift in Sources */,
 				6F20C400244DB9EF009092FD /* SearchingPageViewController.swift in Sources */,
+				6F039DE52456D7FD00C76516 /* savingRecipesDataManager.swift in Sources */,
 				6FB298412414E9B70094F5F4 /* IngredientRefrigerator.swift in Sources */,
 				6F8FC6D7244E13F30092BF61 /* SearchingDataManager.swift in Sources */,
 				6F8BE78923EEAFFF00CEA348 /* searchButtonTableViewCell.swift in Sources */,
@@ -1284,7 +1285,6 @@
 				4069254B23D8346F00059C8E /* mainUserProfileTableViewCell.swift in Sources */,
 				4069254923D8346F00059C8E /* NumberTableViewCell.swift in Sources */,
 				6F4A345C2432F4E000909D7A /* FolllowingFollowerDelegate.swift in Sources */,
-				6F039DCE2454FC9D00C76516 /* savingRecipesDataManager.swift in Sources */,
 				6F788A34240F350500E46598 /* popularDataManager.swift in Sources */,
 				6F73935D24502C4200F77848 /* SearchingViewController.swift in Sources */,
 				69E57A3924235BAD00753243 /* CollectionViewInsideUserTableView.swift in Sources */,
