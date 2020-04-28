@@ -42,8 +42,10 @@
 		691F6AC923FFB0FB005D3231 /* VIPViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 691F6AC823FFB0FB005D3231 /* VIPViewController.swift */; };
 		69202F2E23FB3D33001AB4A9 /* EditorChoice.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 69202F2D23FB3D33001AB4A9 /* EditorChoice.storyboard */; };
 		692327DF242F289E003C434D /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 692327DE242F289E003C434D /* MyPageViewController.swift */; };
-		692327E1242F2B2C003C434D /* RecipeUserPostedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 692327E0242F2B2B003C434D /* RecipeUserPostedCollectionViewCell.swift */; };
 		692327E3242FED06003C434D /* RecipeDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 692327E2242FED05003C434D /* RecipeDetail.storyboard */; };
+		692327EA243543E3003C434D /* AccountSettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 692327E9243543E3003C434D /* AccountSettingTableViewCell.swift */; };
+		692327EC24354D2B003C434D /* AccountSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 692327EB24354D2B003C434D /* AccountSettingViewController.swift */; };
+		692327F22435693D003C434D /* PreferenceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 692327F12435693D003C434D /* PreferenceTableViewCell.swift */; };
 		69325D202413A9B300340F1F /* userRecipeItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69325D1F2413A9B300340F1F /* userRecipeItemTableViewCell.swift */; };
 		69325D222413A9EC00340F1F /* getUserDataDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69325D212413A9EC00340F1F /* getUserDataDelegate.swift */; };
 		69325D242413B62500340F1F /* FetchRecipeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69325D232413B62500340F1F /* FetchRecipeData.swift */; };
@@ -58,6 +60,13 @@
 		6985A53623F48B5E001257A8 /* IngredientsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6985A53523F48B5E001257A8 /* IngredientsViewController.swift */; };
 		6985A53A23F4924A001257A8 /* IngredientTitleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6985A53923F4924A001257A8 /* IngredientTitleCollectionViewCell.swift */; };
 		6985A53C23F494B0001257A8 /* IngredientImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6985A53B23F494B0001257A8 /* IngredientImageCollectionViewCell.swift */; };
+		69909F3324560DC800AACEC7 /* PreferenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69909F3224560DC800AACEC7 /* PreferenceViewController.swift */; };
+		69909F3524561F3900AACEC7 /* recipePreferenceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69909F3424561F3900AACEC7 /* recipePreferenceTableViewCell.swift */; };
+		69909F372456227A00AACEC7 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69909F362456227A00AACEC7 /* SettingViewController.swift */; };
+		69909F3B2456375C00AACEC7 /* SettingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69909F3A2456375C00AACEC7 /* SettingManager.swift */; };
+		69909F412456A85F00AACEC7 /* CreatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69909F402456A85F00AACEC7 /* CreatorViewController.swift */; };
+		69909F432456B81000AACEC7 /* Setting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 69909F422456B80F00AACEC7 /* Setting.storyboard */; };
+		69909F452456C9C700AACEC7 /* AutoSizedTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69909F442456C9C700AACEC7 /* AutoSizedTableView.swift */; };
 		699679AF23F3A25800719A36 /* ingredientRecipe.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 699679AE23F3A25800719A36 /* ingredientRecipe.storyboard */; };
 		6999A49024170ED00013BD5B /* Podfile.lock in Resources */ = {isa = PBXBuildFile; fileRef = 6999A48F24170ED00013BD5B /* Podfile.lock */; };
 		6999A49324170EE40013BD5B /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 6999A49224170EE40013BD5B /* Podfile */; };
@@ -66,13 +75,9 @@
 		69DB5BC123ECBF240027A238 /* FollowingRecipeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69DB5BC023ECBF240027A238 /* FollowingRecipeTableViewCell.swift */; };
 		69E57A3924235BAD00753243 /* CollectionViewInsideUserTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E57A3824235BAD00753243 /* CollectionViewInsideUserTableView.swift */; };
 		69E57A3F2424185A00753243 /* MainImageRecipeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E57A3E2424185A00753243 /* MainImageRecipeTableViewCell.swift */; };
-		69E57A4124255A7D00753243 /* UserRecipeDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E57A4024255A7D00753243 /* UserRecipeDetail.swift */; };
 		69F0D39323F63C5C001BF696 /* EditorChoiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69F0D39223F63C5C001BF696 /* EditorChoiceViewController.swift */; };
 		6F039DD024552CB100C76516 /* MyPageDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F039DCF24552CB100C76516 /* MyPageDataManager.swift */; };
 		6F039DD424561F3300C76516 /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F039DD324561F3300C76516 /* SettingsTableViewCell.swift */; };
-		6F039DDA245627E400C76516 /* MainSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F039DD8245627E300C76516 /* MainSettingsViewController.swift */; };
-		6F039DDB245627E400C76516 /* SettingProifleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F039DD9245627E400C76516 /* SettingProifleViewController.swift */; };
-		6F039DDD2456281800C76516 /* SettingNotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F039DDC2456281800C76516 /* SettingNotificationViewController.swift */; };
 		6F039DE42456D7FD00C76516 /* GenreMLKitDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F039DE22456D7FD00C76516 /* GenreMLKitDataManager.swift */; };
 		6F039DE52456D7FD00C76516 /* savingRecipesDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F039DE32456D7FD00C76516 /* savingRecipesDataManager.swift */; };
 		6F084075244F58D200CA7E6E /* ResultRecipesDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F084074244F58D200CA7E6E /* ResultRecipesDataManager.swift */; };
@@ -158,11 +163,14 @@
 		6FB2983D2414E8350094F5F4 /* ShoppinglistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB2983C2414E8350094F5F4 /* ShoppinglistViewController.swift */; };
 		6FB2983F2414E8970094F5F4 /* IngredientRefrigeratorDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB2983E2414E8970094F5F4 /* IngredientRefrigeratorDataManager.swift */; };
 		6FB298412414E9B70094F5F4 /* IngredientRefrigerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB298402414E9B70094F5F4 /* IngredientRefrigerator.swift */; };
+		6FB33647245800590049C964 /* SettingProifleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB33646245800590049C964 /* SettingProifleViewController.swift */; };
+		6FB336492458015A0049C964 /* MainSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB336482458015A0049C964 /* MainSettingsViewController.swift */; };
+		6FB3364C2458024E0049C964 /* SettingNotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB3364B2458024E0049C964 /* SettingNotificationViewController.swift */; };
+		6FB3364E245802A80049C964 /* RecipeUserPostedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB3364D245802A80049C964 /* RecipeUserPostedCollectionViewCell.swift */; };
 		6FB86C0923E8839800672851 /* KeyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB86C0823E8839800672851 /* KeyManager.swift */; };
 		6FBA968D243F1A8700D48C39 /* followerFollowing.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6FBA968C243F1A8700D48C39 /* followerFollowing.storyboard */; };
 		6FBA969124407BB500D48C39 /* setImageDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FBA969024407BB500D48C39 /* setImageDelegate.swift */; };
 		6FC084C72415E12600C0AE38 /* AddingIngredientRefrigeratorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC084C62415E12600C0AE38 /* AddingIngredientRefrigeratorViewController.swift */; };
-		6FC70D642429CB7D002E14DF /* CreatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC70D632429CB76002E14DF /* CreatorViewController.swift */; };
 		6FC70D6A2429CFA7002E14DF /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6FC70D692429CFA7002E14DF /* Login.storyboard */; };
 		6FCBE8C6244ECBDA00A97454 /* searchingControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FCBE8C5244ECBDA00A97454 /* searchingControllerExtensions.swift */; };
 		6FDA746B243EB85D00E3C978 /* followingUserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FDA746A243EB85D00E3C978 /* followingUserTableViewCell.swift */; };
@@ -236,6 +244,9 @@
 		692327DE242F289E003C434D /* MyPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 		692327E0242F2B2B003C434D /* RecipeUserPostedCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeUserPostedCollectionViewCell.swift; sourceTree = "<group>"; };
 		692327E2242FED05003C434D /* RecipeDetail.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = RecipeDetail.storyboard; sourceTree = "<group>"; };
+		692327E9243543E3003C434D /* AccountSettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettingTableViewCell.swift; sourceTree = "<group>"; };
+		692327EB24354D2B003C434D /* AccountSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettingViewController.swift; sourceTree = "<group>"; };
+		692327F12435693D003C434D /* PreferenceTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferenceTableViewCell.swift; sourceTree = "<group>"; };
 		69325D1F2413A9B300340F1F /* userRecipeItemTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = userRecipeItemTableViewCell.swift; sourceTree = "<group>"; };
 		69325D212413A9EC00340F1F /* getUserDataDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = getUserDataDelegate.swift; sourceTree = "<group>"; };
 		69325D232413B62500340F1F /* FetchRecipeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchRecipeData.swift; sourceTree = "<group>"; };
@@ -250,6 +261,13 @@
 		6985A53523F48B5E001257A8 /* IngredientsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientsViewController.swift; sourceTree = "<group>"; };
 		6985A53923F4924A001257A8 /* IngredientTitleCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientTitleCollectionViewCell.swift; sourceTree = "<group>"; };
 		6985A53B23F494B0001257A8 /* IngredientImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientImageCollectionViewCell.swift; sourceTree = "<group>"; };
+		69909F3224560DC800AACEC7 /* PreferenceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceViewController.swift; sourceTree = "<group>"; };
+		69909F3424561F3900AACEC7 /* recipePreferenceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = recipePreferenceTableViewCell.swift; sourceTree = "<group>"; };
+		69909F362456227A00AACEC7 /* SettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		69909F3A2456375C00AACEC7 /* SettingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingManager.swift; sourceTree = "<group>"; };
+		69909F402456A85F00AACEC7 /* CreatorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreatorViewController.swift; sourceTree = "<group>"; };
+		69909F422456B80F00AACEC7 /* Setting.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Setting.storyboard; sourceTree = "<group>"; };
+		69909F442456C9C700AACEC7 /* AutoSizedTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoSizedTableView.swift; sourceTree = "<group>"; };
 		699679AE23F3A25800719A36 /* ingredientRecipe.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ingredientRecipe.storyboard; sourceTree = "<group>"; };
 		6999A48F24170ED00013BD5B /* Podfile.lock */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile.lock; sourceTree = "<group>"; };
 		6999A49224170EE40013BD5B /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
@@ -258,13 +276,11 @@
 		69DB5BC023ECBF240027A238 /* FollowingRecipeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowingRecipeTableViewCell.swift; sourceTree = "<group>"; };
 		69E57A3824235BAD00753243 /* CollectionViewInsideUserTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewInsideUserTableView.swift; sourceTree = "<group>"; };
 		69E57A3E2424185A00753243 /* MainImageRecipeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainImageRecipeTableViewCell.swift; sourceTree = "<group>"; };
-		69E57A4024255A7D00753243 /* UserRecipeDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRecipeDetail.swift; sourceTree = "<group>"; };
 		69F0D39223F63C5C001BF696 /* EditorChoiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorChoiceViewController.swift; sourceTree = "<group>"; };
 		6F039DCF24552CB100C76516 /* MyPageDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MyPageDataManager.swift; path = "Recipe-CICCC/Controller/Profile/MyPageDataManager.swift"; sourceTree = SOURCE_ROOT; };
 		6F039DD324561F3300C76516 /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SettingsTableViewCell.swift; path = "Recipe-CICCC/StoryBoard/SettingsTableViewCell.swift"; sourceTree = SOURCE_ROOT; };
 		6F039DD8245627E300C76516 /* MainSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainSettingsViewController.swift; sourceTree = "<group>"; };
 		6F039DD9245627E400C76516 /* SettingProifleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingProifleViewController.swift; sourceTree = "<group>"; };
-		6F039DDC2456281800C76516 /* SettingNotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingNotificationViewController.swift; sourceTree = "<group>"; };
 		6F039DE22456D7FD00C76516 /* GenreMLKitDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenreMLKitDataManager.swift; sourceTree = "<group>"; };
 		6F039DE32456D7FD00C76516 /* savingRecipesDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = savingRecipesDataManager.swift; sourceTree = "<group>"; };
 		6F084074244F58D200CA7E6E /* ResultRecipesDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultRecipesDataManager.swift; sourceTree = "<group>"; };
@@ -350,11 +366,14 @@
 		6FB2983C2414E8350094F5F4 /* ShoppinglistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppinglistViewController.swift; sourceTree = "<group>"; };
 		6FB2983E2414E8970094F5F4 /* IngredientRefrigeratorDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientRefrigeratorDataManager.swift; sourceTree = "<group>"; };
 		6FB298402414E9B70094F5F4 /* IngredientRefrigerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientRefrigerator.swift; sourceTree = "<group>"; };
+		6FB33646245800590049C964 /* SettingProifleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingProifleViewController.swift; sourceTree = "<group>"; };
+		6FB336482458015A0049C964 /* MainSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainSettingsViewController.swift; sourceTree = "<group>"; };
+		6FB3364B2458024E0049C964 /* SettingNotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingNotificationViewController.swift; sourceTree = SOURCE_ROOT; };
+		6FB3364D245802A80049C964 /* RecipeUserPostedCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeUserPostedCollectionViewCell.swift; sourceTree = "<group>"; };
 		6FB86C0823E8839800672851 /* KeyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyManager.swift; sourceTree = "<group>"; };
 		6FBA968C243F1A8700D48C39 /* followerFollowing.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = followerFollowing.storyboard; sourceTree = "<group>"; };
 		6FBA969024407BB500D48C39 /* setImageDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = setImageDelegate.swift; sourceTree = "<group>"; };
 		6FC084C62415E12600C0AE38 /* AddingIngredientRefrigeratorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AddingIngredientRefrigeratorViewController.swift; path = "Recipe-CICCC/Controller/ShoppingListRefrigerator/AddingIngredientRefrigeratorViewController.swift"; sourceTree = SOURCE_ROOT; };
-		6FC70D632429CB76002E14DF /* CreatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatorViewController.swift; sourceTree = "<group>"; };
 		6FC70D692429CFA7002E14DF /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		6FCBE8C5244ECBDA00A97454 /* searchingControllerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = searchingControllerExtensions.swift; sourceTree = "<group>"; };
 		6FDA746A243EB85D00E3C978 /* followingUserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = followingUserTableViewCell.swift; sourceTree = "<group>"; };
@@ -464,6 +483,7 @@
 			isa = PBXGroup;
 			children = (
 				6FDA746C243EBA4500E3C978 /* follwerUserTableViewCell.swift */,
+				6FB3364D245802A80049C964 /* RecipeUserPostedCollectionViewCell.swift */,
 				6F27D1742429EC9700B5B071 /* FollowingUserTableViewCell.swift */,
 				692327E0242F2B2B003C434D /* RecipeUserPostedCollectionViewCell.swift */,
 				6F54A4422429D95100D936CD /* NumOfCreatorhasTableViewCell.swift */,
@@ -482,7 +502,6 @@
 			children = (
 				6F98CD23241B5A1C00C9D94B /* newRecipeDetail */,
 				4069255323D834AC00059C8E /* recipeMainTableViewCell.swift */,
-				69E57A4024255A7D00753243 /* UserRecipeDetail.swift */,
 			);
 			path = CellForRecipePage;
 			sourceTree = "<group>";
@@ -490,16 +509,13 @@
 		4069257123D8350100059C8E /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				6F039DD7245627A800C76516 /* settings */,
 				6F15281524540FC700E242D9 /* ExplainationVIPViewController.swift */,
-				6F20C3FC244DB775009092FD /* searching */,
 				6F8408C92449E1C3008B2A25 /* GenreSelectViewController.swift */,
-				6FC70D632429CB76002E14DF /* CreatorViewController.swift */,
 				6F729381242B159D00A7E4E0 /* CommentsViewController.swift */,
 				6F3FF54623DAB62D005162C7 /* StoresMapViewController.swift */,
-				4069257623D8350100059C8E /* SideMenuTableViewController.swift */,
 				4069257923D8350100059C8E /* RecipeViewController.swift */,
 				6F54A4412429D95000D936CD /* RecipeDetailViewController.swift */,
+				6F20C3FC244DB775009092FD /* searching */,
 				40A8051D23A078FA0094E52A /* LoginPart */,
 				6FC70D6F2429D215002E14DF /* Profile */,
 				6FC70D6E2429D178002E14DF /* ShoppingListRefrigerator */,
@@ -532,6 +548,17 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		692327E824353C16003C434D /* CellForSetting */ = {
+			isa = PBXGroup;
+			children = (
+				692327F12435693D003C434D /* PreferenceTableViewCell.swift */,
+				692327E9243543E3003C434D /* AccountSettingTableViewCell.swift */,
+				69909F3424561F3900AACEC7 /* recipePreferenceTableViewCell.swift */,
+				69909F442456C9C700AACEC7 /* AutoSizedTableView.swift */,
+			);
+			path = CellForSetting;
+			sourceTree = "<group>";
+		};
 		693C9FEB23FB48EF00957EF2 /* ReusableView */ = {
 			isa = PBXGroup;
 			children = (
@@ -560,6 +587,19 @@
 			path = CellForIngredientRecipe;
 			sourceTree = "<group>";
 		};
+		69909F3124560D6C00AACEC7 /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				6FB3364B2458024E0049C964 /* SettingNotificationViewController.swift */,
+				6FB336482458015A0049C964 /* MainSettingsViewController.swift */,
+				6FB33646245800590049C964 /* SettingProifleViewController.swift */,
+				69909F362456227A00AACEC7 /* SettingViewController.swift */,
+				692327EB24354D2B003C434D /* AccountSettingViewController.swift */,
+				69909F3224560DC800AACEC7 /* PreferenceViewController.swift */,
+			);
+			path = Setting;
+			sourceTree = "<group>";
+		};
 		69DB5BBF23ECBC280027A238 /* CellForFollowingRecipe */ = {
 			isa = PBXGroup;
 			children = (
@@ -567,16 +607,6 @@
 				69124FA923ECE2C100D116B4 /* followingRecipeCollectionViewCell.swift */,
 			);
 			path = CellForFollowingRecipe;
-			sourceTree = "<group>";
-		};
-		6F039DD7245627A800C76516 /* settings */ = {
-			isa = PBXGroup;
-			children = (
-				6F039DD8245627E300C76516 /* MainSettingsViewController.swift */,
-				6F039DD9245627E400C76516 /* SettingProifleViewController.swift */,
-				6F039DDC2456281800C76516 /* SettingNotificationViewController.swift */,
-			);
-			path = settings;
 			sourceTree = "<group>";
 		};
 		6F0FBB0623DA4B94009C1775 /* StoryBoard */ = {
@@ -598,6 +628,7 @@
 				6970F4E323F6302A00F94541 /* Monthly.storyboard */,
 				69202F2D23FB3D33001AB4A9 /* EditorChoice.storyboard */,
 				693CA00B23FF43CE00957EF2 /* VIP_page.storyboard */,
+				69909F422456B80F00AACEC7 /* Setting.storyboard */,
 			);
 			path = StoryBoard;
 			sourceTree = "<group>";
@@ -605,6 +636,7 @@
 		6F20C3FC244DB775009092FD /* searching */ = {
 			isa = PBXGroup;
 			children = (
+				69909F402456A85F00AACEC7 /* CreatorViewController.swift */,
 				6F73935A24502BEB00F77848 /* ResultRecipesViewController.swift */,
 				6F5344B3244D38480004F78D /* MainPageViewController.swift */,
 				6F73935C24502C4200F77848 /* SearchingViewController.swift */,
@@ -740,6 +772,7 @@
 				6F5344AF244D37930004F78D /* fetchDataInIngredients.swift */,
 				69325D272413D58400340F1F /* FetchRecipeImage.swift */,
 				6FB86C0823E8839800672851 /* KeyManager.swift */,
+				69909F3A2456375C00AACEC7 /* SettingManager.swift */,
 			);
 			path = dataManager;
 			sourceTree = "<group>";
@@ -747,6 +780,7 @@
 		6FC70D6B2429D136002E14DF /* MainPages */ = {
 			isa = PBXGroup;
 			children = (
+				4069257623D8350100059C8E /* SideMenuTableViewController.swift */,
 				69DB5BBD23ECBB930027A238 /* FollowingRecipeViewController.swift */,
 				4069257723D8350100059C8E /* MonthlyViewController.swift */,
 				6F54A43E2429D94E00D936CD /* PopularRecipeViewController.swift */,
@@ -754,6 +788,7 @@
 				691F6AC823FFB0FB005D3231 /* VIPViewController.swift */,
 				4069257323D8350100059C8E /* DiscoveryViewController.swift */,
 				6985A53523F48B5E001257A8 /* IngredientsViewController.swift */,
+				69909F3124560D6C00AACEC7 /* Setting */,
 			);
 			path = MainPages;
 			sourceTree = "<group>";
@@ -819,6 +854,7 @@
 				402CAC6923D92A37004A46F1 /* CellForRefrigenerator */,
 				4069255223D834AC00059C8E /* CellForRecipePage */,
 				69DB5BBF23ECBC280027A238 /* CellForFollowingRecipe */,
+				692327E824353C16003C434D /* CellForSetting */,
 				6FC70D762429D333002E14DF /* CellForProfile */,
 				6FDA746A243EB85D00E3C978 /* followingUserTableViewCell.swift */,
 				6F20C40B244DC013009092FD /* searching */,
@@ -841,6 +877,8 @@
 			children = (
 				6FEC4D9623FE417400AB2785 /* Assets.xcassets */,
 				6FE28B0B241E67BC00BD0FD8 /* SavedRecipesViewController.swift */,
+				6F039DD9245627E400C76516 /* SettingProifleViewController.swift */,
+				6F039DD8245627E300C76516 /* MainSettingsViewController.swift */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -971,6 +1009,7 @@
 				6F27D186242A08D900B5B071 /* apiKey.plist in Resources */,
 				6F27D17F242A054900B5B071 /* Assets.xcassets in Resources */,
 				6970F4E423F6302A00F94541 /* Monthly.storyboard in Resources */,
+				69909F432456B81000AACEC7 /* Setting.storyboard in Resources */,
 				6F8BE77523EEA96300CEA348 /* Map.storyboard in Resources */,
 				6999A49324170EE40013BD5B /* Podfile in Resources */,
 				69202F2E23FB3D33001AB4A9 /* EditorChoice.storyboard in Resources */,
@@ -1163,14 +1202,14 @@
 				6F8BE77B23EEAAAA00CEA348 /* IngredientShopping.swift in Sources */,
 				69E57A3F2424185A00753243 /* MainImageRecipeTableViewCell.swift in Sources */,
 				6F3FF54523DAB0F0005162C7 /* RefrigeratorList.swift in Sources */,
-				6FC70D642429CB7D002E14DF /* CreatorViewController.swift in Sources */,
 				6F8FC6D9244E28DA0092BF61 /* SearchingIngredientsTableViewCell.swift in Sources */,
 				6F8BE78823EEAFFF00CEA348 /* IngredietntShoppingListTableViewCell.swift in Sources */,
-				6F039DDD2456281800C76516 /* SettingNotificationViewController.swift in Sources */,
+				69909F3324560DC800AACEC7 /* PreferenceViewController.swift in Sources */,
 				4069257C23D8350100059C8E /* Image.swift in Sources */,
 				6FB2983F2414E8970094F5F4 /* IngredientRefrigeratorDataManager.swift in Sources */,
 				6F54A4492429D95400D936CD /* PopularRecipeViewController.swift in Sources */,
 				69325D242413B62500340F1F /* FetchRecipeData.swift in Sources */,
+				692327EC24354D2B003C434D /* AccountSettingViewController.swift in Sources */,
 				6FF4BE33243EDE35009C5696 /* passTheIDsDelegate.swift in Sources */,
 				6F5344B0244D37940004F78D /* fetchDataInIngredients.swift in Sources */,
 				4069255C23D834AC00059C8E /* IngredientsTableViewCell.swift in Sources */,
@@ -1178,10 +1217,8 @@
 				69325D202413A9B300340F1F /* userRecipeItemTableViewCell.swift in Sources */,
 				4069258C23D8351800059C8E /* profieTableViewCell.swift in Sources */,
 				69DB5BC123ECBF240027A238 /* FollowingRecipeTableViewCell.swift in Sources */,
-				6F039DDB245627E400C76516 /* SettingProifleViewController.swift in Sources */,
 				6F20C3F9244DB742009092FD /* SearchingGenreViewController.swift in Sources */,
 				6F8BE79423EEB80900CEA348 /* Location.swift in Sources */,
-				69E57A4124255A7D00753243 /* UserRecipeDetail.swift in Sources */,
 				6F54A4522429D95400D936CD /* SavedRecipeViewController.swift in Sources */,
 				6F8BE79523EEB80900CEA348 /* Geometry.swift in Sources */,
 				4069255923D834AC00059C8E /* recipeMainTableViewCell.swift in Sources */,
@@ -1191,14 +1228,17 @@
 				6FBA969124407BB500D48C39 /* setImageDelegate.swift in Sources */,
 				6F8BE79223EEB80900CEA348 /* Photo.swift in Sources */,
 				6F8BE77D23EEAE0400CEA348 /* AddingShoppingListViewController.swift in Sources */,
+				692327F22435693D003C434D /* PreferenceTableViewCell.swift in Sources */,
 				40A8051F23A07FF40094E52A /* EmailRegisterViewController.swift in Sources */,
 				6985A53623F48B5E001257A8 /* IngredientsViewController.swift in Sources */,
 				6F1528182454127700E242D9 /* ExplainationVIPDatamanager.swift in Sources */,
 				693CA00923FF437600957EF2 /* RecipeCollectionViewCell.swift in Sources */,
 				6FDA746B243EB85D00E3C978 /* followingUserTableViewCell.swift in Sources */,
+				6FB33647245800590049C964 /* SettingProifleViewController.swift in Sources */,
 				4069255B23D834AC00059C8E /* titleTableViewCell.swift in Sources */,
 				6F084077244F5B7E00CA7E6E /* ResultRecipeCollectionViewCell.swift in Sources */,
 				6F54A4502429D95400D936CD /* SavedRecipesCollectionViewCell.swift in Sources */,
+				69909F372456227A00AACEC7 /* SettingViewController.swift in Sources */,
 				6F8FC6DD244E2CBB0092BF61 /* fetchRecipes.swift in Sources */,
 				6F27D1752429EC9700B5B071 /* FollowingUserTableViewCell.swift in Sources */,
 				40BF229323D6AD920009FC69 /* LoginMainpageViewController.swift in Sources */,
@@ -1221,12 +1261,16 @@
 				6F788A36240F382300E46598 /* recipeStruct.swift in Sources */,
 				6F8408CC2449E2EC008B2A25 /* GenreCollectionViewCell.swift in Sources */,
 				6F729384242B1CB500A7E4E0 /* RecipeDetailDataManager.swift in Sources */,
+				69909F3524561F3900AACEC7 /* recipePreferenceTableViewCell.swift in Sources */,
+				6FB3364C2458024E0049C964 /* SettingNotificationViewController.swift in Sources */,
 				6F7D4D8B243F17ED006D0A35 /* FollowerViewController.swift in Sources */,
 				6FB86C0923E8839800672851 /* KeyManager.swift in Sources */,
 				6F27D1772429F28300B5B071 /* ServingAndTimeTableViewCell.swift in Sources */,
+				69909F452456C9C700AACEC7 /* AutoSizedTableView.swift in Sources */,
 				6F3FF54723DAB62D005162C7 /* StoresMapViewController.swift in Sources */,
 				6F54A44D2429D95400D936CD /* NumOfCreatorhasTableViewCell.swift in Sources */,
 				69325D282413D58400340F1F /* FetchRecipeImage.swift in Sources */,
+				69909F412456A85F00AACEC7 /* CreatorViewController.swift in Sources */,
 				6F8BE78A23EEAFFF00CEA348 /* SearchIngredientTableViewCell.swift in Sources */,
 				6F144E2B2445B4A300AC0520 /* RecipeCreatorPostedCollectionViewCell.swift in Sources */,
 				4069258123D8350100059C8E /* RecipeViewController.swift in Sources */,
@@ -1236,8 +1280,8 @@
 				6F54A4512429D95400D936CD /* MapTableViewCell.swift in Sources */,
 				4069255D23D834AC00059C8E /* HowToCookTableViewCell.swift in Sources */,
 				6F729386242D68CF00A7E4E0 /* RecipeDetailDelegate.swift in Sources */,
-				6F039DDA245627E400C76516 /* MainSettingsViewController.swift in Sources */,
 				402CAC6B23D92A37004A46F1 /* searchStoresTableViewCell.swift in Sources */,
+				6FB3364E245802A80049C964 /* RecipeUserPostedCollectionViewCell.swift in Sources */,
 				6F8FC6DB244E2ACD0092BF61 /* SearchingIngredientsDataManager.swift in Sources */,
 				6F039DD424561F3300C76516 /* SettingsTableViewCell.swift in Sources */,
 				6F729382242B159E00A7E4E0 /* CommentsViewController.swift in Sources */,
@@ -1245,6 +1289,7 @@
 				6F084075244F58D200CA7E6E /* ResultRecipesDataManager.swift in Sources */,
 				407023662404E82A002EFAB1 /* FirstTimeUserProfileTableViewController.swift in Sources */,
 				6F6E0C93243F0BA300AE566B /* FollowingViewController.swift in Sources */,
+				6FB336492458015A0049C964 /* MainSettingsViewController.swift in Sources */,
 				6985A53C23F494B0001257A8 /* IngredientImageCollectionViewCell.swift in Sources */,
 				6FDA746D243EBA4500E3C978 /* follwerUserTableViewCell.swift in Sources */,
 				4069254A23D8346F00059C8E /* ButtonTableViewCell.swift in Sources */,
@@ -1256,15 +1301,16 @@
 				69325D222413A9EC00340F1F /* getUserDataDelegate.swift in Sources */,
 				6F8BE79823EEB86200CEA348 /* SearchResult.swift in Sources */,
 				6FF61C61241501D8008B55B5 /* RefrigeratorViewController.swift in Sources */,
+				692327EA243543E3003C434D /* AccountSettingTableViewCell.swift in Sources */,
 				6F7393682453D9E600F77848 /* VIPDataManager.swift in Sources */,
 				6F20C3FB244DB76B009092FD /* SearchingCreatorsViewController.swift in Sources */,
-				692327E1242F2B2C003C434D /* RecipeUserPostedCollectionViewCell.swift in Sources */,
 				4069259A23D8355200059C8E /* RecipeItemCollectionViewCell.swift in Sources */,
 				6FC084C72415E12600C0AE38 /* AddingIngredientRefrigeratorViewController.swift in Sources */,
 				4069255E23D834AC00059C8E /* creatorCellRecpipeTableViewCell.swift in Sources */,
 				6F82F99A240E2E4E007B7D71 /* getDataFromFirebase.swift in Sources */,
 				6F73936124502C5C00F77848 /* FollowingDataManager.swift in Sources */,
 				692327DF242F289E003C434D /* MyPageViewController.swift in Sources */,
+				69909F3B2456375C00AACEC7 /* SettingManager.swift in Sources */,
 				6F144E31244867CD00AC0520 /* FollowingDelegate.swift in Sources */,
 				40127ACE23A06E3C00260AF0 /* AppDelegate.swift in Sources */,
 				6F73935F24502C4E00F77848 /* SearchingGenreDataManager.swift in Sources */,

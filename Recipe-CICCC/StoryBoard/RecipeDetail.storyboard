@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ebJ-Xu-dih">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ebJ-Xu-dih">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -275,12 +275,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H4L-f5-aNq">
-                                                    <rect key="frame" x="20" y="35.5" width="374" height="20.5"/>
+                                                    <rect key="frame" x="10" y="35.5" width="394" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Step" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eNd-DD-3Ge">
+
                                                     <rect key="frame" x="20" y="10" width="37.5" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                                     <color key="textColor" red="0.66666666669999997" green="0.47450980390000003" blue="0.25882352939999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -289,6 +290,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GQI-cD-sa9">
                                                     <rect key="frame" x="59.5" y="10" width="43.5" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -302,10 +304,12 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="H4L-f5-aNq" firstAttribute="top" secondItem="eNd-DD-3Ge" secondAttribute="bottom" constant="5" id="2ma-Uc-TEj"/>
+
                                                 <constraint firstItem="H4L-f5-aNq" firstAttribute="leading" secondItem="qsH-zG-mJY" secondAttribute="leading" constant="20" id="JJS-eD-rmf"/>
                                                 <constraint firstItem="eNd-DD-3Ge" firstAttribute="top" secondItem="qsH-zG-mJY" secondAttribute="top" constant="10" id="Jw0-EP-YEB"/>
                                                 <constraint firstAttribute="trailing" secondItem="H4L-f5-aNq" secondAttribute="trailing" constant="20" id="L2u-EG-Hk2"/>
                                                 <constraint firstItem="eNd-DD-3Ge" firstAttribute="leading" secondItem="qsH-zG-mJY" secondAttribute="leading" constant="20" id="Lde-fa-hqJ"/>
+
                                                 <constraint firstItem="GQI-cD-sa9" firstAttribute="leading" secondItem="eNd-DD-3Ge" secondAttribute="trailing" constant="2" id="QPF-Li-axB"/>
                                                 <constraint firstItem="6cE-ah-OAc" firstAttribute="top" secondItem="H4L-f5-aNq" secondAttribute="bottom" constant="25" id="ouE-hZ-Sme"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="6cE-ah-OAc" secondAttribute="bottom" constant="8" id="qRJ-uP-p2g"/>
@@ -509,8 +513,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="ellipses.bubble" catalog="system" width="64" height="54"/>
-        <image name="folder.badge.plus" catalog="system" width="64" height="42"/>
-        <image name="suit.heart" catalog="system" width="64" height="54"/>
+        <image name="ellipses.bubble" catalog="system" width="128" height="110"/>
+        <image name="folder.badge.plus" catalog="system" width="128" height="86"/>
+        <image name="suit.heart" catalog="system" width="128" height="109"/>
     </resources>
 </document>

@@ -134,7 +134,7 @@ class FirstTimeUserProfileTableViewController: UITableViewController, UIPickerVi
 
             
             dataManager.userRegister(userName: userNameTextField.text ?? "", eMailAddress: emailTextField.text ?? "", familySize: Int(familySizeTextField!.text!) ?? 0, cuisineType: cuisineTypeTextField!.text ?? "", accountImage: userImage!, isVIP: isVIP)
-
+            
             let Storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
             let vc = Storyboard.instantiateViewController(withIdentifier: "Discovery")
             self.navigationController?.pushViewController(vc, animated: true)
@@ -317,7 +317,7 @@ extension FirstTimeUserProfileTableViewController: getUserDataDelegate {
                 }
             }
             
-            return temp!
+            return temp ?? 0
         }
         
         self.cuisinePicker.selectRow(rowNumberCuisineType, inComponent: 0, animated: true)

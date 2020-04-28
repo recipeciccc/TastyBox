@@ -234,6 +234,8 @@ class CreatorViewController: UIViewController {
             vc.imageLabelingTagsSelected = self.imagesLabelsSelected
             vc.imageLabelingTags = imagesLabels
             vc.image = mainPhoto
+            
+            self.view.endEditing(true)
         }
     }
     
