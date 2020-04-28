@@ -24,6 +24,8 @@ class EmailRegisterViewController: UIViewController {
 //
     override func viewDidLoad() {
         roundCorners(view: SignUpBtn, cornerRadius: 5.0)
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
+        view.addGestureRecognizer(tap)
     }
     
     @IBAction func pressBackToLogin(_ sender: Any) {

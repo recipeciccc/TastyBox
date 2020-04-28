@@ -8,12 +8,15 @@
 
 import UIKit
 import Firebase
+import Photos
+import RSKImageCropper
 
 class SettingViewController: UIViewController {
     
-    @IBOutlet weak var photo: UIImageView!
     @IBOutlet weak var accounttableView: UITableView!
     @IBOutlet weak var preferenceTableVIew: UITableView!
+    @IBOutlet weak var DoneBtn: UIBarButtonItem!
+    @IBOutlet weak var photoBtn: UIButton!
     
     static var accountData = [String]()
     var accountTitle = [String]()
@@ -21,7 +24,7 @@ class SettingViewController: UIViewController {
     var allergies = [String]()
     var mealSize = [String]()
     var cuisineType = [String]()
-    
+    var userImage = UIImage()
     let userManager =  UserdataManager()
     var accountSettingVC = AccountSettingViewController()
     
@@ -48,12 +51,15 @@ class SettingViewController: UIViewController {
         preferenceTableVIew.delegate = self
         preferenceTableVIew.dataSource = self
         accountSettingVC.delegate = self
+        userManager.delegate = self
     }
     private func UIviewSetup(){
         self.accounttableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         self.preferenceTableVIew.separatorStyle = UITableViewCell.SeparatorStyle.none
         accounttableView.isHidden = true
         preferenceTableVIew.isHidden = true
+        DoneBtn.isEnabled = false
+        DoneBtn.title = ""
     }
     private func userDataSetup(){
         let name = Auth.auth().currentUser?.displayName
@@ -63,10 +69,10 @@ class SettingViewController: UIViewController {
         SettingViewController.accountData[1]  = email ?? ""
     }
     private func photoSetup(){
-        self.photo?.contentMode = .scaleAspectFit
-        self.photo.layer.masksToBounds = false
-        self.photo.layer.cornerRadius = self.photo.bounds.width / 2
-        self.photo.clipsToBounds = true
+        self.photoBtn?.contentMode = .scaleAspectFit
+        self.photoBtn.layer.masksToBounds = false
+        self.photoBtn.layer.cornerRadius = self.photoBtn.bounds.width / 2
+        self.photoBtn.clipsToBounds = true
         userManager.getUserImage(uid: Auth.auth().currentUser!.uid)
         userManager.delegate = self
     }
@@ -77,7 +83,40 @@ class SettingViewController: UIViewController {
     @objc func closeKeyboard(){
            self.view.endEditing(true)
     }
-
+    
+    
+    @IBAction func ImageEditingIsDone(_ sender: Any) {
+        userManager.updateUserImage(Img: userImage)
+        DoneBtn.isEnabled = false
+        DoneBtn.title = ""
+    }
+ 
+    @IBAction func showChoice(_ sender: Any) {
+        DoneBtn.isEnabled = true
+        DoneBtn.title = "Done"
+            let actionSheet = UIAlertController(title: "Your image From...", message: "choose your camera roll or camera", preferredStyle: .actionSheet)
+            
+            let cameraRollAction = UIAlertAction(title: "Camera Roll", style: .default, handler: { action in
+                self.selectPicture()
+            })
+            
+            let cameraAction = UIAlertAction(title: "Camera", style: .default, handler: { action in
+                
+                self.takeYourImage()
+            })
+            
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
+                self.dismiss(animated: true, completion: nil)
+            })
+            actionSheet.addAction(cameraRollAction)
+            actionSheet.addAction(cameraAction)
+            actionSheet.addAction(cancelAction)
+            
+            present(actionSheet, animated: true, completion: nil)
+            
+    }
+    
+    
     @IBAction func accountBtnClick(_ sender: Any) {
         UIView.animate(withDuration: 0.3) {
             self.accounttableView.isHidden = !self.accounttableView.isHidden
@@ -89,6 +128,56 @@ class SettingViewController: UIViewController {
         self.preferenceTableVIew.isHidden = !self.preferenceTableVIew.isHidden
         }
     }
+    
+    
+    func selectPicture() {
+           
+           PHPhotoLibrary.requestAuthorization { status in
+               switch status {
+               case .authorized:
+                   
+                   DispatchQueue.main.async {
+                       let pickerView = UIImagePickerController()
+                       pickerView.sourceType = .photoLibrary
+                       pickerView.delegate = self
+                       
+                       self.present(pickerView, animated: true)
+                   }
+                   
+                   
+               case .restricted:
+                   break
+               case .denied:
+                   DispatchQueue.main.async {
+                       self.showAlert()
+                   }
+                   
+               default:
+                   break
+               }
+           }
+       }
+       
+       func takeYourImage() {
+           if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
+               let pickerView = UIImagePickerController()
+               pickerView.sourceType = .camera
+               pickerView.delegate = self
+               self.present(pickerView, animated: true)
+           }
+       }
+
+       func showAlert() {
+           let alert = UIAlertController(title: "Allow to access your photo library",
+                                         message: "This app need to access your photo library. In order to allow that, \ngo to Settings -> Recipe-CICCC -> Photos",
+                                         preferredStyle: .alert)
+           
+           let cancelButton = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+           
+           alert.addAction(cancelButton)
+          
+           present(alert, animated: true, completion: nil)
+       }
     
 
 }
@@ -159,11 +248,76 @@ extension SettingViewController: SaveChangeDelegate{
     }
 }
 
-extension SettingViewController: getUserDataDelegate{
+extension SettingViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    //　撮影が完了時した時に呼ばれる
+    func imagePickerController(_ imagePicker: UIImagePickerController,
+                               didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        let image : UIImage = info[.originalImage] as! UIImage
+        
+        imagePicker.dismiss(animated: false, completion: { () -> Void in
+            
+            var imageCropVC : RSKImageCropViewController!
+            
+            imageCropVC = RSKImageCropViewController(image: image, cropMode: RSKImageCropMode.circle)
+            
+            imageCropVC.moveAndScaleLabel.text = "Triming"
+            imageCropVC.cancelButton.setTitle("Cancel", for: .normal)
+            imageCropVC.chooseButton.setTitle("Done", for: .normal)
+            
+            imageCropVC.delegate = self
+            
+            self.present(imageCropVC, animated: true)
+        })
+    }
+}
+
+extension SettingViewController:  RSKImageCropViewControllerDelegate {
+    
+    func imageCropViewController(_ controller: RSKImageCropViewController, didCropImage croppedImage: UIImage, usingCropRect cropRect: CGRect, rotationAngle: CGFloat) {
+        
+        
+        //もし円形で画像を切り取りし、その画像自体を加工などで利用したい場合
+        if controller.cropMode == .circle {
+            UIGraphicsBeginImageContext(croppedImage.size)
+            let layerView = UIImageView(image: croppedImage)
+            layerView.frame.size = croppedImage.size
+            layerView.layer.cornerRadius = layerView.frame.size.width * 0.5
+            layerView.clipsToBounds = true
+            let context = UIGraphicsGetCurrentContext()!
+            layerView.layer.render(in: context)
+            let capturedImage = UIGraphicsGetImageFromCurrentImageContext()!
+            UIGraphicsEndImageContext()
+            let pngData = capturedImage.pngData()!
+            //このImageは円形で余白は透過です。
+            let png = UIImage(data: pngData)!
+            
+            
+            UserDefaults.standard.set(pngData, forKey: "userImage")
+            userImage = png
+            photoBtn.setBackgroundImage(png, for: .normal)
+            dismiss(animated: true, completion: nil)
+        }
+    }
+    
+    //トリミング画面でキャンセルを押した時
+    func imageCropViewControllerDidCancelCrop(_ controller: RSKImageCropViewController) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+}
+
+
+extension SettingViewController: getUserDataDelegate {
     func gotUserData(user: User) {
     }
     
     func assignUserImage(image: UIImage) {
-        self.photo.image = image
+        self.userImage = image
+        self.photoBtn.setBackgroundImage(image, for: .normal)
     }
+    
 }
+
+
+
