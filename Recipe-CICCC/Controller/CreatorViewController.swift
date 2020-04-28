@@ -89,7 +89,6 @@ class CreatorViewController: UIViewController {
     
     @objc func handleTap(_ sender: UITapGestureRecognizer) {
         self.view.endEditing(true)
-        print(sender)
     }
     
     //MARK: IBOutlet
@@ -716,16 +715,17 @@ extension CreatorViewController: UITextFieldDelegate, UITextViewDelegate{
 //MARK: TextField
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
-        let tag = textField.tag / 100
-        let indexPathRow = textField.tag % (textField.tag / 10)
-        if let nextField = self.MainTableView.subviews[tag].viewWithTag(textField.tag + 10 + indexPathRow) as? UITextField {
-            nextField.becomeFirstResponder()
-        } else {
-//            textField.resignFirstResponder()
-        }
-        
-//        textField.resignFirstResponder()
-        
+        self.view.endEditing(true)
+//        let tag = textField.tag / 100
+//        let indexPathRow = textField.tag % (textField.tag / 10)
+//        if let nextField = self.MainTableView.subviews[tag].viewWithTag(textField.tag + 10 + indexPathRow) as? UITextField {
+//            nextField.becomeFirstResponder()
+//        } else {
+////            textField.resignFirstResponder()
+//        }
+//
+////        textField.resignFirstResponder()
+//
         
         return true
         
@@ -736,10 +736,14 @@ extension CreatorViewController: UITextFieldDelegate, UITextViewDelegate{
         
     }
     func textFieldDidEndEditing(_ textField: UITextField) {
-        if self.view.frame.origin.y != 0 {
-            self.view.frame.origin.y = 0
+        
+        if !textField.isFirstResponder {
+        
+//        if self.view.frame.origin.y != 0 {
+//            self.view.frame.origin.y = 0
+//        }
         }
-//        MainTableView.reloadData()
+
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {

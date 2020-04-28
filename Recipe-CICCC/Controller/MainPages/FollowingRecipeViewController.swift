@@ -43,6 +43,7 @@ class FollowingRecipeViewController: UIViewController {
         
         self.followingTableView.tableFooterView = UIView()
         
+      
     }
     
 }
@@ -129,27 +130,41 @@ extension FollowingRecipeViewController : UICollectionViewDelegate,UICollectionV
         navigationController?.pushViewController(recipeDetailVC, animated: true)
     }
     
-    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-//        delegate?.stopPaging(isPaging: false)
-        mainViewController = self.parent as! MainPageViewController
-        pageViewControllerDataSource = mainViewController!.dataSource
-        mainViewController!.dataSource = nil
-        
-    }
+//    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+////        delegate?.stopPaging(isPaging: false)
+//        mainViewController = self.parent as! MainPageViewController
+//        pageViewControllerDataSource = mainViewController!.dataSource
+//
+////        if  mainViewController!.dataSource != nil {
+//        mainViewController!.dataSource = nil
+//            mainViewController?.isPaging = false
+////        }
+//    }
+    
+    
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
           
         mainViewController = self.parent as! MainPageViewController
         
-        mainViewController!.dataSource = pageViewControllerDataSource
+//        mainViewController!.dataSource = pageViewControllerDataSource
+        if  mainViewController!.dataSource == nil {
+            
+            mainViewController!.dataSource = mainViewController
+        }
     }
     
-//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-////        delegate?.stopPaging(isPaging: true)
-//
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        delegate?.stopPaging(isPaging: true)
+        mainViewController = self.parent as! MainPageViewController
+                pageViewControllerDataSource = mainViewController!.dataSource
+                
+        //        if  mainViewController!.dataSource != nil {
+                mainViewController!.dataSource = nil
+                    mainViewController?.isPaging = false
 //        let mainViewController = self.parent as! MainPageViewController
 //        mainViewController.dataSource = pageViewControllerDataSource
-//    }
+    }
 }
 
 extension FollowingRecipeViewController : FollowingRecipeDataManagerDelegate {

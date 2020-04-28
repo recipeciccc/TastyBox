@@ -20,6 +20,7 @@ class MainPageViewController: UIPageViewController {
         
         // Do any additional setup after loading the view.
         self.dataSource = self
+        self.isPaging = false
         // PageViewControllerにViewControllerをセット
         
         // tapによるページめくりを担当するインスタンスを取得
