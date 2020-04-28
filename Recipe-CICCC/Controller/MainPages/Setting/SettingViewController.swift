@@ -13,11 +13,10 @@ import RSKImageCropper
 
 class SettingViewController: UIViewController {
     
-    @IBOutlet weak var photo: UIImageView!
     @IBOutlet weak var accounttableView: UITableView!
     @IBOutlet weak var preferenceTableVIew: UITableView!
     @IBOutlet weak var DoneBtn: UIBarButtonItem!
-    
+    @IBOutlet weak var photoBtn: UIButton!
     
     static var accountData = [String]()
     var accountTitle = [String]()
@@ -59,6 +58,8 @@ class SettingViewController: UIViewController {
         self.preferenceTableVIew.separatorStyle = UITableViewCell.SeparatorStyle.none
         accounttableView.isHidden = true
         preferenceTableVIew.isHidden = true
+        DoneBtn.isEnabled = false
+        DoneBtn.title = ""
     }
     private func userDataSetup(){
         let name = Auth.auth().currentUser?.displayName
@@ -68,10 +69,10 @@ class SettingViewController: UIViewController {
         SettingViewController.accountData[1]  = email ?? ""
     }
     private func photoSetup(){
-        self.photo?.contentMode = .scaleAspectFit
-        self.photo.layer.masksToBounds = false
-        self.photo.layer.cornerRadius = self.photo.bounds.width / 2
-        self.photo.clipsToBounds = true
+        self.photoBtn?.contentMode = .scaleAspectFit
+        self.photoBtn.layer.masksToBounds = false
+        self.photoBtn.layer.cornerRadius = self.photoBtn.bounds.width / 2
+        self.photoBtn.clipsToBounds = true
         userManager.getUserImage(uid: Auth.auth().currentUser!.uid)
         userManager.delegate = self
     }
@@ -86,11 +87,13 @@ class SettingViewController: UIViewController {
     
     @IBAction func ImageEditingIsDone(_ sender: Any) {
         userManager.updateUserImage(Img: userImage)
+        DoneBtn.isEnabled = false
+        DoneBtn.title = ""
     }
-    @IBOutlet weak var photoBtn: UIButton!
-    
+ 
     @IBAction func showChoice(_ sender: Any) {
-            
+        DoneBtn.isEnabled = true
+        DoneBtn.title = "Done"
             let actionSheet = UIAlertController(title: "Your image From...", message: "choose your camera roll or camera", preferredStyle: .actionSheet)
             
             let cameraRollAction = UIAlertAction(title: "Camera Roll", style: .default, handler: { action in
@@ -134,14 +137,10 @@ class SettingViewController: UIViewController {
                case .authorized:
                    
                    DispatchQueue.main.async {
-                       // 写真を選ぶビュー
                        let pickerView = UIImagePickerController()
-                       // 写真の選択元をカメラロールにする
-                       // 「.camera」にすればカメラを起動できる
                        pickerView.sourceType = .photoLibrary
-                       // デリゲート
                        pickerView.delegate = self
-                       // ビューに表示
+                       
                        self.present(pickerView, animated: true)
                    }
                    
@@ -150,12 +149,10 @@ class SettingViewController: UIViewController {
                    break
                case .denied:
                    DispatchQueue.main.async {
-                       // アラート表示
                        self.showAlert()
                    }
                    
                default:
-                   // place for .notDetermined - in this callback status is already determined so should never get here
                    break
                }
            }
@@ -163,32 +160,22 @@ class SettingViewController: UIViewController {
        
        func takeYourImage() {
            if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
-               // 写真を選ぶビュー
                let pickerView = UIImagePickerController()
-               // 写真の選択元をカメラロールにする
-               // 「.camera」にすればカメラを起動できる
                pickerView.sourceType = .camera
-               // デリゲート
                pickerView.delegate = self
-               // ビューに表示
                self.present(pickerView, animated: true)
            }
        }
 
-       
-       /// アラート表示
        func showAlert() {
-           
            let alert = UIAlertController(title: "Allow to access your photo library",
                                          message: "This app need to access your photo library. In order to allow that, \ngo to Settings -> Recipe-CICCC -> Photos",
                                          preferredStyle: .alert)
            
            let cancelButton = UIAlertAction(title: "OK", style: .cancel, handler: nil)
            
-           // アラートにボタン追加
            alert.addAction(cancelButton)
-           
-           // アラート表示
+          
            present(alert, animated: true, completion: nil)
        }
     
@@ -326,11 +313,8 @@ extension SettingViewController: getUserDataDelegate {
     }
     
     func assignUserImage(image: UIImage) {
-        self.photo.image = image
-        
         self.userImage = image
         self.photoBtn.setBackgroundImage(image, for: .normal)
-         
     }
     
 }
