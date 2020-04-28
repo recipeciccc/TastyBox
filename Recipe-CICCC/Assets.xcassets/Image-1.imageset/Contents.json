@@ -1,0 +1,21 @@
+{
+  "images" : [
+    {
+      "filename" : "71058PIC3euJE9q8shf45_PIC2018.png!qt324new_nowater.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

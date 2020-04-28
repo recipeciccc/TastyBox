@@ -17,9 +17,9 @@ class LoginMainpageViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.title = ""
-        
+//         navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.9984802604, green: 0.9880111814, blue: 0.655043602, alpha: 1)
+//        self.navigationController!.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.orange]
+        roundCorners(view: login, cornerRadius: 5.0)
         GIDSignIn.sharedInstance()?.delegate = self
         GIDSignIn.sharedInstance()?.presentingViewController = self
         // Do any additional setup after loading the view.
@@ -242,6 +242,12 @@ extension LoginMainpageViewController: GIDSignInDelegate {
     
 }
 
+extension LoginMainpageViewController{
+    func roundCorners(view: UIView, cornerRadius: Double) {
+        view.layer.cornerRadius = CGFloat(cornerRadius)
+        view.clipsToBounds = true
+    }
+}
 //    @IBAction func otherWayToLogin(_ sender: Any) {
 //        if Auth.auth().currentUser != nil {
 //            do {

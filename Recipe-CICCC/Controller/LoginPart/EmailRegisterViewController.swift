@@ -15,15 +15,20 @@ class EmailRegisterViewController: UIViewController {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var confirmPasswordTextField: UITextField!
+    @IBOutlet weak var SignUpBtn: UIButton!
     
 //    @IBAction func pressBackToLoginMainSegue(_ sender: UIBarButtonItem) {
 //        self.performSegue(withIdentifier: "LoginMain", sender: nil)
 //    }
 //
 //
+    override func viewDidLoad() {
+        roundCorners(view: SignUpBtn, cornerRadius: 5.0)
+    }
     
     @IBAction func pressBackToLogin(_ sender: Any) {
-        self.performSegue(withIdentifier: "LoginMainPage", sender: nil)
+        self.navigationController?.popViewController(animated: true)
+       // self.performSegue(withIdentifier: "LoginMainPage", sender: nil)
     }
     
     
@@ -88,4 +93,9 @@ class EmailRegisterViewController: UIViewController {
     }
     
 }
-
+extension EmailRegisterViewController{
+    func roundCorners(view: UIView, cornerRadius: Double) {
+        view.layer.cornerRadius = CGFloat(cornerRadius)
+        view.clipsToBounds = true
+    }
+}
