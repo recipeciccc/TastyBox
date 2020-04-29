@@ -134,19 +134,10 @@ extension RefrigeratorViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        
-        //        if indexPath.section == 0 {
-        //            let cell = (tableView.dequeueReusableCell(withIdentifier: "search stores", for: indexPath) as? searchStoresTableViewCell)!
-        //
-        //            // Configure the cell...
-        //
-        //            return cell
-        //        }
-        //        else if indexPath.section == 1 {
-        
         let cell = (tableView.dequeueReusableCell(withIdentifier: "ingredient", for: indexPath) as? IngredientsTableViewCell)!
         
         // Configure the cell...
+        cell.contentView.backgroundColor = .white
         cell.nameIngredientsLabel.text = ingredients[indexPath.row].name
         cell.amountIngredientsLabel.text = ingredients[indexPath.row].amount
         

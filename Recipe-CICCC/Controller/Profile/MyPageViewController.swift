@@ -54,6 +54,11 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         dataManager.getSavedRecipes()
     }
     
+    @IBAction func editProfile(_ sender: UIButton) {
+        
+        let vc = UIStoryboard(name: "Setting", bundle: nil).instantiateViewController(identifier: "settingPage")
+        navigationController?.pushViewController(vc, animated: true)
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let nextVC = segue.destination as? followerFollowingPageViewController {
