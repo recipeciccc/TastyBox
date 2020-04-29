@@ -15,10 +15,59 @@ class LoginMainpageViewController: UIViewController, UITextFieldDelegate {
     
     var userImage: UIImage = #imageLiteral(resourceName: "imageFile")
     
+    override func loadView() {
+        super.loadView()
+         
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-//         navigationController?.navigationBar.barTintColor = #colorLiteral(red: 0.9984802604, green: 0.9880111814, blue: 0.655043602, alpha: 1)
-//        self.navigationController!.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.orange]
+        
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
+        view.backgroundColor = #colorLiteral(red: 0.9977325797, green: 0.9879661202, blue: 0.7689270973, alpha: 1)
+        view.tag = 100
+        
+//        let label = UILabel(frame: CGRect(x: 0, y: -20, width: self.view.frame.width, height: UILabel().frame.height))
+//             label.text = "Loading..."
+//             label.textAlignment = .center
+//             label.textColor = #colorLiteral(red: 0.6666666667, green: 0.4745098039, blue: 0.2588235294, alpha: 1)
+//             label.font = UIFont(name:"AppleSDGothicNeo-SemiBold", size: 20.0)
+//
+//             view.addSubview(label)
+//
+        
+        let  indicator = UIActivityIndicatorView()
+        indicator.transform = CGAffineTransform(scaleX: 2, y: 2)
+        
+        indicator.color = .orange
+        indicator.startAnimating()
+        
+        view.addSubview(indicator)
+        indicator.center = self.view.center
+        
+     
+        self.view.addSubview(view)
+        
+        if Auth.auth().currentUser != nil {
+                 // User is signed in.
+//            if let viewWithTag = self.view.viewWithTag(100) {
+//                viewWithTag.removeFromSuperview()
+//            }else{
+//                print("No!")
+//            }
+            
+            let Storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = Storyboard.instantiateViewController(withIdentifier: "Discovery")
+            self.navigationController?.pushViewController(vc, animated: true)
+                   
+        } else {
+            if let viewWithTag = self.view.viewWithTag(100) {
+                viewWithTag.removeFromSuperview()
+            }else{
+                print("No!")
+            }
+        }
+        
         roundCorners(view: login, cornerRadius: 5.0)
         GIDSignIn.sharedInstance()?.delegate = self
         GIDSignIn.sharedInstance()?.presentingViewController = self
@@ -34,9 +83,6 @@ class LoginMainpageViewController: UIViewController, UITextFieldDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
-    
-    
-    
     
     @IBAction func unwindtoLoginMain(segue: UIStoryboardSegue) {
         dismiss(animated: true, completion: nil)

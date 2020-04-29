@@ -69,6 +69,7 @@ class GenreSelectViewController: UIViewController {
             uiView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height:  self.view.frame.size.height))
             uiView.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 0.5)
             uiView.tag = 100
+            indicator.transform = CGAffineTransform(scaleX: 2, y: 2)
             
             indicator.hidesWhenStopped = true
             indicator.color = .orange
