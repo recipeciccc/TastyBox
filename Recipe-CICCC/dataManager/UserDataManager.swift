@@ -359,7 +359,23 @@ class UserdataManager {
                 
                 if let imgData = data {
                     image = UIImage(data: imgData)!
-                    self.delegate?.assignUserImage(image: image!)
+                self.delegate?.assignUserImage(image: image!)
+                }
+            }
+        }
+        
+    }
+    
+    func updateUserImage(Img: UIImage){
+        let uid = Auth.auth().currentUser?.uid
+        let imageRef = storageRef.child("user/\(String(describing: uid!))/userAccountImage")
+        if let uploadData = Img.jpegData(compressionQuality: 0.1){
+            imageRef.putData(uploadData, metadata: nil) { (metaData, err) in
+                 if err != nil {
+                    print(err.debugDescription)
+                }
+                else {
+                    print(metaData)
                 }
             }
         }

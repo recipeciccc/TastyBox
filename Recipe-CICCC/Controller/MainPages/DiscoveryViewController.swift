@@ -199,7 +199,7 @@ class DiscoveryViewController: UIViewController {
     }
     @objc func showContact(){
         print("show Contact")
-        performSegue(withIdentifier: "contact", sender: nil)
+        performSegue(withIdentifier: "contactUs", sender: nil)
     }
     @objc func showAbout(){
         print("show About")

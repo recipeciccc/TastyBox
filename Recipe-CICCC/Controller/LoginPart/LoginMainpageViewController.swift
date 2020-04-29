@@ -67,7 +67,7 @@ class LoginMainpageViewController: UIViewController, UITextFieldDelegate {
                 print("No!")
             }
         }
-        
+
         roundCorners(view: login, cornerRadius: 5.0)
         GIDSignIn.sharedInstance()?.delegate = self
         GIDSignIn.sharedInstance()?.presentingViewController = self

@@ -12,6 +12,8 @@ import Firebase
 class ResetPasswordViewController: UIViewController {
     override func viewDidLoad() {
         roundCorners(view: submitBtn, cornerRadius: 5.0)
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
+        view.addGestureRecognizer(tap)
     }
     @IBOutlet weak var submitBtn: UIButton!
     @IBOutlet weak var emailTextField: UITextField!
