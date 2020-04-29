@@ -30,6 +30,8 @@ class MyPageDataManager {
     
     func findFollowerFollowing(id: String?) {
         var uid = (Auth.auth().currentUser?.uid)!
+        followingsIDs.removeAll()
+        followersIDs.removeAll()
         
         if id != nil {
             uid = id!
@@ -71,6 +73,7 @@ class MyPageDataManager {
     
     
     func getSavedRecipes() {
+        savedRecipesIDs.removeAll()
               db.collection("user").document(uid).collection("savedRecipes").order(by: "savedTime", descending: true).addSnapshotListener {
                   querySnapshot, error in
                   if error != nil {

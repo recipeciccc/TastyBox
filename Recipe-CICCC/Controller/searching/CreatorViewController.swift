@@ -234,6 +234,7 @@ class CreatorViewController: UIViewController {
             vc.imageLabelingTagsSelected = self.imagesLabelsSelected
             vc.imageLabelingTags = imagesLabels
             vc.image = mainPhoto
+            vc.isHighlightVIP = isVIP
             
             self.view.endEditing(true)
         }
@@ -290,7 +291,7 @@ extension CreatorViewController{
                //if checkTextView(){
             self.uploadImage(mainPhoto!,uid,rid) { (url) in
                    self.recipeUpload(uid,rid,url!.absoluteString)
-                self.uploadGenres(genres: self.genres, imageLabels: self.imagesLabelsSelected, rid: rid)
+                self.uploadGenres(genres: self.genres, ingredients: self.ingredientList, imageLabels: self.imagesLabelsSelected, rid: rid)
                    self.ingredientUpload(rid)
                    self.commentUpload(rid) // we may not need it
                }
@@ -418,7 +419,7 @@ extension CreatorViewController{
         }
     }
     
-    func uploadGenres(genres: [String], imageLabels: [String], rid: String) {
+    func uploadGenres(genres: [String], ingredients: [String], imageLabels: [String], rid: String) {
         var recipeGenres: [String : [String: Bool]] = [:]
         var dictionary: [String:Bool] = [:]
         
@@ -428,6 +429,10 @@ extension CreatorViewController{
         
         for genre in imageLabels {
             dictionary[genre] = true
+        }
+        
+        for ingredient in ingredients {
+            dictionary[ingredient.capitalized] = true
         }
         
         recipeGenres["genres"] = dictionary

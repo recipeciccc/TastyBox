@@ -112,7 +112,7 @@ extension PopularRecipeViewController: UITableViewDataSource {
         
         cell.selectionStyle = .none
         
-        cell.rankingLabel.text = "No. \(indexPath.row + 3)"
+        cell.rankingLabel.text = "No. \(indexPath.row + 4)"
         cell.numLikeLabel.text = "\(recipes[indexPath.row + 3].like)"
         cell.titleLabel.text = recipes[indexPath.row + 3].title
         cell.recipeImageView.image = images[indexPath.row + 3]

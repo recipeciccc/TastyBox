@@ -31,7 +31,7 @@ class RecipeDetailViewController: UIViewController {
     let userDataManager = UserdataManager()
     
     var instructionImgs = [UIImage]()
-    
+    let uid = Auth.auth().currentUser?.uid
     
     
     override func viewDidLoad() {
@@ -45,7 +45,7 @@ class RecipeDetailViewController: UIViewController {
         userDataManager.delegate = self
         userDataManager.recipeDetailDelegate = self
         
-        if recipe!.isVIPRecipe! {
+        if recipe!.isVIPRecipe! && recipe?.userID != uid {
             userDataManager.checkVIP()
         } else {
             

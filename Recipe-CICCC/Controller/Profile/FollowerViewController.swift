@@ -17,12 +17,36 @@ class FollowerViewController: UIViewController {
     var followers:[User] = []
     var followersImages: [UIImage] = []
     let userDataManager = UserdataManager()
+    var searchedFollowers:[User] = []
+    var searchedFollowersImages:[UIImage] = []
+    
+    var searchingWord : String = "" {
+                didSet {
+                    
+                    guard searchingWord != "" else {
+                        return
+                    }
+                    
+                   searchedFollowersImages.removeAll()
+                   searchedFollowers.removeAll()
+                   
+                   for (index, user) in followers.enumerated() {
+                       
+                       if user.name.lowercased().contains(searchingWord.lowercased()) {
+                           searchedFollowers.append(user)
+                           searchedFollowersImages.append(followersImages[index])
+                       }
+                   }
+                  
+                }
+            }
+       
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-        self.searchBar.delegate = self as? UISearchBarDelegate
+        self.searchBar.delegate = self
         self.tableView.dataSource = self
         self.tableView.delegate = self
         
@@ -119,5 +143,45 @@ extension FollowerViewController: getUserDataDelegate {
     func assignUserImage(image: UIImage) {
         self.followersImages.append(image)
         self.tableView.reloadData()
+    }
+}
+
+
+extension FollowerViewController: UISearchBarDelegate {
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchBar.showsCancelButton = true
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+//        let pageController = self.children[0] as! SearchingPageViewController
+        searchingWord = searchBar.text!
+        
+        if searchingWord == "" {
+            searchedFollowers.removeAll()
+            searchedFollowersImages.removeAll()
+          
+            searchedFollowersImages = followersImages
+            searchedFollowers = followers
+            
+            tableView.reloadData()
+        }
+        
+         tableView.reloadData()
+        
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.showsCancelButton = false
+        searchBar.resignFirstResponder()
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        
+        searchBar.showsCancelButton = false
+        searchingWord = searchBar.text!
+        
+        searchBar.resignFirstResponder()
     }
 }
