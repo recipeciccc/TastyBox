@@ -131,9 +131,9 @@ class StoresMapViewController: UIViewController{
         
         locationManager.startUpdatingLocation()
       
-        let camera = GMSCameraPosition.camera(withLatitude: locationManager.location!.coordinate.latitude, longitude: locationManager.location!.coordinate.longitude, zoom: 15);
+                let camera = GMSCameraPosition.camera(withLatitude: locationManager.location!.coordinate.latitude, longitude: locationManager.location!.coordinate.longitude, zoom: 15);
         
-        mapView = GMSMapView.map(withFrame: self.view.bounds, camera: camera)
+        mapView = GMSMapView.map(withFrame: self.view.bounds, camera: camera)           
         mapView.isMyLocationEnabled = true
         mapView.settings.myLocationButton = true
         mapView.delegate = self
