@@ -15,6 +15,7 @@ protocol recipeDetailDelegate: class {
     func isVIP(isVIP: Bool)
 }
 
+
 class UserdataManager {
     
     let db = Firestore.firestore()
@@ -337,6 +338,25 @@ class UserdataManager {
                     
                     image = UIImage(data: imgData)!
                     self.delegate?.assignUserImage(image: image!)
+                }
+            }
+        }
+    }
+    
+    func getFollwersFollowingsImage(uid: String, index: Int) {
+        let imageRef = Storage.storage().reference().child("user/\(uid)/userAccountImage")
+        var image: UIImage?
+        // Fetch the download URL
+        imageRef.getData(maxSize: 1 * 1024 * 1024) { data, error in
+            if error != nil {
+                print(error?.localizedDescription as Any)
+            } else {
+                if let imgData = data {
+                    
+                    print("imageRef: \(imageRef)")
+                    
+                    image = UIImage(data: imgData)!
+                    self.delegateFollowerFollowing?.assginFollowersFollowingsImages(image: image!, index: index)
                 }
             }
         }

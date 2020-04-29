@@ -31,7 +31,7 @@ class RecipeDetailViewController: UIViewController {
     let userDataManager = UserdataManager()
     
     var instructionImgs = [UIImage]()
-    
+    let uid = Auth.auth().currentUser?.uid
     
     
     override func viewDidLoad() {
@@ -45,7 +45,7 @@ class RecipeDetailViewController: UIViewController {
         userDataManager.delegate = self
         userDataManager.recipeDetailDelegate = self
         
-        if recipe!.isVIPRecipe! {
+        if recipe!.isVIPRecipe! && recipe?.userID != uid {
             userDataManager.checkVIP()
         } else {
             
@@ -194,27 +194,31 @@ extension RecipeDetailViewController: UITableViewDataSource,UITableViewDelegate{
         case 4:
             let cell = (tableView.dequeueReusableCell(withIdentifier: "creator") as? creatorCellRecpipeTableViewCell)!
             
+            
             cell.delegate = self
-            //            cell.imgCreator.setImage(creator.image, for: .normal)
-            if userProfile == true{
+            
+            if creator?.userID == uid {
                 cell.followBtn.isHidden = true
+            } else {
+                cell.followBtn.isHidden = false
+            }
+            
+            if userProfile == true{
                 let creatorName = Auth.auth().currentUser?.displayName
                 cell.creatorNameButton.setTitle(creatorName!, for: .normal)
                 cell.imgCreator.setBackgroundImage(creatorImage, for: .normal)
             }else{
-                cell.followBtn.isHidden = false
                 cell.creatorNameButton.setTitle(creator?.name, for: .normal)
                 cell.imgCreator.setBackgroundImage(creatorImage, for: .normal)
             }
-            cell.delegate = self
-            //            cell.imgCreator.setImage(creator.image, for: .normal)
-            
+          
             cell.userID = recipe?.userID
             
             return cell
         case 5:
             let cell = (tableView.dequeueReusableCell(withIdentifier: "ingredientRecipe") as? IngredientsTableViewCell)!
             if ingredientList.count > 0{
+                 cell.contentView.backgroundColor = #colorLiteral(red: 0.9959775805, green: 0.9961397052, blue: 0.7093081474, alpha: 1)
                 cell.nameIngredientsLabel.text = ingredientList[indexPath.row].name
                 cell.amountIngredientsLabel.text = ingredientList[indexPath.row].amount
             }

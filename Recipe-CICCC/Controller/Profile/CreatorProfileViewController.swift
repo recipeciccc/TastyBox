@@ -222,6 +222,10 @@ extension CreatorProfileViewController: CollectionViewInsideUserTableView {
 }
 
 extension CreatorProfileViewController: FolllowingFollowerDelegate {
+    func assginFollowersFollowingsImages(image: UIImage, index: Int) {
+        
+    }
+    
     func assignFollowersFollowings(users: [User]) {
         
     }

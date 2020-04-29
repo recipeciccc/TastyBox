@@ -11,4 +11,5 @@ import Foundation
 protocol FolllowingFollowerDelegate : class{
     func passFollowerFollowing(followingsIDs: [String], followersIDs: [String])
     func assignFollowersFollowings(users: [User])
+    func assginFollowersFollowingsImages(image: UIImage, index: Int)
 }

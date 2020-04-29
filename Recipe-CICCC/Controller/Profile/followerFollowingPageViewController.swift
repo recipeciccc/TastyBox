@@ -16,6 +16,8 @@ class followerFollowingPageViewController: UIPageViewController {
     var followingsID: [String] = []
     var VCs: [UIViewController] = []
     
+   
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

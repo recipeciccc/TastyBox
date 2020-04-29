@@ -14,10 +14,11 @@ protocol GenreSelectViewControllerDelegate: class {
 
 class GenreSelectViewController: UIViewController {
     
+    @IBOutlet weak var `switch`: UISwitch!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var doneButton: UIBarButtonItem!
     
-    var tags = ["Valentine's Day", "Cozy Spring", "Quick and Simple", "Home Cooking", "Appetizer",  "Main Dish", "Salad", "Dessert", "Beverage"]
+    var tags = ["Valentine's Day", "Cozy Spring", "Quick and Simple", "Home Cooking", "Appetizer",  "Main Dish", "Salad", "Dessert", "Beverage", "Healthy Diet"]
     var imageLabelingTags: [String] = []
     var imageLabelingTagsSelected: [String] = []
     var isHighlightsNotImageLabelsGenres: [String:Bool] = [:]
@@ -30,6 +31,8 @@ class GenreSelectViewController: UIViewController {
     var tagsSelected: [String] = []
     weak var delegate: GenreSelectViewControllerDelegate?
     let dataManager = GenreMLKitDataManager()
+    
+    private let spacing:CGFloat = 16.0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,6 +69,7 @@ class GenreSelectViewController: UIViewController {
             uiView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height:  self.view.frame.size.height))
             uiView.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 0.5)
             uiView.tag = 100
+            indicator.transform = CGAffineTransform(scaleX: 2, y: 2)
             
             indicator.hidesWhenStopped = true
             indicator.color = .orange
@@ -111,7 +115,11 @@ class GenreSelectViewController: UIViewController {
             self.collectionView.reloadData()
         }
         
-        
+        `switch`.isOn = false
+        `switch`.onTintColor = .orange
+        if isHighlightVIP {
+            `switch`.isOn = true
+        }
     }
     
     
@@ -123,7 +131,21 @@ class GenreSelectViewController: UIViewController {
      // Get the new view controller using segue.destination.
      // Pass the selected object to the new view controller.
      }
-     */
+ */
+    
+    @IBAction func VIPAction(_ sender: UISwitch) {
+        
+        if sender.isOn {
+            doneButton.isEnabled = true
+            isHighlightVIP = true
+        } else {
+            isHighlightVIP = false
+            shouldDoneButtonEnabled()
+        }
+    }
+    
+    
+    
     @IBAction func cancel(_ sender: Any) {
         
         self.delegate?.assignGenres(genres: tagsSelected, imagesLabels: imageLabelingTags, imagesLabelsSelected: imageLabelingTagsSelected, isVIP: isHighlightVIP)
@@ -153,16 +175,42 @@ class GenreSelectViewController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
     
+    fileprivate func shouldDoneButtonEnabled() {
+           
+           doneButton.isEnabled = false
+
+           for isHighLight in isHighlightsImageLabelsGenres {
+               if isHighLight.value && doneButton.isEnabled == false{
+                   doneButton.isEnabled = true
+                   break
+               }
+               
+               
+           }
+           
+           if doneButton.isEnabled == false {
+               
+               for isHighLight in isHighlightsNotImageLabelsGenres {
+                   if isHighLight.value && doneButton.isEnabled == false{
+                       doneButton.isEnabled = true
+                       break
+                   }
+               
+               }
+           }
+           
+           
+       }
 }
 
 extension GenreSelectViewController: UICollectionViewDataSource {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 3
+        return 2
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if section == 0 { return 1 }
-        else if section == 1 { return imageLabelingTags.count}
+        
+        if section == 0 { return imageLabelingTags.count}
         return tags.count
     }
     
@@ -170,16 +218,16 @@ extension GenreSelectViewController: UICollectionViewDataSource {
         
         let cell = (collectionView.dequeueReusableCell(withReuseIdentifier: "genreCell", for: indexPath) as? GenreCollectionViewCell)!
         
+//        if indexPath.section == 0 {
+//            //            let cell = (collectionView.dequeueReusableCell(withReuseIdentifier: "genreCell", for: indexPath) as? GenreCollectionViewCell)!
+//
+//
+//            cell.genreLabel.text = "VIP"
+//            cell.highlight(active: false)
+//
+//            return cell
+//        }
         if indexPath.section == 0 {
-            //            let cell = (collectionView.dequeueReusableCell(withReuseIdentifier: "genreCell", for: indexPath) as? GenreCollectionViewCell)!
-            
-            
-            cell.genreLabel.text = "VIP"
-            cell.highlight(active: false)
-            
-            return cell
-        }
-        else if indexPath.section == 1 {
             
             let cell = (collectionView.dequeueReusableCell(withReuseIdentifier: "genreCell", for: indexPath) as? GenreCollectionViewCell)!
             
@@ -212,6 +260,8 @@ extension GenreSelectViewController: UICollectionViewDataSource {
     
     
 }
+
+
 extension GenreSelectViewController: GenreMLKitDataManagerDelegate {
     func passLabeledArray(arr: [String]) {
         imageLabelingTags = arr
@@ -243,43 +293,18 @@ extension GenreSelectViewController: GenreMLKitDataManagerDelegate {
 }
 
 extension GenreSelectViewController: UICollectionViewDelegate {
-    fileprivate func shouldDoneButtonEnabled() {
-        
-        doneButton.isEnabled = false
-
-        for isHighLight in isHighlightsImageLabelsGenres {
-            if isHighLight.value && doneButton.isEnabled == false{
-                doneButton.isEnabled = true
-                break
-            }
-            
-            
-        }
-        
-        if doneButton.isEnabled == false {
-            
-            for isHighLight in isHighlightsNotImageLabelsGenres {
-                if isHighLight.value && doneButton.isEnabled == false{
-                    doneButton.isEnabled = true
-                    break
-                }
-            
-            }
-        }
-        
-        
-    }
+   
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell = (collectionView.cellForItem(at: indexPath) as? GenreCollectionViewCell)!
         
-        if indexPath.section == 0 {
-            
-            
-            isHighlightVIP =  !isHighlightVIP
-            cell.highlight(active: isHighlightVIP)
-        }
-        else if indexPath.section == 1{
+//        if indexPath.section == 0 {
+//
+//
+//            isHighlightVIP =  !isHighlightVIP
+//            cell.highlight(active: isHighlightVIP)
+//        }
+    if indexPath.section == 0{
             //            let cell = (collectionView.cellForItem(at: indexPath) as? GenreCollectionViewCell)!
             
             isHighlightsImageLabelsGenres[imageLabelingTags[indexPath.row]] =  !isHighlightsImageLabelsGenres[imageLabelingTags[indexPath.row]]!
@@ -296,6 +321,35 @@ extension GenreSelectViewController: UICollectionViewDelegate {
         shouldDoneButtonEnabled()
         
     }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+
+        if let sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "SectionHeader", for: indexPath) as? SectionHeaderGenreSelectCollectionReusableView{
+            if indexPath.section == 0 {
+                sectionHeader.titleLabel.text = "Top Suggested"
+                sectionHeader.titleLabel.font = UIFont(name:"AppleSDGothicNeo-SemiBold", size: 20.0)
+            } else {
+                sectionHeader.titleLabel.text = "Others"
+            }
+        
+            return sectionHeader
+        }
+        return UICollectionReusableView()
+    }
+    
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//        let numberOfItemsPerRow:CGFloat = 4
+//        let spacingBetweenCells:CGFloat = 16
+//
+//        let totalSpacing = (2 * self.spacing) + ((numberOfItemsPerRow - 1) * spacingBetweenCells) //Amount of total spacing in a row
+//
+//        if let collection = self.collectionView{
+//            let width = (collection.bounds.width - totalSpacing)/numberOfItemsPerRow
+//            return CGSize(width: width, height: width)
+//        }else{
+//            return CGSize(width: 0, height: 0)
+//        }
+//    }
 }
 
 
