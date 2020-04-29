@@ -11,13 +11,14 @@ import Firebase
 
 protocol FollowingViewControllerDataManagerDelegate: class {
     func deleteFollowings(user:User)
+    func assginFollowersFollowingsImages(image: UIImage, index: Int)
 }
 
 class FollowingViewControllerDataManager {
     
     let uid = Auth.auth().currentUser?.uid
     let db = Firestore.firestore()
-    weak var delegate: FollowingViewControllerDataManager?
+    weak var delegate: FollowingViewControllerDataManagerDelegate?
     
     
     func unfollowing(user: User) {
@@ -28,6 +29,25 @@ class FollowingViewControllerDataManager {
             } else {
                 print("Document successfully removed!")
                 
+            }
+        }
+    }
+    
+    func getFollwersFollowingsImage(uid: String, index: Int) {
+        let imageRef = Storage.storage().reference().child("user/\(uid)/userAccountImage")
+        var image: UIImage?
+        // Fetch the download URL
+        imageRef.getData(maxSize: 1 * 1024 * 1024) { data, error in
+            if error != nil {
+                print(error?.localizedDescription as Any)
+            } else {
+                if let imgData = data {
+                    
+                    print("imageRef: \(imageRef)")
+                    
+                    image = UIImage(data: imgData)!
+                    self.delegate?.assginFollowersFollowingsImages(image: image!, index: index)
+                }
             }
         }
     }

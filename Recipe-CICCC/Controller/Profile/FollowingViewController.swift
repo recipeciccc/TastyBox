@@ -17,9 +17,9 @@ class FollowingViewController: UIViewController {
     var followingsID:[String] = []
     var followings:[User] = []
     var followingOrNot = [Int:Bool]()
-    var followingsImages:[UIImage] = []
+    var followingsImages:[Int:UIImage] = [:]
     var searchedFollowings:[User] = []
-    var searchedFollowingsImages:[UIImage] = []
+    var searchedFollowingsImages:[Int:UIImage] = [:]
     
     let userDataManager = UserdataManager()
     let dataManager = FollowingViewControllerDataManager()
@@ -38,7 +38,7 @@ class FollowingViewController: UIViewController {
                     
                     if user.name.lowercased().contains(searchingWord.lowercased()) {
                         searchedFollowings.append(user)
-                        searchedFollowingsImages.append(followingsImages[index])
+                        searchedFollowingsImages[searchedFollowingsImages.count - 1] = followingsImages[index]
                     }
                 }
                
@@ -57,15 +57,14 @@ class FollowingViewController: UIViewController {
         self.tableView.delegate = self
         
         userDataManager.delegateFollowerFollowing = self
-        userDataManager.delegate = self
-        
+       
         
         let parentVC = self.parent as! followerFollowingPageViewController
         followingsID = parentVC.followingsID
         userDataManager.getFollowersFollowings(IDs: self.followingsID, followerOrFollowing: "following")
         
-        followingsID.map {
-            userDataManager.getUserImage(uid: $0)
+        followingsID.enumerated().map {
+            userDataManager.getFollwersFollowingsImage(uid: $0.1, index: $0.0)
         }
         
         self.navigationItem.title = "Following"
@@ -129,18 +128,7 @@ class FollowingViewController: UIViewController {
     }
 }
 
-extension FollowingViewController: FolllowingFollowerDelegate {
-    func passFollowerFollowing(followingsIDs: [String], followersIDs: [String]) {
-        
-    }
-    
-    func assignFollowersFollowings(users: [User]) {
-        self.followings = users
-        self.searchedFollowings = users
-        self.tableView.reloadData()
-    }
-    
-}
+
 
 
 extension FollowingViewController: UITableViewDataSource {
@@ -161,7 +149,7 @@ extension FollowingViewController: UITableViewDataSource {
        
         
         
-        if followingsID.count == followingsImages.count && !searchedFollowingsImages.isEmpty{
+        if followingsID.count == searchedFollowingsImages.count{
             cell.imgView.image = searchedFollowingsImages[indexPath.row]
         }
         
@@ -182,16 +170,23 @@ extension FollowingViewController:UITableViewDelegate {
     }
 }
 
-extension FollowingViewController: getUserDataDelegate {
-    func gotUserData(user: User) {
+extension FollowingViewController: FolllowingFollowerDelegate {
+    func assginFollowersFollowingsImages(image: UIImage, index: Int) {
+        self.followingsImages[index] = image
+        self.searchedFollowingsImages[index] = image
+        self.tableView.reloadData()
+    }
+    
+    func passFollowerFollowing(followingsIDs: [String], followersIDs: [String]) {
         
     }
     
-    func assignUserImage(image: UIImage) {
-        self.followingsImages.append(image)
-        self.searchedFollowingsImages.append(image)
+    func assignFollowersFollowings(users: [User]) {
+        self.followings = users
+        self.searchedFollowings = users
         self.tableView.reloadData()
     }
+    
 }
 
 

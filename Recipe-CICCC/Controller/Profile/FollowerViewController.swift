@@ -15,10 +15,10 @@ class FollowerViewController: UIViewController {
     
     var followersIDs: [String] = []
     var followers:[User] = []
-    var followersImages: [UIImage] = []
+    var followersImages: [Int:UIImage] = [:]
     let userDataManager = UserdataManager()
     var searchedFollowers:[User] = []
-    var searchedFollowersImages:[UIImage] = []
+    var searchedFollowersImages:[Int:UIImage] = [:]
     
     var searchingWord : String = "" {
                 didSet {
@@ -34,7 +34,7 @@ class FollowerViewController: UIViewController {
                        
                        if user.name.lowercased().contains(searchingWord.lowercased()) {
                            searchedFollowers.append(user)
-                           searchedFollowersImages.append(followersImages[index])
+                           searchedFollowersImages[searchedFollowersImages.count - 1] = followersImages[index]
                        }
                    }
                   
@@ -57,8 +57,8 @@ class FollowerViewController: UIViewController {
         followersIDs = parentVC.followersID
         userDataManager.getFollowersFollowings(IDs: self.followersIDs, followerOrFollowing: "follower")
         
-        followersIDs.map {
-             userDataManager.getUserImage(uid: $0)
+        followersIDs.enumerated().map {
+            userDataManager.getFollwersFollowingsImage(uid: $0.1, index: $0.0)
         }
         
         
@@ -82,6 +82,12 @@ class FollowerViewController: UIViewController {
 
 
 extension FollowerViewController: FolllowingFollowerDelegate {
+    func assginFollowersFollowingsImages(image: UIImage, index: Int) {
+        self.followersImages[index] = image
+        self.searchedFollowersImages[index] = image
+        self.tableView.reloadData()
+    }
+    
     func passFollowerFollowing(followingsIDs: [String], followersIDs: [String]) {
         
     }
@@ -141,8 +147,7 @@ extension FollowerViewController: getUserDataDelegate {
     }
     
     func assignUserImage(image: UIImage) {
-        self.followersImages.append(image)
-        self.tableView.reloadData()
+      
     }
 }
 
