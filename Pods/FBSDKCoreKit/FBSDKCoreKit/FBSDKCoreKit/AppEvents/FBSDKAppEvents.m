@@ -46,7 +46,7 @@
 
 #if !TARGET_OS_TV
 
-#import "FBSDKAddressFilterManager.h"
+#import "FBSDKIntegrityManager.h"
 #import "FBSDKEventBindingManager.h"
 #import "FBSDKHybridAppEventsScriptMessageHandler.h"
 #import "FBSDKModelManager.h"
@@ -455,7 +455,7 @@ static NSString *g_overrideAppID = nil;
   [[FBSDKAppEvents singleton] instanceLogEvent:eventName
                                     valueToSum:valueToSum
                                     parameters:parameters
-                            isImplicitlyLogged:(BOOL)parameters[FBSDKAppEventParameterImplicitlyLogged]
+                            isImplicitlyLogged:[parameters[FBSDKAppEventParameterImplicitlyLogged] boolValue]
                                    accessToken:accessToken];
 }
 
@@ -1157,8 +1157,8 @@ static dispatch_once_t *onceTokenPointer;
   parameters = [FBSDKEventDeactivationManager processParameters:parameters eventName:eventName];
 
 #if !defined BUCK && !TARGET_OS_TV
-  // Filter out address data
-  parameters = [FBSDKAddressFilterManager processParameters:parameters];
+  // Filter out restrictive data with on-device ML
+  parameters = [FBSDKIntegrityManager processParameters:parameters];
 #endif
   // Filter out restrictive keys
   parameters = [FBSDKRestrictiveDataFilterManager processParameters:parameters

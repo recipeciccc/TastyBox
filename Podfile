@@ -52,4 +52,7 @@ pod 'RSKImageCropper'
 # to justify what the main photo recipe is
 pod 'Firebase/MLVision'
 
+# push notification
+pod 'Firebase/Core'
+pod 'Firebase/Messaging'
 end
