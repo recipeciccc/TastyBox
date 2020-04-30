@@ -107,7 +107,7 @@ class DiscoveryViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Discovery"
+        self.title = "TastyBox"
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.orange ]
         CreateMenuLabel()
         
@@ -120,11 +120,7 @@ class DiscoveryViewController: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(toggleSideMenu), name: NSNotification.Name("ToggleSideMenu"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(showSearch), name: NSNotification.Name("ShowSearch"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(showProfile), name: NSNotification.Name("ShowProfile"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(AddRecipe), name: NSNotification.Name("AddRecipe"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(showSetting), name: NSNotification.Name("ShowSetting"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(showContact), name: NSNotification.Name("ShowContact"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(showAbout), name: NSNotification.Name("ShowAbout"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(showLogout), name: NSNotification.Name("ShowLogout"), object: nil)
         
         pageControllView = self.children[0] as! MainPageViewController
@@ -179,11 +175,6 @@ class DiscoveryViewController: UIViewController {
         }
     }
     
-    @objc func showProfile(){
-        print("show Profile")
-        performSegue(withIdentifier: "userProfile", sender: nil)
-    }
-    
     @objc func showSearch(){
         print("show Search")
         performSegue(withIdentifier: "searchPage", sender: nil)
@@ -192,18 +183,6 @@ class DiscoveryViewController: UIViewController {
     @objc func AddRecipe(){
         print("Add Recipe")
         performSegue(withIdentifier: "addRecipe", sender: nil)
-    }
-    @objc func showSetting(){
-        print("show Setting")
-        performSegue(withIdentifier: "setting", sender: nil)
-    }
-    @objc func showContact(){
-        print("show Contact")
-        performSegue(withIdentifier: "contactUs", sender: nil)
-    }
-    @objc func showAbout(){
-        print("show About")
-        performSegue(withIdentifier: "about", sender: nil)
     }
     @objc func showLogout(){
         print("show Logout")
@@ -355,8 +334,10 @@ class MenuCollectionViewCell: UICollectionViewCell{
     //        }
     
     func focusCell(active: Bool) {
-        let color = active ? #colorLiteral(red: 0.9998212457, green: 0.9867780805, blue: 0.7689660192, alpha: 1) : #colorLiteral(red: 0.9607843161, green: 0.7058823705, blue: 0.200000003, alpha: 1)
+        let color = active ? #colorLiteral(red: 0.9998212457, green: 0.9867780805, blue: 0.7689660192, alpha: 1) : #colorLiteral(red: 1, green: 0.8206811547, blue: 0.4302719235, alpha: 1)
         self.contentView.backgroundColor = color
+        let labelColor = active ? #colorLiteral(red: 0.6745098039, green: 0.5568627451, blue: 0.4078431373, alpha: 1) : #colorLiteral(red: 0.9999960065, green: 1, blue: 1, alpha: 1)
+        MenuLabel.textColor = labelColor
     }
     
     override func awakeFromNib() {

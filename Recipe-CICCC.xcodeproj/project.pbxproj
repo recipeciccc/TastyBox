@@ -56,6 +56,8 @@
 		693CA00923FF437600957EF2 /* RecipeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693CA00723FF437600957EF2 /* RecipeCollectionViewCell.swift */; };
 		693CA00A23FF437600957EF2 /* RecipeCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 693CA00823FF437600957EF2 /* RecipeCollectionViewCell.xib */; };
 		693CA00C23FF43CE00957EF2 /* VIP_page.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 693CA00B23FF43CE00957EF2 /* VIP_page.storyboard */; };
+		69663C79245A15F300200902 /* AboutPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 69663C78245A15F300200902 /* AboutPage.storyboard */; };
+		69663C7B245A20C900200902 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69663C7A245A20C900200902 /* AboutViewController.swift */; };
 		6970F4E423F6302A00F94541 /* Monthly.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6970F4E323F6302A00F94541 /* Monthly.storyboard */; };
 		6985A53623F48B5E001257A8 /* IngredientsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6985A53523F48B5E001257A8 /* IngredientsViewController.swift */; };
 		6985A53A23F4924A001257A8 /* IngredientTitleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6985A53923F4924A001257A8 /* IngredientTitleCollectionViewCell.swift */; };
@@ -297,6 +299,8 @@
 		693CA00723FF437600957EF2 /* RecipeCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeCollectionViewCell.swift; sourceTree = "<group>"; };
 		693CA00823FF437600957EF2 /* RecipeCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecipeCollectionViewCell.xib; sourceTree = "<group>"; };
 		693CA00B23FF43CE00957EF2 /* VIP_page.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = VIP_page.storyboard; sourceTree = "<group>"; };
+		69663C78245A15F300200902 /* AboutPage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AboutPage.storyboard; sourceTree = "<group>"; };
+		69663C7A245A20C900200902 /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		6970F4E323F6302A00F94541 /* Monthly.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Monthly.storyboard; sourceTree = "<group>"; };
 		6985A53523F48B5E001257A8 /* IngredientsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientsViewController.swift; sourceTree = "<group>"; };
 		6985A53923F4924A001257A8 /* IngredientTitleCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientTitleCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -706,6 +710,7 @@
 				693CA00B23FF43CE00957EF2 /* VIP_page.storyboard */,
 				69909F422456B80F00AACEC7 /* Setting.storyboard */,
 				69909F4E2458EF7900AACEC7 /* ContactPage.storyboard */,
+				69663C78245A15F300200902 /* AboutPage.storyboard */,
 			);
 			path = StoryBoard;
 			sourceTree = "<group>";
@@ -867,6 +872,7 @@
 				4069257323D8350100059C8E /* DiscoveryViewController.swift */,
 				6985A53523F48B5E001257A8 /* IngredientsViewController.swift */,
 				69909F502458F93400AACEC7 /* ContactViewController.swift */,
+				69663C7A245A20C900200902 /* AboutViewController.swift */,
 				69909F3124560D6C00AACEC7 /* Setting */,
 			);
 			path = MainPages;
@@ -1172,6 +1178,7 @@
 				40127ADA23A06E4600260AF0 /* LaunchScreen.storyboard in Resources */,
 				408C319223C986FF00E74E4A /* creatorProfile.storyboard in Resources */,
 				699679AF23F3A25800719A36 /* ingredientRecipe.storyboard in Resources */,
+				69663C79245A15F300200902 /* AboutPage.storyboard in Resources */,
 				692327E3242FED06003C434D /* RecipeDetail.storyboard in Resources */,
 				693C9FF423FB4B2400957EF2 /* RecipeCollectionView.xib in Resources */,
 				6FEC4DB8240088BD00AB2785 /* popularPage.storyboard in Resources */,
@@ -1418,6 +1425,7 @@
 				6F54A44C2429D95400D936CD /* RecipeDetailViewController.swift in Sources */,
 				6F039DD024552CB100C76516 /* MyPageDataManager.swift in Sources */,
 				6F9BB7972410BF1300CE7F60 /* IngredientShoppingDataManager.swift in Sources */,
+				69663C7B245A20C900200902 /* AboutViewController.swift in Sources */,
 				693C9FF823FB4D2A00957EF2 /* RecipeCollectionView.swift in Sources */,
 				69F0D39323F63C5C001BF696 /* EditorChoiceViewController.swift in Sources */,
 				6F788A36240F382300E46598 /* recipeStruct.swift in Sources */,
