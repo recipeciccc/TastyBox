@@ -111,6 +111,7 @@
 		6F3FF55D23E1068B005162C7 /* ShoppingList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F3FF55C23E1068B005162C7 /* ShoppingList.storyboard */; };
 		6F49661E2410DD1500397B4F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F49661D2410DD1500397B4F /* User.swift */; };
 		6F4A345C2432F4E000909D7A /* FolllowingFollowerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4A345B2432F4E000909D7A /* FolllowingFollowerDelegate.swift */; };
+		6F4F105B245B802400D8BD15 /* SettingNotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4F105A245B802400D8BD15 /* SettingNotificationViewController.swift */; };
 		6F50283A2415B79D0031D204 /* RefigeratorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5028362415B79C0031D204 /* RefigeratorTableViewCell.swift */; };
 		6F5344B0244D37940004F78D /* fetchDataInIngredients.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5344AF244D37930004F78D /* fetchDataInIngredients.swift */; };
 		6F5344B2244D37A80004F78D /* RecipeViewControllerDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5344B1244D37A80004F78D /* RecipeViewControllerDataManager.swift */; };
@@ -170,7 +171,6 @@
 		6FB298412414E9B70094F5F4 /* IngredientRefrigerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB298402414E9B70094F5F4 /* IngredientRefrigerator.swift */; };
 		6FB33647245800590049C964 /* SettingProifleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB33646245800590049C964 /* SettingProifleViewController.swift */; };
 		6FB336492458015A0049C964 /* MainSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB336482458015A0049C964 /* MainSettingsViewController.swift */; };
-		6FB3364C2458024E0049C964 /* SettingNotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB3364B2458024E0049C964 /* SettingNotificationViewController.swift */; };
 		6FB3364E245802A80049C964 /* RecipeUserPostedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB3364D245802A80049C964 /* RecipeUserPostedCollectionViewCell.swift */; };
 		6FB336522458E7310049C964 /* SectionHeaderGenreSelectCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB336512458E7310049C964 /* SectionHeaderGenreSelectCollectionReusableView.swift */; };
 		6FB336542458F85F0049C964 /* FollowingViewControllerDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB336532458F85F0049C964 /* FollowingViewControllerDataManager.swift */; };
@@ -333,6 +333,7 @@
 		6F3FF55C23E1068B005162C7 /* ShoppingList.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ShoppingList.storyboard; sourceTree = "<group>"; };
 		6F49661D2410DD1500397B4F /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		6F4A345B2432F4E000909D7A /* FolllowingFollowerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolllowingFollowerDelegate.swift; sourceTree = "<group>"; };
+		6F4F105A245B802400D8BD15 /* SettingNotificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingNotificationViewController.swift; sourceTree = "<group>"; };
 		6F5028362415B79C0031D204 /* RefigeratorTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefigeratorTableViewCell.swift; sourceTree = "<group>"; };
 		6F5344AF244D37930004F78D /* fetchDataInIngredients.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = fetchDataInIngredients.swift; sourceTree = "<group>"; };
 		6F5344B1244D37A80004F78D /* RecipeViewControllerDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeViewControllerDataManager.swift; sourceTree = "<group>"; };
@@ -546,6 +547,7 @@
 				6F15281524540FC700E242D9 /* ExplainationVIPViewController.swift */,
 				6F8408C92449E1C3008B2A25 /* GenreSelectViewController.swift */,
 				6F729381242B159D00A7E4E0 /* CommentsViewController.swift */,
+				6F4F105A245B802400D8BD15 /* SettingNotificationViewController.swift */,
 				6F3FF54623DAB62D005162C7 /* StoresMapViewController.swift */,
 				4069257923D8350100059C8E /* RecipeViewController.swift */,
 				6F54A4412429D95000D936CD /* RecipeDetailViewController.swift */,
@@ -1328,10 +1330,10 @@
 				6F8408CC2449E2EC008B2A25 /* GenreCollectionViewCell.swift in Sources */,
 				6F729384242B1CB500A7E4E0 /* RecipeDetailDataManager.swift in Sources */,
 				69909F3524561F3900AACEC7 /* recipePreferenceTableViewCell.swift in Sources */,
-				6FB3364C2458024E0049C964 /* SettingNotificationViewController.swift in Sources */,
 				6F7D4D8B243F17ED006D0A35 /* FollowerViewController.swift in Sources */,
 				6FB86C0923E8839800672851 /* KeyManager.swift in Sources */,
 				6F27D1772429F28300B5B071 /* ServingAndTimeTableViewCell.swift in Sources */,
+				6F4F105B245B802400D8BD15 /* SettingNotificationViewController.swift in Sources */,
 				69909F452456C9C700AACEC7 /* AutoSizedTableView.swift in Sources */,
 				6F3FF54723DAB62D005162C7 /* StoresMapViewController.swift in Sources */,
 				6F54A44D2429D95400D936CD /* NumOfCreatorhasTableViewCell.swift in Sources */,
