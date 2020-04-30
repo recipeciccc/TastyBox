@@ -12,9 +12,12 @@ import FBSDKCoreKit
 import GoogleSignIn
 import GoogleMaps
 import GooglePlaces
+import UserNotifications
+import FirebaseInstanceID
+import FirebaseMessaging
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate, MessagingDelegate{
     
     let apiKey = "AIzaSyA8iI9CDqKxnyvCAuWoBbSyZYdRqf_WQLk"
     
@@ -22,9 +25,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        
-        FirebaseApp.configure()
-        
         
         if let apiKey = KeyManager().getValue(key: "apiKey") as? String {
             GMSServices.provideAPIKey(apiKey)
@@ -35,14 +35,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
 //        FirebaseApp.configure()
-        GIDSignIn.sharedInstance()?.clientID = FirebaseApp.app()?.options.clientID
+        GIDSignIn.sharedInstance()?.clientID = "39063762000-u54e1o124ocm3vpes107n5k9qg1m9fkp.apps.googleusercontent.com"//FirebaseApp.app()?.options.clientID
         UINavigationBar.appearance().tintColor = UIColor.orange
         UINavigationBar.appearance().barTintColor = UIColor.white
         
         
-        
+//        if #available(iOS 10.0, *) {
+//            // For iOS 10 display notification (sent via APNS)
+//            UNUserNotificationCenter.current().delegate = self
+//            let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+//            UNUserNotificationCenter.current().requestAuthorization(
+//            options: authOptions,
+//            completionHandler: {_, _ in })
+//            // For iOS 10 data message (sent via FCM
+//            Messaging.messaging().delegate = self
+//        } else {
+//            let settings: UIUserNotificationSettings =
+//            UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
+//              application.registerUserNotificationSettings(settings)
+//        }
+//
+//        application.registerForRemoteNotifications()
+//
+         FirebaseApp.configure()
+         
         return true
     }
+    
+    
 
     // MARK: UISceneSession Lifecycle
 
@@ -73,6 +93,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return handled
     }
 
-
+//
+//    // The callback to handle data message received via FCM for devices running iOS 10 or above.
+//    func applicationReceivedRemoteMessage(_ remoteMessage: MessagingRemoteMessage) {
+//        print(remoteMessage.appData)
+//    }
 }
 

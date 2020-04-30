@@ -174,7 +174,7 @@ extension FollowingViewController: FolllowingFollowerDelegate {
     func assginFollowersFollowingsImages(image: UIImage, index: Int) {
         self.followingsImages[index] = image
         self.searchedFollowingsImages[index] = image
-        self.tableView.reloadData()
+            self.tableView.reloadData()
     }
     
     func passFollowerFollowing(followingsIDs: [String], followersIDs: [String]) {
