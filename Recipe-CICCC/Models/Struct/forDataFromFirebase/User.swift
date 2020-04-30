@@ -16,12 +16,21 @@ struct User {
     var familySize: Int?
     var isVIP: Bool?
     
+    
 //    var followersID: [String]
 //    var followingID: [String]
 }
 
+struct  AllergicFoodData {
+    var allergicFood: String
+    var checkedFood: Bool?
+}
 
 
+
+struct AllFoodList {
+    var allFood:[AllergicFoodData]
+}
 
 
 

@@ -27,6 +27,10 @@ class SettingViewController: UIViewController {
     var userImage = UIImage()
     let userManager =  UserdataManager()
     var accountSettingVC = AccountSettingViewController()
+    let settingManager = SettingManager()
+  //  let allergicData  = allergicFoodData?.self
+    
+    let uid = Auth.auth().currentUser!.uid
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,6 +49,7 @@ class SettingViewController: UIViewController {
          mealSize = ["1-2","3-4","5-6","7-8","9-10","above 10"]
          cuisineType = ["Chinese","Japanese","Korean","Canadian"]
     }
+    
     private func delegate_dataSource_Setup(){
         accounttableView.delegate = self
         accounttableView.dataSource = self
@@ -73,7 +78,7 @@ class SettingViewController: UIViewController {
         self.photoBtn.layer.masksToBounds = false
         self.photoBtn.layer.cornerRadius = self.photoBtn.bounds.width / 2
         self.photoBtn.clipsToBounds = true
-        userManager.getUserImage(uid: Auth.auth().currentUser!.uid)
+        userManager.getUserImage(uid: uid)
         userManager.delegate = self
     }
     
@@ -227,7 +232,9 @@ extension SettingViewController: UITableViewDataSource,UITableViewDelegate{
             switch indexPath.row {
             case 0:
                 vc.row = indexPath.row
-                vc.lists = allergies
+              //  vc.lists = allergies
+                
+        
             case 1:
                 vc.row = indexPath.row
                 vc.lists = mealSize
@@ -318,6 +325,5 @@ extension SettingViewController: getUserDataDelegate {
     }
     
 }
-
 
 

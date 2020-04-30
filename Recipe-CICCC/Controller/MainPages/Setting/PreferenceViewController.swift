@@ -19,15 +19,22 @@ class PreferenceViewController: UIViewController{
     var slectedList = Set<String>()
     var settingManager = SettingManager()
     let uid = Auth.auth().currentUser?.uid
+    var checkItem = [String]()
+    var AllergicFoodInFirebase = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureDelegate()
+        if row == 0{
+        settingManager.getAllFood(userID: uid!, index: row)
+        checkItem = settingManager.getCheckedItemInAllFood(userID: uid!, index: row)
+        }
     }
     private func configureDelegate(){
         AddTextField.delegate = self
         ListTableView.delegate = self
         ListTableView.dataSource = self
+        settingManager.delegate = self
     }
    
     
@@ -35,33 +42,38 @@ class PreferenceViewController: UIViewController{
         print("tab add button")
         if AddTextField.text! != "" && AddTextField.text! != "Add new choice"{
             lists.append(AddTextField.text!)
+            settingManager.addAllFood(userID: uid ?? "", allergicFood: AddTextField.text!)
+            
             AddTextField.text = ""
             AddTextField.textColor = #colorLiteral(red: 1, green: 0.816192925, blue: 0.350728631, alpha: 1)
             ListTableView.reloadData()
         }
-        print(slectedList)
     }
     
     @IBAction func saveData(_ sender: Any) {
         if row == 0{
-            deleteData()
-            updateData()
-        }
-    }
-    
-    func deleteData(){
-        let currentfoodsName = settingManager.getAllergicFood(userID: uid ?? "")
-        for item in currentfoodsName{
-            print(item)
-            settingManager.deleteFood(userID: uid ?? "", allergicFood: item)
+            removeCheck()
+            updateCheckedData()
         }
     }
 
-    func updateData(){
-        for item in slectedList{
-            settingManager.addAllergicFood(userID: uid ?? "", allergicFood: item)
+    func removeCheck(){
+        let previousCheckedList = checkItem
+        let difference = previousCheckedList.difference(from: lists)
+        if difference.count != 0{
+            for item in 0...difference.count-1{
+                    settingManager.removeCheckedFood(userID: uid ?? "", allergicFood: difference[item])
+            }
         }
     }
+
+    func updateCheckedData(){
+        for item in checkItem{
+            settingManager.addCheckedAllergicFood(userID: uid ?? "", allergicFood: item)
+        }
+    }
+    
+    
 }
 
 extension PreferenceViewController: UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate{
@@ -73,6 +85,14 @@ extension PreferenceViewController: UITableViewDelegate,UITableViewDataSource,UI
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "preferenceItem") as! recipePreferenceTableViewCell
         cell.item.text = lists[indexPath.row]
+        
+        if  checkItem.contains(cell.item.text ?? ""){
+            cell.select = true
+            cell.item.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+            cell.backgroundColor = #colorLiteral(red: 1, green: 0.8206811547, blue: 0.4302719235, alpha: 1)
+            cell.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+            cell.accessoryType = UITableViewCell.AccessoryType.checkmark
+        }
         return cell
     }
     
@@ -86,14 +106,18 @@ extension PreferenceViewController: UITableViewDelegate,UITableViewDataSource,UI
             cell.backgroundColor = #colorLiteral(red: 1, green: 0.8206811547, blue: 0.4302719235, alpha: 1)
             cell.tintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
             cell.accessoryType = UITableViewCell.AccessoryType.checkmark
-            slectedList.insert(cell.item.text!)
+            var set_checkItem = Set(checkItem)
+            set_checkItem.insert(cell.item.text!)
+            checkItem = Array(set_checkItem)
         }
         else{
             cell.select = false
             cell.item.textColor = #colorLiteral(red: 1, green: 0.6749868989, blue: 0, alpha: 1)
             cell.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
             cell.accessoryType = UITableViewCell.AccessoryType.none
-            slectedList.remove(cell.item.text!)
+            var set_checkItem = Set(checkItem)
+            set_checkItem.remove(cell.item.text!)
+            checkItem = Array(set_checkItem)
         }
       
         
@@ -111,4 +135,32 @@ extension PreferenceViewController: UITableViewDelegate,UITableViewDataSource,UI
     }
     
     
+}
+
+extension Array where Element: Hashable {
+    func difference(from other: [Element]) -> [Element] {
+        let thisSet = Set(self)
+        let otherSet = Set(other)
+        return Array(thisSet.symmetricDifference(otherSet))
+    }
+}
+
+
+extension PreferenceViewController: getAllergicFoodDelegate{
+    func getCheckedData(foodList: [String],index: Int) {
+        if index == 0{
+            checkItem = foodList
+            print("checkItem: \(checkItem)")
+            ListTableView.reloadData()
+        }
+    }
+    
+    func getFoodData(foodList:[AllergicFoodData],index: Int) {
+        if index == 0{
+                for item in foodList{
+                    lists.append(item.allergicFood)
+                }
+            ListTableView.reloadData()
+        }
+    }
 }
