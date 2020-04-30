@@ -35,7 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
 //        FirebaseApp.configure()
-        GIDSignIn.sharedInstance()?.clientID = FirebaseApp.app()?.options.clientID
+        GIDSignIn.sharedInstance()?.clientID = "39063762000-u54e1o124ocm3vpes107n5k9qg1m9fkp.apps.googleusercontent.com"//FirebaseApp.app()?.options.clientID
         UINavigationBar.appearance().tintColor = UIColor.orange
         UINavigationBar.appearance().barTintColor = UIColor.white
         
@@ -57,7 +57,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 //
 //        application.registerForRemoteNotifications()
 //
-//         FirebaseApp.configure()
+         FirebaseApp.configure()
          
         return true
     }
