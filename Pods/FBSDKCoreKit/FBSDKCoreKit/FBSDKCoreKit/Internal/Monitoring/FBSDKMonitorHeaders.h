@@ -22,6 +22,7 @@
 #import "FBSDKMethodUsageMonitor.h"
 #import "FBSDKMethodUsageMonitorEntry.h"
 #import "FBSDKMonitor.h"
+#import "FBSDKMonitoringConfiguration.h"
 #import "FBSDKMonitorEntry.h"
 #import "FBSDKMonitorNetworker.h"
 #import "FBSDKMonitorStore.h"
