@@ -13,32 +13,58 @@ import FirebaseAuth
 class SettingManager{
     
     let ref = Firestore.firestore().collection("user")
+    weak var delegate: getAllergicFoodDelegate?
+    var allFood = [AllergicFoodData]()
     
-    func addAllergicFood(userID: String,allergicFood : String){
+    func addCheckedAllergicFood(userID: String,allergicFood : String){
+        
         ref.document(userID).collection("allergicFood").document(allergicFood).setData([
             "food": allergicFood,
+            "check": true,
             "uid":userID
         ]) { err in
             if let err = err {
                 print("Error writing document: \(err)")
             } else {
-                print("Document successfully written!")
+                
+                print("check data:\(allergicFood)")
             }
         }
     }
     
-    func deleteFood(userID: String ,allergicFood : String) {
-        ref.document(userID).collection("allergicFood").document(allergicFood).delete(){ err in
+     func addAllFood(userID: String,allergicFood : String){
+           ref.document(userID).collection("allergicFood").document(allergicFood).setData([
+               "food": allergicFood,
+               "check": false,
+               "uid":userID
+           ]) { err in
+               if let err = err {
+                   print("Error writing document: \(err)")
+               } else {
+                   print("Document successfully written!")
+               }
+           }
+       }
+    
+    func removeCheckedFood(userID: String ,allergicFood : String) {
+        
+        ref.document(userID).collection("allergicFood").document(allergicFood).setData([
+            "food": allergicFood,
+            "check": false,
+            "uid":userID]){ err in
+                
             if let err = err {
-                print("Error removing document: \(err)")
+                print("Error writing document: \(err)")
             } else {
-                print("Document successfully removed")
+                print("remove data: \(allergicFood)")
+                
             }
         }
+        
     }
     
-    func getAllergicFood(userID: String) -> [String]{
-        var currentfoodsName = [String]()
+    func getAllFood(userID: String, index: Int){
+        var food = [String]()
         ref.document(userID).collection("allergicFood").getDocuments() { (querySnapshot, err) in
              if let err = err {
                  print("Error getting documents: \(err)")
@@ -46,12 +72,35 @@ class SettingManager{
                  for document in querySnapshot!.documents {
                     let data  = document.data()
                     if let foodName = data["food"]{
-                        currentfoodsName.append(foodName as! String)
-                        print("\(foodName)")
+                        food.append(foodName as! String)
+                        print("all: \(foodName)")
+                        let check = data["check"]
+                        self.allFood.append(AllergicFoodData(allergicFood: foodName as! String, checkedFood: check as? Bool))
                     }
                  }
+                self.delegate?.getFoodData(foodList:self.allFood,index:index)
              }
          }
-        return currentfoodsName
     }
+    
+    func getCheckedItemInAllFood(userID:String,index:Int) -> [String] {
+        var food = [String]()
+        ref.document(userID).collection("allergicFood").whereField("check", isEqualTo: true).getDocuments { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                for document in querySnapshot!.documents {
+                   let data  = document.data()
+                   if let foodName = data["food"]{
+                       food.append(foodName as! String)
+                       print("checked: \(foodName)")
+                   }
+                }
+                self.delegate?.getCheckedData(foodList:food, index:index)
+            }
+        }
+        return food
+    }
+    
+    
 }
