@@ -9,7 +9,8 @@
 import Foundation
 
 protocol GetCommentsDelegate{
+    func assignUserImage(image: UIImage)
     func gotData(comments:[Comment])
     func getCommentUser(user: [User], comments: [Comment])
-    func assignImageCommentUser(imageView: UIImageView, image: UIImage)
+    func assignUserImage(images: [Int:UIImage])
 }
