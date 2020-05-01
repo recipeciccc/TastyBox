@@ -18,11 +18,12 @@ class CommentsViewController: UIViewController {
     
     var comments: [Comment] = []
     var users: [User] = []
+    var usersImage = [Int: UIImage]()
     var recipe: RecipeDetail?
     
     let dataManager = CommentDataManager()
-    let userDataManager = UserdataManager()
-    let fetchData = FetchRecipeData()
+//    let userDataManager = UserdataManager()
+//    let fetchData = FetchRecipeData()
     
     let uid = Auth.auth().currentUser?.uid
     
@@ -34,16 +35,18 @@ class CommentsViewController: UIViewController {
         tableView.dataSource = self
         textView.delegate = self
         dataManager.delegate = self
-        userDataManager.delegate = self
-        fetchData.commentDelegate = self
+//        userDataManager.delegate = self
+//        fetchData.commentDelegate = self
         
         tableView.tableFooterView = UIView()
         
-        let dbRef = Firestore.firestore().collection("recipe").document(recipe?.recipeID ?? "")
-        let query_comment = dbRef.collection("comment").order(by: "time", descending: true)
+//        let dbRef = Firestore.firestore().collection("recipe").document(recipe?.recipeID ?? "")
+//        let query_comment = dbRef.collection("comment").order(by: "time", descending: true)
         
-        fetchData.getComments(queryRef: query_comment)
-        userDataManager.getUserImage(uid: uid!)
+        dataManager.getComments(recipeID: recipe?.recipeID ?? "")
+        dataManager.getUserImage()
+//        fetchData.getComments(queryRef: query_comment)
+//        userDataManager.getUserImage(uid: uid!)
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -121,9 +124,9 @@ extension CommentsViewController: UITableViewDataSource {
         
         cell.commentLabel.text = comments[indexPath.row].text
         
-        if !users.isEmpty {
+        if !users.isEmpty && !usersImage.isEmpty {
             cell.nameLabel.text = users[indexPath.row].name
-            fetchData.getCommenterImages(imageView: cell.userImageView!, users: self.users)
+            cell.userImageView.image = usersImage[indexPath.row]
         }
         
        
@@ -148,7 +151,12 @@ extension CommentsViewController: UITextViewDelegate {
                 //MARK: adjust it later
                 let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
                 toolbar.sizeToFit()
-                self.view.frame.origin.y -= 305 + toolbar.frame.height
+                if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+                    let keyboardRectangle = keyboardFrame.cgRectValue
+                    let keyboardHeight = keyboardRectangle.height
+                    self.view.frame.origin.y -= keyboardHeight
+                }
+//                self.view.frame.origin.y -= 305 //+ toolbar.frame.height
             }
             self.tapRecognizer.isEnabled = true
             
@@ -165,6 +173,15 @@ extension CommentsViewController: UITextViewDelegate {
 }
 
 extension CommentsViewController: GetCommentsDelegate {
+    func assignUserImage(image: UIImage) {
+         self.userImageView.image = image
+    }
+    
+    func assignUserImage(images: [Int : UIImage]) {
+        self.usersImage = images
+        self.tableView.reloadData()
+    }
+    
     func getCommentUser(user: [User], comments: [Comment]) {
         self.users = user
         // reorder users by date
@@ -180,25 +197,9 @@ extension CommentsViewController: GetCommentsDelegate {
         self.tableView.reloadData()
     }
     
-    func getCommentUser(user: [User]) {
-        
-    }
-    
-    func assignImageCommentUser(imageView: UIImageView, image: UIImage) {
-        imageView.image = image
-    }
-    
     func gotData(comments: [Comment]) {
         self.comments = comments
         self.tableView.reloadData()
     }
 }
 
-extension CommentsViewController: getUserDataDelegate {
-    func gotUserData(user: User) {
-    }
-    
-    func assignUserImage(image: UIImage) {
-        self.userImageView.image = image
-    }
-}

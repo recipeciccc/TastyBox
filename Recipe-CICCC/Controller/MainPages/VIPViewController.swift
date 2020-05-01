@@ -28,9 +28,6 @@ class VIPViewController: UIViewController {
         
         dataManager.isVIP()
         dataManager.findFollowing()
-        
-//        collectionview.imageDictionary = [#imageLiteral(resourceName: "Intrepid-Travel-Taiwan-dumplings-Xiao-Long-Bao_577219075"),#imageLiteral(resourceName: "13PAIRING-articleLarge"),#imageLiteral(resourceName: "Lemon-Garlic-Butter-Salmon-with-Zucchini-Noodles-recipes"),#imageLiteral(resourceName: "guacamole-foto-heroe-1024x723"),#imageLiteral(resourceName: "best-salad-7"),#imageLiteral(resourceName: "anna-pelzer-IGfIGP5ONV0-unsplash"),#imageLiteral(resourceName: "huevos-rancheros"),#imageLiteral(resourceName: "no-bake-valentines-day-dessert-recipes-cheesecake-1578947615"),#imageLiteral(resourceName: "anna-pelzer-IGfIGP5ONV0-unsplash"),#imageLiteral(resourceName: "guacamole-foto-heroe-1024x723")]
-//        collectionview.recipes = ["Title:\nCreator:","Title:\nCreator:","Title:\nCreator:","Title:\nCreator:","Title:\nCreator:","Title:\nCreator:","Title:\nCreator:","Title:\nCreator:","Title:\nCreator:","Title:\nCreator:"]
 
     }
 
