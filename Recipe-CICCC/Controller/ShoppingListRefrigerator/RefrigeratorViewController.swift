@@ -52,7 +52,10 @@ class RefrigeratorViewController: UIViewController {
         
     }
     
-    
+    override func viewWillAppear(_ animated: Bool) {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        dataManager.getRefrigeratorDetail(userID: uid)
+    }
     
     @objc func edit() {
         
@@ -97,6 +100,7 @@ class RefrigeratorViewController: UIViewController {
     @objc func add() {
         let vc = storyboard?.instantiateViewController(identifier: "editIngredientsRefrigerator") as! AddingIngredientRefrigeratorViewController
         vc.itemIsEmpty = true
+        vc.delegate = self
         navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -209,14 +213,14 @@ extension RefrigeratorViewController: getIngredientRefrigeratorDataDelegate {
 extension RefrigeratorViewController: AddingIngredientRefrigeratorViewControllerDelegate {
     func editIngredient(controller: AddingIngredientRefrigeratorViewController, name: String, amount: String) {
         guard let uid = Auth.auth().currentUser?.uid else { return }
-        dataManager.addIngredient(name: name, amount: amount, userID: uid)
+       dataManager.editIngredient(name: name, amount: amount, userID: uid)
         dataManager.getRefrigeratorDetail(userID: uid)
         tableView.reloadData()
     }
     
     func addIngredient(controller: AddingIngredientRefrigeratorViewController, name: String, amount: String) {
         guard let uid = Auth.auth().currentUser?.uid else { return }
-        dataManager.editIngredient(name: name, amount: amount, userID: uid)
+         dataManager.addIngredient(name: name, amount: amount, userID: uid)
         print(ingredients)
         dataManager.getRefrigeratorDetail(userID: uid)
         tableView.reloadData()
