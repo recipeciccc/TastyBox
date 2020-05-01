@@ -40,6 +40,11 @@ class ShoppinglistViewController: UIViewController {
         searchBar.delegate = self
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+         guard let uid = Auth.auth().currentUser?.uid else { return }
+         dataManager.getShoppingListDetail(userID: uid)
+    }
+    
     // MARK: - Navigation
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -107,7 +112,7 @@ extension ShoppinglistViewController: UITableViewDataSource {
         tableView.deselectRow(at: indexPath, animated: true)
         
         if !tableView.isEditing {
-            performSegue(withIdentifier: "editItemShopping", sender: nil)
+//            performSegue(withIdentifier: "editItemShopping", sender: nil)
         }
         else {
 //            ingredients[indexPath.row].isBought = true
