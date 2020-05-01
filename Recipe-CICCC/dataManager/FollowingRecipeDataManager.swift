@@ -40,6 +40,7 @@ class FollowingRecipeDataManager {
                        self.followingsIDs.append(data["id"] as! String)
                    }
                 self.delegate?.passFollowing(followingsIDs: self.followingsIDs)
+                self.getUserImage(IDs: self.followingsIDs)
                 }
                }
            }
@@ -132,23 +133,27 @@ class FollowingRecipeDataManager {
           }
       }
     
-    func getUserImage(uid: String) {
-           let imageRef = storageRef.child("user/\(uid)/userAccountImage")
-           var image: UIImage?
-           // Fetch the download URL
-           imageRef.getData(maxSize: 1 * 1024 * 1024) { data, error in
-               if error != nil {
-                   print(error?.localizedDescription as Any)
-               } else {
-                   if let imgData = data {
-                       
-                       print("imageRef: \(imageRef)")
-                       
-                       image = UIImage(data: imgData)!
-                       self.delegate?.assignUserImage(image: image!)
-                   }
-               }
-           }
+        func getUserImage(IDs: [String]) {
+        
+            for (index, id) in IDs.enumerated() {
+                let imageRef = storageRef.child("user/\(id)/userAccountImage")
+                var image: UIImage?
+                // Fetch the download URL
+                imageRef.getData(maxSize: 1 * 1024 * 1024) { data, error in
+                    if error != nil {
+                        print(error?.localizedDescription as Any)
+                    } else {
+                        if let imgData = data {
+                            
+                            print("imageRef: \(imageRef)")
+                            
+                            image = UIImage(data: imgData)!
+                            self.delegate?.assignUserImage(image: image!, index: index)
+                        }
+                    }
+                }
+            }
+           
        }
    
 
@@ -181,7 +186,7 @@ class FollowingRecipeDataManager {
 protocol FollowingRecipeDataManagerDelegate: class {
     func reloadData(data:[RecipeDetail], index: Int)
     func passFollowing(followingsIDs: [String])
-    func assignUserImage(image: UIImage)
+    func assignUserImage(image: UIImage, index: Int)
     func appendRecipeImage(imgs: UIImage, indexOfImage: Int, orderFollowing: Int)
     func assignFollowings(users: [User])
 }
