@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="GiG-KZ-gQh">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="GiG-KZ-gQh">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -45,20 +45,23 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iS3-MC-vsn">
-                                <rect key="frame" x="16" y="41" width="343" height="21"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                <color key="textColor" red="0.66666666669999997" green="0.47450980390000003" blue="0.25882352939999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image-1" translatesAutoresizingMaskIntoConstraints="NO" id="Dh0-3a-TgI">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iS3-MC-vsn">
+                                <rect key="frame" x="16" y="100" width="343" height="32.5"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="27"/>
+                                <color key="textColor" red="0.96701663729999998" green="0.73865300420000002" blue="0.2036716938" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U4o-pj-LtV">
-                                <rect key="frame" x="16" y="97" width="343" height="20.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U4o-pj-LtV">
+                                <rect key="frame" x="40" y="167.5" width="295" height="18"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <color key="textColor" red="0.66666666669999997" green="0.47450980390000003" blue="0.25882352939999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="biE-Kf-wDr">
-                                <rect key="frame" x="87.5" y="137.5" width="200" height="30"/>
+                                <rect key="frame" x="87.5" y="225.5" width="200" height="30"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="jWo-4q-ZMm"/>
@@ -68,11 +71,12 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nVK-7d-KNN">
-                                <rect key="frame" x="137.5" y="237.5" width="100" height="30"/>
+                                <rect key="frame" x="112.5" y="325.5" width="150" height="34"/>
                                 <color key="backgroundColor" red="1" green="0.57647058819999997" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="100" id="4Nq-vF-RVg"/>
+                                    <constraint firstAttribute="width" constant="150" id="4Nq-vF-RVg"/>
                                 </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                 <state key="normal" title="Register!">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
@@ -85,16 +89,20 @@
                         <constraints>
                             <constraint firstItem="nVK-7d-KNN" firstAttribute="top" secondItem="biE-Kf-wDr" secondAttribute="bottom" constant="70" id="0PT-db-W40"/>
                             <constraint firstItem="biE-Kf-wDr" firstAttribute="centerX" secondItem="dc8-Qz-T0o" secondAttribute="centerX" id="0z9-Km-Gtf"/>
-                            <constraint firstItem="kyj-my-O7U" firstAttribute="trailing" secondItem="U4o-pj-LtV" secondAttribute="trailing" constant="16" id="1Pb-W0-QNg"/>
+                            <constraint firstItem="Dh0-3a-TgI" firstAttribute="top" secondItem="kyj-my-O7U" secondAttribute="top" id="1Jb-We-ecW"/>
+                            <constraint firstItem="kyj-my-O7U" firstAttribute="trailing" secondItem="U4o-pj-LtV" secondAttribute="trailing" constant="40" id="1Pb-W0-QNg"/>
                             <constraint firstItem="iS3-MC-vsn" firstAttribute="centerX" secondItem="dc8-Qz-T0o" secondAttribute="centerX" id="2Sx-52-Aum"/>
-                            <constraint firstItem="biE-Kf-wDr" firstAttribute="top" secondItem="U4o-pj-LtV" secondAttribute="bottom" constant="20" id="2zC-JW-jOd"/>
+                            <constraint firstItem="biE-Kf-wDr" firstAttribute="top" secondItem="U4o-pj-LtV" secondAttribute="bottom" constant="40" id="2zC-JW-jOd"/>
+                            <constraint firstItem="Dh0-3a-TgI" firstAttribute="trailing" secondItem="kyj-my-O7U" secondAttribute="trailing" id="4ve-ew-wCI"/>
+                            <constraint firstItem="Dh0-3a-TgI" firstAttribute="bottom" secondItem="kyj-my-O7U" secondAttribute="bottom" id="VOd-7I-h0J"/>
                             <constraint firstItem="iS3-MC-vsn" firstAttribute="leading" secondItem="kyj-my-O7U" secondAttribute="leading" constant="16" id="boT-6u-shP"/>
                             <constraint firstItem="kyj-my-O7U" firstAttribute="trailing" secondItem="iS3-MC-vsn" secondAttribute="trailing" constant="16" id="d6y-Mt-zRv"/>
                             <constraint firstItem="U4o-pj-LtV" firstAttribute="top" secondItem="iS3-MC-vsn" secondAttribute="bottom" constant="35" id="de5-AR-7Uz"/>
                             <constraint firstItem="U4o-pj-LtV" firstAttribute="centerX" secondItem="dc8-Qz-T0o" secondAttribute="centerX" id="jlD-of-ZlP"/>
                             <constraint firstItem="biE-Kf-wDr" firstAttribute="centerX" secondItem="nVK-7d-KNN" secondAttribute="centerX" id="lha-qC-KNQ"/>
-                            <constraint firstItem="iS3-MC-vsn" firstAttribute="top" secondItem="kyj-my-O7U" secondAttribute="top" constant="41" id="qsg-zr-zky"/>
-                            <constraint firstItem="U4o-pj-LtV" firstAttribute="leading" secondItem="kyj-my-O7U" secondAttribute="leading" constant="16" id="uOf-BF-PA4"/>
+                            <constraint firstItem="iS3-MC-vsn" firstAttribute="top" secondItem="kyj-my-O7U" secondAttribute="top" constant="100" id="qsg-zr-zky"/>
+                            <constraint firstItem="Dh0-3a-TgI" firstAttribute="leading" secondItem="kyj-my-O7U" secondAttribute="leading" id="tKR-pm-Sge"/>
+                            <constraint firstItem="U4o-pj-LtV" firstAttribute="leading" secondItem="kyj-my-O7U" secondAttribute="leading" constant="40" id="uOf-BF-PA4"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="kyj-my-O7U"/>
                     </view>
@@ -110,4 +118,7 @@
             <point key="canvasLocation" x="855.20000000000005" y="-232.53373313343329"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Image-1" width="324" height="324"/>
+    </resources>
 </document>

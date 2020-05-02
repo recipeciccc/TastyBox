@@ -40,6 +40,11 @@ class IngredientsViewController: UIViewController {
      var mainViewController: MainPageViewController?
      var pageViewControllerDataSource: UIPageViewControllerDataSource?
     
+    var viewBackgroundColor = UIColor()
+    var viewTintColor = UIColor()
+    var click = Bool()
+    var selectedIndexPath = IndexPath()
+        
     weak var delegate: stopPagingDelegate?
     
     override func viewDidLoad() {
@@ -53,9 +58,6 @@ class IngredientsViewController: UIViewController {
         
         let query = db.collection("recipe").order(by: "like", descending: true)
         let _ = dataManager.Data(queryRef: query)
-                    
-        
-        
     }
    
 }
@@ -80,10 +82,12 @@ extension IngredientsViewController: UICollectionViewDataSource, UICollectionVie
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == TitleCollectionView{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ingredientTitleCell", for: indexPath) as! IngredientTitleCollectionViewCell
-            cell.ingredient.text = ingredientArray[indexPath.row]
+            cell.titleLabel.text = ingredientArray[indexPath.row]
+            cell.focusCell(active: indexPath == selectedIndexPath)
             if let view = cell.titleView{
-                roundCorners(view: view, cornerRadius: 8.0)
+               roundCorners(view: view, cornerRadius: 8.0)
             }
+            
             return cell
         }
         let cell2 = collectionView.dequeueReusableCell(withReuseIdentifier: "ingredientImageCell", for: indexPath) as! IngredientImageCollectionViewCell
@@ -96,15 +100,19 @@ extension IngredientsViewController: UICollectionViewDataSource, UICollectionVie
         return cell2
     }
     
+
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-       
+        selectedIndexPath = indexPath
+        
         if collectionView == TitleCollectionView {
+            collectionView.reloadData()
             showingIngredient = ingredientArray[indexPath.row]
             
             tempCreators.removeAll()
             tempImages.removeAll()
             
-            tempImages = Array(repeating: UIImage(), count: recipes[showingIngredient!]!.count)
+            tempImages = Array(repeating: UIImage(), count: recipes[showingIngredient!]?.count ?? -1)
             
             for (index ,recipe) in self.recipes[showingIngredient!]!.enumerated() {
                 dataManager.getImage(uid: recipe.userID, rid: recipe.recipeID, index: index)

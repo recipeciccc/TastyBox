@@ -34,8 +34,8 @@ class ExplainationVIPViewController: UIViewController {
            // convert your string to date
        
         
-        titleLabel.text = "Get 3 months Free VIP Membership!"
-        thereeMonthsFreeLabel.text = "You can see VIP recipes of your following creators if you sign up VIP membership!  \nOnly now it cost free in 3 months. if you sign up membership now, your free membership will be expired on \(stringExpiredDate) Click register and you can get 3 months free membership."
+        titleLabel.text = "Get 3 months Free\nVIP Membership!"
+        thereeMonthsFreeLabel.text = "* You can see VIP recipes of your following creators if you sign up VIP membership!  \n\n\n* Only now it cost free in 3 months. if you sign up membership now, your free membership will be expired on \(stringExpiredDate) Click register and you can get 3 months free membership."
         priceLabel.text = "$1.5 -> $0!"
     }
     
