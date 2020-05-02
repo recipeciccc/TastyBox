@@ -15,7 +15,7 @@ class PopularRecipeViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     var recipe: RecipeDetail?
-    var recipes = [RecipeDetail]()
+    var recipes: [RecipeDetail] = []
     var images:[Int:UIImage] = [:]
     let db = Firestore.firestore()
     
@@ -78,7 +78,7 @@ extension PopularRecipeViewController: UITableViewDataSource {
             }
                 
             else {
-                                
+                
                 let cell = (tableView.dequeueReusableCell(withIdentifier: "medal recipe", for: indexPath) as? Number123TableViewCell)!
                 cell.selectionStyle = .none
                 
@@ -157,10 +157,13 @@ extension PopularRecipeViewController: getDataFromFirebaseDelegate {
     
     func gotData(recipes: [RecipeDetail]) {
 //        self.recipes = recipes.sorted { $0.like > $1.like }
-        self.recipes = recipes
-        images.removeAll()
+        
+        if recipes.count == 10 {
+            self.recipes = recipes
+            images.removeAll()
         recipes.enumerated().map {
             dataManager.getImage(rid: $0.1.recipeID, uid: $0.1.userID, index: $0.0)
+            }
         }
         
         tableView.reloadData()

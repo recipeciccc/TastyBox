@@ -22,7 +22,7 @@ class IngredientsViewController: UIViewController {
     var showingIngredient: String?
     var imageDictionary: [String:[UIImage]] = [:]
     
-   
+    
     var allRecipes:[RecipeDetail] = []
     var recipes: [String: [RecipeDetail]] = [:]
     
@@ -38,14 +38,14 @@ class IngredientsViewController: UIViewController {
     let getRecipeImageDataManager = FetchRecipeImage()
     let refrigeratorDataManager = IngredientRefrigeratorDataManager()
     var tempImages: [UIImage] = []
-     var mainViewController: MainPageViewController?
-     var pageViewControllerDataSource: UIPageViewControllerDataSource?
+    var mainViewController: MainPageViewController?
+    var pageViewControllerDataSource: UIPageViewControllerDataSource?
     
     var viewBackgroundColor = UIColor()
     var viewTintColor = UIColor()
     var click = Bool()
     var selectedIndexPath = IndexPath()
-        
+    
     weak var delegate: stopPagingDelegate?
     
     override func viewDidLoad() {
@@ -63,7 +63,7 @@ class IngredientsViewController: UIViewController {
         let uid = Auth.auth().currentUser?.uid
         refrigeratorDataManager.getRefrigeratorDetail(userID: uid!)
     }
-   
+    
 }
 
 extension IngredientsViewController: UICollectionViewDataSource, UICollectionViewDelegate{
@@ -89,7 +89,7 @@ extension IngredientsViewController: UICollectionViewDataSource, UICollectionVie
             cell.titleLabel.text = ingredientArray[indexPath.row]
             cell.focusCell(active: indexPath == selectedIndexPath)
             if let view = cell.titleView{
-               roundCorners(view: view, cornerRadius: 8.0)
+                roundCorners(view: view, cornerRadius: 8.0)
             }
             
             return cell
@@ -104,7 +104,7 @@ extension IngredientsViewController: UICollectionViewDataSource, UICollectionVie
         return cell2
     }
     
-
+    
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectedIndexPath = indexPath
@@ -115,25 +115,25 @@ extension IngredientsViewController: UICollectionViewDataSource, UICollectionVie
             
             tempCreators.removeAll()
             tempImages.removeAll()
-    
+            
             if recipes[showingIngredient!] != nil{
                 tempImages = Array(repeating: UIImage(), count: recipes[showingIngredient!]!.count)
                 
                 for (index ,recipe) in self.recipes[showingIngredient!]!.enumerated(){
                     dataManager.getImage(uid: recipe.userID, rid: recipe.recipeID, index: index)
-                  dataManager.getUserDetail(id: recipe.userID)
-                  
+                    dataManager.getUserDetail(id: recipe.userID)
+                    
                 }
             }
             self.ImageCollecitonView.reloadData()
         }
         
         if collectionView == ImageCollecitonView {
-        let vc = UIStoryboard(name: "RecipeDetail", bundle: nil).instantiateViewController(identifier: "detailvc") as! RecipeDetailViewController
-        vc.creator = creators[showingIngredient!]![indexPath.row]
-        vc.mainPhoto = imageDictionary[showingIngredient!]![indexPath.row]
-        vc.recipe = recipes[showingIngredient!]![indexPath.row]
-        navigationController?.pushViewController(vc, animated: true)
+            let vc = UIStoryboard(name: "RecipeDetail", bundle: nil).instantiateViewController(identifier: "detailvc") as! RecipeDetailViewController
+            vc.creator = creators[showingIngredient!]![indexPath.row]
+            vc.mainPhoto = imageDictionary[showingIngredient!]![indexPath.row]
+            vc.recipe = recipes[showingIngredient!]![indexPath.row]
+            navigationController?.pushViewController(vc, animated: true)
         }
     }
     
@@ -141,13 +141,13 @@ extension IngredientsViewController: UICollectionViewDataSource, UICollectionVie
                            shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         
         return self.ImageCollecitonView.isDecelerating || self.ImageCollecitonView.contentOffset.y < 0 || self.ImageCollecitonView.contentOffset.y > max(0, self.ImageCollecitonView.contentSize.height - self.ImageCollecitonView.bounds.size.height); // @Jordan edited - we don't need to always enable simultaneous gesture for bounce enabled tableViews
-
+        
     }
     
     func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
         
         if let gestureRecognizer = gestureRecognizer as? UIPanGestureRecognizer {
-        
+            
             let velocity: CGPoint = gestureRecognizer.velocity(in: ImageCollecitonView)
             if (abs(velocity.y) * 2 < abs(velocity.x)) {
                 return true
@@ -155,25 +155,25 @@ extension IngredientsViewController: UICollectionViewDataSource, UICollectionVie
         }
         return false
     }
-  
+    
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-           
-         mainViewController = self.parent as? MainPageViewController
-         
-         if  mainViewController!.dataSource == nil {
-             
-             mainViewController!.dataSource = mainViewController
-         }
-     }
-     
-     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-         mainViewController = self.parent as? MainPageViewController
-         pageViewControllerDataSource = mainViewController!.dataSource
-                 
-         mainViewController!.dataSource = nil
-         mainViewController?.isPaging = false
-     }
-     
+        
+        mainViewController = self.parent as? MainPageViewController
+        
+        if  mainViewController!.dataSource == nil {
+            
+            mainViewController!.dataSource = mainViewController
+        }
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        mainViewController = self.parent as? MainPageViewController
+        pageViewControllerDataSource = mainViewController!.dataSource
+        
+        mainViewController!.dataSource = nil
+        mainViewController?.isPaging = false
+    }
+    
 }
 
 extension IngredientsViewController: UICollectionViewDelegateFlowLayout {
@@ -211,7 +211,7 @@ extension IngredientsViewController: UICollectionViewDelegateFlowLayout {
     //
     
     // they and self.ispaging = false in pageviewcontroller prevent from paging when collection view is scrollings
- 
+    
     
     
     func roundCorners(view: UIView, cornerRadius: Double) {
@@ -243,22 +243,22 @@ extension IngredientsViewController: fetchDataInIngredientsDelegate {
             
             for (index, ingredient) in ingredientArray.enumerated() {
                 
-               
+                
                 if index != 0 { searchingIngredient = ingredient }
-               
+                
                 haveSearchingIngredient(recipes: self.allRecipes, ingredients: ingredientsDictionary)
-                 print("\(index): \(recipes)")
+                print("\(index): \(recipes)")
             }
             
-                  if searchingIngredient == ingredientArray.last {
-                    tempImages = Array(repeating: UIImage(), count: recipes[showingIngredient!]!.count)
-                    for (index, recipe) in self.recipes[showingIngredient!]!.enumerated(){
-                        
-                        dataManager.getImage(uid: recipe.userID, rid: recipe.recipeID, index: index)
-                        dataManager.getUserDetail(id: recipe.userID)
-                        
-                      }
-                  }
+            if searchingIngredient == ingredientArray.last {
+                tempImages = Array(repeating: UIImage(), count: recipes[showingIngredient!]!.count)
+                for (index, recipe) in self.recipes[showingIngredient!]!.enumerated(){
+                    
+                    dataManager.getImage(uid: recipe.userID, rid: recipe.recipeID, index: index)
+                    dataManager.getUserDetail(id: recipe.userID)
+                    
+                }
+            }
         }
     }
     
@@ -267,37 +267,39 @@ extension IngredientsViewController: fetchDataInIngredientsDelegate {
         
         self.allRecipes = data
         
-        lastRecipeID = self.allRecipes.last!.recipeID
+        guard (self.allRecipes.last?.recipeID) != nil else {
+            return
+        }
         
         // get ingredients of all recipes
         for recipe in self.allRecipes {
             
             dataManager.getIngredients(userId: recipe.userID, recipeId: recipe.recipeID)
-           
+            
         }
-      
+        
     }
     
     func haveSearchingIngredient(recipes: [RecipeDetail], ingredients: [String : [Ingredient]]) {
         var resultRecipes: [RecipeDetail] = []
         
-              for recipe in allRecipes {
-                  for ingredient in ingredientsDictionary {
-                      
-                    if recipe.recipeID == ingredient.key {
-                          
-                          for element in ingredient.value {
-                            let nameUppercased = element.name.capitalized
-                            if nameUppercased == searchingIngredient! {
-                                  resultRecipes.append(recipe)
-                                  break
-                              }
-                          }
-                          break
-                      }
-                  }
-              }
-              
+        for recipe in allRecipes {
+            for ingredient in ingredientsDictionary {
+                
+                if recipe.recipeID == ingredient.key {
+                    
+                    for element in ingredient.value {
+                        let nameUppercased = element.name.capitalized
+                        if nameUppercased == searchingIngredient! {
+                            resultRecipes.append(recipe)
+                            break
+                        }
+                    }
+                    break
+                }
+            }
+        }
+        
         self.recipes[searchingIngredient!] = resultRecipes
     }
     
@@ -305,14 +307,17 @@ extension IngredientsViewController: fetchDataInIngredientsDelegate {
 
 extension IngredientsViewController: getIngredientRefrigeratorDataDelegate{
     func gotData(ingredients: [IngredientRefrigerator]) {
-        var array = [String]()
-        for item in ingredients{
-            let name = item.name
-            array.append(name)
+        
+        if !ingredients.isEmpty {
+            var array = [String]()
+            for item in ingredients{
+                let name = item.name
+                array.append(name)
+            }
+            ingredientArray = array
+            searchingIngredient = ingredientArray[0]
+            showingIngredient = searchingIngredient
+            TitleCollectionView.reloadData()
         }
-        ingredientArray = array
-        searchingIngredient = ingredientArray[0]
-        showingIngredient = searchingIngredient
-        TitleCollectionView.reloadData()
     }
 }
