@@ -17,7 +17,7 @@ class FollowingRecipeViewController: UIViewController {
     
     @IBOutlet weak var followingTableView: UITableView!
     
-    var creatorImageList = [UIImage]()
+    var creatorImageList = [Int:UIImage]()
     var creatorNameList = [String]()
     var recipeImageOneFollowinghas: [Int:UIImage] = [:]
     var recipeImages:[Int: [Int: UIImage]] = [:]
@@ -163,10 +163,14 @@ extension FollowingRecipeViewController : UICollectionViewDelegate,UICollectionV
 }
 
 extension FollowingRecipeViewController : FollowingRecipeDataManagerDelegate {
+    func assignUserImage(image: UIImage, index: Int) {
+        self.creatorImageList[index] = image
+        self.followingTableView.reloadData()
+    }
+    
     func assignFollowings(users: [User]) {
         
         self.creators = users
-               
         self.followingTableView.reloadData()
            
     }
@@ -204,7 +208,7 @@ extension FollowingRecipeViewController : FollowingRecipeDataManagerDelegate {
             
             followingsIDs.enumerated().map {
                 
-                dataManager.getUserImage(uid: followingsIDs[$0.0])
+//                dataManager.getUserImage(IDs: followingsIDs[$0.0])
                 
                 let queryRef = Firestore.firestore().collection("recipe").whereField("userID", isEqualTo: $0.1).order(by: "time", descending: true).limit(to: 10)
                 
@@ -213,12 +217,6 @@ extension FollowingRecipeViewController : FollowingRecipeDataManagerDelegate {
             }
             
         }
-    }
-    
-    
-    func assignUserImage(image: UIImage) {
-        self.creatorImageList.append(image)
-        self.followingTableView.reloadData()
     }
     
     func appendRecipeImage(imgs: UIImage, indexOfImage: Int, orderFollowing: Int) {

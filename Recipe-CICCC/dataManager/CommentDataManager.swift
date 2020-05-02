@@ -16,6 +16,8 @@ class CommentDataManager {
     
     var comments:[Comment] = []
     var user:User?
+    var users:[User] = []
+    var usersImages = [Int: UIImage]()
     
     func addComment(recipeId: String, userId: String, text: String, time: Timestamp) {
         db.collection("recipe").document(recipeId).collection("comment").document().setData([
@@ -29,12 +31,34 @@ class CommentDataManager {
                 print("Document successfully written!")
             }
         }
-        self.getComments(recipeId: recipeId)
+        self.getComments(recipeID: recipeId)
     }
     
-    func getComments(recipeId: String) {
+    func getUserImage() {
         
-        db.collection("recipe").document(recipeId).collection("comment").addSnapshotListener { querySnapshot, error in
+        let uid = Auth.auth().currentUser?.uid
+        
+        let imageRef = Storage.storage().reference().child("user/\(uid!)/userAccountImage")
+        var image: UIImage?
+        // Fetch the download URL
+        imageRef.getData(maxSize: 1 * 1024 * 1024) { data, error in
+            if error != nil {
+                print(error?.localizedDescription as Any)
+            } else {
+                if let imgData = data {
+                    
+                    print("imageRef: \(imageRef)")
+                    
+                    image = UIImage(data: imgData)!
+                    self.delegate?.assignUserImage(image: image!)
+                }
+            }
+        }
+    }
+    
+    func getComments(recipeID: String) {
+        
+        db.collection("recipe").document(recipeID).collection("comment").order(by: "time", descending: true).addSnapshotListener { querySnapshot, error in
             if error != nil {
                 print("Error getting documents: \(String(describing: error))")
             } else {
@@ -55,35 +79,78 @@ class CommentDataManager {
                         
                         self.comments.append(comment)
                     }
+                    
                     self.delegate?.gotData(comments: self.comments)
+
+                    if !self.comments.isEmpty {
+                        self.getCommentedUsers()
+                    }
+                    
                 }
                 
             }
             
         }
         
-        if !comments.isEmpty {
-            for comment in comments {
-                db.collection("user").document(comment.userId).addSnapshotListener { querySnapshot, error in
-                    if error != nil {
-                        print("Error getting documents: \(String(describing: error))")
-                    } else {
-                        let data = querySnapshot!.data()
-                        
-                        print("data count: \(data!.count)")
-                        
-                        
-                        let userID = data!["id"] as? String
-                        let name = data!["userName"] as? String
-                        let familySize = data!["familySize"] as? Int
-                        let cuisineType = data!["cuisineType"] as? String
-                        let isVIP = data!["isVIP"] as? Bool
-                                           
-                        self.user = User(userID: userID!, name: name!, cuisineType: cuisineType!, familySize: familySize!, isVIP: isVIP)
-                    }
-                }
-            }
-        }
-        
     }
+    
+    fileprivate func getCommentedUsers() {
+          for (index, comment) in comments.enumerated() {
+              db.collection("user").document(comment.userId).addSnapshotListener { querySnapshot, error in
+                  if error != nil {
+                      print("Error getting documents: \(String(describing: error))")
+                  } else {
+                      let data = querySnapshot!.data()
+                      
+                      print("data count: \(data!.count)")
+                      
+                      
+                      let userID = data!["id"] as? String
+                      let name = data!["userName"] as? String
+                      let familySize = data!["familySize"] as? Int
+                      let cuisineType = data!["cuisineType"] as? String
+                      let isVIP = data!["isVIP"] as? Bool
+                      
+                      self.user = User(userID: userID!, name: name!, cuisineType: cuisineType!, familySize: familySize!, isVIP: isVIP)
+                      self.users.append(self.user!)
+                      
+                      if index == self.comments.count - 1 {
+                          self.getUserImage(uid: self.user!.userID, index: index)
+                         
+                      } else {
+                          self.getUserImage(uid: self.user!.userID, index: index)
+                      }
+                      
+                  }
+              }
+          }
+      }
+    
+    
+    func getUserImage(uid: String, index: Int) {
+        
+        let storageRef = Storage.storage().reference()
+           let imageRef = storageRef.child("user/\(uid)/userAccountImage")
+           var image: UIImage?
+           // Fetch the download URL
+           imageRef.getData(maxSize: 1 * 1024 * 1024) { data, error in
+               if error != nil {
+                   print(error?.localizedDescription as Any)
+               } else {
+                   if let imgData = data {
+                       
+//                       print("imageRef: \(imageRef)")
+                       
+                    image = UIImage(data: imgData)!
+                    self.usersImages[index] = image
+                    
+                    if self.comments.count == self.usersImages.count {
+                        self.delegate?.getCommentUser(user: self.users, comments: self.comments)
+                        self.delegate?.assignUserImage(images: self.usersImages)
+                    }
+                    
+                   }
+               }
+           }
+       }
 }

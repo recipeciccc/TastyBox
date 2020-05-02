@@ -50,12 +50,7 @@ class LoginMainpageViewController: UIViewController, UITextFieldDelegate {
         
         if Auth.auth().currentUser != nil {
                  // User is signed in.
-//            if let viewWithTag = self.view.viewWithTag(100) {
-//                viewWithTag.removeFromSuperview()
-//            }else{
-//                print("No!")
-//            }
-            
+
             let Storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
             let vc = Storyboard.instantiateViewController(withIdentifier: "Discovery")
             self.navigationController?.pushViewController(vc, animated: true)

@@ -232,7 +232,7 @@ class VIPDataManager {
                     if let imgData = data{
                         image = UIImage(data: imgData)!
                         self.recipeImages[index] = image
-                        if index == self.recipeList.count - 1 {
+                        if self.recipeList.count == self.recipeImages.count {
                             self.delegate?.reloadImages(data: self.recipeImages)
                         }
                     }

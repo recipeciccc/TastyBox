@@ -134,26 +134,26 @@ class FetchRecipeData{
     
     // get images of users who commented and assign image to imageView
     
-    func getCommenterImages(imageView: UIImageView, users: [User]) {
-        for user in users {
-            let imageRef = storageRef.child("user/\(user.userID)/userAccountImage")
-            var image: UIImage?
-            // Fetch the download URL
-            imageRef.getData(maxSize: 1 * 1024 * 1024) { data, error in
-                if error != nil {
-                    print(error?.localizedDescription as Any)
-                } else {
-                    if let imgData = data {
-                        
-                        print("imageRef: \(imageRef)")
-                        
-                        image = UIImage(data: imgData)!
-                        self.commentDelegate?.assignImageCommentUser(imageView: imageView, image: image!)
-                    }
-                }
-            }
-        }
-    }
+//    func getCommenterImages(imageView: UIImageView, users: [User]) {
+//        for user in users {
+//            let imageRef = storageRef.child("user/\(user.userID)/userAccountImage")
+//            var image: UIImage?
+//            // Fetch the download URL
+//            imageRef.getData(maxSize: 1 * 1024 * 1024) { data, error in
+//                if error != nil {
+//                    print(error?.localizedDescription as Any)
+//                } else {
+//                    if let imgData = data {
+//                        
+//                        print("imageRef: \(imageRef)")
+//                        
+//                        image = UIImage(data: imgData)!
+//                        self.commentDelegate?.assignImageCommentUser(imageView: imageView, image: image!)
+//                    }
+//                }
+//            }
+//        }
+//    }
     
     func getComments(queryRef: Query) {
         
