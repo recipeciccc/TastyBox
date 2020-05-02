@@ -36,6 +36,7 @@ class IngredientsViewController: UIViewController {
     let db = Firestore.firestore()
     let dataManager = fetchDataInIngredients()
     let getRecipeImageDataManager = FetchRecipeImage()
+    let refrigeratorDataManager = IngredientRefrigeratorDataManager()
     var tempImages: [UIImage] = []
      var mainViewController: MainPageViewController?
      var pageViewControllerDataSource: UIPageViewControllerDataSource?
@@ -49,15 +50,18 @@ class IngredientsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        ingredientArray = ["Tomato","Beef","Egg","Broccoli","Carrot","Onion","Test for length"]
         
+        ingredientArray = ["Tomato","Beef","Egg","Broccoli","Carrot","Onion","Test for length"]
+        refrigeratorDataManager.delegate = self
         dataManager.delegate = self
         ImageCollecitonView.delegate = self
-        searchingIngredient = "Tomato"
-        showingIngredient = searchingIngredient
+        
         
         let query = db.collection("recipe").order(by: "like", descending: true)
         let _ = dataManager.Data(queryRef: query)
+        
+        let uid = Auth.auth().currentUser?.uid
+        refrigeratorDataManager.getRefrigeratorDetail(userID: uid!)
     }
    
 }
@@ -70,11 +74,11 @@ extension IngredientsViewController: UICollectionViewDataSource, UICollectionVie
         }
         
         if collectionView == ImageCollecitonView {
-            
-            if recipes[showingIngredient!] != nil {
-                return recipes[showingIngredient!]!.count
+            if showingIngredient != nil{
+                if recipes[showingIngredient!] != nil {
+                    return recipes[showingIngredient!]!.count
+                }
             }
-            
         }
         return 0
     }
@@ -111,15 +115,16 @@ extension IngredientsViewController: UICollectionViewDataSource, UICollectionVie
             
             tempCreators.removeAll()
             tempImages.removeAll()
-            
-            tempImages = Array(repeating: UIImage(), count: recipes[showingIngredient!]?.count ?? -1)
-            
-            for (index ,recipe) in self.recipes[showingIngredient!]!.enumerated() {
-                dataManager.getImage(uid: recipe.userID, rid: recipe.recipeID, index: index)
-              dataManager.getUserDetail(id: recipe.userID)
-              
+    
+            if recipes[showingIngredient!] != nil{
+                tempImages = Array(repeating: UIImage(), count: recipes[showingIngredient!]!.count)
+                
+                for (index ,recipe) in self.recipes[showingIngredient!]!.enumerated(){
+                    dataManager.getImage(uid: recipe.userID, rid: recipe.recipeID, index: index)
+                  dataManager.getUserDetail(id: recipe.userID)
+                  
+                }
             }
-            
             self.ImageCollecitonView.reloadData()
         }
         
@@ -296,4 +301,18 @@ extension IngredientsViewController: fetchDataInIngredientsDelegate {
         self.recipes[searchingIngredient!] = resultRecipes
     }
     
+}
+
+extension IngredientsViewController: getIngredientRefrigeratorDataDelegate{
+    func gotData(ingredients: [IngredientRefrigerator]) {
+        var array = [String]()
+        for item in ingredients{
+            let name = item.name
+            array.append(name)
+        }
+        ingredientArray = array
+        searchingIngredient = ingredientArray[0]
+        showingIngredient = searchingIngredient
+        TitleCollectionView.reloadData()
+    }
 }
