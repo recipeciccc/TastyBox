@@ -1592,7 +1592,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "ca.acworkshop.Recipe-CICCC";
+				PRODUCT_BUNDLE_IDENTIFIER = "ca.TastyBox-CICCC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/$(PRODUCT)/Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
@@ -1615,7 +1615,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "ca.acworkshop.Recipe-CICCC";
+				PRODUCT_BUNDLE_IDENTIFIER = "ca.TastyBox-CICCC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/$(PRODUCT)/Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
