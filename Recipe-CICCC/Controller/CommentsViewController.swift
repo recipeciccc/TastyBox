@@ -30,6 +30,16 @@ class CommentsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let alert = UIAlertController(title: "Comming Soon!", message: "You can leave comments after comming soon update! Hope you will be able to leave fancy comments soon!", preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(title: "OK", style: .cancel, handler: { action in
+            self.navigationController?.popViewController(animated: true)
+        })
+        
+        alert.addAction(okAction)
+        
+        self.present(alert, animated: true, completion: nil)
+        
         // Do any additional setup after loading the view.
         
         tableView.dataSource = self
@@ -40,13 +50,17 @@ class CommentsViewController: UIViewController {
         
         tableView.tableFooterView = UIView()
         
+         //uncomment it below after can comment
 //        let dbRef = Firestore.firestore().collection("recipe").document(recipe?.recipeID ?? "")
 //        let query_comment = dbRef.collection("comment").order(by: "time", descending: true)
         
-        dataManager.getComments(recipeID: recipe?.recipeID ?? "")
-        dataManager.getUserImage()
+//        dataManager.getComments(recipeID: recipe?.recipeID ?? "")
+//        dataManager.getUserImage()
 //        fetchData.getComments(queryRef: query_comment)
 //        userDataManager.getUserImage(uid: uid!)
+        
+        // get rid of it below after can comment
+        textView.isHidden = true
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
