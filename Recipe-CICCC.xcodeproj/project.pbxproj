@@ -37,7 +37,6 @@
 		40A8052123A08C130094E52A /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A8052023A08C130094E52A /* ResetPasswordViewController.swift */; };
 		40BF229323D6AD920009FC69 /* LoginMainpageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40BF229223D6AD920009FC69 /* LoginMainpageViewController.swift */; };
 		40E59BED23EE6BC60049F9B6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40E59BEC23EE6BC60049F9B6 /* Main.storyboard */; };
-		484DADF5A56D21C65AE0925A /* Pods_Recipe_CICCCTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E32D65DEEA3D2064428CF46F /* Pods_Recipe_CICCCTests.framework */; };
 		69124FAA23ECE2C100D116B4 /* followingRecipeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69124FA923ECE2C100D116B4 /* followingRecipeCollectionViewCell.swift */; };
 		691F6AC923FFB0FB005D3231 /* VIPViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 691F6AC823FFB0FB005D3231 /* VIPViewController.swift */; };
 		69202F2E23FB3D33001AB4A9 /* EditorChoice.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 69202F2D23FB3D33001AB4A9 /* EditorChoice.storyboard */; };
@@ -113,6 +112,7 @@
 		6F49661E2410DD1500397B4F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F49661D2410DD1500397B4F /* User.swift */; };
 		6F4A345C2432F4E000909D7A /* FolllowingFollowerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4A345B2432F4E000909D7A /* FolllowingFollowerDelegate.swift */; };
 		6F4F105B245B802400D8BD15 /* SettingNotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4F105A245B802400D8BD15 /* SettingNotificationViewController.swift */; };
+		6F4F105C245E8FA300D8BD15 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6F27D187242A090C00B5B071 /* Info.plist */; };
 		6F50283A2415B79D0031D204 /* RefigeratorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5028362415B79C0031D204 /* RefigeratorTableViewCell.swift */; };
 		6F5344B0244D37940004F78D /* fetchDataInIngredients.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5344AF244D37930004F78D /* fetchDataInIngredients.swift */; };
 		6F5344B2244D37A80004F78D /* RecipeViewControllerDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5344B1244D37A80004F78D /* RecipeViewControllerDataManager.swift */; };
@@ -187,26 +187,8 @@
 		6FEC4DBC2400D26E00AB2785 /* UnderNo4TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FEC4DBB2400D26E00AB2785 /* UnderNo4TableViewCell.swift */; };
 		6FF4BE33243EDE35009C5696 /* passTheIDsDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF4BE32243EDE35009C5696 /* passTheIDsDelegate.swift */; };
 		6FF61C61241501D8008B55B5 /* RefrigeratorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF61C60241501D8008B55B5 /* RefrigeratorViewController.swift */; };
-		B85B44E4B7712DCAEA7533E2 /* Pods_Recipe_CICCC_Recipe_CICCCUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0AA45E6A7912FC6432A5B9C /* Pods_Recipe_CICCC_Recipe_CICCCUITests.framework */; };
 		D842848E4079AD1F8EF4DF88 /* Pods_Recipe_CICCC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D89B921DC6BD386DA580F255 /* Pods_Recipe_CICCC.framework */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		40127AE123A06E4700260AF0 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 40127AC223A06E3C00260AF0 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 40127AC923A06E3C00260AF0;
-			remoteInfo = "Recipe-CICCC";
-		};
-		40127AEC23A06E4700260AF0 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 40127AC223A06E3C00260AF0 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 40127AC923A06E3C00260AF0;
-			remoteInfo = "Recipe-CICCC";
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		6FEE5932245A03C9003243E7 /* Embed App Extensions */ = {
@@ -226,8 +208,6 @@
 		40127ACD23A06E3C00260AF0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		40127ACF23A06E3C00260AF0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		40127AD923A06E4600260AF0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		40127AE023A06E4700260AF0 /* Recipe-CICCCTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Recipe-CICCCTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		40127AEB23A06E4700260AF0 /* Recipe-CICCCUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Recipe-CICCCUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		402CAC6A23D92A37004A46F1 /* searchStoresTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = searchStoresTableViewCell.swift; sourceTree = "<group>"; };
 		4069254623D8346F00059C8E /* NumberTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberTableViewCell.swift; sourceTree = "<group>"; };
 		4069254723D8346F00059C8E /* ButtonTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonTableViewCell.swift; sourceTree = "<group>"; };
@@ -439,22 +419,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		40127ADD23A06E4700260AF0 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				484DADF5A56D21C65AE0925A /* Pods_Recipe_CICCCTests.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		40127AE823A06E4700260AF0 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				B85B44E4B7712DCAEA7533E2 /* Pods_Recipe_CICCC_Recipe_CICCCUITests.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -479,8 +443,6 @@
 			isa = PBXGroup;
 			children = (
 				40127ACA23A06E3C00260AF0 /* Recipe-CICCC.app */,
-				40127AE023A06E4700260AF0 /* Recipe-CICCCTests.xctest */,
-				40127AEB23A06E4700260AF0 /* Recipe-CICCCUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -983,46 +945,6 @@
 			productReference = 40127ACA23A06E3C00260AF0 /* Recipe-CICCC.app */;
 			productType = "com.apple.product-type.application";
 		};
-		40127ADF23A06E4700260AF0 /* Recipe-CICCCTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 40127AF723A06E4700260AF0 /* Build configuration list for PBXNativeTarget "Recipe-CICCCTests" */;
-			buildPhases = (
-				8F414096B63FDB0ADDDDB93E /* [CP] Check Pods Manifest.lock */,
-				40127ADC23A06E4700260AF0 /* Sources */,
-				40127ADD23A06E4700260AF0 /* Frameworks */,
-				40127ADE23A06E4700260AF0 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				40127AE223A06E4700260AF0 /* PBXTargetDependency */,
-			);
-			name = "Recipe-CICCCTests";
-			productName = "Recipe-CICCCTests";
-			productReference = 40127AE023A06E4700260AF0 /* Recipe-CICCCTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		40127AEA23A06E4700260AF0 /* Recipe-CICCCUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 40127AFA23A06E4700260AF0 /* Build configuration list for PBXNativeTarget "Recipe-CICCCUITests" */;
-			buildPhases = (
-				6E3A42C2FA78AE882F0D45B1 /* [CP] Check Pods Manifest.lock */,
-				40127AE723A06E4700260AF0 /* Sources */,
-				40127AE823A06E4700260AF0 /* Frameworks */,
-				40127AE923A06E4700260AF0 /* Resources */,
-				A83A9C1EE870F241A6EDE305 /* [CP] Embed Pods Frameworks */,
-				CB7CC069EE4A6BC6258C85AF /* [CP] Copy Pods Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				40127AED23A06E4700260AF0 /* PBXTargetDependency */,
-			);
-			name = "Recipe-CICCCUITests";
-			productName = "Recipe-CICCCUITests";
-			productReference = 40127AEB23A06E4700260AF0 /* Recipe-CICCCUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -1035,14 +957,6 @@
 				TargetAttributes = {
 					40127AC923A06E3C00260AF0 = {
 						CreatedOnToolsVersion = 11.3;
-					};
-					40127ADF23A06E4700260AF0 = {
-						CreatedOnToolsVersion = 11.3;
-						TestTargetID = 40127AC923A06E3C00260AF0;
-					};
-					40127AEA23A06E4700260AF0 = {
-						CreatedOnToolsVersion = 11.3;
-						TestTargetID = 40127AC923A06E3C00260AF0;
 					};
 				};
 			};
@@ -1060,8 +974,6 @@
 			projectRoot = "";
 			targets = (
 				40127AC923A06E3C00260AF0 /* Recipe-CICCC */,
-				40127ADF23A06E4700260AF0 /* Recipe-CICCCTests */,
-				40127AEA23A06E4700260AF0 /* Recipe-CICCCUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -1079,6 +991,7 @@
 				69909F432456B81000AACEC7 /* Setting.storyboard in Resources */,
 				6F8BE77523EEA96300CEA348 /* Map.storyboard in Resources */,
 				6999A49324170EE40013BD5B /* Podfile in Resources */,
+				6F4F105C245E8FA300D8BD15 /* Info.plist in Resources */,
 				69202F2E23FB3D33001AB4A9 /* EditorChoice.storyboard in Resources */,
 				693CA00A23FF437600957EF2 /* RecipeCollectionViewCell.xib in Resources */,
 				69909F4F2458EF7900AACEC7 /* ContactPage.storyboard in Resources */,
@@ -1100,20 +1013,6 @@
 				6FEC4DB8240088BD00AB2785 /* popularPage.storyboard in Resources */,
 				408C319D23C98C1E00E74E4A /* MyPage.storyboard in Resources */,
 				6F98CD1E241B4DE000C9D94B /* Recipe-CICCCTests in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		40127ADE23A06E4700260AF0 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		40127AE923A06E4700260AF0 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1142,50 +1041,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		6E3A42C2FA78AE882F0D45B1 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Recipe-CICCC-Recipe-CICCCUITests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		8F414096B63FDB0ADDDDB93E /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Recipe-CICCCTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
 		A2A997F97DC564311E949389 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1201,40 +1056,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Recipe-CICCC/Pods-Recipe-CICCC-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A83A9C1EE870F241A6EDE305 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Recipe-CICCC-Recipe-CICCCUITests/Pods-Recipe-CICCC-Recipe-CICCCUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Recipe-CICCC-Recipe-CICCCUITests/Pods-Recipe-CICCC-Recipe-CICCCUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Recipe-CICCC-Recipe-CICCCUITests/Pods-Recipe-CICCC-Recipe-CICCCUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		CB7CC069EE4A6BC6258C85AF /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Recipe-CICCC-Recipe-CICCCUITests/Pods-Recipe-CICCC-Recipe-CICCCUITests-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Recipe-CICCC-Recipe-CICCCUITests/Pods-Recipe-CICCC-Recipe-CICCCUITests-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Recipe-CICCC-Recipe-CICCCUITests/Pods-Recipe-CICCC-Recipe-CICCCUITests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		F846AB9BAC2C2CC04E68B52A /* [CP] Embed Pods Frameworks */ = {
@@ -1414,34 +1235,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		40127ADC23A06E4700260AF0 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		40127AE723A06E4700260AF0 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		40127AE223A06E4700260AF0 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 40127AC923A06E3C00260AF0 /* Recipe-CICCC */;
-			targetProxy = 40127AE123A06E4700260AF0 /* PBXContainerItemProxy */;
-		};
-		40127AED23A06E4700260AF0 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 40127AC923A06E3C00260AF0 /* Recipe-CICCC */;
-			targetProxy = 40127AEC23A06E4700260AF0 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		40127AD823A06E4600260AF0 /* LaunchScreen.storyboard */ = {
@@ -1585,6 +1379,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "Recipe-CICCC/Recipe-CICCC.entitlements";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1.2;
 				DEVELOPMENT_TEAM = 3A39A8Y7MG;
 				INFOPLIST_FILE = "Recipe-CICCC/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
@@ -1608,6 +1403,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "Recipe-CICCC/Recipe-CICCC.entitlements";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1.2;
 				DEVELOPMENT_TEAM = 3A39A8Y7MG;
 				INFOPLIST_FILE = "Recipe-CICCC/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
@@ -1620,94 +1416,6 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/$(PRODUCT)/Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
-		40127AF823A06E4700260AF0 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = A409CE6732164C8BD8EBF112 /* Pods-Recipe-CICCCTests.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 58BN93L43H;
-				INFOPLIST_FILE = "Recipe-CICCCTests/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "ca.acworkshop.Recipe-CICCCTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Recipe-CICCC.app/Recipe-CICCC";
-			};
-			name = Debug;
-		};
-		40127AF923A06E4700260AF0 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 84CA4FDB7B93246BD634D653 /* Pods-Recipe-CICCCTests.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 58BN93L43H;
-				INFOPLIST_FILE = "Recipe-CICCCTests/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "ca.acworkshop.Recipe-CICCCTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Recipe-CICCC.app/Recipe-CICCC";
-			};
-			name = Release;
-		};
-		40127AFB23A06E4700260AF0 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 54B7F2427838A0089A954DF9 /* Pods-Recipe-CICCC-Recipe-CICCCUITests.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 58BN93L43H;
-				INFOPLIST_FILE = "Recipe-CICCCUITests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "ca.acworkshop.Recipe-CICCCUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "Recipe-CICCC";
-			};
-			name = Debug;
-		};
-		40127AFC23A06E4700260AF0 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = A065EF72BD956B31BCF074A8 /* Pods-Recipe-CICCC-Recipe-CICCCUITests.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 58BN93L43H;
-				INFOPLIST_FILE = "Recipe-CICCCUITests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "ca.acworkshop.Recipe-CICCCUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "Recipe-CICCC";
 			};
 			name = Release;
 		};
@@ -1728,24 +1436,6 @@
 			buildConfigurations = (
 				40127AF523A06E4700260AF0 /* Debug */,
 				40127AF623A06E4700260AF0 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		40127AF723A06E4700260AF0 /* Build configuration list for PBXNativeTarget "Recipe-CICCCTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				40127AF823A06E4700260AF0 /* Debug */,
-				40127AF923A06E4700260AF0 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		40127AFA23A06E4700260AF0 /* Build configuration list for PBXNativeTarget "Recipe-CICCCUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				40127AFB23A06E4700260AF0 /* Debug */,
-				40127AFC23A06E4700260AF0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
