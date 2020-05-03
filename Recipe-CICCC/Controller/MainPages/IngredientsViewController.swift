@@ -50,8 +50,6 @@ class IngredientsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        ingredientArray = ["Tomato","Beef","Egg","Broccoli","Carrot","Onion","Test for length"]
         refrigeratorDataManager.delegate = self
         dataManager.delegate = self
         ImageCollecitonView.delegate = self
