@@ -164,7 +164,6 @@
 		6F8FC6D9244E28DA0092BF61 /* SearchingIngredientsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8FC6D8244E28DA0092BF61 /* SearchingIngredientsTableViewCell.swift */; };
 		6F8FC6DB244E2ACD0092BF61 /* SearchingIngredientsDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8FC6DA244E2ACD0092BF61 /* SearchingIngredientsDataManager.swift */; };
 		6F8FC6DD244E2CBB0092BF61 /* fetchRecipes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8FC6DC244E2CBB0092BF61 /* fetchRecipes.swift */; };
-		6F98CD1E241B4DE000C9D94B /* Recipe-CICCCTests in Resources */ = {isa = PBXBuildFile; fileRef = 6F98CD1D241B4DE000C9D94B /* Recipe-CICCCTests */; };
 		6F9BB7972410BF1300CE7F60 /* IngredientShoppingDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F9BB7962410BF1300CE7F60 /* IngredientShoppingDataManager.swift */; };
 		6F9BB79A2410C01F00CE7F60 /* getIngredientData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F9BB7992410C01F00CE7F60 /* getIngredientData.swift */; };
 		6FB2983D2414E8350094F5F4 /* ShoppinglistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB2983C2414E8350094F5F4 /* ShoppinglistViewController.swift */; };
@@ -367,7 +366,6 @@
 		6F8FC6D8244E28DA0092BF61 /* SearchingIngredientsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchingIngredientsTableViewCell.swift; sourceTree = "<group>"; };
 		6F8FC6DA244E2ACD0092BF61 /* SearchingIngredientsDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SearchingIngredientsDataManager.swift; path = "Recipe-CICCC/Views/searching/SearchingIngredientsDataManager.swift"; sourceTree = SOURCE_ROOT; };
 		6F8FC6DC244E2CBB0092BF61 /* fetchRecipes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fetchRecipes.swift; sourceTree = "<group>"; };
-		6F98CD1D241B4DE000C9D94B /* Recipe-CICCCTests */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Recipe-CICCCTests"; sourceTree = "<group>"; };
 		6F9BB7962410BF1300CE7F60 /* IngredientShoppingDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientShoppingDataManager.swift; sourceTree = "<group>"; };
 		6F9BB7992410C01F00CE7F60 /* getIngredientData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getIngredientData.swift; sourceTree = "<group>"; };
 		6FB2983C2414E8350094F5F4 /* ShoppinglistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppinglistViewController.swift; sourceTree = "<group>"; };
@@ -425,7 +423,6 @@
 		40127AC123A06E3C00260AF0 = {
 			isa = PBXGroup;
 			children = (
-				6F98CD1D241B4DE000C9D94B /* Recipe-CICCCTests */,
 				6999A49224170EE40013BD5B /* Podfile */,
 				6999A48F24170ED00013BD5B /* Podfile.lock */,
 				40127ACC23A06E3C00260AF0 /* Recipe-CICCC */,
@@ -1012,7 +1009,6 @@
 				693C9FF423FB4B2400957EF2 /* RecipeCollectionView.xib in Resources */,
 				6FEC4DB8240088BD00AB2785 /* popularPage.storyboard in Resources */,
 				408C319D23C98C1E00E74E4A /* MyPage.storyboard in Resources */,
-				6F98CD1E241B4DE000C9D94B /* Recipe-CICCCTests in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
