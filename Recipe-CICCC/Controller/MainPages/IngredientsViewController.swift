@@ -17,7 +17,15 @@ class IngredientsViewController: UIViewController {
     @IBOutlet weak var TitleCollectionView: UICollectionView!
     @IBOutlet weak var ImageCollecitonView: UICollectionView!
     
-    var ingredientArray = [String]()
+    var ingredientArray: [String] = [] {
+        didSet {
+            
+            let query = db.collection("recipe").order(by: "like", descending: true)
+            let _ = dataManager.Data(queryRef: query)
+            searchingIngredient = ingredientArray[0]
+            showingIngredient = searchingIngredient
+        }
+    }
     var searchingIngredient: String?
     var showingIngredient: String?
     var imageDictionary: [String:[UIImage]] = [:]
@@ -51,14 +59,10 @@ class IngredientsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        ingredientArray = ["Tomato","Beef","Egg","Broccoli","Carrot","Onion","Test for length"]
+        ingredientArray = ["Tomato","Beef","Egg","Broccoli","Carrot","Onion"]
         refrigeratorDataManager.delegate = self
         dataManager.delegate = self
         ImageCollecitonView.delegate = self
-        
-        
-        let query = db.collection("recipe").order(by: "like", descending: true)
-        let _ = dataManager.Data(queryRef: query)
         
         let uid = Auth.auth().currentUser?.uid
         refrigeratorDataManager.getRefrigeratorDetail(userID: uid!)
@@ -267,9 +271,11 @@ extension IngredientsViewController: fetchDataInIngredientsDelegate {
         
         self.allRecipes = data
         
-        guard (self.allRecipes.last?.recipeID) != nil else {
-            return
-        }
+//        guard (self.allRecipes.last?.recipeID) != nil else {
+//            return
+//        }
+        
+        lastRecipeID = allRecipes.last!.recipeID
         
         // get ingredients of all recipes
         for recipe in self.allRecipes {
@@ -315,8 +321,10 @@ extension IngredientsViewController: getIngredientRefrigeratorDataDelegate{
                 array.append(name)
             }
             ingredientArray = array
-            searchingIngredient = ingredientArray[0]
-            showingIngredient = searchingIngredient
+//            searchingIngredient = ingredientArray[0]
+//            showingIngredient = searchingIngredient
+//
+                  
             TitleCollectionView.reloadData()
         }
     }
