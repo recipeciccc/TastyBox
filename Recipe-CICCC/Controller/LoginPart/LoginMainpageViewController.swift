@@ -15,9 +15,11 @@ class LoginMainpageViewController: UIViewController, UITextFieldDelegate {
     
     var userImage: UIImage = #imageLiteral(resourceName: "imageFile")
     
+    let vc =  UIStoryboard(name: "AboutPage", bundle: nil).instantiateViewController(withIdentifier: "about") as! AboutViewController
+    
     override func loadView() {
         super.loadView()
-         
+        
     }
     
     override func viewDidLoad() {
@@ -27,14 +29,14 @@ class LoginMainpageViewController: UIViewController, UITextFieldDelegate {
         view.backgroundColor = #colorLiteral(red: 0.9977325797, green: 0.9879661202, blue: 0.7689270973, alpha: 1)
         view.tag = 100
         
-//        let label = UILabel(frame: CGRect(x: 0, y: -20, width: self.view.frame.width, height: UILabel().frame.height))
-//             label.text = "Loading..."
-//             label.textAlignment = .center
-//             label.textColor = #colorLiteral(red: 0.6666666667, green: 0.4745098039, blue: 0.2588235294, alpha: 1)
-//             label.font = UIFont(name:"AppleSDGothicNeo-SemiBold", size: 20.0)
-//
-//             view.addSubview(label)
-//
+        //        let label = UILabel(frame: CGRect(x: 0, y: -20, width: self.view.frame.width, height: UILabel().frame.height))
+        //             label.text = "Loading..."
+        //             label.textAlignment = .center
+        //             label.textColor = #colorLiteral(red: 0.6666666667, green: 0.4745098039, blue: 0.2588235294, alpha: 1)
+        //             label.font = UIFont(name:"AppleSDGothicNeo-SemiBold", size: 20.0)
+        //
+        //             view.addSubview(label)
+        //
         
         let  indicator = UIActivityIndicatorView()
         indicator.transform = CGAffineTransform(scaleX: 2, y: 2)
@@ -45,24 +47,25 @@ class LoginMainpageViewController: UIViewController, UITextFieldDelegate {
         view.addSubview(indicator)
         indicator.center = self.view.center
         
-     
+        
         self.view.addSubview(view)
         
         if Auth.auth().currentUser != nil {
-                 // User is signed in.
-
+            // User is signed in.
+            
             let Storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
             let vc = Storyboard.instantiateViewController(withIdentifier: "Discovery")
             self.navigationController?.pushViewController(vc, animated: true)
-                   
+            
         } else {
             if let viewWithTag = self.view.viewWithTag(100) {
                 viewWithTag.removeFromSuperview()
             }else{
                 print("No!")
             }
+            
         }
-
+        
         roundCorners(view: login, cornerRadius: 5.0)
         GIDSignIn.sharedInstance()?.delegate = self
         GIDSignIn.sharedInstance()?.presentingViewController = self
@@ -122,11 +125,44 @@ class LoginMainpageViewController: UIViewController, UITextFieldDelegate {
                 self.view.endEditing(true)
                 self.passwordTextField.text = ""
                 
+                if  (user?.additionalUserInfo!.isNewUser)! {
+                    
+                    self.vc.isFirst = true
+                    self.navigationController?.pushViewController(self.vc, animated: true)
+                    
+                } else {
+                    Firestore.firestore().collection("user").document(Auth.auth().currentUser!.uid).addSnapshotListener { data, error in
+                        if let error = error {
+                            print(error.localizedDescription)
+                        } else {
+                            
+                            if let data = data {
+                                let isFirst = data["isFirst"] as? Bool
+                                if let isFirst = isFirst {
+                                    if isFirst == true {
+                                        self.vc.isFirst = true
+                                        self.navigationController?.pushViewController(self.vc, animated: true)
+                                        
+                                    } else {
+                                        self.vc.isFirst = false
+                                        let Storyboard: UIStoryboard = UIStoryboard(name: "Login", bundle: nil)
+                                        let vc = Storyboard.instantiateViewController(withIdentifier: "FirstTimeProfile")
+                                        self.navigationController?.pushViewController(vc, animated: true)
+                                    }
+                                } else {
+                                    self.vc.isFirst = true
+                                    self.navigationController?.pushViewController(self.vc, animated: true)
+                                }
+                            }
+                            
+                        }
+                    }
+                
                 //MARK: uncomment out and you don't need to edit info every time
                 //                if (user?.additionalUserInfo!.isNewUser)! {
-                let Storyboard: UIStoryboard = UIStoryboard(name: "Login", bundle: nil)
-                let vc = Storyboard.instantiateViewController(withIdentifier: "FirstTimeProfile")
-                self.navigationController?.pushViewController(vc, animated: true)
+//                let Storyboard: UIStoryboard = UIStoryboard(name: "Login", bundle: nil)
+//                let vc = Storyboard.instantiateViewController(withIdentifier: "FirstTimeProfile")
+//                self.navigationController?.pushViewController(vc, animated: true)
                 //MARK: uncomment out and you don't need to edit info every time
                 //                } else {
                 //                    let Storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
@@ -152,6 +188,7 @@ class LoginMainpageViewController: UIViewController, UITextFieldDelegate {
                 //LoginProperties.user = AppUser(authData: user!)
             }
         }
+    }
     }
     
     // Facebook Login
@@ -186,9 +223,83 @@ class LoginMainpageViewController: UIViewController, UITextFieldDelegate {
                 
                 // present the main View
                 if error == nil {
-                    let Storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                    let vc = Storyboard.instantiateViewController(withIdentifier: "Discovery")
-                    self.navigationController?.pushViewController(vc, animated: true)
+                    
+                    if  (user?.additionalUserInfo!.isNewUser)! {
+                        
+                        self.vc.isFirst = true
+                        self.navigationController?.pushViewController(self.vc, animated: true)
+                        
+                    } else {
+                        Firestore.firestore().collection("user").document(Auth.auth().currentUser!.uid).addSnapshotListener { data, error in
+                            if let error = error {
+                                print(error.localizedDescription)
+                            } else {
+                                
+                                if let data = data {
+                                    let isFirst = data["isFirst"] as? Bool
+                                    if let isFirst = isFirst {
+                                        if isFirst == true {
+                                            self.vc.isFirst = true
+                                            self.navigationController?.pushViewController(self.vc, animated: true)
+                                            
+                                        } else {
+                                            self.vc.isFirst = false
+                                            let Storyboard: UIStoryboard = UIStoryboard(name: "Login", bundle: nil)
+                                            let vc = Storyboard.instantiateViewController(withIdentifier: "FirstTimeProfile")
+                                            self.navigationController?.pushViewController(vc, animated: true)
+                                        }
+                                    } else {
+                                        self.vc.isFirst = true
+                                        self.navigationController?.pushViewController(self.vc, animated: true)
+                                    }
+                                }
+                                
+                            }
+                        }
+                    }
+                    
+                    //            }      Firestore.firestore().collection("user").document(Auth.auth().currentUser!.uid).addSnapshotListener { data, error in
+                    //                        if let error = error {
+                    //                            print(error.localizedDescription)
+                    //                        } else {
+                    //                            if let data = data {
+                    //                                let isFirst = data["isFirst"] as? Bool
+                    //                                if let isFirst = isFirst {
+                    //                                    if isFirst == true {
+                    //                                        self.vc.isFirst = true
+                    //                                    } else {
+                    //                                        self.vc.isFirst = false
+                    //                                    }
+                    //                                } else {
+                    //                                    self.vc.isFirst = false
+                    //                                }
+                    //                            }
+                    //                        }
+                    //                    }
+                    //
+                    //                    if let isFirst = self.vc.isFirst {
+                    //                        if isFirst == true {
+                    //                            self.navigationController?.pushViewController(self.vc, animated: true)
+                    //
+                    //                        } else {
+                    //
+                    //                            let Storyboard: UIStoryboard = UIStoryboard(name: "Login", bundle: nil)
+                    //                            let vc = Storyboard.instantiateViewController(withIdentifier: "FirstTimeProfile")
+                    //                            self.navigationController?.pushViewController(vc, animated: true)
+                    //                        }
+                    //                    }
+                    
+                    if  (user?.additionalUserInfo!.isNewUser)! {
+                        
+                        self.vc.isFirst = true
+                        self.navigationController?.pushViewController(self.vc, animated: true)
+                        
+                    } else {
+                        
+                        let Storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                        let vc = Storyboard.instantiateViewController(withIdentifier: "Discovery")
+                        self.navigationController?.pushViewController(vc, animated: true)
+                    }
                 }
                 
                 //                LoginProperties.user = AppUser(authData: user!)
@@ -266,9 +377,54 @@ extension LoginMainpageViewController: GIDSignInDelegate {
                 
                 //MARK: uncomment out and you don't need to edit info every time
                 //                if (user?.additionalUserInfo!.isNewUser)! {
-                let Storyboard: UIStoryboard = UIStoryboard(name: "Login", bundle: nil)
-                let vc = Storyboard.instantiateViewController(withIdentifier: "FirstTimeProfile")
-                self.navigationController?.pushViewController(vc, animated: true)
+                
+                if  (user?.additionalUserInfo!.isNewUser)! {
+                    
+                    self.vc.isFirst = true
+                    self.navigationController?.pushViewController(self.vc, animated: true)
+                    
+                } else {
+                
+                    if  (user?.additionalUserInfo!.isNewUser)! {
+                        
+                        self.vc.isFirst = true
+                        self.navigationController?.pushViewController(self.vc, animated: true)
+                        
+                    } else {
+                        Firestore.firestore().collection("user").document(Auth.auth().currentUser!.uid).addSnapshotListener { data, error in
+                            if let error = error {
+                                print(error.localizedDescription)
+                            } else {
+                                
+                                if let data = data {
+                                    let isFirst = data["isFirst"] as? Bool
+                                    if let isFirst = isFirst {
+                                        if isFirst == true {
+                                            self.vc.isFirst = true
+                                            self.navigationController?.pushViewController(self.vc, animated: true)
+                                            
+                                        } else {
+                                            self.vc.isFirst = false
+                                            let Storyboard: UIStoryboard = UIStoryboard(name: "Login", bundle: nil)
+                                            let vc = Storyboard.instantiateViewController(withIdentifier: "FirstTimeProfile")
+                                            self.navigationController?.pushViewController(vc, animated: true)
+                                        }
+                                    } else {
+                                        self.vc.isFirst = true
+                                        self.navigationController?.pushViewController(self.vc, animated: true)
+                                    }
+                                }
+                                
+                            }
+                        }
+                    
+                    
+                }
+                
+                //                } else {
+                //                let Storyboard: UIStoryboard = UIStoryboard(name: "Login", bundle: nil)
+                //                let vc = Storyboard.instantiateViewController(withIdentifier: "FirstTimeProfile")
+                //                self.navigationController?.pushViewController(vc, animated: true)
                 //MARK: uncomment out and you don't need to edit info every time
                 //                } else {
                 //                    let Storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
@@ -276,7 +432,7 @@ extension LoginMainpageViewController: GIDSignInDelegate {
                 //                    self.navigationController?.pushViewController(vc, animated: true)
                 //                }
             }
-            
+            }
         })
         
     }
