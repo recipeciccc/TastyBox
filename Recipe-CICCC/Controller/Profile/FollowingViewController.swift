@@ -45,7 +45,7 @@ class FollowingViewController: UIViewController {
              }
          }
     
-    
+    var parentVC: followerFollowingPageViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,8 +59,8 @@ class FollowingViewController: UIViewController {
         userDataManager.delegateFollowerFollowing = self
        
         
-        let parentVC = self.parent as! followerFollowingPageViewController
-        followingsID = parentVC.followingsID
+        parentVC = self.parent as? followerFollowingPageViewController
+        followingsID = parentVC!.followingsID
         userDataManager.getFollowersFollowings(IDs: self.followingsID, followerOrFollowing: "following")
         
         followingsID.enumerated().map {
@@ -145,9 +145,13 @@ extension FollowingViewController: UITableViewDataSource {
             cell.userNameLabel.text = searchedFollowings[indexPath.row].name
         }
         
-        cell.followingButton.setTitle("Unfollow", for: .normal)
-       
+        if parentVC?.userID != Auth.auth().currentUser?.uid {
+            cell.followingButton.isHidden = true
+        } else {
         
+            cell.followingButton.setTitle("Unfollow", for: .normal)
+       
+        }
         
         if followingsID.count == searchedFollowingsImages.count{
             cell.imgView.image = searchedFollowingsImages[indexPath.row]
