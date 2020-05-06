@@ -18,7 +18,7 @@ class ContactViewController: UIViewController {
     }
     
     override func viewDidLoad() {
-        roundCorners(view: sendBtn, cornerRadius: 10.0)
+        roundCorners(view: sendBtn, cornerRadius: 25.0)
     }
     func emailComposer(){
         if MFMailComposeViewController.canSendMail() == true {
