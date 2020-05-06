@@ -16,11 +16,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rdS-A0-TzJ">
-                                <rect key="frame" x="64" y="413" width="293" height="70"/>
+                                <rect key="frame" x="120.5" y="423" width="180" height="50"/>
                                 <color key="backgroundColor" red="0.96848052740000001" green="0.76100769759999998" blue="0.38126343480000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="293" id="Ace-Xh-a2l"/>
-                                    <constraint firstAttribute="height" constant="70" id="kP8-EF-8ci"/>
+                                    <constraint firstAttribute="width" constant="180" id="Ace-Xh-a2l"/>
+                                    <constraint firstAttribute="height" constant="50" id="kP8-EF-8ci"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                 <state key="normal" title="Send Email">
@@ -32,7 +32,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contact Us" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hlg-mz-RU9">
-                                <rect key="frame" x="107" y="257" width="200" height="36"/>
+                                <rect key="frame" x="107" y="267" width="200" height="36"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="dI3-3q-pin"/>
                                 </constraints>
@@ -41,7 +41,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Note: This email will be sent by Apple Mail. Please make sure you have already downloaded it." textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V45-5t-7yk">
-                                <rect key="frame" x="57" y="513" width="300" height="100"/>
+                                <rect key="frame" x="57" y="503" width="300" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="IXa-be-anM"/>
                                     <constraint firstAttribute="width" constant="300" id="ubr-eJ-0qA"/>
@@ -51,7 +51,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Any questions or feedback? Leave us your messages!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z1v-bv-HA8">
-                                <rect key="frame" x="57" y="303" width="300" height="80"/>
+                                <rect key="frame" x="57" y="313" width="300" height="80"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="300" id="30D-ms-qWe"/>
                                     <constraint firstAttribute="height" constant="80" id="gAh-8U-aLz"/>

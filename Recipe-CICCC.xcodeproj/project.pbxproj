@@ -112,7 +112,6 @@
 		6F49661E2410DD1500397B4F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F49661D2410DD1500397B4F /* User.swift */; };
 		6F4A345C2432F4E000909D7A /* FolllowingFollowerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4A345B2432F4E000909D7A /* FolllowingFollowerDelegate.swift */; };
 		6F4F105B245B802400D8BD15 /* SettingNotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4F105A245B802400D8BD15 /* SettingNotificationViewController.swift */; };
-		6F4F105C245E8FA300D8BD15 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6F27D187242A090C00B5B071 /* Info.plist */; };
 		6F50283A2415B79D0031D204 /* RefigeratorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5028362415B79C0031D204 /* RefigeratorTableViewCell.swift */; };
 		6F5344B0244D37940004F78D /* fetchDataInIngredients.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5344AF244D37930004F78D /* fetchDataInIngredients.swift */; };
 		6F5344B2244D37A80004F78D /* RecipeViewControllerDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5344B1244D37A80004F78D /* RecipeViewControllerDataManager.swift */; };
@@ -988,7 +987,6 @@
 				69909F432456B81000AACEC7 /* Setting.storyboard in Resources */,
 				6F8BE77523EEA96300CEA348 /* Map.storyboard in Resources */,
 				6999A49324170EE40013BD5B /* Podfile in Resources */,
-				6F4F105C245E8FA300D8BD15 /* Info.plist in Resources */,
 				69202F2E23FB3D33001AB4A9 /* EditorChoice.storyboard in Resources */,
 				693CA00A23FF437600957EF2 /* RecipeCollectionViewCell.xib in Resources */,
 				69909F4F2458EF7900AACEC7 /* ContactPage.storyboard in Resources */,
