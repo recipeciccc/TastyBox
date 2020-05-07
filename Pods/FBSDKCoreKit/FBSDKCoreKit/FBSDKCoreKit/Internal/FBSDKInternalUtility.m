@@ -43,6 +43,13 @@ typedef NS_ENUM(NSUInteger, FBSDKInternalUtilityVersionShift)
 
 @implementation FBSDKInternalUtility
 
+static BOOL ShouldOverrideHostWithGamingDomain(NSString *hostPrefix) {
+  return
+  [[FBSDKAccessToken currentAccessToken] respondsToSelector:@selector(graphDomain)] &&
+  [[FBSDKAccessToken currentAccessToken].graphDomain isEqualToString:@"gaming"] &&
+  ([hostPrefix isEqualToString:@"graph."] || [hostPrefix isEqualToString:@"graph-video."]);
+}
+
 #pragma mark - Class Methods
 
 + (NSString *)appURLScheme
@@ -144,8 +151,7 @@ typedef NS_ENUM(NSUInteger, FBSDKInternalUtilityVersionShift)
   }
 
   NSString *host =
-  ([hostPrefix isEqualToString:@"graph."] || [hostPrefix isEqualToString:@"graph-video."]) &&
-  [[FBSDKAccessToken currentAccessToken].graphDomain isEqualToString:@"gaming"]
+  ShouldOverrideHostWithGamingDomain(hostPrefix)
   ? @"fb.gg"
   : @"facebook.com";
 
@@ -549,6 +555,21 @@ static NSMapTable *_transientObjects;
   }
   return topController;
 }
+
+#if !TARGET_OS_TV
++ (UIInterfaceOrientation)statusBarOrientation
+{
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 130000
+  if (@available(iOS 13.0, *)) {
+    return [self findWindow].windowScene.interfaceOrientation;
+  } else {
+    return UIInterfaceOrientationUnknown;
+  }
+#else
+  return UIApplication.sharedApplication.statusBarOrientation;
+#endif
+}
+#endif
 
 + (NSString *)hexadecimalStringFromData:(NSData *)data
 {

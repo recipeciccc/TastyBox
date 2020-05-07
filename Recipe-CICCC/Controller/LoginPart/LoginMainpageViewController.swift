@@ -283,12 +283,14 @@ class LoginMainpageViewController: UIViewController {
     }
     
     @objc func handleAppleIdRequest() {
+        
         let appleIDProvider = ASAuthorizationAppleIDProvider()
         let request = appleIDProvider.createRequest()
         request.requestedScopes = [.fullName, .email]
         let authorizationController = ASAuthorizationController(authorizationRequests: [request])
         authorizationController.delegate = self
         authorizationController.performRequests()
+        
     }
      
      // Adapted from https://auth0.com/docs/api-auth/tutorials/nonce#generate-a-cryptographically-random-nonce
@@ -352,14 +354,20 @@ class LoginMainpageViewController: UIViewController {
          
          return hashString
      }
+    
+    
 
 }
 
 extension LoginMainpageViewController: ASAuthorizationControllerDelegate {
 
   func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+    
+    currentNonce = randomNonceString()
+    
     if let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
-      guard let nonce = currentNonce else {
+      
+        guard let nonce = currentNonce else {
         fatalError("Invalid state: A login callback was received, but no login request was sent.")
       }
       guard let appleIDToken = appleIDCredential.identityToken else {
@@ -384,10 +392,45 @@ extension LoginMainpageViewController: ASAuthorizationControllerDelegate {
           // you're sending the SHA256-hashed nonce as a hex string with
           // your request to Apple.
             print(error?.localizedDescription)
-          return
+            return
+        } else {
+            // User is signed in to Firebase with Apple.
+            // ...
+            if  (authResult?.additionalUserInfo?.isNewUser)! {
+                
+                self.vc.isFirst = true
+                self.navigationController?.pushViewController(self.vc, animated: true)
+                
+            } else {
+                Firestore.firestore().collection("user").document(Auth.auth().currentUser!.uid).addSnapshotListener { data, error in
+                    if let error = error {
+                        print(error.localizedDescription)
+                    } else {
+                        
+                        if let data = data {
+                            let isFirst = data["isFirst"] as? Bool
+                            if let isFirst = isFirst {
+                                if isFirst == true {
+                                    self.vc.isFirst = true
+                                    self.navigationController?.pushViewController(self.vc, animated: true)
+                                    
+                                } else {
+                                    self.vc.isFirst = false
+                                    let Storyboard: UIStoryboard = UIStoryboard(name: "Login", bundle: nil)
+                                    let vc = Storyboard.instantiateViewController(withIdentifier: "FirstTimeProfile")
+                                    self.navigationController?.pushViewController(vc, animated: true)
+                                }
+                            } else {
+                                self.vc.isFirst = true
+                                self.navigationController?.pushViewController(self.vc, animated: true)
+                            }
+                        }
+                        
+                    }
+                }
+            }
+            
         }
-        // User is signed in to Firebase with Apple.
-        // ...
       }
     }
   }
