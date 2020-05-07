@@ -10,17 +10,18 @@ import Foundation
 import Firebase
 import FBSDKLoginKit
 import GoogleSignIn
+import AuthenticationServices
+import CryptoKit
 
-class LoginMainpageViewController: UIViewController, UITextFieldDelegate {
+class LoginMainpageViewController: UIViewController {
     
     var userImage: UIImage = #imageLiteral(resourceName: "imageFile")
     
     let vc =  UIStoryboard(name: "AboutPage", bundle: nil).instantiateViewController(withIdentifier: "about") as! AboutViewController
     
-    override func loadView() {
-        super.loadView()
-        
-    }
+    @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var login: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,15 +29,6 @@ class LoginMainpageViewController: UIViewController, UITextFieldDelegate {
         let view = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
         view.backgroundColor = #colorLiteral(red: 0.9977325797, green: 0.9879661202, blue: 0.7689270973, alpha: 1)
         view.tag = 100
-        
-        //        let label = UILabel(frame: CGRect(x: 0, y: -20, width: self.view.frame.width, height: UILabel().frame.height))
-        //             label.text = "Loading..."
-        //             label.textAlignment = .center
-        //             label.textColor = #colorLiteral(red: 0.6666666667, green: 0.4745098039, blue: 0.2588235294, alpha: 1)
-        //             label.font = UIFont(name:"AppleSDGothicNeo-SemiBold", size: 20.0)
-        //
-        //             view.addSubview(label)
-        //
         
         let  indicator = UIActivityIndicatorView()
         indicator.transform = CGAffineTransform(scaleX: 2, y: 2)
@@ -86,12 +78,7 @@ class LoginMainpageViewController: UIViewController, UITextFieldDelegate {
         dismiss(animated: true, completion: nil)
     }
     
-    @IBOutlet weak var emailTextField: UITextField!
-    @IBOutlet weak var passwordTextField: UITextField!
-    
-    
-    
-    @IBOutlet weak var login: UIButton!
+    //MARK: Email login
     @IBAction func loginAction(_ sender: Any) {
         
         if self.emailTextField.text == "" || self.passwordTextField.text == "" {
@@ -157,41 +144,12 @@ class LoginMainpageViewController: UIViewController, UITextFieldDelegate {
                             
                         }
                     }
-                    
-                    //MARK: uncomment out and you don't need to edit info every time
-                    //                if (user?.additionalUserInfo!.isNewUser)! {
-                    //                let Storyboard: UIStoryboard = UIStoryboard(name: "Login", bundle: nil)
-                    //                let vc = Storyboard.instantiateViewController(withIdentifier: "FirstTimeProfile")
-                    //                self.navigationController?.pushViewController(vc, animated: true)
-                    //MARK: uncomment out and you don't need to edit info every time
-                    //                } else {
-                    //                    let Storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                    //                    let vc = Storyboard.instantiateViewController(withIdentifier: "Discovery")
-                    //                    self.navigationController?.pushViewController(vc, animated: true)
-                    //                }
-                    //
-                    //                if error == nil {
-                    //                    // means no error, login successfully
-                    //                    self.login.isEnabled = false
-                    //                    let Storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                    //                    let vc = Storyboard.instantiateViewController(withIdentifier: "Discovery")
-                    //                    self.navigationController?.pushViewController(vc, animated: true)
-                    //                   // self.present(vc, animated: true, completion: nil)
-                    //
-                    //                } else {
-                    //                    // mention there's some error
-                    //                    let alertController = UIAlertController(title: "error", message: error?.localizedDescription, preferredStyle: .alert)
-                    //                    let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-                    //                    alertController.addAction(defaultAction)
-                    //                    self.present(alertController, animated: true, completion: nil)
-                    //                }
-                    //LoginProperties.user = AppUser(authData: user!)
                 }
             }
         }
     }
     
-    // Facebook Login
+    //MARK: Facebook Login
     @IBAction func facebookLogin(_ sender: UIButton) {
         let fbLoginManager = LoginManager()
         fbLoginManager.logIn(permissions: ["public_profile", "email"], from: self) {(
@@ -257,81 +215,15 @@ class LoginMainpageViewController: UIViewController, UITextFieldDelegate {
                             }
                         }
                     }
-                    
-//                                }      Firestore.firestore().collection("user").document(Auth.auth().currentUser!.uid).addSnapshotListener { data, error in
-                    //                        if let error = error {
-                    //                            print(error.localizedDescription)
-                    //                        } else {
-                    //                            if let data = data {
-                    //                                let isFirst = data["isFirst"] as? Bool
-                    //                                if let isFirst = isFirst {
-                    //                                    if isFirst == true {
-                    //                                        self.vc.isFirst = true
-                    //                                    } else {
-                    //                                        self.vc.isFirst = false
-                    //                                    }
-                    //                                } else {
-                    //                                    self.vc.isFirst = false
-                    //                                }
-                    //                            }
-                    //                        }
-                    //                    }
-                    //
-                    //                    if let isFirst = self.vc.isFirst {
-                    //                        if isFirst == true {
-                    //                            self.navigationController?.pushViewController(self.vc, animated: true)
-                    //
-                    //                        } else {
-                    //
-                    //                            let Storyboard: UIStoryboard = UIStoryboard(name: "Login", bundle: nil)
-                    //                            let vc = Storyboard.instantiateViewController(withIdentifier: "FirstTimeProfile")
-                    //                            self.navigationController?.pushViewController(vc, animated: true)
-                    //                        }
-                    //                    }
-//
-//                    if  (user?.additionalUserInfo!.isNewUser)! {
-//
-//                        self.vc.isFirst = true
-//                        self.navigationController?.pushViewController(self.vc, animated: true)
-//
-//                    } else {
-//
-//                        let Storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-//                        let vc = Storyboard.instantiateViewController(withIdentifier: "Discovery")
-//                        self.navigationController?.pushViewController(vc, animated: true)
-//                    }
                 }
-                
-                //                LoginProperties.user = AppUser(authData: user!)
             })
         }
     }
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        //        emailTextField.resignFirstResponder()
-        //        let nextTag = emailTextField.tag + 1
-        //        if let}nextTextField = self.view.viewWithTag(nextTag) {
-        //            nextTextField.becomeFirstResponder()
-        //            return true
-        //        }
-        //        passwordTextField.resignFirstResponder()
-        //        return true
-        
-        switch textField.tag {
-        case 1:
-            // they work
-            emailTextField.resignFirstResponder()
-            passwordTextField.becomeFirstResponder()
-            break
-        case 2:
-            // not close the keyboard
-            textField.resignFirstResponder()
-            break
-        default:
-            break
-        }
-        return true
-    }
     
+    
+    
+
+    //MARK: keyboard delegate
     @objc func keyboardWillShow(notification: NSNotification) {
         if ((notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue) != nil {
             if self.view.frame.origin.y == 0 {
@@ -346,13 +238,125 @@ class LoginMainpageViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
+    //MARK: Apple login
+     
+     // Adapted from https://auth0.com/docs/api-auth/tutorials/nonce#generate-a-cryptographically-random-nonce
+     private func randomNonceString(length: Int = 32) -> String {
+         precondition(length > 0)
+         let charset: Array<Character> =
+             Array("0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._")
+         var result = ""
+         var remainingLength = length
+         
+         while remainingLength > 0 {
+             let randoms: [UInt8] = (0 ..< 16).map { _ in
+                 var random: UInt8 = 0
+                 let errorCode = SecRandomCopyBytes(kSecRandomDefault, 1, &random)
+                 if errorCode != errSecSuccess {
+                     fatalError("Unable to generate nonce. SecRandomCopyBytes failed with OSStatus \(errorCode)")
+                 }
+                 return random
+             }
+             
+             randoms.forEach { random in
+                 if length == 0 {
+                     return
+                 }
+                 
+                 if random < charset.count {
+                     result.append(charset[Int(random)])
+                     remainingLength -= 1
+                 }
+             }
+         }
+         
+         return result
+     }
+     
+     // Unhashed nonce.
+     fileprivate var currentNonce: String?
+     
+     @available(iOS 13, *)
+     func startSignInWithAppleFlow() {
+         let nonce = randomNonceString()
+         currentNonce = nonce
+         let appleIDProvider = ASAuthorizationAppleIDProvider()
+         let request = appleIDProvider.createRequest()
+         request.requestedScopes = [.fullName, .email]
+         request.nonce = sha256(nonce)
+         
+         let authorizationController = ASAuthorizationController(authorizationRequests: [request])
+         authorizationController.delegate = self
+        authorizationController.presentationContextProvider = self as! ASAuthorizationControllerPresentationContextProviding
+         authorizationController.performRequests()
+     }
+     
+     @available(iOS 13, *)
+     private func sha256(_ input: String) -> String {
+         let inputData = Data(input.utf8)
+         let hashedData = SHA256.hash(data: inputData)
+         let hashString = hashedData.compactMap {
+             return String(format: "%02x", $0)
+         }.joined()
+         
+         return hashString
+     }
+
+}
+
+extension LoginMainpageViewController: ASAuthorizationControllerDelegate {
+
+  func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+    if let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
+      guard let nonce = currentNonce else {
+        fatalError("Invalid state: A login callback was received, but no login request was sent.")
+      }
+      guard let appleIDToken = appleIDCredential.identityToken else {
+        print("Unable to fetch identity token")
+        return
+      }
+      guard let idTokenString = String(data: appleIDToken, encoding: .utf8) else {
+        print("Unable to serialize token string from data: \(appleIDToken.debugDescription)")
+        return
+      }
+      // Initialize a Firebase credential.
+      let firebaseCredential = OAuthProvider.credential(withProviderID: "apple.com",
+                                                idToken: idTokenString,
+                                                rawNonce: nonce)
+    
+        UserDefaults.standard.set(appleIDCredential.user, forKey: "appleAuthorizedUserIdKey")
+
+      // Sign in with Firebase.
+      Auth.auth().signIn(with: firebaseCredential) { (authResult, error) in
+        if (error != nil) {
+          // Error. If error.code == .MissingOrInvalidNonce, make sure
+          // you're sending the SHA256-hashed nonce as a hex string with
+          // your request to Apple.
+            print(error?.localizedDescription)
+          return
+        }
+        // User is signed in to Firebase with Apple.
+        // ...
+      }
+    }
+  }
+
+  func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
+    // Handle error.
+    print("Sign in with Apple errored: \(error)")
+  }
+
+}
+
+
+//MARK: Google login
+extension LoginMainpageViewController: GIDSignInDelegate {
+    
+    //MARK: Google login
     @IBAction func googleLogin(sender: UIButton) {
         GIDSignIn.sharedInstance().signIn()
     }
     
-}
-
-extension LoginMainpageViewController: GIDSignInDelegate {
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
         if error != nil {
             return
@@ -374,9 +378,6 @@ extension LoginMainpageViewController: GIDSignInDelegate {
             }
             // present the main view
             if error == nil {
-                
-                //MARK: uncomment out and you don't need to edit info every time
-                //                if (user?.additionalUserInfo!.isNewUser)! {
                 
                 if  (user?.additionalUserInfo!.isNewUser)! {
                     
@@ -423,21 +424,34 @@ extension LoginMainpageViewController: GIDSignInDelegate {
                     
                     
                 }
-                
-                //                } else {
-                //                let Storyboard: UIStoryboard = UIStoryboard(name: "Login", bundle: nil)
-                //                let vc = Storyboard.instantiateViewController(withIdentifier: "FirstTimeProfile")
-                //                self.navigationController?.pushViewController(vc, animated: true)
-                //MARK: uncomment out and you don't need to edit info every time
-                //                } else {
-                //                    let Storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                //                    let vc = Storyboard.instantiateViewController(withIdentifier: "Discovery")
-                //                    self.navigationController?.pushViewController(vc, animated: true)
-                //                }
             }
             }
         })
         
+    }
+    
+  
+    
+}
+
+extension LoginMainpageViewController: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        switch textField.tag {
+        case 1:
+            // they work
+            emailTextField.resignFirstResponder()
+            passwordTextField.becomeFirstResponder()
+            break
+        case 2:
+            // not close the keyboard
+            textField.resignFirstResponder()
+            break
+        default:
+            break
+        }
+        return true
     }
     
 }
@@ -448,16 +462,4 @@ extension LoginMainpageViewController{
         view.clipsToBounds = true
     }
 }
-//    @IBAction func otherWayToLogin(_ sender: Any) {
-//        if Auth.auth().currentUser != nil {
-//            do {
-//                try Auth.auth().signOut()
-//                let vc = UIStoryboard(name: "Login", bundle: nil).instantiateViewController(withIdentifier: "SignIn")
-//                present(vc, animated: true, completion: nil)
-//
-//            } catch let error as NSError {
-//                print(error.localizedDescription)
-//            }
-//        }
-//    }
 
