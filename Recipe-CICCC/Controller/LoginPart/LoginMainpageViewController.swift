@@ -14,12 +14,18 @@ import GoogleSignIn
 class LoginMainpageViewController: UIViewController, UITextFieldDelegate {
     
     var userImage: UIImage = #imageLiteral(resourceName: "imageFile")
-    
+    var lineView = UIView()
     override func loadView() {
         super.loadView()
          
     }
+    @IBOutlet weak var termsBtn: UIButton!
     
+    @IBAction func toTermsPage(_ sender: Any) {
+        let Storyboard: UIStoryboard = UIStoryboard(name: "AboutPage", bundle: nil)
+        let vc = Storyboard.instantiateViewController(withIdentifier:"about")
+        self.present(vc, animated:true, completion:nil)
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -27,14 +33,10 @@ class LoginMainpageViewController: UIViewController, UITextFieldDelegate {
         view.backgroundColor = #colorLiteral(red: 0.9977325797, green: 0.9879661202, blue: 0.7689270973, alpha: 1)
         view.tag = 100
         
-//        let label = UILabel(frame: CGRect(x: 0, y: -20, width: self.view.frame.width, height: UILabel().frame.height))
-//             label.text = "Loading..."
-//             label.textAlignment = .center
-//             label.textColor = #colorLiteral(red: 0.6666666667, green: 0.4745098039, blue: 0.2588235294, alpha: 1)
-//             label.font = UIFont(name:"AppleSDGothicNeo-SemiBold", size: 20.0)
-//
-//             view.addSubview(label)
-//
+        lineView = UIView(frame: CGRect(x: 0, y: termsBtn.frame.size.height, width: termsBtn.frame.size.width, height: 1))
+               
+               lineView.backgroundColor = #colorLiteral(red: 1, green: 0.6235294118, blue: 0.03921568627, alpha: 1)
+               termsBtn.addSubview(lineView)
         
         let  indicator = UIActivityIndicatorView()
         indicator.transform = CGAffineTransform(scaleX: 2, y: 2)
@@ -155,7 +157,8 @@ class LoginMainpageViewController: UIViewController, UITextFieldDelegate {
     }
     
     // Facebook Login
-    @IBAction func facebookLogin(_ sender: UIButton) {
+    
+    private func FBLogin(){
         let fbLoginManager = LoginManager()
         fbLoginManager.logIn(permissions: ["public_profile", "email"], from: self) {(
             Result, Error) in
@@ -194,6 +197,10 @@ class LoginMainpageViewController: UIViewController, UITextFieldDelegate {
                 //                LoginProperties.user = AppUser(authData: user!)
             })
         }
+    }
+    
+    @IBAction func facebookLogin(_ sender: UIButton) {
+        confirm_FB()
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         //        emailTextField.resignFirstResponder()
@@ -236,7 +243,32 @@ class LoginMainpageViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func googleLogin(sender: UIButton) {
-        GIDSignIn.sharedInstance().signIn()
+        self.confirm()
+    }
+    
+    private func confirm(){
+        let alertController = UIAlertController(title: "Terms of Service Agreement", message: "Please make sure you read the terms and conditions carefully before using the app. Do you agree to these terms of agreement?", preferredStyle: .alert)
+        
+        let agreeAction = UIAlertAction(title: "Agree", style: .cancel) { action in
+            GIDSignIn.sharedInstance().signIn()
+        }
+        let disagreeAction = UIAlertAction(title: "Disagree", style: .default, handler: { action in
+        })
+        alertController.addAction(agreeAction)
+        alertController.addAction(disagreeAction)
+        self.present(alertController, animated: true, completion: nil)
+    }
+    private func confirm_FB(){
+        let alertController = UIAlertController(title: "Terms of Service Agreement", message: "Please make sure you read the terms and conditions carefully before using the app. Do you agree to these terms of agreement?", preferredStyle: .alert)
+        
+        let agreeAction = UIAlertAction(title: "Agree", style: .cancel) { action in
+            self.FBLogin()
+        }
+        let disagreeAction = UIAlertAction(title: "Disagree", style: .default, handler: { action in
+        })
+        alertController.addAction(agreeAction)
+        alertController.addAction(disagreeAction)
+        self.present(alertController, animated: true, completion: nil)
     }
     
 }
