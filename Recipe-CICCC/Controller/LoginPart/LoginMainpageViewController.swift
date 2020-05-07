@@ -18,10 +18,14 @@ class LoginMainpageViewController: UIViewController {
     var userImage: UIImage = #imageLiteral(resourceName: "imageFile")
     
     let vc =  UIStoryboard(name: "AboutPage", bundle: nil).instantiateViewController(withIdentifier: "about") as! AboutViewController
+    var tapRecognizer: UITapGestureRecognizer?
     
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var login: UIButton!
+    
+    @IBOutlet var loginButtons: [UIButton]!
+    @IBOutlet var loginButtonStackView: UIStackView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,6 +76,8 @@ class LoginMainpageViewController: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
+        setUpSignInAppleButton()
     }
     
     @IBAction func unwindtoLoginMain(segue: UIStoryboardSegue) {
@@ -222,7 +228,7 @@ class LoginMainpageViewController: UIViewController {
     
     
     
-
+    
     //MARK: keyboard delegate
     @objc func keyboardWillShow(notification: NSNotification) {
         if ((notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue) != nil {
@@ -230,15 +236,60 @@ class LoginMainpageViewController: UIViewController {
                 self.view.frame.origin.y -= 100
             }
         }
+        
+        tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapRecognizerAction))
+        
+        self.view.addGestureRecognizer(tapRecognizer!)
+    }
+    
+    @objc func tapRecognizerAction() {
+       
+
+        if let tapRecognizer = tapRecognizer {
+            self.view.removeGestureRecognizer(tapRecognizer)
+            self.tapRecognizer = nil
+        }
+        
+        UIView.animate(withDuration: 0.3, animations: {
+            self.view.endEditing(true)
+            if self.view.frame.origin.y != 0 {
+                self.view.frame.origin.y = 0
+            }
+        })
+
     }
     
     @objc func keyboardWillHide(notification: NSNotification) {
+        
+       UIView.animate(withDuration: 0.3, animations: {
+            self.view.endEditing(true)
         if self.view.frame.origin.y != 0 {
             self.view.frame.origin.y = 0
         }
+        })
+
     }
     
+    
+    
     //MARK: Apple login
+    
+    func setUpSignInAppleButton() {
+        let authorizationButton = ASAuthorizationAppleIDButton()
+        authorizationButton.addTarget(self, action: #selector(handleAppleIdRequest), for: .touchUpInside)
+        authorizationButton.cornerRadius = 10
+        //Add button on some view or stack
+        self.loginButtonStackView.addArrangedSubview(authorizationButton)
+    }
+    
+    @objc func handleAppleIdRequest() {
+        let appleIDProvider = ASAuthorizationAppleIDProvider()
+        let request = appleIDProvider.createRequest()
+        request.requestedScopes = [.fullName, .email]
+        let authorizationController = ASAuthorizationController(authorizationRequests: [request])
+        authorizationController.delegate = self
+        authorizationController.performRequests()
+    }
      
      // Adapted from https://auth0.com/docs/api-auth/tutorials/nonce#generate-a-cryptographically-random-nonce
      private func randomNonceString(length: Int = 32) -> String {
@@ -287,7 +338,7 @@ class LoginMainpageViewController: UIViewController {
          
          let authorizationController = ASAuthorizationController(authorizationRequests: [request])
          authorizationController.delegate = self
-        authorizationController.presentationContextProvider = self as! ASAuthorizationControllerPresentationContextProviding
+        authorizationController.presentationContextProvider = self as? ASAuthorizationControllerPresentationContextProviding
          authorizationController.performRequests()
      }
      
@@ -345,7 +396,7 @@ extension LoginMainpageViewController: ASAuthorizationControllerDelegate {
     // Handle error.
     print("Sign in with Apple errored: \(error)")
   }
-
+    
 }
 
 
