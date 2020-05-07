@@ -442,13 +442,13 @@
         <!--Searching View Controller-->
         <scene sceneID="W76-rR-iLR">
             <objects>
-                <viewController id="ZEb-Bq-mPO" customClass="SearchingViewController" customModule="Recipe_CICCC" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="searching" id="ZEb-Bq-mPO" customClass="SearchingViewController" customModule="Recipe_CICCC" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="SKQ-tM-OWC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nlv-6E-V8W">
-                                <rect key="frame" x="0.0" y="147" width="414" height="715"/>
+                                <rect key="frame" x="0.0" y="147" width="414" height="749"/>
                                 <connections>
                                     <segue destination="DEg-yT-N3P" kind="embed" id="pn9-h7-5v3"/>
                                 </connections>
@@ -480,7 +480,7 @@
                             <constraint firstItem="fke-Sc-eea" firstAttribute="leading" secondItem="Nlv-6E-V8W" secondAttribute="leading" id="Zbo-CU-ePA"/>
                             <constraint firstItem="fke-Sc-eea" firstAttribute="trailing" secondItem="Nlv-6E-V8W" secondAttribute="trailing" id="bn8-KA-WCF"/>
                             <constraint firstItem="fke-Sc-eea" firstAttribute="leading" secondItem="MWN-Ve-M4j" secondAttribute="leading" id="ivs-AT-YLM"/>
-                            <constraint firstAttribute="bottomMargin" secondItem="Nlv-6E-V8W" secondAttribute="bottom" id="sji-0O-fqf"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="Nlv-6E-V8W" secondAttribute="bottom" constant="-34" id="sji-0O-fqf"/>
                             <constraint firstItem="fke-Sc-eea" firstAttribute="top" secondItem="GQZ-SB-Vjo" secondAttribute="top" constant="20" id="voU-Lq-OOU"/>
                             <constraint firstItem="fke-Sc-eea" firstAttribute="trailing" secondItem="MWN-Ve-M4j" secondAttribute="trailing" id="xpJ-6U-Zyg"/>
                             <constraint firstItem="fke-Sc-eea" firstAttribute="centerX" secondItem="SKQ-tM-OWC" secondAttribute="centerX" id="zAU-9b-Ynr"/>
@@ -495,7 +495,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lew-sc-Txo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2529" y="802"/>
+            <point key="canvasLocation" x="2528.985507246377" y="801.5625"/>
         </scene>
         <!--Login-->
         <scene sceneID="zQd-KT-H1f">
@@ -587,14 +587,14 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="searcingGenre" id="v3Y-lY-ELb" customClass="SearchingGenresTableViewCell" customModule="Recipe_CICCC" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="28" width="414" height="43"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="v3Y-lY-ELb" id="Rc8-qu-Eal">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tMj-cp-2GE">
-                                                    <rect key="frame" x="30" y="11" width="364" height="21.5"/>
+                                                    <rect key="frame" x="30" y="11" width="364" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -653,14 +653,14 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="accountSwitch" id="DiP-zx-XzN" customClass="SettingsTableViewCell" customModule="Recipe_CICCC" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="28" width="414" height="43"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="DiP-zx-XzN" id="tz9-LP-1Ga">
-                                            <rect key="frame" x="0.0" y="0.0" width="383" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="383" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BCS-eR-QHn">
-                                                    <rect key="frame" x="20" y="11" width="355" height="21.5"/>
+                                                    <rect key="frame" x="20" y="11" width="355" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -679,14 +679,14 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="settings" id="ezV-hb-sDo" customClass="SettingsTableViewCell" customModule="Recipe_CICCC" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="71.5" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="71" width="414" height="43"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ezV-hb-sDo" id="bmx-sY-vNL">
-                                            <rect key="frame" x="0.0" y="0.0" width="383" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="383" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5ev-Gy-Nhf">
-                                                    <rect key="frame" x="20" y="11" width="355" height="21.5"/>
+                                                    <rect key="frame" x="20" y="11" width="355" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>

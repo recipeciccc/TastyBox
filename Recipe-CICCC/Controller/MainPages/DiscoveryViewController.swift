@@ -176,8 +176,10 @@ class DiscoveryViewController: UIViewController {
     }
     
     @objc func showSearch(){
-        print("show Search")
-        performSegue(withIdentifier: "searchPage", sender: nil)
+        UIView.animate(withDuration: 1.0) {
+            print("show Search")
+            self.performSegue(withIdentifier: "searchPage", sender: nil)
+        }
     }
     
     @objc func AddRecipe(){
@@ -185,6 +187,7 @@ class DiscoveryViewController: UIViewController {
         performSegue(withIdentifier: "addRecipe", sender: nil)
     }
     @objc func showLogout(){
+        
         print("show Logout")
         if Auth.auth().currentUser != nil{
             do{
@@ -194,11 +197,12 @@ class DiscoveryViewController: UIViewController {
             }catch let error as NSError{
                 print(error.localizedDescription)
             }
+            let Storyboard: UIStoryboard = UIStoryboard(name: "Login", bundle: nil)
+            let vc = Storyboard.instantiateViewController(withIdentifier: "loginPage")
+            self.navigationController?.pushViewController(vc, animated: true)
+                   
         }
-        let Storyboard: UIStoryboard = UIStoryboard(name: "Login", bundle: nil)
-        let vc = Storyboard.instantiateViewController(withIdentifier: "loginPage")
-        self.navigationController?.pushViewController(vc, animated: true)
-        
+       
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -208,6 +212,8 @@ class DiscoveryViewController: UIViewController {
         //            pageControllView.delegate = self  // 追加
         //        }
     }
+    
+    
 }
 
 

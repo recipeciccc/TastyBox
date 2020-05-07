@@ -82,13 +82,13 @@ class UserdataManager {
                     print("data count: \(data.count)")
                 
                 
-                    let userID = data["id"] as? String
-                    let name = data["userName"] as? String
-                    let familySize = data["familySize"] as? Int
-                    let cuisineType = data["cuisineType"] as? String
+                    let userID = data["id"] as? String ?? ""
+                    let name = data["userName"] as? String ?? ""
+                    let familySize = data["familySize"] as? Int ?? 1
+                    let cuisineType = data["cuisineType"] as? String ?? ""
                     let isVIP = data["isVIP"] as? Bool ?? false
  
-                    self.user = User(userID: userID!, name: name!, cuisineType: cuisineType!, familySize: familySize, isVIP: isVIP)
+                    self.user = User(userID: userID, name: name, cuisineType: cuisineType, familySize: familySize, isVIP: isVIP)
                 self.delegate?.gotUserData(user: self.user!)
 
                 }
@@ -106,17 +106,17 @@ class UserdataManager {
         
         db.collection("user").document(userID).collection("follower").document(followerID).setData([
             "id": followerID
-        ]) { err in
-            if let err = err {
-                print("Error writing document: \(err)")
-            } else {
-                print("Document successfully written!")
-            }
+            ],merge: true) { err in
+                if let err = err {
+                    print("Error writing document: \(err)")
+                } else {
+                    print("Document successfully written!")
+                }
         }
         
         db.collection("user").document(followerID).collection("following").document(userID).setData([
             "id": userID
-        ]) { err in
+        ],merge: true) { err in
             if let err = err {
                 print("Error writing document: \(err)")
             } else {

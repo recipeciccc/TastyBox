@@ -22,14 +22,14 @@ class SettingManager{
             "food": allergicFood,
             "check": true,
             "uid":userID
-        ]) { err in
+        ], merge: true ){ err in
             if let err = err {
                 print("Error writing document: \(err)")
             } else {
-                
                 print("check data:\(allergicFood)")
             }
         }
+       
     }
     
      func addAllFood(userID: String,allergicFood : String){
@@ -37,7 +37,7 @@ class SettingManager{
                "food": allergicFood,
                "check": false,
                "uid":userID
-           ]) { err in
+           ], merge: true) { err in
                if let err = err {
                    print("Error writing document: \(err)")
                } else {
@@ -51,7 +51,7 @@ class SettingManager{
         ref.document(userID).collection("allergicFood").document(allergicFood).setData([
             "food": allergicFood,
             "check": false,
-            "uid":userID]){ err in
+            "uid":userID], merge: true){ err in
                 
             if let err = err {
                 print("Error writing document: \(err)")

@@ -30,7 +30,7 @@ class IngredientRefrigeratorDataManager {
             "name": name,
             "amount": amount,
             
-        ]) { err in
+        ],merge: true) { err in
             if let err = err {
                 print("Error writing document: \(err)")
             } else {

@@ -24,6 +24,7 @@ class AboutViewController: UIViewController {
         super.viewDidLoad()
         
         if isFirst == true {
+            segmentedControl.selectedSegmentIndex = 1
             firstPart.isHidden = true
             secondPart.isHidden = false
             
@@ -43,9 +44,22 @@ class AboutViewController: UIViewController {
         let alert = UIAlertController(title: "Thank you", message: "You can check this terms and conditions and privacy policy in about page in menu bar anytime.", preferredStyle: .alert)
         
         let okAction = UIAlertAction(title: "OK", style: .cancel, handler: { action in
-            let Storyboard: UIStoryboard = UIStoryboard(name: "Login", bundle: nil)
-            let vc = Storyboard.instantiateViewController(withIdentifier: "FirstTimeProfile")
-            self.navigationController?.pushViewController(vc, animated: true)
+            
+            Firestore.firestore().collection("user").document(Auth.auth().currentUser!.uid).setData(
+                ["isFirst": false]
+                , merge: true) { err in
+                if let err = err {
+                    print("Error writing document: \(err)")
+                } else {
+                    self.isFirst = nil
+                    let Storyboard: UIStoryboard = UIStoryboard(name: "Login", bundle: nil)
+                    let vc = Storyboard.instantiateViewController(withIdentifier: "FirstTimeProfile")
+                    if !((self.navigationController?.viewControllers.contains(vc))!) {
+                        self.navigationController?.pushViewController(vc, animated: true)
+                        print("Document successfully written!")
+                    }
+                }
+            }
         })
         
         alert.addAction(okAction)
@@ -69,6 +83,3 @@ class AboutViewController: UIViewController {
     }
     
 }
-
-
-

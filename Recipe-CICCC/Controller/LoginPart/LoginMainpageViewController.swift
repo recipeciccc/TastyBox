@@ -157,38 +157,38 @@ class LoginMainpageViewController: UIViewController, UITextFieldDelegate {
                             
                         }
                     }
-                
-                //MARK: uncomment out and you don't need to edit info every time
-                //                if (user?.additionalUserInfo!.isNewUser)! {
-//                let Storyboard: UIStoryboard = UIStoryboard(name: "Login", bundle: nil)
-//                let vc = Storyboard.instantiateViewController(withIdentifier: "FirstTimeProfile")
-//                self.navigationController?.pushViewController(vc, animated: true)
-                //MARK: uncomment out and you don't need to edit info every time
-                //                } else {
-                //                    let Storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                //                    let vc = Storyboard.instantiateViewController(withIdentifier: "Discovery")
-                //                    self.navigationController?.pushViewController(vc, animated: true)
-                //                }
-                //
-                //                if error == nil {
-                //                    // means no error, login successfully
-                //                    self.login.isEnabled = false
-                //                    let Storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                //                    let vc = Storyboard.instantiateViewController(withIdentifier: "Discovery")
-                //                    self.navigationController?.pushViewController(vc, animated: true)
-                //                   // self.present(vc, animated: true, completion: nil)
-                //
-                //                } else {
-                //                    // mention there's some error
-                //                    let alertController = UIAlertController(title: "error", message: error?.localizedDescription, preferredStyle: .alert)
-                //                    let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-                //                    alertController.addAction(defaultAction)
-                //                    self.present(alertController, animated: true, completion: nil)
-                //                }
-                //LoginProperties.user = AppUser(authData: user!)
+                    
+                    //MARK: uncomment out and you don't need to edit info every time
+                    //                if (user?.additionalUserInfo!.isNewUser)! {
+                    //                let Storyboard: UIStoryboard = UIStoryboard(name: "Login", bundle: nil)
+                    //                let vc = Storyboard.instantiateViewController(withIdentifier: "FirstTimeProfile")
+                    //                self.navigationController?.pushViewController(vc, animated: true)
+                    //MARK: uncomment out and you don't need to edit info every time
+                    //                } else {
+                    //                    let Storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                    //                    let vc = Storyboard.instantiateViewController(withIdentifier: "Discovery")
+                    //                    self.navigationController?.pushViewController(vc, animated: true)
+                    //                }
+                    //
+                    //                if error == nil {
+                    //                    // means no error, login successfully
+                    //                    self.login.isEnabled = false
+                    //                    let Storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                    //                    let vc = Storyboard.instantiateViewController(withIdentifier: "Discovery")
+                    //                    self.navigationController?.pushViewController(vc, animated: true)
+                    //                   // self.present(vc, animated: true, completion: nil)
+                    //
+                    //                } else {
+                    //                    // mention there's some error
+                    //                    let alertController = UIAlertController(title: "error", message: error?.localizedDescription, preferredStyle: .alert)
+                    //                    let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                    //                    alertController.addAction(defaultAction)
+                    //                    self.present(alertController, animated: true, completion: nil)
+                    //                }
+                    //LoginProperties.user = AppUser(authData: user!)
+                }
             }
         }
-    }
     }
     
     // Facebook Login
@@ -258,7 +258,7 @@ class LoginMainpageViewController: UIViewController, UITextFieldDelegate {
                         }
                     }
                     
-                    //            }      Firestore.firestore().collection("user").document(Auth.auth().currentUser!.uid).addSnapshotListener { data, error in
+//                                }      Firestore.firestore().collection("user").document(Auth.auth().currentUser!.uid).addSnapshotListener { data, error in
                     //                        if let error = error {
                     //                            print(error.localizedDescription)
                     //                        } else {
@@ -288,18 +288,18 @@ class LoginMainpageViewController: UIViewController, UITextFieldDelegate {
                     //                            self.navigationController?.pushViewController(vc, animated: true)
                     //                        }
                     //                    }
-                    
-                    if  (user?.additionalUserInfo!.isNewUser)! {
-                        
-                        self.vc.isFirst = true
-                        self.navigationController?.pushViewController(self.vc, animated: true)
-                        
-                    } else {
-                        
-                        let Storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-                        let vc = Storyboard.instantiateViewController(withIdentifier: "Discovery")
-                        self.navigationController?.pushViewController(vc, animated: true)
-                    }
+//
+//                    if  (user?.additionalUserInfo!.isNewUser)! {
+//
+//                        self.vc.isFirst = true
+//                        self.navigationController?.pushViewController(self.vc, animated: true)
+//
+//                    } else {
+//
+//                        let Storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+//                        let vc = Storyboard.instantiateViewController(withIdentifier: "Discovery")
+//                        self.navigationController?.pushViewController(vc, animated: true)
+//                    }
                 }
                 
                 //                LoginProperties.user = AppUser(authData: user!)
@@ -384,7 +384,7 @@ extension LoginMainpageViewController: GIDSignInDelegate {
                     self.navigationController?.pushViewController(self.vc, animated: true)
                     
                 } else {
-                
+                    
                     if  (user?.additionalUserInfo!.isNewUser)! {
                         
                         self.vc.isFirst = true
@@ -404,10 +404,13 @@ extension LoginMainpageViewController: GIDSignInDelegate {
                                             self.navigationController?.pushViewController(self.vc, animated: true)
                                             
                                         } else {
-                                            self.vc.isFirst = false
-                                            let Storyboard: UIStoryboard = UIStoryboard(name: "Login", bundle: nil)
-                                            let vc = Storyboard.instantiateViewController(withIdentifier: "FirstTimeProfile")
-                                            self.navigationController?.pushViewController(vc, animated: true)
+                                            
+                                            UIView.animate(withDuration: 1.0) {
+                                                self.vc.isFirst = false
+                                                let Storyboard: UIStoryboard = UIStoryboard(name: "Login", bundle: nil)
+                                                let vc = Storyboard.instantiateViewController(withIdentifier: "FirstTimeProfile")
+                                                self.navigationController?.pushViewController(vc, animated: true)
+                                            }
                                         }
                                     } else {
                                         self.vc.isFirst = true
