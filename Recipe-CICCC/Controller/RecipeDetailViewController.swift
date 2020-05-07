@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import FirebaseFirestore
+import MessageUI
 
 class RecipeDetailViewController: UIViewController {
     
@@ -77,6 +78,39 @@ class RecipeDetailViewController: UIViewController {
                 vc.recipe = recipe
             }
         }
+    }
+    
+    @IBAction func report(_ sender: Any) {
+       reportAlert()
+    }
+    
+    private func reportAlert(){
+           let alertController = UIAlertController(title: "Report Issue", message: "Are you sure this recipe includes objectionable content? ", preferredStyle: .alert)
+           
+           let agreeAction = UIAlertAction(title: "Cancel", style: .cancel) { action in
+           }
+           let disagreeAction = UIAlertAction(title: "Agree", style: .default, handler: { action in
+                self.emailComposer()
+           })
+           alertController.addAction(agreeAction)
+           alertController.addAction(disagreeAction)
+           self.present(alertController, animated: true, completion: nil)
+    }
+    
+    private func emailComposer(){
+        if MFMailComposeViewController.canSendMail() == true {
+            let composer = MFMailComposeViewController()
+            composer.mailComposeDelegate = self
+            composer.setToRecipients(["recipeciccc@gmail.com"])
+            
+            let rid = String(recipe?.recipeID ?? "")
+            composer.setSubject("Report recipe - ID:\(rid)")
+            composer.setMessageBody("What kinds of objectionable content are included in this recipe? (sexual/ violent/ harmful/ spam/ infringes rights)\n\n\nPlease write down your concerns, we will review it to determine whether it violate community guidlines. By TastyBox Team", isHTML: false)
+            present(composer,animated:true)
+        }else{
+            return
+        }
+        
     }
     
     @IBAction func goToUserProfile(_ sender: Any) {
@@ -346,5 +380,29 @@ extension RecipeDetailViewController: recipeDetailDelegate {
             present(alertController, animated: true, completion: nil)
             
         }
+    }
+}
+
+extension RecipeDetailViewController: MFMailComposeViewControllerDelegate{
+    
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        if let _ = error{
+            controller.dismiss(animated: true, completion: nil)
+            return
+        }
+        
+        switch result {
+        case .cancelled:
+            print("cancelled")
+        case .failed:
+            print("failed")
+        case .saved:
+            print("saved")
+        case .sent:
+            print("sent")
+        @unknown default:
+            print("default")
+        }
+        controller.dismiss(animated: true, completion: nil)
     }
 }
