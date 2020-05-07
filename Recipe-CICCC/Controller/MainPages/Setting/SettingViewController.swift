@@ -99,7 +99,7 @@ class SettingViewController: UIViewController {
     @IBAction func showChoice(_ sender: Any) {
         DoneBtn.isEnabled = true
         DoneBtn.title = "Done"
-            let actionSheet = UIAlertController(title: "Your image From...", message: "choose your camera roll or camera", preferredStyle: .actionSheet)
+            let actionSheet = UIAlertController(title: "Your image From...", message: "choose your camera roll or camera", preferredStyle: .alert)
             
             let cameraRollAction = UIAlertAction(title: "Camera Roll", style: .default, handler: { action in
                 self.selectPicture()
