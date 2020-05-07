@@ -105,6 +105,7 @@
 		6F27D17F242A054900B5B071 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6FEC4DAE23FFCF3A00AB2785 /* Assets.xcassets */; };
 		6F27D185242A08D900B5B071 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6F27D183242A08D800B5B071 /* GoogleService-Info.plist */; };
 		6F27D186242A08D900B5B071 /* apiKey.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6F27D184242A08D900B5B071 /* apiKey.plist */; };
+		6F2D208E2463AD3D00526C82 /* LoginMainDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2D208D2463AD3D00526C82 /* LoginMainDataManager.swift */; };
 		6F3FF53F23DAABAD005162C7 /* Refrigerator.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F3FF53E23DAABAD005162C7 /* Refrigerator.storyboard */; };
 		6F3FF54523DAB0F0005162C7 /* RefrigeratorList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4069256D23D834E000059C8E /* RefrigeratorList.swift */; };
 		6F3FF54723DAB62D005162C7 /* StoresMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F3FF54623DAB62D005162C7 /* StoresMapViewController.swift */; };
@@ -308,6 +309,7 @@
 		6F27D183242A08D800B5B071 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6F27D184242A08D900B5B071 /* apiKey.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = apiKey.plist; sourceTree = "<group>"; };
 		6F27D187242A090C00B5B071 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6F2D208D2463AD3D00526C82 /* LoginMainDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginMainDataManager.swift; sourceTree = "<group>"; };
 		6F3FF53E23DAABAD005162C7 /* Refrigerator.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Refrigerator.storyboard; sourceTree = "<group>"; };
 		6F3FF54623DAB62D005162C7 /* StoresMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StoresMapViewController.swift; path = "Recipe-CICCC/Controller/StoresMapViewController.swift"; sourceTree = SOURCE_ROOT; };
 		6F3FF55C23E1068B005162C7 /* ShoppingList.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ShoppingList.storyboard; sourceTree = "<group>"; };
@@ -748,6 +750,7 @@
 		6F9BB7982410BF1F00CE7F60 /* dataManager */ = {
 			isa = PBXGroup;
 			children = (
+				6F2D208D2463AD3D00526C82 /* LoginMainDataManager.swift */,
 				6FB336532458F85F0049C964 /* FollowingViewControllerDataManager.swift */,
 				69909F4C2458C83F00AACEC7 /* UserDataManager.swift */,
 				6F039DCF24552CB100C76516 /* MyPageDataManager.swift */,
@@ -1098,6 +1101,7 @@
 				6F5344B0244D37940004F78D /* fetchDataInIngredients.swift in Sources */,
 				4069255C23D834AC00059C8E /* IngredientsTableViewCell.swift in Sources */,
 				6985A53A23F4924A001257A8 /* IngredientTitleCollectionViewCell.swift in Sources */,
+				6F2D208E2463AD3D00526C82 /* LoginMainDataManager.swift in Sources */,
 				69325D202413A9B300340F1F /* userRecipeItemTableViewCell.swift in Sources */,
 				4069258C23D8351800059C8E /* profieTableViewCell.swift in Sources */,
 				69DB5BC123ECBF240027A238 /* FollowingRecipeTableViewCell.swift in Sources */,

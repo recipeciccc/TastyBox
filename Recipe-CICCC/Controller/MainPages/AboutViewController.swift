@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class AboutViewController: UIViewController {
 
@@ -16,12 +17,55 @@ class AboutViewController: UIViewController {
     
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     
+    var isFirst: Bool?
+   
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        firstPart.isHidden = false
-        secondPart.isHidden = true
+        
+        if isFirst == true {
+            segmentedControl.selectedSegmentIndex = 1
+            firstPart.isHidden = true
+            secondPart.isHidden = false
+            
+            let agreeButton = UIBarButtonItem(title: "Agree", style: .plain, target: self, action: #selector(agreeTermsAndConditions))
+            self.navigationItem.rightBarButtonItem = agreeButton
+        
+        } else {
+        
+            firstPart.isHidden = false
+            secondPart.isHidden = true
+        }
         segmentedControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white], for: UIControl.State.selected)
     }
+    
+    @objc func agreeTermsAndConditions() {
+        
+        let alert = UIAlertController(title: "Thank you", message: "You can check this terms and conditions and privacy policy in about page in menu bar anytime.", preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(title: "OK", style: .cancel, handler: { action in
+            
+            Firestore.firestore().collection("user").document(Auth.auth().currentUser!.uid).setData(
+                ["isFirst": false]
+                , merge: true) { err in
+                if let err = err {
+                    print("Error writing document: \(err)")
+                } else {
+                    self.isFirst = nil
+                    let Storyboard: UIStoryboard = UIStoryboard(name: "Login", bundle: nil)
+                    let vc = Storyboard.instantiateViewController(withIdentifier: "FirstTimeProfile")
+                    if !((self.navigationController?.viewControllers.contains(vc))!) {
+                        self.navigationController?.pushViewController(vc, animated: true)
+                        print("Document successfully written!")
+                    }
+                }
+            }
+        })
+        
+        alert.addAction(okAction)
+        self.present(alert, animated: true)
+    }
+    
     @IBAction func choiceAction(_ sender: Any) {
         
         switch segmentedControl.selectedSegmentIndex {
@@ -39,6 +83,3 @@ class AboutViewController: UIViewController {
     }
     
 }
-
-
-
