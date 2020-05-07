@@ -223,7 +223,7 @@ class FirstTimeUserProfileTableViewController: UITableViewController, UIPickerVi
     
     @IBAction func showChoice(_ sender: AnyObject) {
         
-        let actionSheet = UIAlertController(title: "Your image From...", message: "choose your camera roll or camera", preferredStyle: .alert)
+        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
         let cameraRollAction = UIAlertAction(title: "Camera Roll", style: .default, handler: { action in
              self.selectPicture()
