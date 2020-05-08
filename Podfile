@@ -7,15 +7,6 @@ target 'Recipe-CICCC' do
 
   # Pods for Recipe-CICCC
 
-  target 'Recipe-CICCCTests' do
-    inherit! :search_paths
-    # Pods for testing
-  end
-
-  target 'Recipe-CICCCUITests' do
-    # Pods for testing
-  end
-
 # add the Firebase pod for Google Analytics
 pod 'Firebase/Analytics'
 

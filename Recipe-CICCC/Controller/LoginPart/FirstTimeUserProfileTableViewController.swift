@@ -143,14 +143,15 @@ class FirstTimeUserProfileTableViewController: UITableViewController, UIPickerVi
             
             dataManager.userRegister(userName: userNameTextField.text ?? "", eMailAddress: emailTextField.text ?? "", familySize: Int(familySizeTextField!.text!) ?? 0, cuisineType: cuisineTypeTextField!.text ?? "", accountImage: userImage!, isVIP: isVIP)
             
+            if Auth.auth().currentUser?.displayName == nil {
+                let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
+                changeRequest?.displayName = userNameTextField.text
+            }
+            
             let Storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
             let vc = Storyboard.instantiateViewController(withIdentifier: "Discovery")
             self.navigationController?.pushViewController(vc, animated: true)
             
-            if Auth.auth().currentUser?.displayName == nil {
-            let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
-                changeRequest?.displayName = userNameTextField.text
-            }
         }
     }
     
@@ -222,7 +223,7 @@ class FirstTimeUserProfileTableViewController: UITableViewController, UIPickerVi
     
     @IBAction func showChoice(_ sender: AnyObject) {
         
-        let actionSheet = UIAlertController(title: "Your image From...", message: "choose your camera roll or camera", preferredStyle: .alert)
+        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
         let cameraRollAction = UIAlertAction(title: "Camera Roll", style: .default, handler: { action in
              self.selectPicture()

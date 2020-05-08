@@ -85,7 +85,7 @@ class RecipeDetailViewController: UIViewController {
     }
     
     private func reportAlert(){
-           let alertController = UIAlertController(title: "Report Issue", message: "Are you sure this recipe includes objectionable content? ", preferredStyle: .alert)
+           let alertController = UIAlertController(title: "Report Issue", message: "Do you think this recipe includes objectionable content? ", preferredStyle: .alert)
            
            let agreeAction = UIAlertAction(title: "Cancel", style: .cancel) { action in
            }

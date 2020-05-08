@@ -24,7 +24,7 @@ class CommentDataManager {
             "user": userId,
             "text": text,
             "time": time
-        ]) { err in
+        ],merge: true) { err in
             if let err = err {
                 print("Error writing document: \(err)")
             } else {

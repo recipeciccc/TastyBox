@@ -19,7 +19,6 @@ class EmailRegisterViewController: UIViewController {
     
     @IBOutlet weak var termsConditionsBtn: UIButton!
     var lineView = UIView()
-    
 //    @IBAction func pressBackToLoginMainSegue(_ sender: UIBarButtonItem) {
 //        self.performSegue(withIdentifier: "LoginMain", sender: nil)
 //    }
