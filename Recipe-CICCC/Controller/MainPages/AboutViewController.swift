@@ -69,7 +69,7 @@ class AboutViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
 
-        if self.isMovingFromParent && self.isFirst! {
+        if self.isMovingFromParent && self.isFirst != nil {
               
               let fbLoginManager = LoginManager()
               fbLoginManager.logOut()

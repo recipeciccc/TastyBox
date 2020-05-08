@@ -154,17 +154,20 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L5n-r4-owq">
-                                                    <rect key="frame" x="78" y="25" width="208" height="20"/>
+                                                    <rect key="frame" x="78" y="25" width="276" height="20"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="208" id="0HX-hj-QDO"/>
+                                                        <constraint firstAttribute="width" constant="276" id="0HX-hj-QDO"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q8h-xP-UPS">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q8h-xP-UPS">
                                                     <rect key="frame" x="362" y="24" width="19" height="22"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="19" id="9sI-mL-LOu"/>
+                                                        <constraint firstAttribute="height" constant="22" id="bMw-aY-ieS"/>
+                                                    </constraints>
                                                     <state key="normal" image="ellipsis" catalog="system"/>
                                                     <connections>
                                                         <action selector="userManageButtonAction:" destination="3Zc-Mc-IvH" eventType="touchUpInside" id="Z0a-kw-j6p"/>
@@ -172,8 +175,10 @@
                                                 </button>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstAttribute="trailingMargin" secondItem="Q8h-xP-UPS" secondAttribute="trailing" constant="13" id="3h7-Sg-BWu"/>
                                                 <constraint firstItem="L5n-r4-owq" firstAttribute="leading" secondItem="saD-KI-qwt" secondAttribute="trailing" constant="8" id="5Zv-sT-hx0"/>
                                                 <constraint firstItem="L5n-r4-owq" firstAttribute="centerY" secondItem="aMV-pO-FYU" secondAttribute="centerY" id="JzY-0a-RaH"/>
+                                                <constraint firstItem="Q8h-xP-UPS" firstAttribute="centerY" secondItem="aMV-pO-FYU" secondAttribute="centerY" id="RHs-uy-Qnk"/>
                                                 <constraint firstAttribute="bottom" secondItem="saD-KI-qwt" secondAttribute="bottom" constant="10" id="WFT-FS-jxQ"/>
                                                 <constraint firstItem="saD-KI-qwt" firstAttribute="leading" secondItem="aMV-pO-FYU" secondAttribute="leadingMargin" id="cay-Zn-Xaf"/>
                                                 <constraint firstItem="saD-KI-qwt" firstAttribute="top" secondItem="aMV-pO-FYU" secondAttribute="top" constant="10" id="rA2-Ab-nCg"/>
