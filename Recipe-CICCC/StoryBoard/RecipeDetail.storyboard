@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ebJ-Xu-dih">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ebJ-Xu-dih">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -117,7 +117,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GeO-hU-vGg">
-                                                    <rect key="frame" x="367.5" y="11" width="26.5" height="22"/>
+                                                    <rect key="frame" x="343.5" y="11" width="26.5" height="22"/>
                                                     <color key="tintColor" red="1" green="0.57637232540000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <state key="normal" image="folder.badge.plus" catalog="system"/>
                                                     <connections>
@@ -155,11 +155,23 @@
                                                         </label>
                                                     </subviews>
                                                 </stackView>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rTF-4a-tk5">
+                                                    <rect key="frame" x="380" y="10.5" width="19" height="22.5"/>
+                                                    <color key="tintColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <state key="normal" image="ellipsis" catalog="system"/>
+                                                    <connections>
+                                                        <action selector="report:" destination="ebJ-Xu-dih" eventType="touchUpInside" id="UW0-wl-YcU"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="GeO-hU-vGg" firstAttribute="centerY" secondItem="3LP-hT-K9s" secondAttribute="centerY" id="7H4-Mt-0cF"/>
-                                                <constraint firstAttribute="trailing" secondItem="GeO-hU-vGg" secondAttribute="trailing" constant="20" id="FRO-rI-TMu"/>
+                                                <constraint firstItem="rTF-4a-tk5" firstAttribute="centerY" secondItem="GeO-hU-vGg" secondAttribute="centerY" id="U2L-T1-yRu"/>
                                                 <constraint firstItem="eeW-Hw-SqT" firstAttribute="leading" secondItem="3LP-hT-K9s" secondAttribute="leading" constant="20" id="UXP-ww-GHX"/>
+                                                <constraint firstItem="rTF-4a-tk5" firstAttribute="height" secondItem="GeO-hU-vGg" secondAttribute="height" multiplier="1.02273" id="WcJ-Fj-QuQ"/>
+                                                <constraint firstItem="rTF-4a-tk5" firstAttribute="width" secondItem="GeO-hU-vGg" secondAttribute="width" multiplier="0.716981" id="Wtq-n4-jbk"/>
+                                                <constraint firstAttribute="trailing" secondItem="rTF-4a-tk5" secondAttribute="trailing" constant="15" id="qLH-Xg-V9o"/>
+                                                <constraint firstItem="rTF-4a-tk5" firstAttribute="leading" secondItem="GeO-hU-vGg" secondAttribute="trailing" constant="10" id="yhQ-wS-eGl"/>
                                                 <constraint firstItem="eeW-Hw-SqT" firstAttribute="centerY" secondItem="3LP-hT-K9s" secondAttribute="centerY" id="yuY-OQ-qpA"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -341,7 +353,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Yfo-LR-9mq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4420" y="69"/>
+            <point key="canvasLocation" x="4190" y="-149"/>
         </scene>
         <!--Comments View Controller-->
         <scene sceneID="1RO-50-UIg">
@@ -475,8 +487,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="ellipses.bubble" catalog="system" width="64" height="54"/>
-        <image name="folder.badge.plus" catalog="system" width="64" height="42"/>
-        <image name="suit.heart" catalog="system" width="64" height="54"/>
+        <image name="ellipses.bubble" catalog="system" width="128" height="110"/>
+        <image name="ellipsis" catalog="system" width="128" height="37"/>
+        <image name="folder.badge.plus" catalog="system" width="128" height="86"/>
+        <image name="suit.heart" catalog="system" width="128" height="109"/>
     </resources>
 </document>
