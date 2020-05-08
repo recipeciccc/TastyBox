@@ -13,7 +13,12 @@ class followingUserTableViewCell: UITableViewCell {
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var imgView: UIImageView!
     @IBOutlet weak var followingButton: UIButton!
-    
+    weak var delegate: userManageDelegate?
+    var userID:String = ""
+
+    @IBAction func userManageButton(_ sender: Any) {
+        self.delegate?.pressedUserManageButton(uid: userID)
+    }
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

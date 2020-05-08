@@ -138,10 +138,12 @@ extension FollowingViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = (tableView.dequeueReusableCell(withIdentifier: "followingUser") as? followingUserTableViewCell)!
+        cell.delegate = self
         
         if followings.isEmpty {
             cell.userNameLabel.text = "no following"
         } else {
+            cell.userID = searchedFollowings[indexPath.row].userID
             cell.userNameLabel.text = searchedFollowings[indexPath.row].name
         }
         
@@ -191,6 +193,23 @@ extension FollowingViewController: FolllowingFollowerDelegate {
         self.tableView.reloadData()
     }
     
+}
+
+extension FollowingViewController: userManageDelegate {
+    func pressedUserManageButton(uid: String) {
+        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let blockAction = UIAlertAction(title: "Block", style: .default, handler: { action in
+            self.userDataManager.blockCreators(userID: uid)
+        })
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
+            self.dismiss(animated: true, completion: nil)
+        })
+        
+        actionSheet.addAction(blockAction)
+        actionSheet.addAction(cancelAction)
+        
+        self.present(actionSheet, animated: true, completion: nil)
+    }
 }
 
 
