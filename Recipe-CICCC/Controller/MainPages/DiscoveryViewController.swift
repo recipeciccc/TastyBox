@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import FirebaseAuth
+import FBSDKLoginKit
 
 //protocol MenuViewControllerDelegate: class {
 //    func menuViewController(viewController: DiscoveryViewController, at index: Int)
@@ -197,6 +198,7 @@ class DiscoveryViewController: UIViewController {
             }catch let error as NSError{
                 print(error.localizedDescription)
             }
+            
             let Storyboard: UIStoryboard = UIStoryboard(name: "Login", bundle: nil)
             let vc = Storyboard.instantiateViewController(withIdentifier: "loginPage")
             self.navigationController?.pushViewController(vc, animated: true)

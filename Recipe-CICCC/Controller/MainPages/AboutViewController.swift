@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import FBSDKLoginKit
 
 class AboutViewController: UIViewController {
 
@@ -65,6 +66,16 @@ class AboutViewController: UIViewController {
         alert.addAction(okAction)
         self.present(alert, animated: true)
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+
+        if self.isMovingFromParent && self.isFirst! {
+              
+              let fbLoginManager = LoginManager()
+              fbLoginManager.logOut()
+              
+          }
+      }
     
     @IBAction func choiceAction(_ sender: Any) {
         
