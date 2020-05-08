@@ -36,30 +36,30 @@ class UserdataManager {
     let uid = Auth.auth().currentUser?.uid
     
     func checkVIP() {
-           
-           let uid: String = Auth.auth().currentUser!.uid
-          
-           db.collection("user").document(uid).addSnapshotListener {
-               (querysnapshot, error) in
-               if error != nil {
-                   print("Error getting documents: \(String(describing: error))")
-               }
-               else {
-                  
-                   if let data = querysnapshot!.data() {
-                   
-                       print("data count: \(data.count)")
+        
+        let uid: String = Auth.auth().currentUser!.uid
+        
+        db.collection("user").document(uid).addSnapshotListener {
+            (querysnapshot, error) in
+            if error != nil {
+                print("Error getting documents: \(String(describing: error))")
+            }
+            else {
                 
+                if let data = querysnapshot!.data() {
+                    
+                    print("data count: \(data.count)")
+                    
                     if let isVIP = data["isVIP"] as? Bool {
                         self.recipeDetailDelegate?.isVIP(isVIP: isVIP)
                     }
-
-                   }
-               }
-               
-               
-           }
-       }
+                    
+                }
+            }
+            
+            
+        }
+    }
     
     func getUserDetail(id: String?) {
         
@@ -77,21 +77,21 @@ class UserdataManager {
                 print("Error getting documents: \(String(describing: error))")
             }
             else {
-               
+                
                 if let data = querysnapshot!.data() {
-                
+                    
                     print("data count: \(data.count)")
-                
-                
+                    
+                    
                     let userID = data["id"] as? String ?? ""
                     let name = data["userName"] as? String ?? ""
                     let familySize = data["familySize"] as? Int ?? 1
                     let cuisineType = data["cuisineType"] as? String ?? ""
                     let isVIP = data["isVIP"] as? Bool ?? false
- 
+                    
                     self.user = User(userID: userID, name: name, cuisineType: cuisineType, familySize: familySize, isVIP: isVIP)
-                self.delegate?.gotUserData(user: self.user!)
-
+                    self.delegate?.gotUserData(user: self.user!)
+                    
                 }
             }
             
@@ -99,7 +99,18 @@ class UserdataManager {
         }
     }
     
-
+    
+    func checkFollowing(followingID: String) {
+        db.collection("user").document(uid!).collection("following").document(followingID).addSnapshotListener { (querysnapshot, error) in
+            if error != nil {
+                print("Error getting documents: \(String(describing: error))")
+            } else {
+                
+                
+            }
+            
+        }
+    }
         
     
     

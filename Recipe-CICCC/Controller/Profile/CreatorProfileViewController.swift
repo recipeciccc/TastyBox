@@ -17,6 +17,7 @@ class CreatorProfileViewController: UIViewController {
 //    var id = "3AsWJvUdZkQNPX0pukMcNDabnK53"
     var userName:String = ""
     var creatorImage: UIImage?
+    var isBlocked = false
     
     var recipeList = [RecipeDetail]()
     var imageList = [UIImage]()
@@ -28,6 +29,7 @@ class CreatorProfileViewController: UIViewController {
     let fetchData = FetchRecipeData()
     let fetchImage = FetchRecipeImage()
     let dataManager = UserdataManager()
+    var detailBarButton: UIBarButtonItem?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +39,10 @@ class CreatorProfileViewController: UIViewController {
         self.tableView.delegate = self
         self.tableView.tableFooterView = UIView()
         self.tableView.allowsSelection = false
+        
+        detailBarButton = UIBarButtonItem(title: "∙∙∙", style: .plain, target: self, action: #selector(showsChoice))
+        
+        self.navigationItem.rightBarButtonItem = detailBarButton
         
         fetchData.delegate = self
         fetchImage.delegate = self
@@ -54,7 +60,31 @@ class CreatorProfileViewController: UIViewController {
         dataManager.getUserImage(uid: id!)
     }
     
-    
+    @objc func showsChoice() {
+        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        let alert = UIAlertController(title: "Are you sure?", message: "This acount wouldn't be able to follow you and would be disabled when several people block it. Do you really block this account?", preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(title: "OK", style: .destructive, handler: { action in
+            self.dataManager.blockCreators(userID: self.id!)
+        })
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
+            self.dismiss(animated: true, completion: nil)
+        })
+        
+        alert.addAction(okAction)
+        alert.addAction(cancelAction)
+        
+        let blockingAction = UIAlertAction(title: "Block", style: .destructive, handler: { action in
+            
+            self.present(alert, animated: true, completion: nil)
+        })
+        
+        actionSheet.addAction(blockingAction)
+        
+        self.present(actionSheet, animated: true, completion: nil)
+    }
     
     // MARK: - Navigation
     
