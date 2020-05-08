@@ -11,6 +11,8 @@ import UIKit
 import Firebase
 import Photos
 import RSKImageCropper
+import FBSDKLoginKit
+
 
 class FirstTimeUserProfileTableViewController: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
@@ -82,6 +84,16 @@ class FirstTimeUserProfileTableViewController: UITableViewController, UIPickerVi
         
         PickerColor()
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        if self.isMovingFromParent {
+            
+            let fbLoginManager = LoginManager()
+            fbLoginManager.logOut()
+            
+        }
+    }
+    
     private func PickerColor(){
         
         familyPicker.setValue( #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1) , forKey: "backgroundColor")

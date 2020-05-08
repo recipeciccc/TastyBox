@@ -26,7 +26,7 @@ class FollowingViewController: UIViewController {
     
     var searchingWord : String = "" {
              didSet {
-                 
+                 var count = 0
                  guard searchingWord != "" else {
                      return
                  }
@@ -34,11 +34,14 @@ class FollowingViewController: UIViewController {
                 searchedFollowingsImages.removeAll()
                 searchedFollowings.removeAll()
                 
+                
+                
                 for (index, user) in followings.enumerated() {
-                    
+            
                     if user.name.lowercased().contains(searchingWord.lowercased()) {
                         searchedFollowings.append(user)
-                        searchedFollowingsImages[searchedFollowingsImages.count - 1] = followingsImages[index]
+                        searchedFollowingsImages[count] = followingsImages[index]
+                        count += 1
                     }
                 }
                
@@ -138,22 +141,25 @@ extension FollowingViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = (tableView.dequeueReusableCell(withIdentifier: "followingUser") as? followingUserTableViewCell)!
+        cell.delegate = self
         
         if followings.isEmpty {
             cell.userNameLabel.text = "no following"
         } else {
+            cell.userID = searchedFollowings[indexPath.row].userID
             cell.userNameLabel.text = searchedFollowings[indexPath.row].name
         }
         
         if parentVC?.userID != Auth.auth().currentUser?.uid {
             cell.followingButton.isHidden = true
+            cell.userManageButton.isHidden = true
         } else {
-        
+            cell.userManageButton.isHidden = false
             cell.followingButton.setTitle("Unfollow", for: .normal)
        
         }
         
-        if followingsID.count == searchedFollowingsImages.count{
+        if searchedFollowings.count == searchedFollowingsImages.count{
             cell.imgView.image = searchedFollowingsImages[indexPath.row]
         }
         
@@ -178,7 +184,7 @@ extension FollowingViewController: FolllowingFollowerDelegate {
     func assginFollowersFollowingsImages(image: UIImage, index: Int) {
         self.followingsImages[index] = image
         self.searchedFollowingsImages[index] = image
-            self.tableView.reloadData()
+        self.tableView.reloadData()
     }
     
     func passFollowerFollowing(followingsIDs: [String], followersIDs: [String]) {
@@ -191,6 +197,24 @@ extension FollowingViewController: FolllowingFollowerDelegate {
         self.tableView.reloadData()
     }
     
+}
+
+extension FollowingViewController: userManageDelegate {
+    func pressedUserManageButton(uid: String) {
+        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let blockAction = UIAlertAction(title: "Block", style: .default, handler: { action in
+            self.userDataManager.blockCreators(userID: uid)
+            self.tableView.reloadData()
+        })
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
+            self.dismiss(animated: true, completion: nil)
+        })
+        
+        actionSheet.addAction(blockAction)
+        actionSheet.addAction(cancelAction)
+        
+        self.present(actionSheet, animated: true, completion: nil)
+    }
 }
 
 

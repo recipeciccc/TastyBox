@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class FollowerViewController: UIViewController {
     
@@ -19,10 +20,11 @@ class FollowerViewController: UIViewController {
     let userDataManager = UserdataManager()
     var searchedFollowers:[User] = []
     var searchedFollowersImages:[Int:UIImage] = [:]
+    var parentVC: followerFollowingPageViewController?
     
     var searchingWord : String = "" {
                 didSet {
-                    
+                    var count = 0
                     guard searchingWord != "" else {
                         return
                     }
@@ -34,7 +36,8 @@ class FollowerViewController: UIViewController {
                        
                        if user.name.lowercased().contains(searchingWord.lowercased()) {
                            searchedFollowers.append(user)
-                           searchedFollowersImages[searchedFollowersImages.count - 1] = followersImages[index]
+                           searchedFollowersImages[count] = followersImages[index]
+                            count += 1
                        }
                    }
                   
@@ -51,10 +54,10 @@ class FollowerViewController: UIViewController {
         self.tableView.delegate = self
         
         userDataManager.delegateFollowerFollowing = self
-        userDataManager.delegate = self
+//        userDataManager.delegate = self
         
-        let parentVC = self.parent as! followerFollowingPageViewController
-        followersIDs = parentVC.followersID
+        parentVC = self.parent as? followerFollowingPageViewController
+        followersIDs = parentVC!.followersID
         userDataManager.getFollowersFollowings(IDs: self.followersIDs, followerOrFollowing: "follower")
         
         followersIDs.enumerated().map {
@@ -81,6 +84,8 @@ class FollowerViewController: UIViewController {
 }
 
 
+
+
 extension FollowerViewController: FolllowingFollowerDelegate {
     func assginFollowersFollowingsImages(image: UIImage, index: Int) {
         self.followersImages[index] = image
@@ -94,6 +99,7 @@ extension FollowerViewController: FolllowingFollowerDelegate {
     
     func assignFollowersFollowings(users: [User]) {
         self.followers = users
+        searchedFollowers = users
         self.tableView.reloadData()
     }
     
@@ -102,18 +108,29 @@ extension FollowerViewController: FolllowingFollowerDelegate {
 
 extension FollowerViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return followers.count
+        return searchedFollowers.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = (tableView.dequeueReusableCell(withIdentifier: "followerUser") as? follwerUserTableViewCell)!
         
+        cell.delegate = self
+        
         if followersIDs.isEmpty {
             cell.userNameLabel.text = "no follower"
         } else {
-            cell.userNameLabel.text = followers[indexPath.row].name
+            cell.userID = searchedFollowers[indexPath.row].userID
+            cell.userNameLabel.text = searchedFollowers[indexPath.row].name
         }
-//        userDataManager.getUserImage(uid: self.followersIDs[indexPath.row])
+        
+        
+               if parentVC?.userID != Auth.auth().currentUser?.uid {
+                   cell.userManageButton.isHidden = true
+               } else {
+               
+                  cell.userManageButton.isHidden = false
+              
+               }
         
         cell.imgView?.contentMode = .scaleAspectFit
         cell.imgView.layer.masksToBounds = false
@@ -121,7 +138,7 @@ extension FollowerViewController: UITableViewDataSource {
         cell.imgView.clipsToBounds = true
         
         if followersIDs.count == followersImages.count {
-            cell.imgView.image = followersImages[indexPath.row]
+            cell.imgView.image = searchedFollowersImages[indexPath.row]
         }
         
         return cell
@@ -141,13 +158,22 @@ extension FollowerViewController: UITableViewDelegate {
     }
 }
 
-extension FollowerViewController: getUserDataDelegate {
-    func gotUserData(user: User) {
-        
-    }
+extension FollowerViewController: userManageDelegate {
     
-    func assignUserImage(image: UIImage) {
-      
+    func pressedUserManageButton(uid: String) {
+        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let blockAction = UIAlertAction(title: "Block", style: .default, handler: { action in
+            self.userDataManager.blockCreators(userID: uid)
+            self.tableView.reloadData()
+        })
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
+            self.dismiss(animated: true, completion: nil)
+        })
+        
+        actionSheet.addAction(blockAction)
+        actionSheet.addAction(cancelAction)
+        
+        self.present(actionSheet, animated: true, completion: nil)
     }
 }
 

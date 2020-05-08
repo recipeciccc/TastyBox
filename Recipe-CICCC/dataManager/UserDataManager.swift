@@ -18,6 +18,7 @@ protocol recipeDetailDelegate: class {
 
 class UserdataManager {
     
+    
     let db = Firestore.firestore()
     let storageRef = Storage.storage().reference()
     weak var delegate: getUserDataDelegate?
@@ -245,7 +246,50 @@ class UserdataManager {
         }
     }
     
-    
+    func blockCreators(userID: String) {
+        
+        db.collection("user").document(uid!).setData([
+            "blokingID": [userID:true]
+            
+        ], merge: true) { err in
+            if let err = err {
+                print("Error writing document: \(err)")
+            } else {
+                print("Document successfully written!")
+            }
+        }
+        
+        let numUserBlocked: Double = 1
+        db.collection("blokedIDs").document(userID).setData([
+            
+            userID: FieldValue.increment(numUserBlocked)
+            
+        ], merge: true) { err in
+            if let err = err {
+                print("Error writing document: \(err)")
+            } else {
+                print("Document successfully written!")
+            }
+        }
+        
+        db.collection("user").document(uid!).collection("following").document(userID).delete() { err in
+            if let err = err {
+                print("Error removing document: \(err)")
+            } else {
+                print("Document successfully removed!")
+            }
+        }
+        
+        db.collection("user").document(uid!).collection("follower").document(userID).delete() { err in
+                   if let err = err {
+                       print("Error removing document: \(err)")
+                   } else {
+                       print("Document successfully removed!")
+                   }
+               }
+
+        
+    }
     
     func getSavedRecipes() {
         

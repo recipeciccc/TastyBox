@@ -15,6 +15,9 @@ import CryptoKit
 
 class LoginMainpageViewController: UIViewController {
     
+    // Unhashed nonce.
+    fileprivate var currentNonce: String?
+    
     var userImage: UIImage = #imageLiteral(resourceName: "imageFile")
     
     let vc =  UIStoryboard(name: "AboutPage", bundle: nil).instantiateViewController(withIdentifier: "about") as! AboutViewController
@@ -24,8 +27,9 @@ class LoginMainpageViewController: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var login: UIButton!
     
-    @IBOutlet var loginButtons: [UIButton]!
     @IBOutlet var loginButtonStackView: UIStackView!
+    @IBOutlet weak var faceBookLoginButton: FBLoginButton!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,6 +81,10 @@ class LoginMainpageViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         
+        loginButtonStackView.spacing = 10
+      
+        setUpGoogleLogin()
+        setUpFaceBookLogin()
         setUpSignInAppleButton()
     }
     
@@ -156,76 +164,102 @@ class LoginMainpageViewController: UIViewController {
     }
     
     //MARK: Facebook Login
-    @IBAction func facebookLogin(_ sender: UIButton) {
+    
+    func setUpFaceBookLogin() {
+        //        faceBookLoginButton.setTitle("Sign in with FaceBook", for: .normal)
+        
+        //        faceBookLoginButton.layer.frame.size.width = 400
+        //        faceBookLoginButton.imageView?.contentMode = .scaleAspectFit
+        //        faceBookLoginButton.setImage(#imageLiteral(resourceName: "facebook-32"), for: .normal)
+        //        faceBookLoginButton.imageView?.alpha = 100
+        //        faceBookLoginButton.backgroundColor = #colorLiteral(red: 0.2588235294, green: 0.4039215686, blue: 0.6980392157, alpha: 1)
+        
+        //        faceBookLoginButton.imageView?.image = #imageLiteral(resourceName: "f_logo_RGB-White_58")
+        //        faceBookLoginButton.contentHorizontalAlignment = .fill
+        //        faceBookLoginButton.contentVerticalAlignment = .fill
+        //        faceBookLoginButton.titleLabel?.font = .systemFont(ofSize: 10)
+        //        faceBookLoginButton.titleLabel?.textColor = .white
         let fbLoginManager = LoginManager()
-        fbLoginManager.logIn(permissions: ["public_profile", "email"], from: self) {(
-            Result, Error) in
-            if let error = Error {
-                print("Failed to login: \(error.localizedDescription)")
-                return
-            }
-            
-            guard let accessToken = AccessToken.current
-                else {
-                    print("Failed to get access token")
-                    return
-            }
-            
-            let credential = FacebookAuthProvider.credential(withAccessToken: accessToken.tokenString)
-            
-            // call Firebase API to signin
-            Auth.auth().signIn(with: credential, completion: { user, error in
-                if let error = error {
-                    print("Login error: \(error.localizedDescription)")
-                    let alertController = UIAlertController(title: "Login error", message: error.localizedDescription, preferredStyle: .alert)
-                    let okayAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-                    alertController.addAction(okayAction)
-                    self.present(alertController, animated: true, completion: nil)
-                    
-                    return
-                }
-                
-                // present the main View
-                if error == nil {
-                    
-                    if  (user?.additionalUserInfo!.isNewUser)! {
-                        
-                        self.vc.isFirst = true
-                        self.navigationController?.pushViewController(self.vc, animated: true)
-                        
-                    } else {
-                        Firestore.firestore().collection("user").document(Auth.auth().currentUser!.uid).addSnapshotListener { data, error in
-                            if let error = error {
-                                print(error.localizedDescription)
-                            } else {
-                                
-                                if let data = data {
-                                    let isFirst = data["isFirst"] as? Bool
-                                    if let isFirst = isFirst {
-                                        if isFirst == true {
-                                            self.vc.isFirst = true
-                                            self.navigationController?.pushViewController(self.vc, animated: true)
-                                            
-                                        } else {
-                                            self.vc.isFirst = false
-                                            let Storyboard: UIStoryboard = UIStoryboard(name: "Login", bundle: nil)
-                                            let vc = Storyboard.instantiateViewController(withIdentifier: "FirstTimeProfile")
-                                            self.navigationController?.pushViewController(vc, animated: true)
-                                        }
-                                    } else {
-                                        self.vc.isFirst = true
-                                        self.navigationController?.pushViewController(self.vc, animated: true)
-                                    }
-                                }
-                                
-                            }
-                        }
-                    }
-                }
-            })
-        }
+        fbLoginManager.logOut() // this is an instance function
+        //        faceBookLoginButton.addTarget(self, action: #selector(facebookLogin), for: .touchUpInside)
+        faceBookLoginButton.layer.cornerRadius = 10
+        faceBookLoginButton.delegate = self
+        //Add button on some view or stack
+        //        self.loginButtonStackView.addArrangedSubview(authorizationButton)
     }
     
+//    @objc func facebookLogin() {
+//        let fbLoginManager = LoginManager()
+//        fbLoginManager.logIn(permissions: ["public_profile", "email"], from: self) {(
+//            Result, Error) in
+//            if let error = Error {
+//                print("Failed to login: \(error.localizedDescription)")
+//                return
+//            }
+//
+//            guard let accessToken = AccessToken.current
+//                else {
+//                    print("Failed to get access token")
+//                    return
+//            }
+//
+//            let credential = FacebookAuthProvider.credential(withAccessToken: accessToken.tokenString)
+//
+//            // call Firebase API to signin
+//            Auth.auth().signIn(with: credential, completion: { user, error in
+//                if let error = error {
+//                    print("Login error: \(error.localizedDescription)")
+//                    let alertController = UIAlertController(title: "Login error", message: error.localizedDescription, preferredStyle: .alert)
+//                    let okayAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+//                    alertController.addAction(okayAction)
+//                    self.present(alertController, animated: true, completion: nil)
+//
+//                    return
+//                }
+//
+//                // present the main View
+//                if error == nil {
+//
+//                    if  (user?.additionalUserInfo!.isNewUser)! {
+//                        if !accessToken.isExpired {
+//                            self.vc.isFirst = true
+//                            self.navigationController?.pushViewController(self.vc, animated: true)
+//                        }
+//                    } else {
+//                        if !accessToken.isExpired {
+//                            Firestore.firestore().collection("user").document(Auth.auth().currentUser!.uid).addSnapshotListener { data, error in
+//                                if let error = error {
+//                                    print(error.localizedDescription)
+//                                } else {
+//
+//                                    if let data = data {
+//                                        let isFirst = data["isFirst"] as? Bool
+//                                        if let isFirst = isFirst {
+//                                            if isFirst == true {
+//                                                self.vc.isFirst = true
+//                                                self.navigationController?.pushViewController(self.vc, animated: true)
+//
+//                                            } else {
+//                                                self.vc.isFirst = false
+//                                                let Storyboard: UIStoryboard = UIStoryboard(name: "Login", bundle: nil)
+//                                                let vc = Storyboard.instantiateViewController(withIdentifier: "FirstTimeProfile")
+//                                                self.navigationController?.pushViewController(vc, animated: true)
+//                                            }
+//                                        } else {
+//                                            self.vc.isFirst = true
+//                                            self.navigationController?.pushViewController(self.vc, animated: true)
+//                                        }
+//                                    }
+//
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
+//            })
+//        }
+//    }
+//
     
     
     
@@ -243,8 +277,8 @@ class LoginMainpageViewController: UIViewController {
     }
     
     @objc func tapRecognizerAction() {
-       
-
+        
+        
         if let tapRecognizer = tapRecognizer {
             self.view.removeGestureRecognizer(tapRecognizer)
             self.tapRecognizer = nil
@@ -256,110 +290,186 @@ class LoginMainpageViewController: UIViewController {
                 self.view.frame.origin.y = 0
             }
         })
-
+        
     }
     
     @objc func keyboardWillHide(notification: NSNotification) {
         
-       UIView.animate(withDuration: 0.3, animations: {
+        UIView.animate(withDuration: 0.3, animations: {
             self.view.endEditing(true)
-        if self.view.frame.origin.y != 0 {
-            self.view.frame.origin.y = 0
-        }
+            if self.view.frame.origin.y != 0 {
+                self.view.frame.origin.y = 0
+            }
         })
-
-    }
-    
-    
-    
-    //MARK: Apple login
-    
-    func setUpSignInAppleButton() {
-        let authorizationButton = ASAuthorizationAppleIDButton()
-        authorizationButton.addTarget(self, action: #selector(handleAppleIdRequest), for: .touchUpInside)
-        authorizationButton.cornerRadius = 10
-        //Add button on some view or stack
-        self.loginButtonStackView.addArrangedSubview(authorizationButton)
-    }
-    
-    @objc func handleAppleIdRequest() {
-        
-        let appleIDProvider = ASAuthorizationAppleIDProvider()
-        let request = appleIDProvider.createRequest()
-        request.requestedScopes = [.fullName, .email]
-        let authorizationController = ASAuthorizationController(authorizationRequests: [request])
-        authorizationController.delegate = self
-        authorizationController.performRequests()
         
     }
-     
-     // Adapted from https://auth0.com/docs/api-auth/tutorials/nonce#generate-a-cryptographically-random-nonce
-     private func randomNonceString(length: Int = 32) -> String {
-         precondition(length > 0)
-         let charset: Array<Character> =
-             Array("0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._")
-         var result = ""
-         var remainingLength = length
-         
-         while remainingLength > 0 {
-             let randoms: [UInt8] = (0 ..< 16).map { _ in
-                 var random: UInt8 = 0
-                 let errorCode = SecRandomCopyBytes(kSecRandomDefault, 1, &random)
-                 if errorCode != errSecSuccess {
-                     fatalError("Unable to generate nonce. SecRandomCopyBytes failed with OSStatus \(errorCode)")
-                 }
-                 return random
-             }
-             
-             randoms.forEach { random in
-                 if length == 0 {
-                     return
-                 }
-                 
-                 if random < charset.count {
-                     result.append(charset[Int(random)])
-                     remainingLength -= 1
-                 }
-             }
-         }
-         
-         return result
-     }
-     
-     // Unhashed nonce.
-     fileprivate var currentNonce: String?
-     
-     @available(iOS 13, *)
-     func startSignInWithAppleFlow() {
-         let nonce = randomNonceString()
-         currentNonce = nonce
-         let appleIDProvider = ASAuthorizationAppleIDProvider()
-         let request = appleIDProvider.createRequest()
-         request.requestedScopes = [.fullName, .email]
-         request.nonce = sha256(nonce)
-         
-         let authorizationController = ASAuthorizationController(authorizationRequests: [request])
-         authorizationController.delegate = self
-        authorizationController.presentationContextProvider = self as? ASAuthorizationControllerPresentationContextProviding
-         authorizationController.performRequests()
-     }
-     
-     @available(iOS 13, *)
-     private func sha256(_ input: String) -> String {
-         let inputData = Data(input.utf8)
-         let hashedData = SHA256.hash(data: inputData)
-         let hashString = hashedData.compactMap {
-             return String(format: "%02x", $0)
-         }.joined()
-         
-         return hashString
-     }
     
     
+}
 
+extension LoginMainpageViewController: LoginButtonDelegate {
+    func loginButton(_ loginButton: FBLoginButton, didCompleteWith result: LoginManagerLoginResult?, error: Error?) {
+        // エラーチェック
+        if let error = error {
+            print(error)
+        } else {
+            // ログインがユーザーにキャンセルされたかどうか
+            if result!.isCancelled {
+                print("Login　Cancel")
+                
+            } else {
+                //                     let fbLoginManager = LoginManager()
+                //                            fbLoginManager.logIn(permissions: ["public_profile", "email"], from: self) {(
+                //                                Result, Error) in
+//                guard let accessToken = AccessToken.current
+//                    else {
+//                        print("Failed to get access token")
+//                        return
+//                }
+//
+                let credential = FacebookAuthProvider.credential(withAccessToken: AccessToken.current!.tokenString)
+                
+                Auth.auth().signIn(with: credential) { (result, error) in
+                    if let error = error {
+                        print("Failed to login: \(error.localizedDescription)")
+                        return
+                    }
+                    
+                    guard let accessToken = AccessToken.current
+                        else {
+                            print("Failed to get access token")
+                            return
+                    }
+                    
+                    // call Firebase API to signin
+                    
+                    if  (result?.additionalUserInfo!.isNewUser)! {
+                        if !accessToken.isExpired {
+                            self.vc.isFirst = true
+                            self.navigationController?.pushViewController(self.vc, animated: true)
+                        }
+                    } else {
+                        if !accessToken.isExpired {
+                            Firestore.firestore().collection("user").document(Auth.auth().currentUser!.uid).addSnapshotListener { data, error in
+                                if let error = error {
+                                    print(error.localizedDescription)
+                                } else {
+                                    
+                                    if let data = data {
+                                        let isFirst = data["isFirst"] as? Bool
+                                        if let isFirst = isFirst {
+                                            if isFirst == true {
+                                                self.vc.isFirst = true
+                                                self.navigationController?.pushViewController(self.vc, animated: true)
+                                                
+                                            } else {
+                                                self.vc.isFirst = false
+                                                let Storyboard: UIStoryboard = UIStoryboard(name: "Login", bundle: nil)
+                                                let vc = Storyboard.instantiateViewController(withIdentifier: "FirstTimeProfile")
+                                                self.navigationController?.pushViewController(vc, animated: true)
+                                            }
+                                        } else {
+                                            self.vc.isFirst = true
+                                            self.navigationController?.pushViewController(self.vc, animated: true)
+                                        }
+                                    }
+                                    
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    func loginButtonDidLogOut(_ loginButton: FBLoginButton) {
+        print("logout")
+    }
 }
 
 extension LoginMainpageViewController: ASAuthorizationControllerDelegate {
+    //MARK: Apple login
+      
+      func setUpSignInAppleButton() {
+          let authorizationButton = ASAuthorizationAppleIDButton()
+          authorizationButton.addTarget(self, action: #selector(handleAppleIdRequest), for: .touchUpInside)
+          authorizationButton.cornerRadius = 10
+          //Add button on some view or stack
+          self.loginButtonStackView.addArrangedSubview(authorizationButton)
+      }
+      
+      @objc func handleAppleIdRequest() {
+          
+          let appleIDProvider = ASAuthorizationAppleIDProvider()
+          let request = appleIDProvider.createRequest()
+          request.requestedScopes = [.fullName, .email]
+          let authorizationController = ASAuthorizationController(authorizationRequests: [request])
+          authorizationController.delegate = self
+          authorizationController.performRequests()
+          
+      }
+       
+       // Adapted from https://auth0.com/docs/api-auth/tutorials/nonce#generate-a-cryptographically-random-nonce
+       private func randomNonceString(length: Int = 32) -> String {
+           precondition(length > 0)
+           let charset: Array<Character> =
+               Array("0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._")
+           var result = ""
+           var remainingLength = length
+           
+           while remainingLength > 0 {
+               let randoms: [UInt8] = (0 ..< 16).map { _ in
+                   var random: UInt8 = 0
+                   let errorCode = SecRandomCopyBytes(kSecRandomDefault, 1, &random)
+                   if errorCode != errSecSuccess {
+                       fatalError("Unable to generate nonce. SecRandomCopyBytes failed with OSStatus \(errorCode)")
+                   }
+                   return random
+               }
+               
+               randoms.forEach { random in
+                   if length == 0 {
+                       return
+                   }
+                   
+                   if random < charset.count {
+                       result.append(charset[Int(random)])
+                       remainingLength -= 1
+                   }
+               }
+           }
+           
+           return result
+       }
+    
+    @available(iOS 13, *)
+      func startSignInWithAppleFlow() {
+          let nonce = randomNonceString()
+          currentNonce = nonce
+          let appleIDProvider = ASAuthorizationAppleIDProvider()
+          let request = appleIDProvider.createRequest()
+          request.requestedScopes = [.fullName, .email]
+          request.nonce = sha256(nonce)
+          
+          let authorizationController = ASAuthorizationController(authorizationRequests: [request])
+          authorizationController.delegate = self
+         authorizationController.presentationContextProvider = self as? ASAuthorizationControllerPresentationContextProviding
+          authorizationController.performRequests()
+      }
+      
+      @available(iOS 13, *)
+      private func sha256(_ input: String) -> String {
+          let inputData = Data(input.utf8)
+          let hashedData = SHA256.hash(data: inputData)
+          let hashString = hashedData.compactMap {
+              return String(format: "%02x", $0)
+          }.joined()
+          
+          return hashString
+      }
+     
+     
 
   func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
     
@@ -447,12 +557,21 @@ extension LoginMainpageViewController: ASAuthorizationControllerDelegate {
 extension LoginMainpageViewController: GIDSignInDelegate {
     
     //MARK: Google login
-    @IBAction func googleLogin(sender: UIButton) {
+    func setUpGoogleLogin() {
+        let authorizationButton = GIDSignInButton()
+//        authorizationButton.addTarget(self, action: #selector(googleLogin), for: .touchUpInside)
+        authorizationButton.layer.cornerRadius = 10
+        //Add button on some view or stack
+        self.loginButtonStackView.addArrangedSubview(authorizationButton)
+    }
+    
+    @objc func googleLogin() {
         GIDSignIn.sharedInstance().signIn()
     }
     
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
         if error != nil {
+            print(error)
             return
         }
         guard let authentication = user.authentication else {
@@ -528,6 +647,18 @@ extension LoginMainpageViewController: GIDSignInDelegate {
     
 }
 
+//extension FBLoginButton {
+//  /**
+//   Create a new `LoginButton` with a given optional frame and read permissions.
+//   - Parameter frame: Optional frame to initialize with. Default: `nil`, which uses a default size for the button.
+//   - Parameter permissions: Array of read permissions to request when logging in.
+//   */
+//  convenience init(frame: CGRect = .zero, permissions: [Permission] = [.publicProfile]) {
+//    self.init(frame: frame)
+//    self.permissions = permissions.map { $0.name }
+//  }
+//}
+
 extension LoginMainpageViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -557,3 +688,20 @@ extension LoginMainpageViewController{
     }
 }
 
+extension UIImage {
+    // resize image
+    func reSizeImage(reSize:CGSize)->UIImage {
+        //UIGraphicsBeginImageContext(reSize);
+        UIGraphicsBeginImageContextWithOptions(reSize,false,UIScreen.main.scale);
+        self.draw(in: CGRect(x: 0, y: 0, width: reSize.width, height: reSize.height));
+        let reSizeImage:UIImage! = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        return reSizeImage;
+    }
+
+    // scale the image at rates
+    func scaleImage(scaleSize:CGFloat)->UIImage {
+        let reSize = CGSize(width: self.size.width * scaleSize, height: self.size.height * scaleSize)
+        return reSizeImage(reSize: reSize)
+    }
+}
