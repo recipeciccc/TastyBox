@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class FollowerViewController: UIViewController {
     
@@ -19,10 +20,11 @@ class FollowerViewController: UIViewController {
     let userDataManager = UserdataManager()
     var searchedFollowers:[User] = []
     var searchedFollowersImages:[Int:UIImage] = [:]
+    var parentVC: followerFollowingPageViewController?
     
     var searchingWord : String = "" {
                 didSet {
-                    
+                    var count = 0
                     guard searchingWord != "" else {
                         return
                     }
@@ -34,7 +36,8 @@ class FollowerViewController: UIViewController {
                        
                        if user.name.lowercased().contains(searchingWord.lowercased()) {
                            searchedFollowers.append(user)
-                           searchedFollowersImages[searchedFollowersImages.count - 1] = followersImages[index]
+                           searchedFollowersImages[count] = followersImages[index]
+                            count += 1
                        }
                    }
                   
@@ -53,8 +56,8 @@ class FollowerViewController: UIViewController {
         userDataManager.delegateFollowerFollowing = self
 //        userDataManager.delegate = self
         
-        let parentVC = self.parent as! followerFollowingPageViewController
-        followersIDs = parentVC.followersID
+        parentVC = self.parent as? followerFollowingPageViewController
+        followersIDs = parentVC!.followersID
         userDataManager.getFollowersFollowings(IDs: self.followersIDs, followerOrFollowing: "follower")
         
         followersIDs.enumerated().map {
@@ -119,7 +122,15 @@ extension FollowerViewController: UITableViewDataSource {
             cell.userID = searchedFollowers[indexPath.row].userID
             cell.userNameLabel.text = searchedFollowers[indexPath.row].name
         }
-//        userDataManager.getUserImage(uid: self.followersIDs[indexPath.row])
+        
+        
+               if parentVC?.userID != Auth.auth().currentUser?.uid {
+                   cell.userManageButton.isHidden = true
+               } else {
+               
+                  cell.userManageButton.isHidden = false
+              
+               }
         
         cell.imgView?.contentMode = .scaleAspectFit
         cell.imgView.layer.masksToBounds = false
@@ -153,7 +164,7 @@ extension FollowerViewController: userManageDelegate {
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         let blockAction = UIAlertAction(title: "Block", style: .default, handler: { action in
             self.userDataManager.blockCreators(userID: uid)
-            		
+            self.tableView.reloadData()
         })
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
             self.dismiss(animated: true, completion: nil)

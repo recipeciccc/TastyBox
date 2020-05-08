@@ -82,10 +82,10 @@ class LoginMainpageViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         
         loginButtonStackView.spacing = 10
-        setUpSignInAppleButton()
+      
         setUpGoogleLogin()
         setUpFaceBookLogin()
-        
+        setUpSignInAppleButton()
     }
     
     @IBAction func unwindtoLoginMain(segue: UIStoryboardSegue) {
