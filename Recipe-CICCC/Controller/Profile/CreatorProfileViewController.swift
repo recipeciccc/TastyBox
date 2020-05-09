@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import MessageUI
 
 class CreatorProfileViewController: UIViewController {
     
@@ -73,13 +74,13 @@ class CreatorProfileViewController: UIViewController {
         userDataManager.delegate = self
         userDataManager.delegateFollowerFollowing = self
         
-//        userDataManager.checkUserStatus(ID: id!)
-//
-//        userDataManager.getUserDetail(id: id!)
-//
-//        userDataManager.findFollowerFollowing(id: id!)
-//
-//        userDataManager.getUserImage(uid: id!)
+        //        userDataManager.checkUserStatus(ID: id!)
+        //
+        //        userDataManager.getUserDetail(id: id!)
+        //
+        //        userDataManager.findFollowerFollowing(id: id!)
+        //
+        //        userDataManager.getUserImage(uid: id!)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -125,7 +126,7 @@ class CreatorProfileViewController: UIViewController {
             self.isFollowing = false
             print(self.followers)
             self.userDataManager.findFollowerFollowing(id: self.id!)
-//            self.tableView.reloadData()
+            //            self.tableView.reloadData()
         })
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
@@ -140,11 +141,45 @@ class CreatorProfileViewController: UIViewController {
             self.present(alert, animated: true, completion: nil)
         })
         
+        let reportAction = UIAlertAction(title: "Report", style: .default, handler: { action in
+            self.reportAlert()
+        })
+        
         
         actionSheet.addAction(blockingAction)
+        actionSheet.addAction(reportAction)
         actionSheet.addAction(cancelAction)
         
         self.present(actionSheet, animated: true, completion: nil)
+    }
+    
+    private func reportAlert(){
+        let alertController = UIAlertController(title: "Report Issue", message: "You can report this user with email if you judge this user is abusive.", preferredStyle: .alert)
+        
+        let agreeAction = UIAlertAction(title: "Cancel", style: .cancel) { action in
+        }
+        let disagreeAction = UIAlertAction(title: "Agree", style: .default, handler: { action in
+            self.emailComposer()
+        })
+        alertController.addAction(agreeAction)
+        alertController.addAction(disagreeAction)
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    private func emailComposer(){
+        if MFMailComposeViewController.canSendMail() == true {
+            let composer = MFMailComposeViewController()
+            composer.mailComposeDelegate = self
+            composer.setToRecipients(["recipeciccc@gmail.com"])
+            
+            
+            composer.setSubject("Report recipe - ID:\(id!)")
+            composer.setMessageBody("Why do you think this user is abusive or objectionable? (sexual/ violent/ harmful/ spam/ infringes rights)\n\n\nPlease write down your concerns, we will review it to determine whether it violate community guidlines. By TastyBox Team", isHTML: false)
+            present(composer,animated:true)
+        }else{
+            return
+        }
+        
     }
     
     // MARK: - Navigation
@@ -447,5 +482,29 @@ extension CreatorProfileViewController: followingManageDelegate {
         
         
         //        tableView.reloadData()
+    }
+}
+
+extension CreatorProfileViewController: MFMailComposeViewControllerDelegate{
+    
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        if let _ = error{
+            controller.dismiss(animated: true, completion: nil)
+            return
+        }
+        
+        switch result {
+        case .cancelled:
+            print("cancelled")
+        case .failed:
+            print("failed")
+        case .saved:
+            print("saved")
+        case .sent:
+            print("sent")
+        @unknown default:
+            print("default")
+        }
+        controller.dismiss(animated: true, completion: nil)
     }
 }
