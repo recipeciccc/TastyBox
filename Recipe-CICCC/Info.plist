@@ -74,11 +74,11 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string>This app can select a photo that you take right now. You need to allow to access a camera. </string>
+	<string>This app can select a photo that you take right now. You need to allow to access a camera to take your profile image. </string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>By accessing your location, this app can find you a good place to buy ingredients</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>This app needs to access your photo library to choose images</string>
+	<string>This app needs to access your photo library to choose your profile image. It will be shown in your profile, your recipe page and users can see it as searching result.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
