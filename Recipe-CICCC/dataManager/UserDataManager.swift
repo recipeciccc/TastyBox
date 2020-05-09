@@ -34,12 +34,14 @@ class UserdataManager {
     var followings: [User] = []
     var savedRecipesIDs:[String] = []
     let uid = Auth.auth().currentUser?.uid
+    var isFollowing = false
+    var isBlocked = false
+    var isBlocking = false
     
     func checkVIP() {
         
-        let uid: String = Auth.auth().currentUser!.uid
         
-        db.collection("user").document(uid).addSnapshotListener {
+        db.collection("user").document(uid!).addSnapshotListener {
             (querysnapshot, error) in
             if error != nil {
                 print("Error getting documents: \(String(describing: error))")
@@ -100,34 +102,106 @@ class UserdataManager {
     }
     
     
-    func checkFollowing(followingID: String) {
-        db.collection("user").document(uid!).collection("following").document(followingID).addSnapshotListener { (querysnapshot, error) in
+    fileprivate func isFollowing(_ ID: String) {
+        
+        db.collection("user").document(uid!).collection("following").whereField("id", isEqualTo: ID).addSnapshotListener { (querysnapshot, error) in
             if error != nil {
                 print("Error getting documents: \(String(describing: error))")
             } else {
                 
+                if querysnapshot?.documents.count == 1 {
+                    
+                    self.isFollowing = true
+                    //                    self.delegateFollowerFollowing?.statusUsers(isBlocked: false, isBlocking: self.isBlocking, isFollowing: true)
+                }
+                    
+                else if querysnapshot?.documents.count == 0 {
+                    //                    self.delegateFollowerFollowing?.statusUsers(isBlocked: false, isBlocking: self.isBlocking, isFollowing: false)
+                    self.isFollowing = false
+                }
+            }
+        }
+    }
+    
+    fileprivate func checkIsBlocked(_ ID: String) {
+        db.collection("user").document(ID).addSnapshotListener { (querysnapshot, error) in
+            if error != nil {
+                print("Error getting documents: \(String(describing: error))")
+            } else {
                 
+                if let data = querysnapshot?.data() {
+                    if let dictionary = data["blockingID"] as? [String: Bool] {
+                        let blockingID = [String](dictionary.keys)
+                        if self.binarySearch(blockingID, key: self.uid!) {
+                            self.isBlocked = true
+                        }
+                    }
+                    
+                }
             }
             
         }
     }
-        
     
     
-    func increaseFollower(userID: String, followerID: String) {
-        
-        db.collection("user").document(userID).collection("follower").document(followerID).setData([
-            "id": followerID
-            ],merge: true) { err in
-                if let err = err {
-                    print("Error writing document: \(err)")
-                } else {
-                    print("Document successfully written!")
+    func checkIsBlocking(_ ID: String) {
+        db.collection("user").document(uid!).addSnapshotListener { (querysnapshot, error) in
+            if error != nil {
+                print("Error getting documents: \(String(describing: error))")
+            } else {
+                
+                if let data = querysnapshot?.data() {
+                    if let dictionary = data["blockingID"] as? [String: Bool] {
+                        let blockingID = [String](dictionary.keys)
+                        if self.binarySearch(blockingID, key: ID) {
+                            self.isBlocking = true
+                            self.isFollowing = false
+                        }
+                    }
+                    
                 }
+                
+                self.delegateFollowerFollowing?.statusUsers(isBlocked: self.isBlocked, isBlocking: self.isBlocking, isFollowing: self.isFollowing)
+            }
+            
+        }
+    }
+    
+    func checkUserStatus(ID: String) {
+        
+        checkIsBlocked(ID)
+        
+        if isBlocked != true {
+            isFollowing(ID)
+            checkIsBlocking(ID)
+        } else {
+            checkIsBlocking(ID)
         }
         
-        db.collection("user").document(followerID).collection("following").document(userID).setData([
-            "id": userID
+    }
+    
+    func binarySearch<T: Comparable>(_ a: [T], key: T) -> Bool {
+        var lowerBound = 0
+        var upperBound = a.count
+        while lowerBound < upperBound {
+            let midIndex = lowerBound + (upperBound - lowerBound) / 2
+            if a[midIndex] == key {
+                return true
+            } else if a[midIndex] < key {
+                lowerBound = midIndex + 1
+            } else {
+                upperBound = midIndex
+            }
+        }
+        return false
+    }
+    
+    
+    
+    func increaseFollower(followingID: String) {
+        
+        db.collection("user").document(uid!).collection("following").document(followingID).setData([
+            "id": followingID
         ],merge: true) { err in
             if let err = err {
                 print("Error writing document: \(err)")
@@ -135,50 +209,72 @@ class UserdataManager {
                 print("Document successfully written!")
             }
         }
+        
+        db.collection("user").document(followingID).collection("follower").document(uid!).setData([
+            "id": uid!
+        ],merge: true) { err in
+            if let err = err {
+                print("Error writing document: \(err)")
+            } else {
+                print("Document successfully written!")
+            }
+        }
+        
+        db.collection("user").document(uid!).updateData([
+            "blockingID.\(followingID)": FieldValue.delete()
+        ]) { err in
+            if let err = err {
+                print("Error updating document: \(err)")
+            } else {
+                print("Document successfully updated")
+            }
+        }
+
+        
     }
     
-    func getFollowersFollowings(IDs: [String], followerOrFollowing: String) {
-        
-        for ID in IDs {
-            
-            db.collection("user").document(ID).addSnapshotListener {
-                (querysnapshot, error) in
-                if error != nil {
-                    print("Error getting documents: \(String(describing: error))")
-                } else {
-                    
-                    let data = querysnapshot!.data()
-                    
-                    print("data count: \(data!.count)")
-                    
-                    
-                    let userID = data!["id"] as? String
-                    let name = data!["userName"] as? String
-                    let familySize = data!["familySize"] as? Int
-                    let cuisineType = data!["cuisineType"] as? String
-                    
-                    
-                    self.user = User(userID: userID!, name: name!, cuisineType: cuisineType!, familySize: familySize!)
-                    
-                    if followerOrFollowing == "following" {
-                        self.followings.append(self.user!)
-                        if ID == IDs.last! {
-                        self.delegateFollowerFollowing?.assignFollowersFollowings(users: self.followings)
-                        }
-                    }
-                    if followerOrFollowing == "follower" {
-                        self.followers.append(self.user!)
-                         if ID == IDs.last! {
-                        self.delegateFollowerFollowing?.assignFollowersFollowings(users: self.followers)
-                        }
-                    }
-                    
-                }
-                
-            }
-            
-        }
-    }
+    //    func getFollowersFollowings(IDs: [String], followerOrFollowing: String) {
+    //
+    //        for ID in IDs {
+    //
+    //            db.collection("user").document(ID).addSnapshotListener {
+    //                (querysnapshot, error) in
+    //                if error != nil {
+    //                    print("Error getting documents: \(String(describing: error))")
+    //                } else {
+    //
+    //                    let data = querysnapshot!.data()
+    //
+    //                    print("data count: \(data!.count)")
+    //
+    //
+    //                    let userID = data!["id"] as? String
+    //                    let name = data!["userName"] as? String
+    //                    let familySize = data!["familySize"] as? Int
+    //                    let cuisineType = data!["cuisineType"] as? String
+    //
+    //
+    //                    self.user = User(userID: userID!, name: name!, cuisineType: cuisineType!, familySize: familySize!)
+    //
+    //                    if followerOrFollowing == "following" {
+    //                        self.followings.append(self.user!)
+    //                        if ID == IDs.last! {
+    //                        self.delegateFollowerFollowing?.assignFollowersFollowings(users: self.followings)
+    //                        }
+    //                    }
+    //                    if followerOrFollowing == "follower" {
+    //                        self.followers.append(self.user!)
+    //                         if ID == IDs.last! {
+    //                        self.delegateFollowerFollowing?.assignFollowersFollowings(users: self.followers)
+    //                        }
+    //                    }
+    //
+    //                }
+    //
+    //            }
+    //
+    //        }
+    //    }
     
     func findFollowerFollowing(id: String?) {
         var uid = (Auth.auth().currentUser?.uid)!
@@ -193,6 +289,9 @@ class UserdataManager {
             if error != nil {
                 print("Error getting documents: \(String(describing: error))")
             } else {
+                
+                self.followingsIDs.removeAll()
+                
                 for document in querysnapshot!.documents {
                     let data = document.data()
                     self.followingsIDs.append(data["id"] as! String)
@@ -203,7 +302,7 @@ class UserdataManager {
                     if error != nil {
                         print("Error getting documents: \(String(describing: error))")
                     } else {
-                        
+                        self.followersIDs.removeAll()
                         if let documents = querysnapshot?.documents {
                             for document in documents {
                                 
@@ -260,7 +359,7 @@ class UserdataManager {
     func blockCreators(userID: String) {
         
         db.collection("user").document(uid!).setData([
-            "blokingID": [userID:true]
+            "blockingID": [userID:true]
             
         ], merge: true) { err in
             if let err = err {
@@ -292,12 +391,28 @@ class UserdataManager {
         }
         
         db.collection("user").document(uid!).collection("follower").document(userID).delete() { err in
-                   if let err = err {
-                       print("Error removing document: \(err)")
-                   } else {
-                       print("Document successfully removed!")
-                   }
-               }
+            if let err = err {
+                print("Error removing document: \(err)")
+            } else {
+                print("Document successfully removed!")
+            }
+        }
+        
+        db.collection("user").document(userID).collection("following").document(uid!).delete() { err in
+            if let err = err {
+                print("Error removing document: \(err)")
+            } else {
+                print("Document successfully removed!")
+            }
+        }
+        
+        db.collection("user").document(userID).collection("follower").document(uid!).delete() { err in
+            if let err = err {
+                print("Error removing document: \(err)")
+            } else {
+                print("Document successfully removed!")
+            }
+        }
 
         
     }
@@ -398,24 +513,24 @@ class UserdataManager {
         }
     }
     
-    func getFollwersFollowingsImage(uid: String, index: Int) {
-        let imageRef = Storage.storage().reference().child("user/\(uid)/userAccountImage")
-        var image: UIImage?
-        // Fetch the download URL
-        imageRef.getData(maxSize: 1 * 1024 * 1024) { data, error in
-            if error != nil {
-                print(error?.localizedDescription as Any)
-            } else {
-                if let imgData = data {
-                    
-                    print("imageRef: \(imageRef)")
-                    
-                    image = UIImage(data: imgData)!
-                    self.delegateFollowerFollowing?.assginFollowersFollowingsImages(image: image!, index: index)
-                }
-            }
-        }
-    }
+//    func getFollwersFollowingsImage(uid: String, index: Int) {
+//        let imageRef = Storage.storage().reference().child("user/\(uid)/userAccountImage")
+//        var image: UIImage?
+//        // Fetch the download URL
+//        imageRef.getData(maxSize: 1 * 1024 * 1024) { data, error in
+//            if error != nil {
+//                print(error?.localizedDescription as Any)
+//            } else {
+//                if let imgData = data {
+//
+//                    print("imageRef: \(imageRef)")
+//
+//                    image = UIImage(data: imgData)!
+//                    self.delegateFollowerFollowing?.assginFollowersFollowingsImages(image: image!, index: index)
+//                }
+//            }
+//        }
+//    }
     
     func getUserImageInFirst() {
         

@@ -37,21 +37,6 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oMV-5u-zPo">
-                                                    <rect key="frame" x="211" y="74" width="100" height="34"/>
-                                                    <color key="backgroundColor" red="1" green="0.57647058819999997" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="34" id="nK7-HS-1jH"/>
-                                                        <constraint firstAttribute="width" constant="100" id="q0h-LO-xYD"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                                    <state key="normal" title="Follow me!">
-                                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    </state>
-                                                    <connections>
-                                                        <action selector="followersAddButton:" destination="aRt-dF-TCA" eventType="touchUpInside" id="1WW-Ne-zud"/>
-                                                    </connections>
-                                                </button>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ld5-ik-8wx">
                                                     <rect key="frame" x="20" y="17.5" width="100" height="100"/>
                                                     <constraints>
@@ -59,22 +44,28 @@
                                                         <constraint firstAttribute="width" constant="100" id="xvn-KD-c5m"/>
                                                     </constraints>
                                                 </imageView>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nDl-uY-xl3">
+                                                    <rect key="frame" x="246" y="79.5" width="30" height="30"/>
+                                                    <connections>
+                                                        <action selector="followingManageAction:" destination="aRt-dF-TCA" eventType="touchUpInside" id="r2x-gc-kN0"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="nDl-uY-xl3" firstAttribute="centerX" secondItem="hLl-yl-mAZ" secondAttribute="centerX" id="1Yi-35-Ngz"/>
                                                 <constraint firstItem="ld5-ik-8wx" firstAttribute="leading" secondItem="zPd-rr-W0j" secondAttribute="leadingMargin" id="2Is-if-gcI"/>
                                                 <constraint firstItem="hLl-yl-mAZ" firstAttribute="trailing" secondItem="zPd-rr-W0j" secondAttribute="trailingMargin" id="BTk-gI-91i"/>
-                                                <constraint firstItem="oMV-5u-zPo" firstAttribute="top" secondItem="hLl-yl-mAZ" secondAttribute="bottom" constant="24.5" id="CVD-jN-R8Z"/>
+                                                <constraint firstItem="nDl-uY-xl3" firstAttribute="top" secondItem="hLl-yl-mAZ" secondAttribute="bottom" constant="30" id="Dzg-Vx-NIA"/>
                                                 <constraint firstItem="hLl-yl-mAZ" firstAttribute="top" secondItem="zPd-rr-W0j" secondAttribute="topMargin" constant="18" id="QRS-yo-Qnz"/>
                                                 <constraint firstItem="ld5-ik-8wx" firstAttribute="centerY" secondItem="zPd-rr-W0j" secondAttribute="centerY" id="a82-fW-pUG"/>
                                                 <constraint firstItem="ld5-ik-8wx" firstAttribute="centerY" secondItem="zPd-rr-W0j" secondAttribute="centerY" id="cNF-IF-ekf"/>
-                                                <constraint firstItem="oMV-5u-zPo" firstAttribute="centerX" secondItem="hLl-yl-mAZ" secondAttribute="centerX" id="fyC-St-dBU"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="1" green="0.57647058819999997" blue="0.0" alpha="0.10000000000000001" colorSpace="custom" customColorSpace="displayP3"/>
                                         <connections>
                                             <outlet property="creatorImageView" destination="ld5-ik-8wx" id="dx1-GT-9DC"/>
                                             <outlet property="creatorNameLabel" destination="hLl-yl-mAZ" id="mAU-x9-HK7"/>
-                                            <outlet property="followMeButton" destination="oMV-5u-zPo" id="0UM-nJ-iMc"/>
+                                            <outlet property="followMeButton" destination="nDl-uY-xl3" id="Ao0-Zu-Isd"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="number" id="Xqt-Yo-GUL" customClass="NumOfCreatorhasTableViewCell" customModule="Recipe_CICCC" customModuleProvider="target">
