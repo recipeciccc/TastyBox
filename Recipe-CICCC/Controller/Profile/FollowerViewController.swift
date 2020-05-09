@@ -18,6 +18,7 @@ class FollowerViewController: UIViewController {
     var followers:[User] = []
     var followersImages: [Int:UIImage] = [:]
     let userDataManager = UserdataManager()
+    let dataManager = FollowingFollowerDataManager()
     var searchedFollowers:[User] = []
     var searchedFollowersImages:[Int:UIImage] = [:]
     var parentVC: followerFollowingPageViewController?
@@ -53,15 +54,16 @@ class FollowerViewController: UIViewController {
         self.tableView.dataSource = self
         self.tableView.delegate = self
         
-        userDataManager.delegateFollowerFollowing = self
+//        userDataManager.delegateFollowerFollowing = self
 //        userDataManager.delegate = self
+        dataManager.delegate = self
         
         parentVC = self.parent as? followerFollowingPageViewController
         followersIDs = parentVC!.followersID
-        userDataManager.getFollowersFollowings(IDs: self.followersIDs, followerOrFollowing: "follower")
+        dataManager.getFollowersFollowings(IDs: self.followersIDs, followerOrFollowing: "follower")
         
         followersIDs.enumerated().map {
-            userDataManager.getFollwersFollowingsImage(uid: $0.1, index: $0.0)
+            dataManager.getFollwersFollowingsImage(uid: $0.1, index: $0.0)
         }
         
         
@@ -86,15 +88,11 @@ class FollowerViewController: UIViewController {
 
 
 
-extension FollowerViewController: FolllowingFollowerDelegate {
+extension FollowerViewController: FollowingFollowerManagerDelegate {
     func assginFollowersFollowingsImages(image: UIImage, index: Int) {
         self.followersImages[index] = image
         self.searchedFollowersImages[index] = image
         self.tableView.reloadData()
-    }
-    
-    func passFollowerFollowing(followingsIDs: [String], followersIDs: [String]) {
-        
     }
     
     func assignFollowersFollowings(users: [User]) {

@@ -14,10 +14,12 @@ class CreatorProfileViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     var id: String?
-//    var id = "3AsWJvUdZkQNPX0pukMcNDabnK53"
+    //    var id = "3AsWJvUdZkQNPX0pukMcNDabnK53"
     var userName:String = ""
     var creatorImage: UIImage?
-    var isBlocked = false
+    var isFollowing: Bool?
+    var isBlocked: Bool?
+    var isBlocking: Bool?
     
     var recipeList = [RecipeDetail]()
     var imageList = [UIImage]()
@@ -28,36 +30,85 @@ class CreatorProfileViewController: UIViewController {
     
     let fetchData = FetchRecipeData()
     let fetchImage = FetchRecipeImage()
-    let dataManager = UserdataManager()
+    let userDataManager = UserdataManager()
+    let dataManager = CreatorProfileDataManager()
     var detailBarButton: UIBarButtonItem?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
+        
+        // table view settings
         self.tableView.dataSource = self
         self.tableView.delegate = self
         self.tableView.tableFooterView = UIView()
         self.tableView.allowsSelection = false
         
+        // navigation bar button item settings
         detailBarButton = UIBarButtonItem(title: "∙∙∙", style: .plain, target: self, action: #selector(showsChoice))
         
         self.navigationItem.rightBarButtonItem = detailBarButton
         
+        // during fetching data
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
+        view.backgroundColor = #colorLiteral(red: 0.9977325797, green: 0.9879661202, blue: 0.7689270973, alpha: 1)
+        view.tag = 100
+        
+        let  indicator = UIActivityIndicatorView()
+        indicator.transform = CGAffineTransform(scaleX: 2, y: 2)
+        
+        indicator.color = .orange
+        indicator.startAnimating()
+        
+        view.addSubview(indicator)
+        indicator.center = self.view.center
+        
+        self.view.addSubview(view)
+        
+        
+        // fetching data settings
         fetchData.delegate = self
         fetchImage.delegate = self
-        dataManager.delegate = self
-        dataManager.delegateFollowerFollowing = self
+        userDataManager.delegate = self
+        userDataManager.delegateFollowerFollowing = self
         
-        dataManager.getUserDetail(id: id!)
+//        userDataManager.checkUserStatus(ID: id!)
+//
+//        userDataManager.getUserDetail(id: id!)
+//
+//        userDataManager.findFollowerFollowing(id: id!)
+//
+//        userDataManager.getUserImage(uid: id!)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        userDataManager.checkUserStatus(ID: id!)
         
-        let db = Firestore.firestore()
-        let queryRef = db.collection("recipe").whereField("userID", isEqualTo: id! as Any).order(by: "time", descending: true)
-        recipeList = fetchData.Data(queryRef: queryRef)
+        userDataManager.getUserDetail(id: id!)
         
-        dataManager.findFollowerFollowing(id: id!)
+        userDataManager.findFollowerFollowing(id: id!)
         
-        dataManager.getUserImage(uid: id!)
+        userDataManager.getUserImage(uid: id!)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        if self.navigationController == nil {
+            //view controller was dismissed
+            
+            if let isFollowing = isFollowing {
+                if isFollowing == false {
+                    dataManager.unfollowing(userID: id!)
+                }
+            }
+            
+            self.following.removeAll()
+            self.followers.removeAll()
+            self.isFollowing = nil
+            self.isBlocked = nil
+        }
     }
     
     @objc func showsChoice() {
@@ -66,7 +117,15 @@ class CreatorProfileViewController: UIViewController {
         let alert = UIAlertController(title: "Are you sure?", message: "This acount wouldn't be able to follow you and would be disabled when several people block it. Do you really block this account?", preferredStyle: .alert)
         
         let okAction = UIAlertAction(title: "OK", style: .destructive, handler: { action in
-            self.dataManager.blockCreators(userID: self.id!)
+            self.userDataManager.blockCreators(userID: self.id!)
+            
+            let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! profieTableViewCell
+            cell.followingManagement(isFollowing: false)
+            self.isBlocking = true
+            self.isFollowing = false
+            print(self.followers)
+            self.userDataManager.findFollowerFollowing(id: self.id!)
+//            self.tableView.reloadData()
         })
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
@@ -81,7 +140,9 @@ class CreatorProfileViewController: UIViewController {
             self.present(alert, animated: true, completion: nil)
         })
         
+        
         actionSheet.addAction(blockingAction)
+        actionSheet.addAction(cancelAction)
         
         self.present(actionSheet, animated: true, completion: nil)
     }
@@ -133,13 +194,22 @@ extension CreatorProfileViewController: UITableViewDataSource {
             cell.delegate = self
             
             cell.creatorImageView!.image = self.creatorImage
-            cell.creatorImageView!.layer.masksToBounds = false
-            cell.creatorImageView!.layer.cornerRadius = cell.creatorImageView!.bounds.width / 2
-            cell.creatorImageView!.clipsToBounds = true
-            
-            cell.followMeButton!.layer.cornerRadius = 10
-            
             cell.creatorNameLabel.text = userName
+            
+            //            if let isBlocked = isBlocked {
+            
+            //                if isBlocked {
+            //                    cell.followMeButton.isHidden = true
+            //                }
+            //                else if isBlocked != true && isFollowing == true {
+            //                    cell.followingManagement(isFollowing: true)
+            //                }
+            //                else if isBlocked != true && isFollowing == false {
+            //                    cell.followingManagement(isFollowing: false)
+            //                }
+            
+            //            }
+            
             return cell
         }
             
@@ -252,24 +322,130 @@ extension CreatorProfileViewController: CollectionViewInsideUserTableView {
 }
 
 extension CreatorProfileViewController: FolllowingFollowerDelegate {
-    func assginFollowersFollowingsImages(image: UIImage, index: Int) {
+    func statusUsers(isBlocked: Bool, isBlocking: Bool, isFollowing: Bool) {
+        print("status users isFollowing:\(isFollowing)")
+        print("status users isBlocking:\(isBlocking)")
+        self.isBlocked = isBlocked
+        self.isBlocking = isBlocking
+        
+        if let viewWithTag = self.view.viewWithTag(100) {
+            viewWithTag.removeFromSuperview()
+        }else{
+            print("No!")
+        }
+        let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! profieTableViewCell
+        
+        if !isBlocked  {
+            
+            let db = Firestore.firestore()
+            let queryRef = db.collection("recipe").whereField("userID", isEqualTo: id! as Any).order(by: "time", descending: true)
+            recipeList = fetchData.Data(queryRef: queryRef)
+            
+            
+            cell.followingManagement(isFollowing: isFollowing)
+            self.isFollowing = isFollowing
+            
+        } else {
+            
+            cell.followMeButton.isHidden = true
+        }
+        
         
     }
     
-    func assignFollowersFollowings(users: [User]) {
-        
-    }
+    
+    //    func assginFollowersFollowingsImages(image: UIImage, index: Int) {
+    //
+    //    }
+    //
+    //    func assignFollowersFollowings(users: [User]) {
+    //
+    //    }
     
     func passFollowerFollowing(followingsIDs: [String], followersIDs: [String]) {
+        self.following.removeAll()
+        self.followers.removeAll()
+        
         self.following = followingsIDs
         self.followers = followersIDs
+        
+        self.tableView.reloadData()
     }
 }
 
 
-extension CreatorProfileViewController: AddingFollowersDelegate {
-    func increaseFollower(followerID: String) {
-        self.dataManager.increaseFollower(userID: id!, followerID: followerID)
-        tableView.reloadData()
+extension CreatorProfileViewController: followingManageDelegate {
+    func unfollow() {
+        
+        let alert = UIAlertController(title: "Are you sure?", message: "Do you really unfollow this account?", preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(title: "Unfollow", style: .destructive, handler: { action in
+            
+            let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! profieTableViewCell
+            cell.followingManagement(isFollowing: false)
+            self.isFollowing = false
+//            self.userDataManager.findFollowerFollowing(id: self.id!)
+            //            self.tableView.reloadData()
+        })
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
+            self.dismiss(animated: true, completion: nil)
+        })
+        
+        alert.addAction(okAction)
+        alert.addAction(cancelAction)
+        
+        self.present(alert, animated: true, completion: nil)
+        
+        
+        
+    }
+    
+    func increaseFollower() {
+        //
+        if let isBlocking = self.isBlocking {
+            if isBlocking {
+                
+                let alert = UIAlertController(title: "You are blocking this user.", message: "This user will be deleted from your block users list. Do you really follow this account?", preferredStyle: .alert)
+                
+                let okAction = UIAlertAction(title: "Follow", style: .default, handler: { action in
+                    
+                    let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! profieTableViewCell
+                    cell.followingManagement(isFollowing: true)
+                    self.isFollowing = true
+                    self.isBlocking = false
+                    self.userDataManager.increaseFollower(followingID: self.id!)
+                    self.userDataManager.findFollowerFollowing(id: self.id!)
+                    //            self.tableView.reloadData()
+                })
+                
+                let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
+                    self.dismiss(animated: true, completion: nil)
+                })
+                
+                alert.addAction(okAction)
+                alert.addAction(cancelAction)
+                
+                self.present(alert, animated: true, completion: nil)
+            } else {
+                self.userDataManager.increaseFollower(followingID: self.id!)
+                let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! profieTableViewCell
+                cell.followingManagement(isFollowing: true)
+                self.isFollowing = true
+                self.isBlocking = false
+            }
+        }
+        //        else if isBlocked == nil || isBlocked == false {
+        //
+        //            self.userDataManager.increaseFollower(userID: id!, followerID: followerID)
+        //            let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! profieTableViewCell
+        //            cell.followingManagement(isFollowing: true)
+        //            self.isFollowing = true
+        //        }
+        
+        
+        
+        
+        //        tableView.reloadData()
     }
 }
