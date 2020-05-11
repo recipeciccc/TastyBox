@@ -113,7 +113,12 @@ class CreatorProfileViewController: UIViewController {
     }
     
     @objc func showsChoice() {
-        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        var alertStyle = UIAlertController.Style.actionSheet
+        if (UIDevice.current.userInterfaceIdiom == .pad) {
+          alertStyle = UIAlertController.Style.alert
+        }
+        
+        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: alertStyle)
         
         let alert = UIAlertController(title: "Are you sure?", message: "This acount wouldn't be able to follow you and would be disabled when several people block it. Do you really block this account?", preferredStyle: .alert)
         
@@ -149,7 +154,7 @@ class CreatorProfileViewController: UIViewController {
         actionSheet.addAction(blockingAction)
         actionSheet.addAction(reportAction)
         actionSheet.addAction(cancelAction)
-        
+                
         self.present(actionSheet, animated: true, completion: nil)
     }
     

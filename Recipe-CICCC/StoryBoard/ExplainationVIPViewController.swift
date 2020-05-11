@@ -16,7 +16,7 @@ class ExplainationVIPViewController: UIViewController {
     @IBOutlet weak var registerButton: UIButton!
     
     let expiredDate =  Calendar.current.date(byAdding: .month, value: 3, to: Date())
-
+    
     
     let dataManager = ExplainationVIPDatamanager()
     override func viewDidLoad() {
@@ -32,15 +32,16 @@ class ExplainationVIPViewController: UIViewController {
 
         let stringExpiredDate = formatter.string(from: expiredDate!) // string purpose I add here
            // convert your string to date
-       
         
         titleLabel.text = "Get 3 months Free\nVIP Membership!"
         thereeMonthsFreeLabel.text = "* You can see VIP recipes of your following creators if you sign up VIP membership!  \n\n\n* Only now it cost free in 3 months. if you sign up membership now, your free membership will be expired on \(stringExpiredDate) Click register and you can get 3 months free membership."
-        priceLabel.text = "$1.5 -> $0!"
+        priceLabel.text = "$3.0 + tax -> $0!"
     }
     
     @IBAction func registerVIP(sender: UIButton) {
-        dataManager.registerVIP()
+        
+//        let timeStampExpiredDate = DateFormatter.localizedString(from: expiredDate!, dateStyle: .short, timeStyle: .none)
+        dataManager.registerVIP(expiredDate: expiredDate!)
        
         
         let alertController = UIAlertController(title: "Thank you!", message: "Now You got 3 months free menbership! Enjoy VIP membership!", preferredStyle: .alert)

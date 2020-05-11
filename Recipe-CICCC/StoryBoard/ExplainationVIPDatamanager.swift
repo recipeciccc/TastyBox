@@ -19,11 +19,13 @@ class ExplainationVIPDatamanager {
     let uid = Auth.auth().currentUser?.uid
     let db = Firestore.firestore()
     
-    func registerVIP() {
+    func registerVIP(expiredDate: Date) {
 
         db.collection("user").document(uid!).setData([
         
-            "isVIP": true
+            "isVIP": true,
+            "registrationDate": Timestamp(),
+            "expiredDate": expiredDate
             
         ], merge: true) { err in
             if let err = err {

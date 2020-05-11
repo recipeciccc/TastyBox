@@ -198,7 +198,13 @@ extension FollowingViewController: FollowingFollowerManagerDelegate {
 
 extension FollowingViewController: userManageDelegate {
     func pressedUserManageButton(uid: String) {
-        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        var alertStyle = UIAlertController.Style.actionSheet
+        if (UIDevice.current.userInterfaceIdiom == .pad) {
+            alertStyle = UIAlertController.Style.alert
+        }
+        
+        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: alertStyle)
         let blockAction = UIAlertAction(title: "Block", style: .default, handler: { action in
             self.userDataManager.blockCreators(userID: uid)
             self.tableView.reloadData()
@@ -209,7 +215,8 @@ extension FollowingViewController: userManageDelegate {
         
         actionSheet.addAction(blockAction)
         actionSheet.addAction(cancelAction)
-        
+        actionSheet.modalPresentationStyle = .popover
+
         self.present(actionSheet, animated: true, completion: nil)
     }
 }

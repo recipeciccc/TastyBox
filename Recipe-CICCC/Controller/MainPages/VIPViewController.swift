@@ -44,8 +44,15 @@ extension VIPViewController : VIPDataManagerDelegate {
             let noLongerShowAction = UIAlertAction(title: "Yes, No longer show it.", style: .default, handler: { action in
                 self.dataManager.nolongerShowMessage()
             })
-            alertController.addAction(defaultAction)
+            let registerAction = UIAlertAction(title: "Register", style: .default, handler: { action in
+                let vc = self.storyboard?.instantiateViewController(identifier: "registerVIP")
+                self.navigationController?.pushViewController(vc!, animated: true)
+            })
+            
+           
             alertController.addAction(noLongerShowAction)
+            alertController.addAction(defaultAction)
+            alertController.addAction(registerAction)
                         
             navigationController!.present(alertController, animated: true, completion: nil)
         }

@@ -235,7 +235,12 @@ class FirstTimeUserProfileTableViewController: UITableViewController, UIPickerVi
     
     @IBAction func showChoice(_ sender: AnyObject) {
         
-        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        var alertStyle = UIAlertController.Style.actionSheet
+        if (UIDevice.current.userInterfaceIdiom == .pad) {
+            alertStyle = UIAlertController.Style.alert
+        }
+        
+        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: alertStyle)
         
         let cameraRollAction = UIAlertAction(title: "Camera Roll", style: .default, handler: { action in
              self.selectPicture()
@@ -252,7 +257,8 @@ class FirstTimeUserProfileTableViewController: UITableViewController, UIPickerVi
         actionSheet.addAction(cameraRollAction)
         actionSheet.addAction(cameraAction)
         actionSheet.addAction(cancelAction)
-        
+        actionSheet.modalPresentationStyle = .popover
+
         present(actionSheet, animated: true, completion: nil)
     }
     

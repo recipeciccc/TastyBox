@@ -376,7 +376,6 @@
 		6FB298402414E9B70094F5F4 /* IngredientRefrigerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientRefrigerator.swift; sourceTree = "<group>"; };
 		6FB33646245800590049C964 /* SettingProifleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingProifleViewController.swift; sourceTree = "<group>"; };
 		6FB336482458015A0049C964 /* MainSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainSettingsViewController.swift; sourceTree = "<group>"; };
-		6FB3364B2458024E0049C964 /* SettingNotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingNotificationViewController.swift; sourceTree = SOURCE_ROOT; };
 		6FB3364D245802A80049C964 /* RecipeUserPostedCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeUserPostedCollectionViewCell.swift; sourceTree = "<group>"; };
 		6FB336512458E7310049C964 /* SectionHeaderGenreSelectCollectionReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionHeaderGenreSelectCollectionReusableView.swift; sourceTree = "<group>"; };
 		6FB336532458F85F0049C964 /* FollowingFollowerDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowingFollowerDataManager.swift; sourceTree = "<group>"; };
@@ -591,7 +590,6 @@
 		69909F3124560D6C00AACEC7 /* Setting */ = {
 			isa = PBXGroup;
 			children = (
-				6FB3364B2458024E0049C964 /* SettingNotificationViewController.swift */,
 				6FB336482458015A0049C964 /* MainSettingsViewController.swift */,
 				6FB33646245800590049C964 /* SettingProifleViewController.swift */,
 				69909F362456227A00AACEC7 /* SettingViewController.swift */,
