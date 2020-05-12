@@ -85,8 +85,10 @@ extension FollowingRecipeViewController : UICollectionViewDelegate,UICollectionV
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        if recipes.count == followingsID.count && !recipes[collectionView.tag]!.isEmpty {
-            return recipes[collectionView.tag]!.count
+        if let recipes = recipes[collectionView.tag] {
+            if self.recipes.count == followingsID.count && !recipes.isEmpty {
+                return recipes.count
+            }
         }
         return 0
     }

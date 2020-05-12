@@ -71,6 +71,10 @@
 		<string>fbauth2</string>
 		<string>fbshareextension</string>
 	</array>
+    <key>FacebookAutoLogAppEventsEnabled</key>
+    <string>TRUE</string>
+    <key>FacebookAdvertiserIDCollectionEnabled</key>
+    <string>TRUE</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
