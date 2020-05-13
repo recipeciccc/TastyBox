@@ -45,8 +45,12 @@
 	</array>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<key>FacebookAdvertiserIDCollectionEnabled</key>
+	<string>TRUE</string>
 	<key>FacebookAppID</key>
 	<string>554547202161153</string>
+	<key>FacebookAutoLogAppEventsEnabled</key>
+	<string>TRUE</string>
 	<key>FacebookDisplayName</key>
 	<string>TastyBox</string>
 	<key>LSApplicationCategoryType</key>
@@ -71,10 +75,6 @@
 		<string>fbauth2</string>
 		<string>fbshareextension</string>
 	</array>
-    <key>FacebookAutoLogAppEventsEnabled</key>
-    <string>TRUE</string>
-    <key>FacebookAdvertiserIDCollectionEnabled</key>
-    <string>TRUE</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
