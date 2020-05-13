@@ -19,9 +19,7 @@ class IngredientsViewController: UIViewController {
     
     var ingredientArray: [String] = [] {
         didSet {
-            
-            let query = db.collection("recipe").order(by: "like", descending: true)
-            let _ = dataManager.Data(queryRef: query)
+           
             searchingIngredient = ingredientArray[0]
             showingIngredient = searchingIngredient
         }
@@ -324,6 +322,9 @@ extension IngredientsViewController: getIngredientRefrigeratorDataDelegate{
 //            showingIngredient = searchingIngredient
 //
                   
+            let query = db.collection("recipe").order(by: "like", descending: true)
+            let _ = dataManager.Data(queryRef: query)
+            
             TitleCollectionView.reloadData()
         }
     }

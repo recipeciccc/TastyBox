@@ -17,12 +17,12 @@ import FBSDKLoginKit
 
 class DiscoveryViewController: UIViewController {
     
-    //    @IBOutlet weak var MonthlyContainerView: UIView!
     @IBOutlet weak var PopularContainerView: UIView!
-    //    @IBOutlet weak var SubscribedContainerView: UIView!
-    //    @IBOutlet weak var IngredientsContainerView: UIView!
-    //    @IBOutlet weak var EditorContainerView: UIView!
-    //    @IBOutlet weak var VIPContainerVIew: UIView!
+    @IBOutlet weak var collectionLayout: UICollectionViewFlowLayout! {
+        didSet {
+            collectionLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+        }
+    }
     
     var pageControllView = MainPageViewController()
     var cellUserTappedbefore: UICollectionViewCell?
@@ -112,9 +112,9 @@ class DiscoveryViewController: UIViewController {
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.orange ]
         CreateMenuLabel()
         
-        let width = (MenuCollectionView.frame.size.width - 5) / 2
-        let layout = MenuCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
-        layout.itemSize = CGSize(width: width, height: width)
+//        let width = (self.view.frame.size.width - 5) / 2 //(MenuCollectionView.frame.size.width - 5) / 2
+//        let layout = MenuCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
+//        layout.itemSize = CGSize(width: width, height: width)
         
         initialContentView()
         //        EditorContainerView.isHidden = false
@@ -128,10 +128,13 @@ class DiscoveryViewController: UIViewController {
         pageControllView.delegate = self
         self.MenuCollectionView.showsHorizontalScrollIndicator = false
         
-        self.MenuCollectionView?.scrollToItem(at: NSIndexPath(item: selectedIndex, section: 0) as IndexPath, at: .centeredHorizontally, animated: true)
-        
         
         FollowingVC.delegate = self
+        
+        self.MenuCollectionView.reloadData()
+        self.MenuCollectionView.layoutIfNeeded()
+        self.MenuCollectionView.scrollToItem(at: NSIndexPath(item: selectedIndex, section: 0) as IndexPath, at: .centeredHorizontally, animated: true)
+           
     }
     
     
@@ -153,7 +156,7 @@ class DiscoveryViewController: UIViewController {
         let label3 = "Most Popular"
         let label4 = "Editor Choice"
         let label5 = "Monthly Choice"
-        let label6 = "VIP Only"
+        let label6 = " VIP Only "
         arrayMenu.append(label1)
         arrayMenu.append(label2)
         arrayMenu.append(label3)
@@ -227,17 +230,13 @@ extension DiscoveryViewController: FollowingRecipestopPagingDelegate {
 
 
 
-extension DiscoveryViewController: UICollectionViewDelegate, UICollectionViewDataSource{
+extension DiscoveryViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return arrayMenu.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        //        if indexPath.row == 3 && selectedIndex == 3 {
-        //            self.MenuCollectionView?.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
-        //        }
         
         
         let cell = MenuCollectionView.dequeueReusableCell(withReuseIdentifier: "MenuCell", for: indexPath) as! MenuCollectionViewCell
@@ -308,6 +307,10 @@ extension DiscoveryViewController: UICollectionViewDelegate, UICollectionViewDat
         
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: (self.view.frame.size.width - 5) / 5, height: MenuCollectionView.frame.size.height)
+    }
+    
     // 指定したindexPathのセルを選択状態にして移動させる。(collectionViewなので表示されていないセルは存在しない)
     func focusCell(indexPath: IndexPath) {
         // 以前選択されていたセルを非選択状態にする(collectionViewなので表示されていないセルは存在しない)
@@ -325,6 +328,8 @@ extension DiscoveryViewController: UICollectionViewDelegate, UICollectionViewDat
         // .CenteredHorizontallyでを指定して、CollectionViewのboundsの中央にindexPathのセルが来るようにする
         self.MenuCollectionView?.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
     }
+    
+    
 }
 
 
