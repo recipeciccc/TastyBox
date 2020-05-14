@@ -50,6 +50,8 @@ class savingRecipesDataManager {
                if error != nil {
                    print("Error getting documents: \(String(describing: error))")
                } else {
+                
+                self.savedRecipesID.removeAll()
                    if let documents = querySnapshot?.documents {
                        for document in documents {
                            let data = document.data()
@@ -58,8 +60,8 @@ class savingRecipesDataManager {
 
                                if document == documents.last! {
 
-                                   self.Data(recipeID: self.savedRecipesID)
-                                
+                                self.Data(savedRecipesIDs: self.savedRecipesID)
+                                    
                                }
                            }
 
@@ -70,13 +72,15 @@ class savingRecipesDataManager {
        }
     
    
-    func Data(recipeID:[String]) {
+    func Data(savedRecipesIDs:[String]) {
         var recipeList = [RecipeDetail]()
         var exist = Bool()
         
-        for (index, id) in recipeID.enumerated() {
+         recipeList.removeAll()
+        for (index, id) in savedRecipesIDs.enumerated() {
             db.collection("recipe").document(id).addSnapshotListener { (querySnapshot, err) in
                        if err == nil {
+                        
                         if let data = querySnapshot?.data() {
                             let recipeId = data["recipeID"] as? String
                               let title = data["title"] as? String
@@ -104,7 +108,7 @@ class savingRecipesDataManager {
                               
                               recipeList.append(recipe)
                             
-                            if index == recipeID.count - 1 {
+                            if index == self.savedRecipesID.count - 1  {
                                 self.delegate?.reloadData(data:recipeList)
                                 
                                 for (index, recipe) in recipeList.enumerated() {
@@ -148,13 +152,13 @@ class savingRecipesDataManager {
                        print("data count: \(data.count)")
                    
                    
-                       let userID = data["id"] as? String
-                       let name = data["userName"] as? String
-                       let familySize = data["familySize"] as? Int
-                       let cuisineType = data["cuisineType"] as? String
-                       let isVIP = data["isVIP"] as? Bool ?? false
+                       guard let userID = data["id"] as? String else { return }
+                       guard let name = data["userName"] as? String else { return }
+                       guard let familySize = data["familySize"] as? Int else { return }
+                       guard let cuisineType = data["cuisineType"] as? String else { return }
+                       guard let isVIP = data["isVIP"] as? Bool else { return }
     
-                       self.user = User(userID: userID!, name: name!, cuisineType: cuisineType!, familySize: familySize, isVIP: isVIP)
+                       self.user = User(userID: userID, name: name, cuisineType: cuisineType, familySize: familySize, isVIP: isVIP)
                         
                     self.delegate?.gotUserData(user: self.user!)
                    }

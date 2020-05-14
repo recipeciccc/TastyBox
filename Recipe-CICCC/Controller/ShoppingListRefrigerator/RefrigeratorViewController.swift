@@ -101,6 +101,8 @@ class RefrigeratorViewController: UIViewController {
         let vc = storyboard?.instantiateViewController(identifier: "editIngredientsRefrigerator") as! AddingIngredientRefrigeratorViewController
         vc.itemIsEmpty = true
         vc.delegate = self
+        
+        guard self.navigationController?.topViewController == self else { return }
         navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -166,7 +168,8 @@ extension RefrigeratorViewController: UITableViewDataSource {
             addVC.itemIsEmpty = false
             addVC.name = ingredients[indexPath.row].name
             addVC.amount = ingredients[indexPath.row].amount
-            
+
+            guard self.navigationController?.topViewController == self else { return }
             navigationController?.pushViewController(addVC, animated: true)
         } else {
             

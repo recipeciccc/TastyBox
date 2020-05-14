@@ -85,11 +85,11 @@ class UserdataManager {
                     print("data count: \(data.count)")
                     
                     
-                    let userID = data["id"] as? String ?? ""
-                    let name = data["userName"] as? String ?? ""
-                    let familySize = data["familySize"] as? Int ?? 1
-                    let cuisineType = data["cuisineType"] as? String ?? ""
-                    let isVIP = data["isVIP"] as? Bool ?? false
+                    guard let userID = data["id"] as? String else { return }
+                    guard let name = data["userName"] as? String else { return }
+                    guard let familySize = data["familySize"] as? Int else { return }
+                    guard let cuisineType = data["cuisineType"] as? String else { return }
+                    guard let isVIP = data["isVIP"] as? Bool else { return }
                     
                     self.user = User(userID: userID, name: name, cuisineType: cuisineType, familySize: familySize, isVIP: isVIP)
                     self.delegate?.gotUserData(user: self.user!)

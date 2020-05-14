@@ -57,6 +57,8 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBAction func editProfile(_ sender: UIButton) {
         
         let vc = UIStoryboard(name: "Setting", bundle: nil).instantiateViewController(identifier: "settingPage")
+        
+        guard self.navigationController?.topViewController == self else { return }
         navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -159,6 +161,8 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
     // MARK: cant tap image although put tap recognizer.
     @IBAction func changeAccountImage(_ sender: UITapGestureRecognizer) {
         let imagePickerVC = UIStoryboard(name: "MyPage", bundle: nil).instantiateViewController(withIdentifier: "imagePickerVC")
+        
+        guard self.navigationController?.topViewController == self else { return }
         navigationController?.pushViewController(imagePickerVC, animated: true)
     }
 }
@@ -249,6 +253,8 @@ extension MyPageViewController: CollectionViewInsideUserTableView{
         vc.recipe = recipeList[data.row]
         vc.mainPhoto = imageList[data.row]
         vc.creator = self.user
+        
+        guard self.navigationController?.topViewController == self else { return }
         self.navigationController?.pushViewController(vc, animated: true)
     }
     

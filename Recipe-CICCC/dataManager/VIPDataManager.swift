@@ -198,13 +198,13 @@ class VIPDataManager {
                         print("data count: \(data.count)")
                         
                         
-                        let userID = data["id"] as? String
-                        let name = data["userName"] as? String
-                        let familySize = data["familySize"] as? Int
-                        let cuisineType = data["cuisineType"] as? String
-                        let isVIP = data["isVIP"] as? Bool
+                        guard let userID = data["id"] as? String else { return }
+                        guard let name = data["userName"] as? String else { return }
+                        guard let familySize = data["familySize"] as? Int else { return }
+                        guard let cuisineType = data["cuisineType"] as? String else { return }
+                        guard let isVIP = data["isVIP"] as? Bool else { return }
                         
-                        self.user = User(userID: userID!, name: name!, cuisineType: cuisineType!, familySize: familySize!, isVIP: isVIP)
+                        self.user = User(userID: userID, name: name, cuisineType: cuisineType, familySize: familySize, isVIP: isVIP)
                         self.users.append(self.user!)
                         if index == self.recipeList.count - 1 {
                             self.delegate?.reloadCreators(data: self.users)

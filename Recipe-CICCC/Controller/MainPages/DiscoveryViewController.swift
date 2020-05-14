@@ -111,13 +111,8 @@ class DiscoveryViewController: UIViewController {
         self.title = "TastyBox"
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.orange ]
         CreateMenuLabel()
-        
-//        let width = (self.view.frame.size.width - 5) / 2 //(MenuCollectionView.frame.size.width - 5) / 2
-//        let layout = MenuCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
-//        layout.itemSize = CGSize(width: width, height: width)
-        
+
         initialContentView()
-        //        EditorContainerView.isHidden = false
         
         NotificationCenter.default.addObserver(self, selector: #selector(toggleSideMenu), name: NSNotification.Name("ToggleSideMenu"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(showSearch), name: NSNotification.Name("ShowSearch"), object: nil)
@@ -182,6 +177,7 @@ class DiscoveryViewController: UIViewController {
     @objc func showSearch(){
         UIView.animate(withDuration: 1.0) {
             print("show Search")
+            guard self.navigationController?.topViewController == self else { return }
             self.performSegue(withIdentifier: "searchPage", sender: nil)
         }
     }
@@ -202,6 +198,8 @@ class DiscoveryViewController: UIViewController {
                 print(error.localizedDescription)
             }
             
+            guard self.navigationController?.topViewController == self else { return }
+
             let Storyboard: UIStoryboard = UIStoryboard(name: "Login", bundle: nil)
             let vc = Storyboard.instantiateViewController(withIdentifier: "loginPage")
             self.navigationController?.pushViewController(vc, animated: true)

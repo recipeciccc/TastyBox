@@ -112,6 +112,7 @@ class SearchingViewController: UIViewController {
         
         SearchBar.delegate = self
         SearchBar.becomeFirstResponder()
+        SearchBar.returnKeyType = .done
         SearchBar.placeholder = "Search Recipe"
         let RightNavBarButton = UIBarButtonItem(customView:SearchBar)
         self.navigationItem.rightBarButtonItem = RightNavBarButton

@@ -29,6 +29,8 @@ class LoginMainpageViewController: UIViewController {
     
     @IBOutlet var loginButtonStackView: UIStackView!
     @IBOutlet weak var faceBookLoginButton: FBLoginButton!
+    @IBOutlet weak var resetPasswordButton: UIButton!
+    @IBOutlet weak var registerButton: UIButton!
     
     
     override func viewDidLoad() {
@@ -55,6 +57,8 @@ class LoginMainpageViewController: UIViewController {
             
             let Storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
             let vc = Storyboard.instantiateViewController(withIdentifier: "Discovery")
+            
+            guard self.navigationController?.topViewController == self else { return }
             self.navigationController?.pushViewController(vc, animated: true)
             
         } else {
@@ -80,12 +84,14 @@ class LoginMainpageViewController: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-        
-        loginButtonStackView.spacing = 10
-      
-        setUpGoogleLogin()
+    
         setUpFaceBookLogin()
+        setUpGoogleLogin()
         setUpSignInAppleButton()
+        loginButtonStackView.spacing = 10.0
+        
+        resetPasswordButton.contentHorizontalAlignment = .right
+        registerButton.contentHorizontalAlignment = .right
     }
     
     @IBAction func unwindtoLoginMain(segue: UIStoryboardSegue) {
@@ -129,6 +135,8 @@ class LoginMainpageViewController: UIViewController {
                 if  (user?.additionalUserInfo!.isNewUser)! {
                     
                     self.vc.isFirst = true
+                    
+                    guard self.navigationController?.topViewController == self else { return }
                     self.navigationController?.pushViewController(self.vc, animated: true)
                     
                 } else {
@@ -142,16 +150,22 @@ class LoginMainpageViewController: UIViewController {
                                 if let isFirst = isFirst {
                                     if isFirst == true {
                                         self.vc.isFirst = true
+                                        
+                                        guard self.navigationController?.topViewController == self else { return }
                                         self.navigationController?.pushViewController(self.vc, animated: true)
                                         
                                     } else {
                                         self.vc.isFirst = false
                                         let Storyboard: UIStoryboard = UIStoryboard(name: "Login", bundle: nil)
                                         let vc = Storyboard.instantiateViewController(withIdentifier: "FirstTimeProfile")
+                                        
+                                        guard self.navigationController?.topViewController == self else { return }
                                         self.navigationController?.pushViewController(vc, animated: true)
                                     }
                                 } else {
                                     self.vc.isFirst = true
+                                    
+                                    guard self.navigationController?.topViewController == self else { return }
                                     self.navigationController?.pushViewController(self.vc, animated: true)
                                 }
                             }
@@ -166,101 +180,13 @@ class LoginMainpageViewController: UIViewController {
     //MARK: Facebook Login
     
     func setUpFaceBookLogin() {
-        //        faceBookLoginButton.setTitle("Sign in with FaceBook", for: .normal)
-        
-        //        faceBookLoginButton.layer.frame.size.width = 400
-        //        faceBookLoginButton.imageView?.contentMode = .scaleAspectFit
-        //        faceBookLoginButton.setImage(#imageLiteral(resourceName: "facebook-32"), for: .normal)
-        //        faceBookLoginButton.imageView?.alpha = 100
-        //        faceBookLoginButton.backgroundColor = #colorLiteral(red: 0.2588235294, green: 0.4039215686, blue: 0.6980392157, alpha: 1)
-        
-        //        faceBookLoginButton.imageView?.image = #imageLiteral(resourceName: "f_logo_RGB-White_58")
-        //        faceBookLoginButton.contentHorizontalAlignment = .fill
-        //        faceBookLoginButton.contentVerticalAlignment = .fill
-        //        faceBookLoginButton.titleLabel?.font = .systemFont(ofSize: 10)
-        //        faceBookLoginButton.titleLabel?.textColor = .white
+       
         let fbLoginManager = LoginManager()
         fbLoginManager.logOut() // this is an instance function
-        //        faceBookLoginButton.addTarget(self, action: #selector(facebookLogin), for: .touchUpInside)
         faceBookLoginButton.layer.cornerRadius = 10
         faceBookLoginButton.delegate = self
-        //Add button on some view or stack
-        //        self.loginButtonStackView.addArrangedSubview(authorizationButton)
+      
     }
-    
-//    @objc func facebookLogin() {
-//        let fbLoginManager = LoginManager()
-//        fbLoginManager.logIn(permissions: ["public_profile", "email"], from: self) {(
-//            Result, Error) in
-//            if let error = Error {
-//                print("Failed to login: \(error.localizedDescription)")
-//                return
-//            }
-//
-//            guard let accessToken = AccessToken.current
-//                else {
-//                    print("Failed to get access token")
-//                    return
-//            }
-//
-//            let credential = FacebookAuthProvider.credential(withAccessToken: accessToken.tokenString)
-//
-//            // call Firebase API to signin
-//            Auth.auth().signIn(with: credential, completion: { user, error in
-//                if let error = error {
-//                    print("Login error: \(error.localizedDescription)")
-//                    let alertController = UIAlertController(title: "Login error", message: error.localizedDescription, preferredStyle: .alert)
-//                    let okayAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-//                    alertController.addAction(okayAction)
-//                    self.present(alertController, animated: true, completion: nil)
-//
-//                    return
-//                }
-//
-//                // present the main View
-//                if error == nil {
-//
-//                    if  (user?.additionalUserInfo!.isNewUser)! {
-//                        if !accessToken.isExpired {
-//                            self.vc.isFirst = true
-//                            self.navigationController?.pushViewController(self.vc, animated: true)
-//                        }
-//                    } else {
-//                        if !accessToken.isExpired {
-//                            Firestore.firestore().collection("user").document(Auth.auth().currentUser!.uid).addSnapshotListener { data, error in
-//                                if let error = error {
-//                                    print(error.localizedDescription)
-//                                } else {
-//
-//                                    if let data = data {
-//                                        let isFirst = data["isFirst"] as? Bool
-//                                        if let isFirst = isFirst {
-//                                            if isFirst == true {
-//                                                self.vc.isFirst = true
-//                                                self.navigationController?.pushViewController(self.vc, animated: true)
-//
-//                                            } else {
-//                                                self.vc.isFirst = false
-//                                                let Storyboard: UIStoryboard = UIStoryboard(name: "Login", bundle: nil)
-//                                                let vc = Storyboard.instantiateViewController(withIdentifier: "FirstTimeProfile")
-//                                                self.navigationController?.pushViewController(vc, animated: true)
-//                                            }
-//                                        } else {
-//                                            self.vc.isFirst = true
-//                                            self.navigationController?.pushViewController(self.vc, animated: true)
-//                                        }
-//                                    }
-//
-//                                }
-//                            }
-//                        }
-//                    }
-//                }
-//            })
-//        }
-//    }
-//
-    
     
     
     //MARK: keyboard delegate
@@ -346,6 +272,8 @@ extension LoginMainpageViewController: LoginButtonDelegate {
                     if  (result?.additionalUserInfo!.isNewUser)! {
                         if !accessToken.isExpired {
                             self.vc.isFirst = true
+                            
+                            guard self.navigationController?.topViewController == self else { return }
                             self.navigationController?.pushViewController(self.vc, animated: true)
                         }
                     } else {
@@ -360,16 +288,21 @@ extension LoginMainpageViewController: LoginButtonDelegate {
                                         if let isFirst = isFirst {
                                             if isFirst == true {
                                                 self.vc.isFirst = true
+                                                
+                                                guard self.navigationController?.topViewController == self else { return }
                                                 self.navigationController?.pushViewController(self.vc, animated: true)
                                                 
                                             } else {
                                                 self.vc.isFirst = false
                                                 let Storyboard: UIStoryboard = UIStoryboard(name: "Login", bundle: nil)
                                                 let vc = Storyboard.instantiateViewController(withIdentifier: "FirstTimeProfile")
+                                                
+                                                guard self.navigationController?.topViewController == self else { return }
                                                 self.navigationController?.pushViewController(vc, animated: true)
                                             }
                                         } else {
                                             self.vc.isFirst = true
+                                            guard self.navigationController?.topViewController == self else { return }
                                             self.navigationController?.pushViewController(self.vc, animated: true)
                                         }
                                     }
@@ -509,6 +442,8 @@ extension LoginMainpageViewController: ASAuthorizationControllerDelegate {
             if  (authResult?.additionalUserInfo?.isNewUser)! {
                 
                 self.vc.isFirst = true
+                
+                guard self.navigationController?.topViewController == self else { return }
                 self.navigationController?.pushViewController(self.vc, animated: true)
                 
             } else {
@@ -522,16 +457,22 @@ extension LoginMainpageViewController: ASAuthorizationControllerDelegate {
                             if let isFirst = isFirst {
                                 if isFirst == true {
                                     self.vc.isFirst = true
+                                    
+                                    guard self.navigationController?.topViewController == self else { return }
                                     self.navigationController?.pushViewController(self.vc, animated: true)
                                     
                                 } else {
                                     self.vc.isFirst = false
                                     let Storyboard: UIStoryboard = UIStoryboard(name: "Login", bundle: nil)
                                     let vc = Storyboard.instantiateViewController(withIdentifier: "FirstTimeProfile")
+                                    
+                                    guard self.navigationController?.topViewController == self else { return }
                                     self.navigationController?.pushViewController(vc, animated: true)
                                 }
                             } else {
                                 self.vc.isFirst = true
+                                
+                                guard self.navigationController?.topViewController == self else { return }
                                 self.navigationController?.pushViewController(self.vc, animated: true)
                             }
                         }
@@ -559,10 +500,26 @@ extension LoginMainpageViewController: GIDSignInDelegate {
     //MARK: Google login
     func setUpGoogleLogin() {
         let authorizationButton = GIDSignInButton()
-//        authorizationButton.addTarget(self, action: #selector(googleLogin), for: .touchUpInside)
+        //        authorizationButton.addTarget(self, action: #selector(googleLogin), for: .touchUpInside)
+       
+       
+        
         authorizationButton.layer.cornerRadius = 10
-        //Add button on some view or stack
+        let superViewCenterYAnchor = self.view.centerXAnchor
+        let width = authorizationButton.frame.width
+//        guard let superViewLeadingAnchor = self.loginButtonStackView?.leadingAnchor else { return }
+//        guard let superViewTrailingAnchor = self.loginButtonStackView?.trailingAnchor else { return }
+        
         self.loginButtonStackView.addArrangedSubview(authorizationButton)
+        let centerYAnchor = authorizationButton.centerXAnchor.constraint(equalTo: superViewCenterYAnchor, constant: 0.0)
+        let widthAnchor =  authorizationButton.widthAnchor.constraint(equalToConstant: width)
+//        let leadingAnchor = authorizationButton.leadingAnchor.constraint(greaterThanOrEqualTo: superViewLeadingAnchor, constant: 10.0)
+//        let trailingAnchor = authorizationButton.leadingAnchor.constraint(greaterThanOrEqualTo: superViewTrailingAnchor, constant: 10.0)
+        
+        centerYAnchor.isActive = true
+        widthAnchor.isActive = true
+//        leadingAnchor.isActive = true
+//        trailingAnchor.isActive = true
     }
     
     @objc func googleLogin() {
@@ -571,7 +528,7 @@ extension LoginMainpageViewController: GIDSignInDelegate {
     
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
         if error != nil {
-            print(error)
+            print(error!)
             return
         }
         guard let authentication = user.authentication else {
@@ -595,6 +552,8 @@ extension LoginMainpageViewController: GIDSignInDelegate {
                 if  (user?.additionalUserInfo!.isNewUser)! {
                     
                     self.vc.isFirst = true
+                    guard self.navigationController?.topViewController == self else { return }
+
                     self.navigationController?.pushViewController(self.vc, animated: true)
                     
                 } else {
@@ -602,6 +561,8 @@ extension LoginMainpageViewController: GIDSignInDelegate {
                     if  (user?.additionalUserInfo!.isNewUser)! {
                         
                         self.vc.isFirst = true
+                        
+                        guard self.navigationController?.topViewController == self else { return }
                         self.navigationController?.pushViewController(self.vc, animated: true)
                         
                     } else {
@@ -615,6 +576,8 @@ extension LoginMainpageViewController: GIDSignInDelegate {
                                     if let isFirst = isFirst {
                                         if isFirst == true {
                                             self.vc.isFirst = true
+                                            
+                                            guard self.navigationController?.topViewController == self else { return }
                                             self.navigationController?.pushViewController(self.vc, animated: true)
                                             
                                         } else {
@@ -623,11 +586,15 @@ extension LoginMainpageViewController: GIDSignInDelegate {
                                                 self.vc.isFirst = false
                                                 let Storyboard: UIStoryboard = UIStoryboard(name: "Login", bundle: nil)
                                                 let vc = Storyboard.instantiateViewController(withIdentifier: "FirstTimeProfile")
+                                                
+                                                guard self.navigationController?.topViewController == self else { return }
                                                 self.navigationController?.pushViewController(vc, animated: true)
                                             }
                                         }
                                     } else {
                                         self.vc.isFirst = true
+                                        
+                                        guard self.navigationController?.topViewController == self else { return }
                                         self.navigationController?.pushViewController(self.vc, animated: true)
                                     }
                                 }

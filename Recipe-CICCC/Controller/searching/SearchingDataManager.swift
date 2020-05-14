@@ -36,13 +36,15 @@ class SearchingDataManager: fetchRecipes {
                 for document in querySnapshot!.documents {
                     
                     let data = document.data()
-                    let userID = data["id"] as? String
-                    let name = data["userName"] as? String
-                    let familySize = data["familySize"] as? Int
-                    let cuisineType = data["cuisineType"] as? String
-                     let isVIP = data["isVIP"] as? Bool
+                    guard let userID = data["id"] as? String else { continue }
+                    guard let name = data["userName"] as? String else { continue }
+                    guard let familySize = data["familySize"] as? Int else { continue }
+                    guard let cuisineType = data["cuisineType"] as? String else { continue }
+                    guard let isVIP = data["isVIP"] as? Bool else { continue }
                     
-                    user = User(userID: userID!, name: name!, cuisineType: cuisineType!, familySize: familySize!, isVIP: isVIP)
+                    
+                    
+                    user = User(userID: userID, name: name, cuisineType: cuisineType, familySize: familySize, isVIP: isVIP)
                     
                     if let userName = user?.name.lowercased() {
                         let searchingWord = searchingWord.lowercased()
@@ -51,8 +53,8 @@ class SearchingDataManager: fetchRecipes {
                             
                         }
                         
+                        
                     }
-                    
                     
                 }
                 self.delegateChild?.searchedUsers(users: users)

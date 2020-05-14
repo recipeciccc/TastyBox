@@ -19,7 +19,7 @@ class IngredientsViewController: UIViewController {
     
     var ingredientArray: [String] = [] {
         didSet {
-           
+            
             searchingIngredient = ingredientArray[0]
             showingIngredient = searchingIngredient
         }
@@ -50,7 +50,7 @@ class IngredientsViewController: UIViewController {
     var viewBackgroundColor = UIColor()
     var viewTintColor = UIColor()
     var click = Bool()
-    var selectedIndexPath = IndexPath()
+    var selectedIndexPath:IndexPath?
     
     weak var delegate: stopPagingDelegate?
     
@@ -63,8 +63,20 @@ class IngredientsViewController: UIViewController {
         
         let uid = Auth.auth().currentUser?.uid
         refrigeratorDataManager.getRefrigeratorDetail(userID: uid!)
+        
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if let cell = TitleCollectionView.cellForItem(at: IndexPath(row: 0, section: 0)) as? IngredientTitleCollectionViewCell {
+            if selectedIndexPath == nil {
+                self.TitleCollectionView.reloadData()
+                self.TitleCollectionView.layoutIfNeeded()
+                cell.focusCell(active: true)
+            }
+        }
+        
+    }
 }
 
 extension IngredientsViewController: UICollectionViewDataSource, UICollectionViewDelegate{
@@ -200,20 +212,6 @@ extension IngredientsViewController: UICollectionViewDelegateFlowLayout {
         
         return 10
     }
-    //    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-    //
-    //        return 4
-    //    }
-    //
-    //    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-    //
-    //        return 1
-    //    }
-    //
-    
-    // they and self.ispaging = false in pageviewcontroller prevent from paging when collection view is scrollings
-    
-    
     
     func roundCorners(view: UIView, cornerRadius: Double) {
         view.layer.cornerRadius = CGFloat(cornerRadius)
@@ -268,9 +266,9 @@ extension IngredientsViewController: fetchDataInIngredientsDelegate {
         
         self.allRecipes = data
         
-//        guard (self.allRecipes.last?.recipeID) != nil else {
-//            return
-//        }
+        //        guard (self.allRecipes.last?.recipeID) != nil else {
+        //            return
+        //        }
         
         lastRecipeID = allRecipes.last!.recipeID
         
@@ -318,10 +316,10 @@ extension IngredientsViewController: getIngredientRefrigeratorDataDelegate{
                 array.append(name)
             }
             ingredientArray = array
-//            searchingIngredient = ingredientArray[0]
-//            showingIngredient = searchingIngredient
-//
-                  
+            //            searchingIngredient = ingredientArray[0]
+            //            showingIngredient = searchingIngredient
+            //
+            
             let query = db.collection("recipe").order(by: "like", descending: true)
             let _ = dataManager.Data(queryRef: query)
             

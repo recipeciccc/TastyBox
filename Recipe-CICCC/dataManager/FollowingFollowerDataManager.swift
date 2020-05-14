@@ -10,7 +10,7 @@ import Foundation
 import Firebase
 
 protocol FollowingFollowerManagerDelegate: class {
-//    func deleteFollowings(user:User)
+    //    func deleteFollowings(user:User)
     func assignFollowersFollowings(users: [User])
     func assginFollowersFollowingsImages(image: UIImage, index: Int)
 }
@@ -38,47 +38,48 @@ class FollowingFollowerDataManager {
     }
     
     func getFollowersFollowings(IDs: [String], followerOrFollowing: String) {
-           
-           for ID in IDs {
-               
-               db.collection("user").document(ID).addSnapshotListener {
-                   (querysnapshot, error) in
-                   if error != nil {
-                       print("Error getting documents: \(String(describing: error))")
-                   } else {
-                       
-                       let data = querysnapshot!.data()
-                       
-                       print("data count: \(data!.count)")
-                       
-                       
-                       let userID = data!["id"] as? String
-                       let name = data!["userName"] as? String
-                       let familySize = data!["familySize"] as? Int
-                       let cuisineType = data!["cuisineType"] as? String
-                       
-                       
-                       self.user = User(userID: userID!, name: name!, cuisineType: cuisineType!, familySize: familySize!)
-                       
-                       if followerOrFollowing == "following" {
-                           self.followings.append(self.user!)
-                           if ID == IDs.last! {
-                           self.delegate?.assignFollowersFollowings(users: self.followings)
-                           }
-                       }
-                       else if followerOrFollowing == "follower" {
-                           self.followers.append(self.user!)
+        
+        for ID in IDs {
+            
+            db.collection("user").document(ID).addSnapshotListener {
+                (querysnapshot, error) in
+                if error != nil {
+                    print("Error getting documents: \(String(describing: error))")
+                } else {
+                    
+                    if let data = querysnapshot!.data() {
+                        
+                        print("data count: \(data.count)")
+                        
+                        
+                        guard let userID = data["id"] as? String else { return }
+                        guard let name = data["userName"] as? String else { return }
+                        guard let familySize = data["familySize"] as? Int else { return }
+                        guard let cuisineType = data["cuisineType"] as? String else { return }
+                        
+                        
+                        self.user = User(userID: userID, name: name, cuisineType: cuisineType, familySize: familySize)
+                        
+                        if followerOrFollowing == "following" {
+                            self.followings.append(self.user!)
                             if ID == IDs.last! {
-                           self.delegate?.assignFollowersFollowings(users: self.followers)
-                           }
-                       }
-                       
-                   }
-                   
-               }
-               
-           }
-       }
+                                self.delegate?.assignFollowersFollowings(users: self.followings)
+                            }
+                        }
+                        else if followerOrFollowing == "follower" {
+                            self.followers.append(self.user!)
+                            if ID == IDs.last! {
+                                self.delegate?.assignFollowersFollowings(users: self.followers)
+                            }
+                        }
+                        
+                    }
+                    
+                }
+            }
+            
+        }
+    }
     
     func getFollwersFollowingsImage(uid: String, index: Int) {
         let imageRef = Storage.storage().reference().child("user/\(uid)/userAccountImage")

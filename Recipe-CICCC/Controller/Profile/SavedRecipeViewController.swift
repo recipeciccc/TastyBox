@@ -42,6 +42,7 @@ class SavedRecipeViewController: UIViewController {
             let yesAction = UIAlertAction(title: "OK", style: .default, handler: { action in
                 self.dataManger.saveRecipe(recipeID: self.savingRecipeID!)
                 // call the fucntions to retrieve recipeId and recipeimage
+                self.dataManger.getSavedRecipes()
                 self.collectionView.reloadData()
             })
             alertController.addAction(yesAction)
@@ -54,8 +55,8 @@ class SavedRecipeViewController: UIViewController {
             
             self.present(alertController, animated: true)
         
-    }
-        dataManger.getSavedRecipes()
+        }
+            dataManger.getSavedRecipes()
         
         
         
@@ -83,6 +84,7 @@ extension SavedRecipeViewController: UICollectionViewDataSource, UICollectionVie
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
+        print(savedRecipes.count)
         return savedRecipes.count
     }
 
@@ -104,6 +106,7 @@ extension SavedRecipeViewController: UICollectionViewDataSource, UICollectionVie
         vc.mainPhoto = savedRecipesImages[indexPath.row]!
         vc.creator = self.users[indexPath.row]
         
+        guard self.navigationController?.topViewController == self else { return }
         self.navigationController?.pushViewController(vc, animated: true)
     }
     

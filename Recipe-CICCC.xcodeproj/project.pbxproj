@@ -88,6 +88,7 @@
 		6F039DE52456D7FD00C76516 /* savingRecipesDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F039DE32456D7FD00C76516 /* savingRecipesDataManager.swift */; };
 		6F084075244F58D200CA7E6E /* ResultRecipesDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F084074244F58D200CA7E6E /* ResultRecipesDataManager.swift */; };
 		6F084077244F5B7E00CA7E6E /* ResultRecipeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F084076244F5B7E00CA7E6E /* ResultRecipeCollectionViewCell.swift */; };
+		6F08ACE1246CB0E900BFB1A3 /* GoogleLoginSignInButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F08ACE0246CB0E900BFB1A3 /* GoogleLoginSignInButton.swift */; };
 		6F0FBAFD23DA3E49009C1775 /* savedRecipe.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F0FBAFC23DA3E49009C1775 /* savedRecipe.storyboard */; };
 		6F144E2B2445B4A300AC0520 /* RecipeCreatorPostedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F144E2A2445B4A300AC0520 /* RecipeCreatorPostedCollectionViewCell.swift */; };
 		6F144E31244867CD00AC0520 /* FollowingDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F144E30244867CD00AC0520 /* FollowingDelegate.swift */; };
@@ -292,6 +293,7 @@
 		6F039DE32456D7FD00C76516 /* savingRecipesDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = savingRecipesDataManager.swift; sourceTree = "<group>"; };
 		6F084074244F58D200CA7E6E /* ResultRecipesDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultRecipesDataManager.swift; sourceTree = "<group>"; };
 		6F084076244F5B7E00CA7E6E /* ResultRecipeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ResultRecipeCollectionViewCell.swift; path = "Recipe-CICCC/Controller/searching/ResultRecipeCollectionViewCell.swift"; sourceTree = SOURCE_ROOT; };
+		6F08ACE0246CB0E900BFB1A3 /* GoogleLoginSignInButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GoogleLoginSignInButton.swift; path = "Recipe-CICCC/Controller/LoginPart/GoogleLoginSignInButton.swift"; sourceTree = SOURCE_ROOT; };
 		6F0FBAFC23DA3E49009C1775 /* savedRecipe.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = savedRecipe.storyboard; sourceTree = "<group>"; };
 		6F144E272445789600AC0520 /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
 		6F144E2A2445B4A300AC0520 /* RecipeCreatorPostedCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeCreatorPostedCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -845,6 +847,7 @@
 		6FC70D782429D478002E14DF /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				6F08ACE0246CB0E900BFB1A3 /* GoogleLoginSignInButton.swift */,
 				6F039DD324561F3300C76516 /* SettingsTableViewCell.swift */,
 				6F8408CB2449E2EC008B2A25 /* GenreCollectionViewCell.swift */,
 				6F54A4462429D95300D936CD /* MapTableViewCell.swift */,
@@ -1203,6 +1206,7 @@
 				6FC084C72415E12600C0AE38 /* AddingIngredientRefrigeratorViewController.swift in Sources */,
 				4069255E23D834AC00059C8E /* creatorCellRecpipeTableViewCell.swift in Sources */,
 				6F82F99A240E2E4E007B7D71 /* getDataFromFirebase.swift in Sources */,
+				6F08ACE1246CB0E900BFB1A3 /* GoogleLoginSignInButton.swift in Sources */,
 				6F73936124502C5C00F77848 /* FollowingDataManager.swift in Sources */,
 				692327DF242F289E003C434D /* MyPageViewController.swift in Sources */,
 				69909F3B2456375C00AACEC7 /* SettingManager.swift in Sources */,

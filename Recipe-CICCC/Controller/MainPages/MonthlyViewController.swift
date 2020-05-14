@@ -81,7 +81,8 @@ extension MonthlyViewController: UITableViewDataSource, UITableViewDelegate{
                case 5:  viewContoller?.recipeLabels = self.recipeLabels; break
                default: print("no category"); break
                }
-               
+         
+//        guard self.navigationController?.topViewController == self else { return }
         self.navigationController?.pushViewController(viewContoller!, animated: true)
     }
     

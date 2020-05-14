@@ -176,6 +176,7 @@ extension FollowingViewController:UITableViewDelegate {
         vc.id = searchedFollowings[indexPath.row].userID
         tableView.deselectRow(at: indexPath, animated: true)
         
+//        guard self.navigationController?.topViewController == self else { return }
         navigationController?.pushViewController(vc, animated: true)
     }
 }

@@ -152,6 +152,7 @@ extension FollowerViewController: UITableViewDelegate {
         vc.id = followers[indexPath.row].userID
         tableView.deselectRow(at: indexPath, animated: true)
 
+//        guard self.navigationController?.topViewController == self else { return }
         navigationController?.pushViewController(vc, animated: true)
     }
 }

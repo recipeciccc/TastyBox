@@ -162,6 +162,8 @@ class FirstTimeUserProfileTableViewController: UITableViewController, UIPickerVi
             
             let Storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
             let vc = Storyboard.instantiateViewController(withIdentifier: "Discovery")
+            
+            guard self.navigationController?.topViewController == self else { return }
             self.navigationController?.pushViewController(vc, animated: true)
             
         }

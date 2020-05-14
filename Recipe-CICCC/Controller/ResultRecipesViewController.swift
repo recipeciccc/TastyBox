@@ -87,6 +87,7 @@ extension ResultRecipesViewController: UICollectionViewDelegate {
         vc.recipe = resultRecipes[indexPath.row]
         vc.mainPhoto = resultRecipesImages[indexPath.row]!
 //        vc.creator = self.user
+        guard self.navigationController?.topViewController == self else { return }
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }
