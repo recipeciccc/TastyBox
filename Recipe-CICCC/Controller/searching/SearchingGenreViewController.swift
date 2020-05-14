@@ -19,27 +19,27 @@ class SearchingGenreViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         tableView.dataSource = self
         tableView.delegate = self
         tableView.tableFooterView = UIView()
         
         dataManager.isGenreExistDelegate = self
-//        dataManager.getGenres()
+        //        dataManager.getGenres()
     }
     
-
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destination.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }
 
 extension SearchingGenreViewController : UITableViewDataSource {
@@ -49,9 +49,9 @@ extension SearchingGenreViewController : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = (tableView.dequeueReusableCell(withIdentifier: "searcingGenre") as? SearchingGenresTableViewCell)!
-       
+        
         cell.genresLabel.text = genresArray[indexPath.row]
-       
+        
         return cell
     }
     
@@ -60,17 +60,19 @@ extension SearchingGenreViewController : UITableViewDataSource {
 
 extension SearchingGenreViewController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        if let cell = tableView.cellForRow(at: indexPath) as? SearchingGenresTableViewCell {
-//            let query = dataManager.createQuery(searchingWord: cell.genresLabel.text!)
-            let vc = storyboard?.instantiateViewController(identifier: "resultRecipes") as! ResultRecipesViewController
-            
-//            vc.query = query
-            vc.searchingCategory = "genres"
-            vc.searchingWord = genresArray[indexPath.row]
-            navigationController?.pushViewController(vc, animated: true)
-            tableView.deselectRow(at: indexPath, animated: true)
-        }
-//    }
+        //        if let cell = tableView.cellForRow(at: indexPath) as? SearchingGenresTableViewCell {
+        //            let query = dataManager.createQuery(searchingWord: cell.genresLabel.text!)
+        let vc = storyboard?.instantiateViewController(identifier: "resultRecipes") as! ResultRecipesViewController
+        
+        //            vc.query = query
+        vc.searchingCategory = "genres"
+        vc.searchingWord = genresArray[indexPath.row]
+        guard self.navigationController?.topViewController == self else { return }
+        
+        navigationController?.pushViewController(vc, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    //    }
     
 }
 
@@ -79,7 +81,7 @@ extension SearchingGenreViewController :isGenreExistDelegate {
         genresArray = getGenres
         self.tableView.reloadData()
     }
-
+    
 }
 
 

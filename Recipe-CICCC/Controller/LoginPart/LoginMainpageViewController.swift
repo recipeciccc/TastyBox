@@ -29,6 +29,8 @@ class LoginMainpageViewController: UIViewController {
     
     @IBOutlet var loginButtonStackView: UIStackView!
     @IBOutlet weak var faceBookLoginButton: FBLoginButton!
+    @IBOutlet weak var resetPasswordButton: UIButton!
+    @IBOutlet weak var registerButton: UIButton!
     
     
     override func viewDidLoad() {
@@ -80,12 +82,14 @@ class LoginMainpageViewController: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-        
-        loginButtonStackView.spacing = 10
-      
-        setUpGoogleLogin()
+    
         setUpFaceBookLogin()
+        setUpGoogleLogin()
         setUpSignInAppleButton()
+        loginButtonStackView.spacing = 10.0
+        
+        resetPasswordButton.contentHorizontalAlignment = .right
+        registerButton.contentHorizontalAlignment = .right
     }
     
     @IBAction func unwindtoLoginMain(segue: UIStoryboardSegue) {
@@ -559,10 +563,28 @@ extension LoginMainpageViewController: GIDSignInDelegate {
     //MARK: Google login
     func setUpGoogleLogin() {
         let authorizationButton = GIDSignInButton()
-//        authorizationButton.addTarget(self, action: #selector(googleLogin), for: .touchUpInside)
-        authorizationButton.layer.cornerRadius = 10
-        //Add button on some view or stack
+        //        authorizationButton.addTarget(self, action: #selector(googleLogin), for: .touchUpInside)
+       
         self.loginButtonStackView.addArrangedSubview(authorizationButton)
+        
+        authorizationButton.layer.cornerRadius = 10
+        let superViewCenterYAnchor = self.view.centerXAnchor
+        guard let superViewLeadingAnchor = self.loginButtonStackView?.leadingAnchor else { return }
+        guard let superViewTrailingAnchor = self.loginButtonStackView?.trailingAnchor else { return }
+        
+        let centerYAnchor = authorizationButton.centerXAnchor.constraint(equalTo: superViewCenterYAnchor, constant: 0.0)
+        let leadingAnchor = authorizationButton.leadingAnchor.constraint(greaterThanOrEqualTo: superViewLeadingAnchor, constant: 10.0)
+        let trailingAnchor = authorizationButton.leadingAnchor.constraint(greaterThanOrEqualTo: superViewTrailingAnchor, constant: 10.0)
+        
+        centerYAnchor.isActive = true
+        leadingAnchor.isActive = true
+        trailingAnchor.isActive = true
+        
+//        authorizationButton.addConstraint(centerYAnchor)
+//        authorizationButton.addConstraint(leadingAnchor)
+//        authorizationButton.addConstraint(trailingAnchor)
+        //Add button on some view or stack
+        
     }
     
     @objc func googleLogin() {
@@ -571,7 +593,7 @@ extension LoginMainpageViewController: GIDSignInDelegate {
     
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
         if error != nil {
-            print(error)
+            print(error!)
             return
         }
         guard let authentication = user.authentication else {

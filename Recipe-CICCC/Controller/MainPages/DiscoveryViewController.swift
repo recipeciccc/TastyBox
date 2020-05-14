@@ -182,6 +182,7 @@ class DiscoveryViewController: UIViewController {
     @objc func showSearch(){
         UIView.animate(withDuration: 1.0) {
             print("show Search")
+            guard self.navigationController?.topViewController == self else { return }
             self.performSegue(withIdentifier: "searchPage", sender: nil)
         }
     }
@@ -202,6 +203,8 @@ class DiscoveryViewController: UIViewController {
                 print(error.localizedDescription)
             }
             
+            guard self.navigationController?.topViewController == self else { return }
+
             let Storyboard: UIStoryboard = UIStoryboard(name: "Login", bundle: nil)
             let vc = Storyboard.instantiateViewController(withIdentifier: "loginPage")
             self.navigationController?.pushViewController(vc, animated: true)

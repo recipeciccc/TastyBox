@@ -109,22 +109,22 @@ class FollowingRecipeDataManager {
                       print("Error getting documents: \(String(describing: error))")
                   } else {
                       
-                      let data = querysnapshot!.data()
+                    guard let data = querysnapshot?.data() else { return }
                       
-                      print("data count: \(data!.count)")
-                      
-                      
-                      let userID = data!["id"] as? String
-                      let name = data!["userName"] as? String
-                      let familySize = data!["familySize"] as? Int
-                      let cuisineType = data!["cuisineType"] as? String
+                      print("data count: \(data.count)")
                       
                       
-                      self.user = User(userID: userID!, name: name!, cuisineType: cuisineType!, familySize: familySize!)
+                      guard let userID = data["id"] as? String else { return }
+                      guard let name = data["userName"] as? String else { return }
+                      guard let familySize = data["familySize"] as? Int else { return }
+                      guard let cuisineType = data["cuisineType"] as? String else { return }
+                      
+                      
+                      self.user = User(userID: userID, name: name, cuisineType: cuisineType, familySize: familySize)
                       
                     
-                          self.followings.append(self.user!)
-                          self.delegate?.assignFollowings(users: self.followings)
+                    self.followings.append(self.user!)
+                    self.delegate?.assignFollowings(users: self.followings)
                     
                   }
                   

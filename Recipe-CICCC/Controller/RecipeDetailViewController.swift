@@ -117,13 +117,18 @@ class RecipeDetailViewController: UIViewController {
         if creator?.name == Auth.auth().currentUser?.displayName {
             let storyboard = UIStoryboard(name: "MyPage", bundle: nil)
             let profileVC = storyboard.instantiateViewController(identifier: "User profile") as! MyPageViewController
-            
+           
+            guard self.navigationController?.topViewController == self else { return }
+
             navigationController?.pushViewController(profileVC, animated: true)
         } else {
             let storyboard = UIStoryboard(name: "creatorProfile", bundle: nil)
             let profileVC = storyboard.instantiateViewController(identifier: "creatorProfile") as! CreatorProfileViewController
             
             profileVC.id = self.creator!.userID
+
+            guard self.navigationController?.topViewController == self else { return }
+
             navigationController?.pushViewController(profileVC, animated: true)
         }
     }
@@ -371,6 +376,8 @@ extension RecipeDetailViewController: recipeDetailDelegate {
             let registerAction = UIAlertAction(title: "Sign up VIP membership", style: .default, handler: { action in
                 let registerVC = UIStoryboard(name: "VIP_page", bundle: nil).instantiateViewController(identifier: "registerVIP") as! ExplainationVIPViewController
                 
+                guard self.navigationController?.topViewController == self else { return }
+
                 self.navigationController?.pushViewController(registerVC, animated: true)
             })
             

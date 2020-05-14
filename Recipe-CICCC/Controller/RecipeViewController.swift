@@ -175,6 +175,9 @@ extension RecipeViewController: UICollectionViewDataSource, UICollectionViewDele
             recipeDetailVC.creator = creators[indexPath.row]
             recipeDetailVC.mainPhoto = recipesImages[indexPath.row]!
         }
+
+        guard self.navigationController?.topViewController == self else { return }
+
         navigationController?.pushViewController(recipeDetailVC, animated: true)
     }
     

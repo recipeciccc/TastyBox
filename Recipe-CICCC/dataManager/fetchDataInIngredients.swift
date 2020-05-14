@@ -54,9 +54,9 @@ class fetchDataInIngredients {
                         
                         
                         let isVIPRecipe = data["VIP"] as? Bool ?? false
-                                                                                              
+                        
                         let recipe = RecipeDetail(recipeID: recipeId!, title: title!, updatedDate: time!, cookingTime: cookingTime ?? 0, image: image ?? "", like: like!, serving: serving ?? 0, userID: userId!, genres: genresArr, isVIPRecipe: isVIPRecipe)
-                                             
+                        
                         recipeList.append(recipe)
                         print(time?.dateValue() as Any)
                     }
@@ -166,14 +166,13 @@ class fetchDataInIngredients {
                     
                     print("data count: \(data.count)")
                     
-                    
-                    let userID = data["id"] as? String
-                    let name = data["userName"] as? String
-                    let familySize = data["familySize"] as? Int
-                    let cuisineType = data["cuisineType"] as? String
-                     let isVIP = data["isVIP"] as? Bool
-                                       
-                    self.user = User(userID: userID!, name: name!, cuisineType: cuisineType!, familySize: familySize!, isVIP: isVIP)
+                    guard let userID = data["id"] as? String else { return }
+                    guard let name = data["userName"] as? String else { return }
+                    guard let familySize = data["familySize"] as? Int else { return }
+                    guard let cuisineType = data["cuisineType"] as? String else { return }
+                    guard let isVIP = data["isVIP"] as? Bool else { return }
+                                         
+                    self.user = User(userID: userID, name: name, cuisineType: cuisineType, familySize: familySize, isVIP: isVIP)
                     self.delegate?.gotUserData(user: self.user!)
                     
                 }

@@ -100,11 +100,17 @@ extension SearchingCreatorsViewController: UITableViewDelegate {
         if id == Auth.auth().currentUser?.uid {
             
             let profileVC = UIStoryboard(name: "MyPage", bundle: nil).instantiateViewController(identifier: "User profile") as! MyPageViewController
+
+            guard self.navigationController?.topViewController == self else { return }
+
             navigationController?.pushViewController(profileVC, animated: true)
             
         } else {
             let profileVC = UIStoryboard(name: "creatorProfile", bundle: nil).instantiateViewController(identifier: "creatorProfile") as! CreatorProfileViewController
             profileVC.id = id
+
+            guard self.navigationController?.topViewController == self else { return }
+
             navigationController?.pushViewController(profileVC, animated: true)
         }
         tableView.deselectRow(at: indexPath, animated: true)
