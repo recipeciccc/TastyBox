@@ -109,7 +109,7 @@ extension SearchingCreatorsViewController: UITableViewDelegate {
             let profileVC = UIStoryboard(name: "creatorProfile", bundle: nil).instantiateViewController(identifier: "creatorProfile") as! CreatorProfileViewController
             profileVC.id = id
 
-            guard self.navigationController?.topViewController == self else { return }
+//            guard self.navigationController?.topViewController == self else { return }
 
             navigationController?.pushViewController(profileVC, animated: true)
         }

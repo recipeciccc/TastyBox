@@ -23,6 +23,7 @@ class FollowingRecipeDataManager {
     
     
        func findFollowing(id: String?) {
+        
            var uid = (Auth.auth().currentUser?.uid)!
            
            if id != nil {
@@ -35,6 +36,7 @@ class FollowingRecipeDataManager {
                if error != nil {
                    print("Error getting documents: \(String(describing: error))")
                } else {
+                self.followingsIDs.removeAll()
                    for document in querysnapshot!.documents {
                        let data = document.data()
                        self.followingsIDs.append(data["id"] as! String)

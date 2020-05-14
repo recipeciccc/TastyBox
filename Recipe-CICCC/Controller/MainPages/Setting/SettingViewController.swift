@@ -222,8 +222,11 @@ extension SettingViewController: UITableViewDataSource,UITableViewDelegate{
                 print("select row 1")
                 vc.OriginalData =  SettingViewController.accountData[1]
             default:
+             
                 print("No row is selected")
             }
+            guard self.navigationController?.topViewController == self else { return }
+
             self.navigationController?.pushViewController(vc, animated: true)
             
         }else{
@@ -244,6 +247,7 @@ extension SettingViewController: UITableViewDataSource,UITableViewDelegate{
             default:
                 print("defalt")
             }
+            guard self.navigationController?.topViewController == self else { return }
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }

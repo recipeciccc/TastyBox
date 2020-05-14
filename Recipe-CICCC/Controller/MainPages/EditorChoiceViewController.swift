@@ -66,6 +66,8 @@ extension EditorChoiceViewController: UITableViewDataSource, UITableViewDelegate
         let image = imageArray[indexPath.row]
         viewContoller?.T_image = image.image
         viewContoller?.T_Name = image.title
+        
+//        guard self.navigationController?.topViewController == self else { return }
         self.navigationController?.pushViewController(viewContoller!, animated: true)
     }
         

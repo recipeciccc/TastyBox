@@ -46,6 +46,7 @@ extension VIPViewController : VIPDataManagerDelegate {
             })
             let registerAction = UIAlertAction(title: "Register", style: .default, handler: { action in
                 let vc = self.storyboard?.instantiateViewController(identifier: "registerVIP")
+//                guard self.navigationController?.topViewController == self else { return }
                 self.navigationController?.pushViewController(vc!, animated: true)
             })
             
@@ -82,7 +83,8 @@ extension VIPViewController :RecipeCollectionViewDelegate {
             let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
             let registerAction = UIAlertAction(title: "Sign up VIP membership", style: .default, handler: { action in
                 let registerVC = self.storyboard?.instantiateViewController(identifier: "registerVIP") as! ExplainationVIPViewController
-                
+
+//                guard self.navigationController?.topViewController == self else { return }
                 self.navigationController?.pushViewController(registerVC, animated: true)
             })
             
@@ -99,6 +101,8 @@ extension VIPViewController :RecipeCollectionViewDelegate {
         vc.mainPhoto = image!
         vc.creator = creator
         
+//        guard self.navigationController?.topViewController == self else { return }
+
         navigationController?.pushViewController(vc, animated: true)
     }
     }

@@ -33,6 +33,9 @@ class PopularRecipeViewController: UIViewController {
         tableView.delegate = self as UITableViewDelegate
         tableView.dataSource = self as UITableViewDataSource
         
+        tableView.separatorStyle = .none
+       
+        
     }
     
     
@@ -120,12 +123,14 @@ extension PopularRecipeViewController: UITableViewDataSource {
         return cell
     }
     
-    
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 350.0
-    }
-    
+//    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+//         return 466.0
+//    }
+//
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return 466.0
+//    }
+//
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
 
@@ -143,6 +148,8 @@ extension PopularRecipeViewController: UITableViewDataSource {
         }
         
         tableView.deselectRow(at: indexPath, animated: true)
+
+//        guard self.navigationController?.topViewController == self else { return }
         navigationController?.pushViewController(recipeVC, animated: true)
     }
     

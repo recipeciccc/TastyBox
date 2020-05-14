@@ -81,7 +81,7 @@ extension SearchingIngredientsViewController: UITableViewDelegate {
         
         tableView.deselectRow(at: indexPath, animated: true)
 
-        guard self.navigationController?.topViewController == self else { return }
+//        guard self.navigationController?.topViewController == self else { return }
 
         navigationController?.pushViewController(vc, animated: true)
     }

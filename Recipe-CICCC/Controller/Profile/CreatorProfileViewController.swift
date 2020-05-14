@@ -356,6 +356,8 @@ extension CreatorProfileViewController: CollectionViewInsideUserTableView {
         vc.userProfile = false
         vc.recipe = recipeList[data.row]
         vc.mainPhoto = imageList[data.row]
+        
+        guard self.navigationController?.topViewController == self else { return }
         self.navigationController?.pushViewController(vc, animated: true)
     }
     

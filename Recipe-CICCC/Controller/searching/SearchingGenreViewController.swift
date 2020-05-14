@@ -67,7 +67,7 @@ extension SearchingGenreViewController : UITableViewDelegate {
         //            vc.query = query
         vc.searchingCategory = "genres"
         vc.searchingWord = genresArray[indexPath.row]
-        guard self.navigationController?.topViewController == self else { return }
+//        guard self.navigationController?.topViewController == self else { return }
         
         navigationController?.pushViewController(vc, animated: true)
         tableView.deselectRow(at: indexPath, animated: true)

@@ -74,10 +74,10 @@
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="27" translatesAutoresizingMaskIntoConstraints="NO" id="jxs-J4-geN">
-                                        <rect key="frame" x="147" y="342" width="120.5" height="77.5"/>
+                                        <rect key="frame" x="122" y="342" width="170" height="77.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="or sign up with" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Iz-Wg-71u">
-                                                <rect key="frame" x="0.0" y="0.0" width="120.5" height="20.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="170" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                 <color key="textColor" red="0.96848052740000001" green="0.76100769764463083" blue="0.38126343475297064" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <nil key="highlightedColor"/>
@@ -85,12 +85,15 @@
                                                 <size key="shadowOffset" width="0.0" height="0.0"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zhh-KW-TQQ" customClass="FBSDKLoginButton">
-                                                <rect key="frame" x="0.0" y="47.5" width="120.5" height="30"/>
+                                                <rect key="frame" x="0.0" y="47.5" width="170" height="30"/>
                                                 <state key="normal" title="Button">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                             </button>
                                         </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="170" id="Oek-iM-AzU"/>
+                                        </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="KTU-jZ-19A">
                                         <rect key="frame" x="70" y="449.5" width="274" height="60"/>
@@ -162,7 +165,6 @@
                                     <constraint firstItem="LEz-2R-8zO" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="KTU-jZ-19A" secondAttribute="trailing" constant="70" id="1Dw-Fn-1q5"/>
                                     <constraint firstItem="jxs-J4-geN" firstAttribute="top" secondItem="DG2-oh-kqq" secondAttribute="bottom" constant="18" id="7MY-GI-6rt"/>
                                     <constraint firstAttribute="trailing" secondItem="1Ba-C4-xEl" secondAttribute="trailing" id="7cE-yI-5d9"/>
-                                    <constraint firstItem="jxs-J4-geN" firstAttribute="leading" relation="lessThanOrEqual" secondItem="eJ5-kQ-p0x" secondAttribute="leading" constant="147" id="BKQ-XZ-Dt8"/>
                                     <constraint firstAttribute="bottom" secondItem="1Ba-C4-xEl" secondAttribute="bottom" constant="16" id="DD1-aw-uMz"/>
                                     <constraint firstItem="LEz-2R-8zO" firstAttribute="bottom" secondItem="1Ba-C4-xEl" secondAttribute="bottom" constant="16" id="GQ9-oR-5aa"/>
                                     <constraint firstItem="KTU-jZ-19A" firstAttribute="top" secondItem="jxs-J4-geN" secondAttribute="bottom" constant="30" id="I9u-mD-Jzf"/>
@@ -171,7 +173,6 @@
                                     <constraint firstItem="RQl-0N-std" firstAttribute="centerX" secondItem="c4h-Z0-fQ7" secondAttribute="centerX" id="MKi-58-8ep"/>
                                     <constraint firstItem="DG2-oh-kqq" firstAttribute="centerX" secondItem="c4h-Z0-fQ7" secondAttribute="centerX" id="NBT-4f-CPy"/>
                                     <constraint firstItem="1Ba-C4-xEl" firstAttribute="top" secondItem="LEz-2R-8zO" secondAttribute="top" id="QUM-Wf-wAM"/>
-                                    <constraint firstItem="eJ5-kQ-p0x" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="jxs-J4-geN" secondAttribute="trailing" constant="146.5" id="RZ2-mu-Nc5"/>
                                     <constraint firstItem="RQl-0N-std" firstAttribute="top" secondItem="eJ5-kQ-p0x" secondAttribute="top" constant="45" id="S0c-eA-bAr"/>
                                     <constraint firstItem="KTU-jZ-19A" firstAttribute="centerX" secondItem="c4h-Z0-fQ7" secondAttribute="centerX" id="T30-Bg-e92"/>
                                     <constraint firstItem="6Iz-Wg-71u" firstAttribute="centerX" secondItem="c4h-Z0-fQ7" secondAttribute="centerX" id="cUm-ZK-Xin"/>

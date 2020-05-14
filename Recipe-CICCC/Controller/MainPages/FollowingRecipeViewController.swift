@@ -125,7 +125,9 @@ extension FollowingRecipeViewController : UICollectionViewDelegate,UICollectionV
         let cell = (collectionView.cellForItem(at: indexPath) as? followingRecipeCollectionViewCell )
         
         recipeDetailVC.mainPhoto = (cell?.RecipeImage.image)!
-        
+
+//        guard self.navigationController?.topViewController == self else { return }
+
         navigationController?.pushViewController(recipeDetailVC, animated: true)
     }
     
@@ -237,6 +239,8 @@ extension FollowingRecipeViewController:FollowingRecipeTableViewCellDelegate {
         
         profileVC.id = creators[indexPath.row].userID
         
+//        guard self.navigationController?.topViewController == self else { return }
+
         navigationController?.pushViewController(profileVC, animated: true)
     }
 }

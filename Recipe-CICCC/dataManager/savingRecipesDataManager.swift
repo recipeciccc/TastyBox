@@ -50,6 +50,8 @@ class savingRecipesDataManager {
                if error != nil {
                    print("Error getting documents: \(String(describing: error))")
                } else {
+                
+                self.savedRecipesID.removeAll()
                    if let documents = querySnapshot?.documents {
                        for document in documents {
                            let data = document.data()
@@ -58,8 +60,8 @@ class savingRecipesDataManager {
 
                                if document == documents.last! {
 
-                                   self.Data(recipeID: self.savedRecipesID)
-                                
+                                self.Data(savedRecipesIDs: self.savedRecipesID)
+                                    
                                }
                            }
 
@@ -70,13 +72,15 @@ class savingRecipesDataManager {
        }
     
    
-    func Data(recipeID:[String]) {
+    func Data(savedRecipesIDs:[String]) {
         var recipeList = [RecipeDetail]()
         var exist = Bool()
         
-        for (index, id) in recipeID.enumerated() {
+         recipeList.removeAll()
+        for (index, id) in savedRecipesIDs.enumerated() {
             db.collection("recipe").document(id).addSnapshotListener { (querySnapshot, err) in
                        if err == nil {
+                        
                         if let data = querySnapshot?.data() {
                             let recipeId = data["recipeID"] as? String
                               let title = data["title"] as? String
@@ -104,7 +108,7 @@ class savingRecipesDataManager {
                               
                               recipeList.append(recipe)
                             
-                            if index == recipeID.count - 1 {
+                            if index == self.savedRecipesID.count - 1  {
                                 self.delegate?.reloadData(data:recipeList)
                                 
                                 for (index, recipe) in recipeList.enumerated() {
