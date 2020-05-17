@@ -57,7 +57,7 @@ class DiscoveryViewController: UIViewController {
             blurView.frame = view.frame
             // Choose the style of the blur effect to regular.
             // You can choose dark, light, or extraLight if you wants
-            blurView.effect = UIBlurEffect(style: .light)
+            blurView.effect = UIBlurEffect(style: .systemMaterialDark)
             // Now add the blur view to the main view
             blurView.tag = 100
             

@@ -76,7 +76,9 @@ class IngredientsViewController: UIViewController {
         
         self.view.addSubview(indicator)
         
-        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         DispatchQueue.global(qos: .default).async {
             
             // Do heavy work here
@@ -85,8 +87,7 @@ class IngredientsViewController: UIViewController {
                 // UI updates must be on main thread
                 self?.indicator.startAnimating()
             }
-        }
-        
+        }a
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -98,7 +99,6 @@ class IngredientsViewController: UIViewController {
                 cell.focusCell(active: true)
             }
         }
-        
     }
     
     func isVIPAction(superView: UIView) {
