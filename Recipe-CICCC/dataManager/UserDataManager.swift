@@ -338,6 +338,7 @@ class UserdataManager {
             if let err = err {
                 print("Error writing document: \(err)")
             } else {
+                
                 print("Document successfully written!")
             }
         }

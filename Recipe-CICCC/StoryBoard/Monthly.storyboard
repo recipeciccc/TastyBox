@@ -118,7 +118,7 @@
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="13PAIRING-articleLarge" translatesAutoresizingMaskIntoConstraints="NO" id="sNk-WC-w1n">
-                                                            <rect key="frame" x="0.0" y="0.0" width="175" height="156"/>
+                                                            <rect key="frame" x="0.0" y="9.5" width="175" height="156"/>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="CIl-gQ-AMN">
                                                             <rect key="frame" x="0.0" y="158" width="175" height="17"/>
@@ -127,21 +127,33 @@
                                                             <color key="textColor" systemColor="systemBrownColor" red="0.63529411759999999" green="0.51764705879999995" blue="0.36862745099999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lock.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Dn4-iv-dFR">
+                                                            <rect key="frame" x="37.5" y="38" width="100" height="99"/>
+                                                            <color key="tintColor" white="1" alpha="0.60344373080000002" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" secondItem="Dn4-iv-dFR" secondAttribute="height" multiplier="1:1" id="0Cx-QG-bgi"/>
+                                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="KMh-Ih-53s"/>
+                                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="100" id="OOc-cs-Rxu"/>
+                                                            </constraints>
+                                                        </imageView>
                                                     </subviews>
                                                     <constraints>
-                                                        <constraint firstItem="sNk-WC-w1n" firstAttribute="top" secondItem="BqI-ue-yQl" secondAttribute="top" id="B2M-rk-8hM"/>
+                                                        <constraint firstItem="sNk-WC-w1n" firstAttribute="centerX" secondItem="BqI-ue-yQl" secondAttribute="centerX" id="Awn-Fv-x60"/>
                                                         <constraint firstItem="CIl-gQ-AMN" firstAttribute="leading" secondItem="BqI-ue-yQl" secondAttribute="leading" id="IZc-rW-n2W"/>
-                                                        <constraint firstItem="sNk-WC-w1n" firstAttribute="leading" secondItem="BqI-ue-yQl" secondAttribute="leading" id="VMG-Ft-j0k"/>
+                                                        <constraint firstItem="Dn4-iv-dFR" firstAttribute="centerY" secondItem="BqI-ue-yQl" secondAttribute="centerY" id="YZj-Df-Nie"/>
                                                         <constraint firstAttribute="bottom" secondItem="CIl-gQ-AMN" secondAttribute="bottom" id="Yfk-RO-ahk"/>
-                                                        <constraint firstAttribute="trailing" secondItem="sNk-WC-w1n" secondAttribute="trailing" id="d2m-Xc-ZrJ"/>
+                                                        <constraint firstItem="Dn4-iv-dFR" firstAttribute="centerX" secondItem="BqI-ue-yQl" secondAttribute="centerX" id="fGL-2h-LdY"/>
+                                                        <constraint firstItem="sNk-WC-w1n" firstAttribute="centerY" secondItem="BqI-ue-yQl" secondAttribute="centerY" id="inq-2Z-UNF"/>
+                                                        <constraint firstItem="sNk-WC-w1n" firstAttribute="width" secondItem="BqI-ue-yQl" secondAttribute="width" id="kfA-7K-ca8"/>
+                                                        <constraint firstItem="sNk-WC-w1n" firstAttribute="height" secondItem="BqI-ue-yQl" secondAttribute="height" multiplier="0.891429" id="nOD-dH-lq7"/>
                                                         <constraint firstAttribute="trailing" secondItem="CIl-gQ-AMN" secondAttribute="trailing" id="q1w-MZ-tB9"/>
-                                                        <constraint firstItem="CIl-gQ-AMN" firstAttribute="top" secondItem="sNk-WC-w1n" secondAttribute="bottom" constant="2" id="uLY-IC-NRk"/>
                                                     </constraints>
                                                 </collectionViewCellContentView>
                                                 <size key="customSize" width="175" height="175"/>
                                                 <connections>
                                                     <outlet property="collectionImage" destination="sNk-WC-w1n" id="B1h-kb-TN7"/>
                                                     <outlet property="collectionLabel" destination="CIl-gQ-AMN" id="2C5-9t-Sk3"/>
+                                                    <outlet property="lockIconImageView" destination="Dn4-iv-dFR" id="o38-jg-VmH"/>
                                                 </connections>
                                             </collectionViewCell>
                                         </cells>
@@ -185,10 +197,11 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mCS-jU-lAe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="970" y="-674"/>
+            <point key="canvasLocation" x="969.56521739130437" y="-674.33035714285711"/>
         </scene>
     </scenes>
     <resources>
         <image name="13PAIRING-articleLarge" width="600" height="400"/>
+        <image name="lock.circle" catalog="system" width="64" height="60"/>
     </resources>
 </document>

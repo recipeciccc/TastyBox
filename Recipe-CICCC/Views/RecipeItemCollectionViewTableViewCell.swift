@@ -21,31 +21,6 @@ class RecipeItemCollectionViewTableViewCell: UITableViewCell {
         }
     }
     
-    //    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    //        return 15
-    //    }
-    
-    
-    //    func setCollectionViewDataSourceDelegate(dataSourceDelegate: UICollectionViewDataSource & UICollectionViewDelegate, forRow row: Int) {
-    //        collectionView.delegate = dataSourceDelegate
-    //        collectionView.dataSource = dataSourceDelegate
-    //        self.collectionView.register(UINib.init(nibName: "CollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "recipeItem")
-    //
-    //    }
-    
-    
-    
-    //    var collectionViewOffset: CGFloat {
-    //        get {collectionViewID
-    //            return collectionView.contentOffset.x
-    //        }
-    //
-    //        set {
-    //            collectionView.contentOffset.x = newValue
-    //        }
-    
-    
-    
 }
 
 
@@ -58,8 +33,10 @@ extension RecipeItemCollectionViewTableViewCell: UICollectionViewDataSource, UIC
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = (collectionView.dequeueReusableCell(withReuseIdentifier: "creatorRecipes", for: indexPath) as? RecipeCreatorPostedCollectionViewCell)!
         
-        cell.imageView!.tag = indexPath.row
-        cell.imageView!.image = recipeImage[indexPath.row]
+        cell.recipeImageView!.tag = indexPath.row
+        cell.recipeImageView!.image = recipeImage[indexPath.row]
+        
+        cell.lockImageView.isHidden = recipeData[indexPath.row].isVIPRecipe! ? false : true
         
         return cell
     }
@@ -67,10 +44,6 @@ extension RecipeItemCollectionViewTableViewCell: UICollectionViewDataSource, UIC
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
-    
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-//        return 1
-//    }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 1

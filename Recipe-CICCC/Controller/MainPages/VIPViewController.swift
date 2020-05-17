@@ -9,56 +9,70 @@
 import UIKit
 
 class VIPViewController: UIViewController {
-
+    
     @IBOutlet weak var collectionview: RecipeCollectionView!
     
     let dataManager = VIPDataManager()
-     var mainViewController: MainPageViewController?
-     var pageViewControllerDataSource: UIPageViewControllerDataSource?
+    var mainViewController: MainPageViewController?
+    var pageViewControllerDataSource: UIPageViewControllerDataSource?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        collectionview.width = UIScreen.main.bounds.size.width
-//        collectionview.height = UIScreen.main.bounds.size.height
-        
-        
+    
         dataManager.delegate = self
         collectionview.delegate = self
         
         dataManager.isVIP()
         dataManager.findFollowing()
-
+        
+        let width = collectionview.widthAnchor.constraint(equalToConstant: self.view.frame.size.width)
+        let height =  collectionview.heightAnchor.constraint(equalToConstant: self.view.frame.size.height)
+    
+        width.isActive = true
+        height.isActive = true
+        
     }
-
+    
 }
 
 extension VIPViewController : VIPDataManagerDelegate {
     func isVIP(isVIP: Bool, isMessageWillShow: Bool) {
         collectionview.isVIP = isVIP
-       
+        
         if !isVIP && isMessageWillShow != true {
+            
             let alertController = UIAlertController(title: "Register VIP member", message: "Those recipes in this page is VIP only. You need to be VIP member.", preferredStyle: .alert)
-                                      
-            let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-            let noLongerShowAction = UIAlertAction(title: "Yes, No longer show it.", style: .default, handler: { action in
-                self.dataManager.nolongerShowMessage()
-            })
             let registerAction = UIAlertAction(title: "Register", style: .default, handler: { action in
                 let vc = self.storyboard?.instantiateViewController(identifier: "registerVIP")
-//                guard self.navigationController?.topViewController == self else { return }
+                //                guard self.navigationController?.topViewController == self else { return }
                 self.navigationController?.pushViewController(vc!, animated: true)
             })
             
-           
-            alertController.addAction(noLongerShowAction)
+            let defaultAction = UIAlertAction(title: "No, Thanks", style: .default, handler: { action in
+                
+                let alertController = UIAlertController(title: "No longer show this message?", message: nil, preferredStyle: .alert)
+                
+              
+                let noLongerShowAction = UIAlertAction(title: "Don't show", style: .default, handler: { action in
+                    self.dataManager.nolongerShowMessage()
+                })
+                
+                let neverMindAction = UIAlertAction(title: "Never mind", style: .cancel, handler: nil)
+                
+                alertController.addAction(noLongerShowAction)
+                alertController.addAction(neverMindAction)
+                
+                
+                self.present(alertController, animated: true, completion: nil)
+            })
+            
             alertController.addAction(defaultAction)
             alertController.addAction(registerAction)
-                        
+            
             navigationController!.present(alertController, animated: true, completion: nil)
         }
     }
-  
+    
     func reloadCreators(data: [User]) {
         collectionview.users = data
     }
@@ -79,37 +93,34 @@ extension VIPViewController :RecipeCollectionViewDelegate {
         
         if recipe == nil {
             let alertController = UIAlertController(title: "Register VIP member", message: "This recipe is VIP only. You need to be VIP member.", preferredStyle: .alert)
-                           
+            
             let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
             let registerAction = UIAlertAction(title: "Sign up VIP membership", style: .default, handler: { action in
                 let registerVC = self.storyboard?.instantiateViewController(identifier: "registerVIP") as! ExplainationVIPViewController
-
-//                guard self.navigationController?.topViewController == self else { return }
+                
                 self.navigationController?.pushViewController(registerVC, animated: true)
             })
             
-             alertController.addAction(registerAction)
+            alertController.addAction(registerAction)
             alertController.addAction(defaultAction)
-             
+            
             navigationController!.present(alertController, animated: true, completion: nil)
         } else {
-        
-        let storyboard = UIStoryboard(name: "RecipeDetail", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "detailvc") as! RecipeDetailViewController
-        
-        vc.recipe = recipe
-        vc.mainPhoto = image!
-        vc.creator = creator
-        
-//        guard self.navigationController?.topViewController == self else { return }
-
-        navigationController?.pushViewController(vc, animated: true)
-    }
+            
+            let storyboard = UIStoryboard(name: "RecipeDetail", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "detailvc") as! RecipeDetailViewController
+            
+            vc.recipe = recipe
+            vc.mainPhoto = image!
+            vc.creator = creator
+                    
+            navigationController?.pushViewController(vc, animated: true)
+        }
     }
     
     // they and self.ispaging = false in pageviewcontroller prevent from paging when collection view is scrollings
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-          
+        
         mainViewController = self.parent as? MainPageViewController
         
         if  mainViewController!.dataSource == nil {
@@ -121,7 +132,7 @@ extension VIPViewController :RecipeCollectionViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         mainViewController = self.parent as? MainPageViewController
         pageViewControllerDataSource = mainViewController!.dataSource
-                
+        
         mainViewController!.dataSource = nil
         mainViewController?.isPaging = false
     }

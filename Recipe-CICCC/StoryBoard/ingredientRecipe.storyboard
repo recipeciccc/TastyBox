@@ -1,23 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Aua-h9-SUW">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Aua-h9-SUW">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--RecipeDetail-->
-        <scene sceneID="ey6-wV-h4L">
-            <objects>
-                <viewControllerPlaceholder storyboardName="RecipeDetail" id="fuN-ZP-66L" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="rU3-B7-VQy"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ydX-xL-Yv8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-3076" y="-815"/>
-        </scene>
         <!--Ingredients View Controller-->
         <scene sceneID="JGT-OA-ma6">
             <objects>
@@ -53,6 +43,10 @@
                                                     <color key="textColor" systemColor="systemBrownColor" red="0.63529411759999999" green="0.51764705879999995" blue="0.36862745099999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="lock.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="fGh-SD-41s">
+                                                    <rect key="frame" x="77.5" y="70.5" width="20" height="19"/>
+                                                    <color key="tintColor" white="1" alpha="0.60344373080000002" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </imageView>
                                             </subviews>
                                             <color key="backgroundColor" red="0.99759250880000006" green="0.98715764279999996" blue="0.79212433100000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             <constraints>
@@ -61,6 +55,8 @@
                                                 <constraint firstAttribute="trailing" secondItem="OCr-Ed-8Kr" secondAttribute="trailing" id="N8e-XT-sC0"/>
                                                 <constraint firstAttribute="bottom" secondItem="OCr-Ed-8Kr" secondAttribute="bottom" id="Xvi-ot-gDN"/>
                                                 <constraint firstAttribute="trailing" secondItem="cZQ-GS-aeu" secondAttribute="trailing" id="au3-Hg-goV"/>
+                                                <constraint firstItem="fGh-SD-41s" firstAttribute="centerX" secondItem="9j3-UP-VeL" secondAttribute="centerX" id="bKw-5O-KBl"/>
+                                                <constraint firstItem="fGh-SD-41s" firstAttribute="centerY" secondItem="9j3-UP-VeL" secondAttribute="centerY" id="iP8-iX-rA9"/>
                                                 <constraint firstItem="cZQ-GS-aeu" firstAttribute="top" secondItem="9j3-UP-VeL" secondAttribute="top" id="kPX-NS-ejQ"/>
                                                 <constraint firstItem="OCr-Ed-8Kr" firstAttribute="leading" secondItem="9j3-UP-VeL" secondAttribute="leading" id="yNB-S8-kD8"/>
                                             </constraints>
@@ -70,6 +66,7 @@
                                         <connections>
                                             <outlet property="ingredientRecipeImage" destination="cZQ-GS-aeu" id="vdt-Ux-QvD"/>
                                             <outlet property="ingredientRecipeName" destination="OCr-Ed-8Kr" id="fF7-Zk-gUl"/>
+                                            <outlet property="lockImageView" destination="fGh-SD-41s" id="PlI-af-Igi"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -149,4 +146,7 @@
             <point key="canvasLocation" x="-2504.8000000000002" y="-649.92503748125944"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="lock.circle" catalog="system" width="64" height="60"/>
+    </resources>
 </document>

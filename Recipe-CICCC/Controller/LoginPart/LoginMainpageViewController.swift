@@ -52,14 +52,18 @@ class LoginMainpageViewController: UIViewController {
         
         self.view.addSubview(view)
         
-        if Auth.auth().currentUser != nil {
+        if Auth.auth().currentUser != nil && Auth.auth().currentUser?.uid != nil {
             // User is signed in.
             
             let Storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
             let vc = Storyboard.instantiateViewController(withIdentifier: "Discovery")
             
             guard self.navigationController?.topViewController == self else { return }
-            self.navigationController?.pushViewController(vc, animated: true)
+            
+            vc.modalTransitionStyle = .crossDissolve
+            vc.modalPresentationStyle = .overFullScreen
+            self.navigationController?.pushViewController(vc, animated: false)
+    
             
         } else {
             if let viewWithTag = self.view.viewWithTag(100) {
@@ -459,6 +463,8 @@ extension LoginMainpageViewController: ASAuthorizationControllerDelegate {
                                     self.vc.isFirst = true
                                     
                                     guard self.navigationController?.topViewController == self else { return }
+                                    
+                                    
                                     self.navigationController?.pushViewController(self.vc, animated: true)
                                     
                                 } else {
@@ -507,19 +513,14 @@ extension LoginMainpageViewController: GIDSignInDelegate {
         authorizationButton.layer.cornerRadius = 10
         let superViewCenterYAnchor = self.view.centerXAnchor
         let width = authorizationButton.frame.width
-//        guard let superViewLeadingAnchor = self.loginButtonStackView?.leadingAnchor else { return }
-//        guard let superViewTrailingAnchor = self.loginButtonStackView?.trailingAnchor else { return }
         
         self.loginButtonStackView.addArrangedSubview(authorizationButton)
         let centerYAnchor = authorizationButton.centerXAnchor.constraint(equalTo: superViewCenterYAnchor, constant: 0.0)
         let widthAnchor =  authorizationButton.widthAnchor.constraint(equalToConstant: width)
-//        let leadingAnchor = authorizationButton.leadingAnchor.constraint(greaterThanOrEqualTo: superViewLeadingAnchor, constant: 10.0)
-//        let trailingAnchor = authorizationButton.leadingAnchor.constraint(greaterThanOrEqualTo: superViewTrailingAnchor, constant: 10.0)
-        
+
         centerYAnchor.isActive = true
         widthAnchor.isActive = true
-//        leadingAnchor.isActive = true
-//        trailingAnchor.isActive = true
+
     }
     
     @objc func googleLogin() {

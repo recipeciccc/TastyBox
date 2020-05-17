@@ -11,8 +11,8 @@
             <connections>
                 <outlet property="R_collectionView" destination="ZT2-L1-vUR" id="Gn5-ld-Grn"/>
                 <outlet property="R_view" destination="r1O-MZ-UQv" id="8qG-RF-wh5"/>
-                <outlet property="height" destination="O9q-FC-OG6" id="yFw-oY-WEI"/>
-                <outlet property="width" destination="dp6-Lr-XQl" id="755-rN-WwT"/>
+                <outlet property="height" destination="O9q-FC-OG6" id="53k-2S-NKp"/>
+                <outlet property="width" destination="dp6-Lr-XQl" id="ad1-qU-e7N"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>

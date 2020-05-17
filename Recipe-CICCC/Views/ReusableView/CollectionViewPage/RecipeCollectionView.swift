@@ -17,8 +17,14 @@ class RecipeCollectionView: UIView {
     
     @IBOutlet var R_view: UIView!
     @IBOutlet weak var R_collectionView: UICollectionView!
-    @IBOutlet weak var width: NSLayoutConstraint!
+    
     @IBOutlet weak var height: NSLayoutConstraint!
+    @IBOutlet weak var width: NSLayoutConstraint!
+    
+//    @IBOutlet weak var width: NSLayoutConstraint!
+//    @IBOutlet weak var height: NSLayoutConstraint!
+//    var width: NSLayoutConstraint?
+//    var height: NSLayoutConstraint?
     
     weak var delegate: RecipeCollectionViewDelegate?
     
@@ -68,7 +74,7 @@ class RecipeCollectionView: UIView {
         R_collectionView.dataSource = self
         R_collectionView.delegate = self
         width.constant = UIScreen.main.bounds.size.width
-        height.constant = UIScreen.main.bounds.size.height*0.8
+        height.constant = UIScreen.main.bounds.size.height
     }
 }
 

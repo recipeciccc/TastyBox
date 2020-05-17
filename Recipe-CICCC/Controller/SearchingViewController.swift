@@ -60,7 +60,7 @@ class SearchingViewController: UIViewController {
     var searchedResults:[User] = [] {
         didSet {
             creatorVC.searchedCreators = searchedResults
-//            creatroVC.tableView.reloadData()
+            //            creatroVC.tableView.reloadData()
         }
     }
     
@@ -74,8 +74,8 @@ class SearchingViewController: UIViewController {
         didSet {
             ingredientVC.ingredientArray = searchedIngredient
             if segmentControl.selectedSegmentIndex == 0 {
-            pageController.setViewControllers([ingredientVC], direction: .forward, animated: false, completion: nil)
-        }
+                pageController.setViewControllers([ingredientVC], direction: .forward, animated: false, completion: nil)
+            }
             
         }
     }
@@ -83,15 +83,15 @@ class SearchingViewController: UIViewController {
     var searchedIngredientRecipe:[RecipeDetail] = [] {
         didSet {
             ingredientVC.searchedRecipes = searchedIngredientRecipe
-//            ingredientVC.loadView()
-//            ingredientVC.viewDidLoad()
+            //            ingredientVC.loadView()
+            //            ingredientVC.viewDidLoad()
         }
     }
     
     var searchedGenre:[String] = [] {
         didSet {
             genreVC.genresArray = searchedGenre
-         }
+        }
     }
     
     override func viewDidLoad() {
@@ -102,7 +102,7 @@ class SearchingViewController: UIViewController {
         
         pageController = self.children[0] as! SearchingPageViewController
         pageController.dataSource = self
-       
+        
         
         VCs =  [ingredientVC, genreVC, creatorVC]
         
@@ -116,6 +116,11 @@ class SearchingViewController: UIViewController {
         SearchBar.placeholder = "Search Recipe"
         let RightNavBarButton = UIBarButtonItem(customView:SearchBar)
         self.navigationItem.rightBarButtonItem = RightNavBarButton
+        
+        // tapによるページめくりを担当するインスタンスを取得
+        let tapGestureRecognizer = self.pageController.gestureRecognizers.filter{ $0 is UITapGestureRecognizer }.first as! UITapGestureRecognizer
+        
+        tapGestureRecognizer.isEnabled = false
     }
     
     fileprivate func setSegmentControl() {
@@ -142,7 +147,7 @@ class SearchingViewController: UIViewController {
             else {
                 direction = .reverse
             }
-  
+            
             switch segmentControl.selectedSegmentIndex {
             case 0:
                 
@@ -264,7 +269,7 @@ extension SearchingViewController:UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
-//        let pageController = self.children[0] as! SearchingPageViewController
+        //        let pageController = self.children[0] as! SearchingPageViewController
         searchingWord = searchBar.text!
         
         if searchingWord == "" {
@@ -278,7 +283,7 @@ extension SearchingViewController:UISearchBarDelegate {
             genreVC.genresArray.removeAll()
             
             if ingredientVC.tableView != nil {
-//                creatorVC.tableView.reloadData()
+                //                creatorVC.tableView.reloadData()
                 ingredientVC.tableView.reloadData()
             }
             

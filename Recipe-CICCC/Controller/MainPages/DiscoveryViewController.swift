@@ -135,12 +135,7 @@ class DiscoveryViewController: UIViewController {
     
     
     func initialContentView(){
-        //        self.SubscribedContainerView.isHidden = true
-        //        self.MonthlyContainerView.isHidden = true
-        //        self.PopularContainerView.isHidden = true
-        //        self.IngredientsContainerView.isHidden = true
-        //        self.EditorContainerView.isHidden = true
-        //        self.VIPContainerVIew.isHidden = true
+        
         self.PopularContainerView.isHidden = false
         
     }

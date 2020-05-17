@@ -12,7 +12,7 @@ import FirebaseFirestore
 
 class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    @IBOutlet var profileTableVIew: UITableView!
+    @IBOutlet var profileTableView: UITableView!
     
     let dataManager = MyPageDataManager()
     
@@ -33,9 +33,9 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         super.viewDidLoad()
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.orange ]
-        profileTableVIew.delegate = self
-        profileTableVIew.dataSource = self
-        profileTableVIew.allowsSelection = false
+        profileTableView.delegate = self
+        profileTableView.dataSource = self
+        profileTableView.allowsSelection = false
         
         dataManager.delegate = self
         dataManager.getUserDetail(id: uid!)
@@ -82,6 +82,15 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
         
     }
+    
+    
+    
+    @IBAction func postedButtonAction(_ sender: Any) {
+        
+        self.profileTableView.scrollToRow(at: IndexPath(row: 0, section: 2), at: .top, animated: true)
+    }
+    
+    
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 3 //4
@@ -139,8 +148,7 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
             return 135
         case 1:
             return 60
-            //        case 2:
-        //            return 38
+            
         case 2:
             return self.view.frame.height - ((self.view.frame.origin.y) * -1)
         //return UITableView.automaticDimension
@@ -171,7 +179,7 @@ extension MyPageViewController: MyPageDataManagerDelegate{
     func passSaveingRecipesNumber(number: Int) {
         self.numberSavedRecipes = 0
         self.numberSavedRecipes = number
-        self.profileTableVIew.reloadData()
+        self.profileTableView.reloadData()
     }
     
     
@@ -185,7 +193,7 @@ extension MyPageViewController: MyPageDataManagerDelegate{
             dataManager.getImage(uid: uid!, rid: ridList)
             
             if imageList.count == 0{
-                profileTableVIew.reloadData()
+                profileTableView.reloadData()
             }
         }
     }
@@ -193,17 +201,22 @@ extension MyPageViewController: MyPageDataManagerDelegate{
     //MARK: initialized ImageList
     func reloadImg(images:[UIImage]){
         imageList = images
-        self.profileTableVIew.reloadData()
+        
+        UIView.transition(with:self.profileTableView, duration: 0.3, options: [UIView.AnimationOptions.transitionCrossDissolve], animations: {
+            self.profileTableView.reloadData()
+            
+        }, completion: nil)
+        
     }
     
     func assignUserImage(image: UIImage) {
         self.userImage = image
-        self.profileTableVIew.reloadData()
+        self.profileTableView.reloadData()
     }
     
     func gotUserData(user: User) {
         self.user = user
-        self.profileTableVIew.reloadData()
+        self.profileTableView.reloadData()
     }
     // MARK: initialized recipe id and image id
     
@@ -231,7 +244,7 @@ extension MyPageViewController: MyPageDataManagerDelegate{
     
     func setAccountImage(image: UIImage) {
         self.userImage = image
-        self.profileTableVIew.reloadData()
+        self.profileTableView.reloadData()
     }
 }
 //

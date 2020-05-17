@@ -20,8 +20,8 @@ class PopularRecipeViewController: UIViewController {
     let db = Firestore.firestore()
     
     let dataManager = popularDataManager()
-     var mainViewController: MainPageViewController?
-     var pageViewControllerDataSource: UIPageViewControllerDataSource?
+    var mainViewController: MainPageViewController?
+    var pageViewControllerDataSource: UIPageViewControllerDataSource?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,11 +34,9 @@ class PopularRecipeViewController: UIViewController {
         tableView.dataSource = self as UITableViewDataSource
         
         tableView.separatorStyle = .none
-       
+        
         
     }
-    
-    
     
     // MARK: - Navigation
     
@@ -49,7 +47,24 @@ class PopularRecipeViewController: UIViewController {
         
     }
     
-    
+    func isVIPAction(superView: UIView, isVIP: Bool) {
+        
+        if isVIP == true {
+            let imageView = UIImageView(image: UIImage(systemName: "lock.circle"))
+            imageView.isOpaque = false
+            imageView.tintColor = UIColor(displayP3Red: 1.0, green: 1.0, blue: 1.0, alpha: 0.5)
+            
+            
+            if superView.subviews.count == 3 {
+                superView.addSubview(imageView)
+                
+                imageView.frame.size.width = superView.frame.size.width / 3 * 2
+                imageView.frame.size.height = superView.frame.size.width / 3 * 2
+                
+                imageView.center = superView.center
+            }
+        }
+    }
 }
 
 
@@ -73,22 +88,20 @@ extension PopularRecipeViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
+        guard !recipes.isEmpty else {
+            return UITableViewCell()
+        }
         
         if indexPath.section == 0 {
-            
-            if recipes.isEmpty {
-                return UITableViewCell()
-            }
-                
-            else {
                 
                 let cell = (tableView.dequeueReusableCell(withIdentifier: "medal recipe", for: indexPath) as? Number123TableViewCell)!
                 cell.selectionStyle = .none
-                
+            
                 cell.numberLikeLabel.text = "\(recipes[indexPath.row].like)"
                 cell.titleLabel.text = recipes[indexPath.row].title
                 cell.recipeImageView.image = images[indexPath.row]
-               
+               cell.lockImageView.isHidden = recipes[indexPath.row].isVIPRecipe! ? false : true
+
                 
                 switch indexPath.row {
                 case 0:
@@ -103,34 +116,25 @@ extension PopularRecipeViewController: UITableViewDataSource {
                 default:
                     break
                 }
-                
-                return cell
-            }
+
+            return cell
         }
-        
-        
-        if recipes.isEmpty { return UITableViewCell() }
         
         let cell = (tableView.dequeueReusableCell(withIdentifier: "under no.4", for: indexPath) as? UnderNo4TableViewCell)!
         
         cell.selectionStyle = .none
+//        isVIPAction(superView: cell.contentView, isVIP: recipes[indexPath.row + 3].isVIPRecipe ?? false)
         
         cell.rankingLabel.text = "No. \(indexPath.row + 4)"
         cell.numLikeLabel.text = "\(recipes[indexPath.row + 3].like)"
         cell.titleLabel.text = recipes[indexPath.row + 3].title
         cell.recipeImageView.image = images[indexPath.row + 3]
         
+        cell.lockImageView.isHidden = recipes[indexPath.row + 3].isVIPRecipe! ? false : true
+
         return cell
     }
     
-//    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-//         return 466.0
-//    }
-//
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return 466.0
-//    }
-//
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
 
@@ -148,8 +152,6 @@ extension PopularRecipeViewController: UITableViewDataSource {
         }
         
         tableView.deselectRow(at: indexPath, animated: true)
-
-//        guard self.navigationController?.topViewController == self else { return }
         navigationController?.pushViewController(recipeVC, animated: true)
     }
     
@@ -163,7 +165,6 @@ extension PopularRecipeViewController: getDataFromFirebaseDelegate {
     }
     
     func gotData(recipes: [RecipeDetail]) {
-//        self.recipes = recipes.sorted { $0.like > $1.like }
         
         if recipes.count == 10 {
             self.recipes = recipes

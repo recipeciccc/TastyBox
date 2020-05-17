@@ -99,6 +99,9 @@
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="OmR-z8-GgN">
                                                             <rect key="frame" x="0.0" y="0.0" width="46" height="30"/>
                                                             <state key="normal" title="Button"/>
+                                                            <connections>
+                                                                <action selector="postedButtonAction:" destination="jEb-wp-ELK" eventType="touchUpInside" id="9di-Yv-DJ5"/>
+                                                            </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="HkU-oc-Udd">
                                                             <rect key="frame" x="76" y="0.0" width="46" height="30"/>
@@ -148,7 +151,7 @@
                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="0ZP-1U-cGn">
                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="560"/>
                                                     <color key="backgroundColor" red="1" green="0.57647058819999997" blue="0.0" alpha="0.10000000000000001" colorSpace="custom" customColorSpace="displayP3"/>
-                                                    <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="6PB-lI-g9W">
+                                                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="6PB-lI-g9W">
                                                         <size key="itemSize" width="150" height="150"/>
                                                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -162,22 +165,20 @@
                                                                 <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                 <subviews>
-                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="2018_Sweet-Sallty-Snack-Mix_5817_600x600" translatesAutoresizingMaskIntoConstraints="NO" id="nne-fz-3rg">
+                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="BdF-QN-Gz4">
                                                                         <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
-                                                                        <constraints>
-                                                                            <constraint firstAttribute="width" constant="150" id="He0-qP-MDc"/>
-                                                                            <constraint firstAttribute="height" constant="150" id="d1J-SU-w0t"/>
-                                                                        </constraints>
                                                                     </imageView>
                                                                 </subviews>
                                                                 <constraints>
-                                                                    <constraint firstItem="nne-fz-3rg" firstAttribute="centerX" secondItem="B8k-bZ-S23" secondAttribute="centerX" id="g28-32-ozM"/>
-                                                                    <constraint firstItem="nne-fz-3rg" firstAttribute="centerY" secondItem="B8k-bZ-S23" secondAttribute="centerY" id="ygS-xO-oCv"/>
+                                                                    <constraint firstItem="BdF-QN-Gz4" firstAttribute="centerY" secondItem="B8k-bZ-S23" secondAttribute="centerY" id="BED-L1-pTH"/>
+                                                                    <constraint firstItem="BdF-QN-Gz4" firstAttribute="centerX" secondItem="B8k-bZ-S23" secondAttribute="centerX" id="XyX-nX-cOZ"/>
+                                                                    <constraint firstItem="BdF-QN-Gz4" firstAttribute="width" secondItem="B8k-bZ-S23" secondAttribute="width" id="dfv-Th-Iqi"/>
+                                                                    <constraint firstItem="BdF-QN-Gz4" firstAttribute="height" secondItem="B8k-bZ-S23" secondAttribute="height" id="kTw-mH-Zny"/>
                                                                 </constraints>
                                                             </collectionViewCellContentView>
                                                             <size key="customSize" width="150" height="150"/>
                                                             <connections>
-                                                                <outlet property="imageView" destination="nne-fz-3rg" id="hNd-w8-G5F"/>
+                                                                <outlet property="imageView" destination="BdF-QN-Gz4" id="0Rv-4h-DyB"/>
                                                             </connections>
                                                         </collectionViewCell>
                                                     </cells>
@@ -202,7 +203,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="4jw-dY-cMi"/>
                     <connections>
-                        <outlet property="profileTableVIew" destination="fyW-DW-Eh2" id="GdS-st-xJT"/>
+                        <outlet property="profileTableView" destination="fyW-DW-Eh2" id="GdS-st-xJT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tBj-Pl-kXG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -226,7 +227,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="2018_Sweet-Sallty-Snack-Mix_5817_600x600" width="600" height="600"/>
         <image name="imageFile" width="64" height="64"/>
     </resources>
     <inferredMetricsTieBreakers>

@@ -67,7 +67,7 @@ class GenreSelectViewController: UIViewController {
             dataManager.labelingImage(image: image!)
             
             uiView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height:  self.view.frame.size.height))
-            uiView.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 0.5)
+            uiView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
             uiView.tag = 100
             indicator.transform = CGAffineTransform(scaleX: 2, y: 2)
             

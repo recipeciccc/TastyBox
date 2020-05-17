@@ -16,7 +16,7 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="13PAIRING-articleLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Idl-0t-Sdh" userLabel="ingredientRecipeImage">
-                        <rect key="frame" x="0.0" y="0.0" width="170" height="139"/>
+                        <rect key="frame" x="0.0" y="0.0" width="170" height="141"/>
                     </imageView>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lock.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="7cV-ac-A8W">
                         <rect key="frame" x="55" y="49.5" width="60" height="59"/>
@@ -36,14 +36,14 @@
                 </subviews>
             </view>
             <constraints>
-                <constraint firstItem="Idl-0t-Sdh" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="8Xc-Ae-soY"/>
+                <constraint firstItem="Idl-0t-Sdh" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="4k5-10-udo"/>
+                <constraint firstItem="fFt-0f-d4u" firstAttribute="top" secondItem="Idl-0t-Sdh" secondAttribute="bottom" id="6Rf-ww-Hzn"/>
                 <constraint firstItem="7cV-ac-A8W" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="ETp-zN-CCH"/>
-                <constraint firstAttribute="trailing" secondItem="Idl-0t-Sdh" secondAttribute="trailing" id="IFE-yR-3Q8"/>
                 <constraint firstItem="7cV-ac-A8W" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="Jc6-5g-9tE"/>
                 <constraint firstAttribute="trailing" secondItem="fFt-0f-d4u" secondAttribute="trailing" id="MYv-0u-aMo"/>
-                <constraint firstItem="Idl-0t-Sdh" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="XEN-97-RMA"/>
+                <constraint firstAttribute="trailing" secondItem="Idl-0t-Sdh" secondAttribute="trailing" id="RYW-zN-KjS"/>
+                <constraint firstItem="Idl-0t-Sdh" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="bOO-DK-KpL"/>
                 <constraint firstItem="fFt-0f-d4u" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="jeD-G0-s1c"/>
-                <constraint firstItem="fFt-0f-d4u" firstAttribute="top" secondItem="Idl-0t-Sdh" secondAttribute="bottom" constant="2" id="ppC-ti-7Hc"/>
                 <constraint firstAttribute="bottom" secondItem="fFt-0f-d4u" secondAttribute="bottom" id="q9t-cr-2KL"/>
             </constraints>
             <size key="customSize" width="180" height="156"/>

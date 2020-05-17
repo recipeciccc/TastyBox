@@ -46,6 +46,12 @@ class RecipeDetailViewController: UIViewController {
         userDataManager.delegate = self
         userDataManager.recipeDetailDelegate = self
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        super.viewWillAppear(animated)
+        
         if recipe!.isVIPRecipe! && recipe?.userID != uid {
             userDataManager.checkVIP()
         } else {
@@ -60,9 +66,18 @@ class RecipeDetailViewController: UIViewController {
             userDataManager.getUserDetail(id: recipe?.userID)
             userDataManager.getUserImage(uid: recipe!.userID)
             
-            
         }
         
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+//        if let viewWithTag = self.view.viewWithTag(100) {
+//            viewWithTag.removeFromSuperview()
+//        }else{
+//            print("No!")
+//        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -366,8 +381,19 @@ extension RecipeDetailViewController: recipeDetailDelegate {
             userDataManager.getUserDetail(id: recipe?.userID)
             userDataManager.getUserImage(uid: recipe!.userID)
             
+            
+            if let viewWithTag = self.view.viewWithTag(100) {
+                viewWithTag.removeFromSuperview()
+            }else{
+                print("No!")
+            }
+            
         } else {
-                
+            let view = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
+            view.backgroundColor = #colorLiteral(red: 0.9959775805, green: 0.9961397052, blue: 0.7093081474, alpha: 1)
+            view.tag = 100
+            self.view.addSubview(view)
+            
             let alertController = UIAlertController(title: "Register VIP member", message: "This recipe is VIP only. You need to be VIP member.", preferredStyle: .alert)
             
             let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: { action in

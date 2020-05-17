@@ -15,6 +15,7 @@ class RecipeViewControllerDataManager {
     weak var delegate: RecipeViewControllerDelegate?
     
     var user: User?
+    var creators:[User] = []
     
     func Data(queryRef:Query) {
         var recipeList = [RecipeDetail]()
@@ -134,7 +135,7 @@ class RecipeViewControllerDataManager {
         
     }
     
-    func getUserDetail(id: String?) {
+    func getUserDetail(id: String?, isLast: Bool) {
         
         var uid: String = ""
         
@@ -151,8 +152,9 @@ class RecipeViewControllerDataManager {
             }
             else {
                 
+                
                 if let data = querysnapshot!.data() {
-                    
+                        
                     print("data count: \(data.count)")
                     
                     
@@ -163,7 +165,11 @@ class RecipeViewControllerDataManager {
                     guard let isVIP = data["isVIP"] as? Bool else { return }
                                        
                     self.user = User(userID: userID, name: name, cuisineType: cuisineType, familySize: familySize, isVIP: isVIP)
-                    self.delegate?.gotUserData(user: self.user!)
+                    self.creators.append(self.user!)
+                    
+                    if isLast {
+                        self.delegate?.gotUserData(users: self.creators)
+                    }
                     
                 }
             }
@@ -176,5 +182,5 @@ protocol RecipeViewControllerDelegate: class {
     func reloadRecipe(data:[RecipeDetail])
     //    func reloadGenres(data: [String], recipeID: String)
     func reloadImg(image: UIImage, index: Int)
-    func gotUserData(user: User)
+    func gotUserData(users: [User])
 }
