@@ -10,6 +10,7 @@ import UIKit
 import Firebase
 import FirebaseAuth
 import FBSDKLoginKit
+import Crashlytics
 
 //protocol MenuViewControllerDelegate: class {
 //    func menuViewController(viewController: DiscoveryViewController, at index: Int)
@@ -49,7 +50,6 @@ class DiscoveryViewController: UIViewController {
         print("Toggle side Menu")
         
         
-        
         if sideMenuOpen == false {
             // Init a UIVisualEffectView which going to do the blur for us
             let blurView = UIVisualEffectView()
@@ -57,7 +57,7 @@ class DiscoveryViewController: UIViewController {
             blurView.frame = view.frame
             // Choose the style of the blur effect to regular.
             // You can choose dark, light, or extraLight if you wants
-            blurView.effect = UIBlurEffect(style: .systemMaterialDark)
+            blurView.effect = UIBlurEffect(style: .dark)
             // Now add the blur view to the main view
             blurView.tag = 100
             

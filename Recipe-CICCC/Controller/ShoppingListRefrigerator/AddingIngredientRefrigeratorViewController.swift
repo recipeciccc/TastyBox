@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Crashlytics
 
 protocol AddingIngredientRefrigeratorViewControllerDelegate: class {
     func editIngredient(controller: AddingIngredientRefrigeratorViewController, name: String, amount: String)

@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import Crashlytics
 
 protocol SearchingViewControllerDelegate: class {
     func segmentSetted(index:Int)

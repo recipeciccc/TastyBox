@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Crashlytics
 
 protocol GenreSelectViewControllerDelegate: class {
     func assignGenres(genres: [String], imagesLabels: [String], imagesLabelsSelected: [String], isVIP: Bool)

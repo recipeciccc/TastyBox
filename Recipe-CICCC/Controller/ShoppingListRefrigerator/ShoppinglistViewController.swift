@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import Crashlytics
 
 
 class ShoppinglistViewController: UIViewController {

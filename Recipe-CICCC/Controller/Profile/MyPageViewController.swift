@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import FirebaseFirestore
+import Crashlytics
 
 class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     

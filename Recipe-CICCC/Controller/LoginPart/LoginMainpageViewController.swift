@@ -12,6 +12,7 @@ import FBSDKLoginKit
 import GoogleSignIn
 import AuthenticationServices
 import CryptoKit
+import Crashlytics
 
 class LoginMainpageViewController: UIViewController {
     

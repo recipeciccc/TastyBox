@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import FBSDKLoginKit
+import Crashlytics
 
 class AboutViewController: UIViewController {
 

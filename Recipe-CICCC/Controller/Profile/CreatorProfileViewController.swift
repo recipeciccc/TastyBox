@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import MessageUI
+import Crashlytics
 
 class CreatorProfileViewController: UIViewController {
     

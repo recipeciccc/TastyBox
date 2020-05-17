@@ -10,6 +10,7 @@ import UIKit
 import CoreLocation
 import GoogleMaps
 import GooglePlaces
+import Crashlytics
 
 class StoresMapViewController: UIViewController{
     var mapView: GMSMapView!

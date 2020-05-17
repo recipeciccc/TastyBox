@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import Crashlytics
 
 protocol SaveChangeDelegate{
     func reloadVC(text:String,index: Int)

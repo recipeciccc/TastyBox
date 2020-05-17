@@ -10,6 +10,7 @@ import UIKit
 import Firebase
 import Photos
 import RSKImageCropper
+import Crashlytics
 
 class SettingViewController: UIViewController {
     

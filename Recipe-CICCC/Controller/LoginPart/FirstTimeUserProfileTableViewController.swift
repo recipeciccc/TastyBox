@@ -12,6 +12,7 @@ import Firebase
 import Photos
 import RSKImageCropper
 import FBSDKLoginKit
+import Crashlytics
 
 
 class FirstTimeUserProfileTableViewController: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSource {

@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import Crashlytics
 
 protocol FollowingRecipestopPagingDelegate:  class {
     func stopPaging(isPaging: Bool)

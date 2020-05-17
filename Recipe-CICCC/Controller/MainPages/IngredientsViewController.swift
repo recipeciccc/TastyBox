@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import Crashlytics
 
 protocol stopPagingDelegate:  class {
     func stopPaging(isPaging: Bool)
@@ -87,7 +88,7 @@ class IngredientsViewController: UIViewController {
                 // UI updates must be on main thread
                 self?.indicator.startAnimating()
             }
-        }a
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {

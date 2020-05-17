@@ -10,6 +10,7 @@ import UIKit
 import Firebase
 import FirebaseFirestore
 import MessageUI
+import Crashlytics
 
 class RecipeDetailViewController: UIViewController {
     

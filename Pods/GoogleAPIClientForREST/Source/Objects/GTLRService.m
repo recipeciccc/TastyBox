@@ -31,13 +31,25 @@
   #endif
 #endif
 
+#if !defined(GTLR_USE_MODULE_IMPORTS)
+  #if defined(SWIFT_PACKAGE) && SWIFT_PACKAGE
+    #define GTLR_USE_MODULE_IMPORTS 1
+  #else
+    #define GTLR_USE_MODULE_IMPORTS 0
+  #endif
+#endif
+
 #import "GTLRService.h"
 
+#import "GTLRDefines.h"
 #import "GTLRFramework.h"
 #import "GTLRURITemplate.h"
 #import "GTLRUtilities.h"
 
-#if GTLR_USE_FRAMEWORK_IMPORTS
+#if GTLR_USE_MODULE_IMPORTS
+  @import GTMSessionFetcherCore;
+  @import GTMSessionFetcherFull;
+#elif GTLR_USE_FRAMEWORK_IMPORTS
   #import <GTMSessionFetcher/GTMSessionFetcher.h>
   #import <GTMSessionFetcher/GTMSessionFetcherService.h>
   #import <GTMSessionFetcher/GTMMIMEDocument.h>
@@ -51,6 +63,18 @@
 #ifndef STRIP_GTM_FETCH_LOGGING
   #error GTMSessionFetcher headers should have defaulted this if it wasn't already defined.
 #endif
+
+#ifndef GTLR_ASSERT_CURRENT_QUEUE_DEBUG
+  #define GTLR_ASSERT_CURRENT_QUEUE_DEBUG(targetQueue)                  \
+      GTLR_DEBUG_ASSERT(0 == strcmp(GTLR_QUEUE_NAME(targetQueue),       \
+                        GTLR_QUEUE_NAME(DISPATCH_CURRENT_QUEUE_LABEL)), \
+          @"Current queue is %s (expected %s)",                         \
+          GTLR_QUEUE_NAME(DISPATCH_CURRENT_QUEUE_LABEL),                \
+          GTLR_QUEUE_NAME(targetQueue))
+
+  #define GTLR_QUEUE_NAME(queue) \
+      (strlen(dispatch_queue_get_label(queue)) > 0 ? dispatch_queue_get_label(queue) : "unnamed")
+#endif  // GTLR_ASSERT_CURRENT_QUEUE_DEBUG
 
 NSString *const kGTLRServiceErrorDomain = @"com.google.GTLRServiceDomain";
 NSString *const kGTLRErrorObjectDomain = @"com.google.GTLRErrorObjectDomain";
@@ -178,6 +202,7 @@ static NSDictionary *MergeDictionaries(NSDictionary *recessiveDict, NSDictionary
 //
 // We locally declare some methods of the upload fetcher so we
 // do not need to import the header, as some projects may not have it available
+#if !SWIFT_PACKAGE
 @interface GTMSessionUploadFetcher : GTMSessionFetcher
 
 + (instancetype)uploadFetcherWithRequest:(NSURLRequest *)request
@@ -199,6 +224,7 @@ static NSDictionary *MergeDictionaries(NSDictionary *recessiveDict, NSDictionary
 - (void)resumeFetching;
 - (BOOL)isPaused;
 @end
+#endif  // !SWIFT_PACKAGE
 #endif  // GTLR_HAS_SESSION_UPLOAD_FETCHER_IMPORT
 
 
@@ -1568,29 +1594,31 @@ static NSDictionary *MergeDictionaries(NSDictionary *recessiveDict, NSDictionary
     }
 
     // Create JSON from the body.
-    NSError *parseError = nil;
+    // (if there is any, methods like delete return nothing)
     NSMutableDictionary *json;
     if (partBodyData) {
+      NSError *parseError = nil;
       json = [NSJSONSerialization JSONObjectWithData:partBodyData
                                              options:NSJSONReadingMutableContainers
                                                error:&parseError];
-    } else {
-      parseError = [NSError errorWithDomain:kGTLRServiceErrorDomain
-                                       code:GTLRServiceErrorBatchResponseUnexpected
-                                   userInfo:nil];
+      if (!json) {
+        if (!parseError) {
+          // There should be an error, but just incase...
+          parseError = [NSError errorWithDomain:kGTLRServiceErrorDomain
+                                           code:GTLRServiceErrorBatchResponseUnexpected
+                                       userInfo:nil];
+        }
+        // Add our content ID and part body data to the parse error.
+        NSMutableDictionary *userInfo =
+            [NSMutableDictionary dictionaryWithDictionary:parseError.userInfo];
+        [userInfo setValue:mimePartBody forKey:kGTLRServiceErrorBodyDataKey];
+        [userInfo setValue:responseContentID forKey:kGTLRServiceErrorContentIDKey];
+        responsePart.parseError = [NSError errorWithDomain:parseError.domain
+                                                      code:parseError.code
+                                                  userInfo:userInfo];
+      }
     }
     responsePart.JSON = json;
-
-    if (!json) {
-      // Add our content ID and part body data to the parse error.
-      NSMutableDictionary *userInfo =
-          [NSMutableDictionary dictionaryWithDictionary:parseError.userInfo];
-      [userInfo setValue:mimePartBody forKey:kGTLRServiceErrorBodyDataKey];
-      [userInfo setValue:responseContentID forKey:kGTLRServiceErrorContentIDKey];
-      responsePart.parseError = [NSError errorWithDomain:parseError.domain
-                                                    code:parseError.code
-                                                userInfo:userInfo];
-    }
   }
   return responsePart;
 }
