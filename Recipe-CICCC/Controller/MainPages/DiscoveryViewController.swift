@@ -108,6 +108,7 @@ class DiscoveryViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
         self.title = "TastyBox"
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.orange ]
         CreateMenuLabel()
@@ -201,14 +202,6 @@ class DiscoveryViewController: UIViewController {
                    
         }
        
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        //        if segue.identifier == "embedPageViewController" {
-        //            pageControllView = (segue.destination as? MainPageViewController)!
-        //            pageControllView.dataSource = self
-        //            pageControllView.delegate = self  // 追加
-        //        }
     }
     
     

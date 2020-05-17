@@ -25,27 +25,27 @@ class FollowerViewController: UIViewController {
     var parentVC: followerFollowingPageViewController?
     
     var searchingWord : String = "" {
-                didSet {
-                    var count = 0
-                    guard searchingWord != "" else {
-                        return
-                    }
-                    
-                   searchedFollowersImages.removeAll()
-                   searchedFollowers.removeAll()
-                   
-                   for (index, user) in followers.enumerated() {
-                       
-                       if user.name.lowercased().contains(searchingWord.lowercased()) {
-                           searchedFollowers.append(user)
-                           searchedFollowersImages[count] = followersImages[index]
-                            count += 1
-                       }
-                   }
-                  
+        didSet {
+            var count = 0
+            guard searchingWord != "" else {
+                return
+            }
+            
+            searchedFollowersImages.removeAll()
+            searchedFollowers.removeAll()
+            
+            for (index, user) in followers.enumerated() {
+                
+                if user.name.lowercased().contains(searchingWord.lowercased()) {
+                    searchedFollowers.append(user)
+                    searchedFollowersImages[count] = followersImages[index]
+                    count += 1
                 }
             }
-       
+            
+        }
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,8 +55,8 @@ class FollowerViewController: UIViewController {
         self.tableView.dataSource = self
         self.tableView.delegate = self
         
-//        userDataManager.delegateFollowerFollowing = self
-//        userDataManager.delegate = self
+        //        userDataManager.delegateFollowerFollowing = self
+        //        userDataManager.delegate = self
         dataManager.delegate = self
         
         parentVC = self.parent as? followerFollowingPageViewController
@@ -123,13 +123,13 @@ extension FollowerViewController: UITableViewDataSource {
         }
         
         
-               if parentVC?.userID != Auth.auth().currentUser?.uid {
-                   cell.userManageButton.isHidden = true
-               } else {
-               
-                  cell.userManageButton.isHidden = false
-              
-               }
+        if parentVC?.userID != Auth.auth().currentUser?.uid {
+            cell.userManageButton.isHidden = true
+        } else {
+            
+            cell.userManageButton.isHidden = false
+            
+        }
         
         cell.imgView?.contentMode = .scaleAspectFit
         cell.imgView.layer.masksToBounds = false
@@ -148,13 +148,19 @@ extension FollowerViewController: UITableViewDataSource {
 
 extension FollowerViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc = UIStoryboard(name: "creatorProfile", bundle: nil).instantiateViewController(identifier: "creatorProfile") as! CreatorProfileViewController
-
-        vc.id = followers[indexPath.row].userID
+        if searchedFollowers[indexPath.row].userID == Auth.auth().currentUser!.uid {
+            let vc =  UIStoryboard(name: "MyPage", bundle: nil).instantiateViewController(identifier: "User profile") as! MyPageViewController
+            
+            navigationController?.pushViewController(vc, animated: true)
+        } else {
+            let vc =  UIStoryboard(name: "creatorProfile", bundle: nil).instantiateViewController(identifier: "creatorProfile") as! CreatorProfileViewController
+            
+            vc.id = searchedFollowers[indexPath.row].userID
+            
+            navigationController?.pushViewController(vc, animated: true)
+        }
+        
         tableView.deselectRow(at: indexPath, animated: true)
-
-//        guard self.navigationController?.topViewController == self else { return }
-        navigationController?.pushViewController(vc, animated: true)
     }
 }
 
@@ -180,7 +186,7 @@ extension FollowerViewController: userManageDelegate {
         actionSheet.addAction(blockAction)
         actionSheet.addAction(cancelAction)
         actionSheet.modalPresentationStyle = .popover
-
+        
         self.present(actionSheet, animated: true, completion: nil)
     }
 }
@@ -194,20 +200,20 @@ extension FollowerViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
-//        let pageController = self.children[0] as! SearchingPageViewController
+        //        let pageController = self.children[0] as! SearchingPageViewController
         searchingWord = searchBar.text!
         
         if searchingWord == "" {
             searchedFollowers.removeAll()
             searchedFollowersImages.removeAll()
-          
+            
             searchedFollowersImages = followersImages
             searchedFollowers = followers
             
             tableView.reloadData()
         }
         
-         tableView.reloadData()
+        tableView.reloadData()
         
     }
     

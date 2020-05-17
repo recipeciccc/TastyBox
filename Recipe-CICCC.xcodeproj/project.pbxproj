@@ -1051,6 +1051,7 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
+				"$(SRCROOT)/$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
 			);
 			outputFileListPaths = (
 			);
@@ -1402,6 +1403,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Recipe-CICCC/Recipe-CICCC.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2.1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 3A39A8Y7MG;
 				INFOPLIST_FILE = "Recipe-CICCC/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
@@ -1427,6 +1429,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Recipe-CICCC/Recipe-CICCC.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2.1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 3A39A8Y7MG;
 				INFOPLIST_FILE = "Recipe-CICCC/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.2;

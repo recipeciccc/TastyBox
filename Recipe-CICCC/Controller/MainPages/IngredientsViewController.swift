@@ -63,8 +63,7 @@ class IngredientsViewController: UIViewController {
         dataManager.delegate = self
         ImageCollecitonView.delegate = self
         
-        let uid = Auth.auth().currentUser?.uid
-        refrigeratorDataManager.getRefrigeratorDetail(userID: uid!)
+        
         
         let navigationBar = UINavigationBar()
         let height = UIScreen.main.bounds.height / 2 - navigationBar.frame.size.height - 50
@@ -80,6 +79,9 @@ class IngredientsViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        let uid = Auth.auth().currentUser?.uid
+        
+        refrigeratorDataManager.getRefrigeratorDetail(userID: uid!)
         DispatchQueue.global(qos: .default).async {
             
             // Do heavy work here
@@ -93,8 +95,9 @@ class IngredientsViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        if let cell = TitleCollectionView.cellForItem(at: IndexPath(row: 0, section: 0)) as? IngredientTitleCollectionViewCell {
             if selectedIndexPath == nil {
+
+                if let cell = TitleCollectionView.cellForItem(at: IndexPath(row: 0, section: 0)) as? IngredientTitleCollectionViewCell {
                 self.TitleCollectionView.reloadData()
                 self.TitleCollectionView.layoutIfNeeded()
                 cell.focusCell(active: true)
@@ -282,7 +285,7 @@ extension IngredientsViewController: fetchDataInIngredientsDelegate {
             }
             
             UIView.transition(with: self.ImageCollecitonView, duration: 0.3, options: [UIView.AnimationOptions.transitionCrossDissolve], animations: {
-               self.ImageCollecitonView.reloadData()
+                self.ImageCollecitonView.reloadData()
             }, completion: nil)
         }
     }
@@ -369,13 +372,13 @@ extension IngredientsViewController: getIngredientRefrigeratorDataDelegate{
                 array.append(name)
             }
             ingredientArray = array
-    
+            
             let query = db.collection("recipe").order(by: "like", descending: true)
             let _ = dataManager.Data(queryRef: query)
             
             TitleCollectionView.reloadData()
         } else {
-
+            
             DispatchQueue.main.async { [weak self] in
                 // UI updates must be on main thread
                 self?.indicator.stopAnimating()

@@ -172,13 +172,20 @@ extension FollowingViewController: UITableViewDataSource {
 
 extension FollowingViewController:UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc = UIStoryboard(name: "creatorProfile", bundle: nil).instantiateViewController(identifier: "creatorProfile") as! CreatorProfileViewController
         
-        vc.id = searchedFollowings[indexPath.row].userID
-        tableView.deselectRow(at: indexPath, animated: true)
+        if searchedFollowings[indexPath.row].userID == Auth.auth().currentUser!.uid {
+            let vc =  UIStoryboard(name: "MyPage", bundle: nil).instantiateViewController(identifier: "User profile") as! MyPageViewController
+                    
+                    navigationController?.pushViewController(vc, animated: true)
+        } else {
+            let vc =  UIStoryboard(name: "creatorProfile", bundle: nil).instantiateViewController(identifier: "creatorProfile") as! CreatorProfileViewController
+                    
+                    vc.id = searchedFollowings[indexPath.row].userID
+                    
+                    navigationController?.pushViewController(vc, animated: true)
+        }
         
-//        guard self.navigationController?.topViewController == self else { return }
-        navigationController?.pushViewController(vc, animated: true)
+         tableView.deselectRow(at: indexPath, animated: true)
     }
 }
 

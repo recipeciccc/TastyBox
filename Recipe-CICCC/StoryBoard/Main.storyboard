@@ -1257,33 +1257,30 @@
                                     </connections>
                                 </collectionReusableView>
                             </collectionView>
-                            <stackView opaque="NO" contentMode="scaleToFill" spacing="299" translatesAutoresizingMaskIntoConstraints="NO" id="okU-LR-6SG">
-                                <rect key="frame" x="20" y="108" width="374" height="31"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="VIP" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y06-88-P6O">
-                                        <rect key="frame" x="0.0" y="0.0" width="26" height="31"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="0.66666666669999997" green="0.47450980390000003" blue="0.25882352939999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Jyj-pA-4hf">
-                                        <rect key="frame" x="325" y="0.0" width="51" height="31"/>
-                                        <connections>
-                                            <action selector="VIPAction:" destination="nIB-ep-KXl" eventType="valueChanged" id="vFZ-HV-v81"/>
-                                        </connections>
-                                    </switch>
-                                </subviews>
-                            </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="VIP" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y06-88-P6O">
+                                <rect key="frame" x="20" y="108" width="26" height="31"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.66666666669999997" green="0.47450980390000003" blue="0.25882352939999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Jyj-pA-4hf">
+                                <rect key="frame" x="345" y="108" width="51" height="31"/>
+                                <connections>
+                                    <action selector="VIPAction:" destination="nIB-ep-KXl" eventType="valueChanged" id="vFZ-HV-v81"/>
+                                </connections>
+                            </switch>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="CeO-ju-aQj" firstAttribute="top" secondItem="y06-88-P6O" secondAttribute="bottom" constant="8" id="1oY-wh-zt5"/>
                             <constraint firstAttribute="trailing" secondItem="CeO-ju-aQj" secondAttribute="trailing" constant="20" id="3BE-Wr-PoM"/>
                             <constraint firstItem="CeO-ju-aQj" firstAttribute="leading" secondItem="Rhg-o2-ebq" secondAttribute="leading" constant="20" id="G78-zu-zLL"/>
-                            <constraint firstItem="okU-LR-6SG" firstAttribute="leading" secondItem="Cse-1Z-Qek" secondAttribute="leading" constant="20" id="Urm-GS-bMS"/>
-                            <constraint firstItem="Cse-1Z-Qek" firstAttribute="trailing" secondItem="okU-LR-6SG" secondAttribute="trailing" constant="20" id="chF-u1-6eS"/>
-                            <constraint firstItem="okU-LR-6SG" firstAttribute="top" secondItem="Cse-1Z-Qek" secondAttribute="top" constant="20" id="hiv-Tz-utQ"/>
-                            <constraint firstItem="CeO-ju-aQj" firstAttribute="top" secondItem="okU-LR-6SG" secondAttribute="bottom" constant="8" id="tNb-bQ-c0n"/>
+                            <constraint firstItem="y06-88-P6O" firstAttribute="top" secondItem="Cse-1Z-Qek" secondAttribute="top" constant="20" id="M6n-Mg-1Oy"/>
+                            <constraint firstItem="y06-88-P6O" firstAttribute="leading" secondItem="CeO-ju-aQj" secondAttribute="leading" id="W39-Xf-p6W"/>
+                            <constraint firstItem="Jyj-pA-4hf" firstAttribute="trailing" secondItem="CeO-ju-aQj" secondAttribute="trailing" id="atI-Kk-whb"/>
+                            <constraint firstItem="y06-88-P6O" firstAttribute="bottom" secondItem="Jyj-pA-4hf" secondAttribute="bottom" id="rBx-nb-AHx"/>
                             <constraint firstAttribute="bottom" secondItem="CeO-ju-aQj" secondAttribute="bottom" id="tz0-xp-UcW"/>
+                            <constraint firstItem="y06-88-P6O" firstAttribute="top" secondItem="Jyj-pA-4hf" secondAttribute="top" id="wv2-v2-YJf"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Cse-1Z-Qek"/>
                     </view>

@@ -15,6 +15,7 @@ import GooglePlaces
 import UserNotifications
 import FirebaseInstanceID
 import FirebaseMessaging
+import Crashlytics
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate, MessagingDelegate{
@@ -32,13 +33,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             print("\n Hello \(apiKey)\n")
         }
         
-        
+//        Fabric.sharedSDK().debug = true
         ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
 //        FirebaseApp.configure()
         GIDSignIn.sharedInstance()?.clientID = "247475802290-slfc1mtet3ilq9at7m5nqg1rtom53ggo.apps.googleusercontent.com"//FirebaseApp.app()?.options.clientID
         UINavigationBar.appearance().tintColor = UIColor.orange
         UINavigationBar.appearance().barTintColor = UIColor.white
-        
+    
         
 //        if #available(iOS 10.0, *) {
 //            // For iOS 10 display notification (sent via APNS)
