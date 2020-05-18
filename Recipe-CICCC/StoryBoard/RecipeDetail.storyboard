@@ -28,20 +28,21 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Bfp-ev-kCy">
-                                                    <rect key="frame" x="10" y="10" width="394" height="380"/>
+                                                    <rect key="frame" x="17" y="20" width="380" height="380"/>
                                                     <constraints>
+                                                        <constraint firstAttribute="width" secondItem="Bfp-ev-kCy" secondAttribute="height" multiplier="1:1" id="INF-Je-6xM"/>
                                                         <constraint firstAttribute="height" constant="380" id="RYg-Xg-fSg"/>
                                                         <constraint firstAttribute="width" constant="380" id="cYl-gQ-yd1"/>
                                                     </constraints>
                                                 </imageView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="Bfp-ev-kCy" firstAttribute="leading" secondItem="Ggg-om-qln" secondAttribute="leading" constant="10" id="CdU-lM-7Uv"/>
+                                                <constraint firstItem="Bfp-ev-kCy" firstAttribute="leading" secondItem="Ggg-om-qln" secondAttribute="leading" constant="17" id="CdU-lM-7Uv"/>
                                                 <constraint firstItem="Bfp-ev-kCy" firstAttribute="centerX" secondItem="Ggg-om-qln" secondAttribute="centerX" id="IxN-AB-jA3"/>
-                                                <constraint firstItem="Bfp-ev-kCy" firstAttribute="top" secondItem="Ggg-om-qln" secondAttribute="top" constant="10" id="T3q-FC-TU7"/>
-                                                <constraint firstItem="Bfp-ev-kCy" firstAttribute="centerY" secondItem="Ggg-om-qln" secondAttribute="centerY" id="ZRh-Xk-Fcj"/>
-                                                <constraint firstAttribute="bottom" secondItem="Bfp-ev-kCy" secondAttribute="bottom" constant="10" id="cQw-24-HQO"/>
-                                                <constraint firstAttribute="trailing" secondItem="Bfp-ev-kCy" secondAttribute="trailing" constant="10" id="nYh-bz-0TQ"/>
+                                                <constraint firstItem="Bfp-ev-kCy" firstAttribute="top" secondItem="Ggg-om-qln" secondAttribute="top" constant="20" id="T3q-FC-TU7"/>
+                                                <constraint firstItem="Bfp-ev-kCy" firstAttribute="centerY" secondItem="Ggg-om-qln" secondAttribute="centerY" constant="10" id="X2g-1Z-IKR"/>
+                                                <constraint firstAttribute="bottom" secondItem="Bfp-ev-kCy" secondAttribute="bottom" id="cQw-24-HQO"/>
+                                                <constraint firstAttribute="trailing" secondItem="Bfp-ev-kCy" secondAttribute="trailing" constant="17" id="nYh-bz-0TQ"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -249,16 +250,15 @@
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gaE-sM-Vua">
                                                     <rect key="frame" x="20" y="6" width="100" height="30.5"/>
-                                                    <color key="backgroundColor" red="1" green="0.57637232540000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="100" id="CkY-Bh-I5J"/>
                                                         <constraint firstAttribute="height" constant="30" id="uYK-MJ-Emm"/>
                                                     </constraints>
-                                                    <state key="normal" title="Follow me">
+                                                    <state key="normal">
                                                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </state>
                                                     <connections>
-                                                        <action selector="followerAdding:" destination="rNz-gD-R2N" eventType="touchUpInside" id="s1u-LS-sNa"/>
+                                                        <action selector="followerAdding:" destination="rNz-gD-R2N" eventType="touchUpInside" id="JDF-Lm-iSL"/>
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6H6-18-rY5">
@@ -271,8 +271,8 @@
                                                         <action selector="goToUserProfile:" destination="ebJ-Xu-dih" eventType="touchUpInside" id="5qS-xg-NGc"/>
                                                     </connections>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gx5-Hj-ihu">
-                                                    <rect key="frame" x="206" y="6" width="142" height="30"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gx5-Hj-ihu">
+                                                    <rect key="frame" x="302" y="6" width="46" height="30.5"/>
                                                     <state key="normal" title="Button">
                                                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </state>
@@ -297,6 +297,7 @@
                                         <connections>
                                             <outlet property="creatorNameButton" destination="Gx5-Hj-ihu" id="5Nr-5i-4Hx"/>
                                             <outlet property="followBtn" destination="gaE-sM-Vua" id="gBa-yU-ZoM"/>
+                                            <outlet property="followManageButton" destination="gaE-sM-Vua" id="RrN-X2-wMy"/>
                                             <outlet property="imgCreator" destination="6H6-18-rY5" id="udL-jV-Fy0"/>
                                         </connections>
                                     </tableViewCell>
@@ -347,7 +348,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="300"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H4L-f5-aNq">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H4L-f5-aNq">
                                                     <rect key="frame" x="20" y="35.5" width="374" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>

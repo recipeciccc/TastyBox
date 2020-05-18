@@ -70,6 +70,7 @@ class RecipeDetailViewController: UIViewController {
             
             dataManager1.getGenres(tableView: self.detailTableView, recipe: recipe!)
             dataManager1.isLikedRecipe(recipeID: recipe!.recipeID)
+            dataManager1.isFollowingCreator(userID: recipe!.userID)
         }
     
     }
@@ -297,22 +298,11 @@ extension RecipeDetailViewController: UITableViewDataSource,UITableViewDelegate{
         
         return UITableViewCell()
     }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        switch indexPath.section {
-        case 0:
-            return 350
-        default:
-            return UITableView.automaticDimension
-        }
-    }
-    
+
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         
         switch indexPath.section {
-        case 0:
-            return 350
-        
+
         case 7:
             return 368
             
@@ -343,37 +333,60 @@ extension RecipeDetailViewController: iconItemTableViewCellDelegate{
     func decreaseLike() {
         recipe?.like -= 1
         self.dataManager1.increaseLike(recipe: recipe!, isIncreased: false)
+        
+        self.detailTableView.reloadRows(at: [IndexPath(row: 0, section: 3)], with: .automatic)
+        
     }
     
     func increaseLike() {
         recipe?.like += 1
         self.dataManager1.increaseLike(recipe: recipe!, isIncreased: true)
+        
+        self.detailTableView.reloadRows(at: [IndexPath(row: 0, section: 3)], with: .automatic)
     }
 }
 
-// this extension tell firebase to increase this user's follower.
+// this extension tell firebase to manage this user's follower.
 
-extension RecipeDetailViewController: AddingFollowersDelegate{
+extension RecipeDetailViewController: ManageFollowersDelegate{
+    func decreaseFollower(followerID: String) {
+         self.dataManager1.manageFollowing(followerID: followerID, isfollow: false)
+    }
+    
     func increaseFollower(followerID: String) {
-        self.dataManager1.increaseFollower(followerID: followerID)
-        detailTableView.reloadData()
+        self.dataManager1.manageFollowing(followerID: followerID, isfollow: true)
     }
 }
 
 extension RecipeDetailViewController: RecipeDetailDelegate {
+    func isFollowingCreator(isFollowing: Bool) {
+         let cell = self.detailTableView.cellForRow(at: IndexPath(row: 0, section: 5)) as! creatorCellRecpipeTableViewCell
+        cell.followingButtonUIManagement(isFollowing: isFollowing)
+    }
+    
+    func UnfollowedAction() {
+         let cell = self.detailTableView.cellForRow(at: IndexPath(row: 0, section: 5)) as! creatorCellRecpipeTableViewCell
+               
+        cell.followingButtonUIManagement(isFollowing: false)
+    }
+    
+    func FollowedAction() {
+         let cell = self.detailTableView.cellForRow(at: IndexPath(row: 0, section: 5)) as! creatorCellRecpipeTableViewCell
+               
+        cell.followingButtonUIManagement(isFollowing: true)
+    }
+    
+//    func isUnfollowed() {
+//
+//
+//    }
+    
     func gotGenres(genres: [String]) {
         self.genres = genres
-        
-        let cell = self.detailTableView.cellForRow(at: IndexPath(row: 0, section: 4)) as! recipeGenresTableViewCell
-        
-//        cell.genresCollectionView.reloadData()
-      
     }
     
     func isLikedRecipe(isLiked: Bool) {
         self.isliked = isLiked
-        
-//        self.detailTableView.reloadData()
     }
     
     func getCreator(creator: User) {
@@ -417,7 +430,7 @@ extension RecipeDetailViewController: recipeDetailDelegate {
             
         } else {
             let view = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
-            view.backgroundColor = #colorLiteral(red: 0.9959775805, green: 0.9961397052, blue: 0.7093081474, alpha: 1)
+            view.backgroundColor = #colorLiteral(red: 0.9977325797, green: 0.9879661202, blue: 0.7689270973, alpha: 1)
             view.tag = 100
             self.view.addSubview(view)
             

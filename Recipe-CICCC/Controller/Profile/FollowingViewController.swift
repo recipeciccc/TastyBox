@@ -137,6 +137,9 @@ class FollowingViewController: UIViewController {
 
 extension FollowingViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if followings.isEmpty {
+            return 1
+        }
         return searchedFollowings.count
     }
     
@@ -145,6 +148,7 @@ extension FollowingViewController: UITableViewDataSource {
         cell.delegate = self
         
         if followings.isEmpty {
+            cell.userNameLabel.textAlignment = .center
             cell.userNameLabel.text = "no following"
         } else {
             cell.userID = searchedFollowings[indexPath.row].userID
@@ -156,7 +160,7 @@ extension FollowingViewController: UITableViewDataSource {
             cell.userManageButton.isHidden = true
         } else {
             cell.userManageButton.isHidden = false
-            cell.followingButton.setTitle("Unfollow", for: .normal)
+            cell.followingButton.setTitle("Following", for: .normal)
        
         }
         
