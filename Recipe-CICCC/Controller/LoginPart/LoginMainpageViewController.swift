@@ -59,9 +59,10 @@ class LoginMainpageViewController: UIViewController {
             let Storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
             let vc = Storyboard.instantiateViewController(withIdentifier: "Discovery")
             
-            guard self.navigationController?.topViewController == self else { return }
+            //guard self.navigationController?.topViewController == self else { return }
             
-            vc.modalTransitionStyle = .crossDissolve
+            
+            vc.modalTransitionStyle = .flipHorizontal
             vc.modalPresentationStyle = .overFullScreen
             self.navigationController?.pushViewController(vc, animated: false)
     
@@ -69,34 +70,37 @@ class LoginMainpageViewController: UIViewController {
         } else {
             if let viewWithTag = self.view.viewWithTag(100) {
                 viewWithTag.removeFromSuperview()
+                
+                // make login button rounded
+                    roundCorners(view: login, cornerRadius: 5.0)
+                    GIDSignIn.sharedInstance()?.delegate = self
+                    GIDSignIn.sharedInstance()?.presentingViewController = self
+                    // Do any additional setup after loading the view.
+                    let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
+                    view.addGestureRecognizer(tap)
+                    
+                    self.navigationItem.hidesBackButton = true;
+                    
+                    emailTextField.delegate = self
+                    passwordTextField.delegate = self
+                    
+                    NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+                    NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+                
+                    setUpFaceBookLogin()
+                    setUpGoogleLogin()
+                    setUpSignInAppleButton()
+                    loginButtonStackView.spacing = 10.0
+                    
+                    resetPasswordButton.contentHorizontalAlignment = .right
+                    registerButton.contentHorizontalAlignment = .right
             }else{
                 print("No!")
             }
             
         }
         
-        roundCorners(view: login, cornerRadius: 5.0)
-        GIDSignIn.sharedInstance()?.delegate = self
-        GIDSignIn.sharedInstance()?.presentingViewController = self
-        // Do any additional setup after loading the view.
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
-        view.addGestureRecognizer(tap)
         
-        self.navigationItem.hidesBackButton = true;
-        
-        emailTextField.delegate = self
-        passwordTextField.delegate = self
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-    
-        setUpFaceBookLogin()
-        setUpGoogleLogin()
-        setUpSignInAppleButton()
-        loginButtonStackView.spacing = 10.0
-        
-        resetPasswordButton.contentHorizontalAlignment = .right
-        registerButton.contentHorizontalAlignment = .right
     }
     
     @IBAction func unwindtoLoginMain(segue: UIStoryboardSegue) {

@@ -42,12 +42,19 @@ class RecipeDetailViewController: UIViewController {
         
         detailTableView.delegate = self
         detailTableView.dataSource = self
+        
         detailTableView.tableFooterView = UIView()
         detailTableView.separatorStyle = .none
+        detailTableView.isUserInteractionEnabled = true
+        
         getImg.delegateImg = self
         userDataManager.delegate = self
         userDataManager.recipeDetailDelegate = self
         dataManager1.delegate = self
+        
+        dataManager1.getGenres(tableView: self.detailTableView, recipe: recipe!)
+        dataManager1.isLikedRecipe(recipeID: recipe!.recipeID)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -67,9 +74,7 @@ class RecipeDetailViewController: UIViewController {
             
             userDataManager.getUserDetail(id: recipe?.userID)
             userDataManager.getUserImage(uid: recipe!.userID)
-            
-            dataManager1.getGenres(tableView: self.detailTableView, recipe: recipe!)
-            dataManager1.isLikedRecipe(recipeID: recipe!.recipeID)
+        
             dataManager1.isFollowingCreator(userID: recipe!.userID)
         }
     
@@ -312,9 +317,6 @@ extension RecipeDetailViewController: UITableViewDataSource,UITableViewDelegate{
         
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-    }
 }
 
 extension RecipeDetailViewController: ReloadDataDelegate{
@@ -332,17 +334,16 @@ extension RecipeDetailViewController: ReloadDataDelegate{
 extension RecipeDetailViewController: iconItemTableViewCellDelegate{
     func decreaseLike() {
         recipe?.like -= 1
-        self.dataManager1.increaseLike(recipe: recipe!, isIncreased: false)
+        dataManager1.increaseLike(recipe: recipe!, isIncreased: false)
         
-        self.detailTableView.reloadRows(at: [IndexPath(row: 0, section: 3)], with: .automatic)
+        dataManager1.isLikedRecipe(recipeID: recipe!.recipeID)
         
     }
     
     func increaseLike() {
         recipe?.like += 1
-        self.dataManager1.increaseLike(recipe: recipe!, isIncreased: true)
-        
-        self.detailTableView.reloadRows(at: [IndexPath(row: 0, section: 3)], with: .automatic)
+        dataManager1.increaseLike(recipe: recipe!, isIncreased: true)
+        dataManager1.isLikedRecipe(recipeID: recipe!.recipeID)
     }
 }
 
@@ -376,17 +377,16 @@ extension RecipeDetailViewController: RecipeDetailDelegate {
         cell.followingButtonUIManagement(isFollowing: true)
     }
     
-//    func isUnfollowed() {
-//
-//
-//    }
-    
     func gotGenres(genres: [String]) {
         self.genres = genres
     }
     
     func isLikedRecipe(isLiked: Bool) {
         self.isliked = isLiked
+        
+        guard detailTableView.cellForRow(at: IndexPath(row: 0, section: 3)) != nil else { return }
+        
+        self.detailTableView.reloadRows(at: [IndexPath(row: 0, section: 3)], with: .automatic)
     }
     
     func getCreator(creator: User) {

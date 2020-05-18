@@ -61,19 +61,15 @@ extension SearchingGenreViewController : UITableViewDataSource {
 
 extension SearchingGenreViewController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //        if let cell = tableView.cellForRow(at: indexPath) as? SearchingGenresTableViewCell {
-        //            let query = dataManager.createQuery(searchingWord: cell.genresLabel.text!)
+
         let vc = storyboard?.instantiateViewController(identifier: "resultRecipes") as! ResultRecipesViewController
         
-        //            vc.query = query
         vc.searchingCategory = "genres"
         vc.searchingWord = genresArray[indexPath.row]
-//        guard self.navigationController?.topViewController == self else { return }
         
         navigationController?.pushViewController(vc, animated: true)
         tableView.deselectRow(at: indexPath, animated: true)
     }
-    //    }
     
 }
 

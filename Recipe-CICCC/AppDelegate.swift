@@ -35,7 +35,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
 //        Fabric.sharedSDK().debug = true
         ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
-//        FirebaseApp.configure()
         GIDSignIn.sharedInstance()?.clientID = "247475802290-slfc1mtet3ilq9at7m5nqg1rtom53ggo.apps.googleusercontent.com"//FirebaseApp.app()?.options.clientID
         UINavigationBar.appearance().tintColor = UIColor.orange
         UINavigationBar.appearance().barTintColor = UIColor.white

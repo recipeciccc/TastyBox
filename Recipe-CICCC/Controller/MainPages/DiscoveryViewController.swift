@@ -189,7 +189,6 @@ class DiscoveryViewController: UIViewController {
         if Auth.auth().currentUser != nil{
             do{
                 try Auth.auth().signOut()
-                //                navigationController?.popViewController(animated: true)
                 
             }catch let error as NSError{
                 print(error.localizedDescription)
@@ -325,14 +324,6 @@ extension DiscoveryViewController: UICollectionViewDelegate, UICollectionViewDat
 class MenuCollectionViewCell: UICollectionViewCell{
     @IBOutlet weak var MenuLabel: UILabel!
     
-    //test
-    //        override var isSelected: Bool{
-    //            didSet(newValue){
-    //                contentView.backgroundColor = UIColor.brown
-    //                MenuLabel.tintColor = UIColor.white
-    //            }
-    //        }
-    
     func focusCell(active: Bool) {
         let color = active ? #colorLiteral(red: 0.9984802604, green: 0.9880111814, blue: 0.655043602, alpha: 1) : #colorLiteral(red: 0.9890902638, green: 0.8873679042, blue: 0.4545228481, alpha: 1)
         self.contentView.backgroundColor = color
@@ -343,15 +334,6 @@ class MenuCollectionViewCell: UICollectionViewCell{
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        //        let OriginalView = UIView()
-        //        let ChangeView = UIView()
-        //
-        //        if OriginalView.isEqual(ChangeView){
-        //            ChangeView.backgroundColor = #colorLiteral(red: 0.9607843161, green: 0.7058823705, blue: 0.200000003, alpha: 1)
-        //            self.selectedBackgroundView = ChangeView
-        //        }else{
-        //            ChangeView.backgroundColor = #colorLiteral(red: 0.9998212457, green: 0.9867780805, blue: 0.7689660192, alpha: 1)
-        //            self.backgroundView = ChangeView
     }
     
 }

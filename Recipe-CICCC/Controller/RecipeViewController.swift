@@ -51,8 +51,30 @@ class RecipeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        collectionRef.isHidden = true
+        SearchBar.delegate = self
+        SearchBar.placeholder = "Search Recipe"
+        dataManager.delegate = self
+        let RightNavBarButton = UIBarButtonItem(customView:SearchBar)
+        self.navigationItem.rightBarButtonItem = RightNavBarButton
+        
+        TitleImage.image = T_image
+        TitleLabel.text = T_Name
+        self.view.sendSubviewToBack(TitleImage)
+    
+        collectionRef.delegate = self
+        collectionRef.dataSource = self
+        
+        let width = (collectionRef.frame.size.width - 4) / 2
+        let layout = collectionRef.collectionViewLayout as! UICollectionViewFlowLayout
+        layout.itemSize = CGSize(width: width, height: width)
+                
        
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        collectionRef.isHidden = true
+        
         indicator.color = .white
         indicator.tag = 100
         indicator.transform = CGAffineTransform(scaleX: 2, y: 2)
@@ -71,31 +93,15 @@ class RecipeViewController: UIViewController {
             }
         }
         
-        SearchBar.delegate = self
-        SearchBar.placeholder = "Search Recipe"
-        let RightNavBarButton = UIBarButtonItem(customView:SearchBar)
-        self.navigationItem.rightBarButtonItem = RightNavBarButton
-        
-        TitleImage.image = T_image
-        TitleLabel.text = T_Name
-        self.view.sendSubviewToBack(TitleImage)
-        
-        
-        
-        collectionRef.delegate = self
-        collectionRef.dataSource = self
-        
-        let width = (collectionRef.frame.size.width - 4) / 2
-        let layout = collectionRef.collectionViewLayout as! UICollectionViewFlowLayout
-        layout.itemSize = CGSize(width: width, height: width)
-        
-        //        setupCollection()
-        
-        dataManager.delegate = self
         let query = db.collection("recipe").whereField("genres.\(T_Name)", isEqualTo: true)
         dataManager.Data(queryRef: query)
         
         
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.recipes.removeAll()
     }
     
 }
@@ -178,9 +184,7 @@ extension RecipeViewController: UICollectionViewDataSource, UICollectionViewDele
         if searching{
             cell.collectionLabel.text = searchedRecipes[indexPath.row].title
             cell.collectionImage.image = searchedRecipesImages[indexPath.row]
-            
-            //            isVIP = searchedRecipes[indexPath.row].isVIPRecipe
-            
+                        
         }
         else{
             
@@ -258,7 +262,6 @@ extension RecipeViewController: RecipeViewControllerDelegate {
     }
     
     func reloadRecipe(data: [RecipeDetail]) {
-        self.recipes.removeAll()
         self.recipes = data
         
         recipes = recipes.sorted(by: { $0.like > $1.like })
@@ -284,12 +287,7 @@ extension RecipeViewController: RecipeViewControllerDelegate {
         recipesImages[index] = image
         
         if recipes.count == recipesImages.count {
-            //            UIView.animate(withDuration: 0.1, animations:
-            //            {
-            //                self.collectionRef.isHidden = false
-            //                self.TitleImage.isHidden = false
-            //            })
-            //
+         
             DispatchQueue.global(qos: .default).async {
                 
                 // Do heavy work here

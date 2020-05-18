@@ -16,6 +16,7 @@ class recipeGenresTableViewCell: UITableViewCell {
     
     func configure(with arr: [String]) {
         self.genres = arr
+       
         self.genresCollectionView.reloadData()
         self.genresCollectionView.layoutIfNeeded()
     }

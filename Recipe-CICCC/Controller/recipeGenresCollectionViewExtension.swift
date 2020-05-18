@@ -9,7 +9,8 @@
 import Foundation
 import UIKit
 
-extension RecipeDetailViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension RecipeDetailViewController: UICollectionViewDataSource, UICollectionViewDelegate{
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.genres.count
     }
@@ -21,17 +22,18 @@ extension RecipeDetailViewController: UICollectionViewDataSource, UICollectionVi
         return cell
     }
     
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let vc = storyboard?.instantiateViewController(identifier: "resultRecipes") as! ResultRecipesViewController
+        
+        vc.searchingCategory = "genres"
+        vc.searchingWord = self.genres[indexPath.row]
+       
+        guard self.navigationController?.topViewController == self else { return }
 
-    
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        
-//        let cell = collectionView.cellForItem(at: indexPath) as! recipeGenresCollectionViewCell
-//        
-//        let width: CGFloat = cell.genreLabel.frame.size.width
-//        let height = UILabel().frame.size.height
-//        return CGSize(width: width, height: height)
-//    }
+        navigationController?.pushViewController(vc, animated: true)
+       
+    }
 }
 
 

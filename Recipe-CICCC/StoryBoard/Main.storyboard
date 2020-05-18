@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="zyT-5u-B8i">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
@@ -451,7 +451,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nlv-6E-V8W">
-                                <rect key="frame" x="0.0" y="147" width="414" height="715"/>
+                                <rect key="frame" x="0.0" y="147" width="414" height="749"/>
                                 <connections>
                                     <segue destination="DEg-yT-N3P" kind="embed" id="pn9-h7-5v3"/>
                                 </connections>
@@ -482,7 +482,7 @@
                             <constraint firstItem="fke-Sc-eea" firstAttribute="leading" secondItem="Nlv-6E-V8W" secondAttribute="leading" id="Zbo-CU-ePA"/>
                             <constraint firstItem="fke-Sc-eea" firstAttribute="trailing" secondItem="Nlv-6E-V8W" secondAttribute="trailing" id="bn8-KA-WCF"/>
                             <constraint firstItem="fke-Sc-eea" firstAttribute="leading" secondItem="MWN-Ve-M4j" secondAttribute="leading" id="ivs-AT-YLM"/>
-                            <constraint firstItem="GQZ-SB-Vjo" firstAttribute="bottom" secondItem="Nlv-6E-V8W" secondAttribute="bottom" id="sji-0O-fqf"/>
+                            <constraint firstItem="GQZ-SB-Vjo" firstAttribute="bottom" secondItem="Nlv-6E-V8W" secondAttribute="bottom" constant="-34" id="sji-0O-fqf"/>
                             <constraint firstItem="fke-Sc-eea" firstAttribute="top" secondItem="GQZ-SB-Vjo" secondAttribute="top" constant="20" id="voU-Lq-OOU"/>
                             <constraint firstItem="fke-Sc-eea" firstAttribute="trailing" secondItem="MWN-Ve-M4j" secondAttribute="trailing" id="xpJ-6U-Zyg"/>
                             <constraint firstItem="fke-Sc-eea" firstAttribute="centerX" secondItem="SKQ-tM-OWC" secondAttribute="centerX" id="zAU-9b-Ynr"/>
@@ -635,6 +635,7 @@
         <!--Navigation Controller-->
         <scene sceneID="zI8-Lr-4rl">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RDx-oJ-Chz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="zyT-5u-B8i" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="C7d-62-MUO">
@@ -647,43 +648,8 @@
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="SAh-a2-BWP"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="RDx-oJ-Chz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1047.8260869565217" y="114.50892857142857"/>
-        </scene>
-        <!--Monthly-->
-        <scene sceneID="kRk-wo-m7d">
-            <objects>
-                <viewControllerPlaceholder storyboardName="Monthly" id="bOG-U9-byp" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ebk-D1-WKP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1980" y="-368"/>
-        </scene>
-        <!--followingRecipe-->
-        <scene sceneID="gjd-K3-Lmm">
-            <objects>
-                <viewControllerPlaceholder storyboardName="followingRecipe" id="LJl-fZ-Rb0" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="3fh-5n-rom"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="fJK-29-8mL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2005" y="-336"/>
-        </scene>
-        <!--VIP_page-->
-        <scene sceneID="rtR-na-5dT">
-            <objects>
-                <viewControllerPlaceholder storyboardName="VIP_page" id="9VU-Un-7z1" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="nsi-cG-GZV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1977" y="-406"/>
-        </scene>
-        <!--EditorChoice-->
-        <scene sceneID="MAc-LR-SoQ">
-            <objects>
-                <viewControllerPlaceholder storyboardName="EditorChoice" id="jg4-s1-OQ3" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Syn-7A-a1g" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1993" y="-441"/>
         </scene>
         <!--Main Page View Controller-->
         <scene sceneID="JTn-Ah-2Sb">
@@ -695,16 +661,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LHI-WY-T5F" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2923" y="139"/>
-        </scene>
-        <!--ingredientRecipe-->
-        <scene sceneID="B5Y-pC-TKc">
-            <objects>
-                <viewControllerPlaceholder storyboardName="ingredientRecipe" id="go2-jv-AyD" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="krb-hE-x7l"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="jF5-fa-Upo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1998" y="-279"/>
         </scene>
         <!--Creator View Controller-->
         <scene sceneID="Lnz-eH-7xC">
@@ -1304,14 +1260,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="shb-q4-EBx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3837.68115942029" y="-698.4375"/>
-        </scene>
-        <!--popularPage-->
-        <scene sceneID="Iwr-84-YcL">
-            <objects>
-                <viewControllerPlaceholder storyboardName="popularPage" id="5S8-PP-0s1" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="c36-G1-ma5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1998" y="-307"/>
         </scene>
         <!--Searching Ingredients View Controller-->
         <scene sceneID="T3B-Vg-GyH">

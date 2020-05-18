@@ -24,5 +24,7 @@ class RecipeGenresCollectionView: UICollectionView {
     
     override func awakeFromNib() {
         self.backgroundColor = #colorLiteral(red: 0.9959775805, green: 0.9961397052, blue: 0.7093081474, alpha: 1)
+         self.isUserInteractionEnabled = true
     }
+
 }

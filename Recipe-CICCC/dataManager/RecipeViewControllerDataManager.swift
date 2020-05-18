@@ -74,38 +74,6 @@ class RecipeViewControllerDataManager {
         }
     }
     
-    //
-    //    func getGenres(userId: String, recipeId: String) {
-    //
-    //        var genres:[String] = []
-    //        var exist = false
-    //
-    //        db.collection("recipe").document("\(recipeId)").collection("genre").addSnapshotListener{
-    //            (querysnapshot, error) in
-    //            if error != nil {
-    //                print("Error getting documents: \(String(describing: error))")
-    //            } else {
-    //                for document in querysnapshot!.documents {
-    //                    let data = document.data()
-    //
-    //
-    //
-    //                }
-    //
-    //                exist = true
-    //                self.isGenreExist(exist, genres, recipeId)
-    //            }
-    //        }
-    //
-    //        isGenreExist(exist, genres, recipeId)
-    //
-    //    }
-    //
-    //    func isGenreExist(_ exist:Bool, _ data: [String], _ recipeID: String){
-    //        if exist{
-    //            delegate?.reloadGenres(data: data, recipeID: recipeID)
-    //        }
-    //    }
     
     func getImage( uid:String?, rid: String, index: Int){
         
