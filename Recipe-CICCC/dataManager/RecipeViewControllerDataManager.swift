@@ -20,6 +20,8 @@ class RecipeViewControllerDataManager {
     func Data(queryRef:Query) {
         var recipeList = [RecipeDetail]()
         var exist = Bool()
+        
+        
         queryRef.addSnapshotListener { (snapshot, err) in
             if err == nil {
                 if let snap = snapshot?.documents {
@@ -67,6 +69,7 @@ class RecipeViewControllerDataManager {
     
     func isRecipeExist(_ exist:Bool, _ data: [RecipeDetail]){
         if exist{
+            
             delegate?.reloadRecipe(data:data)
         }
     }

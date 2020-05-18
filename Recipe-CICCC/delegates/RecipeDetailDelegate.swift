@@ -8,6 +8,8 @@
 
 import Foundation
 
-protocol RecipeDetailDelegate {
+protocol RecipeDetailDelegate: class {
     func getCreator(creator: User)
+    func isLikedRecipe(isLiked: Bool)
+    func gotGenres(genres: [String])
 }

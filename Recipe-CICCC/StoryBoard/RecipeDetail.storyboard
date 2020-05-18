@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ebJ-Xu-dih">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ebJ-Xu-dih">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -176,11 +177,71 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="likeButton" destination="5Hb-NA-5qR" id="j9s-lu-UIx"/>
                                             <outlet property="numLikeLabel" destination="VIY-LQ-Qfa" id="Egr-je-eKi"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="recipeGenres" id="Iga-3F-I0j" customClass="recipeGenresTableViewCell" customModule="Recipe_CICCC" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="558.5" width="414" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Iga-3F-I0j" id="Z5g-Zp-Csg">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="qPg-XH-gq7" customClass="RecipeGenresCollectionView" customModule="Recipe_CICCC" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="414" id="UOB-ps-2lm"/>
+                                                    </constraints>
+                                                    <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="KjO-G2-Rfo" customClass="recipeGenresFlowlayout" customModule="Recipe_CICCC" customModuleProvider="target">
+                                                        <size key="itemSize" width="119" height="46"/>
+                                                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                    </collectionViewFlowLayout>
+                                                    <cells>
+                                                        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="recipeGenres" id="7IF-Qg-L3I" customClass="recipeGenresCollectionViewCell" customModule="Recipe_CICCC" customModuleProvider="target">
+                                                            <rect key="frame" x="0.0" y="0.0" width="57.5" height="18"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Qzt-fP-2dK">
+                                                                <rect key="frame" x="0.0" y="0.0" width="57.5" height="18"/>
+                                                                <autoresizingMask key="autoresizingMask"/>
+                                                                <subviews>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iN3-LJ-1xe">
+                                                                        <rect key="frame" x="10" y="0.0" width="37.5" height="18"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                                        <nil key="textColor"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                </subviews>
+                                                                <constraints>
+                                                                    <constraint firstItem="iN3-LJ-1xe" firstAttribute="leading" secondItem="Qzt-fP-2dK" secondAttribute="leading" constant="10" id="BJD-9K-mit"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="iN3-LJ-1xe" secondAttribute="bottom" id="CFu-jl-mzn"/>
+                                                                    <constraint firstItem="iN3-LJ-1xe" firstAttribute="top" secondItem="Qzt-fP-2dK" secondAttribute="top" id="bhT-gn-M23"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="iN3-LJ-1xe" secondAttribute="trailing" constant="10" id="y0p-bA-Cs5"/>
+                                                                </constraints>
+                                                            </collectionViewCellContentView>
+                                                            <connections>
+                                                                <outlet property="genreLabel" destination="iN3-LJ-1xe" id="yuE-DS-OC5"/>
+                                                            </connections>
+                                                        </collectionViewCell>
+                                                    </cells>
+                                                </collectionView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="qPg-XH-gq7" firstAttribute="top" secondItem="Z5g-Zp-Csg" secondAttribute="top" id="AFD-Vc-jV0"/>
+                                                <constraint firstItem="qPg-XH-gq7" firstAttribute="leading" secondItem="Z5g-Zp-Csg" secondAttribute="leading" id="EnT-Cf-39f"/>
+                                                <constraint firstAttribute="trailing" secondItem="qPg-XH-gq7" secondAttribute="trailing" id="Fl0-GP-dSq"/>
+                                                <constraint firstAttribute="bottom" secondItem="qPg-XH-gq7" secondAttribute="bottom" id="dWM-lg-y8H"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="genresCollectionView" destination="qPg-XH-gq7" id="K8b-q5-fVy"/>
+                                        </connections>
+                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="creator" id="rNz-gD-R2N" customClass="creatorCellRecpipeTableViewCell" customModule="Recipe_CICCC" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="558.5" width="414" height="42.5"/>
+                                        <rect key="frame" x="0.0" y="602" width="414" height="42.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="rNz-gD-R2N" id="3bU-eK-P56">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="42.5"/>
@@ -240,7 +301,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ingredientRecipe" id="BiC-Vz-ZOK" customClass="IngredientsTableViewCell" customModule="Recipe_CICCC" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="601" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="644.5" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="BiC-Vz-ZOK" id="YWJ-X3-qcR">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
@@ -280,7 +341,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="instructionsRecipe" rowHeight="300" id="0GS-pK-S8O" customClass="HowToCookTableViewCell" customModule="Recipe_CICCC" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="644.5" width="414" height="300"/>
+                                        <rect key="frame" x="0.0" y="688" width="414" height="300"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0GS-pK-S8O" id="qsH-zG-mJY">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="300"/>
@@ -353,7 +414,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Yfo-LR-9mq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4190" y="-149"/>
+            <point key="canvasLocation" x="4188.4057971014499" y="-149.33035714285714"/>
         </scene>
         <!--Comments View Controller-->
         <scene sceneID="1RO-50-UIg">
@@ -473,7 +534,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="5547.826086956522" y="69.642857142857139"/>
+            <point key="canvasLocation" x="5370" y="-149"/>
         </scene>
         <!--savedRecipe-->
         <scene sceneID="GaB-ur-4Mb">
@@ -483,13 +544,13 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sOt-RK-hMv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4959" y="109"/>
+            <point key="canvasLocation" x="4928" y="-131"/>
         </scene>
     </scenes>
     <resources>
-        <image name="ellipses.bubble" catalog="system" width="128" height="110"/>
-        <image name="ellipsis" catalog="system" width="128" height="37"/>
-        <image name="folder.badge.plus" catalog="system" width="128" height="86"/>
-        <image name="suit.heart" catalog="system" width="128" height="109"/>
+        <image name="ellipses.bubble" catalog="system" width="64" height="54"/>
+        <image name="ellipsis" catalog="system" width="64" height="18"/>
+        <image name="folder.badge.plus" catalog="system" width="64" height="42"/>
+        <image name="suit.heart" catalog="system" width="64" height="54"/>
     </resources>
 </document>

@@ -25,6 +25,7 @@ class RecipeDetailViewController: UIViewController {
     
     var ingredientList  = [Ingredient]()
     var instructionList = [Instruction]()
+    var genres = [String]()
     
     //    var comment = [Comment]()
     
@@ -34,7 +35,7 @@ class RecipeDetailViewController: UIViewController {
     
     var instructionImgs = [UIImage]()
     let uid = Auth.auth().currentUser?.uid
-    
+    var isliked = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,7 +47,7 @@ class RecipeDetailViewController: UIViewController {
         getImg.delegateImg = self
         userDataManager.delegate = self
         userDataManager.recipeDetailDelegate = self
-        
+        dataManager1.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -67,20 +68,12 @@ class RecipeDetailViewController: UIViewController {
             userDataManager.getUserDetail(id: recipe?.userID)
             userDataManager.getUserImage(uid: recipe!.userID)
             
+            dataManager1.getGenres(tableView: self.detailTableView, recipe: recipe!)
+            dataManager1.isLikedRecipe(recipeID: recipe!.recipeID)
         }
-        
-    }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-//        if let viewWithTag = self.view.viewWithTag(100) {
-//            viewWithTag.removeFromSuperview()
-//        }else{
-//            print("No!")
-//        }
     }
-    
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "savingRecipe" {
             if let vc = segue.destination as? SavedRecipeViewController {
@@ -202,15 +195,15 @@ extension RecipeDetailViewController{
 extension RecipeDetailViewController: UITableViewDataSource,UITableViewDelegate{
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 7
+        return 8
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         switch section {
-        case 5:
-            return ingredientList.count
         case 6:
+            return ingredientList.count
+        case 7:
             return instructionList.count
         default:
             return 1
@@ -245,8 +238,19 @@ extension RecipeDetailViewController: UITableViewDataSource,UITableViewDelegate{
             cell.numLikeLabel.text = "\(recipe?.like ?? 0)"
             cell.delegate = self as iconItemTableViewCellDelegate
             
+            cell.isLiked = self.isliked
+
+            
             return cell
+            
         case 4:
+            let cell = (tableView.dequeueReusableCell(withIdentifier: "recipeGenres") as? recipeGenresTableViewCell)!
+            
+            cell.genresCollectionView.dataSource = self
+            cell.configure(with: self.genres)
+            
+            return cell
+        case 5:
             let cell = (tableView.dequeueReusableCell(withIdentifier: "creator") as? creatorCellRecpipeTableViewCell)!
             
             
@@ -270,7 +274,7 @@ extension RecipeDetailViewController: UITableViewDataSource,UITableViewDelegate{
             cell.userID = recipe?.userID
             
             return cell
-        case 5:
+        case 6:
             let cell = (tableView.dequeueReusableCell(withIdentifier: "ingredientRecipe") as? IngredientsTableViewCell)!
             if ingredientList.count > 0{
                  cell.contentView.backgroundColor = #colorLiteral(red: 0.9959775805, green: 0.9961397052, blue: 0.7093081474, alpha: 1)
@@ -278,7 +282,7 @@ extension RecipeDetailViewController: UITableViewDataSource,UITableViewDelegate{
                 cell.amountIngredientsLabel.text = ingredientList[indexPath.row].amount
             }
             return cell
-        case 6:
+        case 7:
             let cell = (tableView.dequeueReusableCell(withIdentifier: "instructionsRecipe") as? HowToCookTableViewCell)!
             if instructionList.count == instructionImgs.count && instructionList.count > 0{
                 cell.stepNum.text = "\(String(indexPath.row + 1)):"
@@ -298,21 +302,24 @@ extension RecipeDetailViewController: UITableViewDataSource,UITableViewDelegate{
         switch indexPath.section {
         case 0:
             return 350
-        case 6:
-            return UITableView.automaticDimension
         default:
             return UITableView.automaticDimension
         }
     }
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.row == 6 {
-            return 368
-        }
-        if indexPath.row == 0 {
+        
+        switch indexPath.section {
+        case 0:
             return 350
+        
+        case 7:
+            return 368
+            
+        default:
+            return UITableView.automaticDimension
         }
-        return UITableView.automaticDimension
+        
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -333,10 +340,14 @@ extension RecipeDetailViewController: ReloadDataDelegate{
 // this extension tell firebase to increase this recipe's like
 
 extension RecipeDetailViewController: iconItemTableViewCellDelegate{
+    func decreaseLike() {
+        recipe?.like -= 1
+        self.dataManager1.increaseLike(recipe: recipe!, isIncreased: false)
+    }
+    
     func increaseLike() {
         recipe?.like += 1
-        self.dataManager1.increaseLike(recipe: recipe!)
-        detailTableView.reloadData()
+        self.dataManager1.increaseLike(recipe: recipe!, isIncreased: true)
     }
 }
 
@@ -350,6 +361,21 @@ extension RecipeDetailViewController: AddingFollowersDelegate{
 }
 
 extension RecipeDetailViewController: RecipeDetailDelegate {
+    func gotGenres(genres: [String]) {
+        self.genres = genres
+        
+        let cell = self.detailTableView.cellForRow(at: IndexPath(row: 0, section: 4)) as! recipeGenresTableViewCell
+        
+//        cell.genresCollectionView.reloadData()
+      
+    }
+    
+    func isLikedRecipe(isLiked: Bool) {
+        self.isliked = isLiked
+        
+//        self.detailTableView.reloadData()
+    }
+    
     func getCreator(creator: User) {
         self.creator = creator
     }

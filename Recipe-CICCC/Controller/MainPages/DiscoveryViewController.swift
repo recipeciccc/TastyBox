@@ -131,6 +131,7 @@ class DiscoveryViewController: UIViewController {
         self.MenuCollectionView.layoutIfNeeded()
         self.MenuCollectionView.scrollToItem(at: NSIndexPath(item: selectedIndex, section: 0) as IndexPath, at: .centeredHorizontally, animated: true)
            
+         self.navigationController?.hidesBarsOnTap = false
     }
     
     

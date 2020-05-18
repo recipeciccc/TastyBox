@@ -17,9 +17,15 @@ class VIPViewController: UIViewController {
     var mainViewController: MainPageViewController?
     var pageViewControllerDataSource: UIPageViewControllerDataSource?
     
+    ///  スクロール開始地点
+    var scrollBeginPoint: CGFloat = 0.0
+
+    /// navigationBarが隠れているかどうか(詳細から戻った一覧に戻った際の再描画に使用)
+    var lastNavigationBarIsHidden = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        
         dataManager.delegate = self
         collectionview.delegate = self
         
@@ -28,10 +34,36 @@ class VIPViewController: UIViewController {
         
         let width = collectionview.widthAnchor.constraint(equalToConstant: self.view.frame.size.width)
         let height =  collectionview.heightAnchor.constraint(equalToConstant: self.view.frame.size.height)
-    
+        
         width.isActive = true
         height.isActive = true
         
+        
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        navigationController?.setNavigationBarHidden(false, animated: true)
+        lastNavigationBarIsHidden = false
+    }
+    
+    func updateNavigationBarHiding(scrollDiff: CGFloat) {
+        let boundaryValue: CGFloat = 100.0
+        
+        /// navigationBar表示
+        if scrollDiff > boundaryValue {
+            navigationController?.setNavigationBarHidden(false, animated: true)
+            lastNavigationBarIsHidden = false
+            return
+        }
+            
+            /// navigationBar非表示
+        else if scrollDiff < -boundaryValue {
+            navigationController?.setNavigationBarHidden(true, animated: true)
+            lastNavigationBarIsHidden = true
+            return
+        } 
     }
     
 }
@@ -53,7 +85,7 @@ extension VIPViewController : VIPDataManagerDelegate {
                 
                 let alertController = UIAlertController(title: "No longer show this message?", message: nil, preferredStyle: .alert)
                 
-              
+                
                 let noLongerShowAction = UIAlertAction(title: "Don't show", style: .default, handler: { action in
                     self.dataManager.nolongerShowMessage()
                 })
@@ -114,7 +146,7 @@ extension VIPViewController :RecipeCollectionViewDelegate {
             vc.recipe = recipe
             vc.mainPhoto = image!
             vc.creator = creator
-                    
+            
             navigationController?.pushViewController(vc, animated: true)
         }
     }
@@ -136,5 +168,12 @@ extension VIPViewController :RecipeCollectionViewDelegate {
         
         mainViewController!.dataSource = nil
         mainViewController?.isPaging = false
+        let scrollDiff = scrollBeginPoint - scrollView.contentOffset.y
+        updateNavigationBarHiding(scrollDiff: scrollDiff)
+        
+    }
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        scrollBeginPoint = scrollView.contentOffset.y
     }
 }

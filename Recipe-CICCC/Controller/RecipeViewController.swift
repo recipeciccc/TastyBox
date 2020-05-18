@@ -6,6 +6,9 @@
 //  Copyright © 2019 fangyilai. All rights reserved.
 //
 
+
+//MARK: do not use same Data function as recipe detail view controller 
+
 import UIKit
 import Firebase
 import Crashlytics
@@ -255,6 +258,7 @@ extension RecipeViewController: RecipeViewControllerDelegate {
     }
     
     func reloadRecipe(data: [RecipeDetail]) {
+        self.recipes.removeAll()
         self.recipes = data
         
         recipes = recipes.sorted(by: { $0.like > $1.like })

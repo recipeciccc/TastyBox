@@ -136,10 +136,11 @@ class SearchingViewController: UIViewController {
     }
     
     @IBAction func actionSegmentAction(sender:UISegmentedControl) {
+        segmentControl.changeUnderlinePosition()
         
-        if segmentControl.selectedSegmentIndex > previousIndex || segmentControl.selectedSegmentIndex < previousIndex {
+//        if segmentControl.selectedSegmentIndex > previousIndex || segmentControl.selectedSegmentIndex < previousIndex {
             
-            segmentControl.changeUnderlinePosition()
+        if segmentControl.selectedSegmentIndex != previousIndex {
             var direction: UIPageViewController.NavigationDirection?
             
             if segmentControl.selectedSegmentIndex > previousIndex  {

@@ -16,8 +16,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="M4d-Mx-h0k">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="M4d-Mx-h0k">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <color key="backgroundColor" red="0.98998743300000003" green="0.97503405809999999" blue="0.80781579020000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="imageCell" rowHeight="250" id="qYe-d2-FV2" customClass="ImagesCell" customModule="Recipe_CICCC" customModuleProvider="target">
@@ -74,7 +74,7 @@
                             <constraint firstAttribute="trailing" secondItem="M4d-Mx-h0k" secondAttribute="trailing" id="IQl-pq-2w4"/>
                             <constraint firstItem="M4d-Mx-h0k" firstAttribute="leading" secondItem="55S-XO-hVO" secondAttribute="leading" id="LO7-H7-m7f"/>
                             <constraint firstItem="M4d-Mx-h0k" firstAttribute="top" secondItem="55S-XO-hVO" secondAttribute="top" id="sfx-Ia-zWw"/>
-                            <constraint firstItem="M4d-Mx-h0k" firstAttribute="bottom" secondItem="sAI-ye-ZSh" secondAttribute="bottom" id="zK9-9w-Pn0"/>
+                            <constraint firstItem="M4d-Mx-h0k" firstAttribute="bottom" secondItem="55S-XO-hVO" secondAttribute="bottom" id="zK9-9w-Pn0"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="sAI-ye-ZSh"/>
                     </view>

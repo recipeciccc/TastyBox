@@ -113,9 +113,16 @@ extension ResultRecipesViewController: UICollectionViewDelegate {
         
         let storyboard = UIStoryboard(name: "RecipeDetail", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "detailvc") as! RecipeDetailViewController
-        vc.userProfile = true
+        
+        if resultRecipes[indexPath.row].userID == Auth.auth().currentUser!.uid {
+            vc.userProfile = true
+        } else {
+            vc.userProfile = false
+        }
+        
         vc.recipe = resultRecipes[indexPath.row]
         vc.mainPhoto = resultRecipesImages[indexPath.row]!
+        
         guard self.navigationController?.topViewController == self else { return }
         self.navigationController?.pushViewController(vc, animated: true)
     }

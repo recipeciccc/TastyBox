@@ -218,16 +218,7 @@ extension GenreSelectViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = (collectionView.dequeueReusableCell(withReuseIdentifier: "genreCell", for: indexPath) as? GenreCollectionViewCell)!
-        
-//        if indexPath.section == 0 {
-//            //            let cell = (collectionView.dequeueReusableCell(withReuseIdentifier: "genreCell", for: indexPath) as? GenreCollectionViewCell)!
-//
-//
-//            cell.genreLabel.text = "VIP"
-//            cell.highlight(active: false)
-//
-//            return cell
-//        }
+
         if indexPath.section == 0 {
             
             let cell = (collectionView.dequeueReusableCell(withReuseIdentifier: "genreCell", for: indexPath) as? GenreCollectionViewCell)!
@@ -299,21 +290,13 @@ extension GenreSelectViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell = (collectionView.cellForItem(at: indexPath) as? GenreCollectionViewCell)!
         
-//        if indexPath.section == 0 {
-//
-//
-//            isHighlightVIP =  !isHighlightVIP
-//            cell.highlight(active: isHighlightVIP)
-//        }
-    if indexPath.section == 0{
-            //            let cell = (collectionView.cellForItem(at: indexPath) as? GenreCollectionViewCell)!
+        if indexPath.section == 0{
             
             isHighlightsImageLabelsGenres[imageLabelingTags[indexPath.row]] =  !isHighlightsImageLabelsGenres[imageLabelingTags[indexPath.row]]!
             
             cell.highlight(active: isHighlightsImageLabelsGenres[imageLabelingTags[indexPath.row]]!)
         } else {
             
-            //            let cell = (collectionView.cellForItem(at: indexPath) as? GenreCollectionViewCell)!
             
             isHighlightsNotImageLabelsGenres[tags[indexPath.row]]! =  !isHighlightsNotImageLabelsGenres[tags[indexPath.row]]!
             cell.highlight(active: isHighlightsNotImageLabelsGenres[tags[indexPath.row]]!)
@@ -337,20 +320,7 @@ extension GenreSelectViewController: UICollectionViewDelegate {
         }
         return UICollectionReusableView()
     }
-    
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        let numberOfItemsPerRow:CGFloat = 4
-//        let spacingBetweenCells:CGFloat = 16
-//
-//        let totalSpacing = (2 * self.spacing) + ((numberOfItemsPerRow - 1) * spacingBetweenCells) //Amount of total spacing in a row
-//
-//        if let collection = self.collectionView{
-//            let width = (collection.bounds.width - totalSpacing)/numberOfItemsPerRow
-//            return CGSize(width: width, height: width)
-//        }else{
-//            return CGSize(width: 0, height: 0)
-//        }
-//    }
+
 }
 
 

@@ -37,6 +37,11 @@ class FollowingRecipeViewController: UIViewController {
     weak var delegate: FollowingRecipestopPagingDelegate?
     
      let indicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
+    ///  スクロール開始地点
+    var scrollBeginPoint: CGFloat = 0.0
+
+    /// navigationBarが隠れているかどうか(詳細から戻った一覧に戻った際の再描画に使用)
+    var lastNavigationBarIsHidden = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,7 +76,22 @@ class FollowingRecipeViewController: UIViewController {
                 self?.indicator.startAnimating()
             }
         }
+        self.navigationController?.hidesBarsOnTap = true
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        if lastNavigationBarIsHidden {
+            self.navigationController?.setNavigationBarHidden(true, animated: false)
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
         
+        navigationController?.setNavigationBarHidden(false, animated: true)
+        lastNavigationBarIsHidden = false
     }
     
     
@@ -89,6 +109,24 @@ class FollowingRecipeViewController: UIViewController {
         imageView.frame = CGRect(x:(superView.frame.size.width / 2) - (width / 2), y: (superView.frame.size.width / 2) - (width / 2) , width: width, height: width)
         
         
+    }
+    
+    func updateNavigationBarHiding(scrollDiff: CGFloat) {
+        let boundaryValue: CGFloat = 100.0
+        
+        /// navigationBar表示
+        if scrollDiff > boundaryValue {
+            navigationController?.setNavigationBarHidden(false, animated: true)
+            lastNavigationBarIsHidden = false
+            return
+        }
+            
+            /// navigationBar非表示
+        else if scrollDiff < -boundaryValue {
+            navigationController?.setNavigationBarHidden(true, animated: true)
+            lastNavigationBarIsHidden = true
+            return
+        } 
     }
     
 }
@@ -122,7 +160,14 @@ extension FollowingRecipeViewController: UITableViewDataSource,UITableViewDelega
         tableViewCell.collectionViewDelegate(self, row: indexPath.row)
     }
     
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let scrollDiff = scrollBeginPoint - scrollView.contentOffset.y
+        updateNavigationBarHiding(scrollDiff: scrollDiff)
+    }
     
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        scrollBeginPoint = scrollView.contentOffset.y
+    }
 }
 
 extension FollowingRecipeViewController : UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
@@ -187,13 +232,13 @@ extension FollowingRecipeViewController : UICollectionViewDelegate,UICollectionV
         }
     }
     
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        mainViewController = self.parent as? MainPageViewController
-        pageViewControllerDataSource = mainViewController!.dataSource
-        
-        mainViewController!.dataSource = nil
-        mainViewController?.isPaging = false
-    }
+//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        mainViewController = self.parent as? MainPageViewController
+//        pageViewControllerDataSource = mainViewController!.dataSource
+//        
+//        mainViewController!.dataSource = nil
+//        mainViewController?.isPaging = false
+//    }
 }
 
 extension FollowingRecipeViewController : FollowingRecipeDataManagerDelegate {
