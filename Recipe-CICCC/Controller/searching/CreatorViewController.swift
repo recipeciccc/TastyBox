@@ -164,11 +164,6 @@ class CreatorViewController: UIViewController {
     @objc func keyboardWillShow(_ notification: Notification) {
         self.contentOffset =  self.MainTableView.contentOffset.y
         
-        //        UITextView.animate(withDuration: 0.2, animations:{
-        //            var frame = self.MainTableView.frame
-        //            frame.origin.y = -243 // keyboardSize.size.height
-        //            self.MainTableView.frame = frame
-        
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             let keyboardHeight = keyboardSize.height
             self.keyboardHeight = keyboardHeight
@@ -200,13 +195,6 @@ class CreatorViewController: UIViewController {
     
     @objc func dismissKeyBoard() {
         
-        //        if let keyboardSize = (Notification(name: .).userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-        //            let keyboardHeight = keyboardSize.height
-        //         let keyboardFrame = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
-        //        self.MainTableView.contentOffset.y = 0
-        
-        
-        
         // 2
         UIView.animate(withDuration: 0.3, animations: {
             self.view.frame.origin.y = 0
@@ -214,14 +202,7 @@ class CreatorViewController: UIViewController {
             self.MainTableView.scrollToRow(at: preparationRow, at: .bottom, animated: true)
             self.view.endEditing(true)
         })
-        
-        //        }
-        
-        //                UITextView.animate(withDuration: 0.3, animations:{
-        //                    var frame = self.MainTableView.frame
-        //                    frame.origin.y = 0 // self.tableviewHeight
-        //                    self.MainTableView.frame = frame})
-        
+     
         isKeyboardOpen = false
         
     }
@@ -248,20 +229,7 @@ class CreatorViewController: UIViewController {
 
 //MARK: upload recipe
 extension CreatorViewController{
-    
-    //    func checkTextView() -> Bool{
-    //        for i in 0..<preparationText.count{
-    //            if preparationText[i].last != "."{
-    //                let alertController = UIAlertController(title: "Error", message: "Please type period(.) after your last word in step \(i+1).", preferredStyle: .alert)
-    //                let alertAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-    //                alertController.addAction(alertAction)
-    //                present(alertController, animated: true, completion: nil)
-    //                return false
-    //            }
-    //        }
-    //        return true
-    //    }
-    
+
     
     //MARK: Save Recipes
     @IBAction func SaveData(_ sender: Any) {
@@ -545,8 +513,8 @@ extension CreatorViewController: UITableViewDelegate,UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.section {
-        case 0:
-            return 350
+//        case 0:
+//            return 350
         case 1,2,3,4,5:
             return 40
         case 6:
@@ -705,13 +673,7 @@ extension CreatorViewController: UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
         return true
     }
-    //
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        //        if scrollView.isDragging {
-        //            self.view.endEditing(true)
-        //            self.dismissKeyBoard()
-        //        }
-    }
+    
 }
 
 

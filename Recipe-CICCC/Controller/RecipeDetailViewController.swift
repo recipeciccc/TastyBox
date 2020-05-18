@@ -55,6 +55,18 @@ class RecipeDetailViewController: UIViewController {
         dataManager1.getGenres(tableView: self.detailTableView, recipe: recipe!)
         dataManager1.isLikedRecipe(recipeID: recipe!.recipeID)
         
+        let dbRef = Firestore.firestore().collection("recipe").document(recipe?.recipeID ?? "")
+        let query_ingredient = dbRef.collection("ingredient").order(by: "ingredient", descending: false)
+        let query_instruction = dbRef.collection("instruction").order(by: "index", descending: false)
+        
+        getIngredientData(query: query_ingredient)
+        getInstructionData(query: query_instruction)
+        
+        userDataManager.getUserDetail(id: recipe?.userID)
+        userDataManager.getUserImage(uid: recipe!.userID)
+        
+        dataManager1.isFollowingCreator(userID: recipe!.userID)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -63,20 +75,7 @@ class RecipeDetailViewController: UIViewController {
         
         if recipe!.isVIPRecipe! && recipe?.userID != uid {
             userDataManager.checkVIP()
-        } else {
-            
-            let dbRef = Firestore.firestore().collection("recipe").document(recipe?.recipeID ?? "")
-            let query_ingredient = dbRef.collection("ingredient").order(by: "ingredient", descending: false)
-            let query_instruction = dbRef.collection("instruction").order(by: "index", descending: false)
-            
-            getIngredientData(query: query_ingredient)
-            getInstructionData(query: query_instruction)
-            
-            userDataManager.getUserDetail(id: recipe?.userID)
-            userDataManager.getUserImage(uid: recipe!.userID)
-        
-            dataManager1.isFollowingCreator(userID: recipe!.userID)
-        }
+        } 
     
     }
 

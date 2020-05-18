@@ -31,7 +31,6 @@ class StoresMapViewController: UIViewController{
               print("No access")
             case .authorizedAlways, .authorizedWhenInUse:
               print("Access")
-//             createMap()
           default:
             break
           }
@@ -52,7 +51,6 @@ class StoresMapViewController: UIViewController{
               print("No access")
             case .authorizedAlways, .authorizedWhenInUse:
               print("Access")
-//             createMap()
             
           default:
             break
