@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import Crashlytics
 
 class FollowingViewController: UIViewController {
     
@@ -136,6 +137,7 @@ class FollowingViewController: UIViewController {
 
 extension FollowingViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+       
         return searchedFollowings.count
     }
     
@@ -143,19 +145,17 @@ extension FollowingViewController: UITableViewDataSource {
         let cell = (tableView.dequeueReusableCell(withIdentifier: "followingUser") as? followingUserTableViewCell)!
         cell.delegate = self
         
-        if followings.isEmpty {
-            cell.userNameLabel.text = "no following"
-        } else {
+        
             cell.userID = searchedFollowings[indexPath.row].userID
             cell.userNameLabel.text = searchedFollowings[indexPath.row].name
-        }
+        
         
         if parentVC?.userID != Auth.auth().currentUser?.uid {
             cell.followingButton.isHidden = true
             cell.userManageButton.isHidden = true
         } else {
             cell.userManageButton.isHidden = false
-            cell.followingButton.setTitle("Unfollow", for: .normal)
+            cell.followingButton.setTitle("Following", for: .normal)
        
         }
         
@@ -171,13 +171,20 @@ extension FollowingViewController: UITableViewDataSource {
 
 extension FollowingViewController:UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc = UIStoryboard(name: "creatorProfile", bundle: nil).instantiateViewController(identifier: "creatorProfile") as! CreatorProfileViewController
         
-        vc.id = searchedFollowings[indexPath.row].userID
-        tableView.deselectRow(at: indexPath, animated: true)
+        if searchedFollowings[indexPath.row].userID == Auth.auth().currentUser!.uid {
+            let vc =  UIStoryboard(name: "MyPage", bundle: nil).instantiateViewController(identifier: "User profile") as! MyPageViewController
+                    
+                    navigationController?.pushViewController(vc, animated: true)
+        } else {
+            let vc =  UIStoryboard(name: "creatorProfile", bundle: nil).instantiateViewController(identifier: "creatorProfile") as! CreatorProfileViewController
+                    
+                    vc.id = searchedFollowings[indexPath.row].userID
+                    
+                    navigationController?.pushViewController(vc, animated: true)
+        }
         
-//        guard self.navigationController?.topViewController == self else { return }
-        navigationController?.pushViewController(vc, animated: true)
+         tableView.deselectRow(at: indexPath, animated: true)
     }
 }
 

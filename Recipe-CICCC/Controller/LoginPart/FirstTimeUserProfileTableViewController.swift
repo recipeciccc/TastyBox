@@ -12,6 +12,7 @@ import Firebase
 import Photos
 import RSKImageCropper
 import FBSDKLoginKit
+import Crashlytics
 
 
 class FirstTimeUserProfileTableViewController: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSource {
@@ -162,9 +163,13 @@ class FirstTimeUserProfileTableViewController: UITableViewController, UIPickerVi
             
             let Storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
             let vc = Storyboard.instantiateViewController(withIdentifier: "Discovery")
+            vc.modalTransitionStyle = .crossDissolve
+            vc.modalPresentationStyle = .overFullScreen
             
             guard self.navigationController?.topViewController == self else { return }
-            self.navigationController?.pushViewController(vc, animated: true)
+            
+            self.navigationController?.pushViewController(vc, animated: false)
+            
             
         }
     }

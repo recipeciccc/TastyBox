@@ -10,16 +10,39 @@ import UIKit
 
 protocol iconItemTableViewCellDelegate: class{
     func increaseLike()
+    func decreaseLike()
 }
 
 class iconItemTableViewCell: UITableViewCell {
 
     @IBOutlet weak var numLikeLabel: UILabel!
+    @IBOutlet weak var likeButton: UIButton!
     
     weak var delegate: iconItemTableViewCellDelegate?
     
+    var isLiked: Bool? {
+        
+        didSet {
+            if isLiked != true {
+                likeButton.setImage(UIImage(systemName: "suit.heart"), for: .normal)
+            } else {
+                likeButton.setImage(UIImage(systemName: "suit.heart.fill"), for: .normal)
+            }
+            
+        }
+    }
+    
     @IBAction func increaseLike(_ sender: UIButton) {
-        self.delegate?.increaseLike()
+       
+        
+        if sender.currentImage == UIImage(systemName: "suit.heart.fill") {
+             sender.setImage(UIImage(systemName: "suit.heart"), for: .normal)
+             self.delegate?.decreaseLike()
+        } else {
+             sender.setImage(UIImage(systemName: "suit.heart.fill"), for: .normal)
+             self.delegate?.increaseLike()
+        }
+       
     }
     
     

@@ -8,6 +8,7 @@
 
 import Foundation
 import Firebase
+import Crashlytics
 
 class EmailRegisterViewController: UIViewController {
     

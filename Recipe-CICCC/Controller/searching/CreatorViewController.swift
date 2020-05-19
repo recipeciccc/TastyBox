@@ -8,6 +8,7 @@
 import UIKit
 import Firebase
 import FirebaseFirestore
+import Crashlytics
 
 
 //Globel variables
@@ -75,8 +76,8 @@ class CreatorViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(dismissKeyBoard), name: UIResponder.keyboardWillHideNotification, object: nil)
         
-//        tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyBoard:))
-//        self.view.addGestureRecognizer(tap!)
+        //        tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyBoard:))
+        //        self.view.addGestureRecognizer(tap!)
         
         tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
         self.view.addGestureRecognizer(tap!)
@@ -94,7 +95,7 @@ class CreatorViewController: UIViewController {
     //MARK: IBOutlet
     @IBOutlet weak var MainTableView: UITableView!
     @IBOutlet weak var saveButton: UIBarButtonItem!
-
+    
     //MARK: decide position
     @IBAction func UploadPhotoAction(_ sender: Any) {
         imagePicker.sourceType = .photoLibrary
@@ -147,7 +148,7 @@ class CreatorViewController: UIViewController {
         
     }
     
-
+    
     @IBAction func EditMode(_ sender: UIButton) {
         
         MainTableView.isEditing = !MainTableView.isEditing
@@ -159,14 +160,9 @@ class CreatorViewController: UIViewController {
         }
     }
     
-// MARK: keyboard method
+    // MARK: keyboard method
     @objc func keyboardWillShow(_ notification: Notification) {
         self.contentOffset =  self.MainTableView.contentOffset.y
-        
-        //        UITextView.animate(withDuration: 0.2, animations:{
-        //            var frame = self.MainTableView.frame
-        //            frame.origin.y = -243 // keyboardSize.size.height
-        //            self.MainTableView.frame = frame
         
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             let keyboardHeight = keyboardSize.height
@@ -199,13 +195,6 @@ class CreatorViewController: UIViewController {
     
     @objc func dismissKeyBoard() {
         
-        //        if let keyboardSize = (Notification(name: .).userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-        //            let keyboardHeight = keyboardSize.height
-        //         let keyboardFrame = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
-        //        self.MainTableView.contentOffset.y = 0
-        
-        
-        
         // 2
         UIView.animate(withDuration: 0.3, animations: {
             self.view.frame.origin.y = 0
@@ -213,14 +202,7 @@ class CreatorViewController: UIViewController {
             self.MainTableView.scrollToRow(at: preparationRow, at: .bottom, animated: true)
             self.view.endEditing(true)
         })
-        
-        //        }
-        
-        //                UITextView.animate(withDuration: 0.3, animations:{
-        //                    var frame = self.MainTableView.frame
-        //                    frame.origin.y = 0 // self.tableviewHeight
-        //                    self.MainTableView.frame = frame})
-        
+     
         isKeyboardOpen = false
         
     }
@@ -247,64 +229,56 @@ class CreatorViewController: UIViewController {
 
 //MARK: upload recipe
 extension CreatorViewController{
+
     
-    //    func checkTextView() -> Bool{
-    //        for i in 0..<preparationText.count{
-    //            if preparationText[i].last != "."{
-    //                let alertController = UIAlertController(title: "Error", message: "Please type period(.) after your last word in step \(i+1).", preferredStyle: .alert)
-    //                let alertAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-    //                alertController.addAction(alertAction)
-    //                present(alertController, animated: true, completion: nil)
-    //                return false
-    //            }
-    //        }
-    //        return true
-    //    }
-    
+    //MARK: Save Recipes
     @IBAction func SaveData(_ sender: Any) {
-           print(genres)
-           MainTableView.reloadData()
-        RecipeData.mainphoto.append(mainPhoto!)
-           RecipeData.title.append(recipeTitle)
-           RecipeData.cookingtime.append(recipeTime)
-           RecipeData.servings.append(recipeServings)
-           RecipeData.ingredients.append(ingredientList)
-           RecipeData.amounts.append(amountList)
-           RecipeData.stepPhotos.append(photoList)
-           RecipeData.stepTexts.append(preparationText)
-           
-           print(RecipeData.title,RecipeData.cookingtime,RecipeData.servings, RecipeData.ingredients, RecipeData.amounts,RecipeData.stepTexts)
-           //print(preparationText)
+        print(genres)
+        MainTableView.reloadData()
+        
+        
         let cgref = mainPhoto?.cgImage
         let cim = mainPhoto?.ciImage
-           guard let uid = Auth.auth().currentUser?.uid else{return}
-           let rid = self.db.collection("recipe").document().documentID
-           
-           if recipeTitle == "" || (cgref == nil && cim == nil){
-               let alertController = UIAlertController(title: "Error:", message: "Please enter recipe title and upload your main photo.", preferredStyle: .alert)
-               let alertAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-               alertController.addAction(alertAction)
-               present(alertController, animated: true, completion: nil)
-               
-           }else{
-               
-               //if checkTextView(){
+        guard let uid = Auth.auth().currentUser?.uid else{return}
+        let rid = self.db.collection("recipe").document().documentID
+        
+        
+        
+        if recipeTitle == "" || (cgref == nil && cim == nil){
+            let alertController = UIAlertController(title: "Error:", message: "Please enter recipe title and upload your main photo.", preferredStyle: .alert)
+            let alertAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+            alertController.addAction(alertAction)
+            present(alertController, animated: true, completion: nil)
+            
+        }else{
+            
+            RecipeData.mainphoto.append(mainPhoto!)
+            RecipeData.title.append(recipeTitle)
+            RecipeData.cookingtime.append(recipeTime)
+            RecipeData.servings.append(recipeServings)
+            RecipeData.ingredients.append(ingredientList)
+            RecipeData.amounts.append(amountList)
+            RecipeData.stepPhotos.append(photoList)
+            RecipeData.stepTexts.append(preparationText)
+            
+            print(RecipeData.title,RecipeData.cookingtime,RecipeData.servings, RecipeData.ingredients, RecipeData.amounts,RecipeData.stepTexts)
+            
             self.uploadImage(mainPhoto!,uid,rid) { (url) in
-                   self.recipeUpload(uid,rid,url!.absoluteString)
+                self.recipeUpload(uid,rid,url!.absoluteString)
                 self.uploadGenres(genres: self.genres, ingredients: self.ingredientList, imageLabels: self.imagesLabelsSelected, rid: rid)
-                   self.ingredientUpload(rid)
-                   self.commentUpload(rid) // we may not need it
-               }
-               
-               for index in 0..<photoList.count{
-                   self.uploadInstructionImage(photoList[index], uid, rid, index) { (url) in
-                       self.instructionUpload(rid,index,url!.absoluteString)
-                   }
-               }
-               navigationController?.popViewController(animated: true)
-               //}
-           }
-       }
+                self.ingredientUpload(rid)
+                self.commentUpload(rid) // we may not need it
+            }
+            
+            for index in 0..<photoList.count{
+                self.uploadInstructionImage(photoList[index], uid, rid, index) { (url) in
+                    self.instructionUpload(rid,index,url!.absoluteString)
+                }
+            }
+            navigationController?.popViewController(animated: true)
+            //}
+        }
+    }
     
     func recipeUpload(_ uid:String,_ rid:String, _ url:String){
         let recipeData = ["userID": uid,
@@ -539,8 +513,8 @@ extension CreatorViewController: UITableViewDelegate,UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.section {
-        case 0:
-            return 350
+//        case 0:
+//            return 350
         case 1,2,3,4,5:
             return 40
         case 6:
@@ -627,17 +601,10 @@ extension CreatorViewController: UITableViewDelegate,UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        //         self.view.endEditing(true)
         
         tableView.cellForRow(at: indexPath)?.selectionStyle = .none
     }
     
-    //    func tableView(_ tableView: UITableView, didSelectRowAt : IndexPath) {
-    //
-    //        self.view.endEditing(true)
-    //
-    //        tableView.cellForRow(at: didSelectRowAt)?.selectionStyle = .none
-    //    }
     
     func tableView(_ tableView: UITableView, targetIndexPathForMoveFromRowAt sourceIndexPath: IndexPath, toProposedIndexPath proposedDestinationIndexPath: IndexPath) -> IndexPath {
         if proposedDestinationIndexPath.section != sourceIndexPath.section{
@@ -706,33 +673,17 @@ extension CreatorViewController: UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
         return true
     }
-    //
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        //        if scrollView.isDragging {
-        //            self.view.endEditing(true)
-        //            self.dismissKeyBoard()
-        //        }
-    }
+    
 }
 
 
 
 extension CreatorViewController: UITextFieldDelegate, UITextViewDelegate{
     
-//MARK: TextField
+    //MARK: TextField
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         self.view.endEditing(true)
-//        let tag = textField.tag / 100
-//        let indexPathRow = textField.tag % (textField.tag / 10)
-//        if let nextField = self.MainTableView.subviews[tag].viewWithTag(textField.tag + 10 + indexPathRow) as? UITextField {
-//            nextField.becomeFirstResponder()
-//        } else {
-////            textField.resignFirstResponder()
-//        }
-//
-////        textField.resignFirstResponder()
-//
         
         return true
         
@@ -742,16 +693,7 @@ extension CreatorViewController: UITextFieldDelegate, UITextViewDelegate{
         move = false
         
     }
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        
-        if !textField.isFirstResponder {
-        
-//        if self.view.frame.origin.y != 0 {
-//            self.view.frame.origin.y = 0
-//        }
-        }
 
-    }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         
@@ -763,7 +705,7 @@ extension CreatorViewController: UITextFieldDelegate, UITextViewDelegate{
         selectedIndexPath = textFieldIndexPath
     }
     
-//MARK: Text view
+    //MARK: Text view
     func textViewDidBeginEditing(_ textView: UITextView) {
         if textView.text == "Please press [return] after the last character to finish editing." {
             textView.text = ""

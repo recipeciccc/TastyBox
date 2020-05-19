@@ -65,6 +65,11 @@ class IngredientRefrigeratorDataManager {
                     self.ingredients.append(ingredient)
                     
                 }
+                
+                if querySnapshot?.documents.count == 0 {
+                    self.delegate?.gotData(ingredients: self.ingredients)
+                }
+                
             }
             
             self.delegate?.gotData(ingredients: self.ingredients)

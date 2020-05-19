@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import Crashlytics
 
 protocol stopPagingDelegate:  class {
     func stopPaging(isPaging: Bool)
@@ -21,13 +22,15 @@ class IngredientsViewController: UIViewController {
         didSet {
             
             searchingIngredient = ingredientArray[0]
-            showingIngredient = searchingIngredient
+            if showingIngredient == nil {
+                showingIngredient = searchingIngredient
+            }
         }
     }
     var searchingIngredient: String?
     var showingIngredient: String?
     var imageDictionary: [String:[UIImage]] = [:]
-    
+    var imageCount = 0
     
     var allRecipes:[RecipeDetail] = []
     var recipes: [String: [RecipeDetail]] = [:]
@@ -54,28 +57,115 @@ class IngredientsViewController: UIViewController {
     
     weak var delegate: stopPagingDelegate?
     
+    ///  スクロール開始地点
+    var scrollBeginPoint: CGFloat = 0.0
+    
+    /// navigationBarが隠れているかどうか(詳細から戻った一覧に戻った際の再描画に使用)
+    var lastNavigationBarIsHidden = false
+    
+    let indicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
         
         refrigeratorDataManager.delegate = self
         dataManager.delegate = self
         ImageCollecitonView.delegate = self
         
+        
+        
+        let navigationBar = UINavigationBar()
+        let height = UIScreen.main.bounds.height / 2 - navigationBar.frame.size.height - 50
+        
+        indicator.transform = CGAffineTransform(scaleX: 2, y: 2)
+        indicator.center = CGPoint(x: UIScreen.main.bounds.width / 2 , y: height)
+        indicator.backgroundColor = #colorLiteral(red: 1, green: 0.5763723254, blue: 0, alpha: 0.5)
+        indicator.color = .white
+        indicator.layer.cornerRadius = 10
+        
+        self.view.addSubview(indicator)
+        
+        navigationController?.setNavigationBarHidden(false, animated: false)
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         let uid = Auth.auth().currentUser?.uid
-        refrigeratorDataManager.getRefrigeratorDetail(userID: uid!)
+        
+        if ingredientArray.isEmpty {
+            refrigeratorDataManager.getRefrigeratorDetail(userID: uid!)
+            
+            
+            DispatchQueue.global(qos: .default).async {
+                
+                // Do heavy work here
+                
+                DispatchQueue.main.async { [weak self] in
+                    // UI updates must be on main thread
+                    self?.indicator.startAnimating()
+                }
+            }
+        }
+        
+        if lastNavigationBarIsHidden {
+            self.navigationController?.setNavigationBarHidden(true, animated: false)
+        }
         
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        if let cell = TitleCollectionView.cellForItem(at: IndexPath(row: 0, section: 0)) as? IngredientTitleCollectionViewCell {
-            if selectedIndexPath == nil {
+        
+        if selectedIndexPath == nil {
+            
+            if let cell = TitleCollectionView.cellForItem(at: IndexPath(row: 0, section: 0)) as? IngredientTitleCollectionViewCell {
                 self.TitleCollectionView.reloadData()
                 self.TitleCollectionView.layoutIfNeeded()
                 cell.focusCell(active: true)
             }
         }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
         
+        imageCount = 0
+        navigationController?.setNavigationBarHidden(false, animated: true)
+        lastNavigationBarIsHidden = false
+    }
+    
+    func isVIPAction(superView: UIView) {
+        
+        let imageView = UIImageView(image: UIImage(systemName: "lock.circle"))
+        imageView.isOpaque = false
+        imageView.tintColor = UIColor(displayP3Red: 1.0, green: 1.0, blue: 1.0, alpha: 0.6)
+        
+        
+        superView.addSubview(imageView)
+        
+        imageView.frame.size.width = superView.frame.size.width / 3 * 2
+        imageView.frame.size.height = superView.frame.size.width / 3 * 2
+        
+        imageView.center = superView.center
+    }
+    
+    func updateNavigationBarHiding(scrollDiff: CGFloat) {
+        let boundaryValue: CGFloat = 100.0
+        
+        /// navigationBar表示
+        if scrollDiff > boundaryValue {
+            navigationController?.setNavigationBarHidden(false, animated: true)
+            lastNavigationBarIsHidden = false
+            return
+        }
+            
+            /// navigationBar非表示
+        else if scrollDiff < -boundaryValue {
+            navigationController?.setNavigationBarHidden(true, animated: true)
+            lastNavigationBarIsHidden = true
+            return
+        } 
     }
 }
 
@@ -111,6 +201,9 @@ extension IngredientsViewController: UICollectionViewDataSource, UICollectionVie
         
         if imageDictionary[showingIngredient!]?.count == recipes[showingIngredient!]?.count  {
             cell2.ingredientRecipeImage.image = imageDictionary[showingIngredient!]![indexPath.row]
+            
+            cell2.lockImageView.isHidden = recipes[showingIngredient!]![indexPath.row].isVIPRecipe! ? false : true
+            
         }
         
         cell2.ingredientRecipeName.text = recipes[showingIngredient!]![indexPath.row].title
@@ -128,6 +221,7 @@ extension IngredientsViewController: UICollectionViewDataSource, UICollectionVie
             
             tempCreators.removeAll()
             tempImages.removeAll()
+            imageCount = 0
             
             if recipes[showingIngredient!] != nil{
                 tempImages = Array(repeating: UIImage(), count: recipes[showingIngredient!]!.count)
@@ -138,7 +232,12 @@ extension IngredientsViewController: UICollectionViewDataSource, UICollectionVie
                     
                 }
             }
-            self.ImageCollecitonView.reloadData()
+            
+            
+            UIView.transition(with: self.ImageCollecitonView, duration: 0.3, options: [UIView.AnimationOptions.transitionCrossDissolve], animations: {
+                self.ImageCollecitonView.reloadData()
+            }, completion: nil)
+            
         }
         
         if collectionView == ImageCollecitonView {
@@ -185,6 +284,13 @@ extension IngredientsViewController: UICollectionViewDataSource, UICollectionVie
         
         mainViewController!.dataSource = nil
         mainViewController?.isPaging = false
+        let scrollDiff = scrollBeginPoint - scrollView.contentOffset.y
+        updateNavigationBarHiding(scrollDiff: scrollDiff)
+        
+    }
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        scrollBeginPoint = scrollView.contentOffset.y
     }
     
 }
@@ -219,22 +325,49 @@ extension IngredientsViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
+
+extension IngredientsViewController: getIngredientRefrigeratorDataDelegate{
+    func gotData(ingredients: [IngredientRefrigerator]) {
+        
+        if !ingredients.isEmpty {
+            var array = [String]()
+            for item in ingredients{
+                let name = item.name
+                array.append(name)
+            }
+            ingredientArray = array
+            
+            let query = db.collection("recipe").order(by: "like", descending: true)
+            let _ = dataManager.Data(queryRef: query)
+            
+            TitleCollectionView.reloadData()
+        } else {
+            
+            DispatchQueue.main.async { [weak self] in
+                // UI updates must be on main thread
+                self?.indicator.stopAnimating()
+            }
+        }
+    }
+}
+
 extension IngredientsViewController: fetchDataInIngredientsDelegate {
-    func reloadImg(image: UIImage, index: Int) {
-        
-        tempImages.remove(at: index)
-        tempImages.insert(image, at: index)
-        imageDictionary[showingIngredient!] = tempImages
-        
-        
-        self.ImageCollecitonView.reloadData()
-    }
     
-    func gotUserData(user: User) {
-        tempCreators.append(user)
-        creators[showingIngredient!] = tempCreators
+    // get the all recipe sorted by like
+    func reloadRecipe(data: [RecipeDetail]) {
+        
+        self.allRecipes = data
+        
+        lastRecipeID = allRecipes.last!.recipeID
+        
+        // get ingredients of all recipes
+        for recipe in self.allRecipes {
+            
+            dataManager.getIngredients(userId: recipe.userID, recipeId: recipe.recipeID)
+            
+        }
+        
     }
-    
     func reloadIngredients(data: [Ingredient], recipeID: String) {
         ingredientsDictionary[recipeID] = data
         
@@ -261,25 +394,7 @@ extension IngredientsViewController: fetchDataInIngredientsDelegate {
         }
     }
     
-    // get the all recipe sorted by like
-    func reloadRecipe(data: [RecipeDetail]) {
-        
-        self.allRecipes = data
-        
-        //        guard (self.allRecipes.last?.recipeID) != nil else {
-        //            return
-        //        }
-        
-        lastRecipeID = allRecipes.last!.recipeID
-        
-        // get ingredients of all recipes
-        for recipe in self.allRecipes {
-            
-            dataManager.getIngredients(userId: recipe.userID, recipeId: recipe.recipeID)
-            
-        }
-        
-    }
+    
     
     func haveSearchingIngredient(recipes: [RecipeDetail], ingredients: [String : [Ingredient]]) {
         var resultRecipes: [RecipeDetail] = []
@@ -304,26 +419,35 @@ extension IngredientsViewController: fetchDataInIngredientsDelegate {
         self.recipes[searchingIngredient!] = resultRecipes
     }
     
-}
-
-extension IngredientsViewController: getIngredientRefrigeratorDataDelegate{
-    func gotData(ingredients: [IngredientRefrigerator]) {
+    func reloadImg(image: UIImage, index: Int) {
         
-        if !ingredients.isEmpty {
-            var array = [String]()
-            for item in ingredients{
-                let name = item.name
-                array.append(name)
+        tempImages.remove(at: index)
+        tempImages.insert(image, at: index)
+        imageDictionary[showingIngredient!] = tempImages
+        imageCount += 1
+        
+        if imageCount ==  self.recipes[showingIngredient!]?.count {
+            DispatchQueue.global(qos: .default).async {
+                
+                // Do heavy work here
+                
+                DispatchQueue.main.async { [weak self] in
+                    // UI updates must be on main thread
+                    self?.indicator.stopAnimating()
+                }
             }
-            ingredientArray = array
-            //            searchingIngredient = ingredientArray[0]
-            //            showingIngredient = searchingIngredient
-            //
             
-            let query = db.collection("recipe").order(by: "like", descending: true)
-            let _ = dataManager.Data(queryRef: query)
-            
-            TitleCollectionView.reloadData()
+            UIView.transition(with: self.ImageCollecitonView, duration: 0.3, options: [UIView.AnimationOptions.transitionCrossDissolve], animations: {
+                self.ImageCollecitonView.reloadData()
+            }, completion: nil)
         }
     }
+    
+    func gotUserData(user: User) {
+        tempCreators.append(user)
+        creators[showingIngredient!] = tempCreators
+    }
+    
+    
 }
+

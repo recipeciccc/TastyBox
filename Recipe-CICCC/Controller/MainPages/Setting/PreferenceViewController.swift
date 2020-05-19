@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import FirebaseFirestoreSwift
+import Crashlytics
 
 class PreferenceViewController: UIViewController{
 

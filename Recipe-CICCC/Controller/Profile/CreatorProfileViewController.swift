@@ -9,13 +9,13 @@
 import UIKit
 import Firebase
 import MessageUI
+import Crashlytics
 
 class CreatorProfileViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
     var id: String?
-    //    var id = "3AsWJvUdZkQNPX0pukMcNDabnK53"
     var userName:String = ""
     var creatorImage: UIImage?
     var isFollowing: Bool?
@@ -74,13 +74,6 @@ class CreatorProfileViewController: UIViewController {
         userDataManager.delegate = self
         userDataManager.delegateFollowerFollowing = self
         
-        //        userDataManager.checkUserStatus(ID: id!)
-        //
-        //        userDataManager.getUserDetail(id: id!)
-        //
-        //        userDataManager.findFollowerFollowing(id: id!)
-        //
-        //        userDataManager.getUserImage(uid: id!)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -187,6 +180,11 @@ class CreatorProfileViewController: UIViewController {
         
     }
     
+    @IBAction func postedButtonAction(_ sender: Any) {
+        
+        self.tableView.scrollToRow(at: IndexPath(row: 0, section: 2), at: .top, animated: true)
+    }
+    
     // MARK: - Navigation
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -235,20 +233,7 @@ extension CreatorProfileViewController: UITableViewDataSource {
             
             cell.creatorImageView!.image = self.creatorImage
             cell.creatorNameLabel.text = userName
-            
-            //            if let isBlocked = isBlocked {
-            
-            //                if isBlocked {
-            //                    cell.followMeButton.isHidden = true
-            //                }
-            //                else if isBlocked != true && isFollowing == true {
-            //                    cell.followingManagement(isFollowing: true)
-            //                }
-            //                else if isBlocked != true && isFollowing == false {
-            //                    cell.followingManagement(isFollowing: false)
-            //                }
-            
-            //            }
+    
             
             return cell
         }
@@ -321,7 +306,13 @@ extension CreatorProfileViewController: ReloadDataDelegate{
     
     func reloadImg(img:[UIImage]){
         imageList = img
-        self.tableView.reloadData()
+        
+        UIView.transition(with:self.tableView, duration: 0.3, options: [UIView.AnimationOptions.transitionCrossDissolve], animations: {
+           self.tableView.reloadData()
+
+        }, completion: nil)
+        
+       
     }
 }
 
@@ -396,14 +387,6 @@ extension CreatorProfileViewController: FolllowingFollowerDelegate {
     }
     
     
-    //    func assginFollowersFollowingsImages(image: UIImage, index: Int) {
-    //
-    //    }
-    //
-    //    func assignFollowersFollowings(users: [User]) {
-    //
-    //    }
-    
     func passFollowerFollowing(followingsIDs: [String], followersIDs: [String]) {
         self.following.removeAll()
         self.followers.removeAll()
@@ -477,18 +460,7 @@ extension CreatorProfileViewController: followingManageDelegate {
                 self.isBlocking = false
             }
         }
-        //        else if isBlocked == nil || isBlocked == false {
-        //
-        //            self.userDataManager.increaseFollower(userID: id!, followerID: followerID)
-        //            let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! profieTableViewCell
-        //            cell.followingManagement(isFollowing: true)
-        //            self.isFollowing = true
-        //        }
-        
-        
-        
-        
-        //        tableView.reloadData()
+    
     }
 }
 

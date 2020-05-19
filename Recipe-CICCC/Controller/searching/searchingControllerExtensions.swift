@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Crashlytics
 
 extension SearchingViewController : SearchingCreatorsDataManagerDelegate{
     func searchedUsers(users: [User]) {

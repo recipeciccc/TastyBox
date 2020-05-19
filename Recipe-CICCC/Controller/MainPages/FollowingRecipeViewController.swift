@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import Crashlytics
 
 protocol FollowingRecipestopPagingDelegate:  class {
     func stopPaging(isPaging: Bool)
@@ -16,6 +17,7 @@ protocol FollowingRecipestopPagingDelegate:  class {
 class FollowingRecipeViewController: UIViewController {
     
     @IBOutlet weak var followingTableView: UITableView!
+
     
     var creatorImageList = [Int:UIImage]()
     var creatorNameList = [String]()
@@ -34,6 +36,13 @@ class FollowingRecipeViewController: UIViewController {
     
     weak var delegate: FollowingRecipestopPagingDelegate?
     
+     let indicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
+    ///  スクロール開始地点
+    var scrollBeginPoint: CGFloat = 0.0
+
+    /// navigationBarが隠れているかどうか(詳細から戻った一覧に戻った際の再描画に使用)
+    var lastNavigationBarIsHidden = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -43,7 +52,85 @@ class FollowingRecipeViewController: UIViewController {
         
         self.followingTableView.tableFooterView = UIView()
         
-      
+        indicator.transform = CGAffineTransform(scaleX: 2, y: 2)
+        
+        indicator.hidesWhenStopped = true
+        indicator.color = .white
+        
+        let navigationBar = UINavigationBar()
+        let height = UIScreen.main.bounds.height / 2 - navigationBar.frame.size.height - 50
+        
+        indicator.center = CGPoint(x: UIScreen.main.bounds.width / 2 , y: height)
+        indicator.backgroundColor = #colorLiteral(red: 1, green: 0.5763723254, blue: 0, alpha: 0.5)
+        indicator.layer.cornerRadius = 10
+        
+        self.view.addSubview(indicator)
+        
+        
+        DispatchQueue.global(qos: .default).async {
+            
+            // Do heavy work here
+            
+            DispatchQueue.main.async { [weak self] in
+                // UI updates must be on main thread
+                self?.indicator.startAnimating()
+            }
+        }
+        self.navigationController?.hidesBarsOnTap = true
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        if lastNavigationBarIsHidden {
+            self.navigationController?.setNavigationBarHidden(true, animated: false)
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        self.followingsID.removeAll()
+        self.followings.removeAll()
+        navigationController?.setNavigationBarHidden(false, animated: true)
+        lastNavigationBarIsHidden = false
+        
+        
+    }
+    
+    
+    func isVIPAction(superView: UIView) {
+        
+        let imageView = UIImageView(image: UIImage(systemName: "lock.circle"))
+        imageView.isOpaque = false
+        imageView.tintColor = UIColor(displayP3Red: 1.0, green: 1.0, blue: 1.0, alpha: 0.1)
+        
+        
+        superView.addSubview(imageView)
+        
+        let width =  superView.frame.size.width / 3 * 2
+    
+        imageView.frame = CGRect(x:(superView.frame.size.width / 2) - (width / 2), y: (superView.frame.size.width / 2) - (width / 2) , width: width, height: width)
+        
+        
+    }
+    
+    func updateNavigationBarHiding(scrollDiff: CGFloat) {
+        let boundaryValue: CGFloat = 100.0
+        
+        /// navigationBar表示
+        if scrollDiff > boundaryValue {
+            navigationController?.setNavigationBarHidden(false, animated: true)
+            lastNavigationBarIsHidden = false
+            return
+        }
+            
+            /// navigationBar非表示
+        else if scrollDiff < -boundaryValue {
+            navigationController?.setNavigationBarHidden(true, animated: true)
+            lastNavigationBarIsHidden = true
+            return
+        } 
     }
     
 }
@@ -77,7 +164,14 @@ extension FollowingRecipeViewController: UITableViewDataSource,UITableViewDelega
         tableViewCell.collectionViewDelegate(self, row: indexPath.row)
     }
     
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let scrollDiff = scrollBeginPoint - scrollView.contentOffset.y
+        updateNavigationBarHiding(scrollDiff: scrollDiff)
+    }
     
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        scrollBeginPoint = scrollView.contentOffset.y
+    }
 }
 
 extension FollowingRecipeViewController : UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
@@ -97,8 +191,8 @@ extension FollowingRecipeViewController : UICollectionViewDelegate,UICollectionV
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionCell", for: indexPath) as! followingRecipeCollectionViewCell
         
         if followingsID.count == recipeImages.count {
-           
-                cell.RecipeImage.image = self.recipeImages[collectionView.tag]?[indexPath.row]
+            
+            cell.RecipeImage.image = self.recipeImages[collectionView.tag]?[indexPath.row]
         }
         
         
@@ -107,6 +201,7 @@ extension FollowingRecipeViewController : UICollectionViewDelegate,UICollectionV
             
         }
         
+        cell.lockImageView.isHidden = recipes[collectionView.tag]![indexPath.row].isVIPRecipe! ? false : true
         
         return cell
     }
@@ -126,26 +221,13 @@ extension FollowingRecipeViewController : UICollectionViewDelegate,UICollectionV
         
         recipeDetailVC.mainPhoto = (cell?.RecipeImage.image)!
 
-//        guard self.navigationController?.topViewController == self else { return }
-
+    
         navigationController?.pushViewController(recipeDetailVC, animated: true)
     }
     
-//    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-////        delegate?.stopPaging(isPaging: false)
-//        mainViewController = self.parent as! MainPageViewController
-//        pageViewControllerDataSource = mainViewController!.dataSource
-//
-////        if  mainViewController!.dataSource != nil {
-//        mainViewController!.dataSource = nil
-//            mainViewController?.isPaging = false
-////        }
-//    }
-    
-    
     // they and self.ispaging = false in pageviewcontroller prevent from paging when collection view is scrollings 
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-          
+        
         mainViewController = self.parent as? MainPageViewController
         
         if  mainViewController!.dataSource == nil {
@@ -153,19 +235,13 @@ extension FollowingRecipeViewController : UICollectionViewDelegate,UICollectionV
             mainViewController!.dataSource = mainViewController
         }
     }
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        mainViewController = self.parent as? MainPageViewController
-        pageViewControllerDataSource = mainViewController!.dataSource
-                
-        mainViewController!.dataSource = nil
-        mainViewController?.isPaging = false
-    }
 }
 
 extension FollowingRecipeViewController : FollowingRecipeDataManagerDelegate {
     func assignUserImage(image: UIImage, index: Int) {
         self.creatorImageList[index] = image
+        
+        
         self.followingTableView.reloadData()
     }
     
@@ -173,7 +249,7 @@ extension FollowingRecipeViewController : FollowingRecipeDataManagerDelegate {
         
         self.creators = users
         self.followingTableView.reloadData()
-           
+        
     }
     
     func reloadData(data: [RecipeDetail], index: Int) {
@@ -198,7 +274,18 @@ extension FollowingRecipeViewController : FollowingRecipeDataManagerDelegate {
     }
     
     func passFollowing(followingsIDs: [String]) {
-        dataManager.getFollowings(IDs: followingsIDs)
+        
+        if followingsIDs.isEmpty {
+
+            DispatchQueue.main.async { [weak self] in
+                // UI updates must be on main thread
+                self?.indicator.stopAnimating()
+            }
+            
+        } else {
+            dataManager.getFollowings(IDs: followingsIDs)
+
+        }
         
         for (index, id) in followingsIDs.enumerated() {
             self.followingsID[index] = id
@@ -208,8 +295,6 @@ extension FollowingRecipeViewController : FollowingRecipeDataManagerDelegate {
             
             
             followingsIDs.enumerated().map {
-                
-//                dataManager.getUserImage(IDs: followingsIDs[$0.0])
                 
                 let queryRef = Firestore.firestore().collection("recipe").whereField("userID", isEqualTo: $0.1).order(by: "time", descending: true).limit(to: 10)
                 
@@ -221,15 +306,30 @@ extension FollowingRecipeViewController : FollowingRecipeDataManagerDelegate {
     }
     
     func appendRecipeImage(imgs: UIImage, indexOfImage: Int, orderFollowing: Int) {
-         print("\(indexOfImage): \(imgs)")
-       
+        print("\(indexOfImage): \(imgs)")
+        
         if recipeImages[orderFollowing] == nil {
             recipeImages[orderFollowing] = [Int:UIImage]()
         }
         recipeImages[orderFollowing]?[indexOfImage] = imgs
-        self.followingTableView.reloadData()
-        
+       
+        DispatchQueue.global(qos: .default).async {
+            
+            // Do heavy work here
+            
+            DispatchQueue.main.async { [weak self] in
+                // UI updates must be on main thread
+                self?.indicator.stopAnimating()
+            }
         }
+        
+        UIView.transition(with:  self.followingTableView, duration: 0.3, options: [UIView.AnimationOptions.transitionCrossDissolve], animations: {
+            
+            self.followingTableView.reloadData()
+        }, completion: nil)
+        
+        
+    }
     
 }
 
@@ -239,8 +339,6 @@ extension FollowingRecipeViewController:FollowingRecipeTableViewCellDelegate {
         
         profileVC.id = creators[indexPath.row].userID
         
-//        guard self.navigationController?.topViewController == self else { return }
-
         navigationController?.pushViewController(profileVC, animated: true)
     }
 }

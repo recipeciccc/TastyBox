@@ -6,8 +6,12 @@
 //  Copyright © 2019 fangyilai. All rights reserved.
 //
 
+
+//MARK: do not use same Data function as recipe detail view controller 
+
 import UIKit
 import Firebase
+import Crashlytics
 
 private let reuseIdentifier = "Cell"
 
@@ -24,7 +28,9 @@ class RecipeViewController: UIViewController {
     var recipeLabels = [String]()
     
     var category:Int = 0
+    
     var T_image = UIImage()
+    
     var T_Name = ""
     var CollectionImage = [UIImage]()
     var CollectionLabel = [String]()
@@ -40,35 +46,64 @@ class RecipeViewController: UIViewController {
     var searching = false
     var searchNames = [String]()
     lazy  var SearchBar: UISearchBar = UISearchBar(frame: CGRect(x: 0, y: 0, width: 600, height: 20))
-    
+    let indicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         SearchBar.delegate = self
-        SearchBar.placeholder = "Search Recipe "
+        SearchBar.placeholder = "Search Recipe"
+        dataManager.delegate = self
         let RightNavBarButton = UIBarButtonItem(customView:SearchBar)
         self.navigationItem.rightBarButtonItem = RightNavBarButton
         
         TitleImage.image = T_image
         TitleLabel.text = T_Name
         self.view.sendSubviewToBack(TitleImage)
-        
+    
         collectionRef.delegate = self
         collectionRef.dataSource = self
         
         let width = (collectionRef.frame.size.width - 4) / 2
         let layout = collectionRef.collectionViewLayout as! UICollectionViewFlowLayout
         layout.itemSize = CGSize(width: width, height: width)
+                
+       
         
-        //        setupCollection()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        collectionRef.isHidden = true
         
-        dataManager.delegate = self
+        indicator.color = .white
+        indicator.tag = 100
+        indicator.transform = CGAffineTransform(scaleX: 2, y: 2)
+        indicator.backgroundColor = .darkGray
+        indicator.layer.cornerRadius = 10.0
+        indicator.hidesWhenStopped = true
+        indicator.center = self.view.center
+        TitleImage.addSubview(indicator)
+        
+        DispatchQueue.global(qos: .default).async {
+            
+            // Do heavy work here
+            DispatchQueue.main.async { [weak self] in
+                // UI updates must be on main thread
+                self?.indicator.startAnimating()
+            }
+        }
+        
         let query = db.collection("recipe").whereField("genres.\(T_Name)", isEqualTo: true)
         dataManager.Data(queryRef: query)
         
+        
     }
-
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.recipes.removeAll()
+    }
+    
 }
 
 
@@ -78,12 +113,12 @@ extension RecipeViewController: UISearchBarDelegate{
         
         if searchBar.text! == "" {
             searchedRecipes.removeAll()
-
+            
             searching = false
             searchBar.showsCancelButton = true
             collectionRef.reloadData()
         } else {
-
+            
             searchedRecipes.removeAll()
             searchedRecipesImages.removeAll()
             searchedCreators.removeAll()
@@ -99,9 +134,9 @@ extension RecipeViewController: UISearchBarDelegate{
                 }
             }
             
-       
-        
-        collectionRef.reloadData()
+            
+            
+            collectionRef.reloadData()
         }
     }
     
@@ -136,7 +171,7 @@ extension RecipeViewController: UICollectionViewDataSource, UICollectionViewDele
         if searching{
             return searchedRecipes.count
         }
-        else{ return recipes.count }
+        else { return recipes.count }
         
         
     }
@@ -144,14 +179,27 @@ extension RecipeViewController: UICollectionViewDataSource, UICollectionViewDele
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionRef.dequeueReusableCell(withReuseIdentifier: "id", for: indexPath) as! CollectionViewCell
+        var isVIP: Bool?
         
         if searching{
             cell.collectionLabel.text = searchedRecipes[indexPath.row].title
             cell.collectionImage.image = searchedRecipesImages[indexPath.row]
+                        
         }
         else{
+            
+            isVIP = recipes[indexPath.row].isVIPRecipe
+            
             cell.collectionImage.image = recipesImages[indexPath.row]
             cell.collectionLabel.text = recipes[indexPath.row].title
+        }
+        
+        if let isVIP = isVIP {
+            if isVIP == true {
+                cell.lockIconImageView.isHidden = false
+            } else {
+                cell.lockIconImageView.isHidden = true
+            }
         }
         
         return cell
@@ -167,17 +215,21 @@ extension RecipeViewController: UICollectionViewDataSource, UICollectionViewDele
         let recipeDetailVC = UIStoryboard(name: "RecipeDetail", bundle: nil).instantiateViewController(identifier: "detailvc") as! RecipeDetailViewController
         
         if searching {
+            
             recipeDetailVC.recipe = searchedRecipes[indexPath.row]
             recipeDetailVC.creator = searchedCreators[indexPath.row]
             recipeDetailVC.mainPhoto = searchedRecipesImages[indexPath.row]
+            
+            
+            
         } else {
             recipeDetailVC.recipe = recipes[indexPath.row]
             recipeDetailVC.creator = creators[indexPath.row]
             recipeDetailVC.mainPhoto = recipesImages[indexPath.row]!
         }
-
+        
         guard self.navigationController?.topViewController == self else { return }
-
+        
         navigationController?.pushViewController(recipeDetailVC, animated: true)
     }
     
@@ -205,6 +257,10 @@ extension RecipeViewController: UICollectionViewDelegateFlowLayout {
 }
 
 extension RecipeViewController: RecipeViewControllerDelegate {
+    func gotUserData(users: [User]) {
+        self.creators = users
+    }
+    
     func reloadRecipe(data: [RecipeDetail]) {
         self.recipes = data
         
@@ -215,18 +271,40 @@ extension RecipeViewController: RecipeViewControllerDelegate {
         }
         
         self.recipes.enumerated().map {
+            
+            if $0.1.recipeID == self.recipes.last!.recipeID {
+                dataManager.getUserDetail(id: $0.1.userID, isLast: true)
+            } else {
+                dataManager.getUserDetail(id: $0.1.userID, isLast: false)
+            }
+            
             dataManager.getImage(uid: $0.1.userID, rid: $0.1.recipeID, index: $0.0)
-            dataManager.getUserDetail(id: $0.1.userID)
+            
         }
     }
     
     func reloadImg(image: UIImage, index: Int) {
         recipesImages[index] = image
-        self.collectionRef.reloadData()
-    }
-    
-    func gotUserData(user: User) {
-        self.creators.append(user)
+        
+        if recipes.count == recipesImages.count {
+         
+            DispatchQueue.global(qos: .default).async {
+                
+                // Do heavy work here
+                
+                DispatchQueue.main.async { [weak self] in
+                    // UI updates must be on main thread
+                    self?.indicator.stopAnimating()
+                }
+            }
+            
+            UIView.transition(with: self.collectionRef, duration: 0.3, options: [UIView.AnimationOptions.transitionCrossDissolve], animations: {
+                self.collectionRef.isHidden = false
+                
+            }, completion: nil)
+            
+            self.collectionRef.reloadData()
+        }
     }
     
     

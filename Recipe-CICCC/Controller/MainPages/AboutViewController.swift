@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import FBSDKLoginKit
+import Crashlytics
 
 class AboutViewController: UIViewController {
 
@@ -46,20 +47,12 @@ class AboutViewController: UIViewController {
         
         let okAction = UIAlertAction(title: "OK", style: .cancel, handler: { action in
             
-            Firestore.firestore().collection("user").document(Auth.auth().currentUser!.uid).setData(
-                ["isFirst": false]
-                , merge: true) { err in
-                if let err = err {
-                    print("Error writing document: \(err)")
-                } else {
-                    self.isFirst = nil
-                    let Storyboard: UIStoryboard = UIStoryboard(name: "Login", bundle: nil)
-                    let vc = Storyboard.instantiateViewController(withIdentifier: "FirstTimeProfile")
-                    if !((self.navigationController?.viewControllers.contains(vc))!) {
-                        self.navigationController?.pushViewController(vc, animated: true)
-                        print("Document successfully written!")
-                    }
-                }
+            
+            let Storyboard: UIStoryboard = UIStoryboard(name: "Login", bundle: nil)
+            let vc = Storyboard.instantiateViewController(withIdentifier: "FirstTimeProfile")
+            if !((self.navigationController?.viewControllers.contains(vc))!) {
+                self.navigationController?.pushViewController(vc, animated: true)
+                print("Document successfully written!")
             }
         })
         

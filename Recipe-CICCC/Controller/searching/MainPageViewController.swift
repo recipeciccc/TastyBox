@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Crashlytics
 
 protocol MainPageViewControllerDelegate : class {
     func indexPageCurledInContainer (index: Int, indexPathUserselectedBefore: Int, indexPath: IndexPath)

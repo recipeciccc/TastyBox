@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Crashlytics
 
 class EditorChoiceViewController: UIViewController {
     
@@ -21,10 +22,36 @@ class EditorChoiceViewController: UIViewController {
      var mainViewController: MainPageViewController?
      var pageViewControllerDataSource: UIPageViewControllerDataSource?
     
+    ///  スクロール開始地点
+    var scrollBeginPoint: CGFloat = 0.0
+
+    /// navigationBarが隠れているかどうか(詳細から戻った一覧に戻った際の再描画に使用)
+    var lastNavigationBarIsHidden = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         CreateImageArray()
-        // Do any additional setup after loading the view.
+        navigationController?.setNavigationBarHidden(false, animated: false)
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        if lastNavigationBarIsHidden {
+            self.navigationController?.setNavigationBarHidden(true, animated: false)
+        }
+        
+//        self.parent?.navigationController?.hidesBarsOnTap = false
+//         self.navigationController?.hidesBarsOnTap = false
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        navigationController?.setNavigationBarHidden(false, animated: true)
+        lastNavigationBarIsHidden = false
+        self.navigationController?.hidesBarsOnTap = false
     }
     
     func CreateImageArray() {
@@ -39,6 +66,25 @@ class EditorChoiceViewController: UIViewController {
         imageArray.append(image3)
         imageArray.append(image4)
         imageArray.append(image5)
+        
+    }
+    
+    func updateNavigationBarHiding(scrollDiff: CGFloat) {
+        let boundaryValue: CGFloat = 100.0
+
+        /// navigationBar表示
+        if scrollDiff > boundaryValue {
+            navigationController?.setNavigationBarHidden(false, animated: true)
+            lastNavigationBarIsHidden = false
+            return
+        }
+
+        /// navigationBar非表示
+        else if scrollDiff < -boundaryValue {
+            navigationController?.setNavigationBarHidden(true, animated: true)
+            lastNavigationBarIsHidden = true
+            return
+        }
         
     }
     
@@ -82,12 +128,29 @@ extension EditorChoiceViewController: UITableViewDataSource, UITableViewDelegate
         }
     }
     
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        // 下から５件くらいになったらリフレッシュ
+        guard tableView.cellForRow(at: IndexPath(row: self.imageArray.count - 1, section: 0)) != nil else {
+            return
+        }
+        // ここでリフレッシュのメソッドを呼ぶ
+        
+        print("HI")
+    }
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         mainViewController = self.parent as? MainPageViewController
         pageViewControllerDataSource = mainViewController!.dataSource
                 
         mainViewController!.dataSource = nil
         mainViewController?.isPaging = false
+    
+        let scrollDiff = scrollBeginPoint - scrollView.contentOffset.y
+        updateNavigationBarHiding(scrollDiff: scrollDiff)
+    }
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        scrollBeginPoint = scrollView.contentOffset.y
     }
 }
 

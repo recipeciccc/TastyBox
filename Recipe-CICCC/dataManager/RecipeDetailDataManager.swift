@@ -15,7 +15,92 @@ class RecipeDetailDataManager {
     var ingredientList:[Ingredient] = []
     var instructionList: [Instruction] = []
     let db = Firestore.firestore()
-    var delegate: RecipeDetailDelegate?
+    weak var delegate: RecipeDetailDelegate?
+    let uid = Auth.auth().currentUser?.uid
+    
+    func isFollowingCreator(userID: String) {
+        db.collection("user").document(uid!).collection("following").whereField("id", isEqualTo: userID).addSnapshotListener {
+            (querysnapshot, error) in
+            
+            if error != nil {
+                print("Error getting documents: \(String(describing: error))")
+            } else {
+                
+                guard let documents = querysnapshot?.documents else {
+                    
+                    self.delegate?.isFollowingCreator(isFollowing: false)
+                    return
+                    
+                }
+                
+                guard let document = documents.first else {
+                    self.delegate?.isFollowingCreator(isFollowing: false)
+                    return
+                }
+                
+                let data = document.data()
+                
+                if (data["id"] as? String) != nil {
+                    self.delegate?.isFollowingCreator(isFollowing: true)
+                } else {
+                    self.delegate?.isFollowingCreator(isFollowing: false)
+                }
+            }
+        }
+    }
+    
+    func isLikedRecipe(recipeID: String) {
+        db.collection("user").document(uid!).addSnapshotListener {
+            (querysnapshot, error) in
+            
+            if error != nil {
+                print("Error getting documents: \(String(describing: error))")
+            } else {
+                
+                if let data = querysnapshot?.data() {
+                    if let dictionaryLikedRecipe = data["likedRecipe"] as? [String : Bool] {
+                        
+                        
+                        let isLiked = dictionaryLikedRecipe.enumerated().filter {
+                            $0.1.key == recipeID
+                        }.map {
+                            $0.element.value
+                        }
+                        
+                        if isLiked.isEmpty {
+                            self.delegate?.isLikedRecipe(isLiked: false)
+                            
+                        } else {
+                            self.delegate?.isLikedRecipe(isLiked: isLiked[0])
+                            
+                        }
+                    }
+                    
+                }
+                
+            }
+        }
+    }
+    
+    func getGenres(tableView: UITableView, recipe: RecipeDetail){
+        db.collection("recipe").document(recipe.recipeID).addSnapshotListener { (snapshot, err) in
+            if err != nil{
+                print("Error: Can not fetch data.")
+            }
+            else{
+                if let data = snapshot?.data(){
+                    
+                    guard let genresDictionary = data["genres"] as? [String: Bool] else {
+                        return
+                    }
+                    
+                    let genres = [String](genresDictionary.keys)
+                    self.delegate?.gotGenres(genres: [String](genres))
+                    
+                }
+            }
+        }
+    }
     
     
     func getIngredientData(query:Query, tableView: UITableView){
@@ -60,8 +145,8 @@ class RecipeDetailDataManager {
         }
     }
     
-    func increaseLike(recipe: RecipeDetail) {
-        
+    func increaseLike(recipe: RecipeDetail, isIncreased: Bool) {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
         db.collection("recipe").document(recipe.recipeID).setData (
             ["like": recipe.like], merge: true
         ) { err in
@@ -72,28 +157,64 @@ class RecipeDetailDataManager {
             }
         }
         
+        let increaseOrDecrease = isIncreased ? true : false
+        db.collection("user").document(uid).setData (
+            ["likedRecipe": [recipe.recipeID : increaseOrDecrease]], merge: true
+        ) { err in
+            if let err = err {
+                print("Error writing document: \(err)")
+            } else {
+                print("Document successfully written!")
+            }
+        }
+        
     }
     
-    func increaseFollower(followerID: String) {
+    func manageFollowing(followerID: String, isfollow: Bool) {
         
         guard let uid = Auth.auth().currentUser?.uid else { return }
-        db.collection("user").document(followerID).collection("follower").document(uid).setData([
-            "id": uid
-        ], merge: true ){ err in
-            if let err = err {
-                print("Error writing document: \(err)")
-            } else {
-                print("Document successfully written!")
+        
+        if isfollow {
+            db.collection("user").document(followerID).collection("follower").document(uid).setData([
+                "id": uid
+            ], merge: true ){ err in
+                if let err = err {
+                    print("Error writing document: \(err)")
+                } else {
+                    print("Document successfully written!")
+                    
+                    self.db.collection("user").document(uid).collection("following").document(followerID).setData([
+                        "id": followerID
+                    ], merge: true ){ err in
+                        if let err = err {
+                            print("Error writing document: \(err)")
+                        } else {
+                            
+                            self.delegate?.FollowedAction()
+                            print("Document successfully written!")
+                        }
+                    }
+                }
             }
+            
+        } else {
+            db.collection("user").document(followerID).collection("follower").document(uid).delete(completion: { error in
+                
+                if let error = error {
+                    print(error)
+                } else {
+                    self.db.collection("user").document(uid).collection("following").document(followerID).delete(completion: { error in
+                        
+                        if let error = error {
+                            print(error)
+                        } else {
+                            self.delegate?.UnfollowedAction()
+                        }
+                    })
+                }
+            })
+            
         }
-        db.collection("user").document(uid).collection("following").document(followerID).setData([
-            "id": followerID
-        ], merge: true ){ err in
-            if let err = err {
-                print("Error writing document: \(err)")
-            } else {
-                print("Document successfully written!")
-            }
-        }
+        
     }
 }

@@ -8,6 +8,7 @@
 
 import UIKit
 import MessageUI
+import Crashlytics
 
 class ContactViewController: UIViewController {
 

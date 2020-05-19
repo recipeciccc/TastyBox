@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Crashlytics
 
 protocol GenreSelectViewControllerDelegate: class {
     func assignGenres(genres: [String], imagesLabels: [String], imagesLabelsSelected: [String], isVIP: Bool)
@@ -67,7 +68,7 @@ class GenreSelectViewController: UIViewController {
             dataManager.labelingImage(image: image!)
             
             uiView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height:  self.view.frame.size.height))
-            uiView.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 0.5)
+            uiView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
             uiView.tag = 100
             indicator.transform = CGAffineTransform(scaleX: 2, y: 2)
             
@@ -217,16 +218,7 @@ extension GenreSelectViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = (collectionView.dequeueReusableCell(withReuseIdentifier: "genreCell", for: indexPath) as? GenreCollectionViewCell)!
-        
-//        if indexPath.section == 0 {
-//            //            let cell = (collectionView.dequeueReusableCell(withReuseIdentifier: "genreCell", for: indexPath) as? GenreCollectionViewCell)!
-//
-//
-//            cell.genreLabel.text = "VIP"
-//            cell.highlight(active: false)
-//
-//            return cell
-//        }
+
         if indexPath.section == 0 {
             
             let cell = (collectionView.dequeueReusableCell(withReuseIdentifier: "genreCell", for: indexPath) as? GenreCollectionViewCell)!
@@ -298,21 +290,13 @@ extension GenreSelectViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell = (collectionView.cellForItem(at: indexPath) as? GenreCollectionViewCell)!
         
-//        if indexPath.section == 0 {
-//
-//
-//            isHighlightVIP =  !isHighlightVIP
-//            cell.highlight(active: isHighlightVIP)
-//        }
-    if indexPath.section == 0{
-            //            let cell = (collectionView.cellForItem(at: indexPath) as? GenreCollectionViewCell)!
+        if indexPath.section == 0{
             
             isHighlightsImageLabelsGenres[imageLabelingTags[indexPath.row]] =  !isHighlightsImageLabelsGenres[imageLabelingTags[indexPath.row]]!
             
             cell.highlight(active: isHighlightsImageLabelsGenres[imageLabelingTags[indexPath.row]]!)
         } else {
             
-            //            let cell = (collectionView.cellForItem(at: indexPath) as? GenreCollectionViewCell)!
             
             isHighlightsNotImageLabelsGenres[tags[indexPath.row]]! =  !isHighlightsNotImageLabelsGenres[tags[indexPath.row]]!
             cell.highlight(active: isHighlightsNotImageLabelsGenres[tags[indexPath.row]]!)
@@ -336,20 +320,7 @@ extension GenreSelectViewController: UICollectionViewDelegate {
         }
         return UICollectionReusableView()
     }
-    
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        let numberOfItemsPerRow:CGFloat = 4
-//        let spacingBetweenCells:CGFloat = 16
-//
-//        let totalSpacing = (2 * self.spacing) + ((numberOfItemsPerRow - 1) * spacingBetweenCells) //Amount of total spacing in a row
-//
-//        if let collection = self.collectionView{
-//            let width = (collection.bounds.width - totalSpacing)/numberOfItemsPerRow
-//            return CGSize(width: width, height: width)
-//        }else{
-//            return CGSize(width: 0, height: 0)
-//        }
-//    }
+
 }
 
 

@@ -10,6 +10,7 @@ import UIKit
 import Firebase
 import FirebaseAuth
 import FBSDKLoginKit
+import Crashlytics
 
 //protocol MenuViewControllerDelegate: class {
 //    func menuViewController(viewController: DiscoveryViewController, at index: Int)
@@ -49,7 +50,6 @@ class DiscoveryViewController: UIViewController {
         print("Toggle side Menu")
         
         
-        
         if sideMenuOpen == false {
             // Init a UIVisualEffectView which going to do the blur for us
             let blurView = UIVisualEffectView()
@@ -57,7 +57,7 @@ class DiscoveryViewController: UIViewController {
             blurView.frame = view.frame
             // Choose the style of the blur effect to regular.
             // You can choose dark, light, or extraLight if you wants
-            blurView.effect = UIBlurEffect(style: .light)
+            blurView.effect = UIBlurEffect(style: .dark)
             // Now add the blur view to the main view
             blurView.tag = 100
             
@@ -108,6 +108,7 @@ class DiscoveryViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
         self.title = "TastyBox"
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.orange ]
         CreateMenuLabel()
@@ -130,17 +131,13 @@ class DiscoveryViewController: UIViewController {
         self.MenuCollectionView.layoutIfNeeded()
         self.MenuCollectionView.scrollToItem(at: NSIndexPath(item: selectedIndex, section: 0) as IndexPath, at: .centeredHorizontally, animated: true)
            
+         self.navigationController?.hidesBarsOnTap = false
     }
     
     
     
     func initialContentView(){
-        //        self.SubscribedContainerView.isHidden = true
-        //        self.MonthlyContainerView.isHidden = true
-        //        self.PopularContainerView.isHidden = true
-        //        self.IngredientsContainerView.isHidden = true
-        //        self.EditorContainerView.isHidden = true
-        //        self.VIPContainerVIew.isHidden = true
+        
         self.PopularContainerView.isHidden = false
         
     }
@@ -192,7 +189,6 @@ class DiscoveryViewController: UIViewController {
         if Auth.auth().currentUser != nil{
             do{
                 try Auth.auth().signOut()
-                //                navigationController?.popViewController(animated: true)
                 
             }catch let error as NSError{
                 print(error.localizedDescription)
@@ -206,14 +202,6 @@ class DiscoveryViewController: UIViewController {
                    
         }
        
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        //        if segue.identifier == "embedPageViewController" {
-        //            pageControllView = (segue.destination as? MainPageViewController)!
-        //            pageControllView.dataSource = self
-        //            pageControllView.delegate = self  // 追加
-        //        }
     }
     
     
@@ -336,14 +324,6 @@ extension DiscoveryViewController: UICollectionViewDelegate, UICollectionViewDat
 class MenuCollectionViewCell: UICollectionViewCell{
     @IBOutlet weak var MenuLabel: UILabel!
     
-    //test
-    //        override var isSelected: Bool{
-    //            didSet(newValue){
-    //                contentView.backgroundColor = UIColor.brown
-    //                MenuLabel.tintColor = UIColor.white
-    //            }
-    //        }
-    
     func focusCell(active: Bool) {
         let color = active ? #colorLiteral(red: 0.9984802604, green: 0.9880111814, blue: 0.655043602, alpha: 1) : #colorLiteral(red: 0.9890902638, green: 0.8873679042, blue: 0.4545228481, alpha: 1)
         self.contentView.backgroundColor = color
@@ -354,15 +334,6 @@ class MenuCollectionViewCell: UICollectionViewCell{
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        //        let OriginalView = UIView()
-        //        let ChangeView = UIView()
-        //
-        //        if OriginalView.isEqual(ChangeView){
-        //            ChangeView.backgroundColor = #colorLiteral(red: 0.9607843161, green: 0.7058823705, blue: 0.200000003, alpha: 1)
-        //            self.selectedBackgroundView = ChangeView
-        //        }else{
-        //            ChangeView.backgroundColor = #colorLiteral(red: 0.9998212457, green: 0.9867780805, blue: 0.7689660192, alpha: 1)
-        //            self.backgroundView = ChangeView
     }
     
 }

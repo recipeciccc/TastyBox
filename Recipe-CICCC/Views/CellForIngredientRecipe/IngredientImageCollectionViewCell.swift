@@ -13,5 +13,15 @@ class IngredientImageCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var ingredientRecipeImage: UIImageView!
     @IBOutlet weak var ingredientRecipeName: UILabel!
     
+    @IBOutlet weak var lockImageView: UIImageView!
+    
+    override func awakeFromNib() {
+        let widthAnchor = lockImageView.widthAnchor.constraint(equalToConstant: self.ingredientRecipeImage.frame.size.width / 3 * 2)
+        
+        let heightAnchor = lockImageView.heightAnchor.constraint(equalToConstant: self.ingredientRecipeImage.frame.size.width / 3 * 2)
+        
+        widthAnchor.isActive = true
+        heightAnchor.isActive = true
+    }
     
 }

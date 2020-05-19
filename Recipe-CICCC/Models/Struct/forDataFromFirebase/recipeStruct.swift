@@ -21,24 +21,6 @@ struct RecipeDetail {
     var userID:String
     var genres: [String] = []
     var isVIPRecipe: Bool?
-//    var instructions: [Instruction]
-//    var ingredients: [Ingredient]
-//    var comment: [Comment]
-    
-    //    init(snapshot:QueryDocumentSnapshot) {
-    //        guard
-    //            let docId = snapshot.documentID,
-    //            let title = snapshot.get("title") as! String,
-    //            let cookingTime = snapshot.get("Cooking Time") as! Int,
-    //    //                    let image = document.get("image") as! String
-    //            let like = snapshot.get("like") as! Int,
-    //            let serving = snapshot.get("serving") as! Int
-    //        else { return }
-    //
-    //        self.id = "ID"
-    //    }
-    
-    
 }
 
 struct Ingredient {
@@ -48,8 +30,7 @@ struct Ingredient {
 
 struct Instruction {
     var index: Int
-//    var image:UIImage?
-    var imageUrl: String  //UIImage
+    var imageUrl: String  
     var text: String
 }
 

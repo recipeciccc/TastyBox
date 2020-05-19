@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import Crashlytics
 
 class ResultRecipesViewController: UIViewController {
 
@@ -24,17 +25,44 @@ class ResultRecipesViewController: UIViewController {
     var resultRecipes:[RecipeDetail] = []
     var resultRecipesImages:[Int:UIImage] = [:]
     
+    var uiView = UIView()
+    let indicator = UIActivityIndicatorView()
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        uiView = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height:  self.view.frame.size.height))
+        uiView.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 0.5)
+        uiView.tag = 100
+        indicator.transform = CGAffineTransform(scaleX: 2, y: 2)
+        
+        indicator.hidesWhenStopped = true
+        indicator.color = .orange
+        indicator.center = self.view.center
+        
+        uiView.addSubview(indicator)
+        
+        self.view.addSubview(uiView)
+        
+        
+        DispatchQueue.global(qos: .default).async {
+            
+            // Do heavy work here
+            
+            DispatchQueue.main.async { [weak self] in
+                // UI updates must be on main thread
+                self?.indicator.startAnimating()
+            }
+        }
  
         collectionView.delegate = self
         collectionView.dataSource = self
         dataManager.delegate = self
         
         resultRecipesImages.removeAll()
-        resultRecipesImages.removeAll()
+        resultRecipes.removeAll()
         
         if searchingCategory! == "genres" {
             dataManager.searchingGenreRecipe(searchingWord: searchingWord!)
@@ -54,7 +82,7 @@ class ResultRecipesViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
+    
 }
 
 extension ResultRecipesViewController: UICollectionViewDataSource {
@@ -72,6 +100,8 @@ extension ResultRecipesViewController: UICollectionViewDataSource {
             cell.imgView.image = resultRecipesImages[indexPath.row]!
         }
         
+        cell.lockImageView.isHidden = resultRecipes[indexPath.row].isVIPRecipe! ? false : true
+        
         return cell
     }
     
@@ -83,10 +113,16 @@ extension ResultRecipesViewController: UICollectionViewDelegate {
         
         let storyboard = UIStoryboard(name: "RecipeDetail", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "detailvc") as! RecipeDetailViewController
-        vc.userProfile = true
+        
+        if resultRecipes[indexPath.row].userID == Auth.auth().currentUser!.uid {
+            vc.userProfile = true
+        } else {
+            vc.userProfile = false
+        }
+        
         vc.recipe = resultRecipes[indexPath.row]
         vc.mainPhoto = resultRecipesImages[indexPath.row]!
-//        vc.creator = self.user
+        
         guard self.navigationController?.topViewController == self else { return }
         self.navigationController?.pushViewController(vc, animated: true)
     }
@@ -117,9 +153,29 @@ extension ResultRecipesViewController : ResultRecipesDataManagerDelegate {
     func reloadImg(img: UIImage, index: Int) {
         if resultRecipesImages.count != resultRecipes.count {
              resultRecipesImages[index] = img
+            
+            if let viewWithTag = self.view.viewWithTag(100) {
+                viewWithTag.removeFromSuperview()
+            }else{
+                print("No!")
+            }
+            
+            DispatchQueue.global(qos: .default).async {
+                
+                // Do heavy work here
+                
+                DispatchQueue.main.async { [weak self] in
+                    // UI updates must be on main thread
+                    self?.indicator.stopAnimating()
+                }
+            }
         }
         
-        self.collectionView.reloadData()
+        UIView.transition(with: self.collectionView, duration: 0.3, options: [UIView.AnimationOptions.transitionCrossDissolve], animations: {
+           self.collectionView.reloadData()
+
+        }, completion: nil)
+        
     }
     
     func reloadIngredients(recipes:[RecipeDetail]) {
