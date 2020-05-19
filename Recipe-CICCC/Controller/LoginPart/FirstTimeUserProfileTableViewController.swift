@@ -163,8 +163,8 @@ class FirstTimeUserProfileTableViewController: UITableViewController, UIPickerVi
             
             let Storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
             let vc = Storyboard.instantiateViewController(withIdentifier: "Discovery")
-//            vc.modalTransitionStyle = .crossDissolve
-//            vc.modalPresentationStyle = .overFullScreen
+            vc.modalTransitionStyle = .crossDissolve
+            vc.modalPresentationStyle = .overFullScreen
             
             guard self.navigationController?.topViewController == self else { return }
             

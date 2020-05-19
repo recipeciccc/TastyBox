@@ -90,8 +90,12 @@ class FollowingRecipeViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
+        self.followingsID.removeAll()
+        self.followings.removeAll()
         navigationController?.setNavigationBarHidden(false, animated: true)
         lastNavigationBarIsHidden = false
+        
+        
     }
     
     
@@ -231,14 +235,6 @@ extension FollowingRecipeViewController : UICollectionViewDelegate,UICollectionV
             mainViewController!.dataSource = mainViewController
         }
     }
-    
-//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        mainViewController = self.parent as? MainPageViewController
-//        pageViewControllerDataSource = mainViewController!.dataSource
-//        
-//        mainViewController!.dataSource = nil
-//        mainViewController?.isPaging = false
-//    }
 }
 
 extension FollowingRecipeViewController : FollowingRecipeDataManagerDelegate {

@@ -22,7 +22,9 @@ class IngredientsViewController: UIViewController {
         didSet {
             
             searchingIngredient = ingredientArray[0]
-            showingIngredient = searchingIngredient
+            if showingIngredient == nil {
+                showingIngredient = searchingIngredient
+            }
         }
     }
     var searchingIngredient: String?
@@ -91,17 +93,20 @@ class IngredientsViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         let uid = Auth.auth().currentUser?.uid
         
-        refrigeratorDataManager.getRefrigeratorDetail(userID: uid!)
-        DispatchQueue.global(qos: .default).async {
+        if ingredientArray.isEmpty {
+            refrigeratorDataManager.getRefrigeratorDetail(userID: uid!)
             
-            // Do heavy work here
             
-            DispatchQueue.main.async { [weak self] in
-                // UI updates must be on main thread
-                self?.indicator.startAnimating()
+            DispatchQueue.global(qos: .default).async {
+                
+                // Do heavy work here
+                
+                DispatchQueue.main.async { [weak self] in
+                    // UI updates must be on main thread
+                    self?.indicator.startAnimating()
+                }
             }
         }
-        
         
         if lastNavigationBarIsHidden {
             self.navigationController?.setNavigationBarHidden(true, animated: false)
@@ -111,6 +116,7 @@ class IngredientsViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
         if selectedIndexPath == nil {
             
             if let cell = TitleCollectionView.cellForItem(at: IndexPath(row: 0, section: 0)) as? IngredientTitleCollectionViewCell {
@@ -126,7 +132,7 @@ class IngredientsViewController: UIViewController {
         
         imageCount = 0
         navigationController?.setNavigationBarHidden(false, animated: true)
-               lastNavigationBarIsHidden = false
+        lastNavigationBarIsHidden = false
     }
     
     func isVIPAction(superView: UIView) {
@@ -226,7 +232,12 @@ extension IngredientsViewController: UICollectionViewDataSource, UICollectionVie
                     
                 }
             }
-            self.ImageCollecitonView.reloadData()
+            
+            
+            UIView.transition(with: self.ImageCollecitonView, duration: 0.3, options: [UIView.AnimationOptions.transitionCrossDissolve], animations: {
+                self.ImageCollecitonView.reloadData()
+            }, completion: nil)
+            
         }
         
         if collectionView == ImageCollecitonView {
@@ -275,7 +286,7 @@ extension IngredientsViewController: UICollectionViewDataSource, UICollectionVie
         mainViewController?.isPaging = false
         let scrollDiff = scrollBeginPoint - scrollView.contentOffset.y
         updateNavigationBarHiding(scrollDiff: scrollDiff)
-
+        
     }
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
@@ -314,7 +325,100 @@ extension IngredientsViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
+
+extension IngredientsViewController: getIngredientRefrigeratorDataDelegate{
+    func gotData(ingredients: [IngredientRefrigerator]) {
+        
+        if !ingredients.isEmpty {
+            var array = [String]()
+            for item in ingredients{
+                let name = item.name
+                array.append(name)
+            }
+            ingredientArray = array
+            
+            let query = db.collection("recipe").order(by: "like", descending: true)
+            let _ = dataManager.Data(queryRef: query)
+            
+            TitleCollectionView.reloadData()
+        } else {
+            
+            DispatchQueue.main.async { [weak self] in
+                // UI updates must be on main thread
+                self?.indicator.stopAnimating()
+            }
+        }
+    }
+}
+
 extension IngredientsViewController: fetchDataInIngredientsDelegate {
+    
+    // get the all recipe sorted by like
+    func reloadRecipe(data: [RecipeDetail]) {
+        
+        self.allRecipes = data
+        
+        lastRecipeID = allRecipes.last!.recipeID
+        
+        // get ingredients of all recipes
+        for recipe in self.allRecipes {
+            
+            dataManager.getIngredients(userId: recipe.userID, recipeId: recipe.recipeID)
+            
+        }
+        
+    }
+    func reloadIngredients(data: [Ingredient], recipeID: String) {
+        ingredientsDictionary[recipeID] = data
+        
+        if recipeID == lastRecipeID {
+            
+            for (index, ingredient) in ingredientArray.enumerated() {
+                
+                
+                if index != 0 { searchingIngredient = ingredient }
+                
+                haveSearchingIngredient(recipes: self.allRecipes, ingredients: ingredientsDictionary)
+                print("\(index): \(recipes)")
+            }
+            
+            if searchingIngredient == ingredientArray.last {
+                tempImages = Array(repeating: UIImage(), count: recipes[showingIngredient!]!.count)
+                for (index, recipe) in self.recipes[showingIngredient!]!.enumerated(){
+                    
+                    dataManager.getImage(uid: recipe.userID, rid: recipe.recipeID, index: index)
+                    dataManager.getUserDetail(id: recipe.userID)
+                    
+                }
+            }
+        }
+    }
+    
+    
+    
+    func haveSearchingIngredient(recipes: [RecipeDetail], ingredients: [String : [Ingredient]]) {
+        var resultRecipes: [RecipeDetail] = []
+        
+        for recipe in allRecipes {
+            for ingredient in ingredientsDictionary {
+                
+                if recipe.recipeID == ingredient.key {
+                    
+                    for element in ingredient.value {
+                        let nameUppercased = element.name.capitalized
+                        if nameUppercased == searchingIngredient! {
+                            resultRecipes.append(recipe)
+                            break
+                        }
+                    }
+                    break
+                }
+            }
+        }
+        
+        self.recipes[searchingIngredient!] = resultRecipes
+    }
+    
     func reloadImg(image: UIImage, index: Int) {
         
         tempImages.remove(at: index)
@@ -344,94 +448,6 @@ extension IngredientsViewController: fetchDataInIngredientsDelegate {
         creators[showingIngredient!] = tempCreators
     }
     
-    func reloadIngredients(data: [Ingredient], recipeID: String) {
-        ingredientsDictionary[recipeID] = data
-        
-        if recipeID == lastRecipeID {
-            
-            for (index, ingredient) in ingredientArray.enumerated() {
-                
-                
-                if index != 0 { searchingIngredient = ingredient }
-                
-                haveSearchingIngredient(recipes: self.allRecipes, ingredients: ingredientsDictionary)
-                print("\(index): \(recipes)")
-            }
-            
-            if searchingIngredient == ingredientArray.last {
-                tempImages = Array(repeating: UIImage(), count: recipes[showingIngredient!]!.count)
-                for (index, recipe) in self.recipes[showingIngredient!]!.enumerated(){
-                    
-                    dataManager.getImage(uid: recipe.userID, rid: recipe.recipeID, index: index)
-                    dataManager.getUserDetail(id: recipe.userID)
-                    
-                }
-            }
-        }
-    }
-    
-    // get the all recipe sorted by like
-    func reloadRecipe(data: [RecipeDetail]) {
-        
-        self.allRecipes = data
-        
-        lastRecipeID = allRecipes.last!.recipeID
-        
-        // get ingredients of all recipes
-        for recipe in self.allRecipes {
-            
-            dataManager.getIngredients(userId: recipe.userID, recipeId: recipe.recipeID)
-            
-        }
-        
-    }
-    
-    func haveSearchingIngredient(recipes: [RecipeDetail], ingredients: [String : [Ingredient]]) {
-        var resultRecipes: [RecipeDetail] = []
-        
-        for recipe in allRecipes {
-            for ingredient in ingredientsDictionary {
-                
-                if recipe.recipeID == ingredient.key {
-                    
-                    for element in ingredient.value {
-                        let nameUppercased = element.name.capitalized
-                        if nameUppercased == searchingIngredient! {
-                            resultRecipes.append(recipe)
-                            break
-                        }
-                    }
-                    break
-                }
-            }
-        }
-        
-        self.recipes[searchingIngredient!] = resultRecipes
-    }
     
 }
 
-extension IngredientsViewController: getIngredientRefrigeratorDataDelegate{
-    func gotData(ingredients: [IngredientRefrigerator]) {
-        
-        if !ingredients.isEmpty {
-            var array = [String]()
-            for item in ingredients{
-                let name = item.name
-                array.append(name)
-            }
-            ingredientArray = array
-            
-            let query = db.collection("recipe").order(by: "like", descending: true)
-            let _ = dataManager.Data(queryRef: query)
-            
-            TitleCollectionView.reloadData()
-        } else {
-            
-            DispatchQueue.main.async { [weak self] in
-                // UI updates must be on main thread
-                self?.indicator.stopAnimating()
-            }
-        }
-    }
-}

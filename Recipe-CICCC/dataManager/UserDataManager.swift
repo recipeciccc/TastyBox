@@ -15,7 +15,6 @@ protocol recipeDetailDelegate: class {
     func isVIP(isVIP: Bool)
 }
 
-
 class UserdataManager {
     
     
@@ -232,49 +231,7 @@ class UserdataManager {
 
         
     }
-    
-    //    func getFollowersFollowings(IDs: [String], followerOrFollowing: String) {
-    //
-    //        for ID in IDs {
-    //
-    //            db.collection("user").document(ID).addSnapshotListener {
-    //                (querysnapshot, error) in
-    //                if error != nil {
-    //                    print("Error getting documents: \(String(describing: error))")
-    //                } else {
-    //
-    //                    let data = querysnapshot!.data()
-    //
-    //                    print("data count: \(data!.count)")
-    //
-    //
-    //                    let userID = data!["id"] as? String
-    //                    let name = data!["userName"] as? String
-    //                    let familySize = data!["familySize"] as? Int
-    //                    let cuisineType = data!["cuisineType"] as? String
-    //
-    //
-    //                    self.user = User(userID: userID!, name: name!, cuisineType: cuisineType!, familySize: familySize!)
-    //
-    //                    if followerOrFollowing == "following" {
-    //                        self.followings.append(self.user!)
-    //                        if ID == IDs.last! {
-    //                        self.delegateFollowerFollowing?.assignFollowersFollowings(users: self.followings)
-    //                        }
-    //                    }
-    //                    if followerOrFollowing == "follower" {
-    //                        self.followers.append(self.user!)
-    //                         if ID == IDs.last! {
-    //                        self.delegateFollowerFollowing?.assignFollowersFollowings(users: self.followers)
-    //                        }
-    //                    }
-    //
-    //                }
-    //
-    //            }
-    //
-    //        }
-    //    }
+
     
     func findFollowerFollowing(id: String?) {
         var uid = (Auth.auth().currentUser?.uid)!
@@ -324,7 +281,6 @@ class UserdataManager {
         
         let uid = (Auth.auth().currentUser?.uid)!
         
-        //        db.collection("user").document(uid).collection("proifle").document("info").setData([
         db.collection("user").document(uid).setData([
             
             "id": uid,
@@ -332,7 +288,8 @@ class UserdataManager {
             "eMailAddress": eMailAddress,
             "familySize": familySize,
             "cuisineType": cuisineType,
-            "isVIP": isVIP
+            "isVIP": isVIP,
+            "isFirst": false
             
         ], merge: true) { err in
             if let err = err {
@@ -514,25 +471,6 @@ class UserdataManager {
         }
     }
     
-//    func getFollwersFollowingsImage(uid: String, index: Int) {
-//        let imageRef = Storage.storage().reference().child("user/\(uid)/userAccountImage")
-//        var image: UIImage?
-//        // Fetch the download URL
-//        imageRef.getData(maxSize: 1 * 1024 * 1024) { data, error in
-//            if error != nil {
-//                print(error?.localizedDescription as Any)
-//            } else {
-//                if let imgData = data {
-//
-//                    print("imageRef: \(imageRef)")
-//
-//                    image = UIImage(data: imgData)!
-//                    self.delegateFollowerFollowing?.assginFollowersFollowingsImages(image: image!, index: index)
-//                }
-//            }
-//        }
-//    }
-    
     func getUserImageInFirst() {
         
         let uid = Auth.auth().currentUser?.uid
@@ -566,7 +504,7 @@ class UserdataManager {
                     print(err.debugDescription)
                 }
                 else {
-                    print(metaData)
+                    print(metaData!)
                 }
             }
         }

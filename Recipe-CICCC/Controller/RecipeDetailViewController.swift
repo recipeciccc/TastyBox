@@ -46,11 +46,14 @@ class RecipeDetailViewController: UIViewController {
         detailTableView.tableFooterView = UIView()
         detailTableView.separatorStyle = .none
         detailTableView.isUserInteractionEnabled = true
+        detailTableView.isHidden = true
         
         getImg.delegateImg = self
         userDataManager.delegate = self
         userDataManager.recipeDetailDelegate = self
         dataManager1.delegate = self
+        
+        view.backgroundColor = #colorLiteral(red: 0.9959775805, green: 0.9961397052, blue: 0.7093081474, alpha: 1)
         
         dataManager1.getGenres(tableView: self.detailTableView, recipe: recipe!)
         dataManager1.isLikedRecipe(recipeID: recipe!.recipeID)
@@ -324,7 +327,11 @@ extension RecipeDetailViewController: ReloadDataDelegate{
     }
     func reloadImg(img:[UIImage]){
         instructionImgs = img
-        detailTableView.reloadData()
+        
+        UIView.transition(with: detailTableView, duration: 0.7, options: [UIView.AnimationOptions.transitionCrossDissolve], animations: {
+               self.detailTableView.isHidden = false
+        }, completion: nil)
+        
     }
 }
 
