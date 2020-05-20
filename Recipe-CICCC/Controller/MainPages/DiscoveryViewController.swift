@@ -45,6 +45,8 @@ class DiscoveryViewController: UIViewController {
     
     var menuOpend = false
     
+
+    
     @IBOutlet weak var MenuCollectionView: UICollectionView!
     @IBAction func SideMenuTapped(){
         print("Toggle side Menu")
@@ -74,6 +76,7 @@ class DiscoveryViewController: UIViewController {
         }
         
         
+        
         NotificationCenter.default.post(name: NSNotification.Name("ToggleSideMenu"), object: nil)
     }
     
@@ -81,7 +84,7 @@ class DiscoveryViewController: UIViewController {
         if let viewWithTag = self.view.viewWithTag(100) {
             viewWithTag.removeFromSuperview()
             sideMenuOpen = false
-            SideMenuConstraint.constant = -160
+            SideMenuConstraint.constant = -230 //-160
             UIView.animate(withDuration: 0.3) {
                 self.view.layoutIfNeeded()
             }
@@ -117,7 +120,7 @@ class DiscoveryViewController: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(toggleSideMenu), name: NSNotification.Name("ToggleSideMenu"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(showSearch), name: NSNotification.Name("ShowSearch"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(AddRecipe), name: NSNotification.Name("AddRecipe"), object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(AddRecipe), name: NSNotification.Name("AddRecipe"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(showLogout), name: NSNotification.Name("ShowLogout"), object: nil)
         
         pageControllView = self.children[0] as! MainPageViewController
@@ -132,6 +135,8 @@ class DiscoveryViewController: UIViewController {
         self.MenuCollectionView.scrollToItem(at: NSIndexPath(item: selectedIndex, section: 0) as IndexPath, at: .centeredHorizontally, animated: true)
            
          self.navigationController?.hidesBarsOnTap = false
+        
+      
     }
     
     
@@ -160,7 +165,7 @@ class DiscoveryViewController: UIViewController {
     @objc func toggleSideMenu() {
         if sideMenuOpen{
             sideMenuOpen = false
-            SideMenuConstraint.constant = -160
+            SideMenuConstraint.constant = -230//-160
         }else{
             sideMenuOpen = true
             SideMenuConstraint.constant = 0
@@ -179,10 +184,12 @@ class DiscoveryViewController: UIViewController {
         }
     }
     
-    @objc func AddRecipe(){
-        print("Add Recipe")
-        performSegue(withIdentifier: "addRecipe", sender: nil)
-    }
+//    @objc func AddRecipe(){
+//        print("Add Recipe")
+//
+//        performSegue(withIdentifier: "addRecipe", sender: nil)
+//    }
+    
     @objc func showLogout(){
         
         print("show Logout")
@@ -199,12 +206,30 @@ class DiscoveryViewController: UIViewController {
             let Storyboard: UIStoryboard = UIStoryboard(name: "Login", bundle: nil)
             let vc = Storyboard.instantiateViewController(withIdentifier: "loginPage")
             self.navigationController?.pushViewController(vc, animated: true)
-                   
+            
         }
-       
+        
     }
     
-    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let identifier = segue.identifier else { return }
+        
+        if identifier == "addRecipe" {
+            let navigationBar = UINavigationBar()
+            let height = UIScreen.main.bounds.height / 2 - navigationBar.frame.size.height - 50
+            let indicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
+            
+            indicator.transform = CGAffineTransform(scaleX: 2, y: 2)
+            indicator.center = CGPoint(x: UIScreen.main.bounds.width / 2 , y: height)
+            indicator.backgroundColor = #colorLiteral(red: 1, green: 0.5763723254, blue: 0, alpha: 0.5)
+            indicator.color = .white
+            indicator.layer.cornerRadius = 10
+            
+            self.view.bringSubviewToFront(indicator)
+            
+        }
+        
+    }
 }
 
 

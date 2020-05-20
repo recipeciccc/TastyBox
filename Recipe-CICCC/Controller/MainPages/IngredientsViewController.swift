@@ -87,7 +87,7 @@ class IngredientsViewController: UIViewController {
         self.view.addSubview(indicator)
         
         navigationController?.setNavigationBarHidden(false, animated: false)
-        
+                
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -216,7 +216,8 @@ extension IngredientsViewController: UICollectionViewDataSource, UICollectionVie
         selectedIndexPath = indexPath
         
         if collectionView == TitleCollectionView {
-            collectionView.reloadData()
+            
+            TitleCollectionView.reloadData()
             showingIngredient = ingredientArray[indexPath.row]
             
             tempCreators.removeAll()
@@ -224,6 +225,7 @@ extension IngredientsViewController: UICollectionViewDataSource, UICollectionVie
             imageCount = 0
             
             if recipes[showingIngredient!] != nil{
+                self.ImageCollecitonView.isHidden = false
                 tempImages = Array(repeating: UIImage(), count: recipes[showingIngredient!]!.count)
                 
                 for (index ,recipe) in self.recipes[showingIngredient!]!.enumerated(){
@@ -232,12 +234,7 @@ extension IngredientsViewController: UICollectionViewDataSource, UICollectionVie
                     
                 }
             }
-            
-            
-            UIView.transition(with: self.ImageCollecitonView, duration: 0.3, options: [UIView.AnimationOptions.transitionCrossDissolve], animations: {
-                self.ImageCollecitonView.reloadData()
-            }, completion: nil)
-            
+  
         }
         
         if collectionView == ImageCollecitonView {
@@ -439,6 +436,7 @@ extension IngredientsViewController: fetchDataInIngredientsDelegate {
             
             UIView.transition(with: self.ImageCollecitonView, duration: 0.3, options: [UIView.AnimationOptions.transitionCrossDissolve], animations: {
                 self.ImageCollecitonView.reloadData()
+                self.ImageCollecitonView.isHidden = false
             }, completion: nil)
         }
     }

@@ -50,7 +50,7 @@ class CreatorViewController: UIViewController {
     var tableviewHeight = CGFloat()
     var contentOffset = CGFloat()
     var numberPreparation = 1
-    let genreVC = GenreSelectViewController()
+    let genreVC = MealTypeSelectViewController()
     var keyboardHeight = CGFloat()
     var isKeyboardOpen = false
     var textFieldSelected = false
@@ -210,7 +210,7 @@ class CreatorViewController: UIViewController {
     
     //MARK: prepare
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let vc = segue.destination as? GenreSelectViewController {
+        if let vc = segue.destination as? MealTypeSelectViewController {
             vc.delegate = self
             vc.tagsSelected = self.genres
             vc.imageLabelingTagsSelected = self.imagesLabelsSelected
@@ -770,7 +770,7 @@ extension CreatorViewController: UITextFieldDelegate, UITextViewDelegate{
 }
 
 //MARK: genre delegate
-extension CreatorViewController: GenreSelectViewControllerDelegate {
+extension CreatorViewController: MealTypeSelectViewControllerDelegate {
     func assignGenres(genres: [String], imagesLabels: [String], imagesLabelsSelected: [String], isVIP: Bool) {
         
         self.genres = genres

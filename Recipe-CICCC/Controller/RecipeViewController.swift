@@ -78,7 +78,8 @@ class RecipeViewController: UIViewController {
         indicator.color = .white
         indicator.tag = 100
         indicator.transform = CGAffineTransform(scaleX: 2, y: 2)
-        indicator.backgroundColor = .darkGray
+        indicator.color = .white
+        indicator.backgroundColor = #colorLiteral(red: 1, green: 0.5764705882, blue: 0, alpha: 0.8)
         indicator.layer.cornerRadius = 10.0
         indicator.hidesWhenStopped = true
         indicator.center = self.view.center

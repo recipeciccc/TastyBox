@@ -147,6 +147,7 @@ extension EditorChoiceViewController: UITableViewDataSource, UITableViewDelegate
     
         let scrollDiff = scrollBeginPoint - scrollView.contentOffset.y
         updateNavigationBarHiding(scrollDiff: scrollDiff)
+        
     }
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {

@@ -29,7 +29,11 @@ class LoginMainpageViewController: UIViewController {
     @IBOutlet weak var login: UIButton!
     
     @IBOutlet var loginButtonStackView: UIStackView!
-    @IBOutlet weak var faceBookLoginButton: FBLoginButton!
+    @IBOutlet weak var googleLoginButton: UIButton!
+////    @IBOutlet weak var faceBookLoginButton: FBLoginButton!
+//    @IBOutlet weak var faceBookLoginButton: FBLoginButton!
+//
+//    @IBOutlet weak var appleLoginButton: UIButton!
     @IBOutlet weak var resetPasswordButton: UIButton!
     @IBOutlet weak var registerButton: UIButton!
     
@@ -99,7 +103,7 @@ class LoginMainpageViewController: UIViewController {
             }
             
         }
-        
+    
         
     }
     
@@ -189,12 +193,14 @@ class LoginMainpageViewController: UIViewController {
     //MARK: Facebook Login
     
     func setUpFaceBookLogin() {
-       
+       let faceBookLoginButton = FBLoginButton()
         let fbLoginManager = LoginManager()
         fbLoginManager.logOut() // this is an instance function
         faceBookLoginButton.layer.cornerRadius = 10
         faceBookLoginButton.delegate = self
       
+        print(faceBookLoginButton.frame.height)
+        loginButtonStackView.addArrangedSubview(faceBookLoginButton)
     }
     
     
@@ -334,11 +340,27 @@ extension LoginMainpageViewController: ASAuthorizationControllerDelegate {
     //MARK: Apple login
       
       func setUpSignInAppleButton() {
-          let authorizationButton = ASAuthorizationAppleIDButton()
-          authorizationButton.addTarget(self, action: #selector(handleAppleIdRequest), for: .touchUpInside)
-          authorizationButton.cornerRadius = 10
+//          let authorizationButton = ASAuthorizationAppleIDButton()
+        let appleLoginButton = UIButton(type: .custom)
+          appleLoginButton.addTarget(self, action: #selector(handleAppleIdRequest), for: .touchUpInside)
+        appleLoginButton.layer.cornerRadius = 10
+        appleLoginButton.layer.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        appleLoginButton.tintColor = .black
+//                 appleLoginButton.titleLabel?.textColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
+//        let image = UIImage(named: "icons8-apple-logo-50")?.withRenderingMode(.alwaysTemplate)
+        let image = #imageLiteral(resourceName: "apple-24")
+        image.withRenderingMode(.alwaysTemplate)
+        appleLoginButton.setImage(image, for: .normal)
+      
+        appleLoginButton.setTitle(" Apple ", for: .normal)
+        appleLoginButton.titleLabel?.font = UIFont(name: "Helvetica-Bold", size: 20.0)
+        appleLoginButton.setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: .normal)
+        appleLoginButton.frame.size.height = 25.0
+//        appleLoginButton.imageView?.contentMode = .scaleAspectFit
+//        appleLoginButton.contentHorizontalAlignment = .fill
+//        appleLoginButton.contentVerticalAlignment = .fill
           //Add button on some view or stack
-          self.loginButtonStackView.addArrangedSubview(authorizationButton)
+          self.loginButtonStackView.addArrangedSubview(appleLoginButton)
       }
       
       @objc func handleAppleIdRequest() {
@@ -510,22 +532,41 @@ extension LoginMainpageViewController: GIDSignInDelegate {
     
     //MARK: Google login
     func setUpGoogleLogin() {
-        let authorizationButton = GIDSignInButton()
-        //        authorizationButton.addTarget(self, action: #selector(googleLogin), for: .touchUpInside)
+//        let authorizationButton = GIDSignInButton()
+//        let googleLoginButton = UIButton(type: .custom)
+        googleLoginButton.addTarget(self, action: #selector(googleLogin), for: .touchUpInside)
        
        
+      
+       
+        googleLoginButton.layer.cornerRadius = 10
+        googleLoginButton.layer.borderColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
+        googleLoginButton.layer.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        googleLoginButton.layer.borderWidth = 1
+//        googleLoginButton.titleLabel?.textColor = #colorLiteral(red: 0.2392156869, green: 0.6745098233, blue: 0.9686274529, alpha: 1)
+//        googleLoginButton.titleLabel?.font = UIFont(name: "Helvetica-Bold", size: 20.0)
+//        let image = UIImage(named: "icons8-google-48")?.withRenderingMode(.alwaysTemplate)
+//        googleLoginButton.setImage(image, for: .normal)
+          googleLoginButton.setTitle(" Google ", for: .normal)
+//        let widthAnchorImageView = googleLoginButton.imageView?.widthAnchor.constraint(equalTo: googleLoginButton.heightAnchor)
         
-        authorizationButton.layer.cornerRadius = 10
+
+               let widthAnchorImageView = googleLoginButton.imageView?.widthAnchor.constraint(equalToConstant: 28.0)
+               let heightAnchor = googleLoginButton.imageView?.heightAnchor.constraint(equalToConstant: 28.0)
+       
+//               widthAnchor!.isActive = true
+               heightAnchor?.isActive = true
+        
         let superViewCenterYAnchor = self.view.centerXAnchor
-        let width = authorizationButton.frame.width
+        let width = self.loginButtonStackView.frame.width
         
-        self.loginButtonStackView.addArrangedSubview(authorizationButton)
-        let centerYAnchor = authorizationButton.centerXAnchor.constraint(equalTo: superViewCenterYAnchor, constant: 0.0)
-        let widthAnchor =  authorizationButton.widthAnchor.constraint(equalToConstant: width)
+        self.loginButtonStackView.addArrangedSubview(googleLoginButton)
+        let centerYAnchor = googleLoginButton.centerXAnchor.constraint(equalTo: superViewCenterYAnchor, constant: 0.0)
+        let widthAnchor =  googleLoginButton.widthAnchor.constraint(equalToConstant: width)
 
         centerYAnchor.isActive = true
         widthAnchor.isActive = true
-
+        widthAnchorImageView?.isActive = true
     }
     
     @objc func googleLogin() {

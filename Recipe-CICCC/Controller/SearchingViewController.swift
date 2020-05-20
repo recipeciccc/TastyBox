@@ -125,7 +125,7 @@ class SearchingViewController: UIViewController {
     }
     
     fileprivate func setSegmentControl() {
-        let titles = ["Ingredient", "Genre", "Creator"]
+        let titles = ["Ingredient", "Meal Type", "Creator"]
         for index in 0 ..< titles.count {
             segmentControl.setTitle(titles[index], forSegmentAt: index)
             

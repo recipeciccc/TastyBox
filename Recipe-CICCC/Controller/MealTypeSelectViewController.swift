@@ -9,11 +9,11 @@
 import UIKit
 import Crashlytics
 
-protocol GenreSelectViewControllerDelegate: class {
+protocol MealTypeSelectViewControllerDelegate: class {
     func assignGenres(genres: [String], imagesLabels: [String], imagesLabelsSelected: [String], isVIP: Bool)
 }
 
-class GenreSelectViewController: UIViewController {
+class MealTypeSelectViewController: UIViewController {
     
     @IBOutlet weak var `switch`: UISwitch!
     @IBOutlet weak var collectionView: UICollectionView!
@@ -30,7 +30,7 @@ class GenreSelectViewController: UIViewController {
     var uiView = UIView()
     
     var tagsSelected: [String] = []
-    weak var delegate: GenreSelectViewControllerDelegate?
+    weak var delegate: MealTypeSelectViewControllerDelegate?
     let dataManager = GenreMLKitDataManager()
     
     private let spacing:CGFloat = 16.0
@@ -204,7 +204,7 @@ class GenreSelectViewController: UIViewController {
        }
 }
 
-extension GenreSelectViewController: UICollectionViewDataSource {
+extension MealTypeSelectViewController: UICollectionViewDataSource {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 2
@@ -254,7 +254,7 @@ extension GenreSelectViewController: UICollectionViewDataSource {
 }
 
 
-extension GenreSelectViewController: GenreMLKitDataManagerDelegate {
+extension MealTypeSelectViewController: GenreMLKitDataManagerDelegate {
     func passLabeledArray(arr: [String]) {
         imageLabelingTags = arr
         
@@ -284,7 +284,7 @@ extension GenreSelectViewController: GenreMLKitDataManagerDelegate {
     }
 }
 
-extension GenreSelectViewController: UICollectionViewDelegate {
+extension MealTypeSelectViewController: UICollectionViewDelegate {
    
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

@@ -211,7 +211,13 @@ extension PopularRecipeViewController: getDataFromFirebaseDelegate {
     func assignImage(image: UIImage, index: Int) {
          self.images[index] = image
         print("\(index): \(image)")
-        self.tableView.reloadData()
+        
+        if self.images.count == 10 {
+            UIView.transition(with: self.tableView, duration: 0.7, options: [UIView.AnimationOptions.transitionCrossDissolve], animations: {
+                self.tableView.reloadData()
+            }, completion: nil)
+        }
+        
     }
     
     func gotData(recipes: [RecipeDetail]) {
@@ -237,14 +243,6 @@ extension PopularRecipeViewController: getDataFromFirebaseDelegate {
            mainViewController!.dataSource = mainViewController
        }
    }
-   
-//   func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//       mainViewController = self.parent as? MainPageViewController
-//       pageViewControllerDataSource = mainViewController!.dataSource
-//               
-//       mainViewController!.dataSource = nil
-//       mainViewController?.isPaging = false
-//   }
 }
 
 
