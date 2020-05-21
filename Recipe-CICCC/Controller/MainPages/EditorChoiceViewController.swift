@@ -24,7 +24,7 @@ class EditorChoiceViewController: UIViewController {
     
     ///  スクロール開始地点
     var scrollBeginPoint: CGFloat = 0.0
-
+    var selfNavigationController: UINavigationController?
     /// navigationBarが隠れているかどうか(詳細から戻った一覧に戻った際の再描画に使用)
     var lastNavigationBarIsHidden = false
     
@@ -32,6 +32,8 @@ class EditorChoiceViewController: UIViewController {
         super.viewDidLoad()
         CreateImageArray()
         navigationController?.setNavigationBarHidden(false, animated: false)
+        
+         self.navigationController?.hidesBarsOnTap = false
         
     }
     
@@ -41,9 +43,7 @@ class EditorChoiceViewController: UIViewController {
         if lastNavigationBarIsHidden {
             self.navigationController?.setNavigationBarHidden(true, animated: false)
         }
-        
-//        self.parent?.navigationController?.hidesBarsOnTap = false
-//         self.navigationController?.hidesBarsOnTap = false
+ 
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -51,7 +51,7 @@ class EditorChoiceViewController: UIViewController {
         
         navigationController?.setNavigationBarHidden(false, animated: true)
         lastNavigationBarIsHidden = false
-        self.navigationController?.hidesBarsOnTap = false
+
     }
     
     func CreateImageArray() {
@@ -74,6 +74,7 @@ class EditorChoiceViewController: UIViewController {
 
         /// navigationBar表示
         if scrollDiff > boundaryValue {
+            
             navigationController?.setNavigationBarHidden(false, animated: true)
             lastNavigationBarIsHidden = false
             return
@@ -81,12 +82,16 @@ class EditorChoiceViewController: UIViewController {
 
         /// navigationBar非表示
         else if scrollDiff < -boundaryValue {
+            
+             selfNavigationController = self.navigationController
             navigationController?.setNavigationBarHidden(true, animated: true)
             lastNavigationBarIsHidden = true
+           
             return
         }
         
     }
+    
     
 }
 
@@ -113,7 +118,6 @@ extension EditorChoiceViewController: UITableViewDataSource, UITableViewDelegate
         viewContoller?.T_image = image.image
         viewContoller?.T_Name = image.title
         
-//        guard self.navigationController?.topViewController == self else { return }
         self.navigationController?.pushViewController(viewContoller!, animated: true)
     }
         
@@ -153,6 +157,15 @@ extension EditorChoiceViewController: UITableViewDataSource, UITableViewDelegate
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         scrollBeginPoint = scrollView.contentOffset.y
     }
+    
+    func scrollViewDidScrollToTop(_ scrollView: UIScrollView) {
+        
+        UIView.animate(withDuration: 0.3, animations: {
+            self.navigationController?.setNavigationBarHidden(false, animated: false)
+        })
+        
+    }
+    
 }
 
 

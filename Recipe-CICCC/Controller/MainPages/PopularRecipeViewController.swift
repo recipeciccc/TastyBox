@@ -26,7 +26,7 @@ class PopularRecipeViewController: UIViewController {
     
     ///  スクロール開始地点
     var scrollBeginPoint: CGFloat = 0.0
-
+    
     /// navigationBarが隠れているかどうか(詳細から戻った一覧に戻った際の再描画に使用)
     var lastNavigationBarIsHidden = false
     
@@ -43,12 +43,12 @@ class PopularRecipeViewController: UIViewController {
         tableView.separatorStyle = .none
         
         navigationController?.setNavigationBarHidden(false, animated: false)
-
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
+        
         if lastNavigationBarIsHidden {
             self.navigationController?.setNavigationBarHidden(true, animated: false)
         }
@@ -134,37 +134,37 @@ extension PopularRecipeViewController: UITableViewDataSource {
         }
         
         if indexPath.section == 0 {
-                
-                let cell = (tableView.dequeueReusableCell(withIdentifier: "medal recipe", for: indexPath) as? Number123TableViewCell)!
-                cell.selectionStyle = .none
             
-                cell.numberLikeLabel.text = "\(recipes[indexPath.row].like)"
-                cell.titleLabel.text = recipes[indexPath.row].title
-                cell.recipeImageView.image = images[indexPath.row]
-               cell.lockImageView.isHidden = recipes[indexPath.row].isVIPRecipe! ? false : true
-
+            let cell = (tableView.dequeueReusableCell(withIdentifier: "medal recipe", for: indexPath) as? Number123TableViewCell)!
+            cell.selectionStyle = .none
+            
+            cell.numberLikeLabel.text = "\(recipes[indexPath.row].like)"
+            cell.titleLabel.text = recipes[indexPath.row].title
+            cell.recipeImageView.image = images[indexPath.row]
+            cell.lockImageView.isHidden = recipes[indexPath.row].isVIPRecipe! ? false : true
+            
+            
+            switch indexPath.row {
+            case 0:
+                cell.badgeImageView.image = #imageLiteral(resourceName: "Group 28")
                 
-                switch indexPath.row {
-                case 0:
-                    cell.badgeImageView.image = #imageLiteral(resourceName: "Group 28")
-                    
-                case 1:
-                    cell.badgeImageView.image = #imageLiteral(resourceName: "Group 29")
-                    
-                case 2:
-                    cell.badgeImageView.image = #imageLiteral(resourceName: "Group 30")
-                    
-                default:
-                    break
-                }
-
+            case 1:
+                cell.badgeImageView.image = #imageLiteral(resourceName: "Group 29")
+                
+            case 2:
+                cell.badgeImageView.image = #imageLiteral(resourceName: "Group 30")
+                
+            default:
+                break
+            }
+            
             return cell
         }
         
         let cell = (tableView.dequeueReusableCell(withIdentifier: "under no.4", for: indexPath) as? UnderNo4TableViewCell)!
         
         cell.selectionStyle = .none
-//        isVIPAction(superView: cell.contentView, isVIP: recipes[indexPath.row + 3].isVIPRecipe ?? false)
+        //        isVIPAction(superView: cell.contentView, isVIP: recipes[indexPath.row + 3].isVIPRecipe ?? false)
         
         cell.rankingLabel.text = "No. \(indexPath.row + 4)"
         cell.numLikeLabel.text = "\(recipes[indexPath.row + 3].like)"
@@ -172,13 +172,13 @@ extension PopularRecipeViewController: UITableViewDataSource {
         cell.recipeImageView.image = images[indexPath.row + 3]
         
         cell.lockImageView.isHidden = recipes[indexPath.row + 3].isVIPRecipe! ? false : true
-
+        
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-
+        
         let recipeVC = UIStoryboard(name: "RecipeDetail", bundle: nil).instantiateViewController(identifier: "detailvc") as! RecipeDetailViewController
         
         if indexPath.section == 0 {
@@ -205,6 +205,13 @@ extension PopularRecipeViewController: UITableViewDataSource {
         updateNavigationBarHiding(scrollDiff: scrollDiff)
     }
     
+    func scrollViewDidScrollToTop(_ scrollView: UIScrollView) {
+        
+        UIView.animate(withDuration: 0.3, animations: {
+            self.navigationController?.setNavigationBarHidden(false, animated: false)
+        })
+        
+    }
 }
 
 extension PopularRecipeViewController: getDataFromFirebaseDelegate {

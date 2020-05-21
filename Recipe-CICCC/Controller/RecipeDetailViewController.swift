@@ -25,6 +25,7 @@ class RecipeDetailViewController: UIViewController {
     
     var ingredientList  = [Ingredient]()
     var instructionList = [Instruction]()
+    var instructionImages: [Int: UIImage] = [:]
     var genres = [String]()
     
     //    var comment = [Comment]()
@@ -191,7 +192,10 @@ extension RecipeDetailViewController{
                     DispatchQueue.main.async {
                         self.detailTableView.reloadData()
                         
-                        self.instructionImgs = self.getImg.getInstructionImg(uid: self.recipe?.userID ?? "",rid: self.recipe?.recipeID ?? "", count: self.instructionList.count)
+//                        self.instructionImgs = self.getImg.getInstructionImg(uid: self.recipe?.userID ?? "",rid: self.recipe?.recipeID ?? "", count: self.instructionList.count)
+                        guard let userID = self.recipe?.userID else { return }
+                        guard let recipeID = self.recipe?.recipeID else { return }
+                        self.dataManager1.getInstructionImg(uid: userID,rid: recipeID, count: self.instructionList.count)
                     }
                 }
             }
@@ -292,10 +296,16 @@ extension RecipeDetailViewController: UITableViewDataSource,UITableViewDelegate{
             return cell
         case 7:
             let cell = (tableView.dequeueReusableCell(withIdentifier: "instructionsRecipe") as? HowToCookTableViewCell)!
-            if instructionList.count == instructionImgs.count && instructionList.count > 0{
+            if instructionList.count == instructionImages.count && instructionList.count > 0{
                 cell.stepNum.text = "\(String(indexPath.row + 1)):"
                 cell.howToCookLabel.text = instructionList[indexPath.row].text
-                cell.instructionImg.image = instructionImgs[indexPath.row]
+                
+//                if instructionImgs[indexPath.row] == UIImage(named: "imageFile") {
+//                    cell.instructionImg.isHidden = true
+//                } else {
+                    cell.instructionImg.image = instructionImages[indexPath.row]
+//                }
+                
             }
             return cell
             
@@ -305,19 +315,20 @@ extension RecipeDetailViewController: UITableViewDataSource,UITableViewDelegate{
         
         return UITableViewCell()
     }
+    
 
-    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        
-        switch indexPath.section {
-
-        case 7:
-            return 368
-            
-        default:
-            return UITableView.automaticDimension
-        }
-        
-    }
+//    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+//
+//        switch indexPath.section {
+//
+//        case 7:
+//            return 368
+//
+//        default:
+//            return UITableView.automaticDimension
+//        }
+//
+//    }
     
 }
 
@@ -328,16 +339,13 @@ extension RecipeDetailViewController: ReloadDataDelegate{
     func reloadImg(img:[UIImage]){
         instructionImgs = img
         
-        UIView.transition(with: detailTableView, duration: 0.7, options: [UIView.AnimationOptions.transitionCrossDissolve], animations: {
-               self.detailTableView.isHidden = false
-        }, completion: nil)
-        
     }
 }
 
 // this extension tell firebase to increase this recipe's like
 
 extension RecipeDetailViewController: iconItemTableViewCellDelegate{
+    
     func decreaseLike() {
         recipe?.like -= 1
         dataManager1.increaseLike(recipe: recipe!, isIncreased: false)
@@ -366,19 +374,31 @@ extension RecipeDetailViewController: ManageFollowersDelegate{
 }
 
 extension RecipeDetailViewController: RecipeDetailDelegate {
+    func gotInstructionImages(images: [Int : UIImage]) {
+        self.instructionImages = images
+        
+        UIView.transition(with: detailTableView, duration: 0.7, options: [UIView.AnimationOptions.transitionCrossDissolve], animations: { [weak self] in
+
+            self?.detailTableView.reloadData()
+            self?.detailTableView.isHidden = false
+            
+        }, completion: nil)
+        
+    }
+    
     func isFollowingCreator(isFollowing: Bool) {
-         let cell = self.detailTableView.cellForRow(at: IndexPath(row: 0, section: 5)) as! creatorCellRecpipeTableViewCell
+        guard let cell = self.detailTableView.cellForRow(at: IndexPath(row: 0, section: 5)) as? creatorCellRecpipeTableViewCell else { return }
         cell.followingButtonUIManagement(isFollowing: isFollowing)
     }
     
     func UnfollowedAction() {
-         let cell = self.detailTableView.cellForRow(at: IndexPath(row: 0, section: 5)) as! creatorCellRecpipeTableViewCell
+          guard let cell = self.detailTableView.cellForRow(at: IndexPath(row: 0, section: 5)) as? creatorCellRecpipeTableViewCell else { return }
                
         cell.followingButtonUIManagement(isFollowing: false)
     }
     
     func FollowedAction() {
-         let cell = self.detailTableView.cellForRow(at: IndexPath(row: 0, section: 5)) as! creatorCellRecpipeTableViewCell
+        guard let cell = self.detailTableView.cellForRow(at: IndexPath(row: 0, section: 5)) as? creatorCellRecpipeTableViewCell else { return }
                
         cell.followingButtonUIManagement(isFollowing: true)
     }
@@ -399,22 +419,6 @@ extension RecipeDetailViewController: RecipeDetailDelegate {
         self.creator = creator
     }
     
-}
-
-extension RecipeDetailViewController: getUserDataDelegate {
-    
-    func assignUserImage(image: UIImage) {
-        self.creatorImage = image
-        self.detailTableView.reloadData()
-    }
-    
-    func gotUserData(user: User) {
-        self.creator = user
-    }
-    
-}
-
-extension RecipeDetailViewController: recipeDetailDelegate {
     func isVIP(isVIP: Bool) {
         if isVIP {
             let dbRef = Firestore.firestore().collection("recipe").document(recipe?.recipeID ?? "")
@@ -460,6 +464,68 @@ extension RecipeDetailViewController: recipeDetailDelegate {
             
         }
     }
+    
+}
+
+extension RecipeDetailViewController: getUserDataDelegate {
+    
+    func assignUserImage(image: UIImage) {
+        self.creatorImage = image
+        self.detailTableView.reloadData()
+    }
+    
+    func gotUserData(user: User) {
+        self.creator = user
+    }
+    
+}
+
+extension RecipeDetailViewController: recipeDetailDelegate {
+//    func isVIP(isVIP: Bool) {
+//        if isVIP {
+//            let dbRef = Firestore.firestore().collection("recipe").document(recipe?.recipeID ?? "")
+//            let query_ingredient = dbRef.collection("ingredient").order(by: "ingredient", descending: false)
+//            let query_instruction = dbRef.collection("instruction").order(by: "index", descending: false)
+//
+//            getIngredientData(query: query_ingredient)
+//            getInstructionData(query: query_instruction)
+//
+//            userDataManager.getUserDetail(id: recipe?.userID)
+//            userDataManager.getUserImage(uid: recipe!.userID)
+//
+//
+//            if let viewWithTag = self.view.viewWithTag(100) {
+//                viewWithTag.removeFromSuperview()
+//            }else{
+//                print("No!")
+//            }
+//
+//        } else {
+//            let view = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
+//            view.backgroundColor = #colorLiteral(red: 0.9977325797, green: 0.9879661202, blue: 0.7689270973, alpha: 1)
+//            view.tag = 100
+//            self.view.addSubview(view)
+//
+//            let alertController = UIAlertController(title: "Register VIP member", message: "This recipe is VIP only. You need to be VIP member.", preferredStyle: .alert)
+//
+//            let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: { action in
+//                self.navigationController?.popViewController(animated: true)
+//            })
+//            let registerAction = UIAlertAction(title: "Sign up VIP membership", style: .default, handler: { action in
+//                let registerVC = UIStoryboard(name: "VIP_page", bundle: nil).instantiateViewController(identifier: "registerVIP") as! ExplainationVIPViewController
+//
+//                guard self.navigationController?.topViewController == self else { return }
+//
+//                self.navigationController?.pushViewController(registerVC, animated: true)
+//            })
+//
+//            alertController.addAction(registerAction)
+//            alertController.addAction(defaultAction)
+//
+//            present(alertController, animated: true, completion: nil)
+//
+//        }
+//    }
 }
 
 extension RecipeDetailViewController: MFMailComposeViewControllerDelegate{

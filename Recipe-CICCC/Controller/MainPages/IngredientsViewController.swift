@@ -87,7 +87,7 @@ class IngredientsViewController: UIViewController {
         self.view.addSubview(indicator)
         
         navigationController?.setNavigationBarHidden(false, animated: false)
-                
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -119,7 +119,7 @@ class IngredientsViewController: UIViewController {
         
         if selectedIndexPath == nil {
             
-            if let cell = TitleCollectionView.cellForItem(at: IndexPath(row: 0, section: 0)) as? IngredientTitleCollectionViewCell {
+            if let cell = TitleCollectionView.cellForItem(at: IndexPath(row: ingredientArray.count - 1, section: 0)) as? IngredientTitleCollectionViewCell {
                 self.TitleCollectionView.reloadData()
                 self.TitleCollectionView.layoutIfNeeded()
                 cell.focusCell(active: true)
@@ -234,7 +234,7 @@ extension IngredientsViewController: UICollectionViewDataSource, UICollectionVie
                     
                 }
             }
-  
+            
         }
         
         if collectionView == ImageCollecitonView {
@@ -290,6 +290,13 @@ extension IngredientsViewController: UICollectionViewDataSource, UICollectionVie
         scrollBeginPoint = scrollView.contentOffset.y
     }
     
+    func scrollViewDidScrollToTop(_ scrollView: UIScrollView) {
+        
+        UIView.animate(withDuration: 0.3, animations: {
+            self.navigationController?.setNavigationBarHidden(false, animated: false)
+        })
+        
+    }
 }
 
 extension IngredientsViewController: UICollectionViewDelegateFlowLayout {

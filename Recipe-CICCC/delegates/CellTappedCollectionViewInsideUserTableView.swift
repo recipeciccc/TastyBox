@@ -8,6 +8,6 @@
 
 import Foundation
 
-protocol CollectionViewInsideUserTableView {
+protocol CellTappedCollectionViewInsideUserTableView: class {
     func cellTaped(data:IndexPath)
 }

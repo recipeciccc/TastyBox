@@ -5,7 +5,6 @@
 //  Created by 北島　志帆美 on 2020-04-20.
 //  Copyright © 2020 Argus Chen. All rights reserved.
 //
-
 import UIKit
 import Crashlytics
 
@@ -80,5 +79,3 @@ extension SearchingGenreViewController :isGenreExistDelegate {
     }
     
 }
-
-
