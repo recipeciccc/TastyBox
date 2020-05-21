@@ -202,7 +202,7 @@ class RecipeDetailDataManager {
         }
     }
     
-    func increaseLike(recipe: RecipeDetail, isIncreased: Bool) {
+    func manageNumOfLikes(recipe: RecipeDetail, isIncreased: Bool) {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         db.collection("recipe").document(recipe.recipeID).setData (
             ["like": recipe.like], merge: true

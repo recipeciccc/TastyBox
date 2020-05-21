@@ -16,8 +16,6 @@ protocol ManageFollowersDelegate: class {
 
 
 class creatorCellRecpipeTableViewCell: UITableViewCell {
-
-//    let numOfCreatorhasTableViewCell = NumOfCreatorhasTableViewCell()
     
     weak var delegate: ManageFollowersDelegate?
 

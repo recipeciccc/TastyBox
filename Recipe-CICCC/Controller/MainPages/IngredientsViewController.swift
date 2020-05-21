@@ -108,9 +108,9 @@ class IngredientsViewController: UIViewController {
             }
         }
         
-        if lastNavigationBarIsHidden {
+//        if lastNavigationBarIsHidden {
             self.navigationController?.setNavigationBarHidden(true, animated: false)
-        }
+//        }
         
     }
     

@@ -263,6 +263,8 @@ extension DiscoveryViewController: UICollectionViewDelegate, UICollectionViewDat
         
         menuViewController(viewController: self.children[0] as! MainPageViewController, at: indexPath.row)
         
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+
     }
     //MARK:- MenuViewControllerDelegate
     func menuViewController(viewController: MainPageViewController, at index: Int) {
