@@ -5,7 +5,6 @@
 //  Created by 北島　志帆美 on 2020-04-20.
 //  Copyright © 2020 Argus Chen. All rights reserved.
 //
-
 import UIKit
 import Firebase
 import Crashlytics
@@ -16,55 +15,26 @@ class SearchingCreatorsViewController: UIViewController {
     
     let dataManager = SearchingDataManager()
     
-    var searchedCreators: [User] = [] {
-        didSet {
-//            tableReload(tableView: self.tableView)
-        }
-    }
-//    var searchedCreators: [User] = []
-    var searchedCreatorsImage:[Int:UIImage] = [:] {
-    
-        didSet {
-//            tableReload(tableView: self.tableView)
-        }
+    var searchedCreators: [User] = []
 
-    }
-//    var searchedCreatorsImage:[Int:UIImage] = [:]
-    
-//    var searchingWord : String = "" {
-//        didSet {
-//            let query = db.collection("user")
-//            dataManager.delegateChild = self
-//            dataManager.getSearchedCreator(query: query, searchingWord: searchingWord)
-//        }
-//    }
-    
+    var searchedCreatorsImage:[Int:UIImage] = [:]
+
     let db = Firestore.firestore()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-//        dataManager.delegateChild = self
+
         tableView.dataSource = self
         tableView.delegate = self
         tableView.tableFooterView = UIView()
-
-        
-        let query = db.collection("user")
-        
-//        if searchingWord != "" {
-//            dataManager.getSearchedCreator(query: query, searchingWord: searchingWord)
-//        }
-//
-    
         
     }
     
     
     /*
     // MARK: - Navigation
-
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
@@ -94,6 +64,7 @@ extension SearchingCreatorsViewController: UITableViewDataSource {
 }
 
 extension SearchingCreatorsViewController: UITableViewDelegate {
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     
         let id = searchedCreators[indexPath.row].userID
@@ -110,8 +81,6 @@ extension SearchingCreatorsViewController: UITableViewDelegate {
             let profileVC = UIStoryboard(name: "creatorProfile", bundle: nil).instantiateViewController(identifier: "creatorProfile") as! CreatorProfileViewController
             profileVC.id = id
 
-//            guard self.navigationController?.topViewController == self else { return }
-
             navigationController?.pushViewController(profileVC, animated: true)
         }
         tableView.deselectRow(at: indexPath, animated: true)
@@ -124,5 +93,3 @@ extension SearchingCreatorsViewController: UITableViewDelegate {
         return 60.0
     }
 }
-
-

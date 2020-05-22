@@ -14,6 +14,7 @@ import Crashlytics
 
 class SettingViewController: UIViewController {
     
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var accounttableView: UITableView!
     @IBOutlet weak var preferenceTableVIew: UITableView!
     @IBOutlet weak var DoneBtn: UIBarButtonItem!
@@ -29,14 +30,14 @@ class SettingViewController: UIViewController {
     let userManager =  UserdataManager()
     var accountSettingVC = AccountSettingViewController()
     let settingManager = SettingManager()
-  //  let allergicData  = allergicFoodData?.self
+    //  let allergicData  = allergicFoodData?.self
     
     let uid = Auth.auth().currentUser!.uid
     
     override func viewDidLoad() {
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(self.refresh), name: NSNotification.Name(rawValue: "dataUpdate"), object: nil)
-    
+        
         initDefaultData()
         delegate_dataSource_Setup()
         userDataSetup()
@@ -44,11 +45,11 @@ class SettingViewController: UIViewController {
         UIviewSetup()
     }
     private func initDefaultData(){
-         accountTitle = ["Name:", "Email:"]
-         preferenceTitle = ["Allergies or Dislike Ingredients", "Meal Size","Cuisine Type"]
-         allergies = ["Peanut","Onion","Egg","Milk"]
-         mealSize = ["1-2","3-4","5-6","7-8","9-10","above 10"]
-         cuisineType = ["Chinese","Japanese","Korean","Canadian"]
+        accountTitle = ["Name:", "Email:"]
+        preferenceTitle = ["Allergies or Dislike Ingredients", "Meal Size","Cuisine Type"]
+        allergies = ["Peanut","Onion","Egg","Milk"]
+        mealSize = ["1-2","3-4","5-6","7-8","9-10","above 10"]
+        cuisineType = ["Chinese","Japanese","Korean","Canadian"]
     }
     
     private func delegate_dataSource_Setup(){
@@ -60,6 +61,7 @@ class SettingViewController: UIViewController {
         userManager.delegate = self
     }
     private func UIviewSetup(){
+        self.scrollView.contentSize = self.view.frame.size
         self.accounttableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         self.preferenceTableVIew.separatorStyle = UITableViewCell.SeparatorStyle.none
         accounttableView.isHidden = true
@@ -87,7 +89,7 @@ class SettingViewController: UIViewController {
         self.accounttableView.reloadData()
     }
     @objc func closeKeyboard(){
-           self.view.endEditing(true)
+        self.view.endEditing(true)
     }
     
     
@@ -96,43 +98,68 @@ class SettingViewController: UIViewController {
         DoneBtn.isEnabled = false
         DoneBtn.title = ""
     }
- 
+    
     @IBAction func showChoice(_ sender: Any) {
         DoneBtn.isEnabled = true
         DoneBtn.title = "Done"
-            let actionSheet = UIAlertController(title: "Your image From...", message: "choose your camera roll or camera", preferredStyle: .alert)
+        let actionSheet = UIAlertController(title: "Your image From...", message: "choose your camera roll or camera", preferredStyle: .alert)
+        
+        let cameraRollAction = UIAlertAction(title: "Camera Roll", style: .default, handler: { action in
+            self.selectPicture()
+        })
+        
+        let cameraAction = UIAlertAction(title: "Camera", style: .default, handler: { action in
             
-            let cameraRollAction = UIAlertAction(title: "Camera Roll", style: .default, handler: { action in
-                self.selectPicture()
-            })
-            
-            let cameraAction = UIAlertAction(title: "Camera", style: .default, handler: { action in
-                
-                self.takeYourImage()
-            })
-            
-            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
-                self.dismiss(animated: true, completion: nil)
-            })
-            actionSheet.addAction(cameraRollAction)
-            actionSheet.addAction(cameraAction)
-            actionSheet.addAction(cancelAction)
-            
-            present(actionSheet, animated: true, completion: nil)
-            
+            self.takeYourImage()
+        })
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
+            self.dismiss(animated: true, completion: nil)
+        })
+        actionSheet.addAction(cameraRollAction)
+        actionSheet.addAction(cameraAction)
+        actionSheet.addAction(cancelAction)
+        
+        present(actionSheet, animated: true, completion: nil)
+        
     }
     
     
     @IBAction func accountBtnClick(_ sender: Any) {
-        UIView.animate(withDuration: 0.3) {
+        
+        UIView.transition(with: self.accounttableView, duration: 0.3, options: [UIView.AnimationOptions.transitionFlipFromTop], animations: {
             self.accounttableView.isHidden = !self.accounttableView.isHidden
-        }
+            
+            self.scrollView.contentSize.height = self.accounttableView.isHidden ? self.view.frame.size.height + self.accounttableView.frame.size.height : self.view.frame.size.height - self.accounttableView.frame.size.height
+            
+        }, completion: nil)
+        
+        //        UIView.animate(withDuration: 0.3) {
+        //
+        //        }
     }
     
+    
+    
+    
     @IBAction func preferenceBtnClick(_ sender: Any) {
-        UIView.animate(withDuration: 0.3) {
-        self.preferenceTableVIew.isHidden = !self.preferenceTableVIew.isHidden
-        }
+        //        UIView.animate(withDuration: 0.3) {
+        //        self.preferenceTableVIew.isHidden = !self.preferenceTableVIew.isHidden
+        //        }
+        UIView.transition(with: self.preferenceTableVIew, duration: 0.3, options: [UIView.AnimationOptions.transitionFlipFromTop], animations: {
+            
+            self.preferenceTableVIew.isHidden = !self.preferenceTableVIew.isHidden
+            
+            self.scrollView.contentSize.height = self.preferenceTableVIew.isHidden ? self.view.frame.size.height + self.preferenceTableVIew.frame.size.height : self.view.frame.size.height - self.preferenceTableVIew.frame.size.height
+            
+        }, completion: { isFinish in
+            
+        
+            let contentOffset = CGPoint(x: self.scrollView.contentSize.width - self.view.frame.size.width, y: 0)
+            if !self.preferenceTableVIew.isHidden {
+                self.scrollView.setContentOffset(contentOffset, animated: true)
+            }
+        })
     }
     
     

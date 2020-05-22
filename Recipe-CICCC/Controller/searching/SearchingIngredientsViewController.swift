@@ -5,7 +5,6 @@
 //  Created by 北島　志帆美 on 2020-04-20.
 //  Copyright © 2020 Argus Chen. All rights reserved.
 //
-
 import UIKit
 import Crashlytics
 
@@ -18,7 +17,7 @@ class SearchingIngredientsViewController: UIViewController {
             if tableView != nil {
                 tableView.reloadData()
             }
-//            dataManager.getAllRecipes(searchingWord: searchingWord)
+
         }
     }
     
@@ -27,8 +26,6 @@ class SearchingIngredientsViewController: UIViewController {
     var searchedRecipes:[RecipeDetail] = []
     
     
-//    let dataManager = SearchingIngredientsDataManager()
-//    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -37,10 +34,7 @@ class SearchingIngredientsViewController: UIViewController {
         tableView.delegate = self
         tableView.tableFooterView = UIView()
         tableView.reloadData()
-//        dataManager.delegate = self
         
-//        dataManager.getAllRecipes(searchingWord: searchingWord)
-       
     }
     
     
@@ -82,10 +76,6 @@ extension SearchingIngredientsViewController: UITableViewDelegate {
         
         tableView.deselectRow(at: indexPath, animated: true)
 
-//        guard self.navigationController?.topViewController == self else { return }
-
         navigationController?.pushViewController(vc, animated: true)
     }
 }
-
-

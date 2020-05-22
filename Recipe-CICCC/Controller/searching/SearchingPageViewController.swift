@@ -42,16 +42,3 @@ class SearchingPageViewController: UIPageViewController {
     
 }
 
-
-
-//extension SearchingPageViewController: SearchingViewControllerDelegate {
-//    func segmentSetted(index: Int) {
-//
-//        let genreVC = storyboard?.instantiateViewController(identifier: "genreVC") as! SearchingGenreViewController
-//        let ingredientVC = storyboard?.instantiateViewController(identifier: "ingredientVC") as! SearchingIngredientsViewController
-//        let creatorVC = storyboard?.instantiateViewController(identifier: "creatroVC") as! SearchingCreatorsViewController
-//
-//        let VCs = [ingredientVC,genreVC,creatorVC]
-//        self.setViewControllers([VCs[index]], direction: .forward, animated: true, completion: nil)
-//    }
-//}

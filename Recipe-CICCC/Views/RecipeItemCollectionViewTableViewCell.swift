@@ -12,7 +12,7 @@ class RecipeItemCollectionViewTableViewCell: UITableViewCell {
     
     var recipeData: [RecipeDetail] = []
     var recipeImage = [UIImage]()
-    var delegate : CollectionViewInsideUserTableView?
+    weak var delegate : CellTappedCollectionViewInsideUserTableView?
     
     @IBOutlet weak var collectionView: UICollectionView!{
         didSet{

@@ -64,17 +64,8 @@ class IngredientsViewController: UIViewController {
     var lastNavigationBarIsHidden = false
     
     let indicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        
-        
-        refrigeratorDataManager.delegate = self
-        dataManager.delegate = self
-        ImageCollecitonView.delegate = self
-        
-        
-        
+    
+    fileprivate func showConnectingView() {
         let navigationBar = UINavigationBar()
         let height = UIScreen.main.bounds.height / 2 - navigationBar.frame.size.height - 50
         
@@ -85,6 +76,18 @@ class IngredientsViewController: UIViewController {
         indicator.layer.cornerRadius = 10
         
         self.view.addSubview(indicator)
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        refrigeratorDataManager.delegate = self
+        dataManager.delegate = self
+        ImageCollecitonView.delegate = self
+        
+        
+        
+        showConnectingView()
         
         navigationController?.setNavigationBarHidden(false, animated: false)
         
@@ -94,8 +97,9 @@ class IngredientsViewController: UIViewController {
         let uid = Auth.auth().currentUser?.uid
         
         if ingredientArray.isEmpty {
+           
             refrigeratorDataManager.getRefrigeratorDetail(userID: uid!)
-            
+            showConnectingView()
             
             DispatchQueue.global(qos: .default).async {
                 
@@ -108,21 +112,23 @@ class IngredientsViewController: UIViewController {
             }
         }
         
-        if lastNavigationBarIsHidden {
+//        if lastNavigationBarIsHidden {
             self.navigationController?.setNavigationBarHidden(true, animated: false)
-        }
+//        }
         
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
+
         if selectedIndexPath == nil {
-            
+
             if let cell = TitleCollectionView.cellForItem(at: IndexPath(row: 0, section: 0)) as? IngredientTitleCollectionViewCell {
+                
                 self.TitleCollectionView.reloadData()
                 self.TitleCollectionView.layoutIfNeeded()
                 cell.focusCell(active: true)
+                
             }
         }
     }
@@ -216,7 +222,8 @@ extension IngredientsViewController: UICollectionViewDataSource, UICollectionVie
         selectedIndexPath = indexPath
         
         if collectionView == TitleCollectionView {
-            collectionView.reloadData()
+            
+            TitleCollectionView.reloadData()
             showingIngredient = ingredientArray[indexPath.row]
             
             tempCreators.removeAll()
@@ -224,6 +231,7 @@ extension IngredientsViewController: UICollectionViewDataSource, UICollectionVie
             imageCount = 0
             
             if recipes[showingIngredient!] != nil{
+                self.ImageCollecitonView.isHidden = false
                 tempImages = Array(repeating: UIImage(), count: recipes[showingIngredient!]!.count)
                 
                 for (index ,recipe) in self.recipes[showingIngredient!]!.enumerated(){
@@ -232,11 +240,6 @@ extension IngredientsViewController: UICollectionViewDataSource, UICollectionVie
                     
                 }
             }
-            
-            
-            UIView.transition(with: self.ImageCollecitonView, duration: 0.3, options: [UIView.AnimationOptions.transitionCrossDissolve], animations: {
-                self.ImageCollecitonView.reloadData()
-            }, completion: nil)
             
         }
         
@@ -293,6 +296,13 @@ extension IngredientsViewController: UICollectionViewDataSource, UICollectionVie
         scrollBeginPoint = scrollView.contentOffset.y
     }
     
+    func scrollViewDidScrollToTop(_ scrollView: UIScrollView) {
+        
+        UIView.animate(withDuration: 0.3, animations: {
+            self.navigationController?.setNavigationBarHidden(false, animated: false)
+        })
+        
+    }
 }
 
 extension IngredientsViewController: UICollectionViewDelegateFlowLayout {
@@ -439,6 +449,7 @@ extension IngredientsViewController: fetchDataInIngredientsDelegate {
             
             UIView.transition(with: self.ImageCollecitonView, duration: 0.3, options: [UIView.AnimationOptions.transitionCrossDissolve], animations: {
                 self.ImageCollecitonView.reloadData()
+                self.ImageCollecitonView.isHidden = false
             }, completion: nil)
         }
     }

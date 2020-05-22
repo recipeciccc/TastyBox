@@ -11,7 +11,7 @@ import Firebase
 import FirebaseFirestore
 
 class FetchRecipeData{
-    var delegate : ReloadDataDelegate?
+    weak var delegate : ReloadDataDelegate?
     var commentDelegate: GetCommentsDelegate?
     let db = Firestore.firestore()
     let storageRef = Storage.storage().reference()

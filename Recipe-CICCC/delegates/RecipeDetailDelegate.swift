@@ -15,4 +15,6 @@ protocol RecipeDetailDelegate: class {
     func gotGenres(genres: [String])
     func UnfollowedAction()
     func FollowedAction()
+    func isVIP(isVIP: Bool)
+    func gotInstructionImages(images:[Int: UIImage])
 }

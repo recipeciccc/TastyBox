@@ -340,7 +340,7 @@ extension CreatorProfileViewController : getUserDataDelegate {
     }
 }
 
-extension CreatorProfileViewController: CollectionViewInsideUserTableView {
+extension CreatorProfileViewController: CellTappedCollectionViewInsideUserTableView {
     func cellTaped(data: IndexPath) {
         let storyboard = UIStoryboard(name: "RecipeDetail", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "detailvc") as! RecipeDetailViewController

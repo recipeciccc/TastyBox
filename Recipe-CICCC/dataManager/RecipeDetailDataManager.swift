@@ -11,9 +11,11 @@ import Firebase
 
 
 class RecipeDetailDataManager {
+    
     var recipe: RecipeDetail?
     var ingredientList:[Ingredient] = []
     var instructionList: [Instruction] = []
+    var instructionImages:[Int: UIImage] = [:]
     let db = Firestore.firestore()
     weak var delegate: RecipeDetailDelegate?
     let uid = Auth.auth().currentUser?.uid
@@ -124,6 +126,61 @@ class RecipeDetailDataManager {
         }
     }
     
+    
+    func getInstructionImg( uid:String, rid: String, count: Int) {
+        
+        var image = UIImage()
+        let storage = Storage.storage()
+        let storageRef = storage.reference()
+        
+        for index in 0..<count{
+            
+            
+            let imagesRef = storageRef.child("user/\(uid)/RecipePhoto/\(rid)/\(index)")
+            imagesRef.getData(maxSize: 1 * 1024 * 1024) { data, error in   //
+
+                if error != nil {
+                    
+                    
+                    self.instructionImages[index] = #imageLiteral(resourceName: "imageFile")
+                    
+                    if count == self.instructionImages.count {
+//                        var imgList = [UIImage]()
+//                        imgList = [UIImage](self.instructionImages.values)
+                        
+                        self.delegate?.gotInstructionImages(images: self.instructionImages)
+                    }
+                    
+                    print(error?.localizedDescription as Any)
+                    
+                   
+                } else {
+                    if let imgData = data{
+                        image = UIImage(data: imgData)!
+                        self.instructionImages[index] = image
+//                        if let images = self.gotInstructionImg(index: index, image: image, count: count)  {
+                            if count == self.instructionImages.count {
+                                 self.delegate?.gotInstructionImages(images: self.instructionImages)
+                            }
+                            
+//                        }
+//                        else {
+//
+//                            if count == self.images.count {
+//                                var imgList = [UIImage]()
+//                                imgList = [UIImage](self.images.values)
+//
+//                                self.delegateImg?.reloadImg(img: imgList)
+//                            }
+//                        }
+                    }
+                    
+                }
+            }
+        }
+        
+    }
+    
     func getInstructionData(query:Query, tableView: UITableView){
         query.getDocuments { (snapshot, err) in
             if err != nil{
@@ -145,7 +202,7 @@ class RecipeDetailDataManager {
         }
     }
     
-    func increaseLike(recipe: RecipeDetail, isIncreased: Bool) {
+    func manageNumOfLikes(recipe: RecipeDetail, isIncreased: Bool) {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         db.collection("recipe").document(recipe.recipeID).setData (
             ["like": recipe.like], merge: true

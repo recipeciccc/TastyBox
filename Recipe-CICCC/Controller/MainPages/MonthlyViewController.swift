@@ -82,6 +82,8 @@ class MonthlyViewController: UIViewController {
             return
         } 
     }
+    
+    
 }
 
 extension MonthlyViewController: UITableViewDataSource, UITableViewDelegate{
@@ -148,5 +150,13 @@ extension MonthlyViewController: UITableViewDataSource, UITableViewDelegate{
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         scrollBeginPoint = scrollView.contentOffset.y
     }
+    
+    func scrollViewDidScrollToTop(_ scrollView: UIScrollView) {
+           
+           UIView.animate(withDuration: 0.3, animations: {
+               self.navigationController?.setNavigationBarHidden(false, animated: false)
+           })
+           
+       }
 }
 

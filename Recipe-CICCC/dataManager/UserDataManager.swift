@@ -12,7 +12,8 @@ import Firebase
 import FirebaseAuth
 
 protocol recipeDetailDelegate: class {
-    func isVIP(isVIP: Bool)
+//    func isVIP(isVIP: Bool)
+//    func gotInstructionImages(images:[Int: UIImage])
 }
 
 class UserdataManager {
@@ -23,7 +24,7 @@ class UserdataManager {
     weak var delegate: getUserDataDelegate?
     weak var delegateFollowerFollowing :FolllowingFollowerDelegate?
     weak var savedRecipesDelegate: SavedRecipeDelegate?
-    weak var recipeDetailDelegate: recipeDetailDelegate?
+    weak var recipeDetailDelegate: RecipeDetailDelegate?
     
     var users: [User] = []
     var user: User?

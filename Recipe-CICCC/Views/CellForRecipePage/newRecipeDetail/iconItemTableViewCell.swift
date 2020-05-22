@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol iconItemTableViewCellDelegate: class{
+protocol RecipeLikesManageDelegate: class{
     func increaseLike()
     func decreaseLike()
 }
@@ -18,7 +18,7 @@ class iconItemTableViewCell: UITableViewCell {
     @IBOutlet weak var numLikeLabel: UILabel!
     @IBOutlet weak var likeButton: UIButton!
     
-    weak var delegate: iconItemTableViewCellDelegate?
+    weak var delegate: RecipeLikesManageDelegate?
     
     var isLiked: Bool? {
         

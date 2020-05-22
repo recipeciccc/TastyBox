@@ -8,15 +8,22 @@
 
 import UIKit
 
+protocol PushSearchingGenres: class {
+    func pushSearedResult(vc: ResultRecipesViewController)
+}
+
 class recipeGenresTableViewCell: UITableViewCell {
 
     @IBOutlet weak var genresCollectionView: UICollectionView!
-    
+    weak var delegate: PushSearchingGenres?
     var genres:[String] = []
     
     func configure(with arr: [String]) {
         self.genres = arr
        
+        genresCollectionView.dataSource = self
+        genresCollectionView.delegate = self
+        
         self.genresCollectionView.reloadData()
         self.genresCollectionView.layoutIfNeeded()
     }
@@ -35,4 +42,30 @@ class recipeGenresTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
+}
+
+extension recipeGenresTableViewCell: UICollectionViewDataSource, UICollectionViewDelegate{
+
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return self.genres.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "recipeGenres", for: indexPath) as! recipeGenresCollectionViewCell
+        cell.genreLabel.text = "#\(self.genres[indexPath.row])"
+        cell.contentView.isUserInteractionEnabled = true
+        
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "resultRecipes") as! ResultRecipesViewController
+        
+        vc.searchingCategory = "genres"
+        vc.searchingWord = self.genres[indexPath.row]
+       
+        delegate?.pushSearedResult(vc: vc)
+       
+    }
 }

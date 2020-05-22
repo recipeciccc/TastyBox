@@ -17,7 +17,7 @@ protocol FollowingRecipestopPagingDelegate:  class {
 class FollowingRecipeViewController: UIViewController {
     
     @IBOutlet weak var followingTableView: UITableView!
-
+    
     
     var creatorImageList = [Int:UIImage]()
     var creatorNameList = [String]()
@@ -36,10 +36,10 @@ class FollowingRecipeViewController: UIViewController {
     
     weak var delegate: FollowingRecipestopPagingDelegate?
     
-     let indicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
+    let indicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
     ///  スクロール開始地点
     var scrollBeginPoint: CGFloat = 0.0
-
+    
     /// navigationBarが隠れているかどうか(詳細から戻った一覧に戻った際の再描画に使用)
     var lastNavigationBarIsHidden = false
     
@@ -81,7 +81,7 @@ class FollowingRecipeViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
+        
         if lastNavigationBarIsHidden {
             self.navigationController?.setNavigationBarHidden(true, animated: false)
         }
@@ -109,7 +109,7 @@ class FollowingRecipeViewController: UIViewController {
         superView.addSubview(imageView)
         
         let width =  superView.frame.size.width / 3 * 2
-    
+        
         imageView.frame = CGRect(x:(superView.frame.size.width / 2) - (width / 2), y: (superView.frame.size.width / 2) - (width / 2) , width: width, height: width)
         
         
@@ -220,8 +220,8 @@ extension FollowingRecipeViewController : UICollectionViewDelegate,UICollectionV
         let cell = (collectionView.cellForItem(at: indexPath) as? followingRecipeCollectionViewCell )
         
         recipeDetailVC.mainPhoto = (cell?.RecipeImage.image)!
-
-    
+        
+        
         navigationController?.pushViewController(recipeDetailVC, animated: true)
     }
     
@@ -234,6 +234,14 @@ extension FollowingRecipeViewController : UICollectionViewDelegate,UICollectionV
             
             mainViewController!.dataSource = mainViewController
         }
+    }
+    
+    func scrollViewDidScrollToTop(_ scrollView: UIScrollView) {
+        
+        UIView.animate(withDuration: 0.3, animations: {
+            self.navigationController?.setNavigationBarHidden(false, animated: false)
+        })
+        
     }
 }
 
@@ -330,6 +338,8 @@ extension FollowingRecipeViewController : FollowingRecipeDataManagerDelegate {
         
         
     }
+    
+    
     
 }
 

@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="1e6-Fi-obH">
-                                <rect key="frame" x="0.0" y="44" width="414" height="852"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <color key="backgroundColor" red="0.99736517670000002" green="0.98348218200000004" blue="0.76859062909999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="recipeCell" rowHeight="236" id="bYH-D1-Zxh" customClass="FollowingRecipeTableViewCell" customModule="Recipe_CICCC" customModuleProvider="target">
@@ -140,10 +140,10 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="1e6-Fi-obH" firstAttribute="leading" secondItem="gg6-7k-lg3" secondAttribute="leading" id="mCj-bd-QdX"/>
+                            <constraint firstItem="1e6-Fi-obH" firstAttribute="leading" secondItem="F1l-zb-5QW" secondAttribute="leading" id="mCj-bd-QdX"/>
                             <constraint firstAttribute="bottom" secondItem="1e6-Fi-obH" secondAttribute="bottom" id="oTl-Rx-T2b"/>
-                            <constraint firstItem="gg6-7k-lg3" firstAttribute="trailing" secondItem="1e6-Fi-obH" secondAttribute="trailing" id="uCa-oI-97a"/>
-                            <constraint firstItem="1e6-Fi-obH" firstAttribute="top" secondItem="gg6-7k-lg3" secondAttribute="top" id="yJE-vc-loP"/>
+                            <constraint firstAttribute="trailing" secondItem="1e6-Fi-obH" secondAttribute="trailing" id="uCa-oI-97a"/>
+                            <constraint firstItem="1e6-Fi-obH" firstAttribute="top" secondItem="F1l-zb-5QW" secondAttribute="top" id="yJE-vc-loP"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="gg6-7k-lg3"/>
                     </view>

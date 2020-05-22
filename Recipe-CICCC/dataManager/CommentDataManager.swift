@@ -12,7 +12,7 @@ import UIKit
 
 class CommentDataManager {
     let db = Firestore.firestore()
-    var delegate: GetCommentsDelegate?
+    weak var delegate: GetCommentsDelegate?
     
     var comments:[Comment] = []
     var user:User?

@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol GetCommentsDelegate{
+protocol GetCommentsDelegate: class {
     func assignUserImage(image: UIImage)
     func gotData(comments:[Comment])
     func getCommentUser(user: [User], comments: [Comment])

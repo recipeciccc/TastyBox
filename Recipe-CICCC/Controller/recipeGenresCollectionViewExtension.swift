@@ -18,6 +18,7 @@ extension RecipeDetailViewController: UICollectionViewDataSource, UICollectionVi
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "recipeGenres", for: indexPath) as! recipeGenresCollectionViewCell
         cell.genreLabel.text = "#\(self.genres[indexPath.row])"
+        cell.contentView.isUserInteractionEnabled = true
         
         return cell
     }

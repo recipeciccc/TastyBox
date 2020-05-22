@@ -258,7 +258,7 @@ extension MyPageViewController: MyPageDataManagerDelegate{
 //
 //}
 
-extension MyPageViewController: CollectionViewInsideUserTableView{
+extension MyPageViewController: CellTappedCollectionViewInsideUserTableView{
     func cellTaped(data: IndexPath) {
         
         let storyboard = UIStoryboard(name: "RecipeDetail", bundle: nil)

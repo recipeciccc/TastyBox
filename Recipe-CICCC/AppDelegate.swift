@@ -21,8 +21,10 @@ import Crashlytics
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate, MessagingDelegate{
     
     let apiKey = "AIzaSyA8iI9CDqKxnyvCAuWoBbSyZYdRqf_WQLk"
-    
+
     var window: UIWindow?
+    
+    let statusBarTappedNotification = Notification(name: Notification.Name(rawValue: "statusBarTappedNotification"))
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -57,6 +59,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 //
 //        application.registerForRemoteNotifications()
 //
+
+//        NotificationCenter.default.addObserver(forName: statusBarTappedNotification.name, object: .none, queue: .none) { _ in
+//                  self.navigationController.setNavigationBarHidden(false, animated: false)
+//              }
+        
          FirebaseApp.configure()
          
         return true
@@ -93,10 +100,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         return handled
     }
 
+    
+   
+     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+            super.touchesBegan(touches, with: event)
+
+            let statusBarRect = UIApplication.shared.statusBarFrame
+            guard let touchPoint = event?.allTouches?.first?.location(in: self.window) else { return }
+
+            if statusBarRect.contains(touchPoint) {
+                NotificationCenter.default.post(statusBarTappedNotification)
+            }
+        }
 //
 //    // The callback to handle data message received via FCM for devices running iOS 10 or above.
 //    func applicationReceivedRemoteMessage(_ remoteMessage: MessagingRemoteMessage) {
 //        print(remoteMessage.appData)
 //    }
+    
+    
+ 
 }
 
