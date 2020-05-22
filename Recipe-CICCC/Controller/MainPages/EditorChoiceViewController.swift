@@ -55,11 +55,11 @@ class EditorChoiceViewController: UIViewController {
     }
     
     func CreateImageArray() {
-        let image1 = Image(title: "Appetizer", image: #imageLiteral(resourceName: "elli-o-XoByiBymX20-unsplash"))
-        let image2 = Image(title: "Main Dish", image: #imageLiteral(resourceName: "How-to-Make-the-Best-Juiciest-Turkey-Meatballs_055"))
-        let image3 = Image(title: "Salad", image: #imageLiteral(resourceName: "Image"))
-        let image4 = Image(title: "Dessert", image: #imageLiteral(resourceName: "vegan-valentines-day-recipe-950x950"))
-        let image5 = Image(title: "Beverage", image: #imageLiteral(resourceName: "shenggeng-lin-XoN3v3Ge7EE-unsplash"))
+        let image1 = Image(title: "Appetizer", image: #imageLiteral(resourceName: "Appetizer-1"))
+        let image2 = Image(title: "Main Dish", image: #imageLiteral(resourceName: "meal-1"))
+        let image3 = Image(title: "Salad", image: #imageLiteral(resourceName: "salad-1"))
+        let image4 = Image(title: "Dessert", image: #imageLiteral(resourceName: "desert1"))
+        let image5 = Image(title: "Beverage", image: #imageLiteral(resourceName: "beverage"))
         
         imageArray.append(image1)
         imageArray.append(image2)
