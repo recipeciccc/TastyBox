@@ -65,9 +65,7 @@ extension recipeGenresTableViewCell: UICollectionViewDataSource, UICollectionVie
         vc.searchingCategory = "genres"
         vc.searchingWord = self.genres[indexPath.row]
        
-//        guard self.navigationController?.topViewController == self else { return }
         delegate?.pushSearedResult(vc: vc)
-//        navigationController?.pushViewController(vc, animated: true)
        
     }
 }

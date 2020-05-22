@@ -45,7 +45,6 @@ class RecipeDetailViewController: UIViewController {
         
         detailTableView.tableFooterView = UIView()
         detailTableView.separatorStyle = .none
-//        detailTableView.isUserInteractionEnabled = true
         detailTableView.isHidden = true
         
         userDataManager.delegate = self
@@ -53,11 +52,7 @@ class RecipeDetailViewController: UIViewController {
         dataManager1.delegate = self
         
         view.backgroundColor = #colorLiteral(red: 0.9959775805, green: 0.9961397052, blue: 0.7093081474, alpha: 1)
-        
-//        UIApplication.shared.windows.last?.makeKeyAndVisible()
-//        let parentViewController = UIApplication.shared.keyWindow!.rootViewController
-//        parentViewController?.present(self, animated: true, completion: nil)
-//        
+  
     }
     
     override func viewWillAppear(_ animated: Bool) {

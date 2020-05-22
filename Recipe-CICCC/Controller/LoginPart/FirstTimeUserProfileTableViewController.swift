@@ -168,8 +168,11 @@ class FirstTimeUserProfileTableViewController: UITableViewController, UIPickerVi
             
             guard self.navigationController?.topViewController == self else { return }
             
-            self.navigationController?.pushViewController(vc, animated: false)
-            
+            if Auth.auth().currentUser?.uid != nil {
+                self.navigationController?.pushViewController(vc, animated: false)
+                } else {
+                
+            }
             
         }
     }

@@ -64,17 +64,8 @@ class IngredientsViewController: UIViewController {
     var lastNavigationBarIsHidden = false
     
     let indicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        
-        
-        refrigeratorDataManager.delegate = self
-        dataManager.delegate = self
-        ImageCollecitonView.delegate = self
-        
-        
-        
+    
+    fileprivate func showConnectingView() {
         let navigationBar = UINavigationBar()
         let height = UIScreen.main.bounds.height / 2 - navigationBar.frame.size.height - 50
         
@@ -85,6 +76,18 @@ class IngredientsViewController: UIViewController {
         indicator.layer.cornerRadius = 10
         
         self.view.addSubview(indicator)
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        refrigeratorDataManager.delegate = self
+        dataManager.delegate = self
+        ImageCollecitonView.delegate = self
+        
+        
+        
+        showConnectingView()
         
         navigationController?.setNavigationBarHidden(false, animated: false)
         
@@ -94,8 +97,9 @@ class IngredientsViewController: UIViewController {
         let uid = Auth.auth().currentUser?.uid
         
         if ingredientArray.isEmpty {
+           
             refrigeratorDataManager.getRefrigeratorDetail(userID: uid!)
-            
+            showConnectingView()
             
             DispatchQueue.global(qos: .default).async {
                 
@@ -116,13 +120,15 @@ class IngredientsViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
+
         if selectedIndexPath == nil {
-            
-            if let cell = TitleCollectionView.cellForItem(at: IndexPath(row: ingredientArray.count - 1, section: 0)) as? IngredientTitleCollectionViewCell {
+
+            if let cell = TitleCollectionView.cellForItem(at: IndexPath(row: 0, section: 0)) as? IngredientTitleCollectionViewCell {
+                
                 self.TitleCollectionView.reloadData()
                 self.TitleCollectionView.layoutIfNeeded()
                 cell.focusCell(active: true)
+                
             }
         }
     }
