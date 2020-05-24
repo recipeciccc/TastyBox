@@ -12,14 +12,22 @@ import Crashlytics
 
 class ContactViewController: UIViewController {
 
+   
+    
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var sendBtn: UIButton!
     @IBAction func emailSend(_ sender: Any) {
         //This need to be run at the device.
         emailComposer()
+        scrollView.delegate = self
+        
     }
     
     override func viewDidLoad() {
         roundCorners(view: sendBtn, cornerRadius: 25.0)
+        
+//        scrollView.contentSize.height = self.view.frame.height
+        self.scrollView.contentSize = self.view.frame.size
     }
     func emailComposer(){
         if MFMailComposeViewController.canSendMail() == true {
@@ -62,4 +70,8 @@ extension ContactViewController: MFMailComposeViewControllerDelegate{
         }
         controller.dismiss(animated: true, completion: nil)
     }
+}
+
+extension ContactViewController:UIScrollViewDelegate {
+    
 }

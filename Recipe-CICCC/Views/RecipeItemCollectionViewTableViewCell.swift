@@ -12,7 +12,7 @@ class RecipeItemCollectionViewTableViewCell: UITableViewCell {
     
     var recipeData: [RecipeDetail] = []
     var recipeImage = [UIImage]()
-    weak var delegate : CellTappedCollectionViewInsideUserTableView?
+    weak var delegate : CollectionViewInsideProfileTableViewDelegate?
     
     @IBOutlet weak var collectionView: UICollectionView!{
         didSet{
@@ -61,6 +61,12 @@ extension RecipeItemCollectionViewTableViewCell: UICollectionViewDataSource, UIC
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-            self.delegate?.cellTaped(data: indexPath)
+        self.delegate?.cellTaped(data: indexPath)
+    }
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        if self.collectionView.contentOffset == CGPoint(x: 0, y: 0) {
+            self.delegate?.beginDragging()
+        }
     }
 }

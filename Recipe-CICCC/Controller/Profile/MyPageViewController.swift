@@ -11,7 +11,7 @@ import Firebase
 import FirebaseFirestore
 import Crashlytics
 
-class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class MyPageViewController: UIViewController {
     
     @IBOutlet var profileTableView: UITableView!
     
@@ -84,14 +84,27 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
     }
     
-    
+    @IBAction func postedButtonTapped(_ sender: Any) {
+           self.view.frame.origin.y = -195.0
+       }
+       
+       
+       // MARK: cant tap image although put tap recognizer.
+       @IBAction func changeAccountImage(_ sender: UITapGestureRecognizer) {
+           let imagePickerVC = UIStoryboard(name: "MyPage", bundle: nil).instantiateViewController(withIdentifier: "imagePickerVC")
+           
+           guard self.navigationController?.topViewController == self else { return }
+           navigationController?.pushViewController(imagePickerVC, animated: true)
+       }
     
     @IBAction func postedButtonAction(_ sender: Any) {
         
         self.profileTableView.scrollToRow(at: IndexPath(row: 0, section: 2), at: .top, animated: true)
     }
     
-    
+}
+
+extension MyPageViewController: UITableViewDataSource, UITableViewDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 3 //4
@@ -158,23 +171,9 @@ class MyPageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-    }
-    
-    @IBAction func postedButtonTapped(_ sender: Any) {
-        self.view.frame.origin.y = -195.0
-    }
-    
-    
-    // MARK: cant tap image although put tap recognizer.
-    @IBAction func changeAccountImage(_ sender: UITapGestureRecognizer) {
-        let imagePickerVC = UIStoryboard(name: "MyPage", bundle: nil).instantiateViewController(withIdentifier: "imagePickerVC")
-        
-        guard self.navigationController?.topViewController == self else { return }
-        navigationController?.pushViewController(imagePickerVC, animated: true)
-    }
 }
+   
+
 
 extension MyPageViewController: MyPageDataManagerDelegate{
     func passSaveingRecipesNumber(number: Int) {
@@ -248,17 +247,13 @@ extension MyPageViewController: MyPageDataManagerDelegate{
         self.profileTableView.reloadData()
     }
 }
-//
-//extension MyPageViewController: ReloadDataDelegate{
-//
-//
-//}
-//
-//extension MyPageViewController : getUserDataDelegate {
-//
-//}
 
-extension MyPageViewController: CellTappedCollectionViewInsideUserTableView{
+
+extension MyPageViewController: CollectionViewInsideProfileTableViewDelegate{
+    func beginDragging() {
+        self.profileTableView.scrollToRow(at: IndexPath(row: 0, section: 2), at: .top, animated: true)
+    }
+    
     func cellTaped(data: IndexPath) {
         
         let storyboard = UIStoryboard(name: "RecipeDetail", bundle: nil)
@@ -273,16 +268,3 @@ extension MyPageViewController: CellTappedCollectionViewInsideUserTableView{
     }
     
 }
-
-//extension MyPageViewController: FolllowingFollowerDelegate {
-//    func assignFollowersFollowings(users: [User]) {
-//
-//    }
-//
-//
-//
-//}
-//
-//extension MyPageViewController: setImageDelegate {
-//
-//}

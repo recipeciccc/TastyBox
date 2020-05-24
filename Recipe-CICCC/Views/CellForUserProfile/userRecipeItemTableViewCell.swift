@@ -12,7 +12,7 @@ class userRecipeItemTableViewCell: UITableViewCell {
     
     var recipeData: [RecipeDetail] = []
     var recipeImage = [UIImage]()
-    weak var delegate : CellTappedCollectionViewInsideUserTableView?
+    weak var delegate : CollectionViewInsideProfileTableViewDelegate?
     
     @IBOutlet weak var collectionView: UICollectionView!{
         didSet{
@@ -21,16 +21,6 @@ class userRecipeItemTableViewCell: UITableViewCell {
            
         }
     }
-    
-//  func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//      if segue.identifier == "RecipeUnit" {
-//        if let controller = segue.destination as? RecipeDetailViewController{
-//            let cell = sender as! UICollectionViewCell
-//            let indexPath = controller.collectionView.indexPath(for: cell)
-//            controller.mainImage = recipeImage[(indexPath?.row)!]
-//        }
-//      }
-//  }
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -77,18 +67,11 @@ extension userRecipeItemTableViewCell: UICollectionViewDataSource, UICollectionV
    }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         self.delegate?.cellTaped(data: indexPath)
-//
-//       let cell =  collectionView.visibleCells[indexPath.row]
-//        let vc = RecipeDetailViewController()
-////        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "recipeItemForUser", for: indexPath) as! userRecipeItemCollectionViewCell
-//        if let index = collectionView.indexPath(for: cell){
-//            vc.mainImage = recipeImage[index.row]
-//            let a:AnyClass = self.superclass ??
-//
-//           let vcRoot =  UIViewController(nibName: "userPageViewController", bundle: nil)
-//            UINavigationController(rootViewController: vcRoot).pushViewController(vc, animated: true)
-//            self.superclass.pushViewController(vc, animated: nil)
-//        }
+    }
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        self.delegate?.beginDragging()
+        
     }
   
 }

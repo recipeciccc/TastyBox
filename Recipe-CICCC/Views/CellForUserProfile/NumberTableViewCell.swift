@@ -29,19 +29,15 @@ class NumberTableViewCell: UITableViewCell {
         // Initialization code
        
         numOfRecipeUserSavedButton.titleLabel?.numberOfLines = 0
-//        numOfRecipeUserSavedButton.setTitle("\(numOfRecipeUserSaved) \nSaved", for: .normal)
         numOfRecipeUserSavedButton.titleLabel?.textAlignment = NSTextAlignment.center
         
         numOfRecipeUserPostedButton.titleLabel?.numberOfLines = 0
-//        numOfRecipeUserPostedButton.setTitle("\(numOfRecipeUserPosted) \nPosted", for: .normal)
         numOfRecipeUserPostedButton.titleLabel?.textAlignment = NSTextAlignment.center
         
         numOfFollowerButton.titleLabel?.numberOfLines = 0
-//        numOfFollowerButton.setTitle("\(numOfFollower) \nFollower", for: .normal)
         numOfFollowerButton.titleLabel?.textAlignment = NSTextAlignment.center
         
         numOfFollowingButton.titleLabel?.numberOfLines = 0
-//        numOfFollowingButton.setTitle("\(numOfFollwing) \nFollowing", for: .normal)
         numOfFollowingButton.titleLabel?.textAlignment = NSTextAlignment.center
         
     }

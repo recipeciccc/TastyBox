@@ -146,6 +146,7 @@ extension ResultRecipesViewController: UICollectionViewDelegateFlowLayout {
 
 extension ResultRecipesViewController : ResultRecipesDataManagerDelegate {
     func passRecipesData(recipes: [RecipeDetail]) {
+        resultRecipes.removeAll()
         resultRecipes = recipes
         self.collectionView.reloadData()
     }

@@ -125,6 +125,7 @@ extension VIPViewController :RecipeCollectionViewDelegate {
     func pushViewController(recipe: RecipeDetail?, image: UIImage?, creator: User?) {
         
         if recipe == nil {
+            
             let alertController = UIAlertController(title: "Register VIP member", message: "This recipe is VIP only. You need to be VIP member.", preferredStyle: .alert)
             
             let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
@@ -138,6 +139,7 @@ extension VIPViewController :RecipeCollectionViewDelegate {
             alertController.addAction(defaultAction)
             
             navigationController!.present(alertController, animated: true, completion: nil)
+            
         } else {
             
             let storyboard = UIStoryboard(name: "RecipeDetail", bundle: nil)
