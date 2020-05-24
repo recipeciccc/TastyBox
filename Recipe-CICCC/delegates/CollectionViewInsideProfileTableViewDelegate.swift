@@ -8,6 +8,7 @@
 
 import Foundation
 
-protocol CellTappedCollectionViewInsideUserTableView: class {
+protocol CollectionViewInsideProfileTableViewDelegate: class {
     func cellTaped(data:IndexPath)
+    func beginDragging()
 }

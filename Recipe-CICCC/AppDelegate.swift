@@ -40,8 +40,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         GIDSignIn.sharedInstance()?.clientID = "247475802290-slfc1mtet3ilq9at7m5nqg1rtom53ggo.apps.googleusercontent.com"//FirebaseApp.app()?.options.clientID
         UINavigationBar.appearance().tintColor = UIColor.orange
         UINavigationBar.appearance().barTintColor = UIColor.white
-    
-        
+//
+//
 //        if #available(iOS 10.0, *) {
 //            // For iOS 10 display notification (sent via APNS)
 //            UNUserNotificationCenter.current().delegate = self
@@ -59,10 +59,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 //
 //        application.registerForRemoteNotifications()
 //
-
-//        NotificationCenter.default.addObserver(forName: statusBarTappedNotification.name, object: .none, queue: .none) { _ in
-//                  self.navigationController.setNavigationBarHidden(false, animated: false)
-//              }
+//        Messaging.messaging().delegate = self
         
          FirebaseApp.configure()
          

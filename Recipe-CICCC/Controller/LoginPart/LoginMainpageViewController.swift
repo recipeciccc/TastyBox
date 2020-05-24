@@ -341,19 +341,21 @@ extension LoginMainpageViewController: ASAuthorizationControllerDelegate {
     
     func setUpSignInAppleButton() {
         
-        let appleLoginButton = UIButton(type: .custom)
-        appleLoginButton.addTarget(self, action: #selector(handleAppleIdRequest), for: .touchUpInside)
-        appleLoginButton.layer.cornerRadius = 10
-        appleLoginButton.layer.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-        appleLoginButton.tintColor = .black
+//        let appleLoginButton = UIButton(type: .custom)
+//        appleLoginButton.addTarget(self, action: #selector(handleAppleIdRequest), for: .touchUpInside)
+//        appleLoginButton.layer.cornerRadius = 10
+//        appleLoginButton.layer.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+//        appleLoginButton.tintColor = .black
         
-        let image = #imageLiteral(resourceName: "apple-24")
-        appleLoginButton.setImage(image, for: .normal)
-        
-        appleLoginButton.setTitle(" Apple ", for: .normal)
-        appleLoginButton.titleLabel?.font = UIFont(name: "Helvetica-Bold", size: 20.0)
-        appleLoginButton.setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: .normal)
-        appleLoginButton.frame.size.height = 25.0
+//        let image = #imageLiteral(resourceName: "apple-24")
+//        appleLoginButton.setImage(image, for: .normal)
+//
+//        appleLoginButton.setTitle(" Apple ", for: .normal)
+//        appleLoginButton.titleLabel?.font = UIFont(name: "Helvetica-Bold", size: 20.0)
+//        appleLoginButton.setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: .normal)
+//        appleLoginButton.frame.size.height = 25.0
+        let appleLoginButton = ASAuthorizationAppleIDButton()
+
         
         self.loginButtonStackView.addArrangedSubview(appleLoginButton)
     }

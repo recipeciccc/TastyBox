@@ -139,6 +139,20 @@ class DiscoveryViewController: UIViewController {
       
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        
+        if let viewWithTag = self.view.viewWithTag(100) {
+            viewWithTag.removeFromSuperview()
+            sideMenuOpen = false
+            SideMenuConstraint.constant = -230 //-160
+            UIView.animate(withDuration: 0.3) {
+                self.view.layoutIfNeeded()
+            }
+        }else{
+            print("No!")
+        }
+    }
+    
     
     
     func initialContentView(){
@@ -183,12 +197,6 @@ class DiscoveryViewController: UIViewController {
             self.performSegue(withIdentifier: "searchPage", sender: nil)
         }
     }
-    
-//    @objc func AddRecipe(){
-//        print("Add Recipe")
-//
-//        performSegue(withIdentifier: "addRecipe", sender: nil)
-//    }
     
     @objc func showLogout(){
         

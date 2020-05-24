@@ -107,7 +107,6 @@
                                                             <rect key="frame" x="76" y="0.0" width="46" height="30"/>
                                                             <state key="normal" title="Button"/>
                                                             <connections>
-                                                                <action selector="postedButtonTapped:" destination="jEb-wp-ELK" eventType="touchUpInside" id="rEY-oi-QHR"/>
                                                                 <segue destination="q2S-V4-Gs5" kind="show" id="B0o-de-Mlk"/>
                                                             </connections>
                                                         </button>

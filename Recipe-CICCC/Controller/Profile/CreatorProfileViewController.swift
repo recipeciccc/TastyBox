@@ -108,7 +108,7 @@ class CreatorProfileViewController: UIViewController {
     @objc func showsChoice() {
         var alertStyle = UIAlertController.Style.actionSheet
         if (UIDevice.current.userInterfaceIdiom == .pad) {
-          alertStyle = UIAlertController.Style.alert
+            alertStyle = UIAlertController.Style.alert
         }
         
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: alertStyle)
@@ -147,7 +147,7 @@ class CreatorProfileViewController: UIViewController {
         actionSheet.addAction(blockingAction)
         actionSheet.addAction(reportAction)
         actionSheet.addAction(cancelAction)
-                
+        
         self.present(actionSheet, animated: true, completion: nil)
     }
     
@@ -233,7 +233,7 @@ extension CreatorProfileViewController: UITableViewDataSource {
             
             cell.creatorImageView!.image = self.creatorImage
             cell.creatorNameLabel.text = userName
-    
+            
             
             return cell
         }
@@ -308,11 +308,11 @@ extension CreatorProfileViewController: ReloadDataDelegate{
         imageList = img
         
         UIView.transition(with:self.tableView, duration: 0.3, options: [UIView.AnimationOptions.transitionCrossDissolve], animations: {
-           self.tableView.reloadData()
-
+            self.tableView.reloadData()
+            
         }, completion: nil)
         
-       
+        
     }
 }
 
@@ -340,7 +340,13 @@ extension CreatorProfileViewController : getUserDataDelegate {
     }
 }
 
-extension CreatorProfileViewController: CellTappedCollectionViewInsideUserTableView {
+extension CreatorProfileViewController: CollectionViewInsideProfileTableViewDelegate  {
+    func beginDragging() {
+        
+        self.tableView.scrollToRow(at: IndexPath(row: 0, section: 2), at: .top, animated: true)
+
+    }
+    
     func cellTaped(data: IndexPath) {
         let storyboard = UIStoryboard(name: "RecipeDetail", bundle: nil)
         let vc = storyboard.instantiateViewController(withIdentifier: "detailvc") as! RecipeDetailViewController
@@ -409,7 +415,7 @@ extension CreatorProfileViewController: followingManageDelegate {
             let cell = self.tableView.cellForRow(at: IndexPath(row: 0, section: 0)) as! profieTableViewCell
             cell.followingManagement(isFollowing: false)
             self.isFollowing = false
-//            self.userDataManager.findFollowerFollowing(id: self.id!)
+            //            self.userDataManager.findFollowerFollowing(id: self.id!)
             //            self.tableView.reloadData()
         })
         
@@ -460,7 +466,7 @@ extension CreatorProfileViewController: followingManageDelegate {
                 self.isBlocking = false
             }
         }
-    
+        
     }
 }
 
