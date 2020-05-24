@@ -166,7 +166,7 @@ class DiscoveryViewController: UIViewController {
         let label2 = "Your Ingredients Recipe"
         let label3 = "Most Popular"
         let label4 = "Editor Choice"
-        let label5 = "Monthly Choice"
+        let label5 = "Cuisine Choice"
         let label6 = " VIP Only "
         arrayMenu.append(label1)
         arrayMenu.append(label2)
