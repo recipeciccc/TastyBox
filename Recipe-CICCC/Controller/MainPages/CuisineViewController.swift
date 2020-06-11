@@ -9,7 +9,7 @@
 import UIKit
 import Crashlytics
 
-class MonthlyViewController: UIViewController {    
+class CuisineViewController: UIViewController {    
     
     var imageArray = [Image]()
     var arrayMenu = [String]()
@@ -85,7 +85,7 @@ class MonthlyViewController: UIViewController {
     
 }
 
-extension MonthlyViewController: UITableViewDataSource, UITableViewDelegate{
+extension CuisineViewController: UITableViewDataSource, UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return imageArray.count
@@ -107,6 +107,7 @@ extension MonthlyViewController: UITableViewDataSource, UITableViewDelegate{
         let image = imageArray[indexPath.row]
         viewContoller?.T_image = image.image
         viewContoller?.T_Name = image.title
+        viewContoller?.isSearchingCuisine = true
 
         switch indexPath.row{
                case 0: viewContoller?.recipeLabels = self.recipeLabels; break
@@ -118,7 +119,6 @@ extension MonthlyViewController: UITableViewDataSource, UITableViewDelegate{
                default: print("no category"); break
                }
          
-//        guard self.navigationController?.topViewController == self else { return }
         self.navigationController?.pushViewController(viewContoller!, animated: true)
     }
     
