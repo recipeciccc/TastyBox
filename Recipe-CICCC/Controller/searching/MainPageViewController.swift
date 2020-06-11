@@ -41,7 +41,7 @@ class MainPageViewController: UIPageViewController {
     let ingredientVC = UIStoryboard(name: "ingredientRecipe", bundle: nil).instantiateViewController(identifier: "ingredientRecipe") as! IngredientsViewController
     let poppularVC = UIStoryboard(name: "popularPage", bundle: nil).instantiateViewController(identifier: "popularPage") as! PopularRecipeViewController
     let editorChoiceVC = UIStoryboard(name: "EditorChoice", bundle: nil).instantiateViewController(identifier: "EditorChoice") as EditorChoiceViewController
-    let monthlyVC = UIStoryboard(name: "Monthly", bundle: nil).instantiateViewController(identifier: "Monthly") as! CuisineViewController
+    let monthlyVC = UIStoryboard(name: "Monthly", bundle: nil).instantiateViewController(identifier: "Monthly") as! MonthlyViewController
     let VIPVC = UIStoryboard(name: "VIP_page", bundle: nil).instantiateViewController(identifier: "VIP_page") as! VIPViewController
     
     weak var pageControllerDelegate: MainPageViewControllerDelegate?
@@ -103,7 +103,7 @@ extension MainPageViewController: UIPageViewControllerDataSource {
             self.pageControllerDelegate?.indexPageCurledInContainer(index: 2, indexPathUserselectedBefore: 3, indexPath: indexPath!)
             return poppularVC
             
-        case is CuisineViewController:
+        case is MonthlyViewController:
             self.pageControllerDelegate?.indexPageCurledInContainer(index: 3, indexPathUserselectedBefore: 4, indexPath: indexPath!)
             return editorChoiceVC
             
@@ -149,7 +149,7 @@ extension MainPageViewController: UIPageViewControllerDataSource {
             
             return monthlyVC
             
-        case is CuisineViewController:
+        case is MonthlyViewController:
             self.pageControllerDelegate?.indexPageCurledInContainer(index: 5, indexPathUserselectedBefore: 4, indexPath: indexPath!)
             
             return VIPVC

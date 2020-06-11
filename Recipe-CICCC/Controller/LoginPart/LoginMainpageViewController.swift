@@ -30,7 +30,10 @@ class LoginMainpageViewController: UIViewController {
     
     @IBOutlet var loginButtonStackView: UIStackView!
     @IBOutlet weak var googleLoginButton: UIButton!
-
+    ////    @IBOutlet weak var faceBookLoginButton: FBLoginButton!
+    //    @IBOutlet weak var faceBookLoginButton: FBLoginButton!
+    //
+    //    @IBOutlet weak var appleLoginButton: UIButton!
     @IBOutlet weak var resetPasswordButton: UIButton!
     @IBOutlet weak var registerButton: UIButton!
     

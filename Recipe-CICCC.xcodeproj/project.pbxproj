@@ -25,7 +25,7 @@
 		4069257C23D8350100059C8E /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4069257423D8350100059C8E /* Image.swift */; };
 		4069257D23D8350100059C8E /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4069257523D8350100059C8E /* CollectionViewCell.swift */; };
 		4069257E23D8350100059C8E /* SideMenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4069257623D8350100059C8E /* SideMenuTableViewController.swift */; };
-		4069257F23D8350100059C8E /* CuisineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4069257723D8350100059C8E /* CuisineViewController.swift */; };
+		4069257F23D8350100059C8E /* MonthlyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4069257723D8350100059C8E /* MonthlyViewController.swift */; };
 		4069258123D8350100059C8E /* RecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4069257923D8350100059C8E /* RecipeViewController.swift */; };
 		4069258C23D8351800059C8E /* profieTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4069258423D8351800059C8E /* profieTableViewCell.swift */; };
 		4069259023D8351800059C8E /* RecipeItemCollectionViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4069258823D8351800059C8E /* RecipeItemCollectionViewTableViewCell.swift */; };
@@ -230,7 +230,7 @@
 		4069257423D8350100059C8E /* Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		4069257523D8350100059C8E /* CollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		4069257623D8350100059C8E /* SideMenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideMenuTableViewController.swift; sourceTree = "<group>"; };
-		4069257723D8350100059C8E /* CuisineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CuisineViewController.swift; sourceTree = "<group>"; };
+		4069257723D8350100059C8E /* MonthlyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonthlyViewController.swift; sourceTree = "<group>"; };
 		4069257923D8350100059C8E /* RecipeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeViewController.swift; sourceTree = "<group>"; };
 		4069258423D8351800059C8E /* profieTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = profieTableViewCell.swift; sourceTree = "<group>"; };
 		4069258823D8351800059C8E /* RecipeItemCollectionViewTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeItemCollectionViewTableViewCell.swift; sourceTree = "<group>"; };
@@ -804,7 +804,7 @@
 			children = (
 				4069257623D8350100059C8E /* SideMenuTableViewController.swift */,
 				69DB5BBD23ECBB930027A238 /* FollowingRecipeViewController.swift */,
-				4069257723D8350100059C8E /* CuisineViewController.swift */,
+				4069257723D8350100059C8E /* MonthlyViewController.swift */,
 				6F54A43E2429D94E00D936CD /* PopularRecipeViewController.swift */,
 				69F0D39223F63C5C001BF696 /* EditorChoiceViewController.swift */,
 				691F6AC823FFB0FB005D3231 /* VIPViewController.swift */,
@@ -1229,7 +1229,7 @@
 				6FDA746D243EBA4500E3C978 /* follwerUserTableViewCell.swift in Sources */,
 				4069254A23D8346F00059C8E /* ButtonTableViewCell.swift in Sources */,
 				6F73936324502C9A00F77848 /* SearchingGenresTableViewCell.swift in Sources */,
-				4069257F23D8350100059C8E /* CuisineViewController.swift in Sources */,
+				4069257F23D8350100059C8E /* MonthlyViewController.swift in Sources */,
 				40A8052123A08C130094E52A /* ResetPasswordViewController.swift in Sources */,
 				6F729380242ADE1300A7E4E0 /* GetCommentsDelegate.swift in Sources */,
 				6F8408CA2449E1C3008B2A25 /* MealTypeSelectViewController.swift in Sources */,

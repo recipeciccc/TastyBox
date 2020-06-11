@@ -24,15 +24,14 @@ class RecipeViewController: UIViewController {
     @IBOutlet weak var TitleLabel: UILabel!
     @IBOutlet weak var collectionRef: UICollectionView!
     
-    var isSearchingCuisine: Bool?
-
+    //    var recipeImages = [UIImage]()
     var recipeLabels = [String]()
     
     var category:Int = 0
     
     var T_image = UIImage()
-    var T_Name = ""
     
+    var T_Name = ""
     var CollectionImage = [UIImage]()
     var CollectionLabel = [String]()
     var EdgeOfCollectionView: CGFloat = 0
@@ -46,7 +45,6 @@ class RecipeViewController: UIViewController {
     
     var searching = false
     var searchNames = [String]()
-    
     lazy  var SearchBar: UISearchBar = UISearchBar(frame: CGRect(x: 0, y: 0, width: 600, height: 20))
     let indicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
     
@@ -62,15 +60,15 @@ class RecipeViewController: UIViewController {
         TitleImage.image = T_image
         TitleLabel.text = T_Name
         self.view.sendSubviewToBack(TitleImage)
-        
+    
         collectionRef.delegate = self
         collectionRef.dataSource = self
         
         let width = (collectionRef.frame.size.width - 4) / 2
         let layout = collectionRef.collectionViewLayout as! UICollectionViewFlowLayout
         layout.itemSize = CGSize(width: width, height: width)
-        
-        
+                
+       
         
     }
     
@@ -96,17 +94,9 @@ class RecipeViewController: UIViewController {
             }
         }
         
-        if let isSearchingCuisine = isSearchingCuisine {
+        let query = db.collection("recipe").whereField("genres.\(T_Name)", isEqualTo: true)
+        dataManager.Data(queryRef: query)
         
-        let query = isSearchingCuisine ?
-            db.collection("recipe").whereField("genres.\(T_Name) cuisine", isEqualTo: true) : db.collection("recipe").whereField("genres.\(T_Name)", isEqualTo: true)
-            
-             dataManager.Data(queryRef: query)
-        } else {
-            
-            let query = db.collection("recipe").whereField("genres.\(T_Name)", isEqualTo: true)
-            dataManager.Data(queryRef: query)
-        }
         
     }
     
@@ -195,7 +185,7 @@ extension RecipeViewController: UICollectionViewDataSource, UICollectionViewDele
         if searching{
             cell.collectionLabel.text = searchedRecipes[indexPath.row].title
             cell.collectionImage.image = searchedRecipesImages[indexPath.row]
-            
+                        
         }
         else{
             
@@ -273,56 +263,24 @@ extension RecipeViewController: RecipeViewControllerDelegate {
     }
     
     func reloadRecipe(data: [RecipeDetail]) {
+        self.recipes = data
         
-        if data.isEmpty {
-            DispatchQueue.global(qos: .default).async {
-                
-                // Do heavy work here
-                
-                DispatchQueue.main.async { [weak self] in
-                    // UI updates must be on main thread
-                    self?.indicator.stopAnimating()
-                }
+        recipes = recipes.sorted(by: { $0.like > $1.like })
+        
+        for recipe in recipes {
+            CollectionLabel.append(recipe.title)
+        }
+        
+        self.recipes.enumerated().map {
+            
+            if $0.1.recipeID == self.recipes.last!.recipeID {
+                dataManager.getUserDetail(id: $0.1.userID, isLast: true)
+            } else {
+                dataManager.getUserDetail(id: $0.1.userID, isLast: false)
             }
             
-            let noResultView = UIView()
-            let label = UILabel()
+            dataManager.getImage(uid: $0.1.userID, rid: $0.1.recipeID, index: $0.0)
             
-            
-            label.text = "Sorry.. No Result. \nLet's post \(T_Name) recipe!"
-            label.textAlignment = .center
-            
-            noResultView.addSubview(label)
-            
-            self.view.addSubview(noResultView)
-            
-            let centerYAnchor = noResultView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor)
-            let centerXAnchor = noResultView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor)
-            
-            centerYAnchor.isActive = true
-            centerXAnchor.isActive = true
-            
-        } else {
-            
-            self.recipes = data
-            
-            recipes = recipes.sorted(by: { $0.like > $1.like })
-            
-            for recipe in recipes {
-                CollectionLabel.append(recipe.title)
-            }
-            
-            self.recipes.enumerated().map {
-                
-                if $0.1.recipeID == self.recipes.last!.recipeID {
-                    dataManager.getUserDetail(id: $0.1.userID, isLast: true)
-                } else {
-                    dataManager.getUserDetail(id: $0.1.userID, isLast: false)
-                }
-                
-                dataManager.getImage(uid: $0.1.userID, rid: $0.1.recipeID, index: $0.0)
-                
-            }
         }
     }
     
@@ -330,7 +288,7 @@ extension RecipeViewController: RecipeViewControllerDelegate {
         recipesImages[index] = image
         
         if recipes.count == recipesImages.count {
-            
+         
             DispatchQueue.global(qos: .default).async {
                 
                 // Do heavy work here
