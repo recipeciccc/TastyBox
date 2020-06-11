@@ -308,7 +308,7 @@ extension DiscoveryViewController: UICollectionViewDelegate, UICollectionViewDat
             currentIndex = 3
             
         }
-        else if viewController.viewControllers?.first is MonthlyViewController {
+        else if viewController.viewControllers?.first is CuisineViewController {
             currentIndex = 4
             
         }
@@ -390,7 +390,7 @@ extension DiscoveryViewController : UIPageViewControllerDelegate {
         else if pageViewController.viewControllers?.first! is EditorChoiceViewController {
             index = 3
         }
-        else if pageViewController.viewControllers?.first! is MonthlyViewController {
+        else if pageViewController.viewControllers?.first! is CuisineViewController {
             index = 4
         }
         else if pageViewController.viewControllers?.first! is VIPViewController {
