@@ -1,39 +1,68 @@
-# Recipe-CICCC-1
+# TastyBox -Discover Recipes-
 
-Project Title
-One Paragraph of project description goes here
+We published our iOS app! ( About 1 month ago though...) You can find and post recipes with this app, "TastyBox".
 
-## Getting Started
+## TastyBox suggests you
+
+・The latest recipes your following recipe creators posted<br>
+・The recipes use ingredients you have right now<br>
+・Top 10 popular recipes<br>
+・Editor choices recipes<br>
+・Cuisine choice recipes<br>
+・VIP member-only recipes<br>
+
+## Not only the functions above! TastyBox has the functions below...
+
+・You can search recipes with ingredients and food types(like "appetizer", "Japanese cuisine" and so on).<br>
+・You can search creators on TastyBox as well.<br>
+・Refrigerator on TastyBox can help to manage the ingredients you have. ( also, TastyBox suggests recipes that you can cook as I mentioned above.)<br>
+
+・Shoppinglist can remind you what ingredients you need to buy.<br>
+・ Map on Refrigerator and shoppinglist shows supermarkets around you.<br>
+
+・ Machine learning suggests what is shown in your recipes and what food type is your recipes when you post them.<br>
+
+We published our iOS app! ( About 1 month ago though...) You can find and post recipes with this app, "TastyBox".<br>
+
+## TastyBox suggests you
+
+・The latest recipes your following recipe creators posted<br>
+・The recipes use ingredients you have right now<br>
+・Top 10 popular recipes<br>
+・Editor choices recipes<br>
+・Cuisine choice recipes<br>
+・VIP member-only recipes<br>
+
+## Not only the functions above! TastyBox has the functions below...
+
+・You can search recipes with ingredients and food types(like "appetizer", "Japanese cuisine" and so on).<br>
+・You can search creators on TastyBox as well.<br>
+・Refrigerator on TastyBox can help to manage the ingredients you have. ( also, TastyBox suggests recipes that you can cook as I mentioned above.)<br>
+
+・Shoppinglist can remind you what ingredients you need to buy.<br>
+・ Map on Refrigerator and shoppinglist shows supermarkets around you.<br>
+
+・ Machine learning suggests what is shown in your recipes and what food type is your recipes when you post them.<br>
+
+## I will add the functions below soon...
+・ notifications to tell the No.1 liked recipe.<br>
+・ In-app-paymente functions below soon...<br>
+・ notifications to tell the No.1 liked recipe.<br>
+・ In-app-payment<br>
+
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
-## Prerequisites
-What things you need to install the software and how to install them
 
-Give examples
-Installing
-A step by step series of examples that tell you how to get a development env running
+## UI design
 
-Say what the step will be
+<img width="857" alt="Screen Shot 2020-06-10 at 7 47 25 PM" src="https://user-images.githubusercontent.com/36534846/84344927-deb78280-ab60-11ea-8eb2-5d7406d227de.png">
 
-Give the example
-And repeat
+<img width="845" alt="Screen Shot 2020-06-10 at 8 05 13 PM" src="https://user-images.githubusercontent.com/36534846/84344955-ef67f880-ab60-11ea-9129-a212474789b5.png">
 
-until finished
-End with an example of getting some data out of the system or using it for a little demo
+## Design Perttern
 
-Running the tests
-Explain how to run the automated tests for this system
+![Group 34](https://user-images.githubusercontent.com/36534846/84344914-da8b6500-ab60-11ea-9aab-a7bef57119e3.png)
 
-Break down into end to end tests
-Explain what these tests test and why
-
-Give an example
-And coding style tests
-Explain what these tests test and why
-
-Give an example
-Deployment
-Add additional notes about how to deploy this on a live system
 
 ## Built With
 Dropwizard - The web framework used
@@ -45,9 +74,6 @@ Please read CONTRIBUTING.md for details on our code of conduct, and the process 
 ## Versioning
 We use SemVer for versioning. For the versions available, see the tags on this repository.
 
-## Authors
-Billie Thompson - Initial work - PurpleBooth
-See also the list of contributors who participated in this project.
 
 ## License
 This project is licensed under the MIT License - see the LICENSE.md file for details
@@ -70,10 +96,10 @@ The app does use third party services that may collect information used to ident
 
 Link to privacy policy of third party service providers used by the app
 
-Google Play Services
 Google Analytics for Firebase
-Facebook
-Log Data
+Firebase (Authentication, Crashlytics, Cloud Firestore,  Storage,  MLKit)
+Google Maps SDK for iOS
+Google Places SDK for iOS
 
 I want to inform you that whenever you use my Service, in a case of an error in the app I collect data and information (through third party products) on your phone called Log Data. This Log Data may include information such as your device Internet Protocol (“IP”) address, device name, operating system version, the configuration of the app when utilizing my Service, the time and date of your use of the Service, and other statistics.
 
