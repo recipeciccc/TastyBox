@@ -52,12 +52,6 @@ class RecipeDetailViewController: UIViewController {
         dataManager1.delegate = self
         
         view.backgroundColor = #colorLiteral(red: 0.9959775805, green: 0.9961397052, blue: 0.7093081474, alpha: 1)
-        
-        if recipe!.isVIPRecipe! && recipe?.userID != uid {
-            userDataManager.checkVIP()
-        } else {
-            askRecipeDetails()
-        }
   
     }
     
@@ -67,7 +61,10 @@ class RecipeDetailViewController: UIViewController {
         
         if recipe!.isVIPRecipe! && recipe?.userID != uid {
             userDataManager.checkVIP()
+        }  else {
+            askRecipeDetails()
         }
+        
     }
     
     

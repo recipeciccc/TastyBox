@@ -68,10 +68,10 @@ class RecipeViewControllerDataManager {
     }
     
     func isRecipeExist(_ exist:Bool, _ data: [RecipeDetail]){
-//        if exist{
+        if exist{
             
             delegate?.reloadRecipe(data:data)
-//        }
+        }
     }
     
     
